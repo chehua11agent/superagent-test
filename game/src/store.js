@@ -1,5 +1,5 @@
 // 本地存档（localStorage）。原型为单机、离线优先；正式版应由服务端权威计算 SRS / HP。
-import { addDays, learningDay } from './srs.js';
+import { addDays, defaultSpelling, isMasteredWord, learningDay } from './srs.js';
 
 export const STORAGE_KEY = 'shici.fog-harbor.save.v1';
 export const SAVE_VERSION = 1;
@@ -19,7 +19,9 @@ export function emptyDay(date) {
     storyFail: 0,
     bossHits: 0,
     bossDone: false,
-    hintsUsed: 0
+    hintsUsed: 0,
+    spellingBonusCorrect: 0,
+    spellingBonusWrong: 0
   };
 }
 
@@ -60,20 +62,30 @@ export function createDemoSave(now, allWords) {
   const today = save.day.date;
   const yesterday = addDays(today, -1);
   const stages = [0, 0, 1, 1, 2, 2, 0, 1, 2, 0, 1, 2];
+  const spellingStages = [0, 0, 1, 0, 2, 2, 0, 1, 2, 2, 0, 1];
   const lapses = [0, 1, 0, 0, 2, 0, 0, 3, 0, 1, 0, 0];
   const first12 = [...allWords].sort((a, b) => a.freq_rank - b.freq_rank).slice(0, 12);
   first12.forEach((word, index) => {
     const stage = stages[index] ?? 0;
-    save.words[word.id] = {
-      state: stage === 3 ? 'mastered' : 'review',
+    const spelling = {
+      stage: spellingStages[index] ?? 0,
+      dueOn: today,
+      passes: spellingStages[index] ?? 0,
+      fails: 0
+    };
+    const userWord = {
+      state: 'review',
       stage,
       dueOn: today,
       correctStreak: stage,
       lapses: lapses[index] ?? 0,
       lastResult: false,
       known: false,
-      introducedAt: yesterday
+      introducedAt: yesterday,
+      spelling
     };
+    userWord.state = isMasteredWord(userWord) ? 'mastered' : 'review';
+    save.words[word.id] = userWord;
   });
   save.demo = true;
   save.progress.sceneIndex = 3;
@@ -118,6 +130,15 @@ export function loadSave() {
     if (!parsed.progress || !parsed.day || !parsed.settings) return null;
     parsed.words = parsed.words || {};
     parsed.history = parsed.history || [];
+    parsed.day.spellingBonusCorrect = parsed.day.spellingBonusCorrect ?? 0;
+    parsed.day.spellingBonusWrong = parsed.day.spellingBonusWrong ?? 0;
+    const today = learningDay(new Date());
+    for (const [id, userWord] of Object.entries(parsed.words)) {
+      if (!userWord.spelling) {
+        userWord.spelling = defaultSpelling(today);
+        userWord.state = isMasteredWord(userWord) ? 'mastered' : 'review';
+      }
+    }
     return parsed;
   } catch (error) {
     console.warn('读取存档失败，已忽略。', error);

@@ -2,6 +2,7 @@
 // 1 / 3 / 7 / 16 天固定阶梯；答对升一档，答错回到 1 天，16 天封顶。
 
 export const INTERVALS = [1, 3, 7, 16];
+export const SPELLING_INTERVALS = [1, 3, 7];
 export const DEFAULT_NEW_PER_DAY = 12;
 export const MAX_NEW_PER_DAY = 20;
 export const MIN_NEW_PER_DAY = 10;
@@ -36,7 +37,23 @@ function frequencyOf(wordsById, wordId) {
   return wordsById?.[wordId]?.freq_rank ?? Number.MAX_SAFE_INTEGER;
 }
 
-/** 新词契约完成：无论对错都排 1 天。 */
+/** 一个新词的默认拼写轨：契约后 1 天到期，尚未通过任何拼写检定。 */
+export function defaultSpelling(today) {
+  return {
+    stage: 0,
+    dueOn: addDays(today, SPELLING_INTERVALS[0]),
+    passes: 0,
+    fails: 0
+  };
+}
+
+/** 双证：认义到 3 且拼写至少到 2。 */
+export function isMasteredWord(userWord) {
+  if (!userWord || userWord.known) return false;
+  return (userWord.stage ?? 0) >= 3 && (userWord.spelling?.stage ?? 0) >= 2;
+}
+
+/** 新词契约完成：认义无论对错都排 1 天，拼写轨从 0 开始。 */
 export function introduce(today, correct) {
   return {
     state: 'review',
@@ -46,13 +63,14 @@ export function introduce(today, correct) {
     lapses: 0,
     lastResult: Boolean(correct),
     known: false,
-    introducedAt: today
+    introducedAt: today,
+    spelling: defaultSpelling(today)
   };
 }
 
-/** 一次复习结果 → 新的 user_word。不修改入参。 */
+/** 认义检定：只动认义轨，不碰拼写轨。 */
 export function review(userWord, correct, today) {
-  const next = { ...userWord };
+  const next = { ...userWord, spelling: userWord.spelling || defaultSpelling(today) };
   if (correct) {
     next.stage = Math.min((userWord.stage ?? 0) + 1, 3);
     next.correctStreak = (userWord.correctStreak ?? 0) + 1;
@@ -63,8 +81,25 @@ export function review(userWord, correct, today) {
     next.lapses = (userWord.lapses ?? 0) + 1;
     next.lastResult = false;
   }
-  next.state = next.stage === 3 ? 'mastered' : 'review';
+  next.state = isMasteredWord(next) ? 'mastered' : 'review';
   next.dueOn = addDays(today, INTERVALS[next.stage]);
+  return next;
+}
+
+/** 拼写检定：只动拼写轨，认义 stage/dueOn 不变。 */
+export function reviewSpelling(userWord, correct, today) {
+  const spelling = userWord.spelling || defaultSpelling(today);
+  const nextSpelling = { ...spelling };
+  if (correct) {
+    nextSpelling.stage = Math.min((spelling.stage ?? 0) + 1, SPELLING_INTERVALS.length - 1);
+    nextSpelling.passes = (spelling.passes ?? 0) + 1;
+  } else {
+    nextSpelling.stage = 0;
+    nextSpelling.fails = (spelling.fails ?? 0) + 1;
+  }
+  nextSpelling.dueOn = addDays(today, SPELLING_INTERVALS[nextSpelling.stage]);
+  const next = { ...userWord, spelling: nextSpelling };
+  next.state = isMasteredWord(next) ? 'mastered' : 'review';
   return next;
 }
 
@@ -77,7 +112,8 @@ export function markKnown(today) {
     lapses: 0,
     lastResult: true,
     known: true,
-    knownAt: today
+    knownAt: today,
+    spelling: { stage: 2, dueOn: addDays(today, SPELLING_INTERVALS[2]), passes: 1, fails: 0 }
   };
 }
 
@@ -87,7 +123,8 @@ export function undoKnown(userWord, today) {
     state: 'review',
     known: false,
     stage: 0,
-    dueOn: addDays(today, INTERVALS[0])
+    dueOn: addDays(today, INTERVALS[0]),
+    spelling: defaultSpelling(today)
   };
 }
 
@@ -189,6 +226,26 @@ export function meaningOptions(word, allWords, count = 4, seedKey = '') {
   return options;
 }
 
+export function lemmaOptions(word, allWords, count = 4, seedKey = '') {
+  const correct = word.lemma;
+  const pool = [];
+  for (const other of allWords) {
+    if (!other || other.id === word.id) continue;
+    if (other.lemma && other.lemma !== correct && !pool.includes(other.lemma)) pool.push(other.lemma);
+  }
+  const rand = mulberry32(hashString(`${word.id}:lemma:${seedKey}`));
+  for (let i = pool.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(rand() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const options = [correct, ...pool.slice(0, Math.max(1, count - 1))];
+  for (let i = options.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(rand() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+  return options;
+}
+
 export function normalizeAnswer(input) {
   return String(input ?? '')
     .trim()
@@ -221,10 +278,18 @@ export function nextDueSummary(save, today, wordsById) {
 
 export function masteryStats(save) {
   const values = Object.values(save.words);
+  const mastered = values.filter((uw) => isMasteredWord(uw)).length;
+  const known = values.filter((uw) => uw.known).length;
+  const recognizedOnly = values.filter(
+    (uw) => !uw.known && (uw.stage ?? 0) > 0 && (uw.spelling?.stage ?? 0) < 2
+  ).length;
+  const spellingConfirmed = values.filter((uw) => !uw.known && (uw.spelling?.stage ?? 0) >= 2).length;
   return {
-    mastered: values.filter((uw) => uw.state === 'mastered').length,
-    reviewing: values.filter((uw) => uw.state === 'review').length,
-    known: values.filter((uw) => uw.known).length,
+    mastered,
+    reviewing: values.filter((uw) => !uw.known && !isMasteredWord(uw)).length,
+    known,
+    recognizedOnly,
+    spellingConfirmed,
     learning: values.length
   };
 }

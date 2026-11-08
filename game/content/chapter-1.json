@@ -783,6 +783,13 @@
     "failure_hp": 20,
     "retreat_hp": 70,
     "success_text": "第五个词落下时，雾从中间裂开。摆渡人让开半步，你第一次看见海那边的灯。",
-    "failure_text": "最后一个词没有说出来。摆渡人把船撑回雾里，你退回岸上，天已经快亮了。"
+    "failure_text": "最后一个词没有说出来。摆渡人把船撑回雾里，你退回岸上，天已经快亮了。",
+    "check_types": [
+      "recognize",
+      "spell",
+      "recognize",
+      "spell",
+      "recognize"
+    ]
   }
 }

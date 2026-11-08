@@ -3353,3 +3353,95 @@ svg {
 .empty-state span {
   font-size: 12px;
 }
+
+/* 双鉴定：认义 / 拼写 */
+.bonus-box {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px dashed rgba(227, 185, 120, 0.28);
+  border-radius: 11px;
+  background: rgba(227, 185, 120, 0.035);
+}
+
+.bonus-box.ok {
+  border-color: rgba(148, 196, 165, 0.4);
+  background: rgba(148, 196, 165, 0.045);
+}
+
+.bonus-box.bad {
+  border-color: rgba(215, 122, 102, 0.35);
+  background: rgba(215, 122, 102, 0.04);
+}
+
+.bonus-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.bonus-box.ok .bonus-title {
+  color: var(--ok);
+}
+
+.bonus-box.bad .bonus-title {
+  color: var(--danger);
+}
+
+.bonus-skip {
+  margin-top: 8px;
+  color: var(--muted-dim);
+  font-size: 10px;
+}
+
+.word-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.word-badge {
+  padding: 3px 8px;
+  border: 1px solid rgba(240, 231, 214, 0.1);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.word-badge.on {
+  border-color: rgba(227, 185, 120, 0.45);
+  color: var(--gold);
+  background: rgba(227, 185, 120, 0.06);
+}
+
+.status-chip.recognized {
+  border-color: rgba(216, 165, 100, 0.34);
+  color: var(--warn);
+}
+
+.word-card.recognized {
+  border-color: rgba(216, 165, 100, 0.2);
+}
+
+.lemma-option {
+  font-family: var(--serif);
+  font-size: 20px;
+  letter-spacing: 0.04em;
+}
+
+.boss-options {
+  margin-top: 8px;
+}
+
+.boss-options .option {
+  text-align: center;
+}
+
+.word-card-foot span {
+  white-space: nowrap;
+}

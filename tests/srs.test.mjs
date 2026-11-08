@@ -2,17 +2,22 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   INTERVALS,
+  SPELLING_INTERVALS,
   addDays,
   buildPlan,
   dueWords,
   introduce,
   isCorrectAnswer,
+  isMasteredWord,
   learningDay,
+  lemmaOptions,
   markKnown,
+  masteryStats,
   meaningOptions,
   nextNewWords,
   normalizeAnswer,
   review,
+  reviewSpelling,
   toISO
 } from '../game/src/srs.js';
 
@@ -40,11 +45,18 @@ test('1/3/7/16 天阶梯：答对升档，16 天封顶', () => {
   word = review(word, true, TODAY);
   assert.equal(word.stage, 3);
   assert.equal(word.dueOn, addDays(TODAY, 16));
+  assert.equal(word.state, 'review');
+  assert.equal(isMasteredWord(word), false);
+  word = reviewSpelling(word, true, TODAY);
+  word = reviewSpelling(word, true, TODAY);
+  assert.equal(word.spelling.stage, 2);
   assert.equal(word.state, 'mastered');
+  assert.equal(isMasteredWord(word), true);
   word = review(word, true, TODAY);
   assert.equal(word.stage, 3);
   assert.equal(word.dueOn, addDays(TODAY, 16));
   assert.deepEqual(INTERVALS, [1, 3, 7, 16]);
+  assert.deepEqual(SPELLING_INTERVALS, [1, 3, 7]);
 });
 
 test('答错立即回到 1 天，lapses +1，状态回到 review', () => {
@@ -59,6 +71,28 @@ test('答错立即回到 1 天，lapses +1，状态回到 review', () => {
   assert.equal(word.dueOn, addDays(TODAY, 1));
   assert.equal(word.lapses, 1);
   assert.equal(word.correctStreak, 0);
+});
+
+test('认义与拼写互不重置：认义错不碰拼写，拼写错不碰认义', () => {
+  let word = introduce(TODAY, true);
+  word = review(word, true, TODAY);
+  word = review(word, true, TODAY);
+  word = reviewSpelling(word, true, TODAY);
+  word = reviewSpelling(word, true, TODAY);
+  assert.equal(word.spelling.stage, 2);
+  const recognitionDue = word.dueOn;
+
+  const recognitionMiss = review(word, false, TODAY);
+  assert.equal(recognitionMiss.stage, 0);
+  assert.equal(recognitionMiss.spelling.stage, 2);
+  assert.equal(recognitionMiss.state, 'review');
+
+  const spellingMiss = reviewSpelling(word, false, TODAY);
+  assert.equal(spellingMiss.stage, 2);
+  assert.equal(spellingMiss.dueOn, recognitionDue);
+  assert.equal(spellingMiss.spelling.stage, 0);
+  assert.equal(spellingMiss.spelling.fails, 1);
+  assert.equal(spellingMiss.state, 'review');
 });
 
 test('逾期复习答对不补罚，按今天 + 下一档间隔', () => {
@@ -151,6 +185,35 @@ test('4 选 1 释义选项稳定、包含正确答案', () => {
   assert.equal(first.length, 4);
   assert.equal(new Set(first).size, 4);
   assert.ok(first.includes('一'));
+});
+
+test('BOSS 认出选项：4 个英文拼写，含正确答案且稳定', () => {
+  const word = { id: 'w1', lemma: 'avoid', meanings: ['避开'] };
+  const all = [
+    word,
+    { id: 'w2', lemma: 'bargain', meanings: ['砍价'] },
+    { id: 'w3', lemma: 'trust', meanings: ['信任'] },
+    { id: 'w4', lemma: 'shelter', meanings: ['避难'] },
+    { id: 'w5', lemma: 'choose', meanings: ['选择'] }
+  ];
+  const first = lemmaOptions(word, all, 4, 'boss');
+  assert.deepEqual(first, lemmaOptions(word, all, 4, 'boss'));
+  assert.equal(first.length, 4);
+  assert.equal(new Set(first).size, 4);
+  assert.ok(first.includes('avoid'));
+});
+
+test('双证统计：只认不拼不算已掌握', () => {
+  const recognized = { ...review(introduce(TODAY, true), true, TODAY) };
+  let mastered = review(recognized, true, TODAY);
+  mastered = review(mastered, true, TODAY);
+  mastered = reviewSpelling(mastered, true, TODAY);
+  mastered = reviewSpelling(mastered, true, TODAY);
+  const save = { words: { a: recognized, b: mastered } };
+  const stats = masteryStats(save);
+  assert.equal(stats.mastered, 1);
+  assert.equal(stats.recognizedOnly, 1);
+  assert.equal(stats.spellingConfirmed, 1);
 });
 
 test('答案归一化：大小写、首尾空格与句末标点', () => {

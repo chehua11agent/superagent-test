@@ -199,7 +199,7 @@ test('演示存档：复习优先，清空 12 张后才进入契约', async ({ p
   await expect(page.locator('.finish-block')).toContainText('复习清空');
   await page.locator('[data-action="review-finish"]').click();
   await expect(page.locator('[data-action="contract-accept"]')).toBeVisible();
-  await expect(page.locator('.story-kicker')).toContainText('词灵契约');
+  await expect(page.locator('.story-kicker')).toContainText('认义契约');
 });
 
 test('已认识：验证通过后跳过，词书可以撤销', async ({ page }) => {
@@ -238,9 +238,10 @@ test('失败前进：答错扣 HP、SRS 回 1 天，剧情仍到下一幕', asyn
     const scene = app.content.chapter.scenes[app.save.progress.sceneIndex];
     const action = scene.actions.find((entry) => entry.id === app.story.selectedAction);
     const word = app.save.words[action.target_word];
-    return { stage: word.stage, dueOn: word.dueOn, today: app.today };
+    return { stage: word.stage, spellingStage: word.spelling.stage, dueOn: word.dueOn, today: app.today };
   });
   expect(wordState.stage).toBe(0);
+  expect(wordState.spellingStage).toBe(0);
   expect(wordState.dueOn > wordState.today).toBe(true);
 
   await page.locator('[data-action="outcome-next"]').click();
@@ -259,17 +260,67 @@ test('硬闯：不测试单词，固定 HP -15，仍然推进', async ({ page })
   expect(await page.evaluate(() => window.__shici.save.progress.sceneIndex)).toBe(4);
 });
 
+test('拼写加试：认义对后可以加试拼写，词书出现双轨徽章', async ({ page }) => {
+  await loadDemo(page);
+  await page.locator('[data-action="review"]').click();
+  await expect(page.getByRole('heading', { name: '到期复习' })).toBeVisible();
+  await pickOption(page, await reviewMeaning(page));
+  await expect(page.locator('[data-action="spelling-bonus"]')).toBeVisible();
+  const beforeSpelling = await page.evaluate(() => {
+    const app = window.__shici;
+    const id = app.review.queue[app.review.index];
+    return app.save.words[id].spelling.stage;
+  });
+  await page.locator('[data-action="spelling-bonus"]').click();
+  const lemma = await page.evaluate(() => {
+    const app = window.__shici;
+    const id = app.review.queue[app.review.index];
+    return app.byId[id].lemma;
+  });
+  await page.locator('#spelling-answer').fill(lemma);
+  await page.locator('#spelling-bonus-form button[type="submit"]').click();
+  await expect(page.locator('.bonus-box.ok')).toContainText('拼写 +1');
+  const spellingStage = await page.evaluate(() => {
+    const app = window.__shici;
+    const id = app.review.queue[app.review.index];
+    return app.save.words[id].spelling.stage;
+  });
+  expect(spellingStage).toBe(Math.min(beforeSpelling + 1, 2));
+
+  await page.goto('/#/words');
+  await page.locator('[data-filter="recognized"]').click();
+  await expect(page.locator('.word-card').first()).toContainText('认义');
+  await expect(page.locator('.word-badge').first()).toBeVisible();
+});
+
 test('BOSS：五问答对三问净化，结算显示已完成', async ({ page }) => {
   await seedBoss(page);
   await page.locator('[data-action="boss-start"]').click();
   for (let index = 0; index < 5; index += 1) {
-    const lemma = await page.evaluate(() => {
+    const check = await page.evaluate(() => {
       const app = window.__shici;
       const id = app.content.chapter.boss.check_word_ids[app.save.boss.index];
-      return app.byId[id].lemma;
+      return {
+        lemma: app.byId[id].lemma,
+        mode: app.content.chapter.boss.check_types?.[app.save.boss.index] || 'spell'
+      };
     });
-    await page.locator('#boss-answer').fill(lemma);
-    await page.locator('#boss-form button[type="submit"]').click();
+    if (check.mode === 'recognize') {
+      const options = page.locator('.lemma-option');
+      const count = await options.count();
+      let clicked = false;
+      for (let i = 0; i < count; i += 1) {
+        if ((await options.nth(i).innerText()).trim() === check.lemma) {
+          await options.nth(i).click();
+          clicked = true;
+          break;
+        }
+      }
+      expect(clicked).toBe(true);
+    } else {
+      await page.locator('#boss-answer').fill(check.lemma);
+      await page.locator('#boss-form button[type="submit"]').click();
+    }
     if (await page.evaluate(() => window.__shici.save.boss.done)) break;
     await page.locator('[data-action="boss-next"]').click();
   }

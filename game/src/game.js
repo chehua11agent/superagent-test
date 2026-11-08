@@ -11,6 +11,7 @@ import {
   nextDueSummary,
   nextNewWords,
   review,
+  reviewSpelling,
   undoKnown
 } from './srs.js';
 import { ensureDay, virtualToday } from './store.js';
@@ -178,6 +179,10 @@ export function performAction(save, content, scene, action, input, today) {
   const correct = isCorrectAnswer(word, input);
   if (correct) {
     save.day.storySuccess += 1;
+    const current = save.words[word.id];
+    if (current && !current.known) {
+      save.words[word.id] = reviewSpelling(current, true, today);
+    }
     const effectMessage = applyEffect(save, action.success.effect);
     save.outcome = {
       sceneId: scene.id,
@@ -187,13 +192,14 @@ export function performAction(save, content, scene, action, input, today) {
       text: action.success.text,
       effectMessage,
       costMessage: '',
-      hard: false
+      hard: false,
+      checkMode: 'spell'
     };
   } else {
     save.day.storyFail += 1;
     const current = save.words[word.id];
     if (current && !current.known) {
-      save.words[word.id] = review(current, false, today);
+      save.words[word.id] = reviewSpelling(current, false, today);
     }
     const cost = applyCost(save, action.failure.cost, scene);
     save.outcome = {
@@ -205,7 +211,8 @@ export function performAction(save, content, scene, action, input, today) {
       effectMessage: '',
       costMessage: cost.message,
       exhausted: cost.exhausted,
-      hard: false
+      hard: false,
+      checkMode: 'spell'
     };
   }
   return { correct, word, outcome: save.outcome };
@@ -233,7 +240,8 @@ export function hardBlast(save, scene, today) {
     effectMessage: '',
     costMessage,
     exhausted,
-    hard: true
+    hard: true,
+    checkMode: 'none'
   };
   return save.outcome;
 }
@@ -294,15 +302,27 @@ export function bossWord(save, content) {
   return wordsById(content)[id] || null;
 }
 
-export function bossCheck(save, content, input, today) {
+export function bossModeAt(content, index) {
+  const types = content.chapter.boss?.check_types || [];
+  return types[index] === 'recognize' ? 'recognize' : 'spell';
+}
+
+export function bossCheck(save, content, input, today, mode = undefined) {
   const boss = content.chapter.boss;
   if (!save.boss || save.boss.done) return null;
   const wordId = boss.check_word_ids[save.boss.index];
   const word = wordsById(content)[wordId];
+  const checkMode = mode || bossModeAt(content, save.boss.index);
   const correct = isCorrectAnswer(word, input);
   if (correct) save.boss.hits += 1;
   else save.progress.hp = Math.max(0, save.progress.hp - boss.failure_hp);
-  save.boss.results.push({ wordId, correct });
+  const current = save.words[wordId];
+  if (current && !current.known) {
+    save.words[wordId] = checkMode === 'recognize'
+      ? review(current, correct, today)
+      : reviewSpelling(current, correct, today);
+  }
+  save.boss.results.push({ wordId, correct, mode: checkMode });
   save.boss.index += 1;
 
   let finished = false;
@@ -329,7 +349,7 @@ export function bossCheck(save, content, input, today) {
     }
     markDayComplete(save, content, today);
   }
-  return { correct, word, finished, won: save.boss.won };
+  return { correct, word, mode: checkMode, finished, won: save.boss.won };
 }
 
 export function resetBoss(save) {

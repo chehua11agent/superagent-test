@@ -324,7 +324,7 @@ function renderHome() {
           ${statCard('flame', save.progress.streak, '连续天数', '每天完成 3 幕 + 清空到期', 'warm')}
           ${statCard('shield', save.progress.hp, '生命值', '每章 100 · 失败扣血', save.progress.hp <= 30 ? 'danger' : '')}
           ${statCard('key', `${save.progress.clues}/3`, '线索', '影响支线与结局文本', '')}
-          ${statCard('star', `${stats.mastered}/48`, '已掌握', `复习中 ${stats.reviewing} · 已认识 ${stats.known}`, 'gold')}
+          ${statCard('star', `${stats.mastered}/48`, '双证掌握', `会认不会写 ${stats.recognizedOnly} · 会拼 ${stats.spellingConfirmed}`, 'gold')}
         </section>
 
         <section class="panel chapter-strip">
@@ -437,6 +437,7 @@ function renderReview() {
       queue: queue.map((entry) => entry.id),
       index: 0,
       feedback: null,
+      bonus: null,
       correct: 0,
       wrong: 0,
       finished: false
@@ -447,6 +448,7 @@ function renderReview() {
     if (app.review.index >= app.review.queue.length) {
       app.review.index = 0;
       app.review.feedback = null;
+      app.review.bonus = null;
     }
   }
 
@@ -481,8 +483,9 @@ function paintReview() {
         <h2>记忆神殿安静了。</h2>
         <p class="finish-copy">答对 ${state.correct} 张，答错 ${state.wrong} 张。新词配额已经解锁。</p>
         <div class="finish-stats">
-          ${statChip('check', state.correct, '答对')}
-          ${statChip('x', state.wrong, '答错', 'danger')}
+          ${statChip('check', state.correct, '认义答对')}
+          ${statChip('x', state.wrong, '认义答错', 'danger')}
+          ${statChip('spark', app.save.day.spellingBonusCorrect || 0, '拼写加试对', 'warm')}
           ${statChip('clock', app.save.progress.streak, '连续天数', 'warm')}
         </div>
         <button class="btn btn-primary btn-lg" data-action="review-finish">进入剧情</button>
@@ -504,9 +507,37 @@ function paintReview() {
     return;
   }
   const feedback = state.feedback;
+  const currentWord = app.save.words[word.id];
+  const spellingStage = currentWord?.spelling?.stage ?? 0;
+  const canBonus = Boolean(feedback?.correct && currentWord && !currentWord.known && spellingStage < 2);
   const options = S.meaningOptions(word, app.content.words, 4, 'review');
+  let bonusHtml = '';
+  if (state.bonus?.mode === 'input') {
+    bonusHtml = `
+      <div class="bonus-box">
+        <p class="bonus-title">${icon('spark')} 拼写加试 · 写出「${esc(word.meanings[0])}」的英文</p>
+        <form id="spelling-bonus-form" autocomplete="off">
+          <div class="answer-row">
+            <input id="spelling-answer" name="answer" type="text" inputmode="latin" spellcheck="false" autocapitalize="off" placeholder="输入英文…" required autofocus>
+            <button class="btn btn-primary" type="submit">提交拼写</button>
+          </div>
+          <p class="hint-line">${icon('eye')} 加试不扣 HP；答错只把拼写轨回 1 天，认义不变。</p>
+        </form>
+        <p class="bonus-skip">不想写？直接点下面的「下一张」跳过，不影响认义复习。</p>
+      </div>`;
+  } else if (state.bonus?.mode === 'result') {
+    bonusHtml = `
+      <div class="bonus-box ${state.bonus.correct ? 'ok' : 'bad'}">
+        <div class="feedback-head">${icon(state.bonus.correct ? 'check' : 'x')}${state.bonus.correct ? '拼写 +1 · 双证前进' : '会认不会写'}</div>
+        <p class="feedback-answer">正确拼写：<b>${esc(word.lemma)}</b> ${esc(word.ipa)}</p>
+        <p class="feedback-example">${esc(word.example_en)}<span>${esc(word.example_zh)}</span></p>
+        <p class="feedback-note">认义不变；拼写轨现在 ${spellingStage}/2${state.bonus.correct ? '，下次间隔更长了。' : '，下次从 1 天重新来。'}</p>
+      </div>`;
+  } else if (canBonus) {
+    bonusHtml = `<button class="btn btn-ghost" data-action="spelling-bonus">${icon('spark')} 拼写加试 · 写出这个词</button>`;
+  }
   const card = `
-    <div class="review-topline"><span>${icon('eye')} 看英文，选中文</span><span>${state.index + 1} / ${state.queue.length}</span></div>
+    <div class="review-topline"><span>${icon('eye')} 认义检定 · 看英文，选中文</span><span>${state.index + 1} / ${state.queue.length}</span></div>
     <div class="word-stage">
       <p class="word-pos">${esc(word.pos)}</p>
       <h1 class="word-lemma">${esc(word.lemma)}</h1>
@@ -528,13 +559,14 @@ function paintReview() {
     ${
       feedback
         ? `<div class="feedback ${feedback.correct ? 'ok' : 'bad'}">
-            <div class="feedback-head">${icon(feedback.correct ? 'check' : 'x')}${feedback.correct ? '对上了' : '差一点'}</div>
+            <div class="feedback-head">${icon(feedback.correct ? 'check' : 'x')}${feedback.correct ? '认义对上了' : '认义差一点'}</div>
             <p class="feedback-answer"><b>${esc(word.lemma)}</b> ${esc(word.ipa)} · ${esc(word.meanings.join('；'))}</p>
             <p class="feedback-example">${esc(word.example_en)}<span>${esc(word.example_zh)}</span></p>
             <div class="feedback-meta">
-              <span>${icon('clock')} 下次：${esc(daysUntil(app.save.words[word.id]?.dueOn))}</span>
-              <span>${icon('refresh')} ${esc(stageLabel(app.save.words[word.id]))}</span>
+              <span>${icon('clock')} 认义下次：${esc(daysUntil(currentWord?.dueOn))}</span>
+              <span>${icon('refresh')} 拼写 ${spellingStage}/2</span>
             </div>
+            ${bonusHtml}
             <button class="btn btn-primary" data-action="review-next">${state.index + 1 >= state.queue.length ? '完成复习' : '下一张'}</button>
           </div>`
         : `<p class="review-hint">复习不展示例句与词根。想不起来就选一个，答案会摊开。</p>`
@@ -566,9 +598,28 @@ function paintReview() {
       });
     });
   } else {
+    $('[data-action="spelling-bonus"]')?.addEventListener('click', () => {
+      state.bonus = { mode: 'input' };
+      paintReview();
+    });
+    $('#spelling-bonus-form')?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = $('#spelling-answer').value;
+      const current = app.save.words[word.id];
+      const correct = S.isCorrectAnswer(word, input);
+      if (current) {
+        app.save.words[word.id] = S.reviewSpelling(current, correct, app.today);
+      }
+      if (correct) app.save.day.spellingBonusCorrect += 1;
+      else app.save.day.spellingBonusWrong += 1;
+      state.bonus = { mode: 'result', correct };
+      saveNow();
+      paintReview();
+    });
     $('[data-action="review-next"]')?.addEventListener('click', () => {
       state.index += 1;
       state.feedback = null;
+      state.bonus = null;
       if (state.index >= state.queue.length) {
         state.finished = true;
         app.save.day.reviewCleared = true;
@@ -582,8 +633,16 @@ function paintReview() {
 function stageLabel(uw) {
   if (!uw) return '';
   if (uw.known) return '已认识';
-  if (uw.stage === 3) return '16 天 · 已掌握';
+  if (uw.stage === 3) return '16 天 · 认义满级';
   return `${[1, 3, 7, 16][uw.stage ?? 0]} 天间隔`;
+}
+
+function spellingLabel(uw) {
+  if (!uw) return '—';
+  if (uw.known) return '已认识';
+  const stage = uw.spelling?.stage ?? 0;
+  if (stage >= 2) return '会拼';
+  return `${[1, 3, 7][stage] ?? 1} 天 / 会认不会写`;
 }
 
 /* ------------------------------------------------------------------ */
@@ -658,7 +717,7 @@ function paintStory(scene, state) {
     const index = state.contractIndex;
     panel.innerHTML = `
       <div class="story-kicker">
-        <span>${icon('spark')} 词灵契约</span>
+        <span>${icon('spark')} 认义契约</span>
         <span>${index + 1} / ${state.contractQueue.length}</span>
       </div>
       <div class="contract-grid">
@@ -695,7 +754,7 @@ function paintStory(scene, state) {
     const word = state.contractQueue[state.contractIndex];
     const options = S.meaningOptions(word, app.content.words, 4, 'contract');
     panel.innerHTML = `
-      <div class="story-kicker"><span>契约检定</span><span>${state.contractIndex + 1} / ${state.contractQueue.length}</span></div>
+      <div class="story-kicker"><span>认义检定</span><span>${state.contractIndex + 1} / ${state.contractQueue.length}</span></div>
       <p class="prompt-line">「<b class="inline-lemma">${esc(word.lemma)}</b>」最接近下面哪个意思？</p>
       <div class="options compact">
         ${options.map((option, index) => `<button class="option" data-index="${index}">${esc(option)}</button>`).join('')}
@@ -718,7 +777,7 @@ function paintStory(scene, state) {
   if (state.stage === 'contract-feedback') {
     const { correct, word } = state.feedback;
     panel.innerHTML = `
-      <div class="story-kicker"><span>契约检定</span><span>${state.contractIndex + 1} / ${state.contractQueue.length}</span></div>
+      <div class="story-kicker"><span>认义检定</span><span>${state.contractIndex + 1} / ${state.contractQueue.length}</span></div>
       <div class="feedback ${correct ? 'ok' : 'bad'}">
         <div class="feedback-head">${icon(correct ? 'check' : 'x')}${correct ? '契约成立' : '契约没有回应'}</div>
         <p class="feedback-answer"><b>${esc(word.lemma)}</b> ${esc(word.ipa)} · ${esc(word.meanings.join('；'))}</p>
@@ -738,7 +797,7 @@ function paintStory(scene, state) {
   if (state.stage === 'verify') {
     const word = state.contractQueue[state.contractIndex];
     panel.innerHTML = `
-      <div class="story-kicker"><span>已认识 · 验证</span><span>${state.contractIndex + 1} / ${state.contractQueue.length}</span></div>
+      <div class="story-kicker"><span>拼写验证 · 已认识</span><span>${state.contractIndex + 1} / ${state.contractQueue.length}</span></div>
       <p class="prompt-line">看中文，写出英文。验证通过后，这个词不进入复习队列。</p>
       <div class="verify-meaning">${esc(word.meanings.join('；'))}</div>
       <form class="answer-form" id="verify-form" autocomplete="off">
@@ -777,7 +836,7 @@ function paintStory(scene, state) {
   if (state.stage === 'verify-feedback') {
     const { word } = state.feedback;
     panel.innerHTML = `
-      <div class="story-kicker"><span>已认识 · 验证</span><span>没有对上</span></div>
+      <div class="story-kicker"><span>拼写验证 · 已认识</span><span>没有对上</span></div>
       <div class="feedback bad">
         <div class="feedback-head">${icon('x')}还没有那么熟</div>
         <p class="feedback-answer">正确拼写：<b>${esc(word.lemma)}</b> ${esc(word.ipa)}</p>
@@ -800,7 +859,7 @@ function paintStory(scene, state) {
       : null;
     const knownTargets = scene.actions.length - actions.length;
     panel.innerHTML = `
-      <div class="story-kicker"><span>${icon('map')} 第 ${scene.ord} 幕 · ${esc(scene.title)}</span><span>${knownTargets ? `${knownTargets} 个词已认识` : '词行动'}</span></div>
+      <div class="story-kicker"><span>${icon('map')} 第 ${scene.ord} 幕 · ${esc(scene.title)}</span><span>${knownTargets ? `${knownTargets} 个词已认识` : '拼写检定'}</span></div>
       <p class="narration">${esc(scene.narration)}</p>
       ${
         actions.length
@@ -811,7 +870,7 @@ function paintStory(scene, state) {
                   return `<button class="action-card ${selected?.id === action.id ? 'selected' : ''}" data-action="select-action" data-id="${action.id}">
                     <span class="action-icon">${icon(typeIcon(action.card_type))}</span>
                     <span class="action-main"><b>${esc(word.meanings[0])}</b><small>${esc(word.effect_text)}</small></span>
-                    <span class="action-meta">${typeLabel(action.card_type)} · 难度 ${'◆'.repeat(action.difficulty || 1)}</span>
+                    <span class="action-meta">${typeLabel(action.card_type)} · 拼出 · 难度 ${'◆'.repeat(action.difficulty || 1)}</span>
                   </button>`;
                 })
                 .join('')}
@@ -869,7 +928,7 @@ function paintStory(scene, state) {
     panel.innerHTML = `
       <div class="story-kicker"><span>${icon(outcome.correct ? 'spark' : 'flame')} 结算</span><span>第 ${scene.ord} 幕 · ${esc(scene.title)}</span></div>
       <div class="outcome ${outcome.correct ? 'ok' : 'bad'}">
-        <div class="outcome-head">${icon(outcome.correct ? 'check' : 'x')}<span>${outcome.correct ? '检定成功' : '检定失败'}</span></div>
+        <div class="outcome-head">${icon(outcome.correct ? 'check' : 'x')}<span>${outcome.correct ? '拼写检定成功' : '拼写检定失败'}</span></div>
         <p class="outcome-text">${esc(outcome.text)}</p>
         <div class="outcome-chips">
           ${outcome.effectMessage ? chip(esc(outcome.effectMessage), 'ok') : ''}
@@ -967,7 +1026,7 @@ function paintBoss() {
   }
 
   if (app.boss.feedback) {
-    const { correct, word } = app.boss.feedback;
+    const { correct, word, mode = 'spell' } = app.boss.feedback;
     const finished = boss.index >= checks.check_word_ids.length;
     panel.innerHTML = `
       <div class="boss-topline"><span>摆渡人的五问</span><span>${boss.index} / ${checks.check_word_ids.length}</span></div>
@@ -978,7 +1037,7 @@ function paintBoss() {
         }).join('')}
       </div>
       <div class="feedback ${correct ? 'ok' : 'bad'}">
-        <div class="feedback-head">${icon(correct ? 'check' : 'x')}${correct ? '答对了' : '答错了 · HP -20'}</div>
+        <div class="feedback-head">${icon(correct ? 'check' : 'x')}${correct ? '答对了' : '答错了 · HP -20'} · ${mode === 'recognize' ? '认出检定' : '拼写检定'}</div>
         <p class="feedback-answer"><b>${esc(word.lemma)}</b> ${esc(word.ipa)} · ${esc(word.meanings.join('；'))}</p>
         <p class="feedback-example">${esc(word.example_en)}<span>${esc(word.example_zh)}</span></p>
         <button class="btn btn-primary" data-action="boss-next">${finished ? '看结果' : '下一问'}</button>
@@ -996,7 +1055,8 @@ function paintBoss() {
       <h1 class="boss-title">${esc(checks.title)}</h1>
       <p class="boss-intro">${esc(checks.intro)}</p>
       <div class="boss-rules">
-        <span>${icon('eye')} 5 个词 · 中文释义 → 英文拼写</span>
+        <span>${icon('eye')} 3 个认出 + 2 个拼出</span>
+        <span>${icon('spark')} 认出：从四个拼写里选；拼出：自己输入</span>
         <span>${icon('shield')} 答错 HP -20</span>
         <span>${icon('check')} 答对 ${checks.required} 个即可净化</span>
       </div>
@@ -1010,16 +1070,42 @@ function paintBoss() {
 
   const wordId = checks.check_word_ids[boss.index];
   const word = app.byId[wordId];
-  panel.innerHTML = `
-    <div class="boss-topline"><span>摆渡人的五问</span><span>第 ${boss.index + 1} / ${checks.check_word_ids.length} 问</span></div>
+  const mode = G.bossModeAt(app.content, boss.index);
+  const dots = `
     <div class="boss-dots">
       ${checks.check_word_ids.map((id, index) => {
         const result = boss.results[index];
         return `<span class="boss-dot ${result ? (result.correct ? 'hit' : 'miss') : index === boss.index ? 'active' : ''}"></span>`;
       }).join('')}
-    </div>
+    </div>`;
+  if (mode === 'recognize') {
+    const lemmaOptions = S.lemmaOptions(word, app.content.words, 4, 'boss');
+    panel.innerHTML = `
+      <div class="boss-topline"><span>摆渡人的五问</span><span>第 ${boss.index + 1} / ${checks.check_word_ids.length} 问</span></div>
+      ${dots}
+      <div class="boss-question">
+        <p class="boss-label">认出检定 · ${esc(word.pos)} · 从四个拼写里选出正确的一个</p>
+        <h2 class="boss-meaning">${esc(word.meanings.join('；'))}</h2>
+        <div class="options boss-options" id="boss-options">
+          ${lemmaOptions.map((lemma) => `<button class="option lemma-option" data-lemma="${esc(lemma)}">${esc(lemma)}</button>`).join('')}
+        </div>
+      </div>
+      <div class="boss-side">${icon('spark')}<span>认出只证明“看得懂”，拼出才证明“写得出”。答错不卡关。</span></div>`;
+    $$('.lemma-option', panel).forEach((button) => {
+      button.addEventListener('click', () => {
+        const result = G.bossCheck(app.save, app.content, button.dataset.lemma, app.today, 'recognize');
+        saveNow();
+        app.boss.feedback = { correct: result.correct, word: result.word, mode: 'recognize' };
+        paintBoss();
+      });
+    });
+    return;
+  }
+  panel.innerHTML = `
+    <div class="boss-topline"><span>摆渡人的五问</span><span>第 ${boss.index + 1} / ${checks.check_word_ids.length} 问</span></div>
+    ${dots}
     <div class="boss-question">
-      <p class="boss-label">${esc(word.pos)} · 说出它的英文</p>
+      <p class="boss-label">拼写检定 · ${esc(word.pos)} · 自己写出它的英文</p>
       <h2 class="boss-meaning">${esc(word.meanings.join('；'))}</h2>
       <form class="answer-form" id="boss-form" autocomplete="off">
         <div class="answer-row">
@@ -1029,13 +1115,13 @@ function paintBoss() {
         <p class="hint-line">${icon('eye')} 提示：${esc(firstLetterHint(word))}</p>
       </form>
     </div>
-    <div class="boss-side">${icon('spark')}<span>答错不卡关。五问结束后，无论结果如何都能继续。</span></div>`;
+    <div class="boss-side">${icon('spark')}<span>拼写是产出；认出和拼出分开记录。答错不卡关。</span></div>`;
   $('#boss-form')?.addEventListener('submit', (event) => {
     event.preventDefault();
     const input = $('#boss-answer').value;
-    const result = G.bossCheck(app.save, app.content, input, app.today);
+    const result = G.bossCheck(app.save, app.content, input, app.today, 'spell');
     saveNow();
-    app.boss.feedback = { correct: result.correct, word: result.word };
+    app.boss.feedback = { correct: result.correct, word: result.word, mode: 'spell' };
     paintBoss();
   });
 }
@@ -1110,7 +1196,8 @@ function renderSummary() {
             <div class="side-stack">
               <span>${icon('clock')} 明日到期 <b>${data.dueTomorrow}</b> 张</span>
               <span>${icon('flame')} 连续 <b>${save.progress.streak}</b> 天</span>
-              <span>${icon('star')} 已掌握 <b>${data.stats.mastered}</b> / 48</span>
+              <span>${icon('star')} 双证 <b>${data.stats.mastered}</b> / 48</span>
+              <span>${icon('eye')} 会认不会写 <b>${data.stats.recognizedOnly}</b></span>
               <span>${icon('key')} 线索 <b>${save.progress.clues}</b> / 3</span>
             </div>
             ${!data.chapterDone && save.progress.sceneIndex >= 12 && !save.boss?.won ? `<button class="btn btn-primary btn-block" data-action="summary-boss">再战摆渡人</button>` : ''}
@@ -1161,7 +1248,9 @@ function renderWords() {
   const filters = [
     ['all', '全部'],
     ['review', '复习中'],
-    ['mastered', '已掌握'],
+    ['recognized', '会认不会写'],
+    ['spelled', '会拼'],
+    ['mastered', '双证'],
     ['known', '已认识'],
     ['locked', '未契约']
   ];
@@ -1172,8 +1261,10 @@ function renderWords() {
     if (filter === 'locked') return !uw;
     if (filter === 'all') return true;
     if (filter === 'known') return uw?.known;
-    if (filter === 'mastered') return uw?.state === 'mastered';
-    if (filter === 'review') return uw && !uw.known && uw.state !== 'mastered';
+    if (filter === 'mastered') return S.isMasteredWord(uw);
+    if (filter === 'recognized') return Boolean(uw && !uw.known && (uw.stage ?? 0) > 0 && (uw.spelling?.stage ?? 0) < 2);
+    if (filter === 'spelled') return Boolean(uw && !uw.known && (uw.spelling?.stage ?? 0) >= 2);
+    if (filter === 'review') return Boolean(uw && !uw.known && !S.isMasteredWord(uw));
     return true;
   });
   const stats = S.masteryStats(save);
@@ -1185,7 +1276,7 @@ function renderWords() {
       <div class="page-wrap">
         <div class="page-head">
           <div><p class="eyebrow">词书 · 雾港</p><h1>你带走的词</h1></div>
-          <p class="page-sub">已认识 ${stats.known} · 复习中 ${stats.reviewing} · 已掌握 ${stats.mastered} / 48</p>
+          <p class="page-sub">已认识 ${stats.known} · 会拼 ${stats.spellingConfirmed} · 会认不会写 ${stats.recognizedOnly} · 双证 ${stats.mastered} / 48</p>
         </div>
         <div class="word-filters">
           ${filters.map(([key, label]) => `<button class="filter-btn ${filter === key ? 'active' : ''}" data-filter="${key}">${label}</button>`).join('')}
@@ -1203,18 +1294,25 @@ function renderWords() {
                   <div class="word-card-foot"><span>${icon('lock')} 第 ${word.chapter} 章</span></div>
                 </article>`;
               }
-              const status = uw.known ? 'known' : uw.state === 'mastered' ? 'mastered' : 'review';
-              const statusText = uw.known ? '已认识' : uw.state === 'mastered' ? '已掌握' : '复习中';
+              const spellingStage = uw.spelling?.stage ?? 0;
+              const mastered = S.isMasteredWord(uw);
+              const status = uw.known ? 'known' : mastered ? 'mastered' : spellingStage < 2 && (uw.stage ?? 0) > 0 ? 'recognized' : 'review';
+              const statusText = uw.known ? '已认识' : mastered ? '双证' : status === 'recognized' ? '会认不会写' : '复习中';
               return `<article class="panel word-card ${status}">
                 <div class="word-card-top"><span class="word-rank">${String(word.freq_rank).padStart(2, '0')}</span><span class="status-chip ${status}">${statusText}</span></div>
                 <h2>${esc(word.lemma)}</h2>
                 <p class="word-ipa">${esc(word.ipa)} · ${esc(word.pos)}</p>
                 <p class="word-meaning">${esc(word.meanings.join('；'))}</p>
                 <p class="word-example">${esc(word.example_en)}</p>
+                <div class="word-badges">
+                  <span class="word-badge ${uw.stage >= 3 ? 'on' : ''}">认义 ${uw.stage ?? 0}/3</span>
+                  <span class="word-badge ${spellingStage >= 2 ? 'on' : ''}">拼写 ${spellingStage}/2${spellingStage >= 2 ? ' · 会拼' : ''}</span>
+                </div>
                 <div class="word-card-foot">
-                  <span>${icon('clock')} ${uw.known ? '不进入复习' : `下次 ${esc(daysUntil(uw.dueOn))}`}</span>
-                  <span>${icon('refresh')} ${esc(stageLabel(uw))}</span>
-                  ${uw.lapses ? `<span class="lapses">${icon('x')} 错 ${uw.lapses}</span>` : ''}
+                  <span>${icon('clock')} ${uw.known ? '不进入复习' : `认义 ${esc(daysUntil(uw.dueOn))}`}</span>
+                  <span>${icon('spark')} ${uw.known ? '已认识' : `拼写 ${esc(daysUntil(uw.spelling?.dueOn))}`}</span>
+                  ${uw.lapses ? `<span class="lapses">${icon('x')} 认义错 ${uw.lapses}</span>` : ''}
+                  ${uw.spelling?.fails ? `<span class="lapses">${icon('x')} 拼写错 ${uw.spelling.fails}</span>` : ''}
                 </div>
                 ${uw.known ? `<button class="btn btn-ghost btn-sm word-undo" data-undo="${word.id}">撤销已认识</button>` : ''}
               </article>`;

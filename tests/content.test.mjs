@@ -101,12 +101,18 @@ test('失败前进：答错仍推进下一幕，并扣 HP / 回 1 天', () => {
   }
   const action = G.availableActions(save, scene)[0];
   const targetWord = G.wordsById(content)[action.target_word];
+  // 把认义段位人为提高，确认剧情拼写失败不会把它打回去
+  save.words[targetWord.id].stage = 2;
+  save.words[targetWord.id].dueOn = S.addDays(today, 7);
+  const recognitionDue = save.words[targetWord.id].dueOn;
   const hpBefore = save.progress.hp;
   const result = G.performAction(save, content, scene, action, 'definitely-wrong', today);
   assert.equal(result.correct, false);
   assert.ok(save.progress.hp < hpBefore);
-  assert.equal(save.words[targetWord.id].dueOn, S.addDays(today, 1));
-  assert.equal(save.words[targetWord.id].stage, 0);
+  assert.equal(save.words[targetWord.id].dueOn, recognitionDue);
+  assert.equal(save.words[targetWord.id].stage, 2);
+  assert.equal(save.words[targetWord.id].spelling.stage, 0);
+  assert.equal(save.words[targetWord.id].spelling.fails, 1);
   const next = G.finishScene(save, content, today);
   assert.equal(next.next, 'story');
   assert.equal(save.progress.sceneIndex, 1);

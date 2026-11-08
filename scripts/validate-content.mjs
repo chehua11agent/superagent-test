@@ -125,6 +125,16 @@ export function validateContent(wordsData, chapter) {
     }
     if (boss.required !== 3) errors.push('BOSS 通过数应为 3。');
     if (!boss.intro || !boss.success_text || !boss.failure_text) errors.push('BOSS 文案不完整。');
+    if (!Array.isArray(boss.check_types) || boss.check_types.length !== 5) {
+      errors.push('BOSS 必须有 5 个 check_types。');
+    } else {
+      if (!boss.check_types.every((type) => ['recognize', 'spell'].includes(type))) {
+        errors.push('BOSS check_types 只能是 recognize / spell。');
+      }
+      if (!boss.check_types.includes('recognize') || !boss.check_types.includes('spell')) {
+        errors.push('BOSS 必须同时包含认出与拼出。');
+      }
+    }
   }
 
   const chapterScenes = scenes.length;
