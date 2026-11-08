@@ -1670,14 +1670,14 @@ function renderSettings() {
           <div class="setting-row">
             <div><b>减少动效</b><p>关闭雾、雨、灯光的循环动画。也会自动遵循系统的“减少动态效果”设置。</p></div>
             <label class="switch">
-              <input type="checkbox" id="reduce-motion" ${save.settings.reduceMotion ? 'checked' : ''}>
+              <input type="checkbox" id="reduce-motion" aria-label="减少动效" ${save.settings.reduceMotion ? 'checked' : ''}>
               <span></span>
             </label>
           </div>
           <div class="setting-row">
             <div><b>音效</b><p>点击与检定结果会播放简短提示音；全部由浏览器合成，不加载音频文件。</p></div>
             <label class="switch">
-              <input type="checkbox" id="sound-on" ${save.settings.sound !== false ? 'checked' : ''}>
+              <input type="checkbox" id="sound-on" aria-label="音效" ${save.settings.sound !== false ? 'checked' : ''}>
               <span></span>
             </label>
           </div>
