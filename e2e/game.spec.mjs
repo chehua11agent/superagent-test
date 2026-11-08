@@ -293,6 +293,59 @@ test('拼写加试：认义对后可以加试拼写，词书出现双轨徽章',
   await expect(page.locator('.word-badge').first()).toBeVisible();
 });
 
+test('词卡战斗：第 4 幕的词变成手牌，3 回合内推进剧情', async ({ page }) => {
+  await seedStory(page);
+  await finishContracts(page);
+  await page.locator('.action-card').first().click();
+  const actionLemma = await page.evaluate(() => {
+    const app = window.__shici;
+    const scene = app.content.chapter.scenes[app.save.progress.sceneIndex];
+    const action = scene.actions.find((entry) => entry.id === app.story.selectedAction) || scene.actions[0];
+    return app.byId[action.target_word].lemma;
+  });
+  await page.locator('#action-answer').fill(actionLemma);
+  await page.locator('#action-form button[type="submit"]').click();
+  await expect(page.locator('.outcome')).toBeVisible();
+  await page.locator('[data-action="start-battle"]').click();
+  await expect(page.locator('#battle-panel')).toBeVisible();
+
+  for (let round = 0; round < 3; round += 1) {
+    if (await page.locator('.battle-final').count()) break;
+    await page.locator('.battle-card').first().click();
+    const mode = round === 0 ? 'recognize' : 'spell';
+    const lemma = await page.evaluate(() => {
+      const app = window.__shici;
+      return app.byId[app.battle.selectedCard].lemma;
+    });
+    if (mode === 'recognize') {
+      await page.locator('[data-battle-mode="recognize"]').click();
+      const options = page.locator('.lemma-option');
+      const count = await options.count();
+      let clicked = false;
+      for (let i = 0; i < count; i += 1) {
+        if ((await options.nth(i).innerText()).trim() === lemma) {
+          await options.nth(i).click();
+          clicked = true;
+          break;
+        }
+      }
+      expect(clicked).toBe(true);
+    } else {
+      await page.locator('[data-battle-mode="spell"]').click();
+      await page.locator('#battle-answer').fill(lemma);
+      await page.locator('#battle-form button[type="submit"]').click();
+    }
+    await page.waitForTimeout(300);
+    if (await page.locator('.battle-final').count()) break;
+    await page.locator('[data-action="battle-next"]').click();
+  }
+
+  await expect(page.locator('.battle-final')).toBeVisible();
+  expect(await page.evaluate(() => window.__shici.save.battle.won)).toBe(true);
+  await page.locator('[data-action="battle-finish"]').click();
+  await expect(page.locator('.hud-title')).toContainText('第 5 幕');
+});
+
 test('BOSS：五问答对三问净化，结算显示已完成', async ({ page }) => {
   await seedBoss(page);
   await page.locator('[data-action="boss-start"]').click();

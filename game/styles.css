@@ -3445,3 +3445,237 @@ svg {
 .word-card-foot span {
   white-space: nowrap;
 }
+
+/* 词卡战斗 */
+.battle-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  padding: 0 26px 26px;
+}
+
+.battle-panel {
+  width: min(1080px, 100%);
+  max-height: min(78vh, 760px);
+  overflow-y: auto;
+  padding: 24px 28px 22px;
+  background: rgba(7, 14, 18, 0.92);
+}
+
+.battle-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(227, 185, 120, 0.12);
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.battle-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.battle-stats b {
+  color: var(--paper);
+  font-family: var(--serif);
+  font-size: 15px;
+}
+
+.battle-intent-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(215, 122, 102, 0.24);
+  border-radius: 10px;
+  background: rgba(215, 122, 102, 0.05);
+  color: #e5b1a6;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.battle-intent-line .icon {
+  margin-top: 3px;
+  color: var(--danger);
+}
+
+.battle-hand {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.battle-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 130px;
+  padding: 14px 12px;
+  border: 1px solid rgba(240, 231, 214, 0.13);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  text-align: left;
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.battle-card:hover,
+.battle-card.selected {
+  border-color: var(--gold);
+  background: rgba(227, 185, 120, 0.07);
+  transform: translateY(-2px);
+}
+
+.battle-card-type {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.battle-card b {
+  margin-top: auto;
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.battle-card small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.battle-choose-hint {
+  margin-top: 14px;
+  color: var(--muted-dim);
+  font-size: 11px;
+}
+
+.battle-check {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid rgba(227, 185, 120, 0.16);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.battle-check-title {
+  margin-bottom: 8px;
+  color: var(--paper-dim);
+  font-family: var(--serif);
+  font-size: 16px;
+}
+
+.battle-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.battle-options {
+  margin-top: 10px;
+}
+
+.battle-round-result {
+  padding: 16px;
+  border: 1px solid rgba(240, 231, 214, 0.1);
+  border-left-width: 3px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.battle-round-result.ok {
+  border-left-color: var(--ok);
+}
+
+.battle-round-result.bad {
+  border-left-color: var(--danger);
+}
+
+.battle-round-result .battle-intent-line {
+  margin: 10px 0;
+}
+
+.battle-final {
+  padding: 12px 4px 4px;
+  text-align: center;
+}
+
+.battle-final h1 {
+  margin: 8px 0 12px;
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 54px);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.battle-final-text {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--paper-dim);
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.battle-final .finish-stats {
+  margin: 20px 0;
+}
+
+.battle-final.ok h1 {
+  color: var(--gold);
+}
+
+.battle-final.bad h1 {
+  color: #e5a093;
+}
+
+@media (max-width: 780px) {
+  .battle-wrap {
+    padding: 0 10px 10px;
+  }
+
+  .battle-panel {
+    max-height: 74vh;
+    padding: 16px;
+  }
+
+  .battle-hand {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .battle-card {
+    min-height: 104px;
+    padding: 10px;
+  }
+
+  .battle-card b {
+    font-size: 16px;
+  }
+
+  .battle-modes {
+    flex-direction: column;
+  }
+
+  .battle-modes .btn {
+    width: 100%;
+  }
+
+  .battle-stats {
+    gap: 8px 12px;
+  }
+}

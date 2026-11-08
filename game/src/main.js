@@ -925,6 +925,7 @@ function paintStory(scene, state) {
       return paintStory(scene, state);
     }
     const word = outcome.wordId ? app.byId[outcome.wordId] : null;
+    const battlePending = Boolean(scene.battle && !app.save.battle?.done);
     panel.innerHTML = `
       <div class="story-kicker"><span>${icon(outcome.correct ? 'spark' : 'flame')} 结算</span><span>第 ${scene.ord} 幕 · ${esc(scene.title)}</span></div>
       <div class="outcome ${outcome.correct ? 'ok' : 'bad'}">
@@ -942,7 +943,14 @@ function paintStory(scene, state) {
         }
         <div class="outcome-foot">
           <span>${outcome.correct ? '剧情向前推进。' : '剧情仍会向前。失败只改写下一次相遇。'}</span>
-          <button class="btn btn-primary" data-action="outcome-next">继续</button>
+          <div class="outcome-actions">
+            ${
+              battlePending
+                ? `<button class="btn btn-primary" data-action="start-battle">${app.save.battle ? '继续词卡战斗' : '进入词卡战斗'}</button>
+                   <button class="btn btn-ghost" data-action="outcome-next">跳过战斗，继续剧情</button>`
+                : `<button class="btn btn-primary" data-action="outcome-next">继续</button>`
+            }
+          </div>
         </div>
       </div>`;
     $('[data-action="outcome-next"]')?.addEventListener('click', () => {
@@ -952,6 +960,12 @@ function paintStory(scene, state) {
       if (result.next === 'boss') return go('boss');
       if (result.next === 'summary') return go('summary');
       return renderStory();
+    });
+    $('[data-action="start-battle"]')?.addEventListener('click', () => {
+      G.startBattle(app.save, scene, app.today);
+      saveNow();
+      app.battle = { selectedCard: null, mode: null };
+      go('battle');
     });
     return;
   }
@@ -1123,6 +1137,175 @@ function paintBoss() {
     saveNow();
     app.boss.feedback = { correct: result.correct, word: result.word, mode: 'spell' };
     paintBoss();
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/* 词卡战斗                                                            */
+/* ------------------------------------------------------------------ */
+
+function renderBattle() {
+  if (!app.save) return renderCover();
+  const battle = app.save.battle;
+  if (!battle) return go('story');
+  const scene = app.content.chapter.scenes.find((entry) => entry.id === battle.sceneId);
+  if (!scene?.battle) return go('story');
+  if (app.save.day.completed) return go('summary');
+  if (!app.battle) app.battle = { selectedCard: null, mode: null };
+
+  const root = $('#app');
+  root.innerHTML = `
+    <main class="screen stage-screen battle-screen">
+      ${worldSVG({ camera: scene.art.camera, time: scene.art.time, weather: scene.art.weather, className: 'stage-art' })}
+      <div class="stage-veil"></div>
+      ${stageHud(null, `词卡战斗 · ${scene.battle.enemy}`)}
+      <div class="battle-wrap">
+        <div class="panel battle-panel" id="battle-panel"></div>
+      </div>
+    </main>`;
+  paintBattle(scene);
+}
+
+function paintBattle(scene) {
+  const panel = $('#battle-panel');
+  if (!panel) return;
+  const save = app.save;
+  const battle = save.battle;
+  if (!battle) return go('story');
+
+  if (battle.done) {
+    panel.innerHTML = `
+      <div class="battle-final ${battle.won ? 'ok' : 'bad'}">
+        <p class="eyebrow">${battle.won ? '战斗胜利' : '战斗结束'}</p>
+        <h1>${battle.won ? '战斗胜利。' : '战斗结束。'}</h1>
+        <p class="battle-final-text">${esc(G.battleResultText(save, scene))}</p>
+        <div class="finish-stats">
+          ${statChip('check', `${battle.successes}`, '成功检定')}
+          ${statChip('x', `${battle.failures}`, '失败', 'danger')}
+          ${statChip('shield', `${save.progress.hp}/100`, 'HP')}
+          ${statChip('key', `${save.progress.clues}/3`, '线索')}
+        </div>
+        <button class="btn btn-primary btn-lg" data-action="battle-finish">继续剧情</button>
+      </div>`;
+    $('[data-action="battle-finish"]')?.addEventListener('click', () => {
+      const result = G.finishScene(save, app.content, app.today);
+      saveNow();
+      app.story = null;
+      app.battle = null;
+      if (result.next === 'boss') return go('boss');
+      if (result.next === 'summary') return go('summary');
+      return renderStory();
+    });
+    return;
+  }
+
+  const intent = scene.battle.intents[battle.round];
+  const rounds = scene.battle.rounds;
+  const cards = scene.featured_words.map((id) => app.byId[id]).filter(Boolean);
+  const selected = app.battle?.selectedCard ? app.byId[app.battle.selectedCard] : null;
+
+  if (battle.phase === 'result') {
+    const last = battle.lastOutcome;
+    const word = last ? app.byId[last.wordId] : null;
+    panel.innerHTML = `
+      <div class="battle-topline"><span>词卡战斗 · ${esc(scene.battle.enemy)}</span><span>第 ${battle.round + 1} / ${rounds} 回合</span></div>
+      <div class="battle-round-result ${last?.correct ? 'ok' : 'bad'}">
+        <div class="feedback-head">${icon(last?.correct ? 'check' : 'x')}${last?.correct ? '检定成功' : '检定失败'} · ${last?.mode === 'recognize' ? '认出' : '拼出'}</div>
+        <p class="feedback-answer"><b>${esc(word?.lemma || '')}</b> ${esc(word?.ipa || '')} · ${esc(word?.meanings?.join('；') || '')}</p>
+        <p class="battle-intent-line">敌人意图：${esc(intent.text)}</p>
+        <p class="feedback-note">${esc(last?.message || '')}</p>
+        <div class="battle-stats">
+          <span>敌人 HP <b>${battle.enemyHp}</b> / ${rounds}</span>
+          <span>成功 <b>${battle.successes}</b></span>
+          <span>失败 <b>${battle.failures}</b></span>
+          <span>你的 HP <b>${save.progress.hp}</b></span>
+        </div>
+        <button class="btn btn-primary" data-action="battle-next">下一回合</button>
+      </div>`;
+    $('[data-action="battle-next"]')?.addEventListener('click', () => {
+      G.battleNext(save, scene);
+      saveNow();
+      app.battle = { selectedCard: null, mode: null };
+      paintBattle(scene);
+    });
+    return;
+  }
+
+  let checkHtml = '<p class="battle-choose-hint">选一张词卡。卡面只写中文语义与效果，英文要你自己取出来。</p>';
+  if (selected) {
+    checkHtml = `
+      <div class="battle-check">
+        <p class="battle-check-title">「${esc(selected.meanings[0])}」· 选一种检定方式</p>
+        <div class="battle-modes">
+          <button class="btn btn-ghost" data-battle-mode="recognize">认出 · 4 选 1（低风险）</button>
+          <button class="btn btn-primary" data-battle-mode="spell">拼出 · 输入（高风险，伤害 +1）</button>
+        </div>
+        ${
+          app.battle.mode === 'recognize'
+            ? `<div class="options battle-options">
+                ${S.lemmaOptions(selected, app.content.words, 4, 'battle').map((lemma) => `<button class="option lemma-option" data-lemma="${esc(lemma)}">${esc(lemma)}</button>`).join('')}
+              </div>`
+            : ''
+        }
+        ${
+          app.battle.mode === 'spell'
+            ? `<form class="answer-form" id="battle-form" autocomplete="off">
+                <label for="battle-answer">写出「${esc(selected.meanings[0])}」的英文</label>
+                <div class="answer-row">
+                  <input id="battle-answer" name="answer" type="text" inputmode="latin" spellcheck="false" autocapitalize="off" placeholder="输入英文…" required autofocus>
+                  <button class="btn btn-primary" type="submit">打出这张卡</button>
+                </div>
+                <p class="hint-line">${icon('eye')} 提示：${esc(firstLetterHint(selected))} · 拼写成功伤害 +1</p>
+              </form>`
+            : ''
+        }
+      </div>`;
+  }
+
+  panel.innerHTML = `
+    <div class="battle-topline"><span>词卡战斗 · ${esc(scene.battle.enemy)}</span><span>第 ${battle.round + 1} / ${rounds} 回合</span></div>
+    <div class="battle-stats">
+      <span>敌人 HP <b>${battle.enemyHp}</b> / ${rounds}</span>
+      <span>成功 <b>${battle.successes}</b></span>
+      <span>失败 <b>${battle.failures}</b></span>
+      <span>你的 HP <b>${save.progress.hp}</b></span>
+    </div>
+    <p class="battle-intent-line">${icon('flame')} 敌人意图：${esc(intent.text)}</p>
+    <div class="battle-hand">
+      ${cards.map((word) => `
+        <button class="battle-card ${selected?.id === word.id ? 'selected' : ''}" data-card="${word.id}">
+          <span class="battle-card-type">${typeLabel(word.card_type)}</span>
+          <b>${esc(word.meanings[0])}</b>
+          <small>${esc(word.effect_text)}</small>
+        </button>`).join('')}
+    </div>
+    ${checkHtml}`;
+  $$('.battle-card', panel).forEach((button) => {
+    button.addEventListener('click', () => {
+      app.battle = { selectedCard: button.dataset.card, mode: null };
+      paintBattle(scene);
+    });
+  });
+  $$('[data-battle-mode]', panel).forEach((button) => {
+    button.addEventListener('click', () => {
+      app.battle.mode = button.dataset.battleMode;
+      paintBattle(scene);
+    });
+  });
+  $$('.lemma-option', panel).forEach((button) => {
+    button.addEventListener('click', () => {
+      G.battleCheck(save, app.content, scene, selected.id, 'recognize', button.dataset.lemma, app.today);
+      saveNow();
+      app.battle = null;
+      paintBattle(scene);
+    });
+  });
+  $('#battle-form')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    G.battleCheck(save, app.content, scene, selected.id, 'spell', $('#battle-answer').value, app.today);
+    saveNow();
+    app.battle = null;
+    paintBattle(scene);
   });
 }
 
@@ -1439,6 +1622,9 @@ function render() {
       break;
     case 'boss':
       renderBoss();
+      break;
+    case 'battle':
+      renderBattle();
       break;
     case 'summary':
       renderSummary();

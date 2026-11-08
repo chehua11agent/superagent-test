@@ -33,6 +33,7 @@ npm run serve
 | 契约 | 先展示英文、音标、释义、例句，再立即做认义小测；答错仍进入 1 天复习 |
 | 已认识 | 中文 → 英文拼写验证；通过后移入词书，不进入 SRS；可撤销 |
 | 章节 | 第一章 12 幕 × 4 词；每天 3 幕；第 12 幕后进入 5 问 BOSS（3 认出 + 2 拼出，答对 3 问净化） |
+| 词卡战斗 | 第 4 幕「旧灯塔」的 4 个词变成手牌，3 回合、敌人意图、认出/拼出双检定、失败扣 HP/线索；可跳过，不卡关 |
 | 可视化 | 程序化 SVG 雾港全景：12 个镜头、昼夜/风暴/黎明、雾、雨、灯塔光束、灯笼、海面；章节地图与节点 |
 | 存档 | localStorage；跨天以本地 04:00 为学习日边界 |
 | 可访问性 | 键盘焦点样式、跳过链接、减少动效（手动开关 + `prefers-reduced-motion`）、移动端布局 |
@@ -64,17 +65,17 @@ tests/
   content.test.mjs      4 个内容校验与通关集成用例
   sample.test.mjs       5 个小样本结构 / 位置 / 语义对照用例
 e2e/
-  game.spec.mjs         9 个 Playwright 端到端用例
+  game.spec.mjs         10 个 Playwright 端到端用例
 playwright.config.mjs   自动启动本地服务器与浏览器项目
 ```
 
 ## 验证
 
 ```bash
-npm test                # 24 个单元 / 内容 / 集成测试
+npm test                # 25 个单元 / 内容 / 集成测试
 npm run validate        # 48 词 / 12 幕 / 行动与长度校验
 npm run validate:sample # 10 词 / 3 幕 / 5 节点：每个词的功能位置审计
-npm run test:e2e        # 9 个 Playwright 端到端用例（首次需 npx playwright install chromium）
+npm run test:e2e        # 10 个 Playwright 端到端用例（首次需 npx playwright install chromium）
 ```
 
 ## 内容小样本：《闭馆通知》
@@ -98,9 +99,10 @@ npm run test:e2e        # 9 个 Playwright 端到端用例（首次需 npx playw
 4. 失败前进：答错扣 HP、SRS 回 1 天，剧情仍到第 5 幕。
 5. 硬闯：不测试单词，固定 HP -15，仍然推进。
 6. 拼写加试：认义答对后可加试拼写，词书出现双轨徽章。
-7. BOSS：3 认出 + 2 拼出，五问答对三问净化 → 章节结算。
-8. 设置与重置：减少动效、锚点时间、清档回封面。
-9. 移动端：首页 CTA、复习选项、剧情契约按钮均在首屏，无横向溢出。
+7. 词卡战斗：第 4 幕的词变成手牌，3 回合内推进剧情。
+8. BOSS：3 认出 + 2 拼出，五问答对三问净化 → 章节结算。
+9. 设置与重置：减少动效、锚点时间、清档回封面。
+10. 移动端：首页 CTA、复习选项、剧情契约按钮均在首屏，无横向溢出。
 
 测试会收集 `pageerror` 与 console error；任何浏览器错误都会让对应用例失败。
 
@@ -115,6 +117,10 @@ npm run test:e2e        # 9 个 Playwright 端到端用例（首次需 npx playw
 - 未接入：剧情“认出/拼出”双路径、听写/语境/近义辨析/词形变化。
 
 实现范围：A（复习拼写加试）+ E（词书双徽章）+ C（BOSS 混检）。完整提案、状态草图、B/D 等后续项见 [`docs/dual-check-design.md`](../docs/dual-check-design.md)。
+
+## 剧情 → 词卡战斗 → 复习
+
+第 4 幕「旧灯塔」已接入一场 3 回合词卡战斗：剧情里契约过的 guide / signal / warn / reflect 变成手牌；每回合选一张卡，用认出（4 选 1）或拼出（输入）打出；成功结算卡牌效果，失败扣 HP/线索；战斗结果回到剧情，词进入 SRS。设计笔记见 [`docs/story-card-combat-design.md`](../docs/story-card-combat-design.md)。
 
 ## 原型边界（诚实说明）
 

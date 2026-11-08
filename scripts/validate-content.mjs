@@ -82,6 +82,22 @@ export function validateContent(wordsData, chapter) {
     if (!Array.isArray(scene.actions) || scene.actions.length < 1 || scene.actions.length > 2) {
       errors.push(`${label}: 每幕必须有 1–2 个词行动。`);
     }
+    if (scene.battle) {
+      const battle = scene.battle;
+      if (!battle.id || !battle.enemy) errors.push(`${label}: battle 缺少 id/enemy。`);
+      if (battle.rounds !== 3) errors.push(`${label}: battle.rounds 应为 3。`);
+      if (!Array.isArray(battle.intents) || battle.intents.length !== battle.rounds) {
+        errors.push(`${label}: battle.intents 数量应等于 rounds。`);
+      } else {
+        for (const intent of battle.intents) {
+          if (!['hp', 'clue'].includes(intent.type)) errors.push(`${label}: battle intent.type 非法（${intent.type}）。`);
+          if (!Number.isInteger(intent.amount) || intent.amount <= 0) errors.push(`${label}: battle intent.amount 非法。`);
+          if (!intent.text) errors.push(`${label}: battle intent 缺少文本。`);
+        }
+      }
+      if (!battle.win_text || !battle.lose_text) errors.push(`${label}: battle 缺少胜负文本。`);
+      if (!battle.reward || !['clue', 'hp'].includes(battle.reward.type)) errors.push(`${label}: battle.reward 非法。`);
+    }
     for (const action of scene.actions || []) {
       const alabel = `${label}/${action.id || '?'}`;
       if (actionIds.has(action.id)) errors.push(`行动 id 重复：${action.id}`);
@@ -139,6 +155,7 @@ export function validateContent(wordsData, chapter) {
 
   const chapterScenes = scenes.length;
   const actionCount = scenes.reduce((sum, scene) => sum + (scene.actions?.length || 0), 0);
+  const battleCount = scenes.filter((scene) => scene.battle).length;
   const branchCount = scenes.reduce(
     (sum, scene) => sum + (scene.actions || []).filter((action) => action.failure?.cost?.type === 'branch').length,
     0
@@ -156,6 +173,7 @@ export function validateContent(wordsData, chapter) {
       words: words.length,
       scenes: chapterScenes,
       actions: actionCount,
+      battles: battleCount,
       branchFailures: branchCount,
       clueFailures: clueCount
     }

@@ -91,6 +91,30 @@ test('完美通关第一章：4 天 × 3 幕 + BOSS，48 词全部契约', () =>
   assert.equal(save.progress.chapterDone, true);
 });
 
+test('词卡战斗：第 4 幕的词变成手牌，3 回合内胜利并给线索', () => {
+  const now = new Date(2026, 10, 8, 10, 0);
+  const save = createNewSave(now);
+  const today = G.todayOf(save, now);
+  const scene = content.chapter.scenes.find((entry) => entry.id === 'ch1_sc04');
+  for (const wordId of G.pendingContractWords(save, scene)) {
+    G.contractWord(save, content, wordId, true, today);
+  }
+  G.startBattle(save, scene, today);
+  assert.equal(save.battle.enemyHp, 3);
+
+  for (let round = 0; round < 3; round += 1) {
+    const word = content.words.find((entry) => scene.featured_words.includes(entry.id));
+    G.battleCheck(save, content, scene, word.id, 'spell', word.lemma, today);
+    if (save.battle.done) break;
+    G.battleNext(save, scene);
+  }
+
+  assert.equal(save.battle.done, true);
+  assert.equal(save.battle.won, true);
+  assert.ok(save.progress.clues >= 1);
+  assert.ok(Object.values(save.words).some((word) => (word.spelling?.stage ?? 0) > 0));
+});
+
 test('失败前进：答错仍推进下一幕，并扣 HP / 回 1 天', () => {
   const now = new Date(2026, 10, 8, 10, 0);
   const save = createNewSave(now);

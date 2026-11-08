@@ -352,6 +352,84 @@ export function bossCheck(save, content, input, today, mode = undefined) {
   return { correct, word, mode: checkMode, finished, won: save.boss.won };
 }
 
+export function startBattle(save, scene, today) {
+  if (save.battle && save.battle.sceneId === scene.id && !save.battle.done) return save.battle;
+  save.battle = {
+    sceneId: scene.id,
+    round: 0,
+    enemyHp: scene.battle.rounds,
+    successes: 0,
+    failures: 0,
+    phase: 'choose',
+    lastOutcome: null,
+    done: false,
+    won: false
+  };
+  return save.battle;
+}
+
+export function battleIntent(save, scene) {
+  return scene.battle.intents[save.battle?.round ?? 0] || null;
+}
+
+export function battleCheck(save, content, scene, wordId, mode, input, today) {
+  const battle = save.battle;
+  if (!battle || battle.done || battle.phase !== 'choose') return null;
+  const word = wordsById(content)[wordId];
+  if (!word) return null;
+  const correct = isCorrectAnswer(word, input);
+  const current = save.words[wordId];
+  if (current && !current.known) {
+    save.words[wordId] = mode === 'recognize'
+      ? review(current, correct, today)
+      : reviewSpelling(current, correct, today);
+  }
+  const intent = scene.battle.intents[battle.round];
+  if (correct) {
+    battle.successes += 1;
+    battle.enemyHp = Math.max(0, battle.enemyHp - (mode === 'spell' ? 2 : 1));
+    battle.lastOutcome = {
+      wordId,
+      mode,
+      correct: true,
+      intent,
+      message: mode === 'spell' ? '拼写成功：卡牌效果加倍。' : '认出成功：卡牌效果生效。'
+    };
+  } else {
+    battle.failures += 1;
+    const cost = applyCost(save, { type: intent.type, amount: intent.amount }, scene);
+    battle.lastOutcome = {
+      wordId,
+      mode,
+      correct: false,
+      intent,
+      message: cost.message
+    };
+  }
+  battle.phase = 'result';
+  if (battle.enemyHp <= 0 || battle.round + 1 >= scene.battle.rounds) {
+    battle.done = true;
+    battle.won = battle.enemyHp <= 0 || battle.successes >= 2;
+    if (battle.won) {
+      save.progress.clues = Math.min(3, save.progress.clues + (scene.battle.reward?.amount || 1));
+    }
+    battle.phase = 'done';
+  }
+  return battle;
+}
+
+export function battleNext(save, scene) {
+  const battle = save.battle;
+  if (!battle || battle.done) return;
+  battle.round = Math.min(battle.round + 1, scene.battle.rounds - 1);
+  battle.phase = 'choose';
+  battle.lastOutcome = null;
+}
+
+export function battleResultText(save, scene) {
+  return save.battle?.won ? scene.battle.win_text : scene.battle.lose_text;
+}
+
 export function resetBoss(save) {
   save.boss = { index: 0, hits: 0, done: false, won: false, results: [] };
   save.outcome = null;
