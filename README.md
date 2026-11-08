@@ -24,7 +24,7 @@ dsh-superagent test repository.
 ```bash
 npm run serve    # http://127.0.0.1:4173/
 npm test         # SRS / 内容 / 通关集成测试
-npm run test:e2e # Playwright 端到端测试
+npm run test:e2e # 11 个 Playwright 端到端测试
 ```
 
 详细说明、操作方式、已知边界与文件结构见 [`game/README.md`](game/README.md)。

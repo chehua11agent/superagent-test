@@ -35,7 +35,7 @@ npm run serve
 | 章节 | 第一章 12 幕 × 4 词；每天 3 幕；第 12 幕后进入 5 问 BOSS（3 认出 + 2 拼出，答对 3 问净化） |
 | 词卡战斗 | 第 4 幕「旧灯塔」的 4 个词变成手牌，3 回合、敌人意图、认出/拼出双检定、失败扣 HP/线索；可跳过，不卡关 |
 | 可视化 | 程序化 SVG 雾港全景：12 个镜头、昼夜/风暴/黎明、雾、雨、灯塔光束、灯笼、海面；章节地图、节点、地名与已走航线 |
-| 游戏化战斗 | 守塔人剪影立绘、九宫格卡框、类型图标、受击闪烁、伤害/代价数字、敌人血条与消散动画；全部为内联 SVG/CSS |
+| 游戏化战斗 | 第 4 幕改成“人物 vs 怪物”舞台：左侧拾词者角色与 HP、右侧带角守塔人与怪物意图气泡、回合点、卡牌技能飞行/命中特效、伤害/代价数字；九宫格卡框与类型图标 |
 | 视差与音效 | 首页与封面的三层 SVG 视差；点击 / 检定成功 / 检定失败三个 Web Audio 合成音效，可在设置关闭 |
 | 存档 | localStorage；跨天以本地 04:00 为学习日边界 |
 | 可访问性 | 键盘焦点样式、跳过链接、减少动效（手动开关 + `prefers-reduced-motion`）、音效开关、移动端布局 |
@@ -44,7 +44,7 @@ npm run serve
 
 按 [`docs/game-visual-solutions-survey.md`](https://github.com/chehua11agent/superagent-test/pull/7) 的 **A 原地游戏化** 路线，保留现有 DOM / SVG / CSS 与交互：
 
-- 战斗：守塔人立绘（代码生成的 SVG 剪影 + 提灯）、敌人血条、九宫格词卡框、类型图标、受击 / 伤害数字 / 消散动画。
+- 战斗：左侧「拾词者」角色（宽檐帽、词卡、人物 HP），右侧「雾中守塔人」怪物（角、提灯、怪物 HP），怪物意图气泡、回合点，以及出牌时的技能飞行 / 命中特效、伤害与代价数字。
 - 地图：节点地名、当前节点脉冲、已走过航线与三层视差。
 - 图标：战斗图标来自 game-icons.net（CC BY 3.0，署名见 [`ASSETS.md`](ASSETS.md)）；其余仍用项目内联图标。
 - 动效与音效没有引入 anime.js / howler.js，而是用 CSS / Web Animations 与 Web Audio 合成，保持原型的零运行时依赖和离线可用。
@@ -79,7 +79,7 @@ tests/
   content.test.mjs      4 个内容校验与通关集成用例
   sample.test.mjs       5 个小样本结构 / 位置 / 语义对照用例
 e2e/
-  game.spec.mjs         10 个 Playwright 端到端用例
+  game.spec.mjs         11 个 Playwright 端到端用例
 playwright.config.mjs   自动启动本地服务器与浏览器项目
 ```
 
@@ -89,7 +89,7 @@ playwright.config.mjs   自动启动本地服务器与浏览器项目
 npm test                # 25 个单元 / 内容 / 集成测试
 npm run validate        # 48 词 / 12 幕 / 行动与长度校验
 npm run validate:sample # 10 词 / 3 幕 / 5 节点：每个词的功能位置审计
-npm run test:e2e        # 10 个 Playwright 端到端用例（首次需 npx playwright install chromium）
+npm run test:e2e        # 11 个 Playwright 端到端用例（首次需 npx playwright install chromium）
 ```
 
 ## 内容小样本：《闭馆通知》
@@ -113,10 +113,11 @@ npm run test:e2e        # 10 个 Playwright 端到端用例（首次需 npx play
 4. 失败前进：答错扣 HP、SRS 回 1 天，剧情仍到第 5 幕。
 5. 硬闯：不测试单词，固定 HP -15，仍然推进。
 6. 拼写加试：认义答对后可加试拼写，词书出现双轨徽章。
-7. 词卡战斗：第 4 幕的词变成手牌，3 回合内推进剧情。
+7. 词卡战斗：第 4 幕进入人物 vs 怪物舞台，词变成手牌，3 回合内推进剧情。
 8. BOSS：3 认出 + 2 拼出，五问答对三问净化 → 章节结算。
 9. 设置与重置：减少动效、锚点时间、清档回封面。
 10. 移动端：首页 CTA、复习选项、剧情契约按钮均在首屏，无横向溢出。
+11. 移动端词卡战斗：人物 / 怪物可见，意图在面板中显示，无横向溢出。
 
 测试会收集 `pageerror` 与 console error；任何浏览器错误都会让对应用例失败。
 

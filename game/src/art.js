@@ -315,6 +315,10 @@ export function foePortraitSVG({ className = '' } = {}) {
       <path class="foe-rim" d="M130 56 C 96 56 78 80 74 120 L 54 306 L 46 340 L 62 330 L 70 356" fill="none" stroke="url(#foe-rim)" stroke-width="3" stroke-linejoin="round"/>
       <path class="foe-cloak-line" d="M130 128 L 126 340 M 98 150 L 86 320 M 162 150 L 174 320" stroke="#0c1b21" stroke-width="2" fill="none" opacity="0.8"/>
 
+      <path class="foe-horn" d="M98 42 C 86 32 78 18 72 8 C 86 14 98 24 106 38 Z" fill="#04090c"/>
+      <path class="foe-horn" d="M162 42 C 174 32 182 18 188 8 C 174 14 162 24 154 38 Z" fill="#04090c"/>
+      <path class="foe-horn-rim" d="M98 42 C 86 32 78 18 72 8" fill="none" stroke="#9db9b2" stroke-width="1.2" opacity="0.18"/>
+      <path class="foe-horn-rim" d="M162 42 C 174 32 182 18 188 8" fill="none" stroke="#9db9b2" stroke-width="1.2" opacity="0.18"/>
       <path class="foe-hood" d="M130 34 C 102 34 84 58 84 90 C 84 118 104 140 130 140 C 156 140 176 118 176 90 C 176 58 158 34 130 34 Z" fill="#04090c"/>
       <path class="foe-hood-rim" d="M130 34 C 102 34 84 58 84 90 C 84 118 104 140 130 140" fill="none" stroke="#9db9b2" stroke-width="1.4" opacity="0.2"/>
       <ellipse cx="130" cy="94" rx="25" ry="32" fill="#010406"/>
@@ -340,3 +344,72 @@ export function foePortraitSVG({ className = '' } = {}) {
   </svg>`;
 }
 
+
+/**
+ * 玩家角色「拾词者」：戴宽檐帽的旅人，手持一张发光的词卡。
+ * 与守塔人共用暗色剪影语言，但用青绿轮廓和纸色卡光区分“人物”。
+ */
+export function playerPortraitSVG({ className = '' } = {}) {
+  return `
+  <svg class="player-svg ${className}" viewBox="0 0 220 380" role="img" aria-label="拾词者的剪影">
+    <defs>
+      <linearGradient id="player-coat" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0d2027"/>
+        <stop offset="62%" stop-color="#071318"/>
+        <stop offset="100%" stop-color="#03090c"/>
+      </linearGradient>
+      <radialGradient id="player-card-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#fff1c8" stop-opacity="0.9"/>
+        <stop offset="36%" stop-color="#e3b978" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#e3b978" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="player-rim" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#bfe3d4" stop-opacity="0.32"/>
+        <stop offset="24%" stop-color="#bfe3d4" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#bfe3d4" stop-opacity="0.06"/>
+      </linearGradient>
+    </defs>
+
+    <g class="player-ground">
+      <ellipse cx="108" cy="358" rx="94" ry="22" fill="#071116" opacity="0.85"/>
+      <ellipse cx="108" cy="354" rx="70" ry="12" fill="#c8dedb" opacity="0.06"/>
+    </g>
+
+    <g class="player-body">
+      <path class="player-legs" d="M88 294 L82 352 L104 354 L108 306 Z" fill="#03090c"/>
+      <path class="player-legs" d="M132 294 L138 352 L116 354 L112 306 Z" fill="#03090c"/>
+      <path class="player-boot" d="M78 342 L106 344 L106 354 L76 352 Z" fill="#061115"/>
+      <path class="player-boot" d="M144 342 L116 344 L116 354 L146 352 Z" fill="#061115"/>
+
+      <path class="player-coat" d="M110 92 C 84 92 70 116 66 150 L 52 286 L 70 298 L 80 326 L 96 306 L 110 330 L 124 306 L 140 326 L 150 298 L 168 286 L 154 150 C 150 116 136 92 110 92 Z" fill="url(#player-coat)"/>
+      <path class="player-rim" d="M110 92 C 84 92 70 116 66 150 L 52 286 L 70 298" fill="none" stroke="url(#player-rim)" stroke-width="3" stroke-linejoin="round"/>
+      <path class="player-coat-line" d="M110 150 L 104 300 M 88 168 L 80 292 M 132 168 L 140 292" stroke="#0d252c" stroke-width="2" fill="none" opacity="0.85"/>
+
+      <path class="player-scarf" d="M90 104 Q110 118 130 104 L138 120 Q110 136 82 120 Z" fill="#12343b"/>
+      <path class="player-scarf-tail" d="M124 120 L136 152 L126 156 L116 124 Z" fill="#102b31"/>
+
+      <path class="player-strap" d="M82 128 L146 218" stroke="#0d2a31" stroke-width="9" opacity="0.9"/>
+      <rect class="player-satchel" x="58" y="216" width="40" height="38" rx="5" fill="#071318" stroke="#9db9b2" stroke-opacity="0.16"/>
+      <path d="M63 224 H93 M63 232 H93" stroke="#9db9b2" stroke-opacity="0.22"/>
+
+      <circle class="player-head" cx="110" cy="82" r="22" fill="#02070a"/>
+      <path class="player-hat" d="M54 78 Q110 58 166 78 Q110 94 54 78 Z" fill="#061115"/>
+      <path class="player-hat-crown" d="M82 76 Q86 40 110 36 Q134 40 138 76 Z" fill="#0a1a20"/>
+      <path class="player-hat-rim" d="M54 78 Q110 58 166 78" fill="none" stroke="#9db9b2" stroke-opacity="0.2"/>
+
+      <path class="player-arm" d="M146 148 C 170 154 180 174 182 194" fill="none" stroke="#050c10" stroke-width="13" stroke-linecap="round"/>
+      <path class="player-arm-rim" d="M146 148 C 170 154 180 174 182 194" fill="none" stroke="#9db9b2" stroke-width="1.2" opacity="0.16"/>
+
+      <g class="player-card">
+        <circle cx="186" cy="206" r="48" fill="url(#player-card-glow)" opacity="0.9"/>
+        <rect x="173" y="187" width="25" height="34" rx="3" transform="rotate(-12 185 204)" fill="#0a1418" stroke="#e3b978" stroke-opacity="0.6"/>
+        <path d="M180 194 L190 204 L180 214" stroke="#f6dfae" stroke-width="2" fill="none" transform="rotate(-12 185 204)"/>
+      </g>
+    </g>
+
+    <g class="player-mist" fill="#c8dedb">
+      <ellipse cx="74" cy="344" rx="80" ry="12" opacity="0.05"/>
+      <ellipse cx="152" cy="364" rx="96" ry="14" opacity="0.05"/>
+    </g>
+  </svg>`;
+}

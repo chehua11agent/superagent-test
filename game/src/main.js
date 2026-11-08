@@ -1,4 +1,4 @@
-import { foePortraitSVG, worldSVG } from './art.js';
+import { foePortraitSVG, playerPortraitSVG, worldSVG } from './art.js';
 import { playCue } from './audio.js';
 import {
   createDemoSave,
@@ -1227,27 +1227,66 @@ function battleCostLabel(intent) {
   return '代价未知';
 }
 
-/** 战斗舞台：敌人立绘、受击/伤害数字与敌人血条。 */
+function battleIntentGlyph(type) {
+  return { hp: 'swords', clue: 'quill', branch: 'bag' }[type] || 'swords';
+}
+
+/** 战斗舞台：人物 / 怪物 / 意图 / 技能特效 / 血条。 */
 function battleArenaInner(scene, battle) {
   const last = battle.lastOutcome;
   const rounds = scene.battle.rounds;
+  const intent = last?.intent || scene.battle.intents[battle.round];
+  const playerHp = app.save.progress.hp;
   const hpPercent = Math.max(0, Math.min(100, (battle.enemyHp / rounds) * 100));
   const hit = battle.phase === 'result' && Boolean(last?.correct);
   const miss = battle.phase === 'result' && Boolean(last && !last.correct);
   const defeated = battle.done && battle.won;
   const lost = battle.done && !battle.won;
+  const word = last?.wordId ? app.byId[last.wordId] : null;
+  const skillType = word?.card_type || 'check';
+  const skillName = word?.meanings?.[0]?.split('；')[0] || '';
   const damage = last?.mode === 'spell' ? 2 : 1;
+  const pips = Array.from({ length: rounds }, (_, index) => {
+    const state = index < battle.successes ? 'hit' : index < battle.successes + battle.failures ? 'miss' : '';
+    return `<i class="${state}"></i>`;
+  }).join('');
   return `
     <div class="battle-flash ${hit ? 'ok' : miss ? 'bad' : ''}"></div>
+    <div class="battle-turn">
+      <span class="battle-turn-label">第 ${battle.round + 1} / ${rounds} 回合</span>
+      <span class="battle-turn-pips" aria-hidden="true">${pips}</span>
+    </div>
+    <div class="battle-versus" aria-hidden="true"><span>VS</span></div>
+    <div class="battle-player ${hit ? 'is-casting' : ''} ${miss ? 'is-hurt' : ''}">
+      ${playerPortraitSVG()}
+      <div class="actor-plate player-plate" aria-hidden="true">
+        <span class="actor-tag">人物</span>
+        <span class="actor-name player-name">拾词者</span>
+        <span class="actor-hp player-hp"><i style="width:${playerHp}%"></i></span>
+        <span class="actor-hp-text">${playerHp} / 100</span>
+      </div>
+    </div>
+    <div class="enemy-intent ${miss ? 'is-hostile' : ''} ${hit ? 'is-hit' : ''}" aria-hidden="true">
+      <span class="intent-label">${gameIcon(battleIntentGlyph(intent?.type))} 怪物意图</span>
+      <p>${esc(intent?.text || '')}</p>
+    </div>
     <div class="battle-foe ${hit ? 'is-hit' : ''} ${miss ? 'is-guarding' : ''} ${defeated ? 'is-defeated' : ''} ${lost ? 'is-lost' : ''}">
       ${foePortraitSVG()}
       ${hit ? `<span class="damage-float damage-enemy" aria-hidden="true">-${damage}</span>` : ''}
-      <div class="foe-plate" aria-hidden="true">
-        <span class="foe-name">${esc(scene.battle.enemy)}</span>
-        <span class="foe-hp"><i style="width:${hpPercent}%"></i></span>
-        <span class="foe-hp-text">${battle.enemyHp} / ${rounds}</span>
+      <div class="actor-plate foe-plate" aria-hidden="true">
+        <span class="actor-tag tag-foe">怪物</span>
+        <span class="actor-name foe-name">${esc(scene.battle.enemy)}</span>
+        <span class="actor-hp foe-hp"><i style="width:${hpPercent}%"></i></span>
+        <span class="actor-hp-text foe-hp-text">${battle.enemyHp} / ${rounds}</span>
       </div>
     </div>
+    ${hit ? `
+      <div class="skill-fx skill-${esc(skillType)}" aria-hidden="true">
+        <span class="skill-trail"></span>
+        <span class="skill-impact"></span>
+        <span class="skill-orb">${gameIcon(typeGlyph(skillType))}<em>${esc(skillName)}</em></span>
+        <span class="skill-callout">${gameIcon(typeGlyph(skillType))} 技能 · ${esc(skillName)}</span>
+      </div>` : ''}
     ${miss ? `<span class="damage-float damage-player" aria-hidden="true">${battleCostLabel(last?.intent)}</span>` : ''}
     ${battle.done ? `<p class="battle-arena-note">${defeated ? '灯重新亮起。' : '雾把最后一盏灯按灭了。'}</p>` : ''}`;
 }
@@ -1320,18 +1359,11 @@ function paintBattle(scene) {
     const last = battle.lastOutcome;
     const word = last ? app.byId[last.wordId] : null;
     panel.innerHTML = `
-      <div class="battle-topline"><span>词卡战斗 · ${esc(scene.battle.enemy)}</span><span>第 ${battle.round + 1} / ${rounds} 回合</span></div>
+      <p class="sr-only">第 ${battle.round + 1} / ${rounds} 回合。怪物意图：${esc(intent.text)}。拾词者 HP ${save.progress.hp}。${esc(scene.battle.enemy)} HP ${battle.enemyHp} / ${rounds}。</p>
       <div class="battle-round-result ${last?.correct ? 'ok' : 'bad'}">
         <div class="feedback-head">${icon(last?.correct ? 'check' : 'x')}${last?.correct ? '检定成功' : '检定失败'} · ${last?.mode === 'recognize' ? '认出' : '拼出'}</div>
         <p class="feedback-answer"><b>${esc(word?.lemma || '')}</b> ${esc(word?.ipa || '')} · ${esc(word?.meanings?.join('；') || '')}</p>
-        <p class="battle-intent-line">敌人意图：${esc(intent.text)}</p>
         <p class="feedback-note">${esc(last?.message || '')}</p>
-        <div class="battle-stats">
-          <span>敌人 HP <b>${battle.enemyHp}</b> / ${rounds}</span>
-          <span>成功 <b>${battle.successes}</b></span>
-          <span>失败 <b>${battle.failures}</b></span>
-          <span>你的 HP <b>${save.progress.hp}</b></span>
-        </div>
         <button class="btn btn-primary" data-action="battle-next">下一回合</button>
       </div>`;
     $('[data-action="battle-next"]')?.addEventListener('click', () => {
@@ -1343,14 +1375,14 @@ function paintBattle(scene) {
     return;
   }
 
-  let checkHtml = '<p class="battle-choose-hint">选一张词卡。卡面只写中文语义与效果，英文要你自己取出来。</p>';
+  let checkHtml = '';
   if (selected) {
     checkHtml = `
       <div class="battle-check">
         <p class="battle-check-title">「${esc(selected.meanings[0])}」· 选一种检定方式</p>
         <div class="battle-modes">
-          <button class="btn btn-ghost" data-battle-mode="recognize">认出 · 4 选 1（低风险）</button>
-          <button class="btn btn-primary" data-battle-mode="spell">拼出 · 输入（高风险，伤害 +1）</button>
+          <button class="btn btn-ghost" data-battle-mode="recognize">${icon('eye')} 认出 · 4 选 1（低风险）</button>
+          <button class="btn btn-primary" data-battle-mode="spell">${gameIcon('quill')} 拼出 · 输入（高风险，伤害 +1）</button>
         </div>
         ${
           app.battle.mode === 'recognize'
@@ -1375,14 +1407,9 @@ function paintBattle(scene) {
   }
 
   panel.innerHTML = `
-    <div class="battle-topline"><span>${gameIcon('swords')} 词卡战斗 · ${esc(scene.battle.enemy)}</span><span>第 ${battle.round + 1} / ${rounds} 回合</span></div>
-    <div class="battle-stats">
-      <span>敌人 HP <b>${battle.enemyHp}</b> / ${rounds}</span>
-      <span>成功 <b>${battle.successes}</b></span>
-      <span>失败 <b>${battle.failures}</b></span>
-      <span>你的 HP <b>${save.progress.hp}</b></span>
-    </div>
-    <p class="battle-intent-line">${gameIcon('swords')} 敌人意图：${esc(intent.text)}</p>
+    <p class="sr-only">第 ${battle.round + 1} / ${rounds} 回合。拾词者 HP ${save.progress.hp}。${esc(scene.battle.enemy)} HP ${battle.enemyHp} / ${rounds}。怪物意图：${esc(intent.text)}</p>
+    <p class="battle-intent-line battle-intent-mobile">${gameIcon(battleIntentGlyph(intent.type))} 怪物意图：${esc(intent.text)}</p>
+    <p class="battle-choose-hint">选一张词卡 · 英文由你自己拼出</p>
     <div class="battle-hand">
       ${cards.map((word, index) => `
         <button class="battle-card ${selected?.id === word.id ? 'selected' : ''}" data-card="${word.id}" data-type="${esc(word.card_type)}" aria-pressed="${selected?.id === word.id}">
@@ -1393,7 +1420,6 @@ function paintBattle(scene) {
           </span>
           <b>${esc(word.meanings[0])}</b>
           <small>${esc(word.effect_text)}</small>
-          <span class="battle-card-foot">点击选取</span>
         </button>`).join('')}
     </div>
     ${checkHtml}`;

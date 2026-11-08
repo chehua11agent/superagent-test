@@ -311,8 +311,11 @@ test('词卡战斗：第 4 幕的词变成手牌，3 回合内推进剧情', asy
   await expect(page.locator('.outcome')).toBeVisible();
   await page.locator('[data-action="start-battle"]').click();
   await expect(page.locator('#battle-panel')).toBeVisible();
+  await expect(page.locator('.battle-player')).toBeVisible();
+  await expect(page.locator('.player-name')).toHaveText('拾词者');
   await expect(page.locator('.battle-foe')).toBeVisible();
   await expect(page.locator('.foe-name')).toHaveText('雾中守塔人');
+  await expect(page.locator('.enemy-intent')).toBeVisible();
   await expect(page.locator('.battle-card-icon path')).toHaveCount(4);
   expect(
     await page.locator('.battle-card').first().evaluate((el) => getComputedStyle(el).borderImageSource)
@@ -347,6 +350,8 @@ test('词卡战斗：第 4 幕的词变成手牌，3 回合内推进剧情', asy
     await page.waitForTimeout(300);
     if (round === 0) {
       await expect(page.locator('.damage-enemy')).toBeVisible();
+      await expect(page.locator('.battle-player.is-casting')).toBeVisible();
+      await expect(page.locator('.skill-orb')).toBeVisible();
     }
     if (await page.locator('.battle-final').count()) break;
     await page.locator('[data-action="battle-next"]').click();
@@ -443,6 +448,30 @@ test.describe('移动端', () => {
     await page.goto('/#/story');
     await expect(page.locator('[data-action="contract-accept"]')).toBeInViewport();
     await expect(page.locator('[data-action="contract-skip"]')).toBeInViewport();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+  });
+
+  test('词卡战斗：人物/怪物可见且无横向溢出', async ({ page }) => {
+    await loadDemo(page);
+    await page.evaluate((key) => {
+      const save = JSON.parse(localStorage.getItem(key));
+      save.progress.sceneIndex = 3;
+      save.day.reviewCleared = true;
+      save.day.scenesPlayed = 0;
+      save.day.completed = false;
+      save.day.started = true;
+      save.battle = {
+        sceneId: 'ch1_sc04', round: 0, enemyHp: 3, successes: 0, failures: 0,
+        phase: 'choose', lastOutcome: null, done: false, won: false
+      };
+      localStorage.setItem(key, JSON.stringify(save));
+    }, SAVE_KEY);
+    await page.reload({ waitUntil: 'networkidle' });
+    await page.goto('/#/battle');
+    await expect(page.locator('.battle-player')).toBeVisible();
+    await expect(page.locator('.battle-foe')).toBeVisible();
+    await expect(page.locator('.battle-intent-mobile')).toBeVisible();
+    await expect(page.locator('.enemy-intent')).toBeHidden();
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
   });
 });
