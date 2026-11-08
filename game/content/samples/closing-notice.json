@@ -1,0 +1,525 @@
+{
+  "id": "sample_closing_notice",
+  "title": "闭馆通知",
+  "subtitle": "10 个拒绝 / 反对类词 · 3 幕 · 5 个节点",
+  "purpose": "检验一个词是否被放进可点击的选项、可失败的判定、可使用的物品，而不是只出现在旁白句子中。",
+  "word_count": 10,
+  "act_count": 3,
+  "node_count": 5,
+  "words": [
+    {
+      "id": "w_decline",
+      "en": "decline",
+      "ipa": "/dɪˈklaɪn/",
+      "pos": "v.",
+      "zh": "婉拒；谢绝",
+      "level": 2,
+      "card_type": "check",
+      "card_face": "婉拒；谢绝",
+      "card_effect": "保留关系，换到一次通融",
+      "nuance": "礼貌地拒绝一个提议，仍给对方留台阶；和 refuse 的直拒形成对照。",
+      "primary_placement": {
+        "kind": "option",
+        "node_id": "n2",
+        "slot_id": "o_decline"
+      },
+      "why_slot": "它不是旁白里的修饰，而是第 2 节点的一个可点击选项：选它，馆员会从『明天再来』改口为『别让馆长看见』，并给出读者卡。选 refuse 则会触发呼叫铃。"
+    },
+    {
+      "id": "w_refuse",
+      "en": "refuse",
+      "ipa": "/rɪˈfjuːz/",
+      "pos": "v.",
+      "zh": "拒绝",
+      "level": 1,
+      "card_type": "check",
+      "card_face": "拒绝",
+      "card_effect": "立刻施压，但会被记名",
+      "nuance": "直接、明确地拒绝；在不对等关系里使用会伤面子，和 decline 的婉拒形成对照。",
+      "primary_placement": {
+        "kind": "option",
+        "node_id": "n2",
+        "slot_id": "o_refuse"
+      },
+      "why_slot": "和第 2 节点的 decline 并排成两个真实选项，选它门会开，但玩家会被记名，后续守卫线更紧。两个词都在同一条选择里承担不同后果。"
+    },
+    {
+      "id": "w_ignore",
+      "en": "ignore",
+      "ipa": "/ɪɡˈnɔː(ɹ)/",
+      "pos": "v.",
+      "zh": "忽视；不理会",
+      "level": 1,
+      "card_type": "spell",
+      "card_face": "忽视；不理会",
+      "card_effect": "绕过警报，但错过墙上的线索",
+      "nuance": "主动选择不回应；不是『没听见』，而是听见了仍不理会。",
+      "primary_placement": {
+        "kind": "option",
+        "node_id": "n3",
+        "slot_id": "o_ignore"
+      },
+      "why_slot": "第 3 节点的潜行路径：玩家选择无视警报后能绕到馆长办公室，但会失去湿脚印线索。它是有收益也有代价的选项，不是叙事形容。"
+    },
+    {
+      "id": "w_resist",
+      "en": "resist",
+      "ipa": "/rɪˈzɪst/",
+      "pos": "v.",
+      "zh": "抵抗；抵制",
+      "level": 2,
+      "card_type": "check",
+      "card_face": "抵抗；抵制",
+      "card_effect": "推开被顶住的门",
+      "nuance": "对物理或压力的抵抗；强调顶住、不退让。",
+      "primary_placement": {
+        "kind": "check",
+        "node_id": "n3",
+        "slot_id": "c_resist"
+      },
+      "why_slot": "第 3 节点的判定：消防门被旧报纸顶住，玩家必须回忆 resist 才能推开。成功会拿到注销章（reject 物品），失败则引发守卫警觉。"
+    },
+    {
+      "id": "w_deny",
+      "en": "deny",
+      "ipa": "/dɪˈnaɪ/",
+      "pos": "v.",
+      "zh": "否认；拒绝给予",
+      "level": 2,
+      "card_type": "check",
+      "card_face": "否认",
+      "card_effect": "逼对方重复一个漏洞",
+      "nuance": "否认一个事实或拒绝给予；和 object 的『对决定提出异议』不同。",
+      "primary_placement": {
+        "kind": "check",
+        "node_id": "n4",
+        "slot_id": "c_deny"
+      },
+      "why_slot": "第 4 节点的判定：馆长说『这本书从未入藏』，玩家要用 deny 逼她再说一遍。成功时她漏掉一个日期，失败时她合上登记册。"
+    },
+    {
+      "id": "w_object",
+      "en": "object",
+      "ipa": "/əbˈdʒɛkt/",
+      "pos": "v.",
+      "zh": "反对",
+      "level": 2,
+      "card_type": "check",
+      "card_face": "反对",
+      "card_effect": "让程序暂停，逼对方回应",
+      "nuance": "对某个决定或说法正式提出异议；比 oppose 更程序化，比 deny 更针对决定而非事实。",
+      "primary_placement": {
+        "kind": "option",
+        "node_id": "n4",
+        "slot_id": "o_object"
+      },
+      "why_slot": "第 4 节点的正式异议选项：选它，馆长必须停下来回应；和 c_deny（质疑事实）形成两条不同的路。"
+    },
+    {
+      "id": "w_reject",
+      "en": "reject",
+      "ipa": "/rɪˈdʒɛkt/",
+      "pos": "v.",
+      "zh": "拒绝；驳回",
+      "level": 2,
+      "card_type": "item",
+      "card_face": "拒绝；驳回",
+      "card_effect": "盖章作废一份伪造文件",
+      "nuance": "正式拒绝一份申请、文件或提议；和 refuse 的人际拒绝不同。",
+      "primary_placement": {
+        "kind": "item",
+        "node_id": "n3",
+        "slot_id": "item_stamp",
+        "use_check": "c_reject"
+      },
+      "why_slot": "第 3 节点抵抗判定成功后获得『馆长的注销章』；第 4 节点用它驳回伪造注销单。玩家必须同时拥有物品并说出 reject，物品才真正生效。"
+    },
+    {
+      "id": "w_forbid",
+      "en": "forbid",
+      "ipa": "/fəˈbɪd/",
+      "pos": "v.",
+      "zh": "禁止",
+      "level": 2,
+      "card_type": "item",
+      "card_face": "禁止",
+      "card_effect": "出示通知，触发一次规则判定",
+      "nuance": "人或有权威的告示直接禁止某行为；比 prohibit 更具体、更贴近个人意志。",
+      "primary_placement": {
+        "kind": "item",
+        "node_id": "n1",
+        "slot_id": "item_notice",
+        "use_check": "c_forbid"
+      },
+      "why_slot": "第 1 节点的可拿取物品『湿掉的闭馆通知』，上面写着禁止闭馆后逗留。到第 5 节点出示它，才会解锁 prohibit 的条例判定；不拿就没有最后一条路。"
+    },
+    {
+      "id": "w_prohibit",
+      "en": "prohibit",
+      "ipa": "/prəˈhɪbɪt/",
+      "pos": "v.",
+      "zh": "（法规、条例）禁止",
+      "level": 3,
+      "card_type": "check",
+      "card_face": "（法规）禁止",
+      "card_effect": "引用条例，阻止书被带走",
+      "nuance": "由法规、条例或制度禁止；比 forbid 更正式、更非个人化。",
+      "primary_placement": {
+        "kind": "check",
+        "node_id": "n5",
+        "slot_id": "c_prohibit"
+      },
+      "why_slot": "第 5 节点的最终判定：玩家先拿闭馆通知通过 c_forbid（说出 forbid），再引用馆内条例说「未登记资料禁止带出」。只有说出 prohibit 才能让馆长把手从书上移开；说成 forbid 不够正式。"
+    },
+    {
+      "id": "w_oppose",
+      "en": "oppose",
+      "ipa": "/əˈpəʊz/",
+      "pos": "v.",
+      "zh": "反对；对抗",
+      "level": 2,
+      "card_type": "check",
+      "card_face": "反对；对抗",
+      "card_effect": "把最后一句话顶回去",
+      "nuance": "站在对立面反对一个人、计划或决定；比 object 更直接、更个人化。",
+      "primary_placement": {
+        "kind": "option",
+        "node_id": "n5",
+        "slot_id": "o_oppose"
+      },
+      "why_slot": "第 5 节点的最后一条路：不引用条例，也不放下书，直接反对馆长那句『闭馆后图书馆不属于任何人』。它通向另一个结局，不是旁白里的形容词。"
+    }
+  ],
+  "acts": [
+    {
+      "id": "act1",
+      "title": "第一幕 · 通知",
+      "nodes": [
+        "n1",
+        "n2"
+      ],
+      "purpose": "建立闭馆规则，并把『婉拒』和『直拒』放进同一个选择里。"
+    },
+    {
+      "id": "act2",
+      "title": "第二幕 · 例外",
+      "nodes": [
+        "n3"
+      ],
+      "purpose": "让玩家在潜行（ignore）和硬推（resist）之间选一条路，物品决定下一幕的选项。"
+    },
+    {
+      "id": "act3",
+      "title": "第三幕 · 留灯的人",
+      "nodes": [
+        "n4",
+        "n5"
+      ],
+      "purpose": "用 deny / object / reject 拆开馆长的说法，再用 forbid 物品触发 prohibit 条例判定，最后用 oppose 或安静离开收束。"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "act_id": "act1",
+      "title": "玻璃门上的通知",
+      "narration": "雨把闭馆通知贴湿了一角。门内只剩值班台的灯，馆员正把最后一摞书推进还书箱。你要找的那本书还在馆里。",
+      "items": [
+        {
+          "id": "item_notice",
+          "name": "湿掉的闭馆通知",
+          "word_id": "w_forbid",
+          "gain": "o_take_notice",
+          "effect": "纸上写着「闭馆后禁止逗留」。第 5 节点出示它，先触发 c_forbid，再进入 c_prohibit 条例判定。",
+          "consumed": false
+        }
+      ],
+      "options": [
+        {
+          "id": "o_take_notice",
+          "label": "把通知揭下来，折进口袋",
+          "word_id": null,
+          "effect": "获得物品：湿掉的闭馆通知。",
+          "next": "n2"
+        },
+        {
+          "id": "o_knock",
+          "label": "敲门，问馆员能不能通融",
+          "word_id": null,
+          "effect": "馆员抬头看了你一眼，没有立刻拒绝。",
+          "next": "n2"
+        },
+        {
+          "id": "o_side",
+          "label": "绕到侧门，看看有没有还开着的窗",
+          "word_id": null,
+          "effect": "侧门锁着，但你记住了一扇没关严的窗。",
+          "next": "n2"
+        }
+      ],
+      "checks": [],
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "act_id": "act1",
+      "title": "值班台",
+      "narration": "馆员隔着玻璃说：系统已经结了今天的账。她可以明天帮你留书，但不能现在开门。她的手指停在『闭馆』键上。",
+      "items": [],
+      "options": [
+        {
+          "id": "o_decline",
+          "label": "婉拒她「明天再来」的建议，请她通融一次",
+          "word_id": "w_decline",
+          "effect": "她犹豫了一下，把读者卡从窗口下推出来：『别让馆长看见。』",
+          "next": "n3",
+          "grants": [
+            "clue_reader_card"
+          ]
+        },
+        {
+          "id": "o_refuse",
+          "label": "直接拒绝她的解释，要求她立刻开门",
+          "word_id": "w_refuse",
+          "effect": "她的表情冷下来，按下了呼叫铃。门开了，但你被记了名。",
+          "next": "n3",
+          "sets": [
+            "flagged"
+          ]
+        },
+        {
+          "id": "o_accept",
+          "label": "接受她的建议，明天再来",
+          "word_id": null,
+          "effect": "你退回雨里。书还在，但今晚的线索断了。",
+          "end": "end_leave"
+        }
+      ],
+      "checks": [],
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "act_id": "act2",
+      "title": "闭馆之后",
+      "narration": "门在背后合上。值班台的灯灭了，走廊尽头的消防门却一下一下地响，像有人从另一边推。",
+      "items": [
+        {
+          "id": "item_stamp",
+          "name": "馆长的注销章",
+          "word_id": "w_reject",
+          "gain": "c_resist_success",
+          "effect": "印章边缘刻着 REJECTED。第 4 节点用它驳回伪造注销单，使用时要说出 reject。",
+          "consumed": true
+        }
+      ],
+      "options": [
+        {
+          "id": "o_ignore",
+          "label": "无视警报，沿着书架摸黑走",
+          "word_id": "w_ignore",
+          "effect": "你数着书架往深处走。警报响了三声就停了，但你已经错过了墙上的湿脚印。",
+          "next": "n4",
+          "sets": [
+            "lost_footprint"
+          ]
+        },
+        {
+          "id": "o_force",
+          "label": "去推那扇被顶住的消防门",
+          "word_id": null,
+          "check_id": "c_resist",
+          "effect": "门后可能有一条更快的路。",
+          "next": "n4"
+        }
+      ],
+      "checks": [
+        {
+          "id": "c_resist",
+          "word_id": "w_resist",
+          "prompt": "门被一箱旧报纸顶住。说出「抵抗」的英文，把门推开。",
+          "success": "门轴发出一声闷响。门后是向下的窄梯，梯口躺着一枚注销章。",
+          "failure": "门只开了一条缝。你听见守卫的脚步声，退回书架间。",
+          "next_success": "n4",
+          "next_failure": "n4",
+          "grants_success": [
+            "item_stamp",
+            "clue_footprint"
+          ],
+          "sets_failure": [
+            "guard_alert"
+          ]
+        }
+      ],
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "act_id": "act3",
+      "title": "馆长的办公室",
+      "narration": "馆长还在。她把一张注销单推到你面前，说这本书从未入藏。你看见她手边的钥匙，也看见她压住的那页登记。",
+      "items": [],
+      "options": [
+        {
+          "id": "o_object",
+          "label": "对注销单提出异议",
+          "word_id": "w_object",
+          "effect": "你指出登记页和注销单的日期对不上。她的手停住了，必须回应你。",
+          "next": "n5",
+          "sets": [
+            "she_listens"
+          ]
+        },
+        {
+          "id": "o_challenge",
+          "label": "逼她把「这本书不存在」再说一遍",
+          "word_id": null,
+          "check_id": "c_deny",
+          "effect": "她刚才漏了一个日期；再问一次，可能会露出更多。",
+          "next": "n5"
+        },
+        {
+          "id": "o_stamp",
+          "label": "用注销章把伪造的注销单驳回",
+          "word_id": null,
+          "check_id": "c_reject",
+          "requires_item": "item_stamp",
+          "effect": "注销单上的编号是伪造的。章在你手里。",
+          "next": "n5"
+        }
+      ],
+      "checks": [
+        {
+          "id": "c_deny",
+          "word_id": "w_deny",
+          "prompt": "她说这本书从未入藏。说出「否认」的英文，逼她把这句话再说一遍。",
+          "success": "她重复时漏掉了一个日期。你记住了那个缺口。",
+          "failure": "她合上登记册，把钥匙收进抽屉。",
+          "next_success": "n5",
+          "next_failure": "n5",
+          "grants_success": [
+            "clue_date_gap"
+          ],
+          "sets_failure": [
+            "key_lost"
+          ]
+        },
+        {
+          "id": "c_reject",
+          "word_id": "w_reject",
+          "requires_item": "item_stamp",
+          "prompt": "注销单上的编号是伪造的。说出「驳回」的英文，把章盖下去。",
+          "success": "章落下去，伪造的编号被红墨盖住。注销单作废。",
+          "failure": "你盖歪了。馆长把注销单抽回去，锁进抽屉。",
+          "next_success": "n5",
+          "next_failure": "n5",
+          "grants_success": [
+            "form_invalid"
+          ],
+          "sets_failure": [
+            "form_lost"
+          ]
+        }
+      ],
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "act_id": "act3",
+      "title": "闭馆之后的第一句话",
+      "narration": "馆长把书放回桌上：闭馆之后，图书馆不属于任何人。你手里还握着那张湿掉的闭馆通知。",
+      "items": [],
+      "options": [
+        {
+          "id": "o_cite",
+          "label": "把闭馆通知拍在桌上，引用条例",
+          "word_id": null,
+          "check_id": "c_forbid",
+          "requires_item": "item_notice",
+          "effect": "通知上是「禁止逗留」；先读出 forbid，再引用条例里的 prohibit。"
+        },
+        {
+          "id": "o_oppose",
+          "label": "反对她最后那句话",
+          "word_id": "w_oppose",
+          "effect": "你说你反对。她看了你很久，最后把灯留给了你。",
+          "end": "end_confront"
+        },
+        {
+          "id": "o_quiet",
+          "label": "把书放回原处，留下那张通知",
+          "word_id": null,
+          "effect": "你把书放回去，把通知留在桌上。馆长没有拦你。",
+          "end": "end_close"
+        }
+      ],
+      "checks": [
+        {
+          "id": "c_forbid",
+          "word_id": "w_forbid",
+          "requires_item": "item_notice",
+          "prompt": "通知上写着「闭馆后禁止逗留」。说出「禁止」的英文，把通知拍在桌上。",
+          "success": "纸张拍在桌上。馆长看见那行字，停了一下。",
+          "failure": "你把通知拿反了。馆长把书合上。",
+          "next_check": "c_prohibit",
+          "next_failure": "end_close",
+          "grants_success": [
+            "notice_presented"
+          ]
+        },
+        {
+          "id": "c_prohibit",
+          "word_id": "w_prohibit",
+          "requires_item": "item_notice",
+          "prompt": "条例写着「未登记资料禁止带出」。说出「（法规）禁止」的英文，引用它。",
+          "success": "你念出条例里那个词。馆长看了一眼通知，把手从书上移开。",
+          "failure": "你只说出「禁止逗留」，却说不出条例里的那个词。她把书带走。",
+          "next_success": "end_lamp",
+          "next_failure": "end_close",
+          "grants_success": [
+            "clue_regulation"
+          ],
+          "sets_failure": [
+            "book_taken"
+          ]
+        }
+      ],
+      "next": "end_close"
+    }
+  ],
+  "endings": [
+    {
+      "id": "end_lamp",
+      "title": "留灯",
+      "condition": "拿到闭馆通知，并在第 5 节点通过 c_prohibit。",
+      "text": "馆长把钥匙留在桌上，自己走进雨里。阅览室的灯亮到天亮。你把那本书读完，也把那句『禁止』读成了自己的词。"
+    },
+    {
+      "id": "end_confront",
+      "title": "对峙",
+      "condition": "在第 5 节点选择 oppose。",
+      "text": "你说你反对。馆长没有拿走书，也没有留下钥匙。你们隔着桌子坐到天亮，谁也没有再说话。"
+    },
+    {
+      "id": "end_close",
+      "title": "闭馆",
+      "condition": "在第 5 节点引用条例失败，或选择安静离开。",
+      "text": "你把书放回原处，把通知留在桌上。门在身后合上时，闭馆的灯灭了一盏。"
+    },
+    {
+      "id": "end_leave",
+      "title": "明天再来",
+      "condition": "在第 2 节点选择接受馆员的建议。",
+      "text": "你退回雨里。书还在，但今晚的线索断了。第二天你来时，值班台上放着一张写着你名字的读者卡。"
+    }
+  ],
+  "design_notes": [
+    "每个词都至少有一个主位置：选项、判定或物品；没有任何一个词只靠旁白出现。",
+    "decline 与 refuse 并排：同一个社交动作的两种力度，后果不同。",
+    "forbid 是物品（闭馆通知），prohibit 是它触发的条例判定：一个人/告示的禁止，一个法规的禁止。",
+    "reject 是物品（注销章），使用时又要说出 reject；物品不是自动通关，仍要回忆英文。",
+    "ignore 与 resist 是两条路：绕开警报会失去线索，硬推消防门会引来守卫。",
+    "选项不显示英文；玩家看到的是中文语义与效果，必须自己回忆英文才能出牌。",
+    "这个样本只验证内容结构，不包含完整战斗、SRS 排期与 UI；它还不是可玩的正式章节。"
+  ]
+}

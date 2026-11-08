@@ -1,0 +1,823 @@
+{
+  "version": "0.1.0-prototype",
+  "chapter": 1,
+  "title": "雾港",
+  "subtitle": "第一章",
+  "theme": "出发、生存、方向",
+  "word_count": 48,
+  "scene_count": 12,
+  "scene_note": "原型实现完整第一章：12 幕 × 4 词，每天 3 幕、12 个新词，四天走完并挑战摆渡人。",
+  "scenes": [
+    {
+      "id": "ch1_sc01",
+      "ord": 1,
+      "title": "雾中来客",
+      "narration": "船靠岸时，雾已经漫过脚踝。码头上没有人，只有一盏不属于你的灯。",
+      "art": {
+        "camera": "dock",
+        "time": "night",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 14,
+        "y": 76
+      },
+      "featured_words": [
+        "w_arrive",
+        "w_journey",
+        "w_distant",
+        "w_silent"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc01_a1",
+          "prompt": "雾里有人问你来做什么。用「到达」这张卡回答他。",
+          "target_word": "w_arrive",
+          "card_type": "spell",
+          "difficulty": 1,
+          "success": {
+            "text": "你说出了那个词。雾退开半步，露出一条通往港口的路。",
+            "effect": {
+              "type": "clue",
+              "amount": 1
+            }
+          },
+          "failure": {
+            "text": "那个词卡在喉咙里。雾里的人转身走了，你踩空一阶，膝盖磕在石上。",
+            "cost": {
+              "type": "hp",
+              "amount": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch1_sc02",
+      "ord": 2,
+      "title": "渡口",
+      "narration": "渡口的木板下传来水声。摆渡人伸出一只手，掌心朝上，等你先开口。",
+      "art": {
+        "camera": "ferry",
+        "time": "night",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 22,
+        "y": 70
+      },
+      "featured_words": [
+        "w_board",
+        "w_fare",
+        "w_deck",
+        "w_harbor"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc02_a1",
+          "prompt": "摆渡人要一枚银币。用「船费」这张卡把价钱说清楚。",
+          "target_word": "w_fare",
+          "card_type": "item",
+          "difficulty": 1,
+          "success": {
+            "text": "他收下银币，解开船绳。你听见远处有人在数拍子。",
+            "effect": {
+              "type": "clue",
+              "amount": 1
+            }
+          },
+          "failure": {
+            "text": "你把价钱说错了。摆渡人收回手，你只好蹚着冷水上船。",
+            "cost": {
+              "type": "hp",
+              "amount": 10
+            }
+          }
+        },
+        {
+          "id": "ch1_sc02_a2",
+          "prompt": "船身一晃。用「甲板」这张卡在湿滑的木板上站稳。",
+          "target_word": "w_deck",
+          "card_type": "item",
+          "difficulty": 2,
+          "success": {
+            "text": "你压低重心，鞋底咬住木板。船头调正，灯没有再晃。",
+            "effect": {
+              "type": "shield",
+              "amount": 0
+            }
+          },
+          "failure": {
+            "text": "你抓住船舷，指节发白。浪从侧面打来，半边身子都湿透了。",
+            "cost": {
+              "type": "hp",
+              "amount": 15
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch1_sc03",
+      "ord": 3,
+      "title": "潮汐",
+      "narration": "潮水在暗处上涨，盖过了系船桩。你需要在它漫过膝盖之前找到路。",
+      "art": {
+        "camera": "tide",
+        "time": "dusk",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 32,
+        "y": 78
+      },
+      "featured_words": [
+        "w_tide",
+        "w_rise",
+        "w_sink",
+        "w_measure"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc03_a1",
+          "prompt": "水已经没过脚背。用「测量」这张卡量出还能走的那一步。",
+          "target_word": "w_measure",
+          "card_type": "check",
+          "difficulty": 2,
+          "success": {
+            "text": "你用手臂量出深度，找到一条刚够落脚的脊线。",
+            "effect": {
+              "type": "clue",
+              "amount": 1
+            }
+          },
+          "failure": {
+            "text": "你估错了深度，一脚踩进石缝。冷水没到腰，灯差点脱手。",
+            "cost": {
+              "type": "hp",
+              "amount": 15
+            }
+          }
+        },
+        {
+          "id": "ch1_sc03_a2",
+          "prompt": "水面在动。用「潮水」这张卡读出它下一次涨落。",
+          "target_word": "w_tide",
+          "card_type": "check",
+          "difficulty": 1,
+          "success": {
+            "text": "你听清水声的间隔，在潮头到来前退上了高处的石阶。",
+            "effect": {
+              "type": "reveal",
+              "amount": 0
+            }
+          },
+          "failure": {
+            "text": "你误判了潮向。退回时撞翻一筐空瓶，声音引出巷口的灯。",
+            "cost": {
+              "type": "branch",
+              "amount": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch1_sc04",
+      "ord": 4,
+      "title": "旧灯塔",
+      "narration": "灯塔立在崖边，光每转一圈，雾里就多出一条路。塔门锁着，灯却亮着。",
+      "art": {
+        "camera": "lighthouse",
+        "time": "night",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 84,
+        "y": 56
+      },
+      "featured_words": [
+        "w_guide",
+        "w_signal",
+        "w_warn",
+        "w_reflect"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc04_a1",
+          "prompt": "光扫过来了。用「指引」这张卡让光落在正确的路上。",
+          "target_word": "w_guide",
+          "card_type": "spell",
+          "difficulty": 1,
+          "success": {
+            "text": "你把灯罩转了一点。光束落在崖下，照出一段被雾藏起的石阶。",
+            "effect": {
+              "type": "reveal",
+              "amount": 0
+            }
+          },
+          "failure": {
+            "text": "光扫偏了。你追着它走了半圈，鞋底在湿草上打滑。",
+            "cost": {
+              "type": "hp",
+              "amount": 10
+            }
+          }
+        },
+        {
+          "id": "ch1_sc04_a2",
+          "prompt": "塔顶有人影。用「警告」这张卡让他停下。",
+          "target_word": "w_warn",
+          "card_type": "check",
+          "difficulty": 2,
+          "success": {
+            "text": "你喊出了那个词。塔顶的人停住，把一盏小灯挂在栏杆外。",
+            "effect": {
+              "type": "clue",
+              "amount": 1
+            }
+          },
+          "failure": {
+            "text": "你的声音被海风吞掉。塔顶的人拉响了钟，整座港口都醒了。",
+            "cost": {
+              "type": "branch",
+              "amount": 0
+            }
+          }
+        }
+      ],
+      "battle": {
+        "id": "ch1_sc04_keeper",
+        "enemy": "雾中守塔人",
+        "rounds": 3,
+        "intents": [
+          {
+            "type": "hp",
+            "amount": 15,
+            "text": "雾墙压过来，灯光被挤成一条细线。"
+          },
+          {
+            "type": "clue",
+            "amount": 1,
+            "text": "守塔人藏进光里，墙上的湿脚印被雾抹掉。"
+          },
+          {
+            "type": "hp",
+            "amount": 20,
+            "text": "灯塔最后的光收束成一道白线，朝你落下。"
+          }
+        ],
+        "win_text": "灯重新亮起。守塔人退到塔顶，让出了一条向下的石阶。",
+        "lose_text": "守塔人把最后一盏灯吹灭。你记住了他的位置，退回雾里。",
+        "reward": {
+          "type": "clue",
+          "amount": 1
+        }
+      }
+    },
+    {
+      "id": "ch1_sc05",
+      "ord": 5,
+      "title": "礁石",
+      "narration": "退潮后礁石露出黑色的牙。你要在下一波浪到来前穿过这片浅滩。",
+      "art": {
+        "camera": "reef",
+        "time": "dusk",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 72,
+        "y": 76
+      },
+      "featured_words": [
+        "w_avoid",
+        "w_crash",
+        "w_sharp",
+        "w_edge"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc05_a1",
+          "prompt": "第一块礁石迎面而来。用「避开」这张卡闪开它。",
+          "target_word": "w_avoid",
+          "card_type": "spell",
+          "difficulty": 1,
+          "success": {
+            "text": "你侧身让开，浪在背后碎成白沫。前面的路突然清楚了。",
+            "effect": {
+              "type": "shield",
+              "amount": 0
+            }
+          },
+          "failure": {
+            "text": "你慢了半拍，肩膀撞上石面。灯罩裂了一道缝。",
+            "cost": {
+              "type": "hp",
+              "amount": 15
+            }
+          }
+        },
+        {
+          "id": "ch1_sc05_a2",
+          "prompt": "绳子磨在石上。用「锋利的」这张卡看出断口。",
+          "target_word": "w_sharp",
+          "card_type": "check",
+          "difficulty": 2,
+          "success": {
+            "text": "你顺着石棱摸到毛边，提前换了一根绳。它没有断。",
+            "effect": {
+              "type": "clue",
+              "amount": 1
+            }
+          },
+          "failure": {
+            "text": "等你发现时，绳子已经断了一半。你只能贴着石壁慢慢挪。",
+            "cost": {
+              "type": "hp",
+              "amount": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch1_sc06",
+      "ord": 6,
+      "title": "船坞",
+      "narration": "船坞里堆着拆到一半的船骨，木屑混着海水。有人在这里修一条不该再下水的船。",
+      "art": {
+        "camera": "yard",
+        "time": "night",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 52,
+        "y": 78
+      },
+      "featured_words": [
+        "w_repair",
+        "w_supply",
+        "w_tool",
+        "w_steady"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc06_a1",
+          "prompt": "船板裂开了。用「修理」这张卡把它接到天亮。",
+          "target_word": "w_repair",
+          "card_type": "spell",
+          "difficulty": 1,
+          "success": {
+            "text": "你把裂口压紧，用湿绳缠了三圈。船身不再进水。",
+            "effect": {
+              "type": "heal",
+              "amount": 20
+            }
+          },
+          "failure": {
+            "text": "木板在你手里又裂开一寸。碎刺扎进掌心，船还是漏的。",
+            "cost": {
+              "type": "hp",
+              "amount": 15
+            }
+          }
+        },
+        {
+          "id": "ch1_sc06_a2",
+          "prompt": "箱子快空了。用「补给」这张卡清点还能用的东西。",
+          "target_word": "w_supply",
+          "card_type": "item",
+          "difficulty": 1,
+          "success": {
+            "text": "你找到半袋干粮和一小罐油。够撑到雾散。",
+            "effect": {
+              "type": "heal",
+              "amount": 20
+            }
+          },
+          "failure": {
+            "text": "箱底只有海水。你把手伸得太深，被锈钉划了一道口子。",
+            "cost": {
+              "type": "hp",
+              "amount": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch1_sc07",
+      "ord": 7,
+      "title": "雾中集市",
+      "narration": "集市在雾里开张，摊主们不吆喝，只把手伸出来。每样东西都标着两种价钱。",
+      "art": {
+        "camera": "market",
+        "time": "dusk",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 64,
+        "y": 72
+      },
+      "featured_words": [
+        "w_trade",
+        "w_bargain",
+        "w_afford",
+        "w_value"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc07_a1",
+          "prompt": "灯油太贵了。用「讨价还价」这张卡把价格压下来。",
+          "target_word": "w_bargain",
+          "card_type": "check",
+          "difficulty": 1,
+          "success": {
+            "text": "你没有松开手，也没有先看钱袋。摊主叹了口气，让了半步。",
+            "effect": {
+              "type": "clue",
+              "amount": 1
+            }
+          },
+          "failure": {
+            "text": "你说漏了底价。摊主收回灯油，还记住了你的脸。",
+            "cost": {
+              "type": "clue",
+              "amount": 1
+            }
+          }
+        },
+        {
+          "id": "ch1_sc07_a2",
+          "prompt": "你只剩一枚银币。用「负担得起」这张卡算清还能买什么。",
+          "target_word": "w_afford",
+          "card_type": "check",
+          "difficulty": 2,
+          "success": {
+            "text": "你放下不必要的东西，换到了灯油和一小段干绳。",
+            "effect": {
+              "type": "reveal",
+              "amount": 0
+            }
+          },
+          "failure": {
+            "text": "你算错了账，把最后一枚银币留在了摊上，只带回一肚子气。",
+            "cost": {
+              "type": "clue",
+              "amount": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch1_sc08",
+      "ord": 8,
+      "title": "窄巷",
+      "narration": "巷子窄得只能侧身过。身后的灯笼越来越近，墙上的影子却先一步动了。",
+      "art": {
+        "camera": "alley",
+        "time": "night",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 46,
+        "y": 68
+      },
+      "featured_words": [
+        "w_hide",
+        "w_follow",
+        "w_escape",
+        "w_shadow"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc08_a1",
+          "prompt": "灯笼逼近。用「躲藏」这张卡让自己从光里消失。",
+          "target_word": "w_hide",
+          "card_type": "spell",
+          "difficulty": 1,
+          "success": {
+            "text": "你缩进门洞的凹处，连呼吸都放轻。灯笼从面前晃过去了。",
+            "effect": {
+              "type": "shield",
+              "amount": 0
+            }
+          },
+          "failure": {
+            "text": "你的衣角露在外面。灯笼停了一瞬，巷口传来脚步声。",
+            "cost": {
+              "type": "branch",
+              "amount": 0
+            }
+          }
+        },
+        {
+          "id": "ch1_sc08_a2",
+          "prompt": "地上有两串脚印。用「跟随」这张卡辨出该跟的那一串。",
+          "target_word": "w_follow",
+          "card_type": "check",
+          "difficulty": 2,
+          "success": {
+            "text": "你跟着更浅的那串脚印拐进岔路，身后的灯声远了。",
+            "effect": {
+              "type": "clue",
+              "amount": 1
+            }
+          },
+          "failure": {
+            "text": "你跟错了脚印，走进死巷。翻墙时手肘重重撞在砖上。",
+            "cost": {
+              "type": "hp",
+              "amount": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch1_sc09",
+      "ord": 9,
+      "title": "守夜人",
+      "narration": "守夜人坐在栈桥尽头，膝上放着一本湿透的名册。他不问名字，只问你还记得什么。",
+      "art": {
+        "camera": "watch",
+        "time": "night",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 38,
+        "y": 62
+      },
+      "featured_words": [
+        "w_trust",
+        "w_secret",
+        "w_promise",
+        "w_doubt"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc09_a1",
+          "prompt": "守夜人伸出手。用「信任」这张卡回答他。",
+          "target_word": "w_trust",
+          "card_type": "check",
+          "difficulty": 2,
+          "success": {
+            "text": "你把灯放在他脚边。他翻到名册最后一页，指给你一个名字。",
+            "effect": {
+              "type": "clue",
+              "amount": 1
+            }
+          },
+          "failure": {
+            "text": "你没有说出那个词。守夜人合上名册，栈桥的灯一盏盏灭了。",
+            "cost": {
+              "type": "branch",
+              "amount": 0
+            }
+          }
+        },
+        {
+          "id": "ch1_sc09_a2",
+          "prompt": "名册上有两处墨迹不对。用「怀疑」这张卡指出来。",
+          "target_word": "w_doubt",
+          "card_type": "check",
+          "difficulty": 2,
+          "success": {
+            "text": "你指出被刮改的那一行。守夜人沉默很久，把钥匙推给你。",
+            "effect": {
+              "type": "reveal",
+              "amount": 0
+            }
+          },
+          "failure": {
+            "text": "你说不清哪里不对。守夜人收回名册，让你在天亮前离开。",
+            "cost": {
+              "type": "hp",
+              "amount": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch1_sc10",
+      "ord": 10,
+      "title": "风暴前",
+      "narration": "风把雾撕成一条一条。远处的钟开始响，港口的人都在往高处走。",
+      "art": {
+        "camera": "shelter",
+        "time": "storm",
+        "weather": "rain"
+      },
+      "map": {
+        "x": 30,
+        "y": 58
+      },
+      "featured_words": [
+        "w_weather",
+        "w_shelter",
+        "w_prepare",
+        "w_survive"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc10_a1",
+          "prompt": "雨墙压过来了。用「避难所」这张卡找到能撑过去的地方。",
+          "target_word": "w_shelter",
+          "card_type": "item",
+          "difficulty": 2,
+          "success": {
+            "text": "你挤进渔具棚，用旧帆布堵住风口。雨在外面砸了一夜。",
+            "effect": {
+              "type": "heal",
+              "amount": 20
+            }
+          },
+          "failure": {
+            "text": "棚顶在风里掀开一角。你抱着灯蹲到天亮，浑身都在抖。",
+            "cost": {
+              "type": "hp",
+              "amount": 20
+            }
+          }
+        },
+        {
+          "id": "ch1_sc10_a2",
+          "prompt": "风越来越硬。用「准备」这张卡把绳和灯固定住。",
+          "target_word": "w_prepare",
+          "card_type": "spell",
+          "difficulty": 2,
+          "success": {
+            "text": "你提前打好双结，把灯挂在背风处。风来时，它们都没飞走。",
+            "effect": {
+              "type": "shield",
+              "amount": 0
+            }
+          },
+          "failure": {
+            "text": "绳子脱了扣，灯被风卷下崖。你摸黑追了半里，只捡回碎玻璃。",
+            "cost": {
+              "type": "hp",
+              "amount": 15
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch1_sc11",
+      "ord": 11,
+      "title": "断桥",
+      "narration": "桥只剩下一根主绳和几块松动的木板。雾下面看不见水，只听见水。",
+      "art": {
+        "camera": "bridge",
+        "time": "storm",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 22,
+        "y": 54
+      },
+      "featured_words": [
+        "w_balance",
+        "w_courage",
+        "w_risk",
+        "w_cross"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc11_a1",
+          "prompt": "主绳在脚下发颤。用「平衡」这张卡走过去。",
+          "target_word": "w_balance",
+          "card_type": "check",
+          "difficulty": 2,
+          "success": {
+            "text": "你看着对岸，不看脚下。走到一半时，风突然停了。",
+            "effect": {
+              "type": "clue",
+              "amount": 1
+            }
+          },
+          "failure": {
+            "text": "绳子猛地一沉。你抱住它滑了半步，膝盖在木板上磕出血。",
+            "cost": {
+              "type": "hp",
+              "amount": 20
+            }
+          }
+        },
+        {
+          "id": "ch1_sc11_a2",
+          "prompt": "身后有人不敢上桥。用「勇气」这张卡回头拉他一把。",
+          "target_word": "w_courage",
+          "card_type": "spell",
+          "difficulty": 2,
+          "success": {
+            "text": "你把手伸回去。他抓住你，两个人一起走到了对岸。",
+            "effect": {
+              "type": "clue",
+              "amount": 1
+            }
+          },
+          "failure": {
+            "text": "你回头时重心偏了。木板断裂，那个人退回岸上，再也没有跟来。",
+            "cost": {
+              "type": "branch",
+              "amount": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch1_sc12",
+      "ord": 12,
+      "title": "摆渡人",
+      "narration": "摆渡人站在船头，手里没有桨。他伸出三根手指，又收回一根，等你选。",
+      "art": {
+        "camera": "gate",
+        "time": "dawn",
+        "weather": "fog"
+      },
+      "map": {
+        "x": 14,
+        "y": 50
+      },
+      "featured_words": [
+        "w_choose",
+        "w_offer",
+        "w_accept",
+        "w_release"
+      ],
+      "actions": [
+        {
+          "id": "ch1_sc12_a1",
+          "prompt": "他让你选一个名字。用「选择」这张卡说出答案。",
+          "target_word": "w_choose",
+          "card_type": "spell",
+          "difficulty": 2,
+          "success": {
+            "text": "你说出那个名字。摆渡人第一次抬头看你，船头的灯亮了一格。",
+            "effect": {
+              "type": "reveal",
+              "amount": 0
+            }
+          },
+          "failure": {
+            "text": "你迟疑太久。他收回手指，雾从船底漫上来，打湿了你的鞋。",
+            "cost": {
+              "type": "hp",
+              "amount": 20
+            }
+          }
+        },
+        {
+          "id": "ch1_sc12_a2",
+          "prompt": "他递来一根没有钩的绳。用「接受」这张卡接住它。",
+          "target_word": "w_accept",
+          "card_type": "check",
+          "difficulty": 2,
+          "success": {
+            "text": "你接过绳子。它比看上去轻，像一句还没说完的话。",
+            "effect": {
+              "type": "heal",
+              "amount": 10
+            }
+          },
+          "failure": {
+            "text": "你缩回了手。绳子落进水里，摆渡人往后退了一步。",
+            "cost": {
+              "type": "hp",
+              "amount": 20
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "boss": {
+    "id": "ch1_boss",
+    "title": "摆渡人的五问",
+    "intro": "摆渡人把船横在雾口。他说：想过去，先把这一章还给你的词，一个一个说给我听。",
+    "check_word_ids": [
+      "w_arrive",
+      "w_avoid",
+      "w_bargain",
+      "w_trust",
+      "w_choose"
+    ],
+    "required": 3,
+    "failure_hp": 20,
+    "retreat_hp": 70,
+    "success_text": "第五个词落下时，雾从中间裂开。摆渡人让开半步，你第一次看见海那边的灯。",
+    "failure_text": "最后一个词没有说出来。摆渡人把船撑回雾里，你退回岸上，天已经快亮了。",
+    "check_types": [
+      "recognize",
+      "spell",
+      "recognize",
+      "spell",
+      "recognize"
+    ]
+  }
+}
