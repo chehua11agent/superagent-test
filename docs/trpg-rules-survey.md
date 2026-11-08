@@ -305,6 +305,7 @@
 ### 4.1 结论
 
 - **没有可直接用的"四级单词跑团"成品**。搜 `vocabulary RPG`、`word RPG`、`CET4 game`，能找到的多是个人 demo（0–12 星），例如 `wordspire-tower`、`word-quest-toeic-rpg`、`RPG-ChineseGame`，都还不能当底座。
+- **规则书全文在 GitHub 上合法开源的只有少数**（Cairn、Fate SRD、24XX 等）；D&D 5e、CoC、Blades 的完整商业书没有合法公开仓库，搜到的"完整 PDF"多为侵权扫描件，不要用。
 - **有可组合的基建**：规则数据、叙事引擎、SRS 库、CET-4 词库都齐全，缺的是"把它们接起来"的中间层。
 - **VTT（Foundry/MapTool）不是单机离线文字游戏的底座**：它们为多人联机地图设计，重、闭源或许可证不匹配。
 - **AI DM 项目很早期**（多为 0–12 星），且设计原则明确"AI 是加分项不是必需品"，不建议作为核心依赖。
