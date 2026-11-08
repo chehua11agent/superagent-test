@@ -1,0 +1,16 @@
+{
+  "name": "shici-fog-harbor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "《拾词者 · 雾港》——CET-4 单词跑团第一章可玩原型",
+  "scripts": {
+    "serve": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "validate": "node scripts/validate.mjs",
+    "validate:sample": "node scripts/validate-sample.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
