@@ -3166,8 +3166,16 @@ svg {
 .reduce-motion .map-node.current,
 .reduce-motion .route-walked,
 .reduce-motion .foe-body,
+.reduce-motion .foe-svg,
 .reduce-motion .foe-lantern,
-.reduce-motion .foe-eye {
+.reduce-motion .foe-eye,
+.reduce-motion .player-body,
+.reduce-motion .player-card,
+.reduce-motion .battle-player.is-casting .player-body,
+.reduce-motion .battle-player.is-casting .player-card,
+.reduce-motion .battle-player.is-hurt .player-body,
+.reduce-motion .enemy-intent.is-hit,
+.reduce-motion .skill-callout {
   animation: none !important;
 }
 
@@ -3181,7 +3189,8 @@ svg {
 }
 
 .reduce-motion .damage-float,
-.reduce-motion .battle-flash {
+.reduce-motion .battle-flash,
+.reduce-motion .skill-fx {
   display: none !important;
 }
 
