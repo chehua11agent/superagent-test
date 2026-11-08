@@ -1,0 +1,119 @@
+{
+ "generated_at": "2026-11-09T00:29:28+08:00",
+ "ocr_engine": "tesseract 5.5.0 / chi_sim+eng / native 250–300 DPI / psm 3",
+ "text_storage": {
+  "committed_to_public_repo": false,
+  "location": "materials/ (ticket workspace)",
+  "reason": "上传素材为受版权保护的扫描书；公开仓库只提交完整性清单与派生数据，不提交全书 OCR 原文。"
+ },
+ "books": [
+  {
+   "id": "you-still-memorize",
+   "title": "英语四级 你还在背单词吗",
+   "pdf_pages": 363,
+   "ocr_pages": 363,
+   "missing_pages": [],
+   "empty_pages": [],
+   "short_pages": [
+    3,
+    8,
+    315
+   ],
+   "total_chars": 697729,
+   "english_words": 64590,
+   "cjk_chars": 102809,
+   "roles": [
+    {
+     "start": 1,
+     "end": 8,
+     "role": "front"
+    },
+    {
+     "start": 9,
+     "end": 344,
+     "role": "vocab"
+    },
+    {
+     "start": 345,
+     "end": 363,
+     "role": "index"
+    }
+   ],
+   "text_file": "materials/pages-you-still.jsonl",
+   "ocr_engine": "tesseract 5.5.0 / chi_sim+eng / native 250–300 DPI / psm 3",
+   "word_kb": "data/cet4-syllabus-kb.json",
+   "word_coverage": {
+    "book_pages_ocr": 336,
+    "syllabus_unique_headwords": 4530,
+    "found_in_book_ocr": 3629,
+    "found_in_book_ocr_including_loose": 3761,
+    "not_found_in_book_ocr": 769,
+    "found_ratio": 0.8011,
+    "found_ratio_including_loose": 0.8302,
+    "toc_unit_word_counts": {
+     "1": 223,
+     "2": 228,
+     "3": 234,
+     "4": 246,
+     "5": 254,
+     "6": 263,
+     "7": 194,
+     "8": 241,
+     "9": 212,
+     "10": 232
+    },
+    "found_by_unit": {
+     "1": 221,
+     "2": 228,
+     "3": 227,
+     "4": 237,
+     "5": 253,
+     "6": 245,
+     "7": 182,
+     "8": 248,
+     "9": 228,
+     "10": 223,
+     "11": 774,
+     "12": 695
+    }
+   },
+   "raw_text_sha256": "f144b3d94ef69efa5a7bdf8879515b8a8cc8c6703c0a01ead9ec9290377680a1",
+   "raw_text_bytes": 980677
+  },
+  {
+   "id": "just-pass",
+   "title": "就这样过英语四级",
+   "pdf_pages": 471,
+   "ocr_pages": 471,
+   "missing_pages": [],
+   "empty_pages": [],
+   "short_pages": [
+    1,
+    2,
+    8,
+    9,
+    73,
+    299
+   ],
+   "total_chars": 755775,
+   "english_words": 73859,
+   "cjk_chars": 194478,
+   "roles": [
+    {
+     "start": 1,
+     "end": 9,
+     "role": "front"
+    },
+    {
+     "start": 10,
+     "end": 471,
+     "role": "content"
+    }
+   ],
+   "text_file": "materials/pages-just-pass.jsonl",
+   "ocr_engine": "tesseract 5.5.0 / chi_sim+eng / native 250–300 DPI / psm 3",
+   "raw_text_sha256": "4c9cda95f26ad64eb7e24ed66e094134b0f755668fe21ec54bdd6349b0f0cf99",
+   "raw_text_bytes": 1213519
+  }
+ ]
+}
