@@ -144,6 +144,7 @@ export function worldSVG({ camera = 'map', time = 'night', weather = 'fog', clas
       </defs>
 
       <g class="world-camera">
+      <g class="parallax-layer layer-far" data-depth="0.3">
       <rect width="1600" height="900" fill="url(#sky-${time})"/>
       <g class="stars">${starField()}</g>
 
@@ -157,7 +158,9 @@ export function worldSVG({ camera = 'map', time = 'night', weather = 'fog', clas
         <ellipse cx="760" cy="215" rx="330" ry="15"/>
         <ellipse cx="1340" cy="235" rx="260" ry="18"/>
       </g>
+      </g>
 
+      <g class="parallax-layer layer-mid" data-depth="0.16">
       <path d="M0 432 L120 360 L238 408 L352 318 L470 405 L588 352 L700 416 L826 330 L946 406 L1088 348 L1210 420 L1330 356 L1462 412 L1600 366 L1600 470 L0 470 Z"
             fill="#08151c" opacity="0.92"/>
       <path d="M0 432 L120 360 L238 408 L352 318 L470 405 L588 352 L700 416 L826 330 L946 406 L1088 348 L1210 420 L1330 356 L1462 412 L1600 366"
@@ -204,7 +207,9 @@ export function worldSVG({ camera = 'map', time = 'night', weather = 'fog', clas
         <rect x="860" y="676" width="8" height="20" fill="#101d20"/>
         <circle class="lantern-glow" cx="860" cy="678" r="7" fill="#e3b978" opacity="0.75"/>
       </g>
+      </g>
 
+      <g class="parallax-layer layer-near" data-depth="0.06">
       <g class="dock">
         <path d="M0 700 L560 700 L560 726 L0 742 Z" fill="#0a1417"/>
         <path d="M0 742 L560 726 L560 756 L0 790 Z" fill="#060e11"/>
@@ -263,6 +268,7 @@ export function worldSVG({ camera = 'map', time = 'night', weather = 'fog', clas
         <ellipse cx="240" cy="760" rx="520" ry="50"/>
       </g>
       </g>
+      </g>
 
       <rect width="1600" height="900" fill="url(#vignette)"/>
     </svg>
@@ -272,3 +278,65 @@ export function worldSVG({ camera = 'map', time = 'night', weather = 'fog', clas
 }
 
 export const viewFor = (camera) => VIEWS[camera] || VIEWS.map;
+
+/**
+ * 战斗对手的立绘：暗色剪影 + 提灯，保持与雾港一致的“雾里看不清”的气质。
+ * 刻意不依赖外部图片；雾、受击与消散动画由 CSS 叠加。
+ */
+export function foePortraitSVG({ className = '' } = {}) {
+  return `
+  <svg class="foe-svg ${className}" viewBox="0 0 260 460" role="img" aria-label="雾中守塔人的剪影">
+    <defs>
+      <radialGradient id="foe-lamp" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffe6b0" stop-opacity="0.9"/>
+        <stop offset="38%" stop-color="#e3b978" stop-opacity="0.26"/>
+        <stop offset="100%" stop-color="#e3b978" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="foe-cloak" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0a151b"/>
+        <stop offset="58%" stop-color="#050c10"/>
+        <stop offset="100%" stop-color="#02070a"/>
+      </linearGradient>
+      <linearGradient id="foe-rim" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#bcd4cf" stop-opacity="0.3"/>
+        <stop offset="22%" stop-color="#bcd4cf" stop-opacity="0"/>
+        <stop offset="78%" stop-color="#bcd4cf" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#bcd4cf" stop-opacity="0.2"/>
+      </linearGradient>
+    </defs>
+
+    <g class="foe-ground">
+      <ellipse cx="130" cy="402" rx="120" ry="30" fill="#071116" opacity="0.85"/>
+      <ellipse cx="130" cy="398" rx="92" ry="16" fill="#c8dedb" opacity="0.07"/>
+    </g>
+
+    <g class="foe-body">
+      <path class="foe-cloak" d="M130 56 C 96 56 78 80 74 120 L 54 306 L 46 340 L 62 330 L 70 356 L 86 338 L 96 366 L 114 344 L 130 372 L 146 344 L 164 366 L 174 338 L 190 356 L 198 330 L 214 340 L 206 306 L 186 120 C 182 80 164 56 130 56 Z" fill="url(#foe-cloak)"/>
+      <path class="foe-rim" d="M130 56 C 96 56 78 80 74 120 L 54 306 L 46 340 L 62 330 L 70 356" fill="none" stroke="url(#foe-rim)" stroke-width="3" stroke-linejoin="round"/>
+      <path class="foe-cloak-line" d="M130 128 L 126 340 M 98 150 L 86 320 M 162 150 L 174 320" stroke="#0c1b21" stroke-width="2" fill="none" opacity="0.8"/>
+
+      <path class="foe-hood" d="M130 34 C 102 34 84 58 84 90 C 84 118 104 140 130 140 C 156 140 176 118 176 90 C 176 58 158 34 130 34 Z" fill="#04090c"/>
+      <path class="foe-hood-rim" d="M130 34 C 102 34 84 58 84 90 C 84 118 104 140 130 140" fill="none" stroke="#9db9b2" stroke-width="1.4" opacity="0.2"/>
+      <ellipse cx="130" cy="94" rx="25" ry="32" fill="#010406"/>
+      <circle class="foe-eye" cx="119" cy="92" r="2.8" fill="#f3d6a0"/>
+      <circle class="foe-eye" cx="141" cy="92" r="2.8" fill="#f3d6a0"/>
+
+      <path class="foe-arm" d="M182 168 C 206 178 216 204 214 232" fill="none" stroke="#050c10" stroke-width="16" stroke-linecap="round"/>
+      <path class="foe-arm-rim" d="M182 168 C 206 178 216 204 214 232" fill="none" stroke="#9db9b2" stroke-width="1.2" opacity="0.16"/>
+
+      <g class="foe-lantern">
+        <circle cx="214" cy="264" r="62" fill="url(#foe-lamp)" opacity="0.85"/>
+        <path d="M211 234 L217 234 L217 244 L211 244 Z" fill="#0a1418"/>
+        <rect x="200" y="242" width="28" height="36" rx="4" fill="#0a1418" stroke="#e3b978" stroke-opacity="0.55"/>
+        <rect x="205" y="247" width="18" height="24" rx="3" fill="#f6dfae" opacity="0.92"/>
+        <path d="M214 252 C 220 258 220 264 214 268 C 208 264 208 258 214 252 Z" fill="#fff5d8" opacity="0.9"/>
+      </g>
+    </g>
+
+    <g class="foe-mist" fill="#c8dedb">
+      <ellipse cx="86" cy="380" rx="104" ry="16" opacity="0.06"/>
+      <ellipse cx="186" cy="404" rx="120" ry="18" opacity="0.05"/>
+    </g>
+  </svg>`;
+}
+

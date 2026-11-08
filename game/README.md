@@ -34,19 +34,33 @@ npm run serve
 | 已认识 | 中文 → 英文拼写验证；通过后移入词书，不进入 SRS；可撤销 |
 | 章节 | 第一章 12 幕 × 4 词；每天 3 幕；第 12 幕后进入 5 问 BOSS（3 认出 + 2 拼出，答对 3 问净化） |
 | 词卡战斗 | 第 4 幕「旧灯塔」的 4 个词变成手牌，3 回合、敌人意图、认出/拼出双检定、失败扣 HP/线索；可跳过，不卡关 |
-| 可视化 | 程序化 SVG 雾港全景：12 个镜头、昼夜/风暴/黎明、雾、雨、灯塔光束、灯笼、海面；章节地图与节点 |
+| 可视化 | 程序化 SVG 雾港全景：12 个镜头、昼夜/风暴/黎明、雾、雨、灯塔光束、灯笼、海面；章节地图、节点、地名与已走航线 |
+| 游戏化战斗 | 守塔人剪影立绘、九宫格卡框、类型图标、受击闪烁、伤害/代价数字、敌人血条与消散动画；全部为内联 SVG/CSS |
+| 视差与音效 | 首页与封面的三层 SVG 视差；点击 / 检定成功 / 检定失败三个 Web Audio 合成音效，可在设置关闭 |
 | 存档 | localStorage；跨天以本地 04:00 为学习日边界 |
-| 可访问性 | 键盘焦点样式、跳过链接、减少动效（手动开关 + `prefers-reduced-motion`）、移动端布局 |
+| 可访问性 | 键盘焦点样式、跳过链接、减少动效（手动开关 + `prefers-reduced-motion`）、音效开关、移动端布局 |
+
+## 画面（调研 PR #7 的方案 A）
+
+按 [`docs/game-visual-solutions-survey.md`](https://github.com/chehua11agent/superagent-test/pull/7) 的 **A 原地游戏化** 路线，保留现有 DOM / SVG / CSS 与交互：
+
+- 战斗：守塔人立绘（代码生成的 SVG 剪影 + 提灯）、敌人血条、九宫格词卡框、类型图标、受击 / 伤害数字 / 消散动画。
+- 地图：节点地名、当前节点脉冲、已走过航线与三层视差。
+- 图标：战斗图标来自 game-icons.net（CC BY 3.0，署名见 [`ASSETS.md`](ASSETS.md)）；其余仍用项目内联图标。
+- 动效与音效没有引入 anime.js / howler.js，而是用 CSS / Web Animations 与 Web Audio 合成，保持原型的零运行时依赖和离线可用。
 
 ## 内容与文件
 
 ```text
 game/
   index.html            应用壳
-  styles.css            视觉系统、响应式、动效降级
+  styles.css            视觉系统、战斗舞台、卡框、响应式、动效降级
+  ASSETS.md             外部图标署名与许可证
   src/
-    art.js              程序化 SVG 雾港全景与 12 个镜头
-    main.js             路由、七个界面、交互
+    art.js              程序化 SVG 雾港全景、12 个镜头、守塔人立绘
+    audio.js            Web Audio 合成音效（点击 / 成功 / 失败）
+    game-icons.js       战斗图标 path 数据（game-icons.net，CC BY 3.0）
+    main.js             路由、七个界面、交互、视差
     game.js             契约、词行动、代价、BOSS、每日结算
     srs.js              纯函数 SRS、每日计划、选项生成
     store.js            localStorage 存档、跨天、演示存档

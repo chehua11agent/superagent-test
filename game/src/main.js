@@ -1,4 +1,5 @@
-import { worldSVG } from './art.js';
+import { foePortraitSVG, worldSVG } from './art.js';
+import { playCue } from './audio.js';
 import {
   createDemoSave,
   createNewSave,
@@ -13,6 +14,7 @@ import {
   chip,
   esc,
   formatDateCN,
+  gameIcon,
   icon,
   progressBar,
   ring,
@@ -63,6 +65,50 @@ function toast(message) {
   el.classList.add('show');
   clearTimeout(app.toastTimer);
   app.toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+function soundEnabled() {
+  return app.save ? app.save.settings?.sound !== false : false;
+}
+
+function cue(name) {
+  playCue(name, soundEnabled());
+}
+
+/** 鼠标/触摸移动时的 2–3 层视差；不改变布局，减少动效时自动停用。 */
+function bindParallax(container) {
+  if (!container) return;
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+  const frame = $('.world-frame', container) || container;
+  let frameId = 0;
+  let pending = null;
+
+  const apply = () => {
+    frameId = 0;
+    if (!pending) return;
+    frame.style.setProperty('--px', pending.x.toFixed(3));
+    frame.style.setProperty('--py', pending.y.toFixed(3));
+    pending = null;
+  };
+
+  container.addEventListener(
+    'pointermove',
+    (event) => {
+      if (document.body.classList.contains('reduce-motion')) return;
+      const rect = container.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      pending = {
+        x: Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width) * 2 - 1)),
+        y: Math.max(-1, Math.min(1, ((event.clientY - rect.top) / rect.height) * 2 - 1))
+      };
+      if (!frameId) frameId = requestAnimationFrame(apply);
+    },
+    { passive: true }
+  );
+  container.addEventListener('pointerleave', () => {
+    pending = { x: 0, y: 0 };
+    if (!frameId) frameId = requestAnimationFrame(apply);
+  });
 }
 
 function dayNumber() {
@@ -197,11 +243,27 @@ function renderCover() {
     toast('已载入演示存档：今天有 12 张到期卡。');
     go('home');
   });
+  bindParallax($('.cover'));
 }
 
 /* ------------------------------------------------------------------ */
 /* 首页                                                                */
 /* ------------------------------------------------------------------ */
+
+/** 地图上的航线：全图一条淡线，已走过的一段点亮。坐标与节点共用百分比。 */
+function mapRouteSVG(chapter, save) {
+  const points = chapter.scenes.map((scene) => [scene.map.x, scene.map.y]);
+  const all = [...points, [8, 52]];
+  const toPath = (list) => list.map(([x, y], index) => `${index ? 'L' : 'M'}${x} ${y}`).join(' ');
+  const count = save.progress.chapterDone
+    ? all.length
+    : Math.min(save.progress.sceneIndex + 1, points.length);
+  const walked = all.slice(0, count);
+  return `<svg class="map-route" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path class="route-faint" d="${toPath(all)}"/>
+    ${walked.length > 1 ? `<path class="route-walked" d="${toPath(walked)}"/>` : ''}
+  </svg>`;
+}
 
 function renderHome() {
   const { today, plan, due, stats, nextDue } = G.planFor(app.save, app.content);
@@ -257,6 +319,9 @@ function renderHome() {
           ? '12 幕已经走完。五问之后，雾才会裂开。'
           : `今天有 ${plan.newWords.length} 个新词、${Math.max(0, 3 - scenesPlayed)} 幕剧情，约 ${plan.estimatedMinutes} 分钟。`;
 
+  const labelFrom = chapterDone ? 9 : Math.max(0, Math.min(save.progress.sceneIndex, 12) - 2);
+  const labelTo = chapterDone ? 12 : Math.min(12, save.progress.sceneIndex + 1);
+
   const root = $('#app');
   root.innerHTML = `
     <main class="screen home">
@@ -302,16 +367,19 @@ function renderHome() {
             </div>
             <div class="map-canvas" id="map-canvas">
               ${worldSVG({ camera: 'map', time: 'night', weather: 'fog', className: 'map-art', fit: 'meet' })}
+              ${mapRouteSVG(chapter, save)}
               <div class="map-nodes">
                 ${chapter.scenes
                   .map((scene, index) => {
                     const state = sceneState(index);
-                    return `<button class="map-node ${state}" style="left:${scene.map.x}%;top:${scene.map.y}%" data-scene="${index}" aria-label="第 ${scene.ord} 幕 ${esc(scene.title)}">
+                    const labelled = index >= labelFrom && index <= labelTo;
+                    const labelAbove = scene.map.y >= 74;
+                    return `<button class="map-node ${state} ${labelled ? 'label-on' : ''} ${labelAbove ? 'label-above' : ''}" style="left:${scene.map.x}%;top:${scene.map.y}%" data-scene="${index}" aria-label="第 ${scene.ord} 幕 ${esc(scene.title)}">
                       <span>${scene.ord}</span><em>${esc(scene.title)}</em>
                     </button>`;
                   })
                   .join('')}
-                <button class="map-node boss ${chapterDone ? 'done' : atBoss ? 'current' : 'locked'}" style="left:8%;top:52%" data-scene="boss" aria-label="章节终局 摆渡人的五问">
+                <button class="map-node boss ${chapterDone ? 'done' : atBoss ? 'current' : 'locked'} ${chapterDone || atBoss ? 'label-on' : ''}" style="left:8%;top:52%" data-scene="boss" aria-label="章节终局 摆渡人的五问">
                   <span>渡</span><em>摆渡人</em>
                 </button>
               </div>
@@ -404,6 +472,7 @@ function bindHome() {
       detail.innerHTML = `<b>第 ${scene.ord} 幕 · ${esc(scene.title)}</b><span>${state === 'locked' ? stateText : esc(scene.narration)}</span><em>${stateText}</em>`;
     });
   });
+  bindParallax($('#map-canvas'));
 }
 
 /* ------------------------------------------------------------------ */
@@ -1108,6 +1177,7 @@ function paintBoss() {
     $$('.lemma-option', panel).forEach((button) => {
       button.addEventListener('click', () => {
         const result = G.bossCheck(app.save, app.content, button.dataset.lemma, app.today, 'recognize');
+        cue(result.correct ? 'success' : 'fail');
         saveNow();
         app.boss.feedback = { correct: result.correct, word: result.word, mode: 'recognize' };
         paintBoss();
@@ -1134,6 +1204,7 @@ function paintBoss() {
     event.preventDefault();
     const input = $('#boss-answer').value;
     const result = G.bossCheck(app.save, app.content, input, app.today, 'spell');
+    cue(result.correct ? 'success' : 'fail');
     saveNow();
     app.boss.feedback = { correct: result.correct, word: result.word, mode: 'spell' };
     paintBoss();
@@ -1143,6 +1214,43 @@ function paintBoss() {
 /* ------------------------------------------------------------------ */
 /* 词卡战斗                                                            */
 /* ------------------------------------------------------------------ */
+
+function typeGlyph(type) {
+  return { spell: 'staff', item: 'bag', check: 'quill' }[type] || 'quill';
+}
+
+function battleCostLabel(intent) {
+  if (!intent) return '';
+  if (intent.type === 'hp') return `HP -${intent.amount}`;
+  if (intent.type === 'clue') return `线索 -${intent.amount || 1}`;
+  if (intent.type === 'branch') return '路线改变';
+  return '代价未知';
+}
+
+/** 战斗舞台：敌人立绘、受击/伤害数字与敌人血条。 */
+function battleArenaInner(scene, battle) {
+  const last = battle.lastOutcome;
+  const rounds = scene.battle.rounds;
+  const hpPercent = Math.max(0, Math.min(100, (battle.enemyHp / rounds) * 100));
+  const hit = battle.phase === 'result' && Boolean(last?.correct);
+  const miss = battle.phase === 'result' && Boolean(last && !last.correct);
+  const defeated = battle.done && battle.won;
+  const lost = battle.done && !battle.won;
+  const damage = last?.mode === 'spell' ? 2 : 1;
+  return `
+    <div class="battle-flash ${hit ? 'ok' : miss ? 'bad' : ''}"></div>
+    <div class="battle-foe ${hit ? 'is-hit' : ''} ${miss ? 'is-guarding' : ''} ${defeated ? 'is-defeated' : ''} ${lost ? 'is-lost' : ''}">
+      ${foePortraitSVG()}
+      ${hit ? `<span class="damage-float damage-enemy" aria-hidden="true">-${damage}</span>` : ''}
+      <div class="foe-plate" aria-hidden="true">
+        <span class="foe-name">${esc(scene.battle.enemy)}</span>
+        <span class="foe-hp"><i style="width:${hpPercent}%"></i></span>
+        <span class="foe-hp-text">${battle.enemyHp} / ${rounds}</span>
+      </div>
+    </div>
+    ${miss ? `<span class="damage-float damage-player" aria-hidden="true">${battleCostLabel(last?.intent)}</span>` : ''}
+    ${battle.done ? `<p class="battle-arena-note">${defeated ? '灯重新亮起。' : '雾把最后一盏灯按灭了。'}</p>` : ''}`;
+}
 
 function renderBattle() {
   if (!app.save) return renderCover();
@@ -1159,6 +1267,7 @@ function renderBattle() {
       ${worldSVG({ camera: scene.art.camera, time: scene.art.time, weather: scene.art.weather, className: 'stage-art' })}
       <div class="stage-veil"></div>
       ${stageHud(null, `词卡战斗 · ${scene.battle.enemy}`)}
+      <div class="battle-arena" id="battle-arena" aria-hidden="true"></div>
       <div class="battle-wrap">
         <div class="panel battle-panel" id="battle-panel"></div>
       </div>
@@ -1172,6 +1281,9 @@ function paintBattle(scene) {
   const save = app.save;
   const battle = save.battle;
   if (!battle) return go('story');
+
+  const arena = $('#battle-arena');
+  if (arena) arena.innerHTML = battleArenaInner(scene, battle);
 
   if (battle.done) {
     panel.innerHTML = `
@@ -1263,20 +1375,25 @@ function paintBattle(scene) {
   }
 
   panel.innerHTML = `
-    <div class="battle-topline"><span>词卡战斗 · ${esc(scene.battle.enemy)}</span><span>第 ${battle.round + 1} / ${rounds} 回合</span></div>
+    <div class="battle-topline"><span>${gameIcon('swords')} 词卡战斗 · ${esc(scene.battle.enemy)}</span><span>第 ${battle.round + 1} / ${rounds} 回合</span></div>
     <div class="battle-stats">
       <span>敌人 HP <b>${battle.enemyHp}</b> / ${rounds}</span>
       <span>成功 <b>${battle.successes}</b></span>
       <span>失败 <b>${battle.failures}</b></span>
       <span>你的 HP <b>${save.progress.hp}</b></span>
     </div>
-    <p class="battle-intent-line">${icon('flame')} 敌人意图：${esc(intent.text)}</p>
+    <p class="battle-intent-line">${gameIcon('swords')} 敌人意图：${esc(intent.text)}</p>
     <div class="battle-hand">
-      ${cards.map((word) => `
-        <button class="battle-card ${selected?.id === word.id ? 'selected' : ''}" data-card="${word.id}">
-          <span class="battle-card-type">${typeLabel(word.card_type)}</span>
+      ${cards.map((word, index) => `
+        <button class="battle-card ${selected?.id === word.id ? 'selected' : ''}" data-card="${word.id}" data-type="${esc(word.card_type)}" aria-pressed="${selected?.id === word.id}">
+          <span class="battle-card-head">
+            <span class="battle-card-icon">${gameIcon(typeGlyph(word.card_type))}</span>
+            <span class="battle-card-type">${typeLabel(word.card_type)}</span>
+            <span class="battle-card-rune">${['I', 'II', 'III', 'IV'][index] || index + 1}</span>
+          </span>
           <b>${esc(word.meanings[0])}</b>
           <small>${esc(word.effect_text)}</small>
+          <span class="battle-card-foot">点击选取</span>
         </button>`).join('')}
     </div>
     ${checkHtml}`;
@@ -1294,7 +1411,8 @@ function paintBattle(scene) {
   });
   $$('.lemma-option', panel).forEach((button) => {
     button.addEventListener('click', () => {
-      G.battleCheck(save, app.content, scene, selected.id, 'recognize', button.dataset.lemma, app.today);
+      const result = G.battleCheck(save, app.content, scene, selected.id, 'recognize', button.dataset.lemma, app.today);
+      cue(result?.lastOutcome?.correct ? 'success' : 'fail');
       saveNow();
       app.battle = null;
       paintBattle(scene);
@@ -1302,7 +1420,8 @@ function paintBattle(scene) {
   });
   $('#battle-form')?.addEventListener('submit', (event) => {
     event.preventDefault();
-    G.battleCheck(save, app.content, scene, selected.id, 'spell', $('#battle-answer').value, app.today);
+    const result = G.battleCheck(save, app.content, scene, selected.id, 'spell', $('#battle-answer').value, app.today);
+    cue(result?.lastOutcome?.correct ? 'success' : 'fail');
     saveNow();
     app.battle = null;
     paintBattle(scene);
@@ -1556,6 +1675,13 @@ function renderSettings() {
             </label>
           </div>
           <div class="setting-row">
+            <div><b>音效</b><p>点击与检定结果会播放简短提示音；全部由浏览器合成，不加载音频文件。</p></div>
+            <label class="switch">
+              <input type="checkbox" id="sound-on" ${save.settings.sound !== false ? 'checked' : ''}>
+              <span></span>
+            </label>
+          </div>
+          <div class="setting-row">
             <div><b>存档</b><p>进度保存在这台设备的 localStorage 中。清除后无法恢复。</p></div>
             <button class="btn btn-ghost btn-sm danger" data-action="reset-save">清除存档</button>
           </div>
@@ -1565,6 +1691,7 @@ function renderSettings() {
           <p class="eyebrow">关于这个原型</p>
           <p>第一章「雾港」共 12 幕、48 个词，按 4 天 × 3 幕组织。已实现：复习优先、1/3/7/16 天 SRS、词行动、HP/线索/分支代价、已认识验证、章节 BOSS、词书与战报复制。</p>
           <p>暂未实现：服务端账号、通知、异步挑战码、小队、10/12/15/20 档位切换、完整六章内容、真题词频管线。词表排序为原型占位，正式版按设计文档 5.2 生成。</p>
+          <p class="about-credit">战斗图标来自 <a href="https://game-icons.net" target="_blank" rel="noreferrer">game-icons.net</a>（作者 Lorc，CC BY 3.0）；守塔人立绘与其他图标为项目内联 SVG。完整许可见仓库 <code>game/ASSETS.md</code>。</p>
           <div class="about-actions">
             <button class="btn btn-ghost btn-sm" data-action="show-cover">查看封面</button>
             <a class="btn btn-ghost btn-sm" href="https://github.com/chehua11agent/superagent-test/pull/2" target="_blank" rel="noreferrer">设计文档 PR #2</a>
@@ -1582,6 +1709,12 @@ function renderSettings() {
     app.save.settings.reduceMotion = event.target.checked;
     document.body.classList.toggle('reduce-motion', app.save.settings.reduceMotion);
     saveNow();
+  });
+  $('#sound-on')?.addEventListener('change', (event) => {
+    app.save.settings.sound = event.target.checked;
+    saveNow();
+    if (event.target.checked) cue('success');
+    toast(event.target.checked ? '音效已开启。' : '音效已关闭。');
   });
   $('[data-action="reset-save"]')?.addEventListener('click', () => {
     if (!window.confirm('确定清除存档吗？这会删除全部进度，无法恢复。')) return;
@@ -1662,6 +1795,14 @@ async function boot() {
       if (changed) saveNow();
     }
     window.__shici = app;
+    document.addEventListener(
+      'pointerdown',
+      (event) => {
+        if (!event.target.closest('button, a[href], .option')) return;
+        cue('click');
+      },
+      { passive: true }
+    );
     render();
   } catch (error) {
     console.error(error);

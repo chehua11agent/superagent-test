@@ -1,4 +1,5 @@
 // 小工具：转义、图标、进度环、日期格式。
+import { GAME_ICON_PATHS } from './game-icons.js';
 
 export function esc(value) {
   return String(value ?? '')
@@ -35,6 +36,13 @@ const ICONS = {
 export function icon(name, className = '') {
   const path = ICONS[name] || ICONS.spark;
   return `<svg class="icon ${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
+}
+
+/** game-icons.net 的实心图标，仅用于战斗界面；未知名字退回内联线性图标。 */
+export function gameIcon(name, className = '') {
+  const path = GAME_ICON_PATHS[name];
+  if (!path) return icon('spark', className);
+  return `<svg class="icon icon-solid ${className}" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="${path}"/></svg>`;
 }
 
 export function ring({ percent, label, value, sub, tone = 'gold' }) {

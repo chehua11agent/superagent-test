@@ -36,7 +36,8 @@ export function createNewSave(now = new Date()) {
     settings: {
       newPerDay: 12,
       anchor: '21:00',
-      reduceMotion: false
+      reduceMotion: false,
+      sound: true
     },
     progress: {
       chapter: 1,
@@ -128,6 +129,7 @@ export function loadSave() {
     const parsed = JSON.parse(raw);
     if (!parsed || parsed.version !== SAVE_VERSION) return null;
     if (!parsed.progress || !parsed.day || !parsed.settings) return null;
+    parsed.settings.sound = parsed.settings.sound !== false;
     parsed.words = parsed.words || {};
     parsed.history = parsed.history || [];
     parsed.day.spellingBonusCorrect = parsed.day.spellingBonusCorrect ?? 0;

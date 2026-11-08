@@ -191,6 +191,9 @@ test('新游戏：3 幕 → 结算 → 快进后出现 12 张到期复习', asyn
 test('演示存档：复习优先，清空 12 张后才进入契约', async ({ page }) => {
   await loadDemo(page);
   await expect(page.locator('.daily-card')).toContainText('先清完复习');
+  await expect(page.locator('.map-route .route-walked')).toHaveCount(1);
+  await expect(page.locator('.map-node.current em')).toBeVisible();
+  await expect(page.locator('#map-canvas .parallax-layer')).toHaveCount(3);
   await page.locator('[data-action="review"]').click();
   await expect(page.getByRole('heading', { name: '到期复习' })).toBeVisible();
   await expect(page.locator('.review-card')).toContainText('1 / 12');
@@ -308,6 +311,12 @@ test('词卡战斗：第 4 幕的词变成手牌，3 回合内推进剧情', asy
   await expect(page.locator('.outcome')).toBeVisible();
   await page.locator('[data-action="start-battle"]').click();
   await expect(page.locator('#battle-panel')).toBeVisible();
+  await expect(page.locator('.battle-foe')).toBeVisible();
+  await expect(page.locator('.foe-name')).toHaveText('雾中守塔人');
+  await expect(page.locator('.battle-card-icon path')).toHaveCount(4);
+  expect(
+    await page.locator('.battle-card').first().evaluate((el) => getComputedStyle(el).borderImageSource)
+  ).toContain('data:image');
 
   for (let round = 0; round < 3; round += 1) {
     if (await page.locator('.battle-final').count()) break;
@@ -336,6 +345,9 @@ test('词卡战斗：第 4 幕的词变成手牌，3 回合内推进剧情', asy
       await page.locator('#battle-form button[type="submit"]').click();
     }
     await page.waitForTimeout(300);
+    if (round === 0) {
+      await expect(page.locator('.damage-enemy')).toBeVisible();
+    }
     if (await page.locator('.battle-final').count()) break;
     await page.locator('[data-action="battle-next"]').click();
   }
@@ -390,6 +402,11 @@ test('设置与重置：减少动效生效，清档回到封面', async ({ page 
 
   await page.locator('#reduce-motion').check({ force: true });
   await expect(page.locator('body')).toHaveClass(/reduce-motion/);
+  await expect(page.locator('#sound-on')).toBeChecked();
+  await page.locator('#sound-on').uncheck({ force: true });
+  expect(await page.evaluate(() => window.__shici.save.settings.sound)).toBe(false);
+  await page.locator('#sound-on').check({ force: true });
+  expect(await page.evaluate(() => window.__shici.save.settings.sound)).toBe(true);
   await page.locator('#anchor-time').fill('07:30');
   await page.locator('#anchor-time').blur();
   expect(await page.evaluate(() => window.__shici.save.settings.anchor)).toBe('07:30');
