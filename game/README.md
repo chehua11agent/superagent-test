@@ -63,14 +63,18 @@ tests/
   srs.test.mjs          12 个 SRS / 日期 / 计划用例
   content.test.mjs      4 个内容校验与通关集成用例
   sample.test.mjs       5 个小样本结构 / 位置 / 语义对照用例
+e2e/
+  game.spec.mjs         8 个 Playwright 端到端用例
+playwright.config.mjs   自动启动本地服务器与浏览器项目
 ```
 
 ## 验证
 
 ```bash
-npm test                # 21 个测试，含 4 天完美通关、失败前进与小样本位置审计
+npm test                # 21 个单元 / 内容 / 集成测试
 npm run validate        # 48 词 / 12 幕 / 行动与长度校验
 npm run validate:sample # 10 词 / 3 幕 / 5 节点：每个词的功能位置审计
+npm run test:e2e        # 8 个 Playwright 端到端用例（首次需 npx playwright install chromium）
 ```
 
 ## 内容小样本：《闭馆通知》
@@ -83,6 +87,21 @@ npm run validate:sample # 10 词 / 3 幕 / 5 节点：每个词的功能位置�
 - `npm run validate:sample` 会拒绝“只写进句子、没有功能位置”的词
 
 设计说明见 [`docs/sample-closing-notice.md`](../docs/sample-closing-notice.md)。它目前是内容设计样本，没有接进第一章的 UI。
+
+## 端到端测试
+
+`e2e/game.spec.mjs` 用真实浏览器跑完整路径：
+
+1. 新游戏：封面 → 3 幕（12 契约 + 3 词行动）→ 结算 → 快进 → 12 张到期复习。
+2. 演示存档：复习优先，12 张清空后才进入契约。
+3. 已认识：验证跳过 → 词书筛选 → 撤销。
+4. 失败前进：答错扣 HP、SRS 回 1 天，剧情仍到第 5 幕。
+5. 硬闯：不测试单词，固定 HP -15，仍然推进。
+6. BOSS：五问答对三问净化 → 章节结算。
+7. 设置与重置：减少动效、锚点时间、清档回封面。
+8. 移动端：首页 CTA、复习四选项、剧情契约按钮均在首屏，无横向溢出。
+
+测试会收集 `pageerror` 与 console error；任何浏览器错误都会让对应用例失败。
 
 ## 原型边界（诚实说明）
 
