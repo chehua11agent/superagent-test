@@ -1,0 +1,1352 @@
+[
+  {
+    "category": "六大属性与 18 项技能",
+    "entries": [
+      {
+        "mechanism": "力量 Strength",
+        "words": [
+          {
+            "en": "strength",
+            "zh": "力量",
+            "level": 1,
+            "why": "力量属性本身决定推、拉、举、攀的运动检定。",
+            "use": "卡牌：推开石门，strength 达标才能打开。"
+          },
+          {
+            "en": "force",
+            "zh": "力；强迫",
+            "level": 2,
+            "why": "表示施加的力，对应推撞与破门。",
+            "use": "事件：用 force 推倒书架，制造掩体。"
+          },
+          {
+            "en": "muscle",
+            "zh": "肌肉；体力",
+            "level": 2,
+            "why": "肌肉量是力量的外在表现，常用于体力活或威吓。",
+            "use": "对话：向铁匠展示 muscle，换取重武器试用。"
+          }
+        ]
+      },
+      {
+        "mechanism": "敏捷与隐匿 Dexterity & Stealth",
+        "words": [
+          {
+            "en": "quick",
+            "zh": "快的；敏捷的",
+            "level": 1,
+            "why": "敏捷决定先攻与反应速度。",
+            "use": "卡牌：quick 检定抢在陷阱合拢前跳出。"
+          },
+          {
+            "en": "balance",
+            "zh": "平衡",
+            "level": 2,
+            "why": "平衡感对应杂技检定，走独木桥、窄梁都靠它。",
+            "use": "事件：balance 失败会从梁上滑落。"
+          },
+          {
+            "en": "silent",
+            "zh": "沉默的；无声的",
+            "level": 2,
+            "why": "隐匿（Stealth）的核心是移动时不发出声音。",
+            "use": "解密：按 silent 提示选择无声路线绕过守卫。"
+          }
+        ]
+      },
+      {
+        "mechanism": "体质 Constitution",
+        "words": [
+          {
+            "en": "endure",
+            "zh": "忍受；忍耐",
+            "level": 2,
+            "why": "体质检定用于长时间跋涉、憋气、耐寒。",
+            "use": "事件：endure 三回合暴风雪才能抵达山洞。"
+          },
+          {
+            "en": "resist",
+            "zh": "抵抗",
+            "level": 2,
+            "why": "体质豁免抵抗毒素、疾病与法术侵蚀。",
+            "use": "卡牌：resist 毒素豁免，成功只受半伤。"
+          },
+          {
+            "en": "tough",
+            "zh": "坚韧的；强壮的",
+            "level": 2,
+            "why": "高体质角色更耐打，对应更多生命值。",
+            "use": "对话：用 tough 说服队长让你断后。"
+          }
+        ]
+      },
+      {
+        "mechanism": "智力 Intelligence",
+        "words": [
+          {
+            "en": "intelligence",
+            "zh": "智力",
+            "level": 1,
+            "why": "智力属性支撑奥秘、历史、调查等知识检定。",
+            "use": "卡牌：intelligence 检定解读古代符文。"
+          },
+          {
+            "en": "knowledge",
+            "zh": "知识",
+            "level": 1,
+            "why": "知识类检定（奥秘、历史、宗教）用来回忆怪物弱点与传说。",
+            "use": "事件：knowledge 成功才知道巨魔怕火。"
+          },
+          {
+            "en": "logic",
+            "zh": "逻辑；推理",
+            "level": 2,
+            "why": "逻辑推理对应调查现场的因果判断。",
+            "use": "解密：用 logic 排除错误嫌疑人。"
+          }
+        ]
+      },
+      {
+        "mechanism": "感知 Wisdom",
+        "words": [
+          {
+            "en": "perceive",
+            "zh": "察觉",
+            "level": 2,
+            "why": "感知（Wisdom）的核心是察觉环境细节。",
+            "use": "卡牌：perceive 发现草丛里的伏兵。"
+          },
+          {
+            "en": "notice",
+            "zh": "注意到",
+            "level": 1,
+            "why": "被动察觉决定你是否注意到异常。",
+            "use": "事件：notice 失败会错过墙上的暗门。"
+          },
+          {
+            "en": "aware",
+            "zh": "意识到的",
+            "level": 2,
+            "why": "警觉状态影响是否被突袭。",
+            "use": "对话：保持 aware，才能听出话里的威胁。"
+          }
+        ]
+      },
+      {
+        "mechanism": "魅力 Charisma",
+        "words": [
+          {
+            "en": "appeal",
+            "zh": "吸引力；呼吁",
+            "level": 2,
+            "why": "魅力包含吸引力与个人风采。",
+            "use": "卡牌：appeal 打动贵族，争取一次会面。"
+          },
+          {
+            "en": "confidence",
+            "zh": "信心",
+            "level": 2,
+            "why": "自信影响说服与威吓的可信度。",
+            "use": "对话：用 confidence 压住对方的气势。"
+          },
+          {
+            "en": "influence",
+            "zh": "影响",
+            "level": 2,
+            "why": "魅力检定用于影响他人态度。",
+            "use": "事件：influence 让守卫睁一只眼闭一只眼。"
+          }
+        ]
+      },
+      {
+        "mechanism": "洞悉 Insight",
+        "words": [
+          {
+            "en": "judge",
+            "zh": "判断",
+            "level": 1,
+            "why": "判断对方意图是洞悉检定的核心动作。",
+            "use": "对话：judge 他是否在拖延时间。"
+          },
+          {
+            "en": "reason",
+            "zh": "推理；理由",
+            "level": 2,
+            "why": "从话语中推理隐含信息，对应洞悉。",
+            "use": "解密：用 reason 拼出对方隐瞒的交易地点。"
+          },
+          {
+            "en": "understand",
+            "zh": "理解",
+            "level": 1,
+            "why": "理解真实意思是看穿谎言的最后一步。",
+            "use": "卡牌：understand 成功识破假契约。"
+          }
+        ]
+      },
+      {
+        "mechanism": "调查 Investigation",
+        "words": [
+          {
+            "en": "investigate",
+            "zh": "调查",
+            "level": 2,
+            "why": "调查（Investigation）用于搜查现场、推断线索。",
+            "use": "卡牌：investigate 找出密室的机关。"
+          },
+          {
+            "en": "examine",
+            "zh": "检查",
+            "level": 1,
+            "why": "仔细检查物品是调查的常见检定。",
+            "use": "事件：examine 尸体，发现中毒迹象。"
+          },
+          {
+            "en": "evidence",
+            "zh": "证据",
+            "level": 2,
+            "why": "证据是调查获得的硬线索。",
+            "use": "解密：把 evidence 拼进指控书。"
+          }
+        ]
+      },
+      {
+        "mechanism": "游说 Persuasion",
+        "words": [
+          {
+            "en": "persuade",
+            "zh": "说服",
+            "level": 2,
+            "why": "游说（Persuasion）用道理与好处改变对方。",
+            "use": "卡牌：persuade 让卫兵放行。"
+          },
+          {
+            "en": "convince",
+            "zh": "使信服",
+            "level": 2,
+            "why": "使对方相信某个事实，属于游说。",
+            "use": "对话：convince 村民相信你不是怪物。"
+          },
+          {
+            "en": "argue",
+            "zh": "争论；论证",
+            "level": 2,
+            "why": "争论、论证可争取中立者支持。",
+            "use": "事件：argue 说服议会推迟处刑。"
+          }
+        ]
+      },
+      {
+        "mechanism": "欺瞒 Deception",
+        "words": [
+          {
+            "en": "deceive",
+            "zh": "欺骗",
+            "level": 2,
+            "why": "欺瞒（Deception）是主动说谎。",
+            "use": "卡牌：deceive 冒充信使混进营地。"
+          },
+          {
+            "en": "trick",
+            "zh": "哄骗；诡计",
+            "level": 1,
+            "why": "设套诱骗，是欺瞒的玩法化表达。",
+            "use": "事件：trick 守卫离开岗位。"
+          },
+          {
+            "en": "pretend",
+            "zh": "假装",
+            "level": 2,
+            "why": "假装身份或状态，是欺瞒的常见手段。",
+            "use": "对话：pretend 自己是占卜师套话。"
+          }
+        ]
+      }
+    ],
+    "ideas": [
+      "卡牌「破门」：面对石门，从 strength / force / muscle 中选一张；strength 稳开，force 会惊动守卫，muscle 省时但耗体力。",
+      "事件「审讯」：商人说谎，先用 judge / reason / understand 找破绽，再用 persuade / convince 或 deceive / trick 让他开口；选错词会拿到假线索。",
+      "解密「密室」：墙上三行线索分别指向 perceive / investigate / knowledge，拼出开关顺序；只拿一块信息无法开门。"
+    ]
+  },
+  {
+    "category": "战斗动作与回合",
+    "entries": [
+      {
+        "mechanism": "回合 Turn",
+        "words": [
+          {
+            "en": "turn",
+            "zh": "回合；转动",
+            "level": 1,
+            "why": "回合（Turn）是战斗行动的基本单位。",
+            "use": "卡牌：一 turn 内选择 attack 或 help 作为主行动。"
+          },
+          {
+            "en": "order",
+            "zh": "顺序；命令",
+            "level": 1,
+            "why": "先攻（Initiative）决定行动顺序。",
+            "use": "事件：order 排错会让敌人先手。"
+          },
+          {
+            "en": "action",
+            "zh": "行动",
+            "level": 2,
+            "why": "标准动作（Action）决定本回合能做什么。",
+            "use": "解密：把 action 分配给攻击、帮助或使用物品。"
+          }
+        ]
+      },
+      {
+        "mechanism": "攻击 Attack",
+        "words": [
+          {
+            "en": "attack",
+            "zh": "攻击",
+            "level": 1,
+            "why": "攻击（Attack）是战斗最核心的动作。",
+            "use": "卡牌：attack 命中 AC 才造成伤害。"
+          },
+          {
+            "en": "strike",
+            "zh": "打击",
+            "level": 2,
+            "why": "打击是攻击的具象动作。",
+            "use": "事件：strike 铁链，放下吊桥。"
+          },
+          {
+            "en": "aim",
+            "zh": "瞄准",
+            "level": 1,
+            "why": "瞄准是攻击前的叙述动作，用来选定目标，不单独构成规则动作。",
+            "use": "卡牌：aim 先选目标，再决定 attack 还是 help。"
+          }
+        ]
+      },
+      {
+        "mechanism": "闪避 Dodge",
+        "words": [
+          {
+            "en": "avoid",
+            "zh": "避开",
+            "level": 2,
+            "why": "闪避（Dodge）的核心是让攻击落空。",
+            "use": "卡牌：avoid 一次攻击，答对完全闪开。"
+          },
+          {
+            "en": "slip",
+            "zh": "溜走；滑",
+            "level": 2,
+            "why": "滑步、溜走是躲开攻击轨迹的动作。",
+            "use": "事件：slip 过守卫的擒抱。"
+          },
+          {
+            "en": "escape",
+            "zh": "逃脱",
+            "level": 1,
+            "why": "从攻击中脱身，是闪避的另一种说法。",
+            "use": "卡牌：escape 一次擒抱，成功则脱身。"
+          }
+        ]
+      },
+      {
+        "mechanism": "冲刺 Dash",
+        "words": [
+          {
+            "en": "dash",
+            "zh": "猛冲",
+            "level": 2,
+            "why": "冲刺（Dash）消耗动作换取额外移动。",
+            "use": "卡牌：dash 两回合冲过开阔地。"
+          },
+          {
+            "en": "rush",
+            "zh": "冲；催促",
+            "level": 1,
+            "why": "猛冲强调速度与时机。",
+            "use": "事件：rush 在城门关闭前挤进去。"
+          },
+          {
+            "en": "speed",
+            "zh": "速度",
+            "level": 1,
+            "why": "速度决定每回合移动距离。",
+            "use": "解密：算 speed 判断能否在陷阱前抵达。"
+          }
+        ]
+      },
+      {
+        "mechanism": "撤离 Disengage",
+        "words": [
+          {
+            "en": "withdraw",
+            "zh": "撤退",
+            "level": 3,
+            "why": "有秩序地后撤，对应撤离动作。",
+            "use": "事件：withdraw 到走廊再关门。"
+          },
+          {
+            "en": "retreat",
+            "zh": "退却",
+            "level": 3,
+            "why": "撤退是整体战术动作。",
+            "use": "对话：retreat 时用假情报拖住追兵。"
+          },
+          {
+            "en": "leave",
+            "zh": "离开",
+            "level": 1,
+            "why": "离开近战范围，对应撤离动作。",
+            "use": "卡牌：leave 近战范围，避免借机攻击。"
+          }
+        ]
+      },
+      {
+        "mechanism": "帮助 Help",
+        "words": [
+          {
+            "en": "help",
+            "zh": "帮助",
+            "level": 1,
+            "why": "帮助（Help）动作给同伴优势。",
+            "use": "卡牌：help 让队友下一次 attack 有优势。"
+          },
+          {
+            "en": "aid",
+            "zh": "援助",
+            "level": 2,
+            "why": "援助是 Help 动作的叙事表达，规则上给予同伴优势。",
+            "use": "事件：aid 队友挣脱束缚。"
+          },
+          {
+            "en": "assist",
+            "zh": "协助",
+            "level": 3,
+            "why": "协助检定，对应 Help 的另一种用法。",
+            "use": "对话：assist 铁匠完成修剑。"
+          }
+        ]
+      },
+      {
+        "mechanism": "躲藏 Hide",
+        "words": [
+          {
+            "en": "hide",
+            "zh": "躲藏",
+            "level": 1,
+            "why": "躲藏（Hide）是敏捷（隐匿）检定。",
+            "use": "卡牌：hide 成功则敌人失去目标。"
+          },
+          {
+            "en": "cover",
+            "zh": "掩体；遮盖",
+            "level": 2,
+            "why": "掩体提供 AC 加值，是躲藏的前提。",
+            "use": "事件：找 cover 才能安全施法。"
+          },
+          {
+            "en": "shadow",
+            "zh": "阴影",
+            "level": 2,
+            "why": "阴影是躲藏的天然环境。",
+            "use": "解密：按 shadow 标记选择潜行路线。"
+          }
+        ]
+      },
+      {
+        "mechanism": "准备 Ready",
+        "words": [
+          {
+            "en": "prepare",
+            "zh": "准备",
+            "level": 1,
+            "why": "准备（Ready）动作预设触发条件。",
+            "use": "卡牌：prepare 一次攻击，敌人进门就触发。"
+          },
+          {
+            "en": "wait",
+            "zh": "等待",
+            "level": 1,
+            "why": "等待触发是准备动作的核心。",
+            "use": "事件：wait 到守卫转身再行动。"
+          },
+          {
+            "en": "ready",
+            "zh": "准备好的",
+            "level": 1,
+            "why": "准备就绪状态决定能否反击。",
+            "use": "对话：ready 回应伏击，避免被突袭。"
+          }
+        ]
+      },
+      {
+        "mechanism": "搜索 Search",
+        "words": [
+          {
+            "en": "search",
+            "zh": "搜寻",
+            "level": 1,
+            "why": "搜索（Search）动作用察觉或调查找东西。",
+            "use": "卡牌：search 找出藏在地砖下的钥匙。"
+          },
+          {
+            "en": "seek",
+            "zh": "寻找",
+            "level": 2,
+            "why": "主动寻找目标，对应搜索。",
+            "use": "事件：seek 失踪的商队。"
+          },
+          {
+            "en": "scan",
+            "zh": "扫视",
+            "level": 2,
+            "why": "快速扫视环境，属于搜索的轻量版。",
+            "use": "解密：scan 墙面找不同。"
+          }
+        ]
+      },
+      {
+        "mechanism": "使用物品 Use an Object",
+        "words": [
+          {
+            "en": "use",
+            "zh": "使用",
+            "level": 1,
+            "why": "使用物品（Use an Object）是战斗中的交互动作。",
+            "use": "卡牌：use 药水恢复生命。"
+          },
+          {
+            "en": "object",
+            "zh": "物件",
+            "level": 2,
+            "why": "物件是交互动作的目标。",
+            "use": "事件：object 卡住机关齿轮。"
+          },
+          {
+            "en": "item",
+            "zh": "物品",
+            "level": 2,
+            "why": "物品栏决定你能使用什么。",
+            "use": "解密：按 item 标签选择正确道具。"
+          }
+        ]
+      }
+    ],
+    "ideas": [
+      "卡牌「闪避」：用 avoid / slip / escape 应对一次攻击，答对完全闪开；选错只减半伤害。",
+      "事件「伏击」：先攻 order 排错则敌人先手；玩家可用 prepare / wait 设伏，ready 决定能否反击。",
+      "卡牌「脱离」：被近身时打 withdraw / retreat / leave，选对才脱离且不吃借机攻击。"
+    ]
+  },
+  {
+    "category": "状态与豁免",
+    "entries": [
+      {
+        "mechanism": "中毒 Poisoned",
+        "words": [
+          {
+            "en": "poison",
+            "zh": "毒；毒害",
+            "level": 2,
+            "why": "中毒（Poisoned）状态影响攻击与检定。",
+            "use": "卡牌：poison 状态下 attack 有劣势。"
+          },
+          {
+            "en": "sick",
+            "zh": "生病的",
+            "level": 1,
+            "why": "生病是中毒的常见叙事表现。",
+            "use": "事件：sick 的村民需要解药。"
+          },
+          {
+            "en": "weak",
+            "zh": "虚弱的",
+            "level": 1,
+            "why": "虚弱是中毒后无法全力行动的叙事表现。",
+            "use": "对话：weak 的证人说出错误线索。"
+          }
+        ]
+      },
+      {
+        "mechanism": "恐惧 Frightened",
+        "words": [
+          {
+            "en": "fear",
+            "zh": "恐惧",
+            "level": 1,
+            "why": "恐惧（Frightened）使角色不敢靠近源头。",
+            "use": "卡牌：fear 状态下不能主动接近敌人。"
+          },
+          {
+            "en": "afraid",
+            "zh": "害怕的",
+            "level": 1,
+            "why": "害怕是恐惧状态的第一层。",
+            "use": "事件：afraid 的士兵会后退。"
+          },
+          {
+            "en": "alarm",
+            "zh": "惊恐；警报",
+            "level": 3,
+            "why": "惊恐会让队伍失去行动秩序。",
+            "use": "解密：alarm 时只能选逃跑选项。"
+          }
+        ]
+      },
+      {
+        "mechanism": "魅惑 Charmed",
+        "words": [
+          {
+            "en": "attract",
+            "zh": "吸引",
+            "level": 2,
+            "why": "被吸引是魅惑的入口。",
+            "use": "事件：attract 目标靠近陷阱。"
+          },
+          {
+            "en": "trust",
+            "zh": "信任",
+            "level": 2,
+            "why": "信任让目标接受你的说辞。",
+            "use": "对话：用 trust 让守卫交出钥匙。"
+          },
+          {
+            "en": "tempt",
+            "zh": "引诱",
+            "level": 3,
+            "why": "引诱对方做出违背本意的选择。",
+            "use": "卡牌：tempt 敌人放下武器。"
+          }
+        ]
+      },
+      {
+        "mechanism": "麻痹 Paralyzed",
+        "words": [
+          {
+            "en": "freeze",
+            "zh": "冻结；僵住",
+            "level": 2,
+            "why": "麻痹（Paralyzed）时身体无法动弹。",
+            "use": "卡牌：freeze 状态下无法行动。"
+          },
+          {
+            "en": "stiff",
+            "zh": "僵硬的",
+            "level": 3,
+            "why": "僵硬描述麻痹的体感。",
+            "use": "事件：stiff 的手指握不住剑。"
+          },
+          {
+            "en": "unable",
+            "zh": "不能的",
+            "level": 2,
+            "why": "无法行动是麻痹的规则结果。",
+            "use": "解密：unable 标记决定谁能响应。"
+          }
+        ]
+      },
+      {
+        "mechanism": "失明与耳聋 Blinded & Deafened",
+        "words": [
+          {
+            "en": "blind",
+            "zh": "失明的",
+            "level": 2,
+            "why": "失明（Blinded）时看不见，攻击与察觉都受影响。",
+            "use": "卡牌：blind 后只能靠声音定位。"
+          },
+          {
+            "en": "deaf",
+            "zh": "耳聋的",
+            "level": 2,
+            "why": "耳聋（Deafened）听不到声音与口令。",
+            "use": "事件：deaf 时错过撤退号角。"
+          },
+          {
+            "en": "sound",
+            "zh": "声音",
+            "level": 2,
+            "why": "声音是耳聋状态下缺失的信息。",
+            "use": "解密：靠 sound 线索判断敌人位置。"
+          }
+        ]
+      },
+      {
+        "mechanism": "力竭 Exhaustion",
+        "words": [
+          {
+            "en": "exhaust",
+            "zh": "使力竭",
+            "level": 3,
+            "why": "力竭（Exhaustion）分级累积，越高级惩罚越重。",
+            "use": "卡牌：exhaust 升级后叠加惩罚。"
+          },
+          {
+            "en": "tired",
+            "zh": "疲惫的",
+            "level": 1,
+            "why": "疲惫是力竭的叙事表现。",
+            "use": "事件：tired 时移动速度减半。"
+          },
+          {
+            "en": "energy",
+            "zh": "精力",
+            "level": 2,
+            "why": "体力是力竭机制消耗的资源。",
+            "use": "解密：分配 energy 决定能走多远。"
+          }
+        ]
+      },
+      {
+        "mechanism": "倒地 Prone",
+        "words": [
+          {
+            "en": "fall",
+            "zh": "跌倒",
+            "level": 1,
+            "why": "倒地（Prone）由摔倒或击倒造成。",
+            "use": "卡牌：fall 后近战攻击对你有优势。"
+          },
+          {
+            "en": "ground",
+            "zh": "地面",
+            "level": 2,
+            "why": "地面是倒地状态的位置。",
+            "use": "事件：ground 上的角色要花移动起身。"
+          },
+          {
+            "en": "lie",
+            "zh": "躺",
+            "level": 2,
+            "why": "躺倒描述倒地姿态。",
+            "use": "对话：lie 着装死骗过敌人。"
+          }
+        ]
+      },
+      {
+        "mechanism": "束缚 Restrained",
+        "words": [
+          {
+            "en": "bind",
+            "zh": "捆绑",
+            "level": 2,
+            "why": "束缚（Restrained）限制移动。",
+            "use": "卡牌：bind 后 speed 变为 0。"
+          },
+          {
+            "en": "tie",
+            "zh": "系；绑",
+            "level": 2,
+            "why": "捆绑是束缚的具象手段。",
+            "use": "事件：tie 住俘虏再搜身。"
+          },
+          {
+            "en": "limit",
+            "zh": "限制",
+            "level": 2,
+            "why": "限制行动是束缚的规则效果。",
+            "use": "解密：limit 可选行动数量。"
+          }
+        ]
+      },
+      {
+        "mechanism": "隐形 Invisible",
+        "words": [
+          {
+            "en": "invisible",
+            "zh": "看不见的",
+            "level": 3,
+            "why": "隐形（Invisible）使敌人难以命中，且可随时躲藏。",
+            "use": "卡牌：invisible 状态下可随时 hide。"
+          },
+          {
+            "en": "vanish",
+            "zh": "消失",
+            "level": 3,
+            "why": "消失是隐形的叙事表达。",
+            "use": "事件：vanish 混入人群。"
+          },
+          {
+            "en": "blend",
+            "zh": "融入；混合",
+            "level": 3,
+            "why": "融入环境是隐形的技巧。",
+            "use": "解密：blend 进壁画，躲过巡逻。"
+          }
+        ]
+      },
+      {
+        "mechanism": "豁免 Saving Throw",
+        "words": [
+          {
+            "en": "save",
+            "zh": "豁免；拯救",
+            "level": 1,
+            "why": "豁免（Saving Throw）是抵抗法术与状态的核心检定。",
+            "use": "卡牌：save 成功只受半伤。"
+          },
+          {
+            "en": "throw",
+            "zh": "投掷",
+            "level": 1,
+            "why": "掷豁免骰是豁免动作的规则表达。",
+            "use": "事件：throw 一次体质豁免对抗毒气。"
+          },
+          {
+            "en": "test",
+            "zh": "测试",
+            "level": 1,
+            "why": "豁免本质是一次能力测试。",
+            "use": "解密：按 test 结果选分支。"
+          }
+        ]
+      }
+    ],
+    "ideas": [
+      "事件「毒沼」：按 poison / sick / weak 描述中毒三阶段，玩家选对词才能配出解药。",
+      "卡牌「恐惧」：fear / afraid / alarm 三档，选错档位会多逃一回合。",
+      "解密「麻痹症状」：把 freeze / stiff / unable 与三张症状卡配对，错配会浪费回合。"
+    ]
+  },
+  {
+    "category": "法术与效果",
+    "entries": [
+      {
+        "mechanism": "伤害 Damage",
+        "words": [
+          {
+            "en": "damage",
+            "zh": "伤害",
+            "level": 2,
+            "why": "伤害（Damage）是法术最直接的效果。",
+            "use": "卡牌：damage 掷伤害骰削减敌人 HP。"
+          },
+          {
+            "en": "hurt",
+            "zh": "使受伤",
+            "level": 1,
+            "why": "造成痛苦是伤害的叙事层。",
+            "use": "事件：hurt 目标会让其分心。"
+          },
+          {
+            "en": "wound",
+            "zh": "创伤",
+            "level": 2,
+            "why": "伤口是伤害留下的持续影响。",
+            "use": "对话：用 wound 交换情报。"
+          }
+        ]
+      },
+      {
+        "mechanism": "治疗 Healing",
+        "words": [
+          {
+            "en": "heal",
+            "zh": "治疗",
+            "level": 2,
+            "why": "治疗（Healing）恢复生命值。",
+            "use": "卡牌：heal 恢复 2d4 HP。"
+          },
+          {
+            "en": "cure",
+            "zh": "治愈",
+            "level": 2,
+            "why": "治愈疾病与中毒是治疗的分支。",
+            "use": "事件：cure 村民的瘟疫。"
+          },
+          {
+            "en": "recover",
+            "zh": "恢复",
+            "level": 2,
+            "why": "恢复是治疗后的状态。",
+            "use": "解密：recover 需要一次短休。"
+          }
+        ]
+      },
+      {
+        "mechanism": "护盾 Shield",
+        "words": [
+          {
+            "en": "shield",
+            "zh": "护盾；保护",
+            "level": 2,
+            "why": "护盾（Shield）法术以反应提供 AC 加值。",
+            "use": "卡牌：shield 提高 AC，可能让攻击落空。"
+          },
+          {
+            "en": "protect",
+            "zh": "保护",
+            "level": 2,
+            "why": "防护法术保护目标免受伤害。",
+            "use": "事件：protect 队友穿过火墙。"
+          },
+          {
+            "en": "block",
+            "zh": "格挡；阻挡",
+            "level": 2,
+            "why": "格挡是护盾的具象动作。",
+            "use": "对话：block 住门口的箭矢。"
+          }
+        ]
+      },
+      {
+        "mechanism": "侦测 Detection",
+        "words": [
+          {
+            "en": "detect",
+            "zh": "侦测",
+            "level": 2,
+            "why": "侦测（Detection）法术揭示隐藏信息。",
+            "use": "卡牌：detect 找出隐形生物。"
+          },
+          {
+            "en": "reveal",
+            "zh": "揭示",
+            "level": 2,
+            "why": "揭示是侦测的结果。",
+            "use": "事件：reveal 伪装成墙的密室。"
+          },
+          {
+            "en": "discover",
+            "zh": "发现",
+            "level": 1,
+            "why": "发现隐藏事物对应侦测与调查。",
+            "use": "解密：discover 符文顺序。"
+          }
+        ]
+      },
+      {
+        "mechanism": "召唤 Summoning",
+        "words": [
+          {
+            "en": "call",
+            "zh": "呼唤",
+            "level": 1,
+            "why": "召唤（Summoning）以呼唤引来生物。",
+            "use": "卡牌：call 一只狼助战。"
+          },
+          {
+            "en": "raise",
+            "zh": "唤起；举起",
+            "level": 2,
+            "why": "唤起、升起对应召唤与唤醒。",
+            "use": "事件：raise 石像守卫。"
+          },
+          {
+            "en": "gather",
+            "zh": "聚集",
+            "level": 2,
+            "why": "聚集生物是召唤的群体版本。",
+            "use": "解密：gather 三只动物开启机关。"
+          }
+        ]
+      },
+      {
+        "mechanism": "控制 Control",
+        "words": [
+          {
+            "en": "control",
+            "zh": "控制",
+            "level": 2,
+            "why": "控制（Control）法术支配目标行动。",
+            "use": "卡牌：control 让敌人转向攻击同伴。"
+          },
+          {
+            "en": "command",
+            "zh": "命令",
+            "level": 2,
+            "why": "命令是控制法术的具体指令。",
+            "use": "事件：command 目标放下武器。"
+          },
+          {
+            "en": "obey",
+            "zh": "服从",
+            "level": 2,
+            "why": "服从是控制成功的结果。",
+            "use": "对话：obey 才能让对方开门。"
+          }
+        ]
+      },
+      {
+        "mechanism": "幻术 Illusion",
+        "words": [
+          {
+            "en": "imagine",
+            "zh": "想象",
+            "level": 1,
+            "why": "想象是幻术的认知基础。",
+            "use": "事件：imagine 出声音引开守卫。"
+          },
+          {
+            "en": "false",
+            "zh": "虚假的",
+            "level": 2,
+            "why": "虚假是幻术的本质。",
+            "use": "解密：false 线索与真线索配对。"
+          },
+          {
+            "en": "seem",
+            "zh": "似乎",
+            "level": 2,
+            "why": "幻术让感官觉得“似乎”为真。",
+            "use": "卡牌：seem 的假象骗过巡逻。"
+          }
+        ]
+      },
+      {
+        "mechanism": "防护 Protection",
+        "words": [
+          {
+            "en": "defend",
+            "zh": "防御",
+            "level": 2,
+            "why": "防护（Protection）用于防御与抵挡。",
+            "use": "卡牌：defend 为队友提供豁免加值。"
+          },
+          {
+            "en": "safe",
+            "zh": "安全的",
+            "level": 1,
+            "why": "安全是防护法术的目标状态。",
+            "use": "事件：safe 区域不受毒雾影响。"
+          },
+          {
+            "en": "secure",
+            "zh": "稳固的；安全的",
+            "level": 3,
+            "why": "加固、确保安全对应防护结界。",
+            "use": "对话：secure 营地过夜。"
+          }
+        ]
+      },
+      {
+        "mechanism": "传送 Teleportation",
+        "words": [
+          {
+            "en": "transport",
+            "zh": "传送；运输",
+            "level": 3,
+            "why": "传送（Teleportation）瞬间搬运目标。",
+            "use": "卡牌：transport 自己跳出牢房。"
+          },
+          {
+            "en": "travel",
+            "zh": "旅行",
+            "level": 1,
+            "why": "远距离移动是传送的替代玩法。",
+            "use": "事件：travel 三天抵达下一座城。"
+          },
+          {
+            "en": "distance",
+            "zh": "距离",
+            "level": 2,
+            "why": "距离是传送法术的关键参数。",
+            "use": "解密：算 distance 选择落点。"
+          }
+        ]
+      },
+      {
+        "mechanism": "变化 Transformation",
+        "words": [
+          {
+            "en": "change",
+            "zh": "变化",
+            "level": 1,
+            "why": "变化（Transformation）改变形态或属性。",
+            "use": "卡牌：change 把木棍变成蛇。"
+          },
+          {
+            "en": "transform",
+            "zh": "变形",
+            "level": 3,
+            "why": "变形是变化法术的核心。",
+            "use": "事件：transform 成狼混入兽群。"
+          },
+          {
+            "en": "shape",
+            "zh": "形状；塑造",
+            "level": 2,
+            "why": "形体改变对应变形术。",
+            "use": "对话：shape 成守卫的样子。"
+          }
+        ]
+      }
+    ],
+    "ideas": [
+      "卡牌「护盾」：shield / protect / block 分别对应法术护盾、防护结界、格挡；按来袭攻击类型选牌。",
+      "事件「幻术厅」：用 imagine / false / seem 识破假墙；选错会掉进陷坑。",
+      "解密「召唤阵」：call / raise / gather 对应召唤、唤起、聚集；按阵眼缺口选词，填错会召出敌对生物。"
+    ]
+  },
+  {
+    "category": "装备与物品",
+    "entries": [
+      {
+        "mechanism": "武器 Weapons",
+        "words": [
+          {
+            "en": "weapon",
+            "zh": "武器",
+            "level": 2,
+            "why": "武器（Weapon）决定攻击的伤害骰。",
+            "use": "卡牌：weapon 决定 attack 的伤害。"
+          },
+          {
+            "en": "sword",
+            "zh": "剑",
+            "level": 1,
+            "why": "剑是常见近战武器。",
+            "use": "事件：sword 卡在石缝里。"
+          },
+          {
+            "en": "sharp",
+            "zh": "锋利的",
+            "level": 2,
+            "why": "锋利决定武器能否切割绳索、皮甲等物件。",
+            "use": "解密：sharp 武器才能割断绳索。"
+          }
+        ]
+      },
+      {
+        "mechanism": "护甲 Armor",
+        "words": [
+          {
+            "en": "leather",
+            "zh": "皮革",
+            "level": 3,
+            "why": "皮甲是轻甲代表。",
+            "use": "事件：leather 在沼泽里发霉。"
+          },
+          {
+            "en": "heavy",
+            "zh": "重的",
+            "level": 1,
+            "why": "重甲提供高 AC，但需要力量支撑且不利于潜行。",
+            "use": "对话：heavy 甲过不了窄门。"
+          },
+          {
+            "en": "metal",
+            "zh": "金属",
+            "level": 2,
+            "why": "金属决定护甲的材质与重量。",
+            "use": "卡牌：metal 重甲需要力量支撑。"
+          }
+        ]
+      },
+      {
+        "mechanism": "工具 Tools",
+        "words": [
+          {
+            "en": "tool",
+            "zh": "工具",
+            "level": 1,
+            "why": "工具（Tool）用于开锁、伪造、修理。",
+            "use": "卡牌：tool 开锁失败会触发警报。"
+          },
+          {
+            "en": "repair",
+            "zh": "修理",
+            "level": 2,
+            "why": "修理工具恢复装备耐久。",
+            "use": "事件：repair 断掉的弓弦。"
+          },
+          {
+            "en": "fix",
+            "zh": "固定；修理",
+            "level": 1,
+            "why": "快速修理对应临时修补。",
+            "use": "解密：fix 机关齿轮。"
+          }
+        ]
+      },
+      {
+        "mechanism": "消耗品 Consumables",
+        "words": [
+          {
+            "en": "food",
+            "zh": "食物",
+            "level": 1,
+            "why": "口粮（Rations）是消耗品，维持生存。",
+            "use": "卡牌：food 支撑一次长途跋涉。"
+          },
+          {
+            "en": "water",
+            "zh": "水",
+            "level": 1,
+            "why": "饮水是长途旅行的消耗品。",
+            "use": "事件：water 不够会力竭。"
+          },
+          {
+            "en": "drink",
+            "zh": "喝；饮料",
+            "level": 1,
+            "why": "饮用动作使用药水或清水。",
+            "use": "对话：drink 下药水前先辨味。"
+          }
+        ]
+      },
+      {
+        "mechanism": "冒险装备 Adventuring Gear",
+        "words": [
+          {
+            "en": "rope",
+            "zh": "绳索",
+            "level": 2,
+            "why": "绳索是冒险装备的万能工具。",
+            "use": "卡牌：rope 攀墙或捆人。"
+          },
+          {
+            "en": "torch",
+            "zh": "火把",
+            "level": 2,
+            "why": "火把提供光源与火焰伤害。",
+            "use": "事件：torch 点燃蛛网。"
+          },
+          {
+            "en": "camp",
+            "zh": "营地",
+            "level": 2,
+            "why": "扎营是休息与补给场景。",
+            "use": "解密：camp 位置决定夜间遭遇。"
+          }
+        ]
+      },
+      {
+        "mechanism": "光源 Light",
+        "words": [
+          {
+            "en": "light",
+            "zh": "光；光源",
+            "level": 1,
+            "why": "光源（Light）决定昏暗与黑暗中的可见性。",
+            "use": "卡牌：light 驱散黑暗劣势。"
+          },
+          {
+            "en": "lamp",
+            "zh": "灯",
+            "level": 2,
+            "why": "提灯是可携带光源。",
+            "use": "事件：lamp 照亮密室壁画。"
+          },
+          {
+            "en": "bright",
+            "zh": "明亮的",
+            "level": 1,
+            "why": "明亮光照是光源等级。",
+            "use": "事件：bright 光下容易暴露行踪。"
+          }
+        ]
+      },
+      {
+        "mechanism": "货币 Currency",
+        "words": [
+          {
+            "en": "coin",
+            "zh": "硬币",
+            "level": 2,
+            "why": "硬币是货币的最小单位。",
+            "use": "卡牌：coin 支付过路费。"
+          },
+          {
+            "en": "gold",
+            "zh": "金币；黄金",
+            "level": 1,
+            "why": "金币是主要计价单位。",
+            "use": "事件：gold 不够买护甲。"
+          },
+          {
+            "en": "money",
+            "zh": "钱",
+            "level": 1,
+            "why": "钱是交易与贿赂的通用资源。",
+            "use": "解密：money 分配决定能雇几个帮手。"
+          }
+        ]
+      },
+      {
+        "mechanism": "容器 Containers",
+        "words": [
+          {
+            "en": "bag",
+            "zh": "包",
+            "level": 1,
+            "why": "背包是容器，限制携带量。",
+            "use": "卡牌：bag 满则无法拾取新物品。"
+          },
+          {
+            "en": "box",
+            "zh": "箱子",
+            "level": 1,
+            "why": "箱子用于存放贵重物品。",
+            "use": "事件：box 里有陷阱。"
+          },
+          {
+            "en": "pack",
+            "zh": "打包；背包",
+            "level": 2,
+            "why": "打包决定负重。",
+            "use": "对话：pack 轻装才能追上盗贼。"
+          }
+        ]
+      },
+      {
+        "mechanism": "坐骑 Mounts",
+        "words": [
+          {
+            "en": "horse",
+            "zh": "马",
+            "level": 1,
+            "why": "马是常见坐骑。",
+            "use": "卡牌：horse 提供额外移动。"
+          },
+          {
+            "en": "ride",
+            "zh": "骑乘",
+            "level": 1,
+            "why": "骑乘是坐骑玩法。",
+            "use": "事件：ride 冲过战场。"
+          },
+          {
+            "en": "carry",
+            "zh": "携带",
+            "level": 1,
+            "why": "负重与载物由力量决定。",
+            "use": "解密：carry 上限决定带多少战利品。"
+          }
+        ]
+      },
+      {
+        "mechanism": "魔法物品 Magic Items",
+        "words": [
+          {
+            "en": "magic",
+            "zh": "魔法",
+            "level": 2,
+            "why": "魔法物品（Magic Items）带超自然效果。",
+            "use": "卡牌：magic 物品需鉴定。"
+          },
+          {
+            "en": "power",
+            "zh": "力量；充能",
+            "level": 1,
+            "why": "充能、力量是魔法物品的资源。",
+            "use": "事件：power 耗尽物品失效。"
+          },
+          {
+            "en": "rare",
+            "zh": "稀有的",
+            "level": 2,
+            "why": "稀有度决定魔法物品获取难度。",
+            "use": "对话：rare 物品要拿人情换。"
+          }
+        ]
+      }
+    ],
+    "ideas": [
+      "卡牌「装备栏」：weapon / leather / tool 各一张，按任务需求出牌；带错类型会卡关。",
+      "事件「黑市」：用 coin / gold / money 讲价，选错词会暴露身份。",
+      "解密「补给」：food / water / drink 分配三天口粮，少一样就走不出沙漠。"
+    ]
+  }
+]
