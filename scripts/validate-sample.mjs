@@ -22,6 +22,7 @@ export function validateSample(sample) {
   const nodeIds = new Set(nodes.map((node) => node.id));
   const actIds = new Set();
   const endingIds = new Set(endings.map((ending) => ending.id));
+  const allCheckIds = new Set(nodes.flatMap((node) => (node.checks || []).map((check) => check.id)));
 
   for (const word of words) {
     for (const field of REQUIRED_WORD_FIELDS) {
@@ -91,6 +92,9 @@ export function validateSample(sample) {
       if (!check.success || !check.failure) errors.push(`判定 ${check.id} 缺少成功/失败文案。`);
       resolveNext(check.next_success, nodeIds, endingIds, endingsUsed, `判定 ${check.id} 成功`, errors);
       resolveNext(check.next_failure, nodeIds, endingIds, endingsUsed, `判定 ${check.id} 失败`, errors);
+      if (check.next_check) {
+        if (!allCheckIds.has(check.next_check)) errors.push(`判定 ${check.id} 的 next_check 不存在：${check.next_check}`);
+      }
       if (check.requires_item) {
         const exists = nodes.some((n) => (n.items || []).some((item) => item.id === check.requires_item));
         if (!exists) errors.push(`判定 ${check.id} 依赖的物品不存在：${check.requires_item}`);
@@ -156,9 +160,11 @@ export function validateSample(sample) {
   }
   if (!forbid || forbid.primary_placement.kind !== 'item') errors.push('forbid 应作为可拿取/可出示的物品。');
   if (!prohibit || prohibit.primary_placement.kind !== 'check') errors.push('prohibit 应作为可失败的条例判定。');
-  if (forbid && prohibit && forbid.primary_placement.use_check !== prohibit.id && prohibit.primary_placement.slot_id !== 'c_prohibit') {
-    warnings.push('forbid 物品没有明确接到 prohibit 判定；检查物品→判定链。');
-  }
+  const cForbid = nodes.flatMap((node) => node.checks || []).find((check) => check.id === 'c_forbid');
+  const cProhibit = nodes.flatMap((node) => node.checks || []).find((check) => check.id === 'c_prohibit');
+  if (forbid && cForbid && cForbid.word_id !== forbid.id) errors.push('c_forbid 应该使用 forbid。');
+  if (prohibit && cProhibit && cProhibit.word_id !== prohibit.id) errors.push('c_prohibit 应该使用 prohibit。');
+  if (cForbid && cForbid.next_check !== 'c_prohibit') errors.push('c_forbid 成功后应接到 c_prohibit。');
 
   // 诗性文字不能替代功能：若一个词的英文只出现在旁白，而没有功能位置，已经在上面报错。
   for (const word of words) {

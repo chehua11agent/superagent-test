@@ -149,7 +149,7 @@
         "kind": "item",
         "node_id": "n1",
         "slot_id": "item_notice",
-        "use_check": "c_prohibit"
+        "use_check": "c_forbid"
       },
       "why_slot": "第 1 节点的可拿取物品『湿掉的闭馆通知』，上面写着禁止闭馆后逗留。到第 5 节点出示它，才会解锁 prohibit 的条例判定；不拿就没有最后一条路。"
     },
@@ -169,7 +169,7 @@
         "node_id": "n5",
         "slot_id": "c_prohibit"
       },
-      "why_slot": "第 5 节点的最终判定：玩家带着闭馆通知，引用馆内条例说『未登记资料禁止带出』。只有说出 prohibit 才能让馆长把手从书上移开；说成 forbid 不够正式。"
+      "why_slot": "第 5 节点的最终判定：玩家先拿闭馆通知通过 c_forbid（说出 forbid），再引用馆内条例说「未登记资料禁止带出」。只有说出 prohibit 才能让馆长把手从书上移开；说成 forbid 不够正式。"
     },
     {
       "id": "w_oppose",
@@ -230,7 +230,7 @@
           "name": "湿掉的闭馆通知",
           "word_id": "w_forbid",
           "gain": "o_take_notice",
-          "effect": "纸上写着『闭馆后禁止逗留』。第 5 节点出示它，可触发 c_prohibit 判定。",
+          "effect": "纸上写着「闭馆后禁止逗留」。第 5 节点出示它，先触发 c_forbid，再进入 c_prohibit 条例判定。",
           "consumed": false
         }
       ],
@@ -434,9 +434,9 @@
           "id": "o_cite",
           "label": "把闭馆通知拍在桌上，引用条例",
           "word_id": null,
-          "check_id": "c_prohibit",
+          "check_id": "c_forbid",
           "requires_item": "item_notice",
-          "effect": "通知上是『禁止逗留』；条例里还有一条更正式的说法。"
+          "effect": "通知上是「禁止逗留」；先读出 forbid，再引用条例里的 prohibit。"
         },
         {
           "id": "o_oppose",
@@ -454,6 +454,19 @@
         }
       ],
       "checks": [
+        {
+          "id": "c_forbid",
+          "word_id": "w_forbid",
+          "requires_item": "item_notice",
+          "prompt": "通知上写着「闭馆后禁止逗留」。说出「禁止」的英文，把通知拍在桌上。",
+          "success": "纸张拍在桌上。馆长看见那行字，停了一下。",
+          "failure": "你把通知拿反了。馆长把书合上。",
+          "next_check": "c_prohibit",
+          "next_failure": "end_close",
+          "grants_success": [
+            "notice_presented"
+          ]
+        },
         {
           "id": "c_prohibit",
           "word_id": "w_prohibit",

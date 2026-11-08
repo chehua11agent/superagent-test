@@ -24,12 +24,12 @@
 | deny | 否认 | **判定** | n4 馆长办公室 | 说出 deny，逼馆长把“这本书不存在”再说一遍 | 成功时她漏掉一个日期，失败时她合上登记册 |
 | object | 反对 | **选项** | n4 馆长办公室 | 对注销单正式提出异议 | 和 deny（质疑事实）是两条不同的路：object 让程序暂停 |
 | reject | 拒绝；驳回 | **物品** | n3 / n4 | 获得“馆长的注销章”，用它驳回伪造注销单 | 物品不是自动通关：使用时仍要说出 reject；没走 resist 线就拿不到 |
-| forbid | 禁止 | **物品** | n1 → n5 | 拿走“湿掉的闭馆通知”，第 5 节点出示它 | 不拿就解锁不了最终条例判定；它是物品，不是旁白 |
-| prohibit | （法规、条例）禁止 | **判定** | n5 闭馆之后的第一句话 | 引用条例，说出 prohibit，阻止馆长把书带走 | 和 forbid 分工：告示/个人说 forbid，制度说 prohibit |
+| forbid | 禁止 | **物品** | n1 → n5 | 拿走“湿掉的闭馆通知”，第 5 节点先过 c_forbid，再过 c_prohibit | 不拿就解锁不了最终条例判定；使用时必须先说出 forbid，物品不是自动通关 |
+| prohibit | （法规、条例）禁止 | **判定** | n5 闭馆之后的第一句话 | 引用条例，说出 prohibit，阻止馆长把书带走 | 和 forbid 分工：告示/个人说 forbid，制度说 prohibit；它接在 c_forbid 之后 |
 | oppose | 反对；对抗 | **选项** | n5 闭馆之后的第一句话 | 直接反对馆长最后那句话 | 不引用条例的另一条结局路径，通向“对峙” |
 
 覆盖：**5 个选项 + 3 个判定 + 2 个物品 = 10 个词**。
-另有 2 个物品 → 判定联动：`forbid` 物品触发 `prohibit` 判定，`reject` 物品触发 `reject` 判定。
+另有 2 个物品 → 判定链：`forbid` 物品先触发 `c_forbid`，再进入 `prohibit` 的 `c_prohibit`；`reject` 物品触发 `c_reject`。
 
 ## 2. 三幕 · 五节点
 
@@ -76,7 +76,7 @@
 
 > 馆长把书放回桌上：闭馆之后，图书馆不属于任何人。你手里还握着那张湿掉的闭馆通知。
 
-- **选项 → 物品判定（forbid → prohibit）**：把通知拍在桌上，引用条例（需要 `item_notice`）→ 说出 prohibit 则进入 `end_lamp`，失败进入 `end_close`。
+- **选项 → 物品判定（forbid → prohibit）**：把通知拍在桌上（需要 `item_notice`）→ 先通过 `c_forbid` 说出 forbid，再通过 `c_prohibit` 说出 prohibit 则进入 `end_lamp`；任何一步失败都进入 `end_close`。
 - **选项（oppose）**：反对她最后那句话 → `end_confront`。
 - **选项（无词）**：把书放回原处，留下通知 → `end_close`。
 
@@ -84,7 +84,7 @@
 
 | 结局 | 怎么到达 | 玩家失去什么 / 得到什么 |
 | --- | --- | --- |
-| **留灯** `end_lamp` | 拿走通知，在 n5 通过 `c_prohibit` | 得到条例线索，灯亮到天亮 |
+| **留灯** `end_lamp` | 拿走通知，在 n5 先过 `c_forbid`，再过 `c_prohibit` | 得到条例线索，灯亮到天亮 |
 | **对峙** `end_confront` | 在 n5 选择 oppose | 没有引用制度，靠自己顶回去 |
 | **闭馆** `end_close` | n5 引用失败，或选择安静离开 | 书被带走/放回，闭馆灯灭一盏 |
 | **明天再来** `end_leave` | n2 接受馆员的建议 | 提前结束，保留“明天”的入口 |
@@ -94,7 +94,7 @@
 | 对照 | 区别 | 在本样本里的功能位置 |
 | --- | --- | --- |
 | decline / refuse | 婉拒保留关系；直拒伤面子 | n2 两个并排选项，后果不同 |
-| forbid / prohibit | 人/告示的禁止；法规/条例的禁止 | forbid 是物品（通知），prohibit 是它触发的条例判定 |
+| forbid / prohibit | 人/告示的禁止；法规/条例的禁止 | forbid 是物品（通知），使用时先过 c_forbid，再过 prohibit 的 c_prohibit |
 | deny / object | 否认事实；对决定提出正式异议 | n4 两条不同的判定/选项 |
 | reject / refuse | 驳回文件/申请；拒绝人的请求 | reject 是注销章物品，refuse 是 n2 的人际选项 |
 
@@ -114,7 +114,7 @@ npm run validate:sample
 - 所有 `next` / `end` 指向存在的节点或结局；
 - 每个节点至少有一个可操作槽和出口；
 - decline 与 refuse 同节点；forbid 是物品、prohibit 是判定；
-- 物品词都有 `use_check`，不是只能看不能用的摆设。
+- 物品词都有 `use_check`，不是只能看不能用的摆设；`c_forbid` 的 `next_check` 指向 `c_prohibit`。
 
 ## 6. 这个样本不是什么
 

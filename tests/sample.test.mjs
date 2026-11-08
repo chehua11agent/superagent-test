@@ -16,7 +16,7 @@ test('小样本结构：10 词 / 3 幕 / 5 节点，全部校验通过', () => {
   assert.equal(result.stats.words, 10);
   assert.equal(result.stats.acts, 3);
   assert.equal(result.stats.nodes, 5);
-  assert.equal(result.stats.functionalWordSlots, 11);
+  assert.equal(result.stats.functionalWordSlots, 12);
 });
 
 test('10 个词都落在选项 / 判定 / 物品位，而不是只写进句子', () => {
@@ -44,7 +44,7 @@ test('语义对照：decline/refuse 同节点，forbid 是物品，prohibit 是�
   const notice = sample.nodes.flatMap((node) => node.items || []).find((item) => item.id === 'item_notice');
   assert.equal(notice.word_id, 'w_forbid');
   assert.equal(notice.id, 'item_notice');
-  assert.equal(byEn.forbid.primary_placement.use_check, 'c_prohibit');
+  assert.equal(byEn.forbid.primary_placement.use_check, 'c_forbid');
 });
 
 test('物品要能被使用：注销章与闭馆通知都接到一次判定', () => {
@@ -54,7 +54,10 @@ test('物品要能被使用：注销章与闭馆通知都接到一次判定', ()
   assert.ok(stamp && notice);
   const checks = sample.nodes.flatMap((node) => node.checks || []);
   assert.ok(checks.some((check) => check.id === 'c_reject' && check.word_id === 'w_reject'));
+  assert.ok(checks.some((check) => check.id === 'c_forbid' && check.word_id === 'w_forbid'));
   assert.ok(checks.some((check) => check.id === 'c_prohibit' && check.word_id === 'w_prohibit'));
+  const cForbid = checks.find((check) => check.id === 'c_forbid');
+  assert.equal(cForbid.next_check, 'c_prohibit');
 });
 
 test('每个节点都有出口，所有 next 都指向存在的节点或结局', () => {
