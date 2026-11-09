@@ -42,7 +42,7 @@ npm run serve
 
 ## 画面（调研 PR #7 的方案 A）
 
-按 [`docs/game-visual-solutions-survey.md`](https://github.com/chehua11agent/superagent-test/pull/7) 的 **A 原地游戏化** 路线，保留现有 DOM / SVG / CSS 与交互：
+按 [`docs/research/game-visual-solutions-survey.md`](../docs/research/game-visual-solutions-survey.md) 的 **A 原地游戏化** 路线，保留现有 DOM / SVG / CSS 与交互：
 
 - 战斗：左侧「拾词者」角色（宽檐帽、词卡、人物 HP），右侧「雾中守塔人」怪物（角、提灯、怪物 HP），怪物意图气泡、回合点，以及出牌时的技能飞行 / 命中特效、伤害与代价数字。
 - 地图：节点地名、当前节点脉冲、已走过航线与三层视差。
