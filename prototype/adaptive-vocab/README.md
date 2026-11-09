@@ -56,6 +56,7 @@ prototype/adaptive-vocab/
 
 ```bash
 npm test          # 包含 tests/adaptive-vocab.test.mjs
+node scripts/robustness-adaptive.mjs   # 20 seeds + 3 种真实遗忘曲线复核
 ```
 
 ## 仿真模型（诚实说明）

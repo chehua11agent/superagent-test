@@ -143,6 +143,21 @@ test('强制巡检比例越高，保持率不升、无效复习上升', () => {
   assert.ok(zero.waste <= high.waste + 1e-9);
 });
 
+test('压力测试模型：指数/幂律曲线可跑，指标有限', () => {
+  for (const trueModel of ['exponential', 'power07']) {
+    const r = runScheduling({
+      learners: 8, words: 40, days: 24, budget: 4, seed: 3,
+      shockRate: 0, auditShare: 0.1, trueModel, methods: ['fixed', 'fsrs']
+    });
+    assert.equal(r.trueModel, trueModel);
+    for (const x of r.result) {
+      assert.ok(Number.isFinite(x.retention));
+      assert.ok(Number.isFinite(x.reviewsPerWord));
+      assert.ok(x.retention >= 0 && x.retention <= 1);
+    }
+  }
+});
+
 test('逐日轨迹：长度、保持率、复习数', () => {
   const track = simulateLearnerTrack({ theta: 0, words: 60, days: 20, budget: 6, seed: 3 });
   assert.equal(track.length, 20);

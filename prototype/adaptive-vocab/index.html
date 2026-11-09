@@ -251,8 +251,8 @@
         <p>前 5 题用最大信息量估能力，之后贴着能力边界挑“大概率不认识”的词。12 题内，生词命中率约 <strong id="v-precision">—</strong>，比“固定 3 词 + 随机”的词汇量误差低约 <strong id="v-mae-delta">—</strong>。</p>
       </article>
       <article>
-        <h2>复习：FSRS 取代固定阶梯</h2>
-        <p>用稳定性 S / 难度 D 预测当前记得的概率 R；R 高就不打扰，R 低才复习。90 天仿真里，复习量少约 <strong id="v-review-save">—</strong>、保持率只差约 <strong id="v-retention-gap">—</strong> 个百分点，无效复习从 <strong id="v-waste-fixed">—</strong> 降到 <strong id="v-waste-fsrs">—</strong>。</p>
+        <h2>复习：FSRS 先影子模式</h2>
+        <p>在真实曲线接近 FSRS 的默认设定下，复习量少约 <strong id="v-review-save">—</strong>、保持率只差约 <strong id="v-retention-gap">—</strong> 个百分点，无效复习从 <strong id="v-waste-fixed">—</strong> 降到 <strong id="v-waste-fsrs">—</strong>。但换成指数/幂律曲线，FSRS 会反超固定阶梯——所以先影子跑，别直接替换。</p>
       </article>
       <article>
         <h2>巡检：只在预算有余量时做</h2>
@@ -308,6 +308,9 @@
           命中率衡量“每抽一个词，有多大概率是生词”；召回衡量“12 题能否覆盖全部生词”——后者天然有限，前者才是选择算法的效率。
         </p>
         <p class="hint" id="s-five" style="margin:4px 0 0;color:var(--gold,#d9b36c);font-size:12.5px"></p>
+        <p class="hint" style="margin:2px 0 0;color:var(--dim);font-size:12px">
+          页面是一次随机抽样；20 个种子的平均改善：5 题 −18%、12 题 −9.4%，生词命中 90.9% vs 62.0%（见调研文档 §4.5）。
+        </p>
 
         <div class="chart-grid">
           <div class="chart-card">
@@ -367,11 +370,17 @@
     <section id="panel-review" role="tabpanel" aria-labelledby="tab-btn-review" hidden>
       <div class="panel">
         <h2>熟词少打扰，遗忘早发现</h2>
-        <p class="sub">90 天、每天 8 个复习名额、40 名虚拟学习者；包含隐藏的记忆偏差与偶发遗忘冲击，所以模型并不完美。复习量按“每词 90 天被复习几次”计。</p>
+        <p class="sub">90 天、每天 8 个复习名额、40 名虚拟学习者；包含隐藏的记忆偏差与偶发遗忘冲击，所以模型并不完美。复习量按“每词 90 天被复习几次”计。默认真实曲线是 FSRS；切到指数/幂律可以做压力测试。</p>
         <div class="controls">
           <span class="status" id="review-status">切到本页时计算…</span>
           <button type="button" class="btn ghost" id="review-rerun">换一组样本</button>
+          <div class="segmented" role="group" aria-label="真实遗忘曲线">
+            <button type="button" data-truemodel="fsrs" aria-pressed="true">FSRS 曲线</button>
+            <button type="button" data-truemodel="exponential" aria-pressed="false">指数</button>
+            <button type="button" data-truemodel="power07" aria-pressed="false">幂律 0.7</button>
+          </div>
         </div>
+        <p class="hint" id="review-model-note" style="margin:10px 0 0;color:var(--dim);font-size:12.5px"></p>
 
         <div class="metric-grid">
           <div class="metric">
@@ -423,9 +432,7 @@
           <div class="audit-out" id="audit-out"></div>
         </div>
         <div class="note" style="margin-top:16px">
-          <b>结论：</b>到期复习优先，是这套仿真里最稳的策略。固定阶梯的 41% 复习发生在“其实还很熟”的时候；
-          FSRS 把间隔随稳定性拉长（16 天封顶 → 数月），熟词自然被“隔着”检查。
-          巡检只在名额有余量时做，是保险，不是主策略。
+          <b>结论：</b><span id="review-conclusion">真实曲线接近 FSRS 时，到期优先 + FSRS 最省；切到指数/幂律后，FSRS 的保持率反而低于固定阶梯。先影子跑、用真实答题数据校准，再决定是否换。</span>
         </div>
       </div>
     </section>
@@ -555,8 +562,9 @@ const SHORT = {
 };
 const SCREEN_METHODS = ['current', 'random', 'info50', 'frontier40', 'soft', 'hybrid'];
 const screenState = { bank: 120, seed: 7, data: null, loading: false };
-const reviewState = { seed: 11, data: null, loading: false, audit: null };
+const reviewState = { seed: 11, trueModel: 'fsrs', data: null, loading: false, audit: null };
 const traceState = { seed: 7 };
+const TRUE_MODEL_LABELS = { fsrs: 'FSRS 曲线', exponential: '指数曲线', power07: '幂律 0.7 曲线' };
 
 function fmt(n, digits = 1) { return Number(n).toFixed(digits); }
 function pct(n, digits = 0) { return (n * 100).toFixed(digits) + '%'; }
@@ -827,18 +835,32 @@ function renderReview() {
   $('#r-retention-fsrs').textContent = pct(fsrs.retention, 1);
   $('#r-waste').textContent = `${pct(fixed.waste)} → ${pct(fsrs.waste)}`;
   $('#r-latency').textContent = `${fixed.medianLatency ?? '—'} → ${fsrs.medianLatency ?? '—'} 天`;
-  $('#v-review-save').textContent = pct(1 - ratio);
-  $('#v-retention-gap').textContent = ((fixed.retention - fsrs.retention) * 100).toFixed(1);
-  $('#v-waste-fixed').textContent = pct(fixed.waste);
-  $('#v-waste-fsrs').textContent = pct(fsrs.waste);
+  if (reviewState.trueModel === 'fsrs') {
+    $('#v-review-save').textContent = pct(1 - ratio);
+    $('#v-retention-gap').textContent = ((fixed.retention - fsrs.retention) * 100).toFixed(1);
+    $('#v-waste-fixed').textContent = pct(fixed.waste);
+    $('#v-waste-fsrs').textContent = pct(fsrs.waste);
+  }
+  const modelNote = reviewState.trueModel === 'fsrs'
+    ? '真实曲线 = FSRS：这是对 FSRS 最有利的设定；下表的收益应视为上限。'
+    : `真实曲线 = ${TRUE_MODEL_LABELS[reviewState.trueModel]}：FSRS 的遗忘曲线假设不再成立，保持率可能低于固定阶梯；这正说明上线前要用真实数据校准。`;
+  $('#review-model-note').textContent = modelNote;
+  const conclusion = reviewState.trueModel === 'fsrs'
+    ? '真实曲线接近 FSRS 时，到期优先 + FSRS 最省；固定阶梯约 41% 的复习发生在“其实还很熟”的时候。巡检只在名额有余量时做，是保险，不是主策略。'
+    : `真实曲线是${TRUE_MODEL_LABELS[reviewState.trueModel]}时，FSRS 的保持率反而低于固定阶梯（${pct(fsrs.retention, 1)} vs ${pct(fixed.retention, 1)}），静默遗忘更高。先影子跑、用真实数据校准，再决定是否替换。`;
+  $('#review-conclusion').textContent = conclusion;
 
   const pts = ['fixed', 'fsrs', 'risk', 'three'].map((k) => ({
     key: k, x: by[k].reviewsPerWord, y: by[k].retention,
     label: '',
     align: 'left', dy: 0
   }));
+  const yValues = pts.map((p) => p.y);
+  const yMin = Math.max(0, Math.floor((Math.min(...yValues) - 0.03) * 10) / 10);
+  const yMax = Math.min(1, Math.ceil((Math.max(...yValues) + 0.02) * 10) / 10);
+  const yStep = (yMax - yMin) <= 0.2 ? 0.02 : 0.1;
   scatterChart($('#chart-review'), pts, {
-    xMax: 5, yMin: 0.90, yMax: 0.98, xStep: 1, yStep: 0.01,
+    xMax: 5, yMin, yMax, xStep: 1, yStep,
     xFmt: (x) => x.toFixed(1), yFmt: (y) => pct(y, 0),
     xLabel: '每词复习次数'
   });
@@ -877,12 +899,12 @@ async function runReviewData() {
   try {
     reviewState.data = await runInWorker('scheduling', {
       learners: 40, words: 160, days: 90, budget: 8,
-      shockRate: 0.0005, seed: reviewState.seed,
+      shockRate: 0.0005, seed: reviewState.seed, trueModel: reviewState.trueModel,
       methods: ['fixed', 'fsrs', 'risk', 'three'], auditShare: 0.1
     });
     renderReview();
     st.classList.remove('busy');
-    st.textContent = `完成 · 40 名学习者 · 90 天 · 种子 ${reviewState.seed}`;
+    st.textContent = `完成 · 40 名学习者 · 90 天 · ${TRUE_MODEL_LABELS[reviewState.trueModel]} · 种子 ${reviewState.seed}`;
   } catch (err) {
     st.classList.remove('busy');
     st.textContent = '计算失败：' + err.message;
@@ -900,7 +922,7 @@ async function runAuditSweep() {
   await tick();
   reviewState.audit = await runInWorker('audit', {
     learners: 40, words: 160, days: 90, budget: 8,
-    shockRate: 0.0005, seed: reviewState.seed
+    shockRate: 0.0005, seed: reviewState.seed, trueModel: reviewState.trueModel
   });
   renderReview();
   st.classList.remove('busy');
@@ -948,6 +970,16 @@ $('#review-rerun').addEventListener('click', () => {
   reviewState.audit = null;
   runReviewData();
 });
+$$('[data-truemodel]').forEach((b) => b.addEventListener('click', () => {
+  if (reviewState.loading) return;
+  $$('[data-truemodel]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  reviewState.trueModel = b.dataset.truemodel;
+  reviewState.audit = null;
+  $('#audit-out').innerHTML = '';
+  $('#audit-status').textContent = '未计算';
+  $('#audit-status').classList.remove('busy');
+  runReviewData();
+}));
 $('#theta').addEventListener('input', renderTrace);
 $('#trace-rerun').addEventListener('click', () => {
   const el = $('#theta');
