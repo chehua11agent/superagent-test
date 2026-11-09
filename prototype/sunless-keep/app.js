@@ -509,6 +509,9 @@ function renderSelect() {
         <button class="btn primary" id="beginBtn" disabled>${T('Begin the adventure', '开始冒险')}</button>
       </div>
     </div>`);
+  $$('.pcard').forEach((c) => c.classList.toggle('picked', state.picked.includes(c.dataset.id)));
+  $('#pickCount').textContent = state.picked.length;
+  $('#beginBtn').disabled = state.picked.length !== SCENARIO.partySize;
   $$('.pcard').forEach((card) => card.addEventListener('click', () => {
     const id = card.dataset.id;
     if (state.picked.includes(id)) state.picked = state.picked.filter((x) => x !== id);
