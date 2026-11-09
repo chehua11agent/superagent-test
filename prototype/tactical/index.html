@@ -891,6 +891,36 @@ body::after{
   .review-card{min-height:80px;font-size:14px}
 }
 
+
+/* hand-holding coach */
+.coach{position:fixed;top:calc(82px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(720px,94vw);z-index:72;pointer-events:none}
+.coach[hidden]{display:none!important}
+.coach-card{
+  pointer-events:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:8px 10px;border:1px solid #c9a15a;border-radius:8px;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(255,255,255,.45),transparent 35%),
+    linear-gradient(180deg,#f4e6c9,#dfc9a4);
+  color:#2b1a0d;box-shadow:0 3px 0 #6b4a2a,0 14px 30px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.35);
+}
+.coach-step{flex:0 0 auto;font-family:var(--mono);font-size:9px;font-weight:700;color:#2b1a0d;background:var(--brass);border-radius:4px;padding:2px 6px}
+.coach-text{flex:1;min-width:170px;font-size:11.5px;line-height:1.55;color:#3d2a18}
+.coach-dots{display:flex;gap:3px;flex:0 0 auto}
+.coach-dots i{width:5px;height:5px;border-radius:50%;background:#b7a07c;display:block}
+.coach-dots i.on{background:#8b5a2b}
+.coach-next{border:1px solid #8b6a42;background:linear-gradient(180deg,#e2c084,#b98f4b);color:#1a1409;border-radius:6px;font-size:10px;font-weight:700;padding:4px 8px;cursor:pointer;flex:0 0 auto}
+.coach-skip{border:1px solid rgba(139,106,66,.4);background:transparent;color:#6b4d2b;border-radius:6px;font-size:9px;padding:3px 7px;cursor:pointer;flex:0 0 auto}
+.coach-target{outline:3px solid #ffd27a!important;outline-offset:3px!important;box-shadow:0 0 0 6px rgba(255,210,122,.22),0 0 26px rgba(255,210,122,.6)!important;animation:coachPulse 1.4s ease-in-out infinite;border-radius:8px}
+@keyframes tutShake{0%,100%{transform:translateX(0)}30%{transform:translateX(-4px)}70%{transform:translateX(4px)}}
+@keyframes coachPulse{0%,100%{outline-color:#ffd27a}50%{outline-color:#fff3c8}}
+@media (max-width:760px){
+  .coach{top:calc(96px + env(safe-area-inset-top));width:96vw}
+  .coach-card{padding:7px 8px;gap:6px}
+  .coach-text{font-size:10.5px;min-width:120px}
+  .coach-dots{display:none}
+  .coach-next,.coach-skip{font-size:9px;padding:3px 6px}
+}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
 }
@@ -995,6 +1025,15 @@ body::after{
       <button class="btn primary" type="button" id="reviewDone">回到战斗</button>
       <span class="review-note">复习不是门槛：配对成功会让词卡更强。</span>
     </div>
+  </div>
+</div>
+<div id="coach" class="coach" hidden>
+  <div class="coach-card" role="dialog" aria-live="polite" aria-labelledby="coachText">
+    <span class="coach-step" id="coachStep">1/10</span>
+    <span class="coach-text" id="coachText"></span>
+    <span class="coach-dots" id="coachDots"></span>
+    <button class="coach-next" type="button" id="coachNext" hidden>下一步</button>
+    <button class="coach-skip" type="button" id="coachSkip">跳过教学</button>
   </div>
 </div>
 <div id="drawer" class="drawer" hidden>
@@ -1256,6 +1295,7 @@ body::after{
       tutorial: { active: false, seen: false, step: 0 },
       check: null,
       review: { open: false, cards: [], first: null, matched: 0, total: 3, lock: false },
+      coach: null,
     };
   }
 
@@ -1990,9 +2030,16 @@ body::after{
     $('#ccActions').innerHTML = '';
     renderCheckModes();
     $('#cardCheck').hidden = false;
+    if (state.coach && state.coach.active && state.coach.step === 3) {
+      state.coach.step = 4;
+      state.coach.checkStage = 'recognize';
+      state.coach.canvas = null;
+      renderCoach();
+    }
     renderUI();
   }
   function closeCardCheck(cancel) {
+    if (cancel && state.coach && state.coach.active && state.coach.step === 4) { coachNudge(); return; }
     $('#cardCheck').hidden = true;
     state.check = null;
     state.busy = false;
@@ -2011,9 +2058,17 @@ body::after{
     </div>
     <div class="cc-actions"><button class="btn" type="button" data-cancel="1">取消</button></div>`;
     $('#ccBody').querySelectorAll('[data-mode]').forEach((b) => {
-      b.addEventListener('click', () => { c.mode = b.dataset.mode; if (c.mode === 'recognize') renderRecognize(); else renderSpell(); });
+      b.addEventListener('click', () => {
+        if (state.coach && state.coach.active && state.coach.step === 4 && b.dataset.mode !== 'recognize') { coachNudge(); return; }
+        c.mode = b.dataset.mode;
+        if (c.mode === 'recognize') renderRecognize(); else renderSpell();
+      });
     });
     $('#ccBody').querySelector('[data-cancel]').addEventListener('click', () => closeCardCheck(true));
+    if (state.coach && state.coach.active && state.coach.step === 4) {
+      state.coach.checkStage = 'recognize';
+      renderCoach();
+    }
   }
   function renderRecognize() {
     const c = state.check;
@@ -2037,10 +2092,15 @@ body::after{
       $('#ccZh').textContent = '打出这张词卡前，先认出或拼出它';
       renderCheckModes();
     });
+    if (state.coach && state.coach.active && state.coach.step === 4 && state.coach.checkStage === 'recognize') {
+      state.coach.checkStage = 'option';
+      renderCoach();
+    }
   }
   function renderSpell() {
     const c = state.check;
     if (!c) return;
+    if (state.coach && state.coach.active && state.coach.step === 4) { coachNudge(); renderCheckModes(); return; }
     const w = c.ab.word;
     $('#ccWord').textContent = '? ? ?';
     $('#ccZh').textContent = wordMeaning(w);
@@ -2056,6 +2116,10 @@ body::after{
     const c = state.check;
     if (!c) return;
     const { ab } = c;
+    if (state.coach && state.coach.active && state.coach.step === 4 && !ok) {
+      coachNudge();
+      return;
+    }
     if (ok) {
       ab.checkPassed = true;
       ab.checkFailed = false;
@@ -2070,6 +2134,10 @@ body::after{
       $('#ccBody').querySelectorAll('button').forEach((b) => { b.disabled = true; });
       $('#ccActions').innerHTML = `<button class="btn primary" type="button" id="ccResolve">让卡牌生效</button>`;
       $('#ccResolve').addEventListener('click', () => finishCardCheck(false, how === 'spell'));
+      if (state.coach && state.coach.active && state.coach.step === 4) {
+        state.coach.checkStage = 'resolve';
+        renderCoach();
+      }
       if (!state.flags.checkTipShown) {
         state.flags.checkTipShown = true;
         setTimeout(() => { if (state.check) setTicker('词卡通过：认义正常生效，拼写额外 +2'); }, 100);
@@ -2096,6 +2164,7 @@ body::after{
   function finishCardCheck(half, spellBonus) {
     const c = state.check;
     if (!c) return;
+    const wasCoachCheck = !!(state.coach && state.coach.active && state.coach.step === 4);
     const { u, ab, target } = c;
     $('#cardCheck').hidden = true;
     state.check = null;
@@ -2103,6 +2172,9 @@ body::after{
     state.mode = 'idle';
     state.pending = null;
     resolvePlayerAbility(u, ab, target, { skipCheck: true, half, spellBonus });
+    if (wasCoachCheck) {
+      setTimeout(() => { if (state.coach && state.coach.active) setCoachStep(5); }, 500);
+    }
   }
 
 
@@ -2223,6 +2295,11 @@ body::after{
   function afterPrep() {
     if (!state || state.phase !== 'player') return;
     state.busy = false;
+    if (state.coach && state.coach.pending) {
+      state.coach.pending = false;
+      startCoach();
+      return;
+    }
     if (!state.tutorial.seen) {
       state.tutorial.active = false;
       state.tutorial.step = 0;
@@ -2232,6 +2309,108 @@ body::after{
       if (first) selectUnit(first.id);
       renderUI();
     }
+  }
+
+
+  /* ============================================================
+     Hand-holding coach
+     ============================================================ */
+  const COACH_STEPS = [
+    { key: 'intro', text: '目标：烧掉枯木古树、击败流亡德鲁伊。先让法师用一张词卡，再让战士上去。', next: true },
+    { key: 'select-wizard', text: '先点洛恩（法师）。他有一张 magic 词卡。', selector: '#partyStrip [data-hero="wizard"]' },
+    { key: 'choose-magic', text: '点这张 magic 词卡。', selector: '#abilityBar [data-ability="magic"]' },
+    { key: 'target-tree', text: '点古树，把飞弹打过去。', canvas: { type: 'unit', id: 'tree' } },
+    { key: 'check', text: '在词卡检定里点“认出”，选“魔法”，再点“让卡牌生效”。' },
+    { key: 'select-fighter', text: '点阿岚（战士）。', selector: '#partyStrip [data-hero="fighter"]' },
+    { key: 'move', text: '点金色标记的格子，移动到枯枝怪旁边。', canvas: { type: 'tile', x: 4, y: 3 } },
+    { key: 'attack', text: '点这只枯枝怪。', canvas: { type: 'unit', id: 'twig1' } },
+    { key: 'end', text: '点右下角的红蜡封，结束我方回合。', selector: '#btnEnd' },
+    { key: 'done', text: '教学完成：选角、词卡检定、移动、攻击、结束回合都走了一遍。敌人会行动，等他们走完就轮到你了。', done: true },
+  ];
+
+  function startCoachMode() {
+    beginBattle();
+    state.coach = { active: false, pending: true, step: 0, checkStage: null, canvas: null };
+  }
+  function startCoach() {
+    if (!state) return;
+    state.tutorial.seen = true;
+    endTutorial();
+    state.coach.active = true;
+    state.coach.pending = false;
+    state.coach.step = 0;
+    state.coach.checkStage = null;
+    state.coach.canvas = null;
+    renderCoach();
+  }
+  function coachNudge() {
+    setTicker('跟着金色标记走，先把这一步做完');
+    const c = $('#coach .coach-card');
+    if (c) {
+      c.style.animation = 'none';
+      void c.offsetWidth;
+      c.style.animation = 'tutShake .3s';
+    }
+  }
+  function clearCoachTargets() {
+    document.querySelectorAll('.coach-target').forEach((e) => e.classList.remove('coach-target'));
+    if (state && state.coach) state.coach.canvas = null;
+  }
+  function coachCheckTarget() {
+    const c = state.coach;
+    if (!c || c.step !== 4) return null;
+    if (c.checkStage === 'recognize') return { selector: '#cardCheck [data-mode="recognize"]', text: '点“认出”，先用中文确认词义。' };
+    if (c.checkStage === 'option') return { selector: `#ccBody [data-opt="${state.check ? state.check.correct : ''}"]`, text: `选“${state.check ? state.check.correct : ''}”。` };
+    if (c.checkStage === 'resolve') return { selector: '#ccResolve', text: '点“让卡牌生效”。' };
+    return null;
+  }
+  function renderCoach() {
+    const c = state.coach;
+    if (!c || !c.active) { $('#coach').hidden = true; return; }
+    const st = COACH_STEPS[c.step];
+    if (!st) { closeCoach(true); return; }
+    $('#coach').hidden = false;
+    $('#coachStep').textContent = (c.step + 1) + ' / ' + COACH_STEPS.length;
+    $('#coachDots').innerHTML = COACH_STEPS.map((_, i) => `<i class="${i <= c.step ? 'on' : ''}"></i>`).join('');
+    clearCoachTargets();
+    let text = st.text;
+    let selector = st.selector || null;
+    let canvas = st.canvas || null;
+    if (st.key === 'check') {
+      const t = coachCheckTarget();
+      if (t) { text = t.text; selector = t.selector; canvas = null; }
+    }
+    $('#coachText').textContent = text;
+    $('#coachNext').hidden = !(st.next || st.done);
+    $('#coachNext').textContent = st.done ? '继续战斗' : '下一步';
+    $('#coachSkip').hidden = !!st.done;
+    if (selector) {
+      document.querySelectorAll(selector).forEach((e) => e.classList.add('coach-target'));
+    }
+    if (canvas) {
+      c.canvas = canvas;
+    }
+  }
+  function setCoachStep(n) {
+    if (!state || !state.coach) return;
+    state.coach.step = n;
+    state.coach.checkStage = null;
+    state.coach.canvas = null;
+    renderCoach();
+  }
+  function closeCoach(completed) {
+    if (!state || !state.coach) return;
+    state.coach.active = false;
+    state.coach.pending = false;
+    $('#coach').hidden = true;
+    clearCoachTargets();
+    if (completed) state.tutorial.seen = true;
+    renderUI();
+  }
+  function coachCurrentKey() {
+    if (!state || !state.coach || !state.coach.active) return null;
+    const st = COACH_STEPS[state.coach.step];
+    return st ? st.key : null;
   }
 
   /* ============================================================
@@ -2274,6 +2453,7 @@ body::after{
     else if (action === 'wordbook') openDrawer('words');
     else if (action === 'help') openDrawer('help');
     else if (action === 'tutorial') openTutorial(false);
+    else if (action === 'coach') startCoachMode();
     else if (action === 'close') hideOverlay();
   }
 
@@ -2291,8 +2471,10 @@ body::after{
     state.effects = [];
     state.ticker = null;
     state.check = null;
+    state.coach = null;
     state.tutorial.active = false;
     $('#tutorial').hidden = true;
+    $('#coach').hidden = true;
     $('#cardCheck').hidden = true;
     $('#tutorialBar').hidden = true;
     clearTutPulse();
@@ -2314,7 +2496,8 @@ body::after{
       </div>
       <div class="actions">
         <button class="btn primary" type="button" data-action="intro">进入庭院</button>
-        <button class="btn" type="button" data-action="tutorial">怎么玩</button>
+        <button class="btn" type="button" data-action="coach">手把手教学</button>
+        <button class="btn ghost" type="button" data-action="tutorial">怎么玩</button>
         <button class="btn ghost" type="button" data-action="wordbook">本章词表</button>
       </div>
       <p class="note">这是画面与战斗方向的小原型，不是完整章节。场景文字为本原型重写；怪物数值按 5e 数值换算。</p>
@@ -2347,7 +2530,8 @@ body::after{
       <p class="intro-note">带“检定”的词会在战斗里变成卡牌：先认出/拼出，卡牌才生效；答错会摊开答案，效果减半，不会卡关。开场战备会先开「记忆火盆」：配对词和义，给词卡充能。</p>
       <div class="actions">
         <button class="btn primary" type="button" data-action="start">开始战斗</button>
-        <button class="btn" type="button" data-action="tutorial">怎么玩</button>
+        <button class="btn" type="button" data-action="coach">手把手教学</button>
+        <button class="btn ghost" type="button" data-action="tutorial">怎么玩</button>
         <button class="btn ghost" type="button" data-action="cover">返回封面</button>
       </div>
       <p class="note">4 名 3 级角色 · 敌方 4 个单位（第 2 回合巨蛙加入）· 目标：古树与德鲁伊都倒下。</p>
@@ -2368,8 +2552,10 @@ body::after{
     state.stats = { damage: 0, kills: 0, fires: 0 };
     state.units = createUnits();
     state.check = null;
+    state.coach = null;
     state.tutorial.active = false;
     $('#tutorial').hidden = true;
+    $('#coach').hidden = true;
     $('#cardCheck').hidden = true;
     $('#tutorialBar').hidden = true;
     clearTutPulse();
@@ -2387,6 +2573,7 @@ body::after{
 
   function showVictory() {
     if (state.phase === 'won') return;
+    if (state.coach && state.coach.active) closeCoach(false);
     endTutorial();
     state.phase = 'won';
     state.selectedId = null;
@@ -2421,6 +2608,7 @@ body::after{
 
   function showDefeat() {
     if (state.phase === 'lost') return;
+    if (state.coach && state.coach.active) closeCoach(false);
     endTutorial();
     state.phase = 'lost';
     state.selectedId = null;
@@ -2510,12 +2698,23 @@ body::after{
       if (!silent) setTicker(u.name + ' 本回合已经行动过了');
       return;
     }
+    const ck = coachCurrentKey();
+    if (ck) {
+      if (ck === 'select-wizard' && id !== 'wizard') { coachNudge(); return; }
+      if (ck === 'select-fighter' && id !== 'fighter') { coachNudge(); return; }
+      if (ck !== 'select-wizard' && ck !== 'select-fighter') { coachNudge(); return; }
+    }
     state.selectedId = id;
     state.mode = 'idle';
     state.pending = null;
+    if (state.coach && state.coach.active) {
+      if (ck === 'select-wizard') setCoachStep(2);
+      if (ck === 'select-fighter') setCoachStep(6);
+    }
     if (state.tutorial.active && state.tutorial.step === 0) advanceTutorial(1);
     if (!silent) renderUI();
     else { renderActor(); renderAbilities(); renderParty(); updateHint(); }
+    if (state.coach && state.coach.active) renderCoach();
   }
 
   function deselect() {
@@ -2540,8 +2739,14 @@ body::after{
     if (!u || state.phase !== 'player' || state.busy || u.acted) return;
     const ab = u.abilities.find((a) => a.id === id);
     if (!ab || ab.uses <= 0) return;
+    const ck = coachCurrentKey();
+    if (ck) {
+      if (ck !== 'choose-magic') { coachNudge(); return; }
+      if (id !== 'magic') { coachNudge(); return; }
+    }
     state.mode = 'target';
     state.pending = ab;
+    if (ck === 'choose-magic') setCoachStep(3);
     updateHint();
     renderUI();
   }
@@ -2673,6 +2878,21 @@ body::after{
     e.preventDefault();
     const { x, y } = tileFromEvent(e);
     if (x < 0 || y < 0 || x >= COLS || y >= ROWS) return;
+    const ck = coachCurrentKey();
+    if (ck) {
+      if (ck === 'target-tree') {
+        const t = unitAt(x, y);
+        if (!t || t.id !== 'tree') { coachNudge(); return; }
+      } else if (ck === 'move') {
+        if (x !== 4 || y !== 3) { coachNudge(); return; }
+      } else if (ck === 'attack') {
+        const t = unitAt(x, y);
+        if (!t || t.id !== 'twig1') { coachNudge(); return; }
+      } else {
+        coachNudge();
+        return;
+      }
+    }
     if (state.mode === 'target' && state.pending) {
       const target = findAbilityTarget(state.pending, x, y);
       if (!target) {
@@ -2833,7 +3053,8 @@ body::after{
      Combat
      ============================================================ */
   function attackTarget(attacker, target, ab, opts = {}) {
-    const roll = d20();
+    const coachHit = state.coach && state.coach.active && state.coach.step === 7 && attacker.id === 'fighter' && target.id === 'twig1';
+    const roll = coachHit ? 15 : d20();
     const ac = effectiveAc(target);
     const crit = roll === 20;
     const miss = roll === 1 || (!crit && roll + ab.bonus < ac);
@@ -2955,6 +3176,7 @@ body::after{
     await animateMove(u, path);
     if (u.dead) { state.busy = false; return; }
     u.moved = true;
+    if (coachCurrentKey() === 'move') setCoachStep(7);
     if (state.tutorial.active && state.tutorial.step <= 1) advanceTutorial(2);
     state.busy = false;
     if (u.acted) {
@@ -3047,6 +3269,7 @@ body::after{
     ab.uses = Math.max(0, ab.uses - 1);
     u.acted = true;
     u.done = !!(u.moved && u.acted);
+    if (coachCurrentKey() === 'attack') setCoachStep(8);
     if (state.tutorial.active && state.tutorial.step <= 2) advanceTutorial(3);
     if (opts.half) addLog('检定未通过，卡牌半效结算；这个词可以下一轮再练。', 'hit');
     else if (opts.spellBonus) addLog('拼写通过：卡牌效果 +2。', 'good');
@@ -3082,6 +3305,11 @@ body::after{
 
   async function endPlayerPhase() {
     if (!state || state.phase !== 'player' || state.busy) return;
+    if (state.coach && state.coach.active) {
+      const ck = coachCurrentKey();
+      if (ck !== 'end') { coachNudge(); return; }
+      setCoachStep(9);
+    }
     if (state.tutorial.active) endTutorial();
     state.selectedId = null;
     state.mode = 'idle';
@@ -4142,6 +4370,41 @@ body::after{
     }
     drawEffects(now);
     drawLighting(now);
+    if (state.coach && state.coach.active && state.coach.canvas) drawCoachTarget(now);
+  }
+
+  function drawCoachTarget(now) {
+    const c = state.coach;
+    if (!c || !c.canvas) return;
+    let cx, cy, r;
+    if (c.canvas.type === 'unit') {
+      const u = byId(c.canvas.id);
+      if (!u || u.dead) return;
+      cx = u.vx; cy = u.vy; r = u.size === 2 ? 56 : 30;
+    } else {
+      cx = (c.canvas.x + 0.5) * T; cy = (c.canvas.y + 0.5) * T; r = 26;
+    }
+    const pulse = 0.5 + 0.5 * Math.sin(now / 220);
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255,210,122,' + (0.65 + pulse * 0.3) + ')';
+    ctx.lineWidth = 3;
+    ctx.setLineDash([6, 5]);
+    ctx.lineDashOffset = -now / 55;
+    ctx.shadowColor = 'rgba(255,210,122,.8)';
+    ctx.shadowBlur = 12;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r + pulse * 4, 0, TAU);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    const bob = Math.sin(now / 220) * 4;
+    ctx.fillStyle = '#ffd27a';
+    ctx.beginPath();
+    ctx.moveTo(cx - 9, cy - r - 20 + bob);
+    ctx.lineTo(cx + 9, cy - r - 20 + bob);
+    ctx.lineTo(cx, cy - r - 7 + bob);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
   }
 
   function updateEffects(dt) {
@@ -4193,6 +4456,14 @@ body::after{
   $('#tutStart').addEventListener('click', () => closeTutorial(true));
   $('#tutClose').addEventListener('click', () => closeTutorial(false));
   $('#tutSkip').addEventListener('click', () => endTutorial());
+  $('#coachSkip').addEventListener('click', () => { closeCoach(false); state.tutorial.seen = true; });
+  $('#coachNext').addEventListener('click', () => {
+    if (!state.coach) return;
+    const st = COACH_STEPS[state.coach.step];
+    if (!st) return;
+    if (st.done) { closeCoach(true); return; }
+    if (st.next) setCoachStep(state.coach.step + 1);
+  });
   $('#mobileInfo').addEventListener('click', (e) => {
     const chip = e.target.closest('[data-foe]');
     if (!chip) return;
