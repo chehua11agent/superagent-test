@@ -1,0 +1,3053 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#070b09" />
+<meta name="description" content="《拾词者》第一章俯视角战棋小原型：一场以枯木庭院为舞台的回合制战斗。" />
+<title>枯木庭院 · 俯视角战棋原型</title>
+<style>
+:root{
+  --bg:#070b09;
+  --bg-deep:#040705;
+  --panel:#0d1410;
+  --panel-2:#111a14;
+  --line:rgba(196,208,178,.14);
+  --line-strong:rgba(217,179,108,.3);
+  --text:#e9e3d2;
+  --muted:#98a28f;
+  --dim:#6d7667;
+  --moss:#86b078;
+  --teal:#69c3b0;
+  --ember:#e08954;
+  --blood:#cf6d5d;
+  --violet:#b397df;
+  --gold:#d9b36c;
+  --gold-soft:rgba(217,179,108,.14);
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua","Songti SC","Noto Serif SC",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;overflow:hidden;color:var(--text);background:var(--bg);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 48% 38%,rgba(48,74,55,.26),transparent 62%),
+    radial-gradient(ellipse at 12% 94%,rgba(88,60,104,.12),transparent 55%),
+    radial-gradient(ellipse at 92% 8%,rgba(30,60,52,.18),transparent 50%),
+    linear-gradient(180deg,#070b09,#040705);
+}
+button{font:inherit;color:inherit}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+[hidden]{display:none!important}
+
+.app{
+  height:100dvh;max-width:1240px;margin:0 auto;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;gap:8px;
+}
+/* ---------- HUD ---------- */
+.hud{
+  flex:0 0 auto;display:flex;align-items:center;gap:14px;
+  padding:8px 12px;border:1px solid var(--line);border-radius:14px;
+  background:linear-gradient(180deg,rgba(17,26,20,.92),rgba(9,14,11,.92));
+  box-shadow:0 10px 30px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.035);
+  min-height:58px;
+}
+.brand{min-width:0;line-height:1.1}
+.eyebrow{display:block;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--moss);margin-bottom:3px}
+.brand h1{
+  margin:0;font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:.09em;
+  color:#efe7d3;text-shadow:0 2px 12px rgba(0,0,0,.55);white-space:nowrap;
+}
+.objectives{display:flex;gap:7px;flex-wrap:wrap;margin-left:4px}
+.obj{
+  display:flex;align-items:center;gap:7px;padding:5px 9px;border:1px solid var(--line);border-radius:9px;
+  background:rgba(255,255,255,.018);font-size:11px;white-space:nowrap;
+}
+.obj .dot{width:6px;height:6px;border-radius:50%;background:var(--blood);box-shadow:0 0 8px rgba(207,109,93,.7)}
+.obj[data-obj="tree"] .dot{background:var(--violet);box-shadow:0 0 8px rgba(179,151,223,.7)}
+.obj[data-obj="rescue"] .dot{background:var(--gold);box-shadow:0 0 8px rgba(217,179,108,.6)}
+.obj .name{color:var(--muted);letter-spacing:.03em}
+.obj .val{color:var(--text);font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:10px}
+.obj.dead{opacity:.42}
+.obj.dead .dot{background:var(--dim);box-shadow:none}
+.obj.dead .val{text-decoration:line-through}
+.round-box{display:flex;align-items:center;gap:6px;margin-left:auto;flex:0 0 auto}
+.round-text{text-align:right;line-height:1.15;margin-right:3px}
+.round-text span{display:block;font-size:9px;letter-spacing:.16em;color:var(--moss);text-transform:uppercase}
+.round-text b{display:block;font-size:12px;font-weight:600;color:var(--text);letter-spacing:.03em}
+.round-text.enemy span{color:var(--blood)}
+.round-text.enemy b{color:#e7b3a8}
+.icon-btn{
+  min-width:34px;height:34px;padding:0 9px;border:1px solid var(--line);border-radius:9px;
+  background:rgba(255,255,255,.025);color:var(--muted);font-size:11px;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;letter-spacing:.04em;
+  transition:border-color .18s,color .18s,background .18s;
+}
+.icon-btn:hover{border-color:var(--line-strong);color:var(--text);background:rgba(217,179,108,.07)}
+/* ---------- stage ---------- */
+.stage{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;position:relative}
+.board-shell{
+  position:relative;flex:0 0 auto;overflow:hidden;border-radius:16px;
+  border:1px solid rgba(217,179,108,.16);
+  box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.03);
+  background:#070b08;
+}
+#board{display:block;width:100%;height:100%;touch-action:none;cursor:default}
+.hint{
+  flex:0 0 auto;min-height:17px;max-width:min(100%,860px);padding:0 6px;
+  font-size:11px;line-height:1.5;color:var(--muted);text-align:center;letter-spacing:.02em;
+  transition:color .2s;
+}
+.hint.warn{color:#e0a57e}
+.hint.good{color:#a9d6a3}
+/* ---------- banner ---------- */
+.banner{
+  position:absolute;left:50%;top:15%;width:94%;transform:translate(-50%,-8px);
+  text-align:center;pointer-events:none;opacity:0;transition:opacity .28s ease,transform .28s ease;
+  z-index:5;
+}
+.banner.show{opacity:1;transform:translate(-50%,0)}
+.banner-main{
+  font-family:var(--serif);font-size:clamp(22px,3.4vw,34px);font-weight:600;letter-spacing:.12em;
+  color:#f2e9d3;text-shadow:0 2px 6px rgba(0,0,0,.9),0 0 30px rgba(0,0,0,.75);
+}
+.banner-sub{margin-top:4px;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);text-shadow:0 1px 4px #000}
+/* ---------- inspect ---------- */
+.inspect{
+  position:absolute;top:10px;right:10px;width:min(210px,52%);z-index:4;pointer-events:none;
+  padding:8px 10px;border:1px solid rgba(217,179,108,.24);border-radius:10px;
+  background:rgba(7,11,9,.88);backdrop-filter:blur(6px);
+  box-shadow:0 8px 24px rgba(0,0,0,.45);
+}
+.inspect .ins-name{font-size:12px;font-weight:600;letter-spacing:.04em}
+.inspect .ins-line{margin-top:3px;font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+.inspect .ins-trait{margin-top:5px;font-size:10px;line-height:1.45;color:#bfb39a}
+/* ---------- mobile foe strip ---------- */
+.mobile-info{display:none}
+@media (max-width:760px){
+  .mobile-info{
+    display:block;flex:0 0 auto;padding:7px 9px;border:1px solid var(--line);border-radius:12px;
+    background:linear-gradient(180deg,rgba(15,23,18,.9),rgba(8,13,10,.92));
+  }
+  .mi-head{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--moss)}
+  .mi-head b{font-weight:600;color:var(--text);letter-spacing:.02em;font-size:10px}
+  .mi-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+  .mi-chip{
+    display:inline-flex;align-items:center;gap:4px;padding:2px 6px;border:1px solid rgba(207,109,93,.25);
+    border-radius:6px;background:rgba(207,109,93,.05);font-size:9.5px;line-height:1.4;
+  }
+  .mi-chip b{font-weight:500;color:#d9b8ad;white-space:nowrap}
+  .mi-chip i{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--muted)}
+  .mi-chip.tree{border-color:rgba(179,151,223,.28);background:rgba(179,151,223,.06)}
+  .mi-chip.tree b{color:#cdbce9}
+  .mi-chip.druid{border-color:rgba(217,179,108,.28);background:rgba(217,179,108,.05)}
+  .mi-chip.druid b{color:#e0c48f}
+  .mi-chip.dead{opacity:.32;text-decoration:line-through}
+}
+/* ---------- dock ---------- */
+.dock{
+  flex:0 0 auto;display:flex;flex-direction:column;gap:7px;
+  padding:8px;border:1px solid var(--line);border-radius:14px;
+  background:linear-gradient(180deg,rgba(16,25,19,.94),rgba(8,13,10,.96));
+  box-shadow:0 14px 36px rgba(0,0,0,.4),inset 0 1px rgba(255,255,255,.03);
+}
+.party{display:flex;gap:6px}
+.hero-btn{
+  flex:1 1 0;min-width:0;display:flex;align-items:center;gap:8px;padding:5px 8px;
+  border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.018);
+  cursor:pointer;text-align:left;transition:border-color .18s,background .18s,opacity .18s;
+  min-height:42px;
+}
+.hero-btn:hover{border-color:rgba(105,195,176,.35);background:rgba(105,195,176,.05)}
+.hero-btn.active{border-color:rgba(105,195,176,.65);background:rgba(105,195,176,.1);box-shadow:inset 0 0 20px rgba(105,195,176,.06)}
+.hero-btn.done{opacity:.5}
+.hero-btn.dead{opacity:.32;filter:grayscale(.7)}
+.hero-avatar{
+  width:28px;height:28px;flex:0 0 28px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--serif);font-size:13px;font-weight:700;color:#0a100c;
+  background:linear-gradient(145deg,#9dcbb4,#4f8978);border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 2px 6px rgba(0,0,0,.4);
+}
+.hero-avatar.ranger{background:linear-gradient(145deg,#b6d59a,#628b57)}
+.hero-avatar.wizard{background:linear-gradient(145deg,#cbb7ea,#7e6aab)}
+.hero-avatar.cleric{background:linear-gradient(145deg,#e8d5a5,#a8864c)}
+.hero-info{min-width:0;flex:1}
+.hero-name{display:flex;justify-content:space-between;gap:4px;font-size:11px;letter-spacing:.03em;white-space:nowrap}
+.hero-name em{font-style:normal;color:var(--dim);font-size:9px}
+.hp-mini{height:4px;margin-top:3px;border-radius:2px;background:rgba(0,0,0,.6);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.hp-mini i{display:block;height:100%;border-radius:2px;background:linear-gradient(90deg,#4f9a7b,#7fc79d);transition:width .3s}
+.hero-btn.low .hp-mini i{background:linear-gradient(90deg,#a33f36,#d8785c)}
+.hero-btn .check{font-size:10px;color:var(--teal);opacity:0}
+.hero-btn.done .check{opacity:1}
+.command{display:flex;gap:9px;align-items:stretch;min-height:64px}
+.actor{
+  flex:0 0 220px;width:220px;padding:2px 10px 2px 2px;border-right:1px solid var(--line);
+  display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;
+}
+.actor-top{display:flex;align-items:baseline;gap:7px;min-width:0}
+.actor-name{font-family:var(--serif);font-size:16px;letter-spacing:.06em;white-space:nowrap}
+.actor-role{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.actor-hp{display:flex;align-items:center;gap:6px}
+.actor-hp .bar{flex:1;height:5px;border-radius:3px;background:rgba(0,0,0,.6);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.actor-hp .bar i{display:block;height:100%;background:linear-gradient(90deg,#4f9a7b,#7fc79d);transition:width .3s}
+.actor-hp .num{font-size:10px;color:var(--muted);font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.actor-tags{display:flex;gap:9px;font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden}
+.actor-tags b{color:var(--text);font-weight:600}
+.actor-tags .st{color:var(--violet)}
+.abilities{flex:1 1 auto;display:flex;gap:7px;min-width:0}
+.ability{
+  position:relative;flex:1 1 0;min-width:0;padding:7px 10px 6px;text-align:left;
+  border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.018);
+  cursor:pointer;transition:border-color .16s,background .16s,transform .12s,opacity .16s;
+  min-height:58px;overflow:hidden;
+}
+.ability:hover:not(:disabled){border-color:rgba(217,179,108,.48);background:rgba(217,179,108,.06)}
+.ability:active:not(:disabled){transform:translateY(1px)}
+.ability:disabled{opacity:.36;cursor:not-allowed}
+.ability.basic{border-color:rgba(217,179,108,.2)}
+.ability .word{
+  display:block;font-family:var(--serif);font-size:15px;line-height:1.15;letter-spacing:.03em;
+  color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.ability .zh{display:block;font-size:11px;color:var(--text);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ability .meta{display:block;margin-top:3px;font-size:9px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ability .uses{
+  position:absolute;top:5px;right:7px;font-family:var(--mono);font-size:9px;color:var(--muted);
+  background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.07);border-radius:5px;padding:0 3px;
+}
+.ability.empty{display:grid;place-items:center;color:var(--dim);font-size:11px;cursor:default;border-style:dashed}
+.end-btn{
+  flex:0 0 92px;min-width:92px;border:1px solid rgba(207,109,93,.32);border-radius:10px;
+  background:linear-gradient(180deg,rgba(120,52,44,.32),rgba(70,30,26,.35));color:#e8c2b7;
+  font-size:12px;letter-spacing:.08em;cursor:pointer;transition:border-color .18s,background .18s,opacity .18s;
+}
+.end-btn:hover:not(:disabled){border-color:rgba(207,109,93,.7);background:rgba(150,62,50,.42)}
+.end-btn:disabled{opacity:.35;cursor:not-allowed}
+/* ---------- overlay ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:18px;
+  background:
+    radial-gradient(ellipse at 50% 42%,rgba(12,20,15,.55),rgba(4,7,5,.9) 70%),
+    rgba(3,6,4,.55);
+  backdrop-filter:blur(5px);
+  opacity:0;transition:opacity .28s ease;
+}
+.overlay.show{opacity:1}
+.panel{
+  width:min(640px,100%);max-height:calc(100dvh - 36px);overflow:auto;
+  padding:28px 30px 24px;border:1px solid rgba(217,179,108,.22);border-radius:20px;
+  background:
+    radial-gradient(ellipse at 80% -10%,rgba(105,195,176,.09),transparent 55%),
+    linear-gradient(180deg,rgba(18,27,21,.985),rgba(7,11,9,.99));
+  box-shadow:0 34px 90px rgba(0,0,0,.68),inset 0 1px rgba(255,255,255,.05);
+  animation:panelIn .38s cubic-bezier(.2,.7,.2,1) both;
+  scrollbar-width:thin;scrollbar-color:rgba(217,179,108,.3) transparent;
+}
+@keyframes panelIn{from{opacity:0;transform:translateY(12px) scale(.992)}to{opacity:1;transform:none}}
+.kicker{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.panel h2{
+  margin:0 0 12px;font-family:var(--serif);font-weight:600;font-size:clamp(25px,4vw,34px);
+  letter-spacing:.06em;color:#f0e7d2;line-height:1.2;
+}
+.panel p{margin:0 0 12px;font-size:13.5px;line-height:1.9;color:#c8c2b1}
+.panel p.small{font-size:11.5px;color:var(--muted);line-height:1.7}
+.panel strong{color:#e9dfc8;font-weight:600}
+.panel .note{margin-top:16px;font-size:10.5px;line-height:1.7;color:var(--dim)}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;align-items:center}
+.btn{
+  appearance:none;min-height:44px;padding:10px 18px;border:1px solid var(--line);border-radius:10px;
+  background:rgba(255,255,255,.03);color:var(--text);font-size:13px;letter-spacing:.04em;cursor:pointer;
+  transition:border-color .18s,background .18s,transform .12s;
+}
+.btn:hover{border-color:rgba(217,179,108,.45);background:rgba(217,179,108,.07)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{
+  border-color:rgba(217,179,108,.75);
+  background:linear-gradient(180deg,#e2c084,#b98f4b);
+  color:#1a1409;font-weight:700;
+  box-shadow:0 6px 18px rgba(190,145,75,.18);
+}
+.btn.primary:hover{background:linear-gradient(180deg,#ebcf98,#c69a53)}
+.btn.ghost{background:transparent;color:var(--muted)}
+.btn.danger{border-color:rgba(207,109,93,.35);color:#e3b7ac}
+/* cover */
+.panel.cover{text-align:center;padding:40px 34px 30px;background:
+  radial-gradient(ellipse at 50% -20%,rgba(105,195,176,.13),transparent 58%),
+  radial-gradient(ellipse at 88% 100%,rgba(179,151,223,.09),transparent 50%),
+  linear-gradient(180deg,rgba(15,23,18,.97),rgba(5,9,7,.99));}
+.cover-rule{width:56px;height:1px;margin:0 auto 18px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.cover-title{
+  margin:0 0 8px!important;font-family:var(--serif);font-weight:600!important;
+  font-size:clamp(42px,8vw,68px)!important;letter-spacing:.14em!important;color:#f1e8d2!important;
+  text-shadow:0 4px 30px rgba(0,0,0,.8),0 0 60px rgba(217,179,108,.12);
+}
+.cover-sub{font-size:11px!important;letter-spacing:.28em!important;text-transform:uppercase;color:var(--gold)!important;margin-bottom:22px!important}
+.cover-lead{max-width:420px;margin:0 auto 22px!important;font-family:var(--serif);font-size:15px!important;line-height:2!important;color:#c4bda9!important}
+.cover-stats{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:0 0 6px}
+.cover-stats span{font-size:10.5px;color:var(--muted);letter-spacing:.06em}
+.cover-stats b{display:block;font-family:var(--serif);font-size:22px;color:var(--gold);font-weight:600;letter-spacing:.03em}
+.cover .actions{justify-content:center}
+.cover .note{max-width:430px;margin-left:auto;margin-right:auto}
+/* objective box */
+.objective-box{
+  margin:16px 0 4px;padding:12px 14px;border:1px solid rgba(217,179,108,.2);border-radius:11px;
+  background:linear-gradient(180deg,rgba(217,179,108,.055),rgba(217,179,108,.015));
+}
+.obj-line{display:flex;gap:12px;align-items:baseline;font-size:12px;line-height:1.75;padding:3px 0}
+.obj-line span{flex:0 0 44px;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);opacity:.8}
+.obj-line b{font-weight:500;color:#d9d2c0}
+/* word chips */
+.word-chips{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 2px}
+.chip{
+  display:inline-flex;align-items:baseline;gap:6px;padding:4px 9px;border:1px solid var(--line);
+  border-radius:999px;background:rgba(255,255,255,.02);font-size:10.5px;
+}
+.chip b{font-family:var(--serif);font-weight:600;font-size:12px;color:var(--gold);letter-spacing:.03em}
+.chip span{color:var(--muted)}
+/* victory stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0 4px}
+.stat{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.018)}
+.stat b{display:block;font-family:var(--serif);font-size:22px;color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:2px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+/* drawer */
+.drawer{position:fixed;inset:0;z-index:45}
+.drawer-backdrop{position:absolute;inset:0;background:rgba(3,6,4,.58);backdrop-filter:blur(3px)}
+.drawer-panel{
+  position:absolute;top:0;right:0;height:100%;width:min(440px,100%);
+  display:flex;flex-direction:column;background:linear-gradient(180deg,#101811,#080d0a);
+  border-left:1px solid rgba(217,179,108,.2);box-shadow:-24px 0 70px rgba(0,0,0,.5);
+  animation:drawerIn .26s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes drawerIn{from{transform:translateX(18px);opacity:.5}to{transform:none;opacity:1}}
+.drawer-head{
+  flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 18px 12px;border-bottom:1px solid var(--line);
+}
+.drawer-head h2{margin:0;font-family:var(--serif);font-size:19px;font-weight:600;letter-spacing:.06em;color:#efe6d1}
+.drawer-body{flex:1 1 auto;overflow:auto;padding:14px 18px calc(24px + env(safe-area-inset-bottom));scrollbar-width:thin;scrollbar-color:rgba(217,179,108,.3) transparent}
+.drawer-body h3{margin:18px 0 8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.drawer-body h3:first-child{margin-top:0}
+.drawer-body p{font-size:12.5px;line-height:1.8;color:#c2bcaa;margin:0 0 10px}
+.drawer-body p.small{font-size:11px;color:var(--muted)}
+.word-row{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.word-row:last-child{border-bottom:none}
+.word-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.word-en{font-family:var(--serif);font-size:16px;color:var(--gold);letter-spacing:.03em}
+.word-zh{font-size:12px;color:var(--text)}
+.word-tag{margin-left:auto;font-size:9px;letter-spacing:.05em;color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:1px 5px;white-space:nowrap}
+.word-row p{margin:5px 0 0;font-size:11.5px;line-height:1.65;color:var(--muted)}
+.word-src{font-size:9px;letter-spacing:.08em;color:var(--moss);text-transform:uppercase;margin-left:2px}
+.log-line{display:flex;gap:9px;padding:5px 0;font-size:11.5px;line-height:1.6;color:#c5bfae;border-bottom:1px solid rgba(255,255,255,.035)}
+.log-line:last-child{border-bottom:none}
+.log-line .r{flex:0 0 24px;font-family:var(--mono);font-size:9px;color:var(--dim);padding-top:2px}
+.log-line.round{color:var(--gold);font-size:10px;letter-spacing:.12em;border-bottom:none;padding-top:12px}
+.log-line.hit .r{color:var(--blood)}
+.log-line.good .r{color:var(--moss)}
+.log-empty{font-size:12px;color:var(--dim);padding:10px 0}
+.help-block{margin-bottom:16px}
+.help-block h3{margin-bottom:6px}
+.help-block p:last-child{margin-bottom:0}
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hud{flex-wrap:wrap;gap:8px 12px}
+  .objectives{order:3;width:100%;margin-left:0;overflow-x:auto;padding-bottom:1px}
+  .round-box{margin-left:auto}
+  .actor{flex-basis:200px;width:200px}
+}
+@media (max-width:760px){
+  .app{padding:7px 8px calc(7px + env(safe-area-inset-bottom));gap:6px}
+  .hud{padding:7px 9px;border-radius:12px;min-height:0}
+  .brand h1{font-size:18px}
+  .eyebrow{font-size:8px}
+  .obj{padding:4px 7px;font-size:10px}
+  .obj .name{display:none}
+  .round-text b{font-size:11px}
+  .icon-btn{min-width:30px;height:30px;font-size:10px;padding:0 7px}
+  .dock{padding:6px;gap:6px;border-radius:12px}
+  .party{gap:4px}
+  .hero-btn{padding:4px 5px;gap:5px;min-height:38px;border-radius:8px}
+  .hero-avatar{width:23px;height:23px;flex-basis:23px;font-size:11px}
+  .hero-name{font-size:10px}
+  .hero-name em{display:none}
+  .command{display:grid;grid-template-columns:1fr auto;grid-template-areas:"actor actor" "abilities end";gap:6px;min-height:0}
+  .actor{grid-area:actor;width:auto;flex:none;border-right:none;padding:0 1px;flex-direction:row;align-items:center;gap:8px;flex-wrap:wrap}
+  .actor-name{font-size:14px}
+  .actor-role{display:none}
+  .actor-hp{flex:1;min-width:100px}
+  .actor-tags{display:none}
+  .abilities{grid-area:abilities;gap:5px;overflow-x:auto;scrollbar-width:none}
+  .abilities::-webkit-scrollbar{display:none}
+  .ability{flex:1 0 118px;min-height:52px;padding:6px 8px 5px}
+  .ability .word{font-size:14px}
+  .ability .meta{font-size:8.5px}
+  .end-btn{grid-area:end;min-width:72px;flex-basis:72px;font-size:11px;padding:0 6px}
+  .hint{font-size:10px;min-height:15px}
+  .panel{padding:22px 18px 18px;border-radius:16px}
+  .cover{padding:30px 20px 22px}
+  .cover-title{font-size:clamp(38px,12vw,54px)!important}
+  .cover-lead{font-size:14px!important}
+  .cover-stats{gap:14px}
+  .drawer-panel{
+    top:auto;bottom:0;height:80dvh;width:100%;border-left:none;border-top:1px solid rgba(217,179,108,.2);
+    border-radius:18px 18px 0 0;animation:sheetIn .26s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes sheetIn{from{transform:translateY(24px);opacity:.4}to{transform:none;opacity:1}}
+  .stats{grid-template-columns:repeat(3,1fr);gap:6px}
+  .stat{padding:8px}
+  .stat b{font-size:18px}
+  .banner{top:12%}
+}
+@media (max-height:700px){
+  .app{padding-top:5px;padding-bottom:calc(5px + env(safe-area-inset-bottom));gap:5px}
+  .hud{min-height:0;padding:5px 9px}
+  .brand h1{font-size:17px}
+  .eyebrow{display:none}
+  .party .hero-btn{min-height:34px;padding:3px 5px}
+  .hero-avatar{width:21px;height:21px;flex-basis:21px}
+  .command{min-height:52px}
+  .ability{min-height:48px}
+  .dock{padding:5px;gap:5px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+<div id="app" class="app">
+  <header class="hud" id="hud">
+    <div class="brand">
+      <span class="eyebrow">拾词者 · 第一章原型</span>
+      <h1>枯木庭院</h1>
+    </div>
+    <div class="objectives" id="objectives"></div>
+    <div class="round-box">
+      <div class="round-text" id="roundText"><span id="phaseLabel">准备中</span><b id="roundLabel">—</b></div>
+      <button class="icon-btn" id="btnLog" aria-label="打开战报">战报</button>
+      <button class="icon-btn" id="btnWords" aria-label="打开本章词卡">词卡</button>
+      <button class="icon-btn" id="btnHelp" aria-label="打开原型说明">?</button>
+    </div>
+  </header>
+
+  <main class="stage" id="stage">
+    <div class="board-shell" id="boardShell">
+      <canvas id="board" width="640" height="576" role="img" aria-label="枯木庭院战术地图：四名冒险者与流亡德鲁伊、树皮骑士、枯枝怪和古树的战斗"></canvas>
+      <div id="banner" class="banner" aria-hidden="true"></div>
+      <div id="inspect" class="inspect" hidden></div>
+    </div>
+    <div class="hint" id="hint" aria-live="polite">点击角色开始</div>
+    <div id="mobileInfo" class="mobile-info" aria-label="敌情"></div>
+  </main>
+
+  <footer class="dock">
+    <div class="party" id="partyStrip"></div>
+    <div class="command">
+      <div class="actor" id="actorCard"></div>
+      <div class="abilities" id="abilityBar"></div>
+      <button class="end-btn" id="btnEnd" type="button">结束回合</button>
+    </div>
+  </footer>
+</div>
+
+<div id="overlay" class="overlay" hidden></div>
+<div id="drawer" class="drawer" hidden>
+  <div class="drawer-backdrop" data-close></div>
+  <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="drawer-head">
+      <h2 id="drawerTitle"></h2>
+      <button class="icon-btn" type="button" data-close aria-label="关闭">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+  </aside>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ============================================================
+     Constants & data
+     ============================================================ */
+  const W = 640, H = 576, T = 64, COLS = 10, ROWS = 9;
+  const TAU = Math.PI * 2;
+
+  // # wall, . stone, b briar, p pillar, f fungus
+  const MAP = [
+    '##########',
+    '#..f...bb#',
+    '#..p.bbb.#',
+    '#....b...#',
+    '#....b...#',
+    '#....b...#',
+    '#..p..b.b#',
+    '#..f.....#',
+    '##########',
+  ];
+
+  const CET4_OVERLAP = 1245;
+
+  const WORD_CARDS = [
+    { w:'strike', zh:'打击', group:'英雄技能', tag:'阿岚 · 普攻', src:'操作补充',
+      text:'阿岚挥剑 strike，近战造成 1d8+3 伤害。' },
+    { w:'shield', zh:'盾；防护', group:'英雄技能', tag:'阿岚 · 技能', src:'正文词',
+      text:'阿岚举起盾牌 shield，让一名同伴的 AC +5，直到下一回合。' },
+    { w:'arrow', zh:'箭', group:'英雄技能', tag:'米拉 · 普攻', src:'正文词',
+      text:'米拉射出一支 arrow，射程 6 格。' },
+    { w:'aim', zh:'瞄准', group:'英雄技能', tag:'米拉 · 技能', src:'操作补充',
+      text:'米拉屏住呼吸 aim，这次射击 +2 命中、+1d6 伤害。' },
+    { w:'flame', zh:'火焰', group:'英雄技能', tag:'洛恩 · 普攻', src:'正文词',
+      text:'洛恩放出一束 flame，对古树造成双倍伤害。' },
+    { w:'magic', zh:'魔法', group:'英雄技能', tag:'洛恩 · 技能', src:'正文词',
+      text:'洛恩念出 magic missile，三枚飞弹必定命中。' },
+    { w:'heal', zh:'治疗', group:'英雄技能', tag:'赛拉 · 技能', src:'正文词',
+      text:'赛拉用 heal 治疗相邻同伴 1d8+3 点生命。' },
+    { w:'sword', zh:'剑', group:'怪物技能', tag:'树皮骑士 · 普攻', src:'正文词',
+      text:'树皮骑士挥动 sword，命中造成 1d8+4 伤害。' },
+    { w:'root', zh:'根', group:'怪物技能', tag:'流亡德鲁伊 · 控制', src:'正文词',
+      text:'德鲁伊让 root 缠住目标；力量豁免失败就不能移动。' },
+    { w:'bark', zh:'树皮；吠叫', group:'怪物技能', tag:'流亡德鲁伊 · 增益', src:'正文词',
+      text:'德鲁伊给自己披上 bark，AC 变成 16，持续 3 回合。' },
+    { w:'poison', zh:'毒', group:'怪物技能', tag:'流亡德鲁伊 · 法术', src:'正文词',
+      text:'德鲁伊喷出 poison；体质豁免失败就受到 1d12 毒伤害。' },
+    { w:'thorn', zh:'刺；荆棘', group:'场景与目标', tag:'古树 · 被动', src:'操作补充',
+      text:'古树有 thorn 护体；近战攻击它的人会被扎 2 点。' },
+    { w:'seed', zh:'种子', group:'场景与目标', tag:'古树 · 被动', src:'正文词',
+      text:'古树会播下 seed，从根边唤出新的枯枝怪。' },
+    { w:'fruit', zh:'果实', group:'场景与目标', tag:'剧情物品', src:'正文词',
+      text:'古树的 fruit 是村民寻找了很多年的东西。' },
+    { w:'rescue', zh:'援救', group:'场景与目标', tag:'章节目标', src:'正文词',
+      text:'你们的任务是 rescue 被树缚住的冒险者。' },
+    { w:'surrender', zh:'投降', group:'场景与目标', tag:'开场事件', src:'正文词',
+      text:'德鲁伊不打算 surrender；他只想要新的养料。' },
+    { w:'descend', zh:'下降', group:'场景与目标', tag:'开场叙述', src:'正文词',
+      text:'你们 descend 到裂谷底部，找到了沉没的城塞。' },
+    { w:'ancient', zh:'古老的', group:'场景与目标', tag:'开场叙述', src:'正文词',
+      text:'这是一座 ancient 城塞，龙教团留下的遗迹。' },
+    { w:'victory', zh:'胜利', group:'场景与目标', tag:'战斗结算', src:'操作补充',
+      text:'victory 条件：古树与流亡德鲁伊都倒下。' },
+    { w:'defeat', zh:'击败；挫败', group:'场景与目标', tag:'战斗结算', src:'正文词',
+      text:'defeat 古树之后，被缚者才能重新呼吸。' },
+  ];
+
+  const ABILITY_DEFS = {
+    strike: { id:'strike', word:'strike', zh:'打击', kind:'attack', target:'enemy', range:1, bonus:5, dice:[1,8], mod:3, dmg:'slashing', desc:'近战 1 格 · 1d8+3' },
+    shield: { id:'shield', word:'shield', zh:'举盾', kind:'buff', effect:'shield', target:'ally', range:1, uses:2, desc:'目标 AC +5 · 持续到下一回合' },
+    arrow: { id:'arrow', word:'arrow', zh:'射击', kind:'attack', target:'enemy', range:6, bonus:5, dice:[1,6], mod:3, dmg:'piercing', desc:'射程 6 格 · 1d6+3' },
+    aim: { id:'aim', word:'aim', zh:'瞄准', kind:'attack', target:'enemy', range:6, bonus:7, dice:[1,6], mod:3, extraDice:[1,6], dmg:'piercing', uses:2, desc:'+2 命中 · 额外 1d6' },
+    flame: { id:'flame', word:'flame', zh:'火焰箭', kind:'attack', target:'enemy', range:8, bonus:5, dice:[1,10], mod:0, dmg:'fire', desc:'射程 8 格 · 1d10 火焰' },
+    magic: { id:'magic', word:'magic', zh:'魔法飞弹', kind:'auto', target:'enemy', range:8, darts:3, dice:[1,4], mod:1, uses:2, desc:'3 枚 · 每枚 1d4+1 · 必中' },
+    mace: { id:'mace', word:'mace', zh:'锤击', kind:'attack', target:'enemy', range:1, bonus:4, dice:[1,6], mod:2, dmg:'bludgeoning', desc:'近战 1 格 · 1d6+2' },
+    heal: { id:'heal', word:'heal', zh:'治疗', kind:'heal', target:'ally', range:1, dice:[1,8], mod:3, uses:3, desc:'相邻同伴 · 回复 1d8+3' },
+    staff: { id:'staff', word:'staff', zh:'杖击', kind:'attack', target:'enemy', range:1, bonus:4, dice:[1,8], mod:2, dmg:'bludgeoning', desc:'近战 · 1d8+2' },
+    root: { id:'root', word:'root', zh:'根须缠绕', kind:'control', target:'enemy', range:6, save:'str', dc:13, status:'rooted', uses:2, desc:'力量豁免 DC 13 · 失败无法移动' },
+    bark: { id:'bark', word:'bark', zh:'树皮术', kind:'buff', effect:'bark', target:'self', range:0, uses:1, desc:'AC 变为 16 · 持续 3 回合' },
+    poison: { id:'poison', word:'poison', zh:'毒雾喷吐', kind:'save', target:'enemy', range:2, save:'con', dc:12, dice:[1,12], mod:0, dmg:'poison', desc:'体质豁免 DC 12 · 失败 1d12' },
+    sword: { id:'sword', word:'sword', zh:'斩击', kind:'attack', target:'enemy', range:1, bonus:6, dice:[1,8], mod:4, dmg:'slashing', desc:'近战 · 1d8+4' },
+    bite: { id:'bite', word:'bite', zh:'枝刺', kind:'attack', target:'enemy', range:1, bonus:3, dice:[1,4], mod:1, dmg:'piercing', desc:'近战 · 1d4+1' },
+    frogbite: { id:'frogbite', word:'bite', zh:'咬击', kind:'attack', target:'enemy', range:1, bonus:3, dice:[1,6], mod:1, dmg:'piercing', desc:'近战 · 1d6+1' },
+  };
+
+  const HERO_DEFS = [
+    {
+      id:'fighter', name:'阿岚', role:'Fighter', kind:'fighter', hp:28, ac:18, speed:5,
+      saves:{ str:3, dex:1, con:2, int:0, wis:1, cha:0 }, moves:'5 格',
+      abilities:['strike','shield'], attackWord:'strike',
+    },
+    {
+      id:'ranger', name:'米拉', role:'Ranger', kind:'ranger', hp:24, ac:15, speed:6,
+      saves:{ str:1, dex:3, con:1, int:0, wis:2, cha:0 }, moves:'6 格',
+      abilities:['arrow','aim'], attackWord:'arrow',
+    },
+    {
+      id:'wizard', name:'洛恩', role:'Wizard', kind:'wizard', hp:20, ac:12, speed:6,
+      saves:{ str:-1, dex:2, con:1, int:3, wis:1, cha:0 }, moves:'6 格',
+      abilities:['flame','magic'], attackWord:'flame',
+    },
+    {
+      id:'cleric', name:'赛拉', role:'Cleric', kind:'cleric', hp:24, ac:16, speed:5,
+      saves:{ str:2, dex:0, con:1, int:0, wis:3, cha:1 }, moves:'5 格',
+      abilities:['mace','heal'], attackWord:'mace',
+    },
+  ];
+
+  const HERO_POS = [ [1,3], [1,4], [1,5], [2,4] ];
+
+  /* ============================================================
+     Small helpers
+     ============================================================ */
+  const $ = (sel) => document.querySelector(sel);
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const key = (x, y) => x + ',' + y;
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const cheb = (ax, ay, bx, by) => Math.max(Math.abs(ax - bx), Math.abs(ay - by));
+  const d20 = () => 1 + Math.floor(Math.random() * 20);
+  const die = (n, s) => { let t = 0; for (let i = 0; i < n; i++) t += 1 + Math.floor(Math.random() * s); return t; };
+  const pct = (a, b) => b <= 0 ? 0 : clamp(a / b, 0, 1) * 100;
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+  const REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const compactQuery = window.matchMedia ? window.matchMedia('(max-width: 760px)') : null;
+  let compactView = compactQuery ? compactQuery.matches : false;
+  if (compactQuery) {
+    const onCompact = (e) => { compactView = e.matches; };
+    if (compactQuery.addEventListener) compactQuery.addEventListener('change', onCompact);
+    else compactQuery.addListener(onCompact);
+  }
+
+  function hash2(x, y) {
+    let h = (x * 374761393 + y * 668265263) | 0;
+    h = (h ^ (h >>> 13)) * 1274126177;
+    return (h ^ (h >>> 16)) >>> 0;
+  }
+  function seeded(seed) {
+    let s = seed >>> 0;
+    return () => {
+      s = (s + 0x6D2B79F5) | 0;
+      let t = Math.imul(s ^ (s >>> 15), 1 | s);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function roundRect(g, x, y, w, h, r) {
+    const rr = Math.min(r, w / 2, h / 2);
+    g.beginPath();
+    g.moveTo(x + rr, y);
+    g.arcTo(x + w, y, x + w, y + h, rr);
+    g.arcTo(x + w, y + h, x, y + h, rr);
+    g.arcTo(x, y + h, x, y, rr);
+    g.arcTo(x, y, x + w, y, rr);
+    g.closePath();
+  }
+
+  /* ============================================================
+     Map accessors
+     ============================================================ */
+  const tileAt = (x, y) => (x < 0 || y < 0 || x >= COLS || y >= ROWS) ? '#' : MAP[y][x];
+  const isWall = (x, y) => tileAt(x, y) === '#';
+  const isPillar = (x, y) => tileAt(x, y) === 'p';
+  const isBriar = (x, y) => tileAt(x, y) === 'b';
+  const isFloor = (x, y) => !isWall(x, y) && !isPillar(x, y);
+  const blocksSight = (x, y) => isWall(x, y) || isPillar(x, y);
+  const tileCenter = (x, y) => ({ x: (x + 0.5) * T, y: (y + 0.5) * T });
+
+  /* ============================================================
+     Unit creation
+     ============================================================ */
+  let uid = 0;
+  function makeAbility(id) {
+    return JSON.parse(JSON.stringify(ABILITY_DEFS[id]));
+  }
+  function makeHero(def, idx) {
+    const [x, y] = HERO_POS[idx];
+    return {
+      id: def.id, name: def.name, role: def.role, kind: def.kind,
+      side: 'party', x, y, size: 1, vx: (x + 0.5) * T, vy: (y + 0.5) * T,
+      hp: def.hp, maxHp: def.hp, ac: def.ac, baseAc: def.ac, speed: def.speed,
+      saves: { ...def.saves }, moves: def.moves, traits: [],
+      abilities: def.abilities.map(makeAbility).map((a) => ({ ...a, uses: a.uses ?? Infinity, maxUses: a.uses ?? Infinity })),
+      moved: false, acted: false, done: false, dead: false,
+      statuses: {}, shieldRound: -1, rooted: false,
+    };
+  }
+  function makeEnemy(o) {
+    return {
+      id: o.id, name: o.name, role: o.role || '', kind: o.kind,
+      side: o.side || 'enemy', x: o.x, y: o.y, size: o.size || 1,
+      vx: (o.x + (o.size || 1) / 2) * T, vy: (o.y + (o.size || 1) / 2) * T,
+      hp: o.hp, maxHp: o.hp, ac: o.ac, baseAc: o.ac, speed: o.speed,
+      saves: o.saves || { str:0, dex:0, con:0, int:0, wis:0, cha:0 },
+      abilities: o.abilities.map(makeAbility).map((a) => ({ ...a, uses: a.uses ?? Infinity, maxUses: a.uses ?? Infinity })),
+      moved: false, acted: false, done: false, dead: false,
+      statuses: {}, shieldRound: -1, rooted: false,
+      traits: o.traits || [], thrall: !!o.thrall, immobile: !!o.immobile,
+      barkUntil: -1,
+    };
+  }
+  function createUnits() {
+    uid = 0;
+    const heroes = HERO_DEFS.map((d, i) => makeHero(d, i));
+    const enemies = [
+      makeEnemy({ id:'druid', name:'流亡德鲁伊', role:'Druid', kind:'druid', x:7, y:5, hp:27, ac:11, speed:5,
+        saves:{ str:1, dex:1, con:2, int:2, wis:3, cha:1 }, abilities:['staff','root','bark','poison'] }),
+      makeEnemy({ id:'knight', name:'树皮骑士', role:'Thrall', kind:'knight', x:6, y:4, hp:19, ac:18, speed:5,
+        saves:{ str:3, dex:-1, con:2, int:0, wis:1, cha:0 }, abilities:['sword'], thrall:true, traits:['bark'] }),
+      makeEnemy({ id:'twig1', name:'枯枝怪', role:'Twig', kind:'twig', x:5, y:2, hp:4, ac:13, speed:4,
+        saves:{ str:0, dex:2, con:1, int:0, wis:0, cha:0 }, abilities:['bite'], thrall:true, small:true, traits:['fireVuln'] }),
+      makeEnemy({ id:'twig2', name:'枯枝怪', role:'Twig', kind:'twig', x:6, y:6, hp:4, ac:13, speed:4,
+        saves:{ str:0, dex:2, con:1, int:0, wis:0, cha:0 }, abilities:['bite'], thrall:true, small:true, traits:['fireVuln'] }),
+      makeEnemy({ id:'twig3', name:'枯枝怪', role:'Twig', kind:'twig', x:4, y:5, hp:4, ac:13, speed:4,
+        saves:{ str:0, dex:2, con:1, int:0, wis:0, cha:0 }, abilities:['bite'], thrall:true, small:true, traits:['fireVuln'] }),
+      makeEnemy({ id:'tree', name:'枯木古树', role:'The Tree', kind:'tree', x:7, y:3, size:2, hp:35, ac:10, speed:0,
+        abilities:[], immobile:true, traits:['fireVuln','pierceResist','thorns'] }),
+    ];
+    return [...heroes, ...enemies];
+  }
+
+  /* ============================================================
+     Game state
+     ============================================================ */
+  let state = null;
+  let floorCanvas = null;
+  let motes = [];
+  let lastFrame = 0;
+  let bannerTimer = 0;
+  let inspectTimer = 0;
+
+  function freshState() {
+    return {
+      phase: 'cover',
+      round: 0,
+      units: createUnits(),
+      selectedId: null,
+      mode: 'idle',
+      pending: null,
+      busy: false,
+      hover: null,
+      drawer: null,
+      effects: [],
+      log: [],
+      ticker: null,
+      stats: { damage: 0, kills: 0, fires: 0 },
+      flags: { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0 },
+      lastHint: '',
+      sheetReturn: null,
+    };
+  }
+
+  const party = () => state.units.filter((u) => u.side === 'party');
+  const enemies = () => state.units.filter((u) => (u.side === 'enemy' || u.side === 'wild') && !u.dead);
+  const living = () => state.units.filter((u) => !u.dead);
+  const byId = (id) => state.units.find((u) => u.id === id);
+  const selected = () => state.selectedId ? byId(state.selectedId) : null;
+  const druid = () => state.units.find((u) => u.id === 'druid');
+  const tree = () => state.units.find((u) => u.id === 'tree');
+
+  function tilesOf(u) {
+    const out = [];
+    for (let dy = 0; dy < (u.size || 1); dy++) {
+      for (let dx = 0; dx < (u.size || 1); dx++) out.push([u.x + dx, u.y + dy]);
+    }
+    return out;
+  }
+  function occupies(u, x, y) {
+    for (const [tx, ty] of tilesOf(u)) if (tx === x && ty === y) return true;
+    return false;
+  }
+  function unitAt(x, y) {
+    return living().find((u) => occupies(u, x, y)) || null;
+  }
+  function unitAtExcept(x, y, except) {
+    return living().find((u) => u !== except && !u.dead && occupies(u, x, y)) || null;
+  }
+  function distanceUnits(a, b) {
+    let best = Infinity;
+    for (const [ax, ay] of tilesOf(a)) {
+      for (const [bx, by] of tilesOf(b)) {
+        best = Math.min(best, cheb(ax, ay, bx, by));
+      }
+    }
+    return best;
+  }
+  function effectiveAc(u) {
+    let ac = u.ac;
+    if (u.kind === 'druid' && state.round <= u.barkUntil) ac = Math.max(ac, 16);
+    if (u.kind === 'knight') ac = Math.max(ac, 16);
+    if (u.shieldRound === state.round) ac += 5;
+    return ac;
+  }
+  function isHostileTo(a, b) {
+    if (!a || !b || a === b) return false;
+    const aSide = a.side, bSide = b.side;
+    if (aSide === 'party') return bSide === 'enemy' || bSide === 'wild';
+    if (aSide === 'wild') return bSide === 'druid' || bSide === 'party';
+    return bSide === 'party' || bSide === 'wild';
+  }
+
+  /* ============================================================
+     Map rendering (static)
+     ============================================================ */
+  const floorTints = ['#1a231b', '#1c261d', '#18211a', '#1e281f', '#19221b'];
+
+  function drawFloorTile(g, x, y) {
+    const px = x * T, py = y * T;
+    const r = seeded(hash2(x, y));
+    const base = floorTints[Math.floor(r() * floorTints.length)];
+    g.fillStyle = base;
+    g.fillRect(px, py, T, T);
+
+    // soft variation
+    const v = g.createRadialGradient(px + T * r(), py + T * r(), 2, px + T / 2, py + T / 2, T * .75);
+    v.addColorStop(0, 'rgba(120,150,115,.045)');
+    v.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = v;
+    g.fillRect(px, py, T, T);
+
+    // slab joints
+    g.strokeStyle = 'rgba(0,0,0,.24)';
+    g.lineWidth = 1;
+    g.strokeRect(px + .5, py + .5, T - 1, T - 1);
+    g.strokeStyle = 'rgba(210,225,200,.035)';
+    g.beginPath();
+    g.moveTo(px + 1, py + T - 2);
+    g.lineTo(px + T - 2, py + T - 2);
+    g.stroke();
+
+    // cracks
+    if (r() < .52) {
+      g.strokeStyle = 'rgba(0,0,0,.3)';
+      g.lineWidth = 1;
+      let cx = px + 8 + r() * (T - 16), cy = py + 8 + r() * (T - 16);
+      g.beginPath();
+      g.moveTo(cx, cy);
+      const segs = 2 + Math.floor(r() * 3);
+      for (let i = 0; i < segs; i++) {
+        cx += (r() - .5) * 26;
+        cy += (r() - .5) * 26;
+        g.lineTo(cx, cy);
+      }
+      g.stroke();
+    }
+
+    // rubble
+    for (let i = 0; i < 3; i++) {
+      if (r() < .55) {
+        g.fillStyle = 'rgba(200,215,185,.05)';
+        g.beginPath();
+        g.ellipse(px + 6 + r() * (T - 12), py + 6 + r() * (T - 12), 1 + r() * 2.5, .8 + r() * 1.6, r() * TAU, 0, TAU);
+        g.fill();
+      }
+    }
+
+    // moss
+    if (r() < .34) {
+      const mx = px + 8 + r() * (T - 16), my = py + 8 + r() * (T - 16);
+      const mr = 9 + r() * 20;
+      const mg = g.createRadialGradient(mx, my, 0, mx, my, mr);
+      mg.addColorStop(0, 'rgba(96,126,64,.15)');
+      mg.addColorStop(1, 'rgba(96,126,64,0)');
+      g.fillStyle = mg;
+      g.beginPath();
+      g.arc(mx, my, mr, 0, TAU);
+      g.fill();
+    }
+  }
+
+  function drawWallTile(g, x, y) {
+    const px = x * T, py = y * T;
+    const r = seeded(hash2(x + 31, y + 17));
+    g.fillStyle = '#040705';
+    g.fillRect(px, py, T, T);
+    for (let i = 0; i < 5; i++) {
+      const bx = px + 4 + r() * (T - 8);
+      const by = py + 6 + r() * (T - 10);
+      const bw = 10 + r() * 24, bh = 8 + r() * 18;
+      g.fillStyle = r() < .5 ? '#0a100b' : '#0d140e';
+      g.beginPath();
+      g.ellipse(bx, by, bw / 2, bh / 2, r() * TAU, 0, TAU);
+      g.fill();
+      g.fillStyle = 'rgba(130,155,125,.035)';
+      g.beginPath();
+      g.ellipse(bx - 1, by - 2, bw / 2.6, bh / 3.2, r() * TAU, 0, TAU);
+      g.fill();
+    }
+  }
+
+  function drawPillar(g, x, y) {
+    const cx = (x + .5) * T, cy = (y + .5) * T;
+    const r = seeded(hash2(x + 5, y + 9));
+    g.save();
+    g.fillStyle = 'rgba(0,0,0,.4)';
+    g.beginPath();
+    g.ellipse(cx + 5, cy + 12, 24, 9, 0, 0, TAU);
+    g.fill();
+    const grd = g.createRadialGradient(cx - 8, cy - 10, 3, cx, cy, 28);
+    grd.addColorStop(0, '#3a4438');
+    grd.addColorStop(.55, '#222b23');
+    grd.addColorStop(1, '#0c110d');
+    g.fillStyle = grd;
+    g.beginPath();
+    g.arc(cx, cy, 25, 0, TAU);
+    g.fill();
+    g.strokeStyle = 'rgba(0,0,0,.45)';
+    g.lineWidth = 1.5;
+    g.beginPath();
+    g.arc(cx, cy, 25, 0, TAU);
+    g.stroke();
+    g.strokeStyle = 'rgba(210,225,200,.09)';
+    g.lineWidth = 1;
+    g.beginPath();
+    g.arc(cx, cy, 18, Math.PI * 1.1, Math.PI * 1.7);
+    g.stroke();
+    for (let i = 0; i < 3; i++) {
+      g.strokeStyle = 'rgba(0,0,0,.35)';
+      g.beginPath();
+      let a = r() * TAU, rr = 5 + r() * 15;
+      g.moveTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr);
+      g.lineTo(cx + Math.cos(a + .7) * (rr + 8), cy + Math.sin(a + .7) * (rr + 8));
+      g.stroke();
+    }
+    g.restore();
+  }
+
+  function drawBriar(g, x, y) {
+    const px = x * T, py = y * T;
+    const r = seeded(hash2(x + 11, y + 23));
+    g.save();
+    const patch = g.createRadialGradient(px + T / 2, py + T / 2, 3, px + T / 2, py + T / 2, T * .62);
+    patch.addColorStop(0, 'rgba(26,42,25,.55)');
+    patch.addColorStop(.7, 'rgba(20,33,20,.28)');
+    patch.addColorStop(1, 'rgba(20,33,20,0)');
+    g.fillStyle = patch;
+    g.fillRect(px, py, T, T);
+    g.lineCap = 'round';
+    for (let i = 0; i < 12; i++) {
+      const sx = px + 6 + r() * (T - 12), sy = py + 6 + r() * (T - 12);
+      const ex = sx + (r() - .5) * 46, ey = sy + (r() - .5) * 46;
+      g.strokeStyle = r() < .5 ? 'rgba(52,72,40,.95)' : 'rgba(68,88,50,.88)';
+      g.lineWidth = 1.1 + r() * 1.5;
+      g.beginPath();
+      g.moveTo(sx, sy);
+      g.quadraticCurveTo(sx + (r() - .5) * 20, sy + (r() - .5) * 20, ex, ey);
+      g.stroke();
+      // thorn
+      g.fillStyle = r() < .5 ? 'rgba(150,120,185,.7)' : 'rgba(100,130,80,.65)';
+      const tx = ex - 2 + r() * 4, ty = ey - 2 + r() * 4;
+      g.beginPath();
+      g.moveTo(tx, ty);
+      g.lineTo(tx + 3.5, ty - 5);
+      g.lineTo(tx + 1, ty + 1.5);
+      g.closePath();
+      g.fill();
+    }
+    g.strokeStyle = 'rgba(130,110,180,.1)';
+    g.lineWidth = 3;
+    g.beginPath();
+    g.arc(px + T / 2, py + T / 2, 22, 0, TAU);
+    g.stroke();
+    g.restore();
+  }
+
+  function drawFungus(g, x, y) {
+    const cx = (x + .5) * T, cy = (y + .5) * T;
+    const r = seeded(hash2(x + 3, y + 41));
+    g.save();
+    const glow = g.createRadialGradient(cx, cy, 0, cx, cy, 34);
+    glow.addColorStop(0, 'rgba(120,210,195,.16)');
+    glow.addColorStop(.55, 'rgba(120,210,195,.05)');
+    glow.addColorStop(1, 'rgba(120,210,195,0)');
+    g.fillStyle = glow;
+    g.beginPath();
+    g.arc(cx, cy, 34, 0, TAU);
+    g.fill();
+    for (let i = 0; i < 7; i++) {
+      const fx = cx + (r() - .5) * 40, fy = cy + (r() - .5) * 40;
+      const rad = 1.2 + r() * 3.2;
+      const col = r() < .6 ? '160,225,200' : '175,145,225';
+      g.shadowColor = 'rgba(' + col + ',.8)';
+      g.shadowBlur = 8;
+      g.fillStyle = 'rgba(' + col + ',.75)';
+      g.beginPath();
+      g.arc(fx, fy, rad, 0, TAU);
+      g.fill();
+      g.shadowBlur = 0;
+      g.strokeStyle = 'rgba(' + col + ',.22)';
+      g.lineWidth = 1;
+      g.beginPath();
+      g.moveTo(fx, fy + rad);
+      g.lineTo(fx + (r() - .5) * 5, fy + rad + 6 + r() * 7);
+      g.stroke();
+    }
+    g.restore();
+  }
+
+  function drawFloorRim(g) {
+    for (let y = 0; y < ROWS; y++) {
+      for (let x = 0; x < COLS; x++) {
+        if (!isFloor(x, y)) continue;
+        const px = x * T, py = y * T;
+        if (isWall(x - 1, y)) {
+          const gr = g.createLinearGradient(px, 0, px + 20, 0);
+          gr.addColorStop(0, 'rgba(0,0,0,.55)');
+          gr.addColorStop(1, 'rgba(0,0,0,0)');
+          g.fillStyle = gr; g.fillRect(px, py, 20, T);
+          for (let i = 0; i < 2; i++) {
+            g.fillStyle = 'rgba(92,105,82,.12)';
+            roundRect(g, px + 2, py + 6 + i * 28, 7, 16, 3);
+            g.fill();
+          }
+        }
+        if (isWall(x + 1, y)) {
+          const gr = g.createLinearGradient(px + T, 0, px + T - 20, 0);
+          gr.addColorStop(0, 'rgba(0,0,0,.5)');
+          gr.addColorStop(1, 'rgba(0,0,0,0)');
+          g.fillStyle = gr; g.fillRect(px + T - 20, py, 20, T);
+        }
+        if (isWall(x, y - 1)) {
+          const gr = g.createLinearGradient(0, py, 0, py + 18);
+          gr.addColorStop(0, 'rgba(0,0,0,.55)');
+          gr.addColorStop(1, 'rgba(0,0,0,0)');
+          g.fillStyle = gr; g.fillRect(px, py, T, 18);
+          g.fillStyle = 'rgba(60,80,48,.12)';
+          g.beginPath(); g.ellipse(px + T / 2, py + 6, T * .42, 7, 0, 0, TAU); g.fill();
+        }
+        if (isWall(x, y + 1)) {
+          const gr = g.createLinearGradient(0, py + T, 0, py + T - 16);
+          gr.addColorStop(0, 'rgba(0,0,0,.5)');
+          gr.addColorStop(1, 'rgba(0,0,0,0)');
+          g.fillStyle = gr; g.fillRect(px, py + T - 16, T, 16);
+        }
+      }
+    }
+    // a faint green pool near the entrance
+    const lp = g.createRadialGradient(2 * T, 4.2 * T, 10, 2 * T, 4.2 * T, 170);
+    lp.addColorStop(0, 'rgba(96,150,110,.055)');
+    lp.addColorStop(1, 'rgba(96,150,110,0)');
+    g.fillStyle = lp;
+    g.fillRect(0, 0, W, H);
+  }
+
+  function buildFloor() {
+    const c = document.createElement('canvas');
+    c.width = W * 2;
+    c.height = H * 2;
+    const g = c.getContext('2d');
+    g.scale(2, 2);
+    g.fillStyle = '#060906';
+    g.fillRect(0, 0, W, H);
+
+    for (let y = 0; y < ROWS; y++) {
+      for (let x = 0; x < COLS; x++) {
+        if (isWall(x, y)) drawWallTile(g, x, y);
+        else drawFloorTile(g, x, y);
+      }
+    }
+    for (let y = 0; y < ROWS; y++) {
+      for (let x = 0; x < COLS; x++) {
+        if (isPillar(x, y)) drawPillar(g, x, y);
+      }
+    }
+    for (let y = 0; y < ROWS; y++) {
+      for (let x = 0; x < COLS; x++) {
+        if (isBriar(x, y)) drawBriar(g, x, y);
+      }
+    }
+    for (let y = 0; y < ROWS; y++) {
+      for (let x = 0; x < COLS; x++) {
+        if (tileAt(x, y) === 'f') drawFungus(g, x, y);
+      }
+    }
+    drawFloorRim(g);
+    return c;
+  }
+
+  /* ============================================================
+     Toast / hint / log
+     ============================================================ */
+  const HINT_BASE = '点击角色 · 蓝色格移动 · 点击敌人普攻 · 技能按钮先选目标';
+  function setTicker(text, ms = 4200) {
+    state.ticker = { text, until: performance.now() + ms };
+    updateHint();
+    clearTimeout(setTicker._t);
+    setTicker._t = setTimeout(() => {
+      if (state.ticker && performance.now() >= state.ticker.until) {
+        state.ticker = null;
+        updateHint();
+      }
+    }, ms + 60);
+  }
+  function updateHint() {
+    const el = $('#hint');
+    if (!el || !state) return;
+    let text = '';
+    let tone = '';
+    if (state.mode === 'target' && state.pending) {
+      text = '选择目标：' + state.pending.zh + ' · 点空白处或 Esc 取消';
+      tone = 'warn';
+    } else if (state.phase === 'enemy') {
+      text = '敌方行动中……';
+      tone = 'warn';
+    } else if (state.phase === 'player' && selected()) {
+      const u = selected();
+      if (u.rooted) text = u.name + ' 被根须缠住了，本回合不能移动；仍然可以行动';
+      else if (u.moved && u.acted) text = u.name + ' 已完成行动';
+      else if (u.acted) text = u.name + ' 还可以移动；点蓝色格，或结束回合';
+      else if (u.moved) text = u.name + ' 已移动；选择一个技能，或点击敌人普攻';
+      else text = u.name + '：点蓝色格移动，或点击敌人普攻 / 选择技能';
+    } else if (state.phase === 'player') {
+      text = state.busy ? '……' : HINT_BASE;
+    } else if (state.phase === 'ending') {
+      text = '战斗结束……';
+      tone = 'good';
+    } else if (state.phase === 'won') {
+      text = '战斗结束 · 胜利';
+      tone = 'good';
+    } else if (state.phase === 'lost') {
+      text = '战斗结束 · 失败';
+      tone = 'warn';
+    }
+    if (state.ticker && performance.now() < state.ticker.until) {
+      text = state.ticker.text;
+      tone = '';
+    }
+    el.textContent = text;
+    el.classList.toggle('warn', tone === 'warn');
+    el.classList.toggle('good', tone === 'good');
+  }
+  function addLog(text, kind = 'info') {
+    if (!state) return;
+    state.log.push({ round: state.round || 0, text, kind });
+    if (kind !== 'round') setTicker(text);
+    if (state.drawer === 'log') renderDrawerBody();
+  }
+
+  /* ============================================================
+     UI rendering
+     ============================================================ */
+  function renderUI() {
+    if (!state) return;
+    renderObjectives();
+    renderParty();
+    renderActor();
+    renderAbilities();
+    renderRound();
+    renderMobileInfo();
+    updateHint();
+    const endBtn = $('#btnEnd');
+    endBtn.disabled = !(state.phase === 'player' && !state.busy);
+    endBtn.textContent = state.phase === 'enemy' ? '敌方行动' : '结束回合';
+  }
+
+  function renderObjectives() {
+    const t = tree(), d = druid(), k = byId('knight');
+    const parts = [];
+    parts.push(`<div class="obj ${t && t.dead ? 'dead' : ''}" data-obj="tree">
+      <span class="dot"></span><span class="name">古树</span>
+      <span class="val">${t ? (t.dead ? '已倒下' : t.hp + '/' + t.maxHp) : '—'}</span></div>`);
+    parts.push(`<div class="obj ${d && d.dead ? 'dead' : ''}" data-obj="druid">
+      <span class="dot"></span><span class="name">德鲁伊</span>
+      <span class="val">${d ? (d.dead ? '已击败' : d.hp + '/' + d.maxHp) : '—'}</span></div>`);
+    const rescued = state.flags.treeDead;
+    parts.push(`<div class="obj ${rescued ? 'done' : ''}" data-obj="rescue">
+      <span class="dot"></span><span class="name">被缚者</span>
+      <span class="val">${rescued ? '已解救' : (k ? '待解救' : '—')}</span></div>`);
+    $('#objectives').innerHTML = parts.join('');
+  }
+
+  function renderParty() {
+    const html = party().map((u) => {
+      const cls = [
+        'hero-btn',
+        u.id === state.selectedId ? 'active' : '',
+        u.done ? 'done' : '',
+        u.dead ? 'dead' : '',
+        u.hp / u.maxHp < .34 ? 'low' : '',
+      ].filter(Boolean).join(' ');
+      return `<button type="button" class="${cls}" data-hero="${u.id}" ${u.dead ? 'disabled' : ''} aria-label="${esc(u.name)}，生命 ${u.dead ? 0 : u.hp}/${u.maxHp}">
+        <span class="hero-avatar ${u.kind}">${esc(u.name.slice(0, 1))}</span>
+        <span class="hero-info">
+          <span class="hero-name">${esc(u.name)}<em>${u.dead ? '倒下' : 'HP ' + u.hp}</em><span class="check">✓</span></span>
+          <span class="hp-mini"><i style="width:${u.dead ? 0 : pct(u.hp, u.maxHp)}%"></i></span>
+        </span>
+      </button>`;
+    }).join('');
+    $('#partyStrip').innerHTML = html;
+  }
+
+  function renderActor() {
+    const u = selected();
+    if (!u || u.dead) {
+      $('#actorCard').innerHTML = `<div class="actor-top"><span class="actor-name" style="color:var(--muted)">等待行动</span></div>
+        <div class="actor-tags"><span>选择一名角色，查看技能与状态</span></div>`;
+      return;
+    }
+    const status = [];
+    if (u.rooted) status.push('<span class="st">缠绕</span>');
+    if (u.shieldRound === state.round) status.push('<span class="st">AC +5</span>');
+    if (u.id === 'druid' && state.round <= u.barkUntil) status.push('<span class="st">树皮 AC 16</span>');
+    const statusHtml = status.length ? ' · ' + status.join(' ') : '';
+    $('#actorCard').innerHTML = `
+      <div class="actor-top"><span class="actor-name">${esc(u.name)}</span><span class="actor-role">${esc(u.role)}</span></div>
+      <div class="actor-hp"><span class="bar"><i style="width:${pct(u.hp, u.maxHp)}%"></i></span><span class="num">${u.hp}/${u.maxHp}</span></div>
+      <div class="actor-tags">
+        <span>AC <b>${effectiveAc(u)}</b></span>
+        <span>移动 <b>${u.speed}</b></span>
+        <span>${u.moved ? '移动 ✓' : '移动 —'}</span>
+        <span>${u.acted ? '行动 ✓' : '行动 —'}</span>
+        ${statusHtml}
+      </div>`;
+  }
+
+  function renderAbilities() {
+    const bar = $('#abilityBar');
+    const u = selected();
+    if (!u || u.dead) {
+      bar.innerHTML = `<div class="ability empty">选择角色</div>`;
+      return;
+    }
+    const html = u.abilities.map((a) => {
+      const remaining = a.uses === Infinity ? '∞' : a.uses;
+      const disabled = u.dead || u.acted || a.uses <= 0 || state.phase !== 'player' || state.busy;
+      const basic = a === u.abilities[0] ? ' basic' : '';
+      const meta = a.kind === 'buff' ? a.desc : a.desc;
+      return `<button type="button" class="ability${basic}" data-ability="${a.id}" ${disabled ? 'disabled' : ''} title="${esc(a.desc)}">
+        <span class="uses">${remaining}</span>
+        <span class="word">${esc(a.word)}</span>
+        <span class="zh">${esc(a.zh)}</span>
+        <span class="meta">${esc(meta)}</span>
+      </button>`;
+    }).join('');
+    bar.innerHTML = html;
+  }
+
+  function renderRound() {
+    $('#phaseLabel').textContent = state.phase === 'enemy' ? '敌方行动' : (state.phase === 'player' ? '我方行动' : (state.phase === 'ending' ? '战斗结束' : '战前'));
+    $('#roundLabel').textContent = state.round ? '第 ' + state.round + ' 回合' : '—';
+    $('#roundText').classList.toggle('enemy', state.phase === 'enemy');
+  }
+
+  function renderMobileInfo() {
+    const el = $('#mobileInfo');
+    if (!el) return;
+    const t = tree(), d = druid();
+    if (!state || state.phase === 'cover' || state.phase === 'intro') { el.innerHTML = ''; return; }
+    const foes = state.units.filter((u) => (u.side === 'enemy' || u.side === 'wild') && u.kind !== 'tree');
+    const chips = foes.map((u) => {
+      const cls = u.dead ? 'dead' : (u.kind === 'druid' ? 'druid' : '');
+      return `<span class="mi-chip ${cls}" data-foe="${u.id}"><b>${esc(u.name)}</b><i>${u.dead ? 0 : u.hp}</i></span>`;
+    }).join('');
+    const treeChip = t ? `<span class="mi-chip tree ${t.dead ? 'dead' : ''}" data-foe="tree"><b>古树</b><i>${t.dead ? 0 : t.hp}</i></span>` : '';
+    const aliveFoes = state.units.filter((u) => (u.side === 'enemy' || u.side === 'wild') && !u.dead).length;
+    el.innerHTML = `<div class="mi-head"><span>敌情 · ${aliveFoes} 个活动单位</span><b>古树 ${t ? (t.dead ? 0 : t.hp) : 0} · 德鲁伊 ${d ? (d.dead ? 0 : d.hp) : 0}</b></div>
+      <div class="mi-chips">${treeChip}${chips}</div>`;
+  }
+
+  /* ============================================================
+     Overlay screens
+     ============================================================ */
+  function showOverlay(html, after) {
+    const ov = $('#overlay');
+    ov.innerHTML = html;
+    ov.hidden = false;
+    requestAnimationFrame(() => ov.classList.add('show'));
+    ov.querySelectorAll('[data-action]').forEach((btn) => {
+      btn.addEventListener('click', () => handleOverlayAction(btn.dataset.action));
+    });
+    if (after) after();
+  }
+  function hideOverlay() {
+    const ov = $('#overlay');
+    ov.classList.remove('show');
+    setTimeout(() => { ov.hidden = true; ov.innerHTML = ''; }, 300);
+  }
+  function handleOverlayAction(action) {
+    if (action === 'intro') beginIntro();
+    else if (action === 'start') beginBattle();
+    else if (action === 'cover') showCover();
+    else if (action === 'replay') beginBattle();
+    else if (action === 'wordbook') openDrawer('words');
+    else if (action === 'help') openDrawer('help');
+    else if (action === 'close') hideOverlay();
+  }
+
+  function showCover() {
+    state.phase = 'cover';
+    state.selectedId = null;
+    state.mode = 'idle';
+    state.pending = null;
+    state.busy = false;
+    state.round = 0;
+    state.flags = { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0 };
+    state.stats = { damage: 0, kills: 0, fires: 0 };
+    state.units = createUnits();
+    state.log = [];
+    state.effects = [];
+    state.ticker = null;
+    closeDrawer();
+    renderUI();
+    showOverlay(`<div class="panel cover">
+      <div class="cover-rule"></div>
+      <div class="kicker">Tactical Prototype · Chapter One</div>
+      <h2 class="cover-title">枯木庭院</h2>
+      <p class="cover-sub">《拾词者》第一章 · 俯视角战棋原型</p>
+      <p class="cover-lead">一座沉入地底的城塞。<br>一片被荆棘占满的庭院。<br>一棵还在呼吸的枯树。</p>
+      <div class="cover-stats">
+        <span><b>1</b>场战斗</span>
+        <span><b>20</b>个四级词</span>
+        <span><b>5e</b>怪物数值</span>
+      </div>
+      <div class="actions">
+        <button class="btn primary" type="button" data-action="intro">进入庭院</button>
+        <button class="btn" type="button" data-action="wordbook">本章词表</button>
+        <button class="btn ghost" type="button" data-action="help">原型说明</button>
+      </div>
+      <p class="note">这是画面与战斗方向的小原型，不是完整章节。场景文字为本原型重写；怪物数值按 5e 规则简化换算。</p>
+    </div>`);
+  }
+
+  function beginIntro() {
+    state.phase = 'intro';
+    showOverlay(`<div class="panel">
+      <div class="kicker">第一章 · 事件 01</div>
+      <h2>被树缚住的人</h2>
+      <p>你们 descend 到裂谷底部。狗头人和哥布林在走廊里争夺地盘，被偷走的白龙幼崽还关在某个笼子里——但这些都不是这趟旅程的终点。</p>
+      <p>穿过最后一道塌陷的拱门，紫色的菌光照亮了庭院。一棵枯黑的巨树在呼吸。树干上嵌着两个人影，其中一个还穿着骑士的甲胄。树前站着一位披褐色斗篷的德鲁伊，脚边的荆棘正一根根抽芽。</p>
+      <p>“你们来得正好。”他没有 surrender 的意思，“古树正缺新的养料。”</p>
+      <div class="objective-box">
+        <div class="obj-line"><span>目标</span><b>击倒流亡德鲁伊，烧毁枯木古树</b></div>
+        <div class="obj-line"><span>援救</span><b>把被树缚住的冒险者带回地面</b></div>
+        <div class="obj-line"><span>要点</span><b>古树怕火；箭矢对它的伤害减半</b></div>
+      </div>
+      <div class="word-chips">
+        <span class="chip"><b>rescue</b><span>援救</span></span>
+        <span class="chip"><b>root</b><span>根</span></span>
+        <span class="chip"><b>thorn</b><span>刺</span></span>
+        <span class="chip"><b>seed</b><span>种子</span></span>
+        <span class="chip"><b>fruit</b><span>果实</span></span>
+        <span class="chip"><b>descend</b><span>下降</span></span>
+      </div>
+      <div class="actions">
+        <button class="btn primary" type="button" data-action="start">开始战斗</button>
+        <button class="btn ghost" type="button" data-action="cover">返回封面</button>
+        <button class="btn ghost" type="button" data-action="wordbook">本章词表</button>
+      </div>
+      <p class="note">4 名 3 级角色 · 敌方 6 个单位 · 目标：古树与德鲁伊都倒下。点角色 → 蓝格移动 → 点敌人 / 技能。</p>
+    </div>`);
+  }
+
+  function beginBattle() {
+    state.phase = 'player';
+    state.round = 1;
+    state.selectedId = null;
+    state.mode = 'idle';
+    state.pending = null;
+    state.busy = false;
+    state.effects = [];
+    state.log = [];
+    state.ticker = null;
+    state.flags = { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0 };
+    state.stats = { damage: 0, kills: 0, fires: 0 };
+    state.units = createUnits();
+    closeDrawer();
+    hideOverlay();
+    renderUI();
+    addLog('你们踏入枯木庭院。紫色的菌光在头顶亮起。', 'round');
+    addLog('流亡德鲁伊挡在古树前：“把武器放下，或者成为养料。”');
+    addLog('第 1 回合 · 我方行动', 'round');
+    banner('第 1 回合', 'Your Turn', 1100);
+    const first = party().find((u) => !u.dead);
+    if (first) selectUnit(first.id);
+    renderUI();
+  }
+
+  function showVictory() {
+    if (state.phase === 'won') return;
+    state.phase = 'won';
+    state.selectedId = null;
+    state.mode = 'idle';
+    state.pending = null;
+    state.busy = false;
+    renderUI();
+    const knight = byId('knight');
+    const alive = party().filter((u) => !u.dead).length;
+    const rescueLine = (knight && !knight.dead)
+      ? '树皮从骑士身上一寸寸剥落。他跪在地上，第一次自己呼吸。'
+      : '骑士没能等到树倒。你们把他的剑带回地面。';
+    showOverlay(`<div class="panel">
+      <div class="kicker">战斗结束 · Victory</div>
+      <h2>古树倒下</h2>
+      <p>最后一段根须在火里蜷曲。紫色的光暗下去，庭院里只剩焦土和风声。</p>
+      <p>${rescueLine} 树上的 fruit 被你们收进背包——山脚的村民等了很多年的东西。</p>
+      <div class="stats">
+        <div class="stat"><b>${state.round}</b><span>回合</span></div>
+        <div class="stat"><b>${state.stats.damage}</b><span>总伤害</span></div>
+        <div class="stat"><b>${alive}/4</b><span>存活</span></div>
+      </div>
+      <p class="small">本章共出现约 ${CET4_OVERLAP.toLocaleString('zh-CN')} 个四级大纲词头；这场战斗里放了 ${WORD_CARDS.length} 个可玩 / 剧情词。</p>
+      <div class="actions">
+        <button class="btn primary" type="button" data-action="replay">再战一次</button>
+        <button class="btn" type="button" data-action="wordbook">本章词表</button>
+        <button class="btn ghost" type="button" data-action="cover">返回封面</button>
+      </div>
+      <p class="note">原型结束。完整章节还会包含狗头人巢穴、被偷的白龙幼崽和下山后的村庄。</p>
+    </div>`);
+  }
+
+  function showDefeat() {
+    if (state.phase === 'lost') return;
+    state.phase = 'lost';
+    state.selectedId = null;
+    state.mode = 'idle';
+    state.pending = null;
+    state.busy = false;
+    renderUI();
+    showOverlay(`<div class="panel">
+      <div class="kicker">战斗结束 · Defeat</div>
+      <h2>最后一盏紫光</h2>
+      <p>古树的根须把庭院重新合拢。你们的名字会被记在山脚村庄的失踪名单里，和之前那些人放在一起。</p>
+      <p class="small">提示：先点杀 4 点生命的枯枝怪，让洛恩用火焰箭烧树；骑士的 AC 18，用魔法飞弹更稳。</p>
+      <div class="actions">
+        <button class="btn primary" type="button" data-action="replay">再试一次</button>
+        <button class="btn ghost" type="button" data-action="cover">返回封面</button>
+      </div>
+    </div>`);
+  }
+
+  /* ============================================================
+     Drawer (log / words / help)
+     ============================================================ */
+  function openDrawer(type) {
+    state.drawer = type;
+    const titles = { log: '战报', words: '本章词卡', help: '原型说明' };
+    $('#drawerTitle').textContent = titles[type] || '';
+    renderDrawerBody();
+    const d = $('#drawer');
+    d.hidden = false;
+    requestAnimationFrame(() => d.classList.add('show'));
+  }
+  function closeDrawer() {
+    state.drawer = null;
+    const d = $('#drawer');
+    d.classList.remove('show');
+    setTimeout(() => { d.hidden = true; }, 200);
+  }
+  function renderDrawerBody() {
+    if (!state || !state.drawer) return;
+    const body = $('#drawerBody');
+    if (state.drawer === 'log') {
+      if (!state.log.length) {
+        body.innerHTML = '<div class="log-empty">还没有战报。</div>';
+      } else {
+        body.innerHTML = state.log.map((l) => {
+          if (l.kind === 'round') return `<div class="log-line round"><span class="r"></span><span>${esc(l.text)}</span></div>`;
+          return `<div class="log-line ${l.kind}"><span class="r">R${l.round || '—'}</span><span>${esc(l.text)}</span></div>`;
+        }).join('');
+      }
+    } else if (state.drawer === 'words') {
+      const groups = ['英雄技能', '怪物技能', '场景与目标'];
+      const counts = groups.map((g) => WORD_CARDS.filter((w) => w.group === g).length);
+      body.innerHTML = `
+        <p class="small">第一章英文正文约 17,300 词，按四级大纲核对，出现了约 <strong>${CET4_OVERLAP.toLocaleString('zh-CN')}</strong> 个不同的四级词头（含高频虚词）。这里从战斗操作和剧情里挑出 <strong>${WORD_CARDS.length}</strong> 个，做成这场战斗能看到的词。</p>
+        <p class="small">标“正文词”的来自本章英文句子；标“操作补充”的是为了把战斗操作补齐的四级词。</p>
+        ${groups.map((g, i) => `<h3>${g} · ${counts[i]}</h3>${WORD_CARDS.filter((w) => w.group === g).map((w) => `
+          <div class="word-row">
+            <div class="word-top"><span class="word-en">${esc(w.w)}</span><span class="word-zh">${esc(w.zh)}</span>
+              <span class="word-tag">${esc(w.tag)}</span></div>
+            <p>${esc(w.text)} <span class="word-src">${esc(w.src)}</span></p>
+          </div>`).join('')}`).join('')}
+        <p class="note">词义按仓库里的四级大纲知识库；例句为本原型重写。</p>`;
+    } else {
+      body.innerHTML = `
+        <div class="help-block"><h3>这是什么</h3>
+          <p>这是《拾词者》画面方向的一个小原型：一场俯视角、格子制的战棋战斗。它只做一章里的一场战斗，用来判断“改成战棋”是否值得继续。</p></div>
+        <div class="help-block"><h3>事件与怪物从哪来</h3>
+          <p>结构来自你提供的 5e 冒险集第一章：沉没的城塞、狗头人与哥布林的争夺、被偷走的白龙幼崽、被枯树控制的冒险者，以及庭院深处的枯木古树和它的德鲁伊。原型只取了最后的庭院战，其他事件留作后续章节。</p></div>
+        <div class="help-block"><h3>数值</h3>
+          <p>怪物 HP、AC、攻击加值、伤害骰、火焰易伤与穿刺抗性按 5e 怪物卡和冒险原文换算。攻击是 d20 + 加值对抗 AC；控制与毒伤走豁免。为了单场能打完，古树的“播种”和部分法术做了简化，树皮骑士的 AC 按 18 处理。</p></div>
+        <div class="help-block"><h3>没有收录什么</h3>
+          <p>仓库是公开的，所以这里没有收录原书文字、专有名词或完整数据表；场景描述、对白和词卡例句都是本原型重写的。原书请留给你自己学习。</p></div>
+        <div class="help-block"><h3>操作</h3>
+          <p>点角色 → 蓝格移动 → 点敌人普攻；点技能按钮，再点目标释放。Esc 或点空白处取消。每名角色每回合可以移动一次、行动一次；行动后还能移动，移动后也能行动。全部做完会自动结束我方回合。</p></div>
+        <div class="help-block"><h3>已知边界</h3>
+          <p>单场战斗、无存档、无剧情分支；数值是原型平衡，不是完整战役。手机竖屏可直接玩。</p></div>`;
+    }
+  }
+
+  /* ============================================================
+     Selection & player input
+     ============================================================ */
+  function selectUnit(id, { silent = false } = {}) {
+    const u = byId(id);
+    if (!u || u.dead || u.side !== 'party' || state.phase !== 'player') return;
+    if (u.done) {
+      if (!silent) setTicker(u.name + ' 本回合已经行动过了');
+      return;
+    }
+    state.selectedId = id;
+    state.mode = 'idle';
+    state.pending = null;
+    if (!silent) renderUI();
+    else { renderActor(); renderAbilities(); renderParty(); updateHint(); }
+  }
+
+  function deselect() {
+    state.selectedId = null;
+    state.mode = 'idle';
+    state.pending = null;
+    renderUI();
+  }
+
+  function cancelTargeting() {
+    if (state.mode === 'target') {
+      state.mode = 'idle';
+      state.pending = null;
+      renderUI();
+      return true;
+    }
+    return false;
+  }
+
+  function chooseAbility(id) {
+    const u = selected();
+    if (!u || state.phase !== 'player' || state.busy || u.acted) return;
+    const ab = u.abilities.find((a) => a.id === id);
+    if (!ab || ab.uses <= 0) return;
+    state.mode = 'target';
+    state.pending = ab;
+    updateHint();
+    renderUI();
+  }
+
+  function findAbilityTarget(ab, x, y) {
+    const unit = unitAt(x, y);
+    if (!unit) return null;
+    if (ab.target === 'enemy') {
+      if (!isHostileTo(selected(), unit)) return null;
+      const dist = distanceUnits(selected(), unit);
+      if (dist > ab.range) return null;
+      if (ab.kind !== 'melee' && ab.range > 1) {
+        if (!hasLineOfSight(selected(), unit)) return null;
+      }
+      return unit;
+    }
+    if (ab.target === 'ally') {
+      if (unit.side !== 'party' || unit.dead) return null;
+      if (distanceUnits(selected(), unit) > ab.range) return null;
+      return unit;
+    }
+    if (ab.target === 'self') return selected();
+    return null;
+  }
+
+  function hasLineOfSight(a, b) {
+    const start = tilesOf(a)[0];
+    const targetTiles = new Set(tilesOf(b).map(([x, y]) => key(x, y)));
+    const pts = bresenham(start[0], start[1], b.x, b.y);
+    for (const [x, y] of pts) {
+      if (targetTiles.has(key(x, y))) continue;
+      if (blocksSight(x, y)) return false;
+    }
+    return true;
+  }
+  function bresenham(x0, y0, x1, y1) {
+    const pts = [];
+    let dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+    let dy = -Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+    let err = dx + dy;
+    for (let guard = 0; guard < 64; guard++) {
+      pts.push([x0, y0]);
+      if (x0 === x1 && y0 === y1) break;
+      const e2 = 2 * err;
+      if (e2 >= dy) { err += dy; x0 += sx; }
+      if (e2 <= dx) { err += dx; y0 += sy; }
+    }
+    return pts;
+  }
+
+  function moveCost(u, x, y) {
+    if (isBriar(x, y) && !u.small) return 2;
+    return 1;
+  }
+  function blockedForMove(u, x, y) {
+    if (x < 0 || y < 0 || x >= COLS || y >= ROWS) return true;
+    if (!isFloor(x, y)) return true;
+    const occ = unitAtExcept(x, y, u);
+    // Party members can move through each other, but not stop on an occupied tile.
+    if (occ && !(u.side === 'party' && occ.side === 'party')) return true;
+    return false;
+  }
+  function cornerBlocked(u, x, y) {
+    if (x < 0 || y < 0 || x >= COLS || y >= ROWS) return true;
+    if (!isFloor(x, y)) return true;
+    const occ = unitAtExcept(x, y, u);
+    return !!(occ && !(u.side === 'party' && occ.side === 'party'));
+  }
+  function reachable(u) {
+    const start = key(u.x, u.y);
+    const best = new Map([[start, 0]]);
+    const prev = new Map();
+    const open = [{ x: u.x, y: u.y, cost: 0 }];
+    const dirs = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
+    while (open.length) {
+      open.sort((a, b) => a.cost - b.cost);
+      const cur = open.shift();
+      const ck = key(cur.x, cur.y);
+      if (cur.cost > (best.get(ck) ?? Infinity)) continue;
+      for (const [dx, dy] of dirs) {
+        const nx = cur.x + dx, ny = cur.y + dy;
+        if (blockedForMove(u, nx, ny)) continue;
+        if (dx && dy) {
+          if (cornerBlocked(u, cur.x + dx, cur.y) || cornerBlocked(u, cur.x, cur.y + dy)) continue;
+        }
+        const nc = cur.cost + moveCost(u, nx, ny);
+        if (nc > u.speed) continue;
+        const nk = key(nx, ny);
+        if (nc < (best.get(nk) ?? Infinity)) {
+          best.set(nk, nc);
+          prev.set(nk, { x: cur.x, y: cur.y });
+          open.push({ x: nx, y: ny, cost: nc });
+        }
+      }
+    }
+    return { best, prev };
+  }
+  function pathTo(prev, x, y) {
+    const out = [];
+    let cur = { x, y };
+    let guard = 0;
+    while (cur && guard++ < 64) {
+      out.push(cur);
+      const p = prev.get(key(cur.x, cur.y));
+      if (!p) break;
+      cur = p;
+    }
+    return out.reverse();
+  }
+  function reachTileSet(u) {
+    const { best } = reachable(u);
+    const set = new Set();
+    for (const [k, cost] of best) {
+      if (cost > 0) set.add(k);
+    }
+    return set;
+  }
+
+  function tileFromEvent(e) {
+    const c = $('#board');
+    const r = c.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width * W;
+    const y = (e.clientY - r.top) / r.height * H;
+    return { x: Math.floor(x / T), y: Math.floor(y / T) };
+  }
+
+  function onBoardPointerDown(e) {
+    if (!state || state.busy || state.phase !== 'player' || state.drawer) return;
+    e.preventDefault();
+    const { x, y } = tileFromEvent(e);
+    if (x < 0 || y < 0 || x >= COLS || y >= ROWS) return;
+    if (state.mode === 'target' && state.pending) {
+      const target = findAbilityTarget(state.pending, x, y);
+      if (!target) {
+        if (!unitAt(x, y)) cancelTargeting();
+        else setTicker('这个目标不在范围或视线内');
+        return;
+      }
+      resolvePlayerAbility(selected(), state.pending, target);
+      return;
+    }
+    const clicked = unitAt(x, y);
+    if (clicked) {
+      if (clicked.side === 'party') {
+        if (selected() && selected() !== clicked && state.mode === 'idle') {
+          selectUnit(clicked.id);
+        } else if (!selected()) {
+          selectUnit(clicked.id);
+        }
+        return;
+      }
+      if (isHostileTo(selected() || { side: 'party' }, clicked) && selected()) {
+        const u = selected();
+        if (u.acted) { inspectUnit(clicked, true); return; }
+        const basic = u.abilities[0];
+        const target = findAbilityTarget(basic, x, y);
+        if (target) {
+          resolvePlayerAbility(u, basic, target);
+        } else {
+          setTicker('超出射程' + (basic.range > 1 ? '，或视线被石柱挡住' : ''));
+          inspectUnit(clicked, true);
+        }
+        return;
+      }
+      inspectUnit(clicked, true);
+      return;
+    }
+    if (selected() && !selected().moved && !selected().rooted) {
+      const reach = reachable(selected());
+      const k = key(x, y);
+      if (reach.best.has(k) && reach.best.get(k) > 0) {
+        const path = pathTo(reach.prev, x, y);
+        doPlayerMove(selected(), path);
+        return;
+      }
+    }
+    if (selected()) {
+      state.selectedId = null;
+      state.mode = 'idle';
+      state.pending = null;
+      renderUI();
+    }
+  }
+
+  function onBoardPointerMove(e) {
+    if (!state || state.phase === 'cover' || state.phase === 'intro') return;
+    if (e.pointerType !== 'mouse') return;
+    const { x, y } = tileFromEvent(e);
+    state.hover = (x >= 0 && y >= 0 && x < COLS && y < ROWS) ? { x, y } : null;
+    const u = state.hover ? unitAt(x, y) : null;
+    if (u) inspectUnit(u, false);
+    else hideInspect();
+  }
+  function onBoardPointerLeave() {
+    if (!state) return;
+    state.hover = null;
+    hideInspect();
+  }
+
+  function inspectUnit(u, sticky) {
+    const el = $('#inspect');
+    if (!el) return;
+    const traits = [];
+    if (u.kind === 'tree') traits.push('火焰易伤 ×2', '穿刺抗性 ÷2', '荆棘护体');
+    else if (u.kind === 'twig') traits.push('火焰易伤 ×2', '小型：无视荆棘减速');
+    else if (u.kind === 'druid') traits.push('树皮术 → AC 16', '根须缠绕');
+    else if (u.kind === 'knight') traits.push('树皮护甲 AC 16');
+    if (u.thrall) traits.push('被古树控制');
+    const hp = u.dead ? '已倒下' : `${u.hp}/${u.maxHp}`;
+    el.innerHTML = `<div class="ins-name">${esc(u.name)} ${u.role ? `<span style="color:var(--dim);font-weight:400">· ${esc(u.role)}</span>` : ''}</div>
+      <div class="ins-line">HP ${hp} · AC ${u.dead ? '—' : effectiveAc(u)}</div>
+      <div class="ins-trait">${traits.length ? traits.join(' · ') : '—'}</div>`;
+    el.hidden = false;
+    clearTimeout(inspectTimer);
+    if (sticky) inspectTimer = setTimeout(() => { el.hidden = true; }, 2600);
+  }
+  function hideInspect() {
+    const el = $('#inspect');
+    if (el) el.hidden = true;
+  }
+
+  /* ============================================================
+     Animations
+     ============================================================ */
+  function centerOf(u) {
+    return { x: (u.x + (u.size || 1) / 2) * T, y: (u.y + (u.size || 1) / 2) * T };
+  }
+  function tweenTo(u, tx, ty, ms) {
+    if (REDUCED || ms <= 0) { u.vx = tx; u.vy = ty; return Promise.resolve(); }
+    return new Promise((resolve) => {
+      const sx = u.vx, sy = u.vy;
+      const t0 = performance.now();
+      const step = (t) => {
+        const k = clamp((t - t0) / ms, 0, 1);
+        const e = 1 - Math.pow(1 - k, 3);
+        u.vx = sx + (tx - sx) * e;
+        u.vy = sy + (ty - sy) * e;
+        if (k < 1) requestAnimationFrame(step);
+        else resolve();
+      };
+      requestAnimationFrame(step);
+    });
+  }
+  async function animateMove(u, path) {
+    if (!path || path.length < 2) return;
+    for (let i = 1; i < path.length; i++) {
+      const p = path[i];
+      u.x = p.x; u.y = p.y;
+      const c = centerOf(u);
+      await tweenTo(u, c.x, c.y, 90);
+    }
+    const enteredBriar = path.slice(1).some((p) => isBriar(p.x, p.y));
+    if (enteredBriar && !u.small) {
+      const dmg = 1;
+      u.hp = Math.max(0, u.hp - dmg);
+      addEffect({ type: 'text', x: u.vx, y: u.vy - 26, text: '-' + dmg, color: '#b7a7c9', age: 0, dur: 800 });
+      addLog(`${u.name} 被荆棘划伤，受到 1 点穿刺伤害。`);
+      if (u.hp <= 0) killUnit(u);
+      else if (u.side === 'party' && state.phase === 'player') renderUI();
+    }
+  }
+  async function lunge(attacker, target) {
+    if (REDUCED) return;
+    const ox = attacker.vx, oy = attacker.vy;
+    const tx = attacker.vx + (target.vx - attacker.vx) * .18;
+    const ty = attacker.vy + (target.vy - attacker.vy) * .18;
+    await tweenTo(attacker, tx, ty, 80);
+    await tweenTo(attacker, ox, oy, 110);
+  }
+  function addEffect(e) {
+    e.age = e.age || 0;
+    e.dur = e.dur || 600;
+    state.effects.push(e);
+  }
+  function spawnBurst(x, y, color, n = 12) {
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * TAU, sp = 20 + Math.random() * 70;
+      addEffect({ type: 'spark', x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, color, age: 0, dur: 380 + Math.random() * 320, size: 1 + Math.random() * 2 });
+    }
+  }
+  function floatText(x, y, text, color, size = 16) {
+    addEffect({ type: 'text', x, y, text, color, size, age: 0, dur: 950, vy: -26 });
+  }
+  function flashTile(x, y, color) {
+    addEffect({ type: 'tile', x, y, color, age: 0, dur: 420 });
+  }
+
+  /* ============================================================
+     Combat
+     ============================================================ */
+  function attackTarget(attacker, target, ab) {
+    const roll = d20();
+    const ac = effectiveAc(target);
+    const crit = roll === 20;
+    const miss = roll === 1 || (!crit && roll + ab.bonus < ac);
+    const totalRoll = roll + ab.bonus;
+    addLog(`${attacker.name} 使用 ${ab.zh} → ${target.name}：d20 ${roll} + ${ab.bonus} = ${totalRoll} vs AC ${ac}${crit ? ' · 暴击！' : ''}`, miss ? 'hit' : 'good');
+    if (miss) {
+      floatText(target.vx, target.vy - 30, 'MISS', '#b9b2a2', 15);
+      spawnBurst(target.vx, target.vy - 4, 'rgba(190,185,165,.5)', 4);
+      return { hit: false, dmg: 0 };
+    }
+    let total = die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
+    if (crit) total += die(ab.dice[0], ab.dice[1]);
+    if (ab.extraDice) total += die(ab.extraDice[0], ab.extraDice[1]);
+    const traits = target.traits || [];
+    let note = '';
+    if (ab.dmg === 'fire' && traits.includes('fireVuln')) { total *= 2; note = '（火焰易伤 ×2）'; }
+    if (ab.dmg === 'piercing' && traits.includes('pierceResist')) { total = Math.floor(total / 2); note = '（穿刺抗性 ÷2）'; }
+    if (ab.dmg === 'fire') state.stats.fires++;
+    applyDamage(target, total, { source: attacker, note, damageType: ab.dmg, crit });
+    return { hit: true, dmg: total };
+  }
+
+  function applyDamage(target, amount, opts = {}) {
+    if (target.dead) return;
+    target.hp = Math.max(0, target.hp - amount);
+    if (opts.source && opts.source.side === 'party') state.stats.damage += amount;
+    const c = { x: target.vx, y: target.vy - 26 };
+    floatText(c.x, c.y, '-' + amount, opts.crit ? '#ffd27a' : '#f0a58f', opts.crit ? 21 : 17);
+    if (opts.note) setTicker((opts.source ? opts.source.name + '：' : '') + amount + ' 伤害 ' + opts.note);
+    spawnBurst(target.vx, target.vy, opts.damageType === 'fire' ? 'rgba(240,150,80,.8)' : 'rgba(220,110,90,.6)', opts.crit ? 18 : 9);
+    if (target.kind === 'tree' && !state.flags.lowTree && target.hp > 0 && target.hp <= 17) {
+      state.flags.lowTree = true;
+      addLog('古树的树干裂开，暗红色的汁液渗进泥土。', 'good');
+      banner('古树受伤', 'The Tree Is Bleeding', 900);
+    }
+    if (target.hp <= 0) killUnit(target);
+    renderUI();
+  }
+
+  function killUnit(u) {
+    if (u.dead) return;
+    u.dead = true;
+    u.hp = 0;
+    u.done = true;
+    state.stats.kills++;
+    addLog(`${u.name} 倒下了。`, 'good');
+    spawnBurst(u.vx, u.vy, u.side === 'party' ? 'rgba(160,200,180,.7)' : 'rgba(190,120,100,.75)', 22);
+    addEffect({ type: 'death', x: u.vx, y: u.vy, age: 0, dur: 700 });
+    if (u.id === 'tree') onTreeDeath();
+    if (u.id === 'druid') onDruidDeath();
+    if (u.side === 'party') {
+      if (!party().some((p) => !p.dead)) {
+        setTimeout(() => showDefeat(), 700);
+      } else if (state.phase === 'player' && state.selectedId === u.id) {
+        state.selectedId = null;
+        state.mode = 'idle';
+        state.pending = null;
+        renderUI();
+      }
+    }
+    renderUI();
+    checkVictory();
+  }
+
+  function onTreeDeath() {
+    if (state.flags.treeDead) return;
+    state.flags.treeDead = true;
+    banner('古树倒下', 'The Grove Falls Silent', 1500);
+    addLog('古树倒下。树皮骑士和枯枝怪失去了控制。', 'good');
+    for (const u of state.units) {
+      if (u.thrall && !u.dead) {
+        u.side = 'wild';
+        addLog(`${u.name} 把武器转向了德鲁伊。`, 'good');
+      }
+    }
+    spawnBurst(tree().vx, tree().vy, 'rgba(200,140,80,.9)', 40);
+    for (let i = 0; i < 18; i++) {
+      const x = tree().vx + (Math.random() - .5) * 100;
+      const y = tree().vy + (Math.random() - .5) * 90;
+      addEffect({ type: 'ember', x, y, vx: (Math.random() - .5) * 30, vy: -20 - Math.random() * 40, color: '#e39a55', age: 0, dur: 900 + Math.random() * 700, size: 1 + Math.random() * 2 });
+    }
+    // resume the current action after the dramatic pause
+    state.busy = true;
+    setTimeout(() => { state.busy = false; renderUI(); }, 1200);
+  }
+
+  function onDruidDeath() {
+    if (state.flags.druidDead) return;
+    state.flags.druidDead = true;
+    if (tree() && !tree().dead) {
+      banner('德鲁伊倒下', 'But The Tree Still Breathes', 1200);
+      addLog('流亡德鲁伊倒下。古树还在呼吸，得烧掉它。', 'good');
+    }
+  }
+
+  function checkVictory() {
+    if (state.phase === 'won' || state.phase === 'lost') return;
+    if (state.flags.treeDead && state.flags.druidDead) {
+      state.phase = 'ending';
+      state.busy = true;
+      addLog('庭院安静下来。你们赢了。', 'good');
+      setTimeout(() => showVictory(), 900);
+    }
+  }
+
+  /* ============================================================
+     Player actions
+     ============================================================ */
+  async function doPlayerMove(u, path) {
+    if (!u || state.busy) return;
+    state.busy = true;
+    state.mode = 'idle';
+    state.pending = null;
+    renderUI();
+    await animateMove(u, path);
+    if (u.dead) { state.busy = false; return; }
+    u.moved = true;
+    state.busy = false;
+    if (u.acted) {
+      finishUnit(u);
+    } else {
+      renderUI();
+    }
+  }
+
+  async function resolvePlayerAbility(u, ab, target) {
+    if (!u || !ab || !target || state.busy) return;
+    state.busy = true;
+    state.mode = 'idle';
+    state.pending = null;
+    renderUI();
+    const ranged = ab.range > 1 || ab.kind === 'auto';
+    if (ab.kind === 'buff') {
+      if (ab.effect === 'shield') {
+        target.shieldRound = state.round;
+        addLog(`${u.name} 举起盾牌，为 ${target.name} 加上 5 点 AC（持续到下一回合）。`, 'good');
+        addEffect({ type: 'shield', x: target.vx, y: target.vy, age: 0, dur: 700 });
+        spawnBurst(target.vx, target.vy, 'rgba(120,190,220,.7)', 12);
+      }
+    } else if (ab.kind === 'heal') {
+      const amount = die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
+      target.hp = Math.min(target.maxHp, target.hp + amount);
+      floatText(target.vx, target.vy - 30, '+' + amount, '#9fe0a8', 18);
+      addLog(`${u.name} 用 ${ab.zh} 治疗 ${target.name}，回复 ${amount} 点生命。`, 'good');
+      spawnBurst(target.vx, target.vy, 'rgba(140,220,150,.7)', 14);
+      addEffect({ type: 'heal', x: target.vx, y: target.vy, age: 0, dur: 700 });
+    } else if (ab.kind === 'auto') {
+      await lunge(u, target);
+      let total = 0;
+      for (let i = 0; i < ab.darts; i++) total += die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
+      addLog(`${u.name} 释放 ${ab.zh}：${ab.darts} 枚飞弹，共 ${total} 点力场伤害。`, 'good');
+      addEffect({ type: 'bolt', x0: u.vx, y0: u.vy, x1: target.vx, y1: target.vy, color: '#b9a2ff', age: 0, dur: 520 });
+      applyDamage(target, total, { source: u, damageType: 'force' });
+    } else if (ab.kind === 'save') {
+      await lunge(u, target);
+      const save = d20() + (target.saves[ab.save] || 0);
+      addLog(`${target.name} 进行 ${saveName(ab.save)} 豁免：d20 + ${target.saves[ab.save] || 0} = ${save} vs DC ${ab.dc}`, save >= ab.dc ? 'good' : 'hit');
+      if (save < ab.dc) {
+        const amount = die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
+        addLog(`${target.name} 豁免失败，受到 ${amount} 点毒伤害。`);
+        applyDamage(target, amount, { source: u, damageType: 'poison' });
+      } else {
+        floatText(target.vx, target.vy - 30, 'SAVE', '#9fc7b0', 15);
+        setTicker(target.name + ' 豁免成功，没有受到伤害');
+      }
+    } else if (ab.kind === 'control') {
+      const save = d20() + (target.saves[ab.save] || 0);
+      addLog(`${target.name} 进行 ${saveName(ab.save)} 豁免：d20 + ${target.saves[ab.save] || 0} = ${save} vs DC ${ab.dc}`, save >= ab.dc ? 'good' : 'hit');
+      addEffect({ type: 'root', x: target.vx, y: target.vy, age: 0, dur: 900 });
+      if (save < ab.dc) {
+        target.rooted = true;
+        addLog(`${target.name} 被根须缠住，下回合不能移动。`, 'hit');
+        floatText(target.vx, target.vy - 30, 'ROOTED', '#b9a2d9', 14);
+      } else {
+        floatText(target.vx, target.vy - 30, 'SAVE', '#9fc7b0', 15);
+      }
+    } else {
+      if (!ranged) await lunge(u, target);
+      else addEffect({ type: 'bolt', x0: u.vx, y0: u.vy, x1: target.vx, y1: target.vy, color: ab.dmg === 'fire' ? '#f0a05a' : '#d9d2b8', age: 0, dur: 420 });
+      await sleep(REDUCED ? 0 : 180);
+      const hitResult = attackTarget(u, target, ab);
+      addEffect({ type: 'slash', x: target.vx, y: target.vy, angle: Math.atan2(target.vy - u.vy, target.vx - u.vx), color: ab.dmg === 'fire' ? '#f0a05a' : '#e8dfc8', age: 0, dur: 300 });
+      if (!ranged && hitResult.hit && target.kind === 'tree' && !target.dead) {
+        const thorn = 2;
+        u.hp = Math.max(0, u.hp - thorn);
+        floatText(u.vx, u.vy - 26, '-' + thorn, '#b7a7c9', 13);
+        addLog(`${u.name} 被古树的荆棘扎伤，受到 ${thorn} 点伤害。`);
+        if (u.hp <= 0) killUnit(u);
+      }
+    }
+    ab.uses = Math.max(0, ab.uses - 1);
+    u.acted = true;
+    u.done = !!(u.moved && u.acted);
+    state.busy = false;
+    await sleep(REDUCED ? 0 : 260);
+    if (u.done) finishUnit(u);
+    else {
+      renderUI();
+      setTicker(u.name + ' 还可以移动；点蓝色格，或结束回合');
+    }
+    checkVictory();
+  }
+
+  function saveName(s) {
+    return { str:'力量', dex:'敏捷', con:'体质', int:'智力', wis:'感知', cha:'魅力' }[s] || s;
+  }
+
+  function finishUnit(u) {
+    if (!u) return;
+    u.done = true;
+    u.rooted = false;
+    if (state.selectedId === u.id) state.selectedId = null;
+    state.mode = 'idle';
+    state.pending = null;
+    renderUI();
+    const next = party().find((p) => !p.dead && !p.done);
+    if (!next) {
+      setTimeout(() => endPlayerPhase(), REDUCED ? 0 : 500);
+    } else {
+      selectUnit(next.id, { silent: false });
+    }
+  }
+
+  async function endPlayerPhase() {
+    if (!state || state.phase !== 'player' || state.busy) return;
+    state.selectedId = null;
+    state.mode = 'idle';
+    state.pending = null;
+    state.phase = 'enemy';
+    state.busy = true;
+    state.hover = null;
+    hideInspect();
+    renderUI();
+    banner('敌方行动', 'Enemy Phase', 1000);
+    addLog('敌方行动', 'round');
+    await sleep(REDUCED ? 0 : 700);
+    const order = ['druid', 'knight', 'twig1', 'twig2', 'twig3', 'frog'];
+    for (const id of order) {
+      if (state.phase !== 'enemy') break;
+      const u = byId(id);
+      if (!u || u.dead) continue;
+      await enemyAct(u);
+      if (state.phase !== 'enemy') break;
+      await sleep(REDUCED ? 0 : 240);
+    }
+    if (state.phase === 'enemy') await endRound();
+  }
+
+  /* ============================================================
+     Enemy AI
+     ============================================================ */
+  function hostileTargets(u) {
+    if (u.side === 'wild') {
+      const d = druid();
+      if (d && !d.dead) return [d];
+      return party().filter((p) => !p.dead);
+    }
+    return party().filter((p) => !p.dead);
+  }
+  function nearestTarget(u, targets) {
+    let best = null, bestD = Infinity;
+    for (const t of targets) {
+      const d = distanceUnits(u, t);
+      if (d < bestD || (d === bestD && t.hp < (best ? best.hp : 999))) {
+        best = t; bestD = d;
+      }
+    }
+    return best;
+  }
+  function canActFrom(u, target, ab) {
+    const d = distanceUnits(u, target);
+    if (d > ab.range) return false;
+    if (ab.range > 1 && !hasLineOfSight(u, target)) return false;
+    return true;
+  }
+  function chooseBestMove(u, target, desiredRange) {
+    const { best, prev } = reachable(u);
+    let bestTile = { x: u.x, y: u.y };
+    let bestScore = Infinity;
+    for (const [k, cost] of best) {
+      const [x, y] = k.split(',').map(Number);
+      if (unitAtExcept(x, y, u)) continue;
+      const d = cheb(x, y, target.x, target.y);
+      let score;
+      if (desiredRange === 1) score = d;
+      else score = Math.abs(d - desiredRange) + (d < 2 ? 2 : 0);
+      // prefer tiles with a bit of spread, and lower cost
+      score += cost * 0.01 + Math.random() * 0.05;
+      if (score < bestScore) { bestScore = score; bestTile = { x, y }; }
+    }
+    return { tile: bestTile, path: pathTo(prev, bestTile.x, bestTile.y) };
+  }
+
+  async function enemyAct(u) {
+    if (!u || u.dead || u.immobile) return;
+    const targets = hostileTargets(u);
+    if (!targets.length) return;
+    const target = nearestTarget(u, targets);
+    if (!target) return;
+
+    // The druid opens with barkskin, then tries to control the nearest hero.
+    if (u.kind === 'druid' && u.barkUntil < state.round && u.abilities.find((a) => a.id === 'bark').uses > 0) {
+      const bark = u.abilities.find((a) => a.id === 'bark');
+      bark.uses = 0;
+      u.barkUntil = state.round + 2;
+      addLog(`流亡德鲁伊念动树皮术，皮肤变成灰褐色（AC 16）。`, 'good');
+      addEffect({ type: 'shield', x: u.vx, y: u.vy, age: 0, dur: 800 });
+      spawnBurst(u.vx, u.vy, 'rgba(130,110,70,.6)', 12);
+      await sleep(REDUCED ? 0 : 500);
+      return;
+    }
+
+    // choose action
+    let ab = null;
+    if (u.kind === 'druid') {
+      const root = u.abilities.find((a) => a.id === 'root');
+      const poison = u.abilities.find((a) => a.id === 'poison');
+      const staff = u.abilities.find((a) => a.id === 'staff');
+      if (root && root.uses > 0 && !target.rooted && canActFrom(u, target, root)) ab = root;
+      else if (poison && canActFrom(u, target, poison)) ab = poison;
+      else if (staff && canActFrom(u, target, staff)) ab = staff;
+    } else {
+      ab = u.abilities[0];
+    }
+
+    // if no action from here, move
+    if (!ab) {
+      const desired = u.kind === 'druid' ? 3 : 1;
+      const { tile, path } = chooseBestMove(u, target, desired);
+      if (path.length > 1) {
+        banner(u.name, 'Enemy', 500);
+        await animateMove(u, path);
+      }
+      u.moved = true;
+      // re-evaluate
+      if (u.kind === 'druid') {
+        const root = u.abilities.find((a) => a.id === 'root');
+        const poison = u.abilities.find((a) => a.id === 'poison');
+        const staff = u.abilities.find((a) => a.id === 'staff');
+        if (root && root.uses > 0 && !target.rooted && canActFrom(u, target, root)) ab = root;
+        else if (poison && canActFrom(u, target, poison)) ab = poison;
+        else if (staff && canActFrom(u, target, staff)) ab = staff;
+      } else if (canActFrom(u, target, u.abilities[0])) {
+        ab = u.abilities[0];
+      }
+    }
+
+    if (ab) {
+      await enemyUseAbility(u, ab, target);
+    } else {
+      addLog(`${u.name} 向你们逼近，但够不到目标。`);
+      await sleep(REDUCED ? 0 : 250);
+    }
+  }
+
+  async function enemyUseAbility(u, ab, target) {
+    // root and poison are resolved like player abilities, attacks with animation
+    if (ab.kind === 'control') {
+      const save = d20() + (target.saves[ab.save] || 0);
+      addLog(`${target.name} 进行 ${saveName(ab.save)} 豁免：d20 + ${target.saves[ab.save] || 0} = ${save} vs DC ${ab.dc}`, save >= ab.dc ? 'good' : 'hit');
+      addEffect({ type: 'root', x: target.vx, y: target.vy, age: 0, dur: 900 });
+      if (save < ab.dc) {
+        target.rooted = true;
+        floatText(target.vx, target.vy - 30, 'ROOTED', '#b9a2d9', 14);
+        addLog(`${target.name} 被根须缠住，下回合不能移动。`, 'hit');
+      } else {
+        floatText(target.vx, target.vy - 30, 'SAVE', '#9fc7b0', 15);
+      }
+      ab.uses = Math.max(0, ab.uses - 1);
+      await sleep(REDUCED ? 0 : 500);
+      return;
+    }
+    if (ab.kind === 'save') {
+      const save = d20() + (target.saves[ab.save] || 0);
+      addLog(`${target.name} 进行 ${saveName(ab.save)} 豁免：d20 + ${target.saves[ab.save] || 0} = ${save} vs DC ${ab.dc}`, save >= ab.dc ? 'good' : 'hit');
+      if (save < ab.dc) {
+        const amount = die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
+        addLog(`${target.name} 豁免失败，受到 ${amount} 点毒伤害。`);
+        applyDamage(target, amount, { source: u, damageType: 'poison' });
+      } else {
+        floatText(target.vx, target.vy - 30, 'SAVE', '#9fc7b0', 15);
+      }
+      await sleep(REDUCED ? 0 : 500);
+      return;
+    }
+    // melee / ranged attack
+    if (ab.range > 1) {
+      addEffect({ type: 'bolt', x0: u.vx, y0: u.vy, x1: target.vx, y1: target.vy, color: '#c9b98a', age: 0, dur: 420 });
+    } else {
+      await lunge(u, target);
+    }
+    await sleep(REDUCED ? 0 : 160);
+    attackTarget(u, target, ab);
+    addEffect({ type: 'slash', x: target.vx, y: target.vy, angle: Math.atan2(target.vy - u.vy, target.vx - u.vx), color: '#e0b39a', age: 0, dur: 300 });
+    await sleep(REDUCED ? 0 : 420);
+    if (party().every((p) => p.dead)) showDefeat();
+  }
+
+  /* ============================================================
+     Round flow & events
+     ============================================================ */
+  async function endRound() {
+    if (!state || state.phase !== 'enemy') return;
+    // The tree seeds a new blight every third round, at most twice.
+    if (!state.flags.treeDead && state.round >= 3 && state.flags.treeSpawns < 2) {
+      const twigs = state.units.filter((u) => u.kind === 'twig' && !u.dead);
+      if (twigs.length < 2) {
+        const t = tree();
+        const spots = [[6,3],[6,4],[7,2],[8,2],[7,5],[8,5],[6,2]].filter(([x, y]) =>
+          isFloor(x, y) && !unitAt(x, y));
+        if (spots.length) {
+          const [sx, sy] = spots[Math.floor(Math.random() * spots.length)];
+          const twig = makeEnemy({ id:'twig' + (++uid), name:'枯枝怪', role:'Twig', kind:'twig', x:sx, y:sy, hp:4, ac:13, speed:4,
+            saves:{ str:0, dex:2, con:1, int:0, wis:0, cha:0 }, abilities:['bite'], thrall:true, small:true, traits:['fireVuln'] });
+          state.units.push(twig);
+          state.flags.treeSpawns++;
+          addLog('古树抖落种子：一只新的枯枝怪从根边钻了出来。', 'hit');
+          banner('枯枝怪苏醒', 'A New Twig Blight', 1100);
+          spawnBurst(twig.vx, twig.vy, 'rgba(150,200,120,.8)', 18);
+          await sleep(REDUCED ? 0 : 900);
+        }
+      }
+    }
+    // advance
+    state.round++;
+    state.phase = 'player';
+    state.busy = false;
+    for (const u of state.units) {
+      u.moved = false;
+      u.acted = false;
+      u.done = false;
+    }
+    // frog event at round 2
+    if (state.round === 2 && !state.flags.frog) {
+      state.flags.frog = true;
+      const spots = [[8,2],[7,2],[6,2],[8,1],[7,1]].filter(([x, y]) => isFloor(x, y) && !unitAt(x, y));
+      if (spots.length) {
+        const [fx, fy] = spots[0];
+        const frog = makeEnemy({ id:'frog', name:'巨蛙', role:'Giant Frog', kind:'frog', x:fx, y:fy, hp:18, ac:11, speed:5,
+          saves:{ str:2, dex:1, con:1, int:-4, wis:0, cha:-2 }, abilities:['frogbite'], traits:[] });
+        state.units.push(frog);
+        addLog('树冠一阵晃动。一只巨蛙从枯枝间跳下来，落在古树旁边。', 'hit');
+        banner('巨蛙跃下', 'The Frog Drops', 1300);
+        spawnBurst(frog.vx, frog.vy, 'rgba(120,180,100,.8)', 16);
+        state.busy = true;
+        await sleep(REDUCED ? 0 : 1000);
+        state.busy = false;
+      }
+    }
+    addLog(`第 ${state.round} 回合 · 我方行动`, 'round');
+    banner(`第 ${state.round} 回合`, 'Your Turn', 1000);
+    renderUI();
+    updateHint();
+    const first = party().find((u) => !u.dead);
+    if (first) selectUnit(first.id, { silent: true });
+    renderUI();
+    updateHint();
+  }
+
+  /* ============================================================
+     Drawing
+     ============================================================ */
+  const canvas = $('#board');
+  const ctx = canvas.getContext('2d');
+  let dpr = 1;
+
+  function setupCanvas() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+  }
+
+  function fitBoard() {
+    const stage = $('#stage');
+    const shell = $('#boardShell');
+    const hint = $('#hint');
+    const mobileInfo = $('#mobileInfo');
+    const availW = Math.max(200, stage.clientWidth - 4);
+    const infoH = mobileInfo && getComputedStyle(mobileInfo).display !== 'none' ? mobileInfo.offsetHeight + 8 : 0;
+    const availH = Math.max(160, stage.clientHeight - (hint ? hint.offsetHeight : 0) - infoH - 12);
+    const scale = Math.min(availW / W, availH / H);
+    shell.style.width = Math.floor(W * scale) + 'px';
+    shell.style.height = Math.floor(H * scale) + 'px';
+  }
+
+  function drawMotes(now) {
+    if (!motes.length) {
+      for (let i = 0; i < 26; i++) {
+        motes.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: .6 + Math.random() * 1.8,
+          phase: Math.random() * TAU,
+          speed: .15 + Math.random() * .5,
+          drift: 4 + Math.random() * 14,
+          color: Math.random() < .65 ? '170,220,180' : '175,150,225',
+        });
+      }
+    }
+    for (const m of motes) {
+      const yy = (m.y + Math.sin(now / 1000 * m.speed + m.phase) * m.drift) % H;
+      const xx = (m.x + Math.cos(now / 1500 * m.speed + m.phase) * m.drift * .5) % W;
+      ctx.globalAlpha = .10 + .18 * (0.5 + 0.5 * Math.sin(now / 900 + m.phase));
+      ctx.fillStyle = 'rgba(' + m.color + ',.8)';
+      ctx.beginPath();
+      ctx.arc(xx, yy, m.r, 0, TAU);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function drawRangeTiles() {
+    const u = selected();
+    if (!u || u.dead || state.phase !== 'player') return;
+    if (state.mode === 'target' && state.pending) {
+      const ab = state.pending;
+      const isHeal = ab.target === 'ally';
+      const color = isHeal ? 'rgba(150,210,160,' : 'rgba(220,100,80,';
+      for (let y = 0; y < ROWS; y++) {
+        for (let x = 0; x < COLS; x++) {
+          if (!isFloor(x, y)) continue;
+          const d = Math.max(Math.abs(x - u.x), Math.abs(y - u.y));
+          if (d > ab.range) continue;
+          const target = unitAt(x, y);
+          if (ab.target === 'enemy' && target && !isHostileTo(u, target)) continue;
+          if (ab.target === 'ally' && target && target.side !== 'party') continue;
+          const valid = target ? !!findAbilityTarget(ab, x, y) : (ab.target === 'self' || ab.range === 0);
+          if (!target && ab.target !== 'self') continue;
+          const alpha = valid ? .22 : .07;
+          ctx.fillStyle = color + alpha + ')';
+          roundRect(ctx, x * T + 3, y * T + 3, T - 6, T - 6, 7);
+          ctx.fill();
+          ctx.strokeStyle = color + (valid ? .55 : .16) + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+      // highlight valid targets
+      for (const t of living()) {
+        if (!isHostileTo(u, t) && !(ab.target === 'ally' && t.side === 'party')) continue;
+        if (!findAbilityTarget(ab, t.x, t.y)) continue;
+        drawTargetBrackets(t.vx, t.vy, t.size || 1, isHeal ? '#a6d6a7' : '#e6a08a', performance.now());
+      }
+      return;
+    }
+    if (u.moved || u.rooted) return;
+    const reach = reachable(u);
+    for (const [k, cost] of reach.best) {
+      if (cost === 0) continue;
+      const [x, y] = k.split(',').map(Number);
+      const hovered = state.hover && state.hover.x === x && state.hover.y === y;
+      ctx.fillStyle = hovered ? 'rgba(110,205,215,.17)' : 'rgba(70,135,170,.075)';
+      roundRect(ctx, x * T + 3, y * T + 3, T - 6, T - 6, 7);
+      ctx.fill();
+      ctx.strokeStyle = hovered ? 'rgba(150,235,235,.6)' : 'rgba(100,185,200,.14)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      if (hovered) {
+        ctx.fillStyle = 'rgba(220,245,235,.9)';
+        ctx.font = '10px ' + getComputedStyle(document.body).fontFamily;
+        ctx.textAlign = 'center';
+        ctx.fillText(cost + ' 格', x * T + T / 2, y * T + T - 7);
+      }
+    }
+    // path preview
+    if (state.hover) {
+      const hk = key(state.hover.x, state.hover.y);
+      if (reach.best.has(hk) && reach.best.get(hk) > 0) {
+        const path = pathTo(reach.prev, state.hover.x, state.hover.y);
+        ctx.save();
+        ctx.strokeStyle = 'rgba(180,230,220,.65)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 5]);
+        ctx.lineDashOffset = -performance.now() / 90;
+        ctx.beginPath();
+        path.forEach((p, i) => {
+          const c = tileCenter(p.x, p.y);
+          if (i === 0) ctx.moveTo(c.x, c.y); else ctx.lineTo(c.x, c.y);
+        });
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+
+  function drawTargetBrackets(x, y, size, color, now) {
+    const r = size === 2 ? 44 : 26;
+    const pulse = 1 + Math.sin(now / 220) * .07;
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    ctx.globalAlpha = .85;
+    ctx.translate(x, y);
+    ctx.scale(pulse, pulse);
+    for (let i = 0; i < 4; i++) {
+      const a = i * Math.PI / 2 + Math.PI / 4;
+      const c = Math.cos(a), s = Math.sin(a);
+      ctx.beginPath();
+      ctx.moveTo(c * (r + 6), s * (r + 6));
+      ctx.lineTo(c * (r + 12), s * (r + 12));
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawTree(now) {
+    const t = tree();
+    if (!t) return;
+    const cx = t.vx, cy = t.vy;
+    const alive = !t.dead;
+    const pulse = 0.5 + 0.5 * Math.sin(now / 1400);
+    ctx.save();
+    if (alive) {
+      const aura = ctx.createRadialGradient(cx, cy + 10, 10, cx, cy + 10, 140);
+      aura.addColorStop(0, 'rgba(150,95,180,' + (0.17 + pulse * 0.05) + ')');
+      aura.addColorStop(.55, 'rgba(100,70,130,.06)');
+      aura.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = aura;
+      ctx.beginPath();
+      ctx.arc(cx, cy + 10, 140, 0, TAU);
+      ctx.fill();
+    }
+    if (alive) {
+      // dark canopy mass behind the trunk
+      const blobs = [
+        [-78, -116, 84, 48], [2, -136, 96, 58], [78, -110, 72, 46], [-16, -88, 108, 44],
+      ];
+      ctx.fillStyle = 'rgba(7,12,7,.94)';
+      for (const [bx, by, rx, ry] of blobs) {
+        ctx.beginPath();
+        ctx.ellipse(cx + bx, cy + by, rx, ry, (bx / 220), 0, TAU);
+        ctx.fill();
+      }
+      ctx.strokeStyle = 'rgba(128,96,165,.16)';
+      ctx.lineWidth = 2;
+      for (const [bx, by, rx, ry] of blobs) {
+        ctx.beginPath();
+        ctx.ellipse(cx + bx, cy + by, rx, ry, (bx / 220), 0, TAU);
+        ctx.stroke();
+      }
+      // leaf clusters for texture
+      const lr = seeded(20261109);
+      for (let i = 0; i < 64; i++) {
+        const a = lr() * TAU;
+        const rr = 26 + lr() * 78;
+        const lx = cx - 8 + Math.cos(a) * rr * 1.05;
+        const ly = cy - 112 + Math.sin(a) * rr * .58;
+        const cols = ['rgba(22,33,20,.9)', 'rgba(30,45,25,.85)', 'rgba(40,54,33,.6)'];
+        ctx.fillStyle = cols[Math.floor(lr() * cols.length)];
+        ctx.beginPath();
+        ctx.ellipse(lx, ly, 4 + lr() * 9, 2.5 + lr() * 5, lr() * TAU, 0, TAU);
+        ctx.fill();
+      }
+      // thorny twigs over the canopy
+      ctx.strokeStyle = 'rgba(58,72,42,.55)';
+      ctx.lineWidth = 1.2;
+      for (let i = 0; i < 26; i++) {
+        const a = lr() * TAU;
+        const rr = 40 + lr() * 62;
+        const sx = cx - 8 + Math.cos(a) * 18;
+        const sy = cy - 108 + Math.sin(a) * 12;
+        const ex = cx - 8 + Math.cos(a) * rr * 1.05;
+        const ey = cy - 108 + Math.sin(a) * rr * .6;
+        ctx.beginPath();
+        ctx.moveTo(sx, sy);
+        ctx.quadraticCurveTo(sx + (ex - sx) * .4 + 10, sy + (ey - sy) * .6 - 8, ex, ey);
+        ctx.stroke();
+      }
+      // hanging vines
+      ctx.strokeStyle = 'rgba(50,64,38,.8)';
+      ctx.lineWidth = 1.1;
+      for (let i = 0; i < 9; i++) {
+        const vx = cx - 96 + i * 24;
+        const vy = cy - 92 + (i % 3) * 9;
+        ctx.beginPath();
+        ctx.moveTo(vx, vy);
+        ctx.quadraticCurveTo(vx + 8, vy + 34, vx - 4, vy + 58 + (i % 4) * 14);
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(88,115,62,.55)';
+        ctx.beginPath();
+        ctx.ellipse(vx - 4, vy + 58 + (i % 4) * 14, 3, 1.6, .5, 0, TAU);
+        ctx.fill();
+      }
+    }
+    // roots
+    ctx.strokeStyle = alive ? 'rgba(28,30,22,.95)' : 'rgba(20,18,15,.9)';
+    ctx.lineCap = 'round';
+    const roots = [[-96, 34, -58, 8], [-70, 42, -38, 30], [-30, 48, -8, 40], [34, 46, 63, 32], [70, 40, 102, 26], [22, 50, 44, 38]];
+    for (const [x1, y1, x2, y2] of roots) {
+      ctx.lineWidth = 6 + Math.random() * 1.5;
+      ctx.beginPath();
+      ctx.moveTo(cx + x1 * .55, cy + y1);
+      ctx.quadraticCurveTo(cx + x2 * .7, cy + y2 + 18, cx + x2, cy + y2 + 38);
+      ctx.stroke();
+    }
+    if (!alive) {
+      // burnt stump
+      ctx.fillStyle = '#14120e';
+      ctx.beginPath();
+      ctx.moveTo(cx - 30, cy + 34);
+      ctx.lineTo(cx - 18, cy - 30);
+      ctx.lineTo(cx + 4, cy - 54);
+      ctx.lineTo(cx + 20, cy - 22);
+      ctx.lineTo(cx + 32, cy + 36);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(120,80,50,.35)';
+      ctx.lineWidth = 1.4;
+      for (let i = 0; i < 5; i++) {
+        ctx.beginPath();
+        ctx.moveTo(cx - 20 + i * 10, cy + 28);
+        ctx.quadraticCurveTo(cx - 12 + i * 9, cy - 10, cx - 4 + i * 5, cy - 36);
+        ctx.stroke();
+      }
+      ctx.fillStyle = 'rgba(220,140,80,.55)';
+      for (let i = 0; i < 6; i++) {
+        ctx.beginPath();
+        ctx.arc(cx - 18 + Math.random() * 38, cy + 12 + Math.random() * 20, 1 + Math.random() * 2, 0, TAU);
+        ctx.fill();
+      }
+      drawTreeHp(t, cx, cy);
+      ctx.restore();
+      return;
+    }
+    // trunk
+    const tg = ctx.createLinearGradient(cx - 34, cy, cx + 34, cy);
+    tg.addColorStop(0, '#151711');
+    tg.addColorStop(.45, '#2b2c1e');
+    tg.addColorStop(1, '#11120d');
+    ctx.fillStyle = tg;
+    ctx.beginPath();
+    ctx.moveTo(cx - 30, cy + 42);
+    ctx.bezierCurveTo(cx - 38, cy + 6, cx - 24, cy - 52, cx - 17, cy - 92);
+    ctx.bezierCurveTo(cx - 4, cy - 104, cx + 10, cy - 100, cx + 18, cy - 84);
+    ctx.bezierCurveTo(cx + 26, cy - 40, cx + 39, cy + 8, cx + 31, cy + 44);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(105,95,66,.22)';
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.moveTo(cx - 18, cy + 32);
+    ctx.bezierCurveTo(cx - 26, cy - 12, cx - 14, cy - 56, cx - 8, cy - 88);
+    ctx.stroke();
+    // trunk texture
+    ctx.strokeStyle = 'rgba(0,0,0,.4)';
+    ctx.lineWidth = 1.2;
+    for (let i = 0; i < 5; i++) {
+      ctx.beginPath();
+      ctx.moveTo(cx - 20 + i * 9, cy + 36);
+      ctx.bezierCurveTo(cx - 26 + i * 10, cy - 10, cx - 8 + i * 7, cy - 52, cx - 6 + i * 6, cy - 84);
+      ctx.stroke();
+    }
+    // branches
+    ctx.strokeStyle = 'rgba(24,25,17,.95)';
+    ctx.lineWidth = 7;
+    ctx.beginPath();
+    ctx.moveTo(cx - 10, cy - 70); ctx.quadraticCurveTo(cx - 52, cy - 102, cx - 70, cy - 128); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx + 8, cy - 66); ctx.quadraticCurveTo(cx + 48, cy - 92, cx + 66, cy - 120); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx - 4, cy - 84); ctx.quadraticCurveTo(cx + 10, cy - 116, cx + 24, cy - 132); ctx.stroke();
+    ctx.lineWidth = 3;
+    for (let i = 0; i < 9; i++) {
+      const bx = cx - 76 + i * 19;
+      const by = cy - 112 - Math.sin(i * 1.8) * 14;
+      ctx.beginPath();
+      ctx.moveTo(cx - 18 + i * 4, cy - 92);
+      ctx.quadraticCurveTo(bx, by + 22, bx, by);
+      ctx.stroke();
+    }
+    // canopy briars
+    ctx.strokeStyle = 'rgba(40,46,30,.62)';
+    ctx.lineWidth = 1.3;
+    for (let i = 0; i < 30; i++) {
+      const a = (i / 30) * TAU;
+      const rr = 52 + (i % 5) * 13;
+      const bx = cx + Math.cos(a) * rr;
+      const by = cy - 74 + Math.sin(a) * rr * .55;
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(a) * 26, cy - 74 + Math.sin(a) * 22);
+      ctx.quadraticCurveTo(bx + Math.sin(i) * 12, by - 18, bx, by);
+      ctx.stroke();
+    }
+    // fruits
+    const fruitGlow = 0.55 + pulse * 0.35;
+    for (const [fx, fy] of [[-26, -58], [18, -96], [36, -48]]) {
+      const fg = ctx.createRadialGradient(cx + fx, cy + fy, 0, cx + fx, cy + fy, 11);
+      fg.addColorStop(0, 'rgba(255,120,100,' + fruitGlow + ')');
+      fg.addColorStop(1, 'rgba(180,50,50,0)');
+      ctx.fillStyle = fg;
+      ctx.beginPath();
+      ctx.arc(cx + fx, cy + fy, 14, 0, TAU);
+      ctx.fill();
+      ctx.fillStyle = '#d95b53';
+      ctx.beginPath();
+      ctx.arc(cx + fx, cy + fy, 4.2, 0, TAU);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,200,170,.8)';
+      ctx.beginPath();
+      ctx.arc(cx + fx - 1, cy + fy - 1, 1.1, 0, TAU);
+      ctx.fill();
+    }
+    // face / hollow
+    ctx.fillStyle = 'rgba(5,7,5,.75)';
+    ctx.beginPath();
+    ctx.ellipse(cx - 2, cy - 40, 7, 11, .2, 0, TAU);
+    ctx.fill();
+    drawTreeHp(t, cx, cy);
+    ctx.restore();
+  }
+
+  function drawTreeHp(t, cx, cy) {
+    const wt = 120;
+    const bx = cx - wt / 2, by = cy - 150;
+    ctx.save();
+    ctx.fillStyle = 'rgba(4,7,5,.75)';
+    roundRect(ctx, bx, by, wt, 16, 8);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(217,179,108,.28)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,.07)';
+    roundRect(ctx, bx + 3, by + 3, wt - 6, 6, 3);
+    ctx.fill();
+    if (!t.dead) {
+      const fw = (wt - 6) * (t.hp / t.maxHp);
+      const hg = ctx.createLinearGradient(bx, 0, bx + wt, 0);
+      hg.addColorStop(0, '#7b4c8f');
+      hg.addColorStop(1, '#c2716a');
+      ctx.fillStyle = hg;
+      roundRect(ctx, bx + 3, by + 3, Math.max(2, fw), 6, 3);
+      ctx.fill();
+    }
+    if (!compactView) {
+      ctx.fillStyle = t.dead ? 'rgba(190,180,160,.55)' : '#e7dcc4';
+      ctx.font = '9px ' + getComputedStyle(document.body).fontFamily;
+      ctx.textAlign = 'center';
+      ctx.fillText(t.dead ? '枯木古树 · 已倒下' : '枯木古树', cx, by - 5);
+    }
+    ctx.restore();
+  }
+
+  function drawUnitGlyph(kind, x, y, s, color) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(s / 24, s / 24);
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx.lineWidth = 1.7;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    switch (kind) {
+      case 'fighter':
+        ctx.beginPath();
+        ctx.moveTo(-8, -6); ctx.lineTo(0, -9); ctx.lineTo(8, -6); ctx.lineTo(7, 2);
+        ctx.quadraticCurveTo(0, 11, -7, 2); ctx.closePath(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-2, 8); ctx.lineTo(8, -4); ctx.moveTo(4, 0); ctx.lineTo(8, 4);
+        ctx.stroke();
+        break;
+      case 'ranger':
+        ctx.beginPath();
+        ctx.arc(-3, 0, 9, -Math.PI * .42, Math.PI * .42); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(1, -7); ctx.lineTo(1, 7); ctx.moveTo(-7, 0); ctx.lineTo(10, 0);
+        ctx.moveTo(10, 0); ctx.lineTo(5, -3); ctx.moveTo(10, 0); ctx.lineTo(5, 3);
+        ctx.stroke();
+        break;
+      case 'wizard':
+        ctx.beginPath();
+        ctx.moveTo(-1, -10); ctx.lineTo(8, 5); ctx.lineTo(-10, 5); ctx.closePath(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-1, -10); ctx.lineTo(2, -5); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-7, 9); ctx.lineTo(7, 9); ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(9, -3, 2.3, 0, TAU); ctx.fill();
+        break;
+      case 'cleric':
+        ctx.beginPath();
+        ctx.arc(0, -2, 7, 0, TAU); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, -9); ctx.lineTo(0, 7); ctx.moveTo(-5, -2); ctx.lineTo(5, -2); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(7, 8); ctx.lineTo(11, 8); ctx.stroke();
+        break;
+      case 'druid':
+        ctx.beginPath();
+        ctx.moveTo(0, -10); ctx.quadraticCurveTo(10, -4, 9, 8); ctx.lineTo(-9, 8);
+        ctx.quadraticCurveTo(-10, -4, 0, -10); ctx.closePath(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-7, 8); ctx.quadraticCurveTo(-2, 2, 5, 5); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(6, -8); ctx.quadraticCurveTo(12, -4, 8, 1); ctx.stroke();
+        break;
+      case 'knight':
+        ctx.beginPath();
+        ctx.moveTo(-7, -7); ctx.quadraticCurveTo(0, -12, 7, -7); ctx.lineTo(7, 3); ctx.lineTo(-7, 3); ctx.closePath();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-2, 3); ctx.lineTo(-2, 10); ctx.moveTo(2, 3); ctx.lineTo(2, 10); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-4, -3); ctx.lineTo(4, -3); ctx.stroke();
+        break;
+      case 'twig':
+        ctx.beginPath();
+        ctx.moveTo(-5, 9); ctx.quadraticCurveTo(-8, 0, -2, -7); ctx.quadraticCurveTo(2, -2, 0, 4);
+        ctx.quadraticCurveTo(6, -1, 9, -8); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-4, 0); ctx.lineTo(-10, -4); ctx.moveTo(2, -1); ctx.lineTo(8, 5); ctx.stroke();
+        break;
+      case 'frog':
+        ctx.beginPath();
+        ctx.ellipse(0, 3, 9, 7, 0, 0, TAU); ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(-4, -5, 2.6, 0, TAU); ctx.arc(4, -5, 2.6, 0, TAU); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-3, 5); ctx.quadraticCurveTo(0, 8, 3, 5); ctx.stroke();
+        break;
+    }
+    ctx.restore();
+  }
+
+  function drawUnit(u, now) {
+    if (u.dead && u.kind !== 'tree') return;
+    const cx = u.vx, cy = u.vy;
+    const radius = u.size === 2 ? 30 : 20;
+    ctx.save();
+    if (u.done && u.side === 'party') ctx.globalAlpha = .55;
+    // shadow
+    ctx.fillStyle = 'rgba(0,0,0,.42)';
+    ctx.beginPath();
+    ctx.ellipse(cx, cy + radius * .72, radius * .95, radius * .32, 0, 0, TAU);
+    ctx.fill();
+    // selection glow
+    if (u.id === state.selectedId) {
+      const pulse = .5 + .5 * Math.sin(now / 260);
+      const g = ctx.createRadialGradient(cx, cy, 6, cx, cy, radius + 20);
+      g.addColorStop(0, 'rgba(217,179,108,.22)');
+      g.addColorStop(1, 'rgba(217,179,108,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius + 20, 0, TAU);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(232,196,124,' + (.5 + pulse * .35) + ')';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 5]);
+      ctx.lineDashOffset = -now / 60;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius + 8, 0, TAU);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    // ring
+    const ring = u.side === 'party' ? '#69c3b0' : (u.side === 'wild' ? '#d9b36c' : '#cf6d5d');
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, TAU);
+    ctx.fillStyle = 'rgba(7,11,8,.95)';
+    ctx.fill();
+    const g = ctx.createRadialGradient(cx - radius * .4, cy - radius * .5, 2, cx, cy, radius);
+    g.addColorStop(0, u.side === 'party' ? '#2b443a' : '#3a2a25');
+    g.addColorStop(1, '#0b100c');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius - 2, 0, TAU);
+    ctx.fill();
+    ctx.strokeStyle = ring;
+    ctx.lineWidth = 2.1;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius - 1, 0, TAU);
+    ctx.stroke();
+    // glyph
+    drawUnitGlyph(u.kind, cx, cy, u.size === 2 ? 30 : 22, u.side === 'party' ? '#e7e0cc' : '#e3d2c3');
+    // hp bar
+    const bw = u.size === 2 ? 62 : 42;
+    const bx = cx - bw / 2, by = cy - radius - 13;
+    ctx.fillStyle = 'rgba(3,5,4,.8)';
+    roundRect(ctx, bx, by, bw, 5, 2.5);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,.1)';
+    ctx.lineWidth = .8;
+    ctx.stroke();
+    ctx.fillStyle = u.side === 'party' ? '#6fc39d' : '#cf6d5d';
+    roundRect(ctx, bx + 1, by + 1, Math.max(0, (bw - 2) * (u.hp / u.maxHp)), 3, 1.5);
+    ctx.fill();
+    // name
+    if (!compactView) {
+      ctx.fillStyle = 'rgba(228,222,204,.9)';
+      ctx.font = '9px ' + getComputedStyle(document.body).fontFamily;
+      ctx.textAlign = 'center';
+      ctx.fillText(u.name, cx, by - 4);
+    }
+    // status dots
+    const dots = [];
+    if (u.rooted) dots.push('#a98bd6');
+    if (u.shieldRound === state.round) dots.push('#7fc6dd');
+    if (u.kind === 'druid' && state.round <= u.barkUntil) dots.push('#b08b5a');
+    if (dots.length) {
+      dots.forEach((c, i) => {
+        ctx.fillStyle = c;
+        ctx.beginPath();
+        ctx.arc(cx - (dots.length - 1) * 4 + i * 8, cy + radius + 8, 2.1, 0, TAU);
+        ctx.fill();
+      });
+    }
+    // done check
+    if (u.done && u.side === 'party') {
+      ctx.fillStyle = 'rgba(5,8,6,.8)';
+      ctx.beginPath();
+      ctx.arc(cx + radius - 4, cy - radius + 3, 7, 0, TAU);
+      ctx.fill();
+      ctx.strokeStyle = '#7fbf9f';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(cx + radius - 7, cy - radius + 3);
+      ctx.lineTo(cx + radius - 5, cy - radius + 6);
+      ctx.lineTo(cx + radius - 1, cy - radius);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawEffects(now) {
+    for (const e of state.effects) {
+      const k = clamp(e.age / e.dur, 0, 1);
+      ctx.save();
+      if (e.type === 'text') {
+        const y = e.y + (e.vy || -26) * k;
+        ctx.globalAlpha = 1 - k;
+        ctx.fillStyle = e.color;
+        ctx.font = '700 ' + (e.size || 16) + 'px ' + getComputedStyle(document.body).fontFamily;
+        ctx.textAlign = 'center';
+        ctx.shadowColor = 'rgba(0,0,0,.8)';
+        ctx.shadowBlur = 4;
+        ctx.fillText(e.text, e.x, y);
+      } else if (e.type === 'spark') {
+        ctx.globalAlpha = 1 - k;
+        ctx.fillStyle = e.color;
+        ctx.beginPath();
+        ctx.arc(e.x + e.vx * k * .5, e.y + e.vy * k * .5, Math.max(.4, e.size * (1 - k * .5)), 0, TAU);
+        ctx.fill();
+      } else if (e.type === 'ember') {
+        ctx.globalAlpha = 1 - k;
+        ctx.fillStyle = e.color;
+        const ex = e.x + (e.vx || 0) * k, ey = e.y + (e.vy || -20) * k;
+        ctx.beginPath();
+        ctx.arc(ex, ey, e.size * (1 - k * .6), 0, TAU);
+        ctx.fill();
+      } else if (e.type === 'bolt') {
+        const cx = e.x0 + (e.x1 - e.x0) * k;
+        const cy = e.y0 + (e.y1 - e.y0) * k;
+        ctx.globalAlpha = .9;
+        ctx.fillStyle = e.color;
+        ctx.shadowColor = e.color;
+        ctx.shadowBlur = 16;
+        ctx.beginPath();
+        ctx.arc(cx, cy, 3.2, 0, TAU);
+        ctx.fill();
+        ctx.globalAlpha = .35;
+        ctx.strokeStyle = e.color;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(e.x0, e.y0);
+        ctx.lineTo(cx, cy);
+        ctx.stroke();
+      } else if (e.type === 'slash') {
+        ctx.globalAlpha = 1 - k;
+        ctx.strokeStyle = e.color;
+        ctx.lineWidth = 3 * (1 - k) + 1;
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, 22 + k * 16, e.angle - .9, e.angle + .9);
+        ctx.stroke();
+      } else if (e.type === 'shield') {
+        ctx.globalAlpha = .8 * (1 - k);
+        ctx.strokeStyle = '#8ecde0';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, 20 + k * 26, 0, TAU);
+        ctx.stroke();
+      } else if (e.type === 'heal') {
+        ctx.globalAlpha = 1 - k;
+        ctx.fillStyle = '#a7e1a8';
+        for (let i = 0; i < 5; i++) {
+          const a = i / 5 * TAU + now / 500;
+          const rr = 8 + k * 28;
+          ctx.fillRect(e.x + Math.cos(a) * rr, e.y + Math.sin(a) * rr - k * 20, 3, 3);
+        }
+      } else if (e.type === 'root') {
+        ctx.globalAlpha = .85 * (1 - k * .3);
+        ctx.strokeStyle = '#7fa15b';
+        ctx.lineWidth = 2;
+        for (let i = 0; i < 4; i++) {
+          const a = i / 4 * TAU + .4;
+          ctx.beginPath();
+          ctx.moveTo(e.x + Math.cos(a) * 10, e.y + 8 + Math.sin(a) * 6);
+          ctx.quadraticCurveTo(
+            e.x + Math.cos(a) * (26 + k * 16), e.y + Math.sin(a) * (16 + k * 10),
+            e.x + Math.cos(a) * (34 + k * 22), e.y + 10 + Math.sin(a) * (24 + k * 12)
+          );
+          ctx.stroke();
+        }
+      } else if (e.type === 'death') {
+        ctx.globalAlpha = .5 * (1 - k);
+        ctx.strokeStyle = '#9a8f7c';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, 12 + k * 34, 0, TAU);
+        ctx.stroke();
+      } else if (e.type === 'tile') {
+        ctx.globalAlpha = .5 * (1 - k);
+        ctx.fillStyle = e.color;
+        roundRect(ctx, e.x * T + 3, e.y * T + 3, T - 6, T - 6, 7);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  function drawLighting(now) {
+    // vignette
+    const v = ctx.createRadialGradient(W * .48, H * .46, 120, W * .5, H * .5, W * .78);
+    v.addColorStop(0, 'rgba(0,0,0,0)');
+    v.addColorStop(.62, 'rgba(2,4,3,.10)');
+    v.addColorStop(1, 'rgba(2,4,3,.62)');
+    ctx.fillStyle = v;
+    ctx.fillRect(0, 0, W, H);
+    // faint shaft
+    ctx.save();
+    ctx.globalCompositeOperation = 'screen';
+    const shaft = ctx.createLinearGradient(W * .2, 0, W * .55, H);
+    shaft.addColorStop(0, 'rgba(140,180,150,.055)');
+    shaft.addColorStop(1, 'rgba(140,180,150,0)');
+    ctx.fillStyle = shaft;
+    ctx.beginPath();
+    ctx.moveTo(W * .30, 0);
+    ctx.lineTo(W * .48, 0);
+    ctx.lineTo(W * .72, H);
+    ctx.lineTo(W * .40, H);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+    drawMotes(now);
+  }
+
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    if (floorCanvas) ctx.drawImage(floorCanvas, 0, 0, W, H);
+    drawRangeTiles();
+    drawTree(now);
+    const units = state.units.filter((u) => !u.dead || u.kind === 'tree').sort((a, b) => a.vy - b.vy);
+    for (const u of units) {
+      if (u.kind === 'tree') continue;
+      if (u.dead) continue;
+      drawUnit(u, now);
+    }
+    // reticle over hovered enemy
+    if (state.hover) {
+      const h = unitAt(state.hover.x, state.hover.y);
+      if (h && h.side !== 'party') drawTargetBrackets(h.vx, h.vy, h.size || 1, '#d98b78', now);
+    }
+    drawEffects(now);
+    drawLighting(now);
+  }
+
+  function updateEffects(dt) {
+    for (const e of state.effects) e.age += dt;
+    state.effects = state.effects.filter((e) => e.age < e.dur);
+  }
+
+  function loop(now) {
+    if (!state) return;
+    const dt = lastFrame ? Math.min(60, now - lastFrame) : 16;
+    lastFrame = now;
+    updateEffects(dt);
+    draw(now);
+    if (state.ticker && performance.now() > state.ticker.until) {
+      state.ticker = null;
+      updateHint();
+    }
+    requestAnimationFrame(loop);
+  }
+
+  /* ============================================================
+     Banner
+     ============================================================ */
+  function banner(main, sub, ms = 1200) {
+    const el = $('#banner');
+    if (!el) return;
+    el.innerHTML = `<div class="banner-main">${esc(main)}</div>${sub ? `<div class="banner-sub">${esc(sub)}</div>` : ''}`;
+    el.classList.add('show');
+    clearTimeout(bannerTimer);
+    bannerTimer = setTimeout(() => el.classList.remove('show'), ms);
+  }
+
+  /* ============================================================
+     Events & init
+     ============================================================ */
+  $('#board').addEventListener('pointerdown', onBoardPointerDown);
+  $('#board').addEventListener('pointermove', onBoardPointerMove);
+  $('#board').addEventListener('pointerleave', onBoardPointerLeave);
+  $('#btnEnd').addEventListener('click', endPlayerPhase);
+  $('#btnLog').addEventListener('click', () => openDrawer('log'));
+  $('#btnWords').addEventListener('click', () => openDrawer('words'));
+  $('#btnHelp').addEventListener('click', () => openDrawer('help'));
+  $('#mobileInfo').addEventListener('click', (e) => {
+    const chip = e.target.closest('[data-foe]');
+    if (!chip) return;
+    const u = byId(chip.dataset.foe);
+    if (u) inspectUnit(u, true);
+  });
+  $('#partyStrip').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-hero]');
+    if (b) selectUnit(b.dataset.hero);
+  });
+  $('#abilityBar').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ability]');
+    if (b) chooseAbility(b.dataset.ability);
+  });
+  $('#drawer').addEventListener('click', (e) => {
+    if (e.target.closest('[data-close]')) closeDrawer();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (state.drawer) { closeDrawer(); return; }
+      if (cancelTargeting()) return;
+      if (state.selectedId) deselect();
+    }
+  });
+  window.addEventListener('resize', () => { setupCanvas(); fitBoard(); });
+  window.addEventListener('orientationchange', () => { setTimeout(() => { setupCanvas(); fitBoard(); }, 120); });
+
+  function init() {
+    state = freshState();
+    if (new URLSearchParams(location.search).has('debug')) {
+      window.__tacticalDebug = {
+        snapshot: () => ({
+          phase: state.phase, round: state.round, selected: state.selectedId,
+          flags: { ...state.flags },
+          log: state.log.slice(-30).map((l) => ({ round: l.round, text: l.text, kind: l.kind })),
+          units: state.units.map((u) => ({ id: u.id, side: u.side, x: u.x, y: u.y, hp: u.hp, maxHp: u.maxHp, dead: u.dead, done: u.done, moved: u.moved, acted: u.acted, rooted: u.rooted })),
+        }),
+        damage: (id, n) => { const u = byId(id); if (u) applyDamage(u, n, { source: party()[0], damageType: 'force' }); },
+        win: () => { const t = tree(), d = druid(); if (t) t.hp = 1; if (d) d.hp = 1; if (t) applyDamage(t, 5, { source: party()[0] }); if (d) applyDamage(d, 5, { source: party()[0] }); },
+      };
+    }
+    setupCanvas();
+    floorCanvas = buildFloor();
+    fitBoard();
+    renderUI();
+    showCover();
+    requestAnimationFrame(loop);
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
