@@ -648,6 +648,67 @@
         }
       }
 
+      @media (max-height: 620px) {
+        .app {
+          padding-top: 10px;
+          padding-bottom: calc(8px + env(safe-area-inset-bottom));
+        }
+
+        .stage {
+          padding: 0;
+        }
+
+        .prompt {
+          font-size: 12px;
+        }
+
+        .word {
+          font-size: clamp(2rem, 7vw, 2.6rem);
+        }
+
+        .meta {
+          margin-top: 6px;
+          font-size: 12px;
+        }
+
+        .options {
+          margin-top: 8px;
+          gap: 6px;
+        }
+
+        .option {
+          min-height: 46px;
+        }
+
+        .feedback {
+          margin-top: 6px;
+          padding: 8px 12px 10px;
+        }
+
+        .fb-answer {
+          margin-top: 4px;
+          font-size: 15px;
+        }
+
+        .fb-example {
+          margin-top: 3px;
+          font-size: 12.5px;
+        }
+
+        .fb-example .zh {
+          font-size: 12px;
+        }
+
+        .fb-meta {
+          margin-top: 6px;
+        }
+
+        .next {
+          min-height: 46px;
+          margin-top: 8px;
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
