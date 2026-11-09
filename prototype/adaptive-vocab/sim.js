@@ -435,15 +435,34 @@ function makeDeck(theta, words, rng, mismatch = 0.35, shockRate = 0) {
   });
 }
 
-function trueRecall(card, day) {
-  return retrievability(day - card.lastReviewDay, card.sTrue);
+function trueRecall(card, day, trueModel = 'fsrs') {
+  const elapsed = day - card.lastReviewDay;
+  const s = Math.max(0.2, card.sTrue);
+  if (trueModel === 'exponential') return Math.pow(0.9, elapsed / s);
+  if (trueModel === 'power07') {
+    const decay = -0.7;
+    const factor = Math.pow(0.9, 1 / decay) - 1;
+    return Math.pow(1 + factor * (elapsed / s), decay);
+  }
+  return retrievability(elapsed, s);
 }
 
-function trueUpdate(card, correct, elapsed) {
+function trueUpdate(card, correct, elapsed, trueModel = 'fsrs') {
   if (card.sTrue <= 0) card.sTrue = 1;
-  const next = fsrsUpdate({ s: card.sTrue, d: card.dTrue }, correct, elapsed);
-  card.sTrue = next.s;
-  card.dTrue = next.d;
+  if (trueModel === 'fsrs') {
+    const next = fsrsUpdate({ s: card.sTrue, d: card.dTrue }, correct, elapsed);
+    card.sTrue = next.s;
+    card.dTrue = next.d;
+    return;
+  }
+  // 替代真实模型：只保留“成功变稳、失败变脆”的单调规则，
+  // 用来检验推荐调度器是不是只在“真实世界也服从 FSRS”时占优。
+  if (correct) {
+    const spacing = 1 + 0.35 * Math.min(1, elapsed / Math.max(1, card.sTrue));
+    card.sTrue = Math.min(3650, card.sTrue * 1.5 * spacing);
+  } else {
+    card.sTrue = Math.max(0.4, card.sTrue * 0.3);
+  }
 }
 
 function modelUpdate(card, correct, elapsed) {
@@ -471,7 +490,7 @@ function auditScore(card, day) {
   return Math.pow(ratio, 1.35) * (1 + 1.6 * card.lapses) * card.value;
 }
 
-function applyResult(card, correct, day, algorithm) {
+function applyResult(card, correct, day, algorithm, trueModel = 'fsrs') {
   const elapsed = day - card.lastReviewDay;
   card.reviews += 1;
   card.lastResult = correct;
@@ -484,13 +503,13 @@ function applyResult(card, correct, day, algorithm) {
     }
     card.due = day + FIXED_INTERVALS[card.stage];
     if (correct && before === FIXED_INTERVALS.length - 1) card.mastered = true;
-    trueUpdate(card, correct, elapsed);
+    trueUpdate(card, correct, elapsed, trueModel);
   } else {
     if (!correct) card.lapses += 1;
     modelUpdate(card, correct, elapsed);
     card.due = day + Math.max(1, Math.round(intervalFor(card.sHat, 0.9)));
     if (card.sHat > 60) card.mastered = true;
-    trueUpdate(card, correct, elapsed);
+    trueUpdate(card, correct, elapsed, trueModel);
   }
   card.lastReviewDay = day;
   if (!correct) card.forgotDetected = true;
@@ -554,6 +573,7 @@ export function runScheduling({
   mismatch = 0.35,
   shockRate = 0,
   auditShare = 0.1,
+  trueModel = 'fsrs',
   methods = schedulingMethods().map((m) => m.key)
 } = {}) {
   const words = makeWordBank(wordCount);
@@ -582,14 +602,14 @@ export function runScheduling({
       for (let day = 1; day <= days; day += 1) {
         for (const card of deck) {
           if (shockRate > 0 && rng() < shockRate && card.sTrue > 2) card.sTrue *= 0.25;
-          if (card.forgottenAt === null && trueRecall(card, day) < 0.7) {
+          if (card.forgottenAt === null && trueRecall(card, day, trueModel) < 0.7) {
             card.forgottenAt = day;
             sumEvents += 1;
           }
         }
         const picks = selectItems(deck, day, budget, key, rng, auditShare);
         for (const card of picks) {
-          const r = trueRecall(card, day);
+          const r = trueRecall(card, day, trueModel);
           const correct = rng() < r;
           sumWaste += r > 0.9 ? 1 : 0;
           if (!correct && card.forgottenAt !== null && !card.detectedEvent) {
@@ -597,11 +617,11 @@ export function runScheduling({
             sumDetected += 1;
             card.detectedEvent = true;
           }
-          applyResult(card, correct, day, key === 'fixed' ? 'fixed' : 'fsrs');
+          applyResult(card, correct, day, key === 'fixed' ? 'fixed' : 'fsrs', trueModel);
         }
       }
       for (const card of deck) {
-        const r = trueRecall(card, days + 1);
+        const r = trueRecall(card, days + 1, trueModel);
         sumRetention += r;
         sumReviews += card.reviews;
         sumWords += 1;
@@ -622,14 +642,14 @@ export function runScheduling({
       silent: sumSilent / sumWords
     });
   }
-  return { learners, words: wordCount, days, budget, result };
+  return { learners, words: wordCount, days, budget, trueModel, result };
 }
 
 // ---------------------------------------------------------------------------
 // 单学习者逐日轨迹：交互演示用
 // ---------------------------------------------------------------------------
 
-export function simulateLearnerTrack({ theta = 0, words: wordCount = 60, days = 30, budget = 8, seed = 3, algorithm = 'three' } = {}) {
+export function simulateLearnerTrack({ theta = 0, words: wordCount = 60, days = 30, budget = 8, seed = 3, algorithm = 'three', trueModel = 'fsrs' } = {}) {
   const rng = mulberry32(seed);
   const words = makeWordBank(wordCount);
   const deck = makeDeck(theta, words, rng, 0.3, 0);
@@ -638,12 +658,12 @@ export function simulateLearnerTrack({ theta = 0, words: wordCount = 60, days = 
     const picks = selectItems(deck, day, budget, algorithm, rng);
     let correctCount = 0;
     for (const card of picks) {
-      const r = trueRecall(card, day);
+      const r = trueRecall(card, day, trueModel);
       const correct = rng() < r;
       if (correct) correctCount += 1;
-      applyResult(card, correct, day, algorithm === 'fixed' ? 'fixed' : 'fsrs');
+      applyResult(card, correct, day, algorithm === 'fixed' ? 'fixed' : 'fsrs', trueModel);
     }
-    const retention = deck.reduce((a, c) => a + trueRecall(c, day), 0) / deck.length;
+    const retention = deck.reduce((a, c) => a + trueRecall(c, day, trueModel), 0) / deck.length;
     timeline.push({
       day,
       reviews: picks.length,

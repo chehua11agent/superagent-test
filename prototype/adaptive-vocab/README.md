@@ -56,6 +56,7 @@ prototype/adaptive-vocab/
 
 ```bash
 npm test          # 包含 tests/adaptive-vocab.test.mjs
+node scripts/robustness-adaptive.mjs   # 20 seeds + 3 种真实遗忘曲线复核
 ```
 
 ## 仿真模型（诚实说明）
@@ -80,5 +81,3 @@ npm test          # 包含 tests/adaptive-vocab.test.mjs
 ## 接进游戏
 
 调研文档第 4 节给了最小改法：保留 `game/src/srs.js` 的对外函数，新增 FSRS 纯函数；把 `nextNewWords` 的词频排序换成混合选题；复习队列先到期、再巡检；答错先次日确认。先用开关灰度，拿真实数据校准后再替换默认 SRS。
-
-<!-- preview retrigger: 2026-11-09T10:44Z -->
