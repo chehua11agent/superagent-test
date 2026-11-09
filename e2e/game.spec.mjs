@@ -23,6 +23,9 @@ async function expectHome(page) {
 async function startNewGame(page) {
   await page.goto('/');
   await expect(page.locator('.cover-title')).toHaveText('拾词者');
+  await expect(page.locator('.cover-cast')).toBeVisible();
+  await expect(page.locator('.cover-player .player-svg')).toBeVisible();
+  await expect(page.locator('.cover-foe .foe-svg')).toBeVisible();
   await page.getByRole('button', { name: '开始新的航程' }).click();
   await expectHome(page);
 }
@@ -30,6 +33,7 @@ async function startNewGame(page) {
 async function loadDemo(page) {
   await page.goto('/');
   await expect(page.locator('.cover-title')).toHaveText('拾词者');
+  await expect(page.locator('.cover-cast')).toBeVisible();
   await page.getByRole('button', { name: '体验演示存档' }).click();
   await expectHome(page);
   await expect(page.locator('#toast')).not.toHaveClass(/show/, { timeout: 6000 });
@@ -129,6 +133,9 @@ async function seedStory(page) {
   await page.reload({ waitUntil: 'networkidle' });
   await page.goto('/#/story');
   await expect(page.locator('[data-action="contract-accept"]')).toBeVisible();
+  await expect(page.locator('.story-cast')).toBeVisible();
+  await expect(page.locator('.story-player .player-svg')).toBeVisible();
+  await expect(page.locator('.story-npc .npc-svg')).toBeVisible();
 }
 
 async function seedBoss(page) {
@@ -191,6 +198,9 @@ test('新游戏：3 幕 → 结算 → 快进后出现 12 张到期复习', asyn
 test('演示存档：复习优先，清空 12 张后才进入契约', async ({ page }) => {
   await loadDemo(page);
   await expect(page.locator('.daily-card')).toContainText('先清完复习');
+  await expect(page.locator('.map-route .route-walked')).toHaveCount(1);
+  await expect(page.locator('.map-node.current em')).toBeVisible();
+  await expect(page.locator('#map-canvas .parallax-layer')).toHaveCount(3);
   await page.locator('[data-action="review"]').click();
   await expect(page.getByRole('heading', { name: '到期复习' })).toBeVisible();
   await expect(page.locator('.review-card')).toContainText('1 / 12');
@@ -308,6 +318,15 @@ test('词卡战斗：第 4 幕的词变成手牌，3 回合内推进剧情', asy
   await expect(page.locator('.outcome')).toBeVisible();
   await page.locator('[data-action="start-battle"]').click();
   await expect(page.locator('#battle-panel')).toBeVisible();
+  await expect(page.locator('.battle-player')).toBeVisible();
+  await expect(page.locator('.player-name')).toHaveText('拾词者');
+  await expect(page.locator('.battle-foe')).toBeVisible();
+  await expect(page.locator('.foe-name')).toHaveText('雾中守塔人');
+  await expect(page.locator('.enemy-intent')).toBeVisible();
+  await expect(page.locator('.battle-card-icon path')).toHaveCount(4);
+  expect(
+    await page.locator('.battle-card').first().evaluate((el) => getComputedStyle(el).borderImageSource)
+  ).toContain('data:image');
 
   for (let round = 0; round < 3; round += 1) {
     if (await page.locator('.battle-final').count()) break;
@@ -336,6 +355,11 @@ test('词卡战斗：第 4 幕的词变成手牌，3 回合内推进剧情', asy
       await page.locator('#battle-form button[type="submit"]').click();
     }
     await page.waitForTimeout(300);
+    if (round === 0) {
+      await expect(page.locator('.damage-enemy')).toBeVisible();
+      await expect(page.locator('.battle-player.is-casting')).toBeVisible();
+      await expect(page.locator('.skill-orb')).toBeVisible();
+    }
     if (await page.locator('.battle-final').count()) break;
     await page.locator('[data-action="battle-next"]').click();
   }
@@ -390,6 +414,11 @@ test('设置与重置：减少动效生效，清档回到封面', async ({ page 
 
   await page.locator('#reduce-motion').check({ force: true });
   await expect(page.locator('body')).toHaveClass(/reduce-motion/);
+  await expect(page.locator('#sound-on')).toBeChecked();
+  await page.locator('#sound-on').uncheck({ force: true });
+  expect(await page.evaluate(() => window.__shici.save.settings.sound)).toBe(false);
+  await page.locator('#sound-on').check({ force: true });
+  expect(await page.evaluate(() => window.__shici.save.settings.sound)).toBe(true);
   await page.locator('#anchor-time').fill('07:30');
   await page.locator('#anchor-time').blur();
   expect(await page.evaluate(() => window.__shici.save.settings.anchor)).toBe('07:30');
@@ -426,6 +455,31 @@ test.describe('移动端', () => {
     await page.goto('/#/story');
     await expect(page.locator('[data-action="contract-accept"]')).toBeInViewport();
     await expect(page.locator('[data-action="contract-skip"]')).toBeInViewport();
+    await expect(page.locator('.story-cast')).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+  });
+
+  test('词卡战斗：人物/怪物可见且无横向溢出', async ({ page }) => {
+    await loadDemo(page);
+    await page.evaluate((key) => {
+      const save = JSON.parse(localStorage.getItem(key));
+      save.progress.sceneIndex = 3;
+      save.day.reviewCleared = true;
+      save.day.scenesPlayed = 0;
+      save.day.completed = false;
+      save.day.started = true;
+      save.battle = {
+        sceneId: 'ch1_sc04', round: 0, enemyHp: 3, successes: 0, failures: 0,
+        phase: 'choose', lastOutcome: null, done: false, won: false
+      };
+      localStorage.setItem(key, JSON.stringify(save));
+    }, SAVE_KEY);
+    await page.reload({ waitUntil: 'networkidle' });
+    await page.goto('/#/battle');
+    await expect(page.locator('.battle-player')).toBeVisible();
+    await expect(page.locator('.battle-foe')).toBeVisible();
+    await expect(page.locator('.battle-intent-mobile')).toBeVisible();
+    await expect(page.locator('.enemy-intent')).toBeHidden();
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
   });
 });
