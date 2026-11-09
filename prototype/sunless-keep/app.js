@@ -29,6 +29,10 @@ const state = {
   aftermath: null,
   endingId: null,
   showZh: true,
+  viewMode: 'dm',
+  voice: 'ryan',
+  audioManifest: null,
+  audioEl: null,
   sound: false,
   mapZoom: 1,
   selectedId: null,
@@ -42,6 +46,11 @@ const state = {
 };
 
 function clone(o) { return JSON.parse(JSON.stringify(o)); }
+function hashText(text) {
+  let h = 2166136261;
+  for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return (h >>> 0).toString(16).padStart(8, '0');
+}
 function skillLabel(s) { const en = Rules.SKILL_LABEL[s] || cap(s); return state.showZh ? (ZH.skills[s] || en) : en; }
 function T(en, zh) { return (state.showZh && zh) ? zh : en; }
 function abilityLabel(a) { return state.showZh ? (ZH.abilities[a] || a) : a.toUpperCase(); }
@@ -173,7 +182,7 @@ function saveGame() {
       v: 1, sceneId: state.sceneId, party: state.party, flags: state.flags, clues: state.clues,
       inventory: state.inventory, gold: state.gold, xp: state.xp, visited: state.visited,
       checksDone: state.checksDone, endingId: state.endingId, stats: state.stats,
-      startedAt: state.startedAt, sound: state.sound, showZh: state.showZh
+      startedAt: state.startedAt, sound: state.sound, showZh: state.showZh, viewMode: state.viewMode, voice: state.voice
     }));
   } catch (e) { /* storage may be unavailable */ }
 }
@@ -195,6 +204,7 @@ function resumeGame() {
   state.xp = d.xp || 0; state.visited = d.visited || []; state.checksDone = d.checksDone || {};
   state.endingId = d.endingId || null; state.stats = d.stats || state.stats;
   state.startedAt = d.startedAt || Date.now(); state.sound = !!d.sound; state.showZh = !!d.showZh;
+  state.viewMode = d.viewMode === 'page' ? 'page' : 'dm'; state.voice = d.voice === 'browser' ? 'browser' : 'ryan';
   document.body.classList.toggle('show-zh', state.showZh);
   if (state.endingId) { renderEnding(state.endingId); return; }
   if (!state.sceneId) state.sceneId = SCENARIO.startScene;
@@ -207,6 +217,8 @@ function renderHud() {
   const bt = $('.brand-title'); if (bt) bt.textContent = T('The Sunless Keep', '无光城塞');
   const bs = $('.brand-sub'); if (bs) bs.textContent = T('A 5e adventure', '5e 冒险');
   const hb = { journalBtn: ['Journal', '日志'], wordsBtn: ['Words', '词表'], soundBtn: ['Read aloud', '朗读'], restartBtn: ['Restart', '重来'] };
+  const vb = document.getElementById('viewBtn'); if (vb) vb.textContent = state.viewMode === 'dm' ? T('DM dialogue', 'DM 对话') : T('Reading mode', '文字阅读');
+  const vc = document.getElementById('voiceBtn'); if (vc) vc.textContent = state.voice === 'browser' ? T('Browser voice', '浏览器语音') : `${T('Voice', '声线')} · Ryan`;
   Object.entries(hb).forEach(([id, [en, zh]]) => { const b = document.getElementById(id); if (b) b.textContent = T(en, zh); });
   const strip = $('#partyStrip');
   if (!state.party.length) { strip.innerHTML = ''; }
@@ -299,6 +311,7 @@ function pickActor(interaction, onPick) {
 function showCheckRoll(interaction, actorId) {
   const actor = getChar(actorId);
   if (!actor) return;
+  recordPlayerChoice(interaction);
   const r = Rules.check(actor, interaction.skill, interaction.dc);
   state.stats.checks++;
   if (r.ok) state.stats.successes++;
@@ -313,6 +326,7 @@ function showCheckRoll(interaction, actorId) {
 }
 
 function showGroupRoll(interaction) {
+  recordPlayerChoice(interaction);
   const party = state.party.filter((p) => !p.dead);
   const rows = party.map((p) => {
     const r = Rules.check(p, interaction.skill, interaction.dc);
@@ -391,6 +405,47 @@ document.addEventListener('keydown', (e) => {
 });
 
 function speak(text) {
+  const voice = state.voice || 'ryan';
+  if (voice !== 'browser') {
+    const hashes = state.audioManifest?.voices?.[voice]?.hashes;
+    const h = hashText(text);
+    if (hashes && hashes.includes(h)) {
+      try { if (state.audioEl) { state.audioEl.pause(); state.audioEl.currentTime = 0; } } catch (e) {}
+      const a = new Audio(`audio/${voice}/${h}.mp3`);
+      state.audioEl = a;
+      a.onerror = () => speakBrowser(text);
+      a.play().catch(() => speakBrowser(text));
+      return;
+    }
+  }
+  speakBrowser(text);
+}
+function speakSequence(texts) {
+  const list = (texts || []).filter(Boolean);
+  if (!list.length) return;
+  try { if (state.audioEl) { state.audioEl.pause(); state.audioEl = null; } } catch (e) {}
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  let i = 0;
+  const next = () => {
+    if (i >= list.length) return;
+    const text = list[i++];
+    const hashes = state.audioManifest?.voices?.[state.voice]?.hashes;
+    const h = hashText(text);
+    if (state.voice !== 'browser' && hashes && hashes.includes(h)) {
+      const a = new Audio(`audio/${state.voice}/${h}.mp3`);
+      state.audioEl = a;
+      a.onended = next;
+      a.onerror = () => { speakBrowser(text); setTimeout(next, Math.max(1400, text.length * 55)); };
+      a.play().catch(() => { speakBrowser(text); setTimeout(next, Math.max(1400, text.length * 55)); });
+    } else {
+      speakBrowser(text);
+      setTimeout(next, Math.max(1600, text.length * 55));
+    }
+  };
+  next();
+}
+
+function speakBrowser(text) {
   if (!('speechSynthesis' in window)) { toast(T('Read-aloud is not available in this browser.', '这个浏览器不支持朗读。')); return; }
   try {
     window.speechSynthesis.cancel();
@@ -449,6 +504,7 @@ function renderTitle() {
             <span class="badge">${T('initiative & grid combat', '先攻与网格战斗')}</span>
             <span class="badge">${T('spells, conditions, death saves', '法术、状态、死亡豁免')}</span>
             <span class="badge">${T('English read-aloud + 中文', '英文朗读 + 中文对照')}</span>
+            <span class="badge hot">${T('DM dialogue + neural voice', 'DM 对话 + 神经语音')}</span>
           </div>
           <div class="title-actions">
             ${cont}
@@ -630,6 +686,25 @@ function bindGlobal() {
     refreshScreen();
     renderHud(); saveGame();
   });
+  $('#viewBtn').addEventListener('click', () => {
+    state.viewMode = state.viewMode === 'dm' ? 'page' : 'dm';
+    saveGame();
+    refreshScreen();
+    renderHud();
+  });
+  $('#voiceBtn').addEventListener('click', () => {
+    const options = [
+      { key: 'ryan', title: 'Ryan', sub: T('British male · neural', '英式男声 · 神经语音'), sample: SCENARIO.scenes.oakvale.read[0].en },
+      { key: 'browser', title: T('Browser voice', '浏览器语音'), sub: T('Fallback · depends on your device', '后备方案 · 取决于你的设备'), sample: SCENARIO.scenes.oakvale.read[0].en }
+    ];
+    openModal(`<div class="modal"><h3>${T('Read-aloud voice', '朗读声线')}</h3><div class="m-sub">${T('Neural voices are pre-generated and work on any device. Browser voice is the fallback.', '神经语音是预生成的，任何设备都能用；浏览器语音是后备。')}</div>
+      <div class="actions" style="margin-top:10px">${options.map((o) => `<button class="act" data-voice="${o.key}"><span class="act-ico">${o.key === 'browser' ? 'B' : '✦'}</span><span class="act-body"><span class="act-label">${esc(o.title)} ${state.voice === o.key ? '✓' : ''}</span><span class="act-meta">${esc(o.sub)}</span></span></button>`).join('')}</div>
+      <div class="m-actions"><button class="btn small" data-close>${T('Close', '关闭')}</button></div></div>`);
+    $$('[data-voice]').forEach((b) => b.addEventListener('click', () => {
+      state.voice = b.dataset.voice; saveGame(); renderHud(); $('#modalRoot').innerHTML = '';
+      speak(SCENARIO.scenes.oakvale.read[0].en);
+    }));
+  });
   $('#soundBtn').addEventListener('click', () => {
     state.sound = !state.sound;
     if (!state.sound && 'speechSynthesis' in window) window.speechSynthesis.cancel();
@@ -654,6 +729,7 @@ function boot() {
   const saved = loadGame();
   if (saved) state.showZh = !!saved.showZh;
   document.body.classList.toggle('show-zh', state.showZh);
+  fetch('audio/manifest.json').then((r) => r.json()).then((m) => { state.audioManifest = m; }).catch(() => {});
   renderTitle();
 }
 
@@ -683,16 +759,106 @@ function goScene(id) {
 
 function currentSceneData() { return SCENARIO.scenes[state.sceneId]; }
 
+function renderSceneDM() {
+  const s = currentSceneData();
+  if (!s) { renderTitle(); return; }
+  const z = zScene();
+  const doneForScene = state.checksDone[s.id] || {};
+  const say = (text) => `<button class="dm-say" data-say="${esc(text)}" title="${T('Play this line', '朗读这一段')}">▶</button>`;
+  const dmRow = (en, zh, extra = '') => `<div class="dm-row dm">
+    <div class="dm-avatar">DM</div>
+    <div class="dm-body"><div class="dm-name">DM · ${T('Dungeon Master', '地下城主')}</div>
+      <div class="dm-bubble">${prose(en)}${zh ? `<div class="dm-zh">${esc(zh)}</div>` : ''}${extra}${say(en)}</div>
+    </div></div>`;
+  const rows = [];
+  s.read.forEach((p) => rows.push(dmRow(p.en, p.zh)));
+  if (z?.dm || s.dm) rows.push(`<div class="dm-row dm dm-note-row"><div class="dm-avatar">DM</div><div class="dm-body"><div class="dm-bubble dm-note-bubble">${T('Table note: ', '桌上提示：')}${esc(z?.dm || s.dm)}</div></div></div>`);
+
+  state.results.forEach((r) => {
+    if (r.player) {
+      rows.push(`<div class="dm-row player"><div class="dm-avatar player-avatar">${T('You', '你')}</div>
+        <div class="dm-body"><div class="dm-name">${T('You', '你')}</div><div class="dm-bubble">${esc(state.showZh && r.titleZh ? r.titleZh : r.title)}</div></div></div>`);
+    } else {
+      const okClass = r.ok ? 'good' : 'bad';
+      rows.push(`<div class="dm-row dm"><div class="dm-avatar">DM</div><div class="dm-body">
+        <div class="dm-name">DM · ${T('Dungeon Master', '地下城主')} <span class="dm-verdict ${okClass}">${r.ok ? T('Success', '成功') : T('Failure', '失败')}</span></div>
+        <div class="dm-bubble ${okClass}">${prose(r.en)}${r.zh ? `<div class="dm-zh">${esc(r.zh)}</div>` : ''}${say(r.en)}</div>
+      </div></div>`);
+    }
+  });
+
+  if (state.pendingCombat) {
+    rows.push(`<div class="dm-row dm"><div class="dm-avatar">DM</div><div class="dm-body"><div class="dm-name">DM · ${T('Dungeon Master', '地下城主')}</div><div class="dm-bubble">${T('Roll initiative. We are going to the board.', '骰先攻。我们上棋盘。')}</div></div></div>`);
+  } else if (state.pendingNext) {
+    rows.push(`<div class="dm-row dm"><div class="dm-avatar">DM</div><div class="dm-body"><div class="dm-name">DM · ${T('Dungeon Master', '地下城主')}</div><div class="dm-bubble">${T('The story moves on. Ready?', '故事继续。准备好了吗？')}</div></div></div>`);
+  }
+
+  const interactions = (s.interactions || []).map((x) => {
+    const done = Object.prototype.hasOwnProperty.call(doneForScene, x.id);
+    const locked = !!(state.pendingCombat || state.pendingNext);
+    const zx = z?.labels?.[x.id];
+    const icon = state.showZh ? ({ WIS: '感', CHA: '魅', INT: '智', STR: '力', DEX: '敏', ATK: '战' }[x.icon] || 'd20') : (x.icon || 'd20');
+    return `<button class="dm-choice ${done ? 'done' : ''}" data-dm-act="${x.id}" ${(done || locked) ? 'disabled' : ''}>
+      <span class="dm-choice-ico">${esc(icon)}</span>
+      <span class="dm-choice-body"><span class="dm-choice-label">${esc(zx?.label || x.label)}</span><span class="dm-choice-meta">${esc(zx?.hint || x.hint || '')}${done ? T(' · already tried', ' · 已尝试') : ''}</span></span>
+    </button>`;
+  }).join('');
+
+  const pending = state.pendingCombat
+    ? `<button class="btn primary dm-primary" id="dmStartCombat">${T('Roll initiative', '掷先攻')}</button>`
+    : state.pendingNext
+      ? `<button class="btn primary dm-primary" id="dmPendingNext">${T('Continue', '继续')}</button>`
+      : s.next
+        ? `<button class="btn primary dm-primary" id="dmNext">${esc(z?.next || s.next.label)}</button>`
+        : '';
+
+  const prompt = s.id === 'coda'
+    ? T('DM: The last choice is yours.', 'DM：最后一个选择是你的。')
+    : T('DM: What do you do?', 'DM：你打算怎么做？');
+
+  setScreen(`
+    <div class="dm-wrap">
+      <div class="dm-head">
+        <div class="dm-art">${sceneArt(s.art, state.showZh ? (ZH.art[s.art] || '') : '')}</div>
+        <div class="dm-head-copy">
+          <div class="kicker">${esc(z?.kicker || s.kicker)}</div>
+          <h2>${esc(z?.title || s.title)}</h2>
+          <p>${esc(z?.sub || s.sub || '')}</p>
+          <div class="dm-quest">${((z?.objectives) || s.objectives || []).map((o) => `<span class="badge">${esc(o)}</span>`).join('')}</div>
+        </div>
+      </div>
+      <div class="dm-thread" id="dmThread">${rows.join('')}</div>
+      <div class="dm-choice-tray">
+        <div class="dm-prompt">${prompt}</div>
+        <div class="dm-choices">${interactions}${pending}</div>
+      </div>
+    </div>`);
+
+  $$('.dm-say').forEach((b) => b.addEventListener('click', () => speak(b.dataset.say)));
+  $$('[data-dm-act]').forEach((b) => b.addEventListener('click', () => {
+    if (b.disabled) return;
+    const x = s.interactions.find((i) => i.id === b.dataset.dmAct);
+    if (x) handleInteraction(x);
+  }));
+  const sc = $('#dmStartCombat'); if (sc) sc.addEventListener('click', () => { const id = state.pendingCombat; state.pendingCombat = null; startCombat(id); });
+  const pn = $('#dmPendingNext'); if (pn) pn.addEventListener('click', () => { const id = state.pendingNext; state.pendingNext = null; goScene(id); });
+  const nx = $('#dmNext'); if (nx) nx.addEventListener('click', () => { if (state.pendingCombat) { toast(T('Finish this first.', '先打完这一场。')); return; } goScene(s.next.scene); });
+  const thread = $('#dmThread');
+  if (thread) requestAnimationFrame(() => { thread.scrollTop = state.results.length ? thread.scrollHeight : 0; });
+  renderHud();
+}
+
 function renderScene() {
   const s = currentSceneData();
   if (!s) { renderTitle(); return; }
+  if (state.viewMode === 'dm') { renderSceneDM(); return; }
   const z = zScene();
   const zl = (id) => z?.labels?.[id] || null;
   const doneForScene = state.checksDone[s.id] || {};
   const readHtml = s.read.map((p, i) => `<div class="p">${prose(p.en)}${p.zh ? `<div class="zh">${esc(p.zh)}</div>` : ''}</div>`).join('');
   const ttsText = s.read.map((p) => p.en).join(' ');
   const objectives = ((z?.objectives) || s.objectives || []).map((o) => `<div class="obj">${esc(o)}</div>`).join('');
-  const results = state.results.map((r) => `<div class="check-result ${r.ok ? 'ok' : 'bad'}">
+  const results = state.results.filter((r) => !r.player).map((r) => `<div class="check-result ${r.ok ? 'ok' : 'bad'}">
       <div class="cr-head"><span>${esc(state.showZh && r.titleZh ? r.titleZh : r.title)}</span><b>${r.ok ? T('Success', '成功') : T('Failure', '失败')}</b></div>
       <p>${prose(r.en)}</p>${r.zh ? `<div class="zh">${esc(r.zh)}</div>` : ''}
     </div>`).join('');
@@ -745,7 +911,7 @@ function renderScene() {
       ${sceneArt(s.art, state.showZh ? (ZH.art[s.art] || '') : '')}
     </div>`);
 
-  $('#ttsBtn').addEventListener('click', () => speak(ttsText));
+  $('#ttsBtn').addEventListener('click', () => speakSequence(s.read.map((p) => p.en)));
   $('#zhInline').addEventListener('click', () => {
     state.showZh = !state.showZh;
     document.body.classList.toggle('show-zh', state.showZh);
@@ -772,9 +938,16 @@ function renderScene() {
   renderHud();
 }
 
+function recordPlayerChoice(x) {
+  if (!x || state.results.some((r) => r.player && r.interactionId === x.id)) return;
+  const zLabel = state.showZh ? (ZH.scenes[state.sceneId]?.labels?.[x.id]?.label || null) : null;
+  state.results.push({ player: true, interactionId: x.id, title: x.label, titleZh: zLabel });
+}
+
 function handleInteraction(x) {
   if (x.kind === 'action') {
     const r = x.result || {};
+    recordPlayerChoice(x);
     if (r.ending) {
       applyOutcome(r, x, null, true);
       return;
@@ -877,6 +1050,7 @@ function showAftermath(combat) {
 }
 
 function renderAftermath() {
+  if (state.viewMode === 'dm') { renderAftermathDM(); return; }
   const a = state.aftermath;
   if (!a) { renderTitle(); return; }
   const v = a.victory;
@@ -917,6 +1091,46 @@ function renderAftermath() {
   renderHud();
 }
 
+function renderAftermathDM() {
+  const a = state.aftermath;
+  if (!a) { renderTitle(); return; }
+  const v = a.victory;
+  const ze = zEnc(state.lastEncounterId);
+  const say = (text) => `<button class="dm-say" data-say="${esc(text)}">▶</button>`;
+  const bubbles = (v.read || []).map((p) => `<div class="dm-row dm"><div class="dm-avatar">DM</div><div class="dm-body"><div class="dm-name">DM · ${T('Dungeon Master', '地下城主')}</div><div class="dm-bubble">${prose(p.en)}${p.zh ? `<div class="dm-zh">${esc(p.zh)}</div>` : ''}${say(p.en)}</div></div></div>`).join('');
+  const loot = (v.items || []).map((i) => `<span class="badge hot">${esc(itemName(i))}</span>`).join('');
+  const canRest = v.next !== 'coda';
+  setScreen(`<div class="dm-wrap">
+    <div class="dm-head">
+      <div class="dm-art">${artAftermath()}</div>
+      <div class="dm-head-copy"><div class="kicker">${T('After the fight', '战后')}</div><h2>${esc(state.showZh ? (ze?.victory || v.title) : (v.title || 'The fight is over'))}</h2>
+      <p>${T('XP', '经验')} ${a.xp}${loot ? ` · ${T('Loot', '战利品')} ${loot}` : ''}</p></div>
+    </div>
+    <div class="dm-thread" id="dmThread">${bubbles}<div class="dm-row dm dm-note-row"><div class="dm-avatar">DM</div><div class="dm-body"><div class="dm-bubble dm-note-bubble">${T('The board is clear. You can rest before the story goes on.', '棋盘清空了。故事继续前，可以短休。')}</div></div></div></div>
+    <div class="dm-choice-tray"><div class="dm-prompt">${T('DM: What now?', 'DM：接下来做什么？')}</div><div class="dm-choices">
+      ${canRest ? `<button class="dm-choice" id="dmRestBtn" ${state.restUsed ? 'disabled' : ''}><span class="dm-choice-ico">休</span><span class="dm-choice-body"><span class="dm-choice-label">${T('Short rest', '短休')}</span><span class="dm-choice-meta">${T('Spend Hit Dice, reset short-rest features', '花生命骰，恢复短休特性')}</span></span></button>` : ''}
+      <button class="dm-choice" id="dmAfterNext"><span class="dm-choice-ico">→</span><span class="dm-choice-body"><span class="dm-choice-label">${T('Continue', '继续')}</span><span class="dm-choice-meta">${T('Back to the DM', '回到 DM 的故事')}</span></span></button>
+    </div></div></div>`);
+  $$('.dm-say').forEach((b) => b.addEventListener('click', () => speak(b.dataset.say)));
+  const r = $('#dmRestBtn');
+  if (r) r.addEventListener('click', () => {
+    if (state.restUsed) return;
+    const log = [];
+    Rules.shortRest(state.party, log);
+    state.stats.rests++;
+    state.restUsed = true;
+    renderAftermathDM();
+    toast(state.showZh ? '队伍短休完毕。' : (log[0] || 'The party rests.'));
+    saveGame();
+  });
+  $('#dmAfterNext').addEventListener('click', () => {
+    const next = v.next;
+    state.aftermath = null;
+    if (next) goScene(next); else renderTitle();
+  });
+  renderHud();
+}
+
 function showEnding(id) {
   state.endingId = id;
   state.screen = 'ending';
@@ -937,7 +1151,7 @@ function renderEnding(id) {
   const ze = zEnd(id);
   state.endingId = id;
   state.screen = 'ending';
-  const read = e.read.map((p) => `<p>${prose(p.en)}</p>${p.zh ? `<p style="font-family:var(--sans);font-size:11.5px;color:var(--dim);line-height:1.6">${esc(p.zh)}</p>` : ''}`).join('');
+  const read = e.read.map((p) => `<p>${prose(p.en)}<button class="dm-say" data-say="${esc(p.en)}">▶</button></p>${p.zh ? `<p style="font-family:var(--sans);font-size:11.5px;color:var(--dim);line-height:1.6">${esc(p.zh)}</p>` : ''}`).join('');
   const total = state.stats.checks || 0;
   const rate = total ? Math.round((state.stats.successes / total) * 100) : 0;
   setScreen(`
@@ -965,6 +1179,7 @@ function renderEnding(id) {
         <button class="btn ghost" id="titleBtn">${T('Back to title', '回到标题')}</button>
       </div>
     </div>`);
+  $$('.dm-say').forEach((b) => b.addEventListener('click', () => speak(b.dataset.say)));
   $('#againBtn').addEventListener('click', () => { clearSave(); startNew(); });
   $('#titleBtn').addEventListener('click', () => { renderTitle(); });
   renderHud();
