@@ -8,8 +8,7 @@
 
 ## 试玩
 
-- 在线预览（分支）：<https://raw.githack.com/chehua11agent/superagent-test/agent/tactical-view-prototype-649fd9ef9a76/prototype/tactical/index.html>
-- 备用预览（htmlpreview）：<https://htmlpreview.github.io/?https://github.com/chehua11agent/superagent-test/blob/agent/tactical-view-prototype-649fd9ef9a76/prototype/tactical/index.html>
+- 在线预览：<https://chehua11agent.github.io/superagent-test/prototype/tactical/>
 - 本地：在仓库根目录运行 `python3 -m http.server 4180`，打开 <http://127.0.0.1:4180/prototype/tactical/index.html>。
 
 手机竖屏可直接玩。点角色 → 蓝格移动 → 点敌人普攻；点技能按钮再点目标。`Esc` 或点空白处取消。
