@@ -74,7 +74,7 @@ A full run is about **20–35 minutes**; combat can end a run early, and the def
 
 Chinese is **on by default across the whole interface**: scene titles, read-aloud and result cards, choice labels, objectives, combat controls, character sheets, item/spell/feature names, damage types, combat logs, aftermath, endings and stats. The English prose stays above its Chinese paragraph so the original is still there to learn from. The top-bar `中文 ✓` button and the inline `中文对照` button switch the whole interface back to English; the setting is saved.
 
-Every highlighted word opens a Chinese meaning and an example; the Words drawer lists all 47. Read-aloud uses pre-generated **Edge Neural** audio (Ryan) where available; the browser's SpeechSynthesis is the fallback for lines outside the 71 bundled clips.
+Every highlighted word opens a Chinese meaning and an example; the Words drawer lists all 47. Read-aloud uses pre-generated **Edge Neural** audio (Ryan) where available; the browser's SpeechSynthesis is the fallback for lines outside the 71 bundled clips. The clips were generated once for this prototype with Microsoft Edge Neural TTS; no API key or network call is used at runtime. Ending paragraphs also have a ▶ button.
 
 ### Deliberate simplifications
 

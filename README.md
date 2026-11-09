@@ -9,7 +9,7 @@ dsh-superagent test repository.
 | 文档 | [`docs/`](docs/README.md) | 总体设计、玩法设计、规则/内容/画面调研、词汇与知识库说明 |
 | 数据 | [`data/`](data/) | 150 个 DnD × CET-4 映射词、4530 个四级大纲词头、两本素材的录入清单 |
 | 可玩原型 | [`game/`](game/) | 《拾词者 · 雾港》第一章：12 幕、48 个 CET-4 词 |
-| 5e 剧本原型 | [`prototype/sunless-keep/`](prototype/sunless-keep/) | 一个完整 5e 剧本：进村接任务 → 裂谷 → 地城 → 两族交涉 → 树庭 BOSS → 结局 |
+| 5e 剧本原型 | [`prototype/sunless-keep/`](prototype/sunless-keep/) | 一个完整 5e 剧本：进村接任务 → 裂谷 → 地城 → 两族交涉 → 树庭 BOSS → 结局；默认 DM 对话模式 + 神经语音 |
 
 文档导航与分类见 [`docs/README.md`](docs/README.md)。核心入口：
 
@@ -32,7 +32,7 @@ npm run test:e2e # Playwright 端到端测试
 
 ## 5e 剧本原型《无光城塞》
 
-按 5e 规则跑一个完整短剧本：3 名 3 级角色，从村庄接任务开始，经过探索、社交、两族对峙、地城战斗，到最终树庭 BOSS 和多结局收尾。规则层包含检定/豁免、优劣势、AC、先攻、网格移动、法术位、状态、死亡豁免与短休；文本层提供英文朗读、中文切换与 47 个 CET-4 重点词。
+按 5e 规则跑一个完整短剧本：3 名 3 级角色，从村庄接任务开始，经过探索、社交、两族对峙、地城战斗，到最终树庭 BOSS 和多结局收尾。默认是 DM 对话模式：DM 一段段讲、你一段段选，掷骰结果由 DM 接着讲；可切回文档阅读。规则层包含检定/豁免、优劣势、AC、先攻、网格移动、法术位、状态、死亡豁免与短休；文本层提供全中文界面、47 个 CET-4 重点词，以及 71 段预生成的 Edge 神经语音（Ryan）。
 
 在线试玩：<https://chehua11agent.github.io/superagent-test/prototype/sunless-keep/>
 

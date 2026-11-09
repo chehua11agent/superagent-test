@@ -504,6 +504,7 @@ function renderTitle() {
             <span class="badge">${T('initiative & grid combat', '先攻与网格战斗')}</span>
             <span class="badge">${T('spells, conditions, death saves', '法术、状态、死亡豁免')}</span>
             <span class="badge">${T('English read-aloud + 中文', '英文朗读 + 中文对照')}</span>
+            <span class="badge hot">${T('DM dialogue + neural voice', 'DM 对话 + 神经语音')}</span>
           </div>
           <div class="title-actions">
             ${cont}
@@ -1150,7 +1151,7 @@ function renderEnding(id) {
   const ze = zEnd(id);
   state.endingId = id;
   state.screen = 'ending';
-  const read = e.read.map((p) => `<p>${prose(p.en)}</p>${p.zh ? `<p style="font-family:var(--sans);font-size:11.5px;color:var(--dim);line-height:1.6">${esc(p.zh)}</p>` : ''}`).join('');
+  const read = e.read.map((p) => `<p>${prose(p.en)}<button class="dm-say" data-say="${esc(p.en)}">▶</button></p>${p.zh ? `<p style="font-family:var(--sans);font-size:11.5px;color:var(--dim);line-height:1.6">${esc(p.zh)}</p>` : ''}`).join('');
   const total = state.stats.checks || 0;
   const rate = total ? Math.round((state.stats.successes / total) * 100) : 0;
   setScreen(`
@@ -1178,6 +1179,7 @@ function renderEnding(id) {
         <button class="btn ghost" id="titleBtn">${T('Back to title', '回到标题')}</button>
       </div>
     </div>`);
+  $$('.dm-say').forEach((b) => b.addEventListener('click', () => speak(b.dataset.say)));
   $('#againBtn').addEventListener('click', () => { clearSave(); startNew(); });
   $('#titleBtn').addEventListener('click', () => { renderTitle(); });
   renderHud();
