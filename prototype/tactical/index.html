@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#070b09" />
-<meta name="description" content="《拾词者》第一章俯视角战棋小原型：一场以枯木庭院为舞台的回合制战斗。" />
-<title>枯木庭院 · 俯视角战棋原型</title>
+<meta name="description" content="《拾词者》第一章鸟瞰战棋小原型：一场以枯木庭院为舞台的回合制战斗。" />
+<title>枯木庭院 · 鸟瞰战棋原型</title>
 <style>
 :root{
   --bg:#070b09;
@@ -102,9 +102,12 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 }
 #board{display:block;width:100%;height:100%;touch-action:none;cursor:default}
 .hint{
-  flex:0 0 auto;min-height:17px;max-width:min(100%,860px);padding:0 6px;
-  font-size:11px;line-height:1.5;color:var(--muted);text-align:center;letter-spacing:.02em;
-  transition:color .2s;
+  flex:0 0 auto;min-height:23px;max-width:min(100%,900px);padding:4px 12px;
+  font-size:12px;line-height:1.5;color:#f0e2c4;text-align:center;letter-spacing:.02em;
+  background:linear-gradient(180deg,rgba(46,28,16,.96),rgba(18,10,6,.96));
+  border:1px solid rgba(201,161,90,.45);border-radius:6px;
+  box-shadow:inset 0 0 12px rgba(0,0,0,.45),0 3px 10px rgba(0,0,0,.35);
+  transition:color .2s;position:relative;z-index:2;
 }
 .hint.warn{color:#e0a57e}
 .hint.good{color:#a9d6a3}
@@ -213,6 +216,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .ability:active:not(:disabled){transform:translateY(1px)}
 .ability:disabled{opacity:.36;cursor:not-allowed}
 .ability.basic{border-color:rgba(217,179,108,.2)}
+.ability.check{padding-top:16px}
 .ability .word{
   display:block;font-family:var(--serif);font-size:15px;line-height:1.15;letter-spacing:.03em;
   color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -416,6 +420,417 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   .ability{min-height:48px}
   .dock{padding:5px;gap:5px}
 }
+
+/* ============================================================
+   TABLETOP OVERRIDES — physical board game on a wooden table
+   ============================================================ */
+:root{
+  --wood-1:#2a1a10; --wood-2:#332116; --wood-3:#1c110a;
+  --paper:#f0e2c4; --paper-2:#dfc9a4; --paper-3:#cdb48a;
+  --ink:#2b1a0d; --ink-soft:#5a3f24; --brass:#c9a15a; --brass-2:#8b6a42;
+  --leather:#2a1b11; --leather-2:#17100a; --seal:#8e2f27;
+}
+body{
+  background:
+    radial-gradient(ellipse at 50% 24%,rgba(255,186,110,.20),transparent 52%),
+    radial-gradient(ellipse at 10% 90%,rgba(120,70,40,.18),transparent 45%),
+    repeating-linear-gradient(93deg,#2a1a10 0 11px,#332116 11px 22px,#2b1a11 22px 31px,#382418 31px 44px),
+    #1a100a;
+}
+body::before{
+  display:block;content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 38%,transparent 28%,rgba(0,0,0,.62) 100%),
+    repeating-linear-gradient(88deg,rgba(0,0,0,.10) 0 2px,transparent 2px 9px);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle at 88% 8%,rgba(255,178,96,.10),transparent 26%);
+}
+.app{padding:10px 14px calc(10px + env(safe-area-inset-bottom));gap:9px;position:relative}
+/* HUD: a leather-and-parchment quest strip */
+.hud{
+  background:linear-gradient(180deg,#f0e2c4,#dcc7a2 68%,#cdb48a);
+  border:1px solid #8b6a42;border-radius:10px;color:var(--ink);
+  box-shadow:0 2px 0 #6b4a2a,0 10px 26px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.55);
+  position:relative;
+}
+.hud::after{
+  content:"";position:absolute;right:10px;bottom:-5px;width:52px;height:10px;
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,.22),transparent);filter:blur(2px);
+}
+.brand .eyebrow{color:#7d5a34}
+.brand h1{color:#2b1a0d;text-shadow:0 1px 0 rgba(255,255,255,.45);font-size:22px}
+.objectives .obj{background:rgba(255,255,255,.28);border-color:#a98a5a;color:#3a2814}
+.objectives .obj .name{color:#6b4d2b}
+.objectives .obj .val{color:#2b1a0d}
+.objectives .obj .dot{box-shadow:none}
+.objectives .obj.dead{opacity:.45}
+.round-text span{color:#7d5a34}
+.round-text b{color:#2b1a0d}
+.round-text.enemy b{color:#8e2f27}
+.icon-btn{
+  border-color:#7a5a36;background:linear-gradient(180deg,#3a2517,#24150c);color:#e8d6b4;
+  box-shadow:0 1px 0 rgba(255,255,255,.12),inset 0 0 8px rgba(0,0,0,.5);
+}
+.icon-btn:hover{border-color:var(--brass);color:#fff3d7;background:linear-gradient(180deg,#4a2e1c,#2a1a10)}
+/* stage + board frame */
+.stage{gap:6px}
+.board-shell{
+  border:13px solid #4a2e1a;border-radius:9px;background:#0b0704;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.72),
+    0 0 0 2px #1a0f08,
+    inset 0 0 0 2px var(--brass),
+    inset 0 0 22px rgba(0,0,0,.85);
+  outline:1px solid rgba(255,220,160,.12);outline-offset:-1px;
+}
+.board-shell::before{
+  content:"";position:absolute;inset:-13px;border-radius:9px;pointer-events:none;z-index:6;
+  background:
+    radial-gradient(circle at 5px 5px,var(--brass) 0 2px,transparent 2.5px),
+    radial-gradient(circle at calc(100% - 5px) 5px,var(--brass) 0 2px,transparent 2.5px),
+    radial-gradient(circle at 5px calc(100% - 5px),var(--brass) 0 2px,transparent 2.5px),
+    radial-gradient(circle at calc(100% - 5px) calc(100% - 5px),var(--brass) 0 2px,transparent 2.5px);
+  background-repeat:no-repeat;
+  box-shadow:inset 0 0 0 1px rgba(255,230,180,.18);
+}
+#board{background:#0b0704;border-radius:2px}
+.hint{color:#d9c39c;text-shadow:0 1px 2px rgba(0,0,0,.8)}
+.hint.warn{color:#f0b27a}
+.hint.good{color:#b9d99d}
+/* dock: leather tray, parchment cards */
+.dock{
+  background:
+    radial-gradient(ellipse at 20% 0%,rgba(255,214,150,.08),transparent 45%),
+    linear-gradient(180deg,#2c1c11,#1a100a);
+  border:1px solid #5a4027;border-radius:12px;
+  box-shadow:0 2px 0 #0c0805,0 18px 44px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,220,160,.12);
+  position:relative;
+}
+.dock::before{
+  content:"";position:absolute;left:9px;right:9px;top:-1px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,206,140,.35),transparent);
+  border-radius:2px;
+}
+.party .hero-btn{
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.55),transparent 34%),
+    linear-gradient(180deg,#f1e3c6,#d6c099);
+  border:1px solid #8b6a42;border-radius:8px;color:#2b1a0d;
+  box-shadow:0 2px 0 #6b4a2a,0 4px 10px rgba(0,0,0,.35);
+}
+.hero-btn:hover{border-color:var(--brass);background:linear-gradient(180deg,#f7ead0,#e0cba6)}
+.hero-btn.active{
+  border-color:#d9b36c;background:linear-gradient(180deg,#fff1d4,#e6cfa8);
+  box-shadow:0 2px 0 #8b6a42,0 0 0 2px rgba(217,179,108,.55),0 6px 16px rgba(0,0,0,.4);
+}
+.hero-btn .hero-name{color:#2b1a0d}
+.hero-btn .hero-name em{color:#7d5a34}
+.hero-btn .hp-mini{background:#4a321e;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.hero-btn .hp-mini i{background:linear-gradient(90deg,#5d8a52,#9bbf6c)}
+.hero-btn.low .hp-mini i{background:linear-gradient(90deg,#8e2f27,#c96a4e)}
+.hero-avatar{border:1px solid #6b4a2a;box-shadow:0 1px 0 rgba(255,255,255,.5),0 3px 8px rgba(0,0,0,.35);color:#24150c}
+.actor{border-right:1px solid rgba(201,161,90,.3)}
+.actor-name{color:#f0e2c4;font-size:17px}
+.actor-role{color:#a98a5a}
+.actor-hp .bar{background:#0b0704;box-shadow:inset 0 0 0 1px rgba(255,220,160,.18)}
+.actor-tags{color:#b39a75}
+.actor-tags b{color:#f0e2c4}
+.actor-tags .st{color:#c9a15a}
+.abilities{gap:8px;align-items:stretch;padding:1px 0}
+.ability{
+  background:
+    radial-gradient(circle at 16% 0%,rgba(255,255,255,.55),transparent 34%),
+    linear-gradient(180deg,#f2e4c6,#d9c09a 70%,#cdb48a);
+  border:1px solid #9b7748;border-radius:8px;color:var(--ink);
+  box-shadow:0 2px 0 #6b4a2a,0 7px 14px rgba(0,0,0,.42);
+  overflow:hidden;transform:rotate(var(--tilt,0deg));
+}
+.ability:nth-child(1){--tilt:-.55deg}
+.ability:nth-child(2){--tilt:.45deg}
+.ability:nth-child(3){--tilt:-.3deg}
+.ability::before{
+  content:"";position:absolute;inset:3px;border:1px solid rgba(139,106,66,.4);border-radius:5px;pointer-events:none;
+}
+.ability:hover:not(:disabled){transform:translateY(-4px) rotate(0);border-color:var(--brass);box-shadow:0 10px 20px rgba(0,0,0,.5)}
+.ability:active:not(:disabled){transform:translateY(-1px)}
+.ability .word{color:#2b1a0d;font-size:17px}
+.ability .zh{color:#4a321e}
+.ability .meta{color:#7d5a34}
+.ability .uses{background:#2b1a0d;color:#f0e2c4;border-color:#8b6a42}
+.ability:disabled{opacity:.45;filter:saturate(.7)}
+.ability .card-art{position:absolute;right:7px;bottom:6px;opacity:.18;width:34px;height:34px;pointer-events:none}
+.check-badge{
+  position:absolute;left:7px;top:5px;font-size:8px;letter-spacing:.1em;color:#7d3d24;
+  border:1px solid rgba(125,61,36,.45);border-radius:4px;padding:0 3px;background:rgba(255,255,255,.25);
+}
+.ability.passed .check-badge{color:#3d6a35;border-color:rgba(61,106,53,.45);background:rgba(190,220,160,.3)}
+.ability.failed .check-badge{color:#8e2f27;border-color:rgba(142,47,39,.5);background:rgba(220,150,130,.25)}
+.end-btn{
+  background:radial-gradient(circle at 32% 22%,#b24a3d,#7c241d 62%,#511511);
+  border:2px solid var(--brass);border-radius:10px;color:#ffe9cf;
+  box-shadow:0 3px 0 #350c08,0 0 0 2px rgba(0,0,0,.45),0 8px 18px rgba(0,0,0,.5);
+  text-shadow:0 1px 2px rgba(0,0,0,.8);
+}
+.end-btn:hover:not(:disabled){background:radial-gradient(circle at 32% 22%,#c95b4b,#8e2f27 62%,#5c1914);border-color:#eed08c}
+/* dice tray */
+.dice-tray{
+  display:flex;align-items:center;gap:6px;padding:3px 8px 3px 4px;margin-right:5px;
+  border:1px solid #6b4a2a;border-radius:9px;background:radial-gradient(circle at 30% 20%,#4a2e1a,#24150c);
+  box-shadow:inset 0 0 10px rgba(0,0,0,.7),0 1px 0 rgba(255,220,160,.1);
+  cursor:pointer;user-select:none;flex:0 0 auto;
+}
+.dice-tray .d20{
+  width:27px;height:27px;display:grid;place-items:center;flex:0 0 27px;
+  font-family:var(--mono);font-weight:700;font-size:12px;color:#2b1a0d;
+  background:linear-gradient(145deg,#f1ddb2,#b78d52);
+  clip-path:polygon(50% 0,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.55));
+  transition:transform .25s;
+}
+.dice-tray .d20.rolling{animation:dieRoll .45s ease-out}
+@keyframes dieRoll{0%{transform:rotate(0) scale(1)}40%{transform:rotate(150deg) scale(1.2)}100%{transform:rotate(360deg) scale(1)}}
+.dice-tray .die-meta{display:flex;flex-direction:column;line-height:1.05;min-width:0}
+.dice-tray .die-meta b{font-family:var(--mono);font-size:9px;color:#f0e2c4;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
+.dice-tray .die-meta span{font-size:7px;letter-spacing:.14em;color:#a98a5a;text-transform:uppercase}
+.dice-tray:hover{border-color:var(--brass)}
+/* tutorial bar */
+.tutorial-bar{
+  display:flex;align-items:center;gap:8px;padding:5px 9px;border:1px solid rgba(201,161,90,.55);
+  border-radius:8px;background:linear-gradient(180deg,rgba(74,46,26,.95),rgba(36,21,12,.95));
+  color:#f0e2c4;font-size:11px;line-height:1.4;box-shadow:inset 0 0 12px rgba(0,0,0,.45);
+}
+.tutorial-bar .tut-step{font-family:var(--mono);font-size:9px;color:#1c110a;background:var(--brass);border-radius:4px;padding:1px 5px;font-weight:700;white-space:nowrap}
+.tutorial-bar .tut-text{flex:1;min-width:0}
+.tutorial-bar .tut-skip{border:1px solid rgba(201,161,90,.4);background:transparent;color:#c9a15a;border-radius:5px;font-size:9px;padding:2px 6px;cursor:pointer;white-space:nowrap}
+.tutorial-bar .tut-dots{display:flex;gap:3px}
+.tutorial-bar .tut-dots i{width:5px;height:5px;border-radius:50%;background:#5a4027;display:block}
+.tutorial-bar .tut-dots i.on{background:var(--brass)}
+.tut-pulse{animation:tutPulse 1.6s ease-in-out infinite}
+.party.tut-pulse,.abilities.tut-pulse{box-shadow:0 0 0 2px rgba(217,179,108,.55),0 0 22px rgba(217,179,108,.22);border-radius:8px}
+.party.tut-pulse .hero-btn,.abilities.tut-pulse .ability{border-color:rgba(217,179,108,.55)}
+@keyframes tutPulse{0%,100%{box-shadow:0 0 0 0 rgba(217,179,108,.0)}50%{box-shadow:0 0 0 3px rgba(217,179,108,.55)}}
+/* scene-mode cover / intro: the board is the illustration */
+.app.scene-mode .hud,
+.app.scene-mode .dock,
+.app.scene-mode .hint,
+.app.scene-mode .mobile-info{display:none!important}
+.app.scene-mode .stage{flex:1 1 auto}
+.overlay.scene-overlay{
+  place-items:initial;justify-items:start;justify-content:start;align-items:flex-start;
+  background:
+    linear-gradient(180deg,rgba(5,3,2,.10) 0%,rgba(5,3,2,.18) 44%,rgba(5,3,2,.84) 100%),
+    radial-gradient(ellipse at 70% 36%,transparent 30%,rgba(3,2,1,.45) 100%);
+  backdrop-filter:none;align-items:flex-start;justify-content:flex-start;
+  padding:4.2vh 4vw;
+}
+.overlay.scene-overlay .panel{
+  width:min(520px,92vw);max-height:calc(100dvh - 8.4vh);margin-top:1vh;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(255,255,255,.45),transparent 35%),
+    linear-gradient(180deg,#f2e3c3,#dfc9a4 72%,#d0b88f);
+  border:1px solid #8b6a42;border-radius:10px;color:#2b1a0d;
+  box-shadow:0 2px 0 #6b4a2a,0 36px 90px rgba(0,0,0,.72),inset 0 0 0 1px rgba(255,255,255,.4);
+}
+.overlay.scene-overlay .panel::before{
+  content:"";position:absolute;inset:8px;border:1px solid rgba(139,106,66,.35);border-radius:6px;pointer-events:none;
+}
+.overlay.scene-overlay .panel{position:relative}
+.overlay.scene-overlay .kicker{color:#8b5a2b}
+.overlay.scene-overlay h2,.overlay.scene-overlay .cover-title{color:#2b1a0d!important;text-shadow:0 1px 0 rgba(255,255,255,.4)!important}
+.overlay.scene-overlay p{color:#4a3520}
+.overlay.scene-overlay p.small,.overlay.scene-overlay .note{color:#6b4d2b}
+.overlay.scene-overlay .cover-sub{color:#8b5a2b!important}
+.overlay.scene-overlay .cover-lead{color:#3d2a18!important}
+.overlay.scene-overlay .cover-stats span{color:#6b4d2b}
+.overlay.scene-overlay .cover-stats b{color:#8b5a2b}
+.overlay.scene-overlay .cover-rule{background:linear-gradient(90deg,transparent,#8b5a2b,transparent)}
+.overlay.scene-overlay .objective-box{
+  border-color:rgba(139,106,66,.45);background:rgba(255,255,255,.22);
+}
+.overlay.scene-overlay .obj-line span{color:#8b5a2b}
+.overlay.scene-overlay .obj-line b{color:#3d2a18}
+.overlay.scene-overlay .btn{background:rgba(255,255,255,.22);border-color:#8b6a42;color:#3d2a18}
+.overlay.scene-overlay .btn:hover{background:rgba(255,255,255,.4)}
+.overlay.scene-overlay .btn.primary{background:linear-gradient(180deg,#e2c084,#b98f4b);color:#1a1409;border-color:#8b6a42}
+.overlay.scene-overlay .btn.ghost{background:transparent;color:#6b4d2b}
+.cover-wax{
+  position:absolute;right:18px;top:18px;width:42px;height:42px;border-radius:50%;
+  background:radial-gradient(circle at 32% 26%,#b24a3d,#7c241d 62%,#511511);
+  box-shadow:0 2px 5px rgba(0,0,0,.55),inset 0 0 0 2px rgba(255,220,180,.18);
+  display:grid;place-items:center;color:#f6d7b6;font-family:var(--serif);font-size:16px;
+  transform:rotate(-12deg);
+}
+.cover-scene-tag{
+  position:absolute;left:18px;top:16px;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:#8b5a2b;
+}
+@media (max-width:760px){
+  .app.scene-mode .stage{justify-content:flex-start;padding-top:6px}
+  .overlay.scene-overlay .panel{max-height:58dvh}
+  .overlay.scene-overlay{align-items:flex-end;justify-items:center;justify-content:center;padding:0;background:linear-gradient(180deg,rgba(5,3,2,.05) 0%,rgba(5,3,2,.15) 35%,rgba(5,3,2,.88) 100%)}
+  .overlay.scene-overlay .panel{width:100%;max-height:76dvh;margin:0;border-radius:16px 16px 0 0;border-bottom:none;padding:20px 18px calc(16px + env(safe-area-inset-bottom))}
+  .dice-tray{margin-right:2px;padding:2px 5px 2px 3px}
+  .dice-tray .d20{width:23px;height:23px;flex-basis:23px;font-size:10px}
+  .dice-tray .die-meta{display:none}
+  .hud{padding:6px 9px}
+  .brand h1{font-size:19px}
+}
+
+
+/* intro word cards (physical cards) */
+.intro-word-cards{display:flex;flex-wrap:wrap;gap:7px;padding:6px 2px 10px;scrollbar-width:thin}
+.intro-word-card{
+  flex:0 0 104px;min-height:74px;padding:7px 8px;border:1px solid #8b6a42;border-radius:7px;
+  background:linear-gradient(180deg,#f6ead2,#e2cda8);box-shadow:0 2px 0 #6b4a2a,0 5px 10px rgba(0,0,0,.25);
+  transform:rotate(var(--tilt,0deg));cursor:default;position:relative;
+}
+.intro-word-card:nth-child(odd){--tilt:-.8deg}
+.intro-word-card:nth-child(even){--tilt:.7deg}
+.intro-word-card .iw-en{display:block;font-family:var(--serif);font-size:15px;color:#2b1a0d;letter-spacing:.02em}
+.intro-word-card .iw-zh{display:block;font-size:10px;color:#5a3f24;margin-top:1px}
+.intro-word-card .iw-tag{display:block;font-size:8px;color:#8b5a2b;margin-top:5px;letter-spacing:.06em}
+.intro-word-card .iw-check{position:absolute;top:4px;right:5px;font-size:7px;color:#7d3d24;border:1px solid rgba(125,61,36,.35);border-radius:3px;padding:0 2px}
+.intro-note{font-size:10.5px;color:#6b4d2b;line-height:1.6;margin:2px 0 0}
+/* card check modal */
+.card-check{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:16px;background:rgba(3,2,1,.66);backdrop-filter:blur(4px)}
+.card-check[hidden]{display:none!important}
+.cc-panel{
+  position:relative;width:min(420px,94vw);max-height:calc(100dvh - 32px);overflow:auto;
+  padding:22px 22px 18px;border:1px solid #8b6a42;border-radius:10px;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(255,255,255,.5),transparent 35%),
+    linear-gradient(180deg,#f4e6c9,#e0caa4 74%,#d0b88f);
+  color:#2b1a0d;box-shadow:0 3px 0 #6b4a2a,0 30px 80px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.4);
+  animation:panelIn .28s cubic-bezier(.2,.7,.2,1) both;
+}
+.cc-panel::before{content:"";position:absolute;inset:7px;border:1px solid rgba(139,106,66,.35);border-radius:6px;pointer-events:none}
+.cc-kicker{font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:#8b5a2b;margin-bottom:7px}
+.cc-word{font-family:var(--serif);font-size:clamp(30px,7vw,42px);line-height:1.05;letter-spacing:.04em;color:#2b1a0d}
+.cc-zh{font-size:12px;color:#5a3f24;margin-top:2px}
+.cc-effect{margin-top:10px;padding:8px 10px;border:1px dashed rgba(139,106,66,.45);border-radius:6px;font-size:11px;line-height:1.6;color:#4a3520;background:rgba(255,255,255,.18)}
+.cc-modes{display:flex;gap:8px;margin-top:12px}
+.cc-mode{
+  flex:1;padding:8px 10px;border:1px solid #8b6a42;border-radius:7px;background:rgba(255,255,255,.3);
+  color:#3d2a18;cursor:pointer;text-align:left;line-height:1.3;
+}
+.cc-mode b{display:block;font-family:var(--serif);font-size:14px;color:#2b1a0d}
+.cc-mode span{display:block;font-size:9px;color:#6b4d2b;margin-top:2px}
+.cc-mode:hover{border-color:var(--brass);background:rgba(255,255,255,.5)}
+.cc-options{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.cc-option{
+  padding:9px 10px;border:1px solid rgba(139,106,66,.55);border-radius:6px;background:rgba(255,255,255,.35);
+  color:#3d2a18;font-size:11px;line-height:1.35;cursor:pointer;text-align:left;min-height:42px;
+}
+.cc-option:hover{border-color:var(--brass);background:rgba(255,255,255,.55)}
+.cc-option.correct{border-color:#4f7a42;background:rgba(160,200,130,.35)}
+.cc-option.wrong{border-color:#8e2f27;background:rgba(220,140,120,.3)}
+.cc-option:disabled{opacity:.6;cursor:default}
+.cc-input-row{display:flex;gap:7px;margin-top:12px}
+.cc-input{
+  flex:1;min-width:0;padding:9px 10px;border:1px solid rgba(139,106,66,.55);border-radius:6px;
+  background:rgba(255,255,255,.5);color:#2b1a0d;font-family:var(--mono);font-size:14px;letter-spacing:.06em;
+}
+.cc-input:focus{outline:2px solid var(--brass);outline-offset:1px}
+.cc-feedback{margin-top:10px;font-size:11px;line-height:1.6;color:#4a3520;min-height:18px}
+.cc-feedback.good{color:#3d6a35}
+.cc-feedback.bad{color:#8e2f27}
+.cc-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.cc-actions .btn{min-height:36px;padding:7px 12px;font-size:11px;border-color:#8b6a42;background:rgba(255,255,255,.25);color:#3d2a18}
+.cc-actions .btn.primary{background:linear-gradient(180deg,#e2c084,#b98f4b);color:#1a1409}
+.cc-hint{font-size:9.5px;color:#6b4d2b;line-height:1.6;margin-top:8px}
+.cc-stamp{
+  position:absolute;right:16px;bottom:14px;transform:rotate(-12deg);
+  border:2px solid #8e2f27;color:#8e2f27;border-radius:6px;padding:3px 8px;
+  font-family:var(--serif);font-size:14px;letter-spacing:.16em;opacity:.9;
+}
+.cc-stamp.good{border-color:#3d6a35;color:#3d6a35}
+#tutorial{z-index:80}
+/* tutorial modal */
+.tut-panel{width:min(480px,94vw)}
+.tut-steps{display:grid;gap:9px;margin-top:10px}
+.tut-step-row{display:flex;gap:10px;align-items:flex-start;padding:8px 9px;border:1px solid rgba(139,106,66,.4);border-radius:7px;background:rgba(255,255,255,.2)}
+.tut-num{flex:0 0 24px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#2b1a0d;color:#f0e2c4;font-family:var(--mono);font-size:11px;font-weight:700}
+.tut-step-row b{display:block;font-family:var(--serif);font-size:13px;color:#2b1a0d}
+.tut-step-row span{display:block;font-size:10.5px;line-height:1.55;color:#5a3f24;margin-top:2px}
+/* small screens for card check / intro cards */
+@media (max-width:760px){
+  .card-check{padding:10px;align-items:end}
+  .cc-panel{width:100%;max-height:88dvh;border-radius:14px 14px 0 0;padding:18px 16px calc(14px + env(safe-area-inset-bottom))}
+  .cc-panel::before{inset:6px}
+  .intro-word-card{flex-basis:94px;min-height:68px}
+}
+
+
+/* decorative table props (desktop) */
+.table-props{position:absolute;right:1.6vw;top:50%;transform:translateY(-50%);width:132px;display:flex;flex-direction:column;align-items:center;gap:18px;pointer-events:none;z-index:1;opacity:.92}
+.prop-candle{position:relative;width:46px;height:82px;filter:drop-shadow(0 10px 16px rgba(0,0,0,.55))}
+.prop-candle .wax{position:absolute;left:14px;bottom:8px;width:18px;height:46px;border-radius:5px 5px 3px 3px;background:linear-gradient(90deg,#b99b6c,#f0dfb6 55%,#a07d50);box-shadow:inset 0 0 0 1px rgba(80,50,20,.35)}
+.prop-candle .holder{position:absolute;left:7px;bottom:0;width:32px;height:12px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#d9b36c,#6b4a2a 70%,#2a180e);box-shadow:0 3px 0 #1a100a}
+.prop-candle .flame{position:absolute;left:19px;bottom:51px;width:10px;height:18px;border-radius:50% 50% 45% 45%;background:radial-gradient(circle at 50% 70%,#fff0b0,#f2a34e 55%,rgba(230,110,40,.2));filter:blur(.3px);animation:candle 2.2s ease-in-out infinite}
+.prop-candle .prop-glow{position:absolute;left:-28px;bottom:26px;width:104px;height:104px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,90,.20),transparent 68%)}
+@keyframes candle{0%,100%{transform:scaleY(1) skewX(0)}50%{transform:scaleY(1.12) skewX(-2deg)}}
+.prop-cards{position:relative;width:78px;height:72px;filter:drop-shadow(0 8px 12px rgba(0,0,0,.5))}
+.prop-cards i{position:absolute;left:9px;bottom:3px;width:46px;height:62px;border-radius:4px;border:1px solid #8b6a42;background:linear-gradient(180deg,#f0e2c4,#cbb48a);box-shadow:inset 0 0 0 3px rgba(255,255,255,.18)}
+.prop-cards i:nth-child(1){transform:rotate(-14deg) translate(-7px,2px)}
+.prop-cards i:nth-child(2){transform:rotate(4deg) translate(5px,0)}
+.prop-cards i.top{transform:rotate(13deg) translate(15px,3px);background:linear-gradient(180deg,#f6ead2,#d8c19a)}
+.prop-potion{position:relative;width:34px;height:50px;filter:drop-shadow(0 7px 10px rgba(0,0,0,.5))}
+.prop-potion .bottle{position:absolute;left:6px;bottom:0;width:22px;height:32px;border-radius:8px 8px 10px 10px;background:linear-gradient(90deg,rgba(90,160,95,.8),rgba(150,220,140,.9));box-shadow:inset 0 0 0 1px rgba(60,100,55,.6),inset 0 6px 10px rgba(255,255,255,.25)}
+.prop-potion .cork{position:absolute;left:11px;bottom:31px;width:12px;height:12px;border-radius:3px;background:linear-gradient(90deg,#8b6a42,#c9a15a)}
+.prop-book{position:relative;width:92px;height:64px;border-radius:4px;border:1px solid #2a1a0d;background:linear-gradient(160deg,#4a2e1a,#2a180e 60%,#1a100a);box-shadow:0 8px 14px rgba(0,0,0,.55),inset 0 0 0 2px #8b6a42,inset 0 0 0 4px rgba(0,0,0,.3);display:grid;place-items:center;transform:rotate(3deg)}
+.prop-book span{font-family:var(--serif);font-size:8px;letter-spacing:.2em;color:#c9a15a;opacity:.85}
+.prop-book i{position:absolute;right:10px;bottom:8px;width:16px;height:22px;border-left:2px solid #8e2f27;border-radius:2px}
+@media (max-width:1180px){.table-props{display:none}}
+
+
+/* wordbook / log drawer as a parchment notebook */
+.drawer-panel{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(255,255,255,.4),transparent 35%),
+    linear-gradient(180deg,#f2e3c3,#dfc9a4 72%,#d0b88f);
+  border-left:1px solid #8b6a42;color:#2b1a0d;
+  box-shadow:-24px 0 70px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.35);
+}
+.drawer-head{border-bottom:1px solid rgba(139,106,66,.35)}
+.drawer-head h2{color:#2b1a0d}
+.drawer-body h3{color:#8b5a2b}
+.drawer-body p,.drawer-body p.small{color:#4a3520}
+.drawer-body p.small strong,.drawer-body .small strong{color:#2b1a0d}
+.word-row{border-bottom:1px solid rgba(139,106,66,.22)}
+.word-en{color:#8b5a2b}
+.word-zh{color:#2b1a0d}
+.word-tag{color:#6b4d2b;border-color:rgba(139,106,66,.4)}
+.word-row p{color:#5a3f24}
+.word-src{color:#5d7a45}
+.word-row .note,.drawer-body .note{color:#6b4d2b}
+.log-line{color:#4a3520;border-bottom:1px solid rgba(139,106,66,.18)}
+.log-line .r{color:#8b5a2b}
+.log-line.round{color:#8b5a2b}
+.log-line.hit .r{color:#8e2f27}
+.log-line.good .r{color:#3d6a35}
+.help-block p{color:#4a3520}
+.help-block h3{color:#8b5a2b}
+.drawer .icon-btn{background:linear-gradient(180deg,#3a2517,#24150c);color:#e8d6b4;border-color:#7a5a36}
+.drawer-backdrop{background:rgba(3,2,1,.62)}
+@media (max-width:760px){
+  .drawer-panel{border-top:1px solid #8b6a42}
+}
+
+
+@media (max-width:760px){
+  .overlay.scene-overlay .panel .actions{
+    position:sticky;bottom:0;z-index:3;margin-top:8px;
+    padding:10px 0 calc(4px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg,rgba(232,212,174,0),#e8d4ae 28%,#e2cda6);
+  }
+}
+
+
+@media (max-width:760px){
+  .overlay.scene-overlay .panel{max-height:58dvh;padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
 }
@@ -430,10 +845,14 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     </div>
     <div class="objectives" id="objectives"></div>
     <div class="round-box">
+      <div class="dice-tray" id="diceTray" title="最近一次 d20" role="status" aria-live="polite">
+        <span class="d20" id="dieFace">20</span>
+        <span class="die-meta"><b id="dieFormula">等待投掷</b><span>d20 tray</span></span>
+      </div>
       <div class="round-text" id="roundText"><span id="phaseLabel">准备中</span><b id="roundLabel">—</b></div>
       <button class="icon-btn" id="btnLog" aria-label="打开战报">战报</button>
       <button class="icon-btn" id="btnWords" aria-label="打开本章词卡">词卡</button>
-      <button class="icon-btn" id="btnHelp" aria-label="打开原型说明">?</button>
+      <button class="icon-btn" id="btnHelp" aria-label="打开玩法说明">玩法</button>
     </div>
   </header>
 
@@ -445,9 +864,21 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     </div>
     <div class="hint" id="hint" aria-live="polite">点击角色开始</div>
     <div id="mobileInfo" class="mobile-info" aria-label="敌情"></div>
+    <div class="table-props" aria-hidden="true">
+      <div class="prop-candle"><i class="flame"></i><i class="wax"></i><i class="holder"></i><span class="prop-glow"></span></div>
+      <div class="prop-cards"><i></i><i></i><i class="top"></i></div>
+      <div class="prop-potion"><i class="bottle"></i><i class="cork"></i></div>
+      <div class="prop-book"><span>RULES</span><i></i></div>
+    </div>
   </main>
 
   <footer class="dock">
+    <div id="tutorialBar" class="tutorial-bar" hidden>
+      <span class="tut-step" id="tutStep">第 1 步</span>
+      <span class="tut-text" id="tutText"></span>
+      <span class="tut-dots" id="tutDots"></span>
+      <button class="tut-skip" id="tutSkip" type="button">跳过</button>
+    </div>
     <div class="party" id="partyStrip"></div>
     <div class="command">
       <div class="actor" id="actorCard"></div>
@@ -458,6 +889,37 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 </div>
 
 <div id="overlay" class="overlay" hidden></div>
+<div id="tutorial" class="card-check" hidden>
+  <div class="cc-panel tut-panel" role="dialog" aria-modal="true" aria-labelledby="tutTitle">
+    <div class="cc-kicker">HOW TO PLAY · 4 步</div>
+    <h2 id="tutTitle" style="font-family:var(--serif);font-size:24px;margin:0 0 6px;color:#2b1a0d">先看一遍，再动手</h2>
+    <p style="margin:0 0 4px;font-size:11.5px;line-height:1.7;color:#5a3f24">目标：击败流亡德鲁伊，烧掉枯木古树。被树缚住的骑士会随树倒而解脱。</p>
+    <div class="tut-steps">
+      <div class="tut-step-row"><span class="tut-num">1</span><div><b>选角色</b><span>点下方任意一张角色卡。每回合每人可以移动一次、行动一次。</span></div></div>
+      <div class="tut-step-row"><span class="tut-num">2</span><div><b>移动</b><span>点角色周围的蓝色格子。荆棘会减速并划伤；枯枝怪是小型生物，不受影响。</span></div></div>
+      <div class="tut-step-row"><span class="tut-num">3</span><div><b>行动</b><span>点敌人普攻，或点一张词卡。词卡要先“认出”或“拼出”这个词；答错会摊开答案，可重试或半效结算。</span></div></div>
+      <div class="tut-step-row"><span class="tut-num">4</span><div><b>结束回合</b><span>点右下角红色蜡封。敌人行动完，回到你的下一回合。</span></div></div>
+    </div>
+    <div class="cc-actions">
+      <button class="btn primary" type="button" id="tutStart">开始</button>
+      <button class="btn" type="button" id="tutClose">跳过，自己试</button>
+    </div>
+    <p class="cc-hint">认义：从 4 个中文里选；拼写：打出英文。答错不扣 HP，卡牌半效或重试。</p>
+  </div>
+</div>
+<div id="cardCheck" class="card-check" hidden>
+  <div class="cc-panel" role="dialog" aria-modal="true" aria-labelledby="ccWord">
+    <div class="cc-kicker">WORD CHECK · 词卡检定</div>
+    <div class="cc-word" id="ccWord">shield</div>
+    <div class="cc-zh" id="ccZh">盾；防护</div>
+    <div class="cc-effect" id="ccEffect"></div>
+    <div class="cc-body" id="ccBody"></div>
+    <div class="cc-feedback" id="ccFeedback"></div>
+    <div class="cc-actions" id="ccActions"></div>
+    <div class="cc-hint">认义成功：卡牌正常生效。拼写成功：额外 +2。答错会摊开答案，可重试或半效结算；复习失败不扣 HP。</div>
+    <div class="cc-stamp" id="ccStamp" hidden></div>
+  </div>
+</div>
 <div id="drawer" class="drawer" hidden>
   <div class="drawer-backdrop" data-close></div>
   <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
@@ -539,13 +1001,13 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
   const ABILITY_DEFS = {
     strike: { id:'strike', word:'strike', zh:'打击', kind:'attack', target:'enemy', range:1, bonus:5, dice:[1,8], mod:3, dmg:'slashing', desc:'近战 1 格 · 1d8+3' },
-    shield: { id:'shield', word:'shield', zh:'举盾', kind:'buff', effect:'shield', target:'ally', range:1, uses:2, desc:'目标 AC +5 · 持续到下一回合' },
+    shield: { id:'shield', word:'shield', zh:'格挡', kind:'buff', effect:'shield', target:'ally', range:1, uses:2, desc:'目标 AC +5 · 持续到下一回合', check:true },
     arrow: { id:'arrow', word:'arrow', zh:'射击', kind:'attack', target:'enemy', range:6, bonus:5, dice:[1,6], mod:3, dmg:'piercing', desc:'射程 6 格 · 1d6+3' },
-    aim: { id:'aim', word:'aim', zh:'瞄准', kind:'attack', target:'enemy', range:6, bonus:7, dice:[1,6], mod:3, extraDice:[1,6], dmg:'piercing', uses:2, desc:'+2 命中 · 额外 1d6' },
+    aim: { id:'aim', word:'aim', zh:'精准射击', kind:'attack', target:'enemy', range:6, bonus:7, dice:[1,6], mod:3, extraDice:[1,6], dmg:'piercing', uses:2, desc:'+2 命中 · 额外 1d6', check:true },
     flame: { id:'flame', word:'flame', zh:'火焰箭', kind:'attack', target:'enemy', range:8, bonus:5, dice:[1,10], mod:0, dmg:'fire', desc:'射程 8 格 · 1d10 火焰' },
-    magic: { id:'magic', word:'magic', zh:'魔法飞弹', kind:'auto', target:'enemy', range:8, darts:3, dice:[1,4], mod:1, uses:2, desc:'3 枚 · 每枚 1d4+1 · 必中' },
+    magic: { id:'magic', word:'magic', zh:'飞弹', kind:'auto', target:'enemy', range:8, darts:3, dice:[1,4], mod:1, uses:2, desc:'3 枚 · 每枚 1d4+1 · 必中', check:true },
     mace: { id:'mace', word:'mace', zh:'锤击', kind:'attack', target:'enemy', range:1, bonus:4, dice:[1,6], mod:2, dmg:'bludgeoning', desc:'近战 1 格 · 1d6+2' },
-    heal: { id:'heal', word:'heal', zh:'治疗', kind:'heal', target:'ally', range:1, dice:[1,8], mod:3, uses:3, desc:'相邻同伴 · 回复 1d8+3' },
+    heal: { id:'heal', word:'heal', zh:'回复', kind:'heal', target:'ally', range:1, dice:[1,8], mod:3, uses:3, desc:'相邻同伴 · 回复 1d8+3', check:true },
     staff: { id:'staff', word:'staff', zh:'杖击', kind:'attack', target:'enemy', range:1, bonus:4, dice:[1,8], mod:2, dmg:'bludgeoning', desc:'近战 · 1d8+2' },
     root: { id:'root', word:'root', zh:'根须缠绕', kind:'control', target:'enemy', range:6, save:'str', dc:13, status:'rooted', uses:2, desc:'力量豁免 DC 13 · 失败无法移动' },
     bark: { id:'bark', word:'bark', zh:'树皮术', kind:'buff', effect:'bark', target:'self', range:0, uses:1, desc:'AC 变为 16 · 持续 3 回合' },
@@ -718,6 +1180,8 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
       flags: { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0 },
       lastHint: '',
       sheetReturn: null,
+      tutorial: { active: false, seen: false, step: 0 },
+      check: null,
     };
   }
 
@@ -759,7 +1223,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     let ac = u.ac;
     if (u.kind === 'druid' && state.round <= u.barkUntil) ac = Math.max(ac, 16);
     if (u.kind === 'knight') ac = Math.max(ac, 16);
-    if (u.shieldRound === state.round) ac += 5;
+    if (u.shieldRound === state.round) ac += (u.shieldBonus || 5);
     return ac;
   }
   function isHostileTo(a, b) {
@@ -863,74 +1327,79 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     const cx = (x + .5) * T, cy = (y + .5) * T;
     const r = seeded(hash2(x + 5, y + 9));
     g.save();
-    g.fillStyle = 'rgba(0,0,0,.4)';
+    // cast shadow onto the board
+    g.fillStyle = 'rgba(0,0,0,.45)';
+    g.beginPath(); g.ellipse(cx + 7, cy + 21, 25, 9, 0, 0, TAU); g.fill();
+    // base
+    const base = g.createRadialGradient(cx - 5, cy + 15, 2, cx, cy + 18, 24);
+    base.addColorStop(0, '#3a4236'); base.addColorStop(1, '#0d120d');
+    g.fillStyle = base;
+    g.beginPath(); g.ellipse(cx, cy + 18, 22, 8, 0, 0, TAU); g.fill();
+    // column body
+    const body = g.createLinearGradient(cx - 14, 0, cx + 14, 0);
+    body.addColorStop(0, '#1a211a'); body.addColorStop(.35, '#46503f'); body.addColorStop(.7, '#2a3228'); body.addColorStop(1, '#10150f');
+    g.fillStyle = body;
     g.beginPath();
-    g.ellipse(cx + 5, cy + 12, 24, 9, 0, 0, TAU);
-    g.fill();
-    const grd = g.createRadialGradient(cx - 8, cy - 10, 3, cx, cy, 28);
-    grd.addColorStop(0, '#3a4438');
-    grd.addColorStop(.55, '#222b23');
-    grd.addColorStop(1, '#0c110d');
-    g.fillStyle = grd;
+    g.moveTo(cx - 13, cy + 18);
+    g.lineTo(cx - 11, cy - 18);
+    g.lineTo(cx + 10, cy - 18);
+    g.lineTo(cx + 13, cy + 18);
+    g.closePath(); g.fill();
+    // broken top
+    g.fillStyle = '#2c3429';
     g.beginPath();
-    g.arc(cx, cy, 25, 0, TAU);
-    g.fill();
-    g.strokeStyle = 'rgba(0,0,0,.45)';
-    g.lineWidth = 1.5;
-    g.beginPath();
-    g.arc(cx, cy, 25, 0, TAU);
-    g.stroke();
-    g.strokeStyle = 'rgba(210,225,200,.09)';
-    g.lineWidth = 1;
-    g.beginPath();
-    g.arc(cx, cy, 18, Math.PI * 1.1, Math.PI * 1.7);
-    g.stroke();
+    g.moveTo(cx - 12, cy - 18); g.lineTo(cx - 6, cy - 24); g.lineTo(cx + 2, cy - 20);
+    g.lineTo(cx + 8, cy - 26); g.lineTo(cx + 11, cy - 17); g.closePath(); g.fill();
+    g.fillStyle = '#3d4739';
+    g.beginPath(); g.ellipse(cx - 1, cy - 18, 11, 3.6, 0, 0, TAU); g.fill();
+    // flutes / cracks
+    g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 1;
     for (let i = 0; i < 3; i++) {
-      g.strokeStyle = 'rgba(0,0,0,.35)';
-      g.beginPath();
-      let a = r() * TAU, rr = 5 + r() * 15;
-      g.moveTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr);
-      g.lineTo(cx + Math.cos(a + .7) * (rr + 8), cy + Math.sin(a + .7) * (rr + 8));
-      g.stroke();
+      const fx = cx - 8 + i * 8;
+      g.beginPath(); g.moveTo(fx, cy - 14); g.lineTo(fx + (r() - .5) * 3, cy + 15); g.stroke();
     }
+    g.strokeStyle = 'rgba(190,210,170,.1)'; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(cx - 8, cy - 15); g.lineTo(cx - 6, cy + 14); g.stroke();
+    // moss at the base
+    g.fillStyle = 'rgba(90,125,62,.35)';
+    g.beginPath(); g.ellipse(cx - 11, cy + 17, 6, 3, .2, 0, TAU); g.fill();
     g.restore();
   }
 
   function drawBriar(g, x, y) {
-    const px = x * T, py = y * T;
+    const cx = (x + .5) * T, cy = (y + .5) * T;
     const r = seeded(hash2(x + 11, y + 23));
     g.save();
-    const patch = g.createRadialGradient(px + T / 2, py + T / 2, 3, px + T / 2, py + T / 2, T * .62);
-    patch.addColorStop(0, 'rgba(26,42,25,.55)');
-    patch.addColorStop(.7, 'rgba(20,33,20,.28)');
-    patch.addColorStop(1, 'rgba(20,33,20,0)');
-    g.fillStyle = patch;
-    g.fillRect(px, py, T, T);
-    g.lineCap = 'round';
-    for (let i = 0; i < 12; i++) {
-      const sx = px + 6 + r() * (T - 12), sy = py + 6 + r() * (T - 12);
-      const ex = sx + (r() - .5) * 46, ey = sy + (r() - .5) * 46;
-      g.strokeStyle = r() < .5 ? 'rgba(52,72,40,.95)' : 'rgba(68,88,50,.88)';
-      g.lineWidth = 1.1 + r() * 1.5;
-      g.beginPath();
-      g.moveTo(sx, sy);
-      g.quadraticCurveTo(sx + (r() - .5) * 20, sy + (r() - .5) * 20, ex, ey);
-      g.stroke();
-      // thorn
-      g.fillStyle = r() < .5 ? 'rgba(150,120,185,.7)' : 'rgba(100,130,80,.65)';
-      const tx = ex - 2 + r() * 4, ty = ey - 2 + r() * 4;
-      g.beginPath();
-      g.moveTo(tx, ty);
-      g.lineTo(tx + 3.5, ty - 5);
-      g.lineTo(tx + 1, ty + 1.5);
-      g.closePath();
-      g.fill();
+    // thorny bush: several stacked lobes with a dark base
+    g.fillStyle = 'rgba(0,0,0,.4)';
+    g.beginPath(); g.ellipse(cx + 3, cy + 15, 24, 8, 0, 0, TAU); g.fill();
+    const glow = g.createRadialGradient(cx, cy, 2, cx, cy, 30);
+    glow.addColorStop(0, 'rgba(105,80,140,.14)'); glow.addColorStop(1, 'rgba(105,80,140,0)');
+    g.fillStyle = glow; g.beginPath(); g.arc(cx, cy, 30, 0, TAU); g.fill();
+    const lobes = [
+      [-9, 5, 17, 11], [7, 3, 15, 10], [0, -4, 18, 11], [-5, 11, 13, 8], [8, 11, 12, 7],
+    ];
+    for (const [ox, oy, rx, ry] of lobes) {
+      const grd = g.createRadialGradient(cx + ox - 3, cy + oy - 4, 1, cx + ox, cy + oy, rx);
+      grd.addColorStop(0, '#3d5530');
+      grd.addColorStop(.55, '#263a20');
+      grd.addColorStop(1, '#121c10');
+      g.fillStyle = grd;
+      g.beginPath(); g.ellipse(cx + ox, cy + oy, rx, ry, r() * .6, 0, TAU); g.fill();
     }
-    g.strokeStyle = 'rgba(130,110,180,.1)';
-    g.lineWidth = 3;
-    g.beginPath();
-    g.arc(px + T / 2, py + T / 2, 22, 0, TAU);
-    g.stroke();
+    // thorny stems and tips
+    g.lineCap = 'round';
+    for (let i = 0; i < 9; i++) {
+      const sx = cx + (r() - .5) * 34, sy = cy + (r() - .5) * 26;
+      const a = r() * TAU, len = 10 + r() * 16;
+      const ex = sx + Math.cos(a) * len, ey = sy + Math.sin(a) * len;
+      g.strokeStyle = 'rgba(64,84,44,.9)'; g.lineWidth = 1 + r() * 1.4;
+      g.beginPath(); g.moveTo(sx, sy); g.quadraticCurveTo(sx + Math.cos(a + .5) * 8, sy + Math.sin(a + .5) * 8, ex, ey); g.stroke();
+      g.fillStyle = r() < .5 ? 'rgba(160,125,190,.8)' : 'rgba(120,150,85,.75)';
+      g.beginPath(); g.moveTo(ex, ey); g.lineTo(ex + 3, ey - 4); g.lineTo(ex + 1, ey + 1); g.closePath(); g.fill();
+    }
+    g.strokeStyle = 'rgba(180,150,220,.12)'; g.lineWidth = 2;
+    g.beginPath(); g.arc(cx, cy, 24, 0, TAU); g.stroke();
     g.restore();
   }
 
@@ -1013,6 +1482,106 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     g.fillRect(0, 0, W, H);
   }
 
+  function drawBoardProps(g) {
+    // ritual circle under the tree
+    const tx = 8 * T, ty = 4 * T;
+    g.save();
+    g.strokeStyle = 'rgba(150,90,160,.16)';
+    g.lineWidth = 2.2;
+    g.beginPath(); g.arc(tx, ty, 150, 0, TAU); g.stroke();
+    g.strokeStyle = 'rgba(150,90,160,.09)';
+    g.lineWidth = 1.2;
+    g.beginPath(); g.arc(tx, ty, 128, 0, TAU); g.stroke();
+    g.strokeStyle = 'rgba(180,120,190,.22)';
+    g.lineWidth = 1.4;
+    for (let i = 0; i < 12; i++) {
+      const a = i / 12 * TAU;
+      g.beginPath();
+      g.moveTo(tx + Math.cos(a) * 128, ty + Math.sin(a) * 128);
+      g.lineTo(tx + Math.cos(a + .04) * 150, ty + Math.sin(a + .04) * 150);
+      g.stroke();
+    }
+    for (let i = 0; i < 5; i++) {
+      const a = i / 5 * TAU + .3;
+      const rx = tx + Math.cos(a) * 160, ry = ty + Math.sin(a) * 160;
+      g.beginPath(); g.arc(rx, ry, 2.4, 0, TAU); g.stroke();
+    }
+    g.restore();
+
+    // brazier at (4,7)
+    let cx = 4.5 * T, cy = 7.5 * T;
+    g.save();
+    g.fillStyle = 'rgba(0,0,0,.45)';
+    g.beginPath(); g.ellipse(cx + 4, cy + 16, 22, 8, 0, 0, TAU); g.fill();
+    g.strokeStyle = '#3a2f24'; g.lineWidth = 3;
+    g.beginPath(); g.moveTo(cx - 10, cy + 14); g.lineTo(cx - 12, cy - 2); g.moveTo(cx + 10, cy + 14); g.lineTo(cx + 12, cy - 2); g.stroke();
+    g.fillStyle = '#2c241c';
+    g.beginPath(); g.ellipse(cx, cy + 2, 16, 7, 0, 0, TAU); g.fill();
+    g.fillStyle = '#16120e';
+    g.beginPath(); g.ellipse(cx, cy - 1, 14, 5.5, 0, 0, TAU); g.fill();
+    const fl = g.createRadialGradient(cx, cy - 7, 1, cx, cy - 7, 18);
+    fl.addColorStop(0, 'rgba(255,210,120,.9)');
+    fl.addColorStop(.4, 'rgba(240,140,60,.6)');
+    fl.addColorStop(1, 'rgba(240,120,50,0)');
+    g.fillStyle = fl;
+    g.beginPath(); g.arc(cx, cy - 7, 18, 0, TAU); g.fill();
+    g.fillStyle = '#f6d27a';
+    g.beginPath(); g.moveTo(cx, cy - 22); g.quadraticCurveTo(cx + 10, cy - 8, cx, cy - 2); g.quadraticCurveTo(cx - 8, cy - 10, cx, cy - 22); g.fill();
+    g.restore();
+
+    // small chest at (8,7)
+    cx = 8.5 * T; cy = 7.5 * T;
+    g.save();
+    g.fillStyle = 'rgba(0,0,0,.4)';
+    g.beginPath(); g.ellipse(cx + 3, cy + 15, 20, 7, 0, 0, TAU); g.fill();
+    g.fillStyle = '#5a3a20';
+    roundRect(g, cx - 16, cy - 2, 32, 17, 3); g.fill();
+    g.fillStyle = '#7a512c';
+    roundRect(g, cx - 16, cy - 8, 32, 9, 4); g.fill();
+    g.strokeStyle = '#c9a15a'; g.lineWidth = 2;
+    g.beginPath(); g.moveTo(cx - 12, cy - 8); g.lineTo(cx - 12, cy + 15); g.moveTo(cx + 12, cy - 8); g.lineTo(cx + 12, cy + 15); g.stroke();
+    g.fillStyle = '#d9b36c'; g.beginPath(); g.arc(cx, cy + 2, 2.4, 0, TAU); g.fill();
+    g.restore();
+
+    // bones at (2,7)
+    cx = 2.5 * T; cy = 7.5 * T;
+    g.save();
+    g.fillStyle = 'rgba(220,210,180,.55)';
+    g.beginPath(); g.arc(cx - 8, cy + 2, 6, 0, TAU); g.fill();
+    g.fillStyle = 'rgba(40,32,24,.8)';
+    g.beginPath(); g.arc(cx - 10, cy, 1.6, 0, TAU); g.arc(cx - 6, cy, 1.6, 0, TAU); g.fill();
+    g.strokeStyle = 'rgba(220,210,180,.45)'; g.lineWidth = 2;
+    g.beginPath(); g.moveTo(cx + 3, cy + 4); g.lineTo(cx + 14, cy - 4); g.moveTo(cx + 6, cy + 8); g.lineTo(cx + 16, cy + 6); g.stroke();
+    g.restore();
+
+    // potion at (1,6)
+    cx = 1.5 * T; cy = 6.5 * T;
+    g.save();
+    g.fillStyle = 'rgba(0,0,0,.35)';
+    g.beginPath(); g.ellipse(cx + 2, cy + 10, 10, 4, 0, 0, TAU); g.fill();
+    g.fillStyle = 'rgba(120,200,140,.35)';
+    g.beginPath(); g.ellipse(cx, cy + 4, 12, 12, 0, 0, TAU); g.fill();
+    g.fillStyle = '#7fae74';
+    roundRect(g, cx - 5, cy - 2, 10, 12, 4); g.fill();
+    g.fillStyle = '#d7d0b8';
+    g.fillRect(cx - 2, cy - 9, 4, 7);
+    g.fillStyle = '#8e2f27'; g.fillRect(cx - 2, cy - 11, 4, 3);
+    g.restore();
+
+    // scroll at (1,1)
+    cx = 1.5 * T; cy = 1.5 * T;
+    g.save();
+    g.fillStyle = 'rgba(0,0,0,.35)';
+    g.beginPath(); g.ellipse(cx + 2, cy + 8, 16, 5, 0, 0, TAU); g.fill();
+    g.fillStyle = '#e2cfa8';
+    roundRect(g, cx - 15, cy - 4, 30, 9, 4); g.fill();
+    g.fillStyle = '#c9b48a';
+    g.beginPath(); g.ellipse(cx - 15, cy, 4, 6, 0, 0, TAU); g.ellipse(cx + 15, cy, 4, 6, 0, 0, TAU); g.fill();
+    g.strokeStyle = '#8e2f27'; g.lineWidth = 2;
+    g.beginPath(); g.moveTo(cx - 2, cy - 6); g.lineTo(cx + 2, cy - 6); g.stroke();
+    g.restore();
+  }
+
   function buildFloor() {
     const c = document.createElement('canvas');
     c.width = W * 2;
@@ -1044,6 +1613,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
       }
     }
     drawFloorRim(g);
+    drawBoardProps(g);
     return c;
   }
 
@@ -1195,12 +1765,14 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
       const remaining = a.uses === Infinity ? '∞' : a.uses;
       const disabled = u.dead || u.acted || a.uses <= 0 || state.phase !== 'player' || state.busy;
       const basic = a === u.abilities[0] ? ' basic' : '';
-      const meta = a.kind === 'buff' ? a.desc : a.desc;
-      return `<button type="button" class="ability${basic}" data-ability="${a.id}" ${disabled ? 'disabled' : ''} title="${esc(a.desc)}">
+      const checkCls = a.check ? (' check' + (a.checkPassed ? ' passed' : '') + (a.checkFailed ? ' failed' : '')) : '';
+      const badge = a.check ? `<span class="check-badge">${a.checkPassed ? '已过' : '认/拼'}</span>` : '';
+      return `<button type="button" class="ability${basic}${checkCls}" data-ability="${a.id}" ${disabled ? 'disabled' : ''} title="${esc(a.desc)}">
+        ${badge}
         <span class="uses">${remaining}</span>
         <span class="word">${esc(a.word)}</span>
         <span class="zh">${esc(a.zh)}</span>
-        <span class="meta">${esc(meta)}</span>
+        <span class="meta">${esc(a.desc)}</span>
       </button>`;
     }).join('');
     bar.innerHTML = html;
@@ -1228,14 +1800,251 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
       <div class="mi-chips">${treeChip}${chips}</div>`;
   }
 
+
+  /* ============================================================
+     Tutorial / dice / word checks
+     ============================================================ */
+  let tutorialFromBattle = false;
+  const TUT_STEPS = [
+    { text: '点一张角色卡，选一个要行动的人', pulse: '#partyStrip' },
+    { text: '点角色周围的蓝色格子移动', pulse: null },
+    { text: '点敌人普攻，或点词卡（先认出/拼出）', pulse: '#abilityBar' },
+    { text: '点右下角的红蜡封，结束我方回合', pulse: '#btnEnd' },
+  ];
+
+  function openTutorial(fromBattle) {
+    tutorialFromBattle = !!fromBattle;
+    const el = $('#tutorial');
+    el.hidden = false;
+    $('#tutStart').textContent = fromBattle ? '开始' : '知道啦';
+    $('#tutClose').textContent = fromBattle ? '跳过，自己试' : '关闭';
+  }
+  function closeTutorial(start) {
+    const el = $('#tutorial');
+    if (!el) return;
+    el.hidden = true;
+    if (tutorialFromBattle) {
+      state.tutorial.seen = true;
+      if (start) startTutorialBar();
+      else endTutorial();
+    }
+    tutorialFromBattle = false;
+  }
+  function clearTutPulse() {
+    document.querySelectorAll('.tut-pulse').forEach((e) => e.classList.remove('tut-pulse'));
+  }
+  function startTutorialBar() {
+    if (!state) return;
+    state.tutorial.active = true;
+    state.tutorial.step = 0;
+    state.tutorial.seen = true;
+    $('#tutorialBar').hidden = false;
+    updateTutorialBar();
+  }
+  function updateTutorialBar() {
+    if (!state || !state.tutorial.active) return;
+    const i = clamp(state.tutorial.step, 0, TUT_STEPS.length - 1);
+    const step = TUT_STEPS[i];
+    $('#tutStep').textContent = '第 ' + (i + 1) + ' 步';
+    $('#tutText').textContent = step.text;
+    $('#tutDots').innerHTML = TUT_STEPS.map((_, n) => `<i class="${n <= i ? 'on' : ''}"></i>`).join('');
+    clearTutPulse();
+    if (step.pulse) {
+      const el = document.querySelector(step.pulse);
+      if (el) el.classList.add('tut-pulse');
+    }
+  }
+  function advanceTutorial(step) {
+    if (!state || !state.tutorial.active) return;
+    if (step > state.tutorial.step) {
+      state.tutorial.step = step;
+      if (step >= TUT_STEPS.length) endTutorial();
+      else updateTutorialBar();
+    }
+  }
+  function endTutorial() {
+    if (!state) return;
+    state.tutorial.active = false;
+    state.tutorial.seen = true;
+    clearTutPulse();
+    const bar = $('#tutorialBar');
+    if (bar) bar.hidden = true;
+  }
+  function showDie(face, formula) {
+    const f = $('#dieFace');
+    if (!f) return;
+    f.textContent = face;
+    f.classList.remove('rolling');
+    void f.offsetWidth;
+    f.classList.add('rolling');
+    const fo = $('#dieFormula');
+    if (fo) fo.textContent = formula || '';
+  }
+
+  function wordEntry(word) {
+    return WORD_CARDS.find((w) => w.w === word) || null;
+  }
+  function wordMeaning(word) {
+    const e = wordEntry(word);
+    return e ? e.zh : word;
+  }
+  function wordExample(word) {
+    const e = wordEntry(word);
+    return e ? e.text : '';
+  }
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function openCardCheck(u, ab, target) {
+    state.check = { u, ab, target, mode: null, correct: wordMeaning(ab.word) };
+    state.busy = true;
+    state.mode = 'idle';
+    state.pending = null;
+    $('#ccWord').textContent = ab.word;
+    $('#ccZh').textContent = '打出这张词卡前，先认出或拼出它';
+    $('#ccEffect').textContent = `${ab.desc} · 卡牌效果`;
+    $('#ccFeedback').textContent = '';
+    $('#ccFeedback').className = 'cc-feedback';
+    $('#ccStamp').hidden = true;
+    $('#ccStamp').className = 'cc-stamp';
+    $('#ccActions').innerHTML = '';
+    renderCheckModes();
+    $('#cardCheck').hidden = false;
+    renderUI();
+  }
+  function closeCardCheck(cancel) {
+    $('#cardCheck').hidden = true;
+    state.check = null;
+    state.busy = false;
+    state.mode = 'idle';
+    state.pending = null;
+    if (cancel) setTicker('已取消，卡牌没有打出');
+    renderUI();
+  }
+  function renderCheckModes() {
+    const c = state.check;
+    if (!c) return;
+    $('#ccActions').innerHTML = '';
+    $('#ccBody').innerHTML = `<div class="cc-modes">
+      <button class="cc-mode" type="button" data-mode="recognize"><b>认出</b><span>从 4 个中文里选，正常生效</span></button>
+      <button class="cc-mode" type="button" data-mode="spell"><b>拼出</b><span>打出英文，成功额外 +2</span></button>
+    </div>
+    <div class="cc-actions"><button class="btn" type="button" data-cancel="1">取消</button></div>`;
+    $('#ccBody').querySelectorAll('[data-mode]').forEach((b) => {
+      b.addEventListener('click', () => { c.mode = b.dataset.mode; if (c.mode === 'recognize') renderRecognize(); else renderSpell(); });
+    });
+    $('#ccBody').querySelector('[data-cancel]').addEventListener('click', () => closeCardCheck(true));
+  }
+  function renderRecognize() {
+    const c = state.check;
+    if (!c) return;
+    const correct = c.correct;
+    const others = [];
+    for (const w of WORD_CARDS) {
+      if (w.w === c.ab.word) continue;
+      if (w.zh === correct) continue;
+      if (!others.includes(w.zh)) others.push(w.zh);
+    }
+    shuffle(others);
+    const options = shuffle([correct, ...others.slice(0, 3)]);
+    $('#ccBody').innerHTML = `<div class="cc-options">${options.map((o) => `<button class="cc-option" type="button" data-opt="${esc(o)}">${esc(o)}</button>`).join('')}</div>
+      <div class="cc-actions"><button class="btn" type="button" data-back="1">换一种检定</button></div>`;
+    $('#ccBody').querySelectorAll('[data-opt]').forEach((b) => {
+      b.addEventListener('click', () => evaluateCheck(b.dataset.opt === correct, 'recognize', b));
+    });
+    $('#ccBody').querySelector('[data-back]').addEventListener('click', () => {
+      $('#ccWord').textContent = c.ab.word;
+      $('#ccZh').textContent = '打出这张词卡前，先认出或拼出它';
+      renderCheckModes();
+    });
+  }
+  function renderSpell() {
+    const c = state.check;
+    if (!c) return;
+    const w = c.ab.word;
+    $('#ccWord').textContent = '? ? ?';
+    $('#ccZh').textContent = wordMeaning(w);
+    $('#ccBody').innerHTML = `<div class="cc-input-row"><input class="cc-input" id="ccInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="输入英文" aria-label="拼写 ${esc(w)}"><button class="cc-mode" type="button" id="ccSubmit" style="flex:0 0 auto"><b>确认</b><span>${w.length} 个字母</span></button></div>
+      <div class="cc-actions"><button class="btn" type="button" data-back="1">换一种检定</button></div>`;
+    const input = $('#ccInput');
+    const submit = () => evaluateCheck(input.value.trim().toLowerCase() === w.toLowerCase(), 'spell');
+    $('#ccSubmit').addEventListener('click', submit);
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+    setTimeout(() => input.focus(), 80);
+  }
+  function evaluateCheck(ok, how, btn) {
+    const c = state.check;
+    if (!c) return;
+    const { ab } = c;
+    if (ok) {
+      ab.checkPassed = true;
+      ab.checkFailed = false;
+      const stamp = $('#ccStamp');
+      stamp.hidden = false;
+      stamp.className = 'cc-stamp good';
+      stamp.textContent = how === 'spell' ? '拼写通过' : '认义通过';
+      $('#ccFeedback').className = 'cc-feedback good';
+      $('#ccFeedback').textContent = how === 'spell'
+        ? `拼写正确：${ab.word} = ${wordMeaning(ab.word)}。卡牌生效，额外 +2。`
+        : `认义正确：${ab.word} = ${wordMeaning(ab.word)}。卡牌生效。`;
+      $('#ccBody').querySelectorAll('button').forEach((b) => { b.disabled = true; });
+      $('#ccActions').innerHTML = `<button class="btn primary" type="button" id="ccResolve">让卡牌生效</button>`;
+      $('#ccResolve').addEventListener('click', () => finishCardCheck(false, how === 'spell'));
+      if (!state.flags.checkTipShown) {
+        state.flags.checkTipShown = true;
+        setTimeout(() => { if (state.check) setTicker('词卡通过：认义正常生效，拼写额外 +2'); }, 100);
+      }
+      renderUI();
+    } else {
+      ab.checkFailed = true;
+      const stamp = $('#ccStamp');
+      stamp.hidden = false;
+      stamp.className = 'cc-stamp';
+      stamp.textContent = '再复习';
+      $('#ccFeedback').className = 'cc-feedback bad';
+      $('#ccFeedback').textContent = `答案是：${ab.word} = ${wordMeaning(ab.word)}。${wordExample(ab.word)}`;
+      $('#ccBody').querySelectorAll('button').forEach((b) => { b.disabled = true; });
+      if (btn) btn.classList.add('wrong');
+      const correctBtn = Array.from($('#ccBody').querySelectorAll('[data-opt]')).find((b) => b.dataset.opt === c.correct);
+      if (correctBtn) correctBtn.classList.add('correct');
+      $('#ccActions').innerHTML = `<button class="btn primary" type="button" id="ccRetry">再试一次</button><button class="btn" type="button" id="ccHalf">半效结算</button>`;
+      $('#ccRetry').addEventListener('click', () => { $('#ccStamp').hidden = true; $('#ccFeedback').textContent = ''; $('#ccFeedback').className = 'cc-feedback'; renderCheckModes(); });
+      $('#ccHalf').addEventListener('click', () => finishCardCheck(true, false));
+      renderUI();
+    }
+  }
+  function finishCardCheck(half, spellBonus) {
+    const c = state.check;
+    if (!c) return;
+    const { u, ab, target } = c;
+    $('#cardCheck').hidden = true;
+    state.check = null;
+    state.busy = false;
+    state.mode = 'idle';
+    state.pending = null;
+    resolvePlayerAbility(u, ab, target, { skipCheck: true, half, spellBonus });
+  }
+
   /* ============================================================
      Overlay screens
      ============================================================ */
-  function showOverlay(html, after) {
+  function showOverlay(html, after, opts = {}) {
     const ov = $('#overlay');
+    const scene = !!opts.scene;
     ov.innerHTML = html;
     ov.hidden = false;
-    requestAnimationFrame(() => ov.classList.add('show'));
+    ov.classList.toggle('scene-overlay', scene);
+    $('#app').classList.toggle('scene-mode', scene);
+    requestAnimationFrame(() => {
+      ov.classList.add('show');
+      setupCanvas();
+      fitBoard();
+    });
     ov.querySelectorAll('[data-action]').forEach((btn) => {
       btn.addEventListener('click', () => handleOverlayAction(btn.dataset.action));
     });
@@ -1244,7 +2053,14 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   function hideOverlay() {
     const ov = $('#overlay');
     ov.classList.remove('show');
-    setTimeout(() => { ov.hidden = true; ov.innerHTML = ''; }, 300);
+    $('#app').classList.remove('scene-mode');
+    setTimeout(() => {
+      ov.hidden = true;
+      ov.innerHTML = '';
+      ov.classList.remove('scene-overlay');
+      setupCanvas();
+      fitBoard();
+    }, 300);
   }
   function handleOverlayAction(action) {
     if (action === 'intro') beginIntro();
@@ -1253,6 +2069,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     else if (action === 'replay') beginBattle();
     else if (action === 'wordbook') openDrawer('words');
     else if (action === 'help') openDrawer('help');
+    else if (action === 'tutorial') openTutorial(false);
     else if (action === 'close') hideOverlay();
   }
 
@@ -1269,13 +2086,21 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     state.log = [];
     state.effects = [];
     state.ticker = null;
+    state.check = null;
+    state.tutorial.active = false;
+    $('#tutorial').hidden = true;
+    $('#cardCheck').hidden = true;
+    $('#tutorialBar').hidden = true;
+    clearTutPulse();
     closeDrawer();
     renderUI();
     showOverlay(`<div class="panel cover">
+      <div class="cover-scene-tag">Tabletop prototype · 鸟瞰</div>
+      <div class="cover-wax">拾</div>
       <div class="cover-rule"></div>
       <div class="kicker">Tactical Prototype · Chapter One</div>
       <h2 class="cover-title">枯木庭院</h2>
-      <p class="cover-sub">《拾词者》第一章 · 俯视角战棋原型</p>
+      <p class="cover-sub">《拾词者》第一章 · 鸟瞰战棋原型</p>
       <p class="cover-lead">一座沉入地底的城塞。<br>一片被荆棘占满的庭院。<br>一棵还在呼吸的枯树。</p>
       <div class="cover-stats">
         <span><b>1</b>场战斗</span>
@@ -1284,11 +2109,11 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
       </div>
       <div class="actions">
         <button class="btn primary" type="button" data-action="intro">进入庭院</button>
-        <button class="btn" type="button" data-action="wordbook">本章词表</button>
-        <button class="btn ghost" type="button" data-action="help">原型说明</button>
+        <button class="btn" type="button" data-action="tutorial">怎么玩</button>
+        <button class="btn ghost" type="button" data-action="wordbook">本章词表</button>
       </div>
-      <p class="note">这是画面与战斗方向的小原型，不是完整章节。场景文字为本原型重写；怪物数值按 5e 规则简化换算。</p>
-    </div>`);
+      <p class="note">这是画面与战斗方向的小原型，不是完整章节。场景文字为本原型重写；怪物数值按 5e 数值换算。</p>
+    </div>`, null, { scene: true });
   }
 
   function beginIntro() {
@@ -1304,21 +2129,24 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
         <div class="obj-line"><span>援救</span><b>把被树缚住的冒险者带回地面</b></div>
         <div class="obj-line"><span>要点</span><b>古树怕火；箭矢对它的伤害减半</b></div>
       </div>
-      <div class="word-chips">
-        <span class="chip"><b>rescue</b><span>援救</span></span>
-        <span class="chip"><b>root</b><span>根</span></span>
-        <span class="chip"><b>thorn</b><span>刺</span></span>
-        <span class="chip"><b>seed</b><span>种子</span></span>
-        <span class="chip"><b>fruit</b><span>果实</span></span>
-        <span class="chip"><b>descend</b><span>下降</span></span>
+      <div class="intro-word-cards">
+        <div class="intro-word-card"><span class="iw-check">检定</span><span class="iw-en">shield</span><span class="iw-zh">盾；防护</span><span class="iw-tag">阿岚 · 格挡</span></div>
+        <div class="intro-word-card"><span class="iw-check">检定</span><span class="iw-en">aim</span><span class="iw-zh">瞄准</span><span class="iw-tag">米拉 · 精准射击</span></div>
+        <div class="intro-word-card"><span class="iw-check">检定</span><span class="iw-en">magic</span><span class="iw-zh">魔法</span><span class="iw-tag">洛恩 · 飞弹</span></div>
+        <div class="intro-word-card"><span class="iw-check">检定</span><span class="iw-en">heal</span><span class="iw-zh">治疗</span><span class="iw-tag">赛拉 · 回复</span></div>
+        <div class="intro-word-card"><span class="iw-en">root</span><span class="iw-zh">根</span><span class="iw-tag">德鲁伊 · 缠绕</span></div>
+        <div class="intro-word-card"><span class="iw-en">seed</span><span class="iw-zh">种子</span><span class="iw-tag">古树 · 播种</span></div>
+        <div class="intro-word-card"><span class="iw-en">fruit</span><span class="iw-zh">果实</span><span class="iw-tag">剧情物品</span></div>
+        <div class="intro-word-card"><span class="iw-en">rescue</span><span class="iw-zh">援救</span><span class="iw-tag">章节目标</span></div>
       </div>
+      <p class="intro-note">带“检定”的词会在战斗里变成卡牌：先认出/拼出，卡牌才生效；答错会摊开答案，效果减半，不会卡关。</p>
       <div class="actions">
         <button class="btn primary" type="button" data-action="start">开始战斗</button>
+        <button class="btn" type="button" data-action="tutorial">怎么玩</button>
         <button class="btn ghost" type="button" data-action="cover">返回封面</button>
-        <button class="btn ghost" type="button" data-action="wordbook">本章词表</button>
       </div>
-      <p class="note">4 名 3 级角色 · 敌方 6 个单位 · 目标：古树与德鲁伊都倒下。点角色 → 蓝格移动 → 点敌人 / 技能。</p>
-    </div>`);
+      <p class="note">4 名 3 级角色 · 敌方 6 个单位 · 目标：古树与德鲁伊都倒下。</p>
+    </div>`, null, { scene: true });
   }
 
   function beginBattle() {
@@ -1334,6 +2162,12 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     state.flags = { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0 };
     state.stats = { damage: 0, kills: 0, fires: 0 };
     state.units = createUnits();
+    state.check = null;
+    state.tutorial.active = false;
+    $('#tutorial').hidden = true;
+    $('#cardCheck').hidden = true;
+    $('#tutorialBar').hidden = true;
+    clearTutPulse();
     closeDrawer();
     hideOverlay();
     renderUI();
@@ -1341,13 +2175,20 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     addLog('流亡德鲁伊挡在古树前：“把武器放下，或者成为养料。”');
     addLog('第 1 回合 · 我方行动', 'round');
     banner('第 1 回合', 'Your Turn', 1100);
-    const first = party().find((u) => !u.dead);
-    if (first) selectUnit(first.id);
     renderUI();
+    if (!state.tutorial.seen) {
+      state.tutorial.active = false;
+      state.tutorial.step = 0;
+      openTutorial(true);
+    } else {
+      const first = party().find((u) => !u.dead);
+      if (first) selectUnit(first.id);
+    }
   }
 
   function showVictory() {
     if (state.phase === 'won') return;
+    endTutorial();
     state.phase = 'won';
     state.selectedId = null;
     state.mode = 'idle';
@@ -1381,6 +2222,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
   function showDefeat() {
     if (state.phase === 'lost') return;
+    endTutorial();
     state.phase = 'lost';
     state.selectedId = null;
     state.mode = 'idle';
@@ -1445,11 +2287,11 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     } else {
       body.innerHTML = `
         <div class="help-block"><h3>这是什么</h3>
-          <p>这是《拾词者》画面方向的一个小原型：一场俯视角、格子制的战棋战斗。它只做一章里的一场战斗，用来判断“改成战棋”是否值得继续。</p></div>
+          <p>这是《拾词者》画面方向的一个小原型：一场鸟瞰、格子制的战棋战斗。它只做一章里的一场战斗，用来判断“改成战棋”是否值得继续。</p></div>
         <div class="help-block"><h3>事件与怪物从哪来</h3>
           <p>结构来自你提供的 5e 冒险集第一章：沉没的城塞、狗头人与哥布林的争夺、被偷走的白龙幼崽、被枯树控制的冒险者，以及庭院深处的枯木古树和它的德鲁伊。原型只取了最后的庭院战，其他事件留作后续章节。</p></div>
         <div class="help-block"><h3>数值</h3>
-          <p>怪物 HP、AC、攻击加值、伤害骰、火焰易伤与穿刺抗性按 5e 怪物卡和冒险原文换算。攻击是 d20 + 加值对抗 AC；控制与毒伤走豁免。为了单场能打完，古树的“播种”和部分法术做了简化，树皮骑士的 AC 按 18 处理。</p></div>
+          <p>怪物 HP、AC、攻击加值、伤害骰、火焰易伤与穿刺抗性按 5e 怪物卡和冒险原文换算。攻击是 d20 + 加值对抗 AC；控制与毒伤走豁免。为了单场节奏，古树的“播种”和缠绕持续时间做了演示取舍；怪物数值本身按 5e 怪物卡换算，没有为了“避嫌”重算，树皮骑士的 AC 按 18。</p></div>
         <div class="help-block"><h3>没有收录什么</h3>
           <p>仓库是公开的，所以这里没有收录原书文字、专有名词或完整数据表；场景描述、对白和词卡例句都是本原型重写的。原书请留给你自己学习。</p></div>
         <div class="help-block"><h3>操作</h3>
@@ -1472,6 +2314,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     state.selectedId = id;
     state.mode = 'idle';
     state.pending = null;
+    if (state.tutorial.active && state.tutorial.step === 0) advanceTutorial(1);
     if (!silent) renderUI();
     else { renderActor(); renderAbilities(); renderParty(); updateHint(); }
   }
@@ -1790,12 +2633,13 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   /* ============================================================
      Combat
      ============================================================ */
-  function attackTarget(attacker, target, ab) {
+  function attackTarget(attacker, target, ab, opts = {}) {
     const roll = d20();
     const ac = effectiveAc(target);
     const crit = roll === 20;
     const miss = roll === 1 || (!crit && roll + ab.bonus < ac);
     const totalRoll = roll + ab.bonus;
+    showDie(roll, `${roll} + ${ab.bonus} = ${totalRoll}`);
     addLog(`${attacker.name} 使用 ${ab.zh} → ${target.name}：d20 ${roll} + ${ab.bonus} = ${totalRoll} vs AC ${ac}${crit ? ' · 暴击！' : ''}`, miss ? 'hit' : 'good');
     if (miss) {
       floatText(target.vx, target.vy - 30, 'MISS', '#b9b2a2', 15);
@@ -1809,6 +2653,8 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     let note = '';
     if (ab.dmg === 'fire' && traits.includes('fireVuln')) { total *= 2; note = '（火焰易伤 ×2）'; }
     if (ab.dmg === 'piercing' && traits.includes('pierceResist')) { total = Math.floor(total / 2); note = '（穿刺抗性 ÷2）'; }
+    if (opts.mult && opts.mult !== 1) { total = Math.max(1, Math.floor(total * opts.mult)); note += '（半效）'; }
+    if (opts.spellBonus) { total += 2; note += '（拼写 +2）'; }
     if (ab.dmg === 'fire') state.stats.fires++;
     applyDamage(target, total, { source: attacker, note, damageType: ab.dmg, crit });
     return { hit: true, dmg: total };
@@ -1909,6 +2755,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     await animateMove(u, path);
     if (u.dead) { state.busy = false; return; }
     u.moved = true;
+    if (state.tutorial.active && state.tutorial.step <= 1) advanceTutorial(2);
     state.busy = false;
     if (u.acted) {
       finishUnit(u);
@@ -1917,22 +2764,30 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     }
   }
 
-  async function resolvePlayerAbility(u, ab, target) {
+  async function resolvePlayerAbility(u, ab, target, opts = {}) {
     if (!u || !ab || !target || state.busy) return;
+    if (ab.check && !ab.checkPassed && !opts.skipCheck) {
+      openCardCheck(u, ab, target);
+      return;
+    }
     state.busy = true;
     state.mode = 'idle';
     state.pending = null;
     renderUI();
+    const mult = opts.half ? 0.5 : 1;
+    const spellBonus = opts.spellBonus ? 2 : 0;
     const ranged = ab.range > 1 || ab.kind === 'auto';
     if (ab.kind === 'buff') {
       if (ab.effect === 'shield') {
+        const bonus = Math.max(2, Math.round(5 * mult)) + (opts.spellBonus ? 1 : 0);
         target.shieldRound = state.round;
-        addLog(`${u.name} 举起盾牌，为 ${target.name} 加上 5 点 AC（持续到下一回合）。`, 'good');
+        target.shieldBonus = bonus;
+        addLog(`${u.name} 举起盾牌，为 ${target.name} 加上 ${bonus} 点 AC（持续到下一回合）。`, 'good');
         addEffect({ type: 'shield', x: target.vx, y: target.vy, age: 0, dur: 700 });
         spawnBurst(target.vx, target.vy, 'rgba(120,190,220,.7)', 12);
       }
     } else if (ab.kind === 'heal') {
-      const amount = die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
+      const amount = Math.max(1, Math.floor((die(ab.dice[0], ab.dice[1]) + (ab.mod || 0)) * mult) + spellBonus);
       target.hp = Math.min(target.maxHp, target.hp + amount);
       floatText(target.vx, target.vy - 30, '+' + amount, '#9fe0a8', 18);
       addLog(`${u.name} 用 ${ab.zh} 治疗 ${target.name}，回复 ${amount} 点生命。`, 'good');
@@ -1942,12 +2797,16 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
       await lunge(u, target);
       let total = 0;
       for (let i = 0; i < ab.darts; i++) total += die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
+      total = Math.max(1, Math.floor(total * mult) + spellBonus);
       addLog(`${u.name} 释放 ${ab.zh}：${ab.darts} 枚飞弹，共 ${total} 点力场伤害。`, 'good');
+      showDie('AUTO', '必中 · ' + ab.darts + ' 枚飞弹');
       addEffect({ type: 'bolt', x0: u.vx, y0: u.vy, x1: target.vx, y1: target.vy, color: '#b9a2ff', age: 0, dur: 520 });
       applyDamage(target, total, { source: u, damageType: 'force' });
     } else if (ab.kind === 'save') {
       await lunge(u, target);
-      const save = d20() + (target.saves[ab.save] || 0);
+      const saveRoll = d20();
+      const save = saveRoll + (target.saves[ab.save] || 0);
+      showDie(saveRoll, `${saveRoll} + ${target.saves[ab.save] || 0} = ${save} · DC ${ab.dc}`);
       addLog(`${target.name} 进行 ${saveName(ab.save)} 豁免：d20 + ${target.saves[ab.save] || 0} = ${save} vs DC ${ab.dc}`, save >= ab.dc ? 'good' : 'hit');
       if (save < ab.dc) {
         const amount = die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
@@ -1958,7 +2817,9 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
         setTicker(target.name + ' 豁免成功，没有受到伤害');
       }
     } else if (ab.kind === 'control') {
-      const save = d20() + (target.saves[ab.save] || 0);
+      const saveRoll = d20();
+      const save = saveRoll + (target.saves[ab.save] || 0);
+      showDie(saveRoll, `${saveRoll} + ${target.saves[ab.save] || 0} = ${save} · DC ${ab.dc}`);
       addLog(`${target.name} 进行 ${saveName(ab.save)} 豁免：d20 + ${target.saves[ab.save] || 0} = ${save} vs DC ${ab.dc}`, save >= ab.dc ? 'good' : 'hit');
       addEffect({ type: 'root', x: target.vx, y: target.vy, age: 0, dur: 900 });
       if (save < ab.dc) {
@@ -1972,7 +2833,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
       if (!ranged) await lunge(u, target);
       else addEffect({ type: 'bolt', x0: u.vx, y0: u.vy, x1: target.vx, y1: target.vy, color: ab.dmg === 'fire' ? '#f0a05a' : '#d9d2b8', age: 0, dur: 420 });
       await sleep(REDUCED ? 0 : 180);
-      const hitResult = attackTarget(u, target, ab);
+      const hitResult = attackTarget(u, target, ab, { mult, spellBonus, half: opts.half });
       addEffect({ type: 'slash', x: target.vx, y: target.vy, angle: Math.atan2(target.vy - u.vy, target.vx - u.vx), color: ab.dmg === 'fire' ? '#f0a05a' : '#e8dfc8', age: 0, dur: 300 });
       if (!ranged && hitResult.hit && target.kind === 'tree' && !target.dead) {
         const thorn = 2;
@@ -1985,6 +2846,9 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     ab.uses = Math.max(0, ab.uses - 1);
     u.acted = true;
     u.done = !!(u.moved && u.acted);
+    if (state.tutorial.active && state.tutorial.step <= 2) advanceTutorial(3);
+    if (opts.half) addLog('检定未通过，卡牌半效结算；这个词可以下一轮再练。', 'hit');
+    else if (opts.spellBonus) addLog('拼写通过：卡牌效果 +2。', 'good');
     state.busy = false;
     await sleep(REDUCED ? 0 : 260);
     if (u.done) finishUnit(u);
@@ -2017,6 +2881,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
   async function endPlayerPhase() {
     if (!state || state.phase !== 'player' || state.busy) return;
+    if (state.tutorial.active) endTutorial();
     state.selectedId = null;
     state.mode = 'idle';
     state.pending = null;
@@ -2150,7 +3015,9 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   async function enemyUseAbility(u, ab, target) {
     // root and poison are resolved like player abilities, attacks with animation
     if (ab.kind === 'control') {
-      const save = d20() + (target.saves[ab.save] || 0);
+      const saveRoll = d20();
+      const save = saveRoll + (target.saves[ab.save] || 0);
+      showDie(saveRoll, `${saveRoll} + ${target.saves[ab.save] || 0} = ${save} · DC ${ab.dc}`);
       addLog(`${target.name} 进行 ${saveName(ab.save)} 豁免：d20 + ${target.saves[ab.save] || 0} = ${save} vs DC ${ab.dc}`, save >= ab.dc ? 'good' : 'hit');
       addEffect({ type: 'root', x: target.vx, y: target.vy, age: 0, dur: 900 });
       if (save < ab.dc) {
@@ -2165,7 +3032,9 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
       return;
     }
     if (ab.kind === 'save') {
-      const save = d20() + (target.saves[ab.save] || 0);
+      const saveRoll = d20();
+      const save = saveRoll + (target.saves[ab.save] || 0);
+      showDie(saveRoll, `${saveRoll} + ${target.saves[ab.save] || 0} = ${save} · DC ${ab.dc}`);
       addLog(`${target.name} 进行 ${saveName(ab.save)} 豁免：d20 + ${target.saves[ab.save] || 0} = ${save} vs DC ${ab.dc}`, save >= ab.dc ? 'good' : 'hit');
       if (save < ab.dc) {
         const amount = die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
@@ -2477,6 +3346,11 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
         ctx.fill();
       }
     }
+    // terrain base / mound
+    ctx.fillStyle = 'rgba(8,6,4,.55)';
+    ctx.beginPath(); ctx.ellipse(cx, cy + 40, 64, 20, 0, 0, TAU); ctx.fill();
+    ctx.strokeStyle = 'rgba(120,95,60,.25)'; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.ellipse(cx, cy + 40, 64, 20, 0, 0, TAU); ctx.stroke();
     // roots
     ctx.strokeStyle = alive ? 'rgba(28,30,22,.95)' : 'rgba(20,18,15,.9)';
     ctx.lineCap = 'round';
@@ -2545,6 +3419,37 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
       ctx.bezierCurveTo(cx - 26 + i * 10, cy - 10, cx - 8 + i * 7, cy - 52, cx - 6 + i * 6, cy - 84);
       ctx.stroke();
     }
+    // two adventurers half-swallowed by the trunk
+    ctx.save();
+    ctx.globalAlpha = .62;
+    // knight silhouette (left)
+    ctx.fillStyle = '#17140f';
+    ctx.beginPath();
+    ctx.moveTo(cx - 19, cy - 20);
+    ctx.quadraticCurveTo(cx - 25, cy - 44, cx - 17, cy - 54);
+    ctx.quadraticCurveTo(cx - 10, cy - 58, cx - 7, cy - 48);
+    ctx.lineTo(cx - 6, cy - 18);
+    ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx - 15, cy - 57, 5, 0, TAU); ctx.fill();
+    ctx.strokeStyle = 'rgba(180,160,120,.18)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx - 22, cy - 42); ctx.quadraticCurveTo(cx - 16, cy - 38, cx - 8, cy - 42); ctx.stroke();
+    // robed silhouette (right)
+    ctx.fillStyle = '#191510';
+    ctx.beginPath();
+    ctx.moveTo(cx + 8, cy + 2);
+    ctx.quadraticCurveTo(cx + 2, cy - 30, cx + 11, cy - 40);
+    ctx.quadraticCurveTo(cx + 19, cy - 44, cx + 23, cy - 34);
+    ctx.lineTo(cx + 25, cy + 2);
+    ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx + 16, cy - 44, 4.5, 0, TAU); ctx.fill();
+    ctx.strokeStyle = 'rgba(150,130,95,.15)';
+    ctx.beginPath(); ctx.moveTo(cx + 10, cy + 2); ctx.lineTo(cx + 11, cy - 32); ctx.stroke();
+    // bark creepers over the bodies
+    ctx.strokeStyle = 'rgba(60,55,38,.55)'; ctx.lineWidth = 1.2;
+    for (let i = 0; i < 4; i++) {
+      ctx.beginPath(); ctx.moveTo(cx - 22 + i * 5, cy - 50 + i * 8); ctx.quadraticCurveTo(cx - 14 + i * 4, cy - 40 + i * 9, cx - 20 + i * 6, cy - 26 + i * 10); ctx.stroke();
+    }
+    ctx.restore();
     // branches
     ctx.strokeStyle = 'rgba(24,25,17,.95)';
     ctx.lineWidth = 7;
@@ -2716,76 +3621,184 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     ctx.restore();
   }
 
+  function drawMiniFigure(u, x, footY, now) {
+    const g = ctx;
+    const kind = u.kind;
+    g.save();
+    g.translate(x, footY);
+    const s = u.size === 2 ? 1.3 : 1.22;
+    g.scale(s, s);
+    g.lineCap = 'round';
+    g.lineJoin = 'round';
+    const outline = 'rgba(8,6,4,.75)';
+    const skin = '#d8c39c';
+    if (kind === 'fighter') {
+      // legs and cloak
+      g.strokeStyle = '#3a2a1c'; g.lineWidth = 3;
+      g.beginPath(); g.moveTo(-4, -8); g.lineTo(-5, 0); g.moveTo(4, -8); g.lineTo(5, 0); g.stroke();
+      g.fillStyle = '#2f5f57'; g.beginPath();
+      g.moveTo(-8, -28); g.lineTo(8, -28); g.lineTo(10, -1); g.lineTo(0, 2); g.lineTo(-10, -1); g.closePath(); g.fill();
+      // armour torso
+      g.fillStyle = '#8fa4a8'; roundRect(g, -6, -27, 12, 16, 3); g.fill();
+      g.strokeStyle = outline; g.lineWidth = 1; g.stroke();
+      g.fillStyle = '#c9d3d2'; g.fillRect(-4, -25, 2, 12);
+      // head and helm
+      g.fillStyle = skin; g.beginPath(); g.arc(0, -32, 4.5, 0, TAU); g.fill();
+      g.fillStyle = '#6b7a80'; g.beginPath(); g.arc(0, -33, 4.8, Math.PI, TAU); g.fill();
+      g.fillRect(-4.8, -33, 9.6, 2);
+      // shield
+      g.fillStyle = '#b98f4b'; g.beginPath(); g.ellipse(-10, -17, 5.6, 8, -.1, 0, TAU); g.fill();
+      g.strokeStyle = '#5a3a20'; g.lineWidth = 1.2; g.stroke();
+      g.fillStyle = '#e2c084'; g.beginPath(); g.arc(-10, -17, 1.8, 0, TAU); g.fill();
+      // sword
+      g.strokeStyle = '#e0dac8'; g.lineWidth = 2;
+      g.beginPath(); g.moveTo(8, -27); g.lineTo(9, -5); g.moveTo(5, -8); g.lineTo(12, -8); g.stroke();
+    } else if (kind === 'ranger') {
+      g.strokeStyle = '#3a2a1c'; g.lineWidth = 2.8;
+      g.beginPath(); g.moveTo(-3, -7); g.lineTo(-4, 0); g.moveTo(3, -7); g.lineTo(4, 0); g.stroke();
+      g.fillStyle = '#3f5a34'; g.beginPath();
+      g.moveTo(-7, -27); g.lineTo(7, -27); g.lineTo(9, -2); g.lineTo(0, 1); g.lineTo(-9, -2); g.closePath(); g.fill();
+      g.fillStyle = '#7f9a5a'; g.fillRect(-5, -24, 10, 3);
+      g.fillStyle = skin; g.beginPath(); g.arc(0, -31, 4.2, 0, TAU); g.fill();
+      g.fillStyle = '#2f4a2b'; g.beginPath(); g.moveTo(0, -38); g.lineTo(6, -29); g.lineTo(-6, -29); g.closePath(); g.fill();
+      // bow
+      g.strokeStyle = '#b98f4b'; g.lineWidth = 1.8;
+      g.beginPath(); g.arc(-10, -18, 9, Math.PI * .62, Math.PI * 1.38); g.stroke();
+      g.strokeStyle = '#e0dac8'; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(-10, -27); g.lineTo(-10, -9); g.stroke();
+      // arrow
+      g.strokeStyle = '#e0dac8'; g.lineWidth = 1.2;
+      g.beginPath(); g.moveTo(-14, -18); g.lineTo(8, -18); g.lineTo(5, -21); g.moveTo(8, -18); g.lineTo(5, -15); g.stroke();
+    } else if (kind === 'wizard') {
+      g.fillStyle = '#4a3d73'; g.beginPath();
+      g.moveTo(-7, -26); g.lineTo(7, -26); g.lineTo(11, -1); g.lineTo(0, 2); g.lineTo(-11, -1); g.closePath(); g.fill();
+      g.strokeStyle = outline; g.lineWidth = 1; g.stroke();
+      g.fillStyle = '#8d7ab8'; g.fillRect(-4, -24, 8, 4);
+      g.fillStyle = skin; g.beginPath(); g.arc(0, -31, 4.2, 0, TAU); g.fill();
+      g.fillStyle = '#5f4f91'; g.beginPath(); g.moveTo(0, -46); g.lineTo(9, -30); g.lineTo(-9, -30); g.closePath(); g.fill();
+      g.strokeStyle = outline; g.stroke();
+      // staff and orb
+      g.strokeStyle = '#8b6a42'; g.lineWidth = 2;
+      g.beginPath(); g.moveTo(10, -38); g.lineTo(12, 1); g.stroke();
+      g.fillStyle = '#b397df'; g.beginPath(); g.arc(10, -39, 3.4, 0, TAU); g.fill();
+      g.fillStyle = 'rgba(220,200,255,.8)'; g.beginPath(); g.arc(9, -40, 1.2, 0, TAU); g.fill();
+    } else if (kind === 'cleric') {
+      g.strokeStyle = '#3a2a1c'; g.lineWidth = 2.8;
+      g.beginPath(); g.moveTo(-3, -7); g.lineTo(-4, 0); g.moveTo(3, -7); g.lineTo(4, 0); g.stroke();
+      g.fillStyle = '#a98a5a'; g.beginPath();
+      g.moveTo(-7, -26); g.lineTo(7, -26); g.lineTo(9, -1); g.lineTo(0, 2); g.lineTo(-9, -1); g.closePath(); g.fill();
+      g.fillStyle = '#e2d3ae'; g.fillRect(-4, -24, 8, 14);
+      g.fillStyle = '#d9b36c'; g.beginPath(); g.moveTo(0, -22); g.lineTo(0, -12); g.moveTo(-4, -18); g.lineTo(4, -18); g.stroke();
+      g.fillStyle = skin; g.beginPath(); g.arc(0, -31, 4.2, 0, TAU); g.fill();
+      g.fillStyle = '#7a5a36'; g.beginPath(); g.arc(0, -32, 4.8, Math.PI, TAU); g.fill();
+      // mace
+      g.strokeStyle = '#8b6a42'; g.lineWidth = 2;
+      g.beginPath(); g.moveTo(10, -25); g.lineTo(11, -2); g.stroke();
+      g.fillStyle = '#b0b0a8'; g.beginPath(); g.arc(10, -27, 3.6, 0, TAU); g.fill();
+    } else if (kind === 'knight') {
+      g.strokeStyle = '#3a2a1c'; g.lineWidth = 3;
+      g.beginPath(); g.moveTo(-4, -8); g.lineTo(-5, 0); g.moveTo(4, -8); g.lineTo(5, 0); g.stroke();
+      g.fillStyle = '#6b3a34'; g.beginPath();
+      g.moveTo(-8, -28); g.lineTo(8, -28); g.lineTo(10, -1); g.lineTo(0, 2); g.lineTo(-10, -1); g.closePath(); g.fill();
+      g.fillStyle = '#7d8790'; roundRect(g, -6, -27, 12, 16, 2); g.fill();
+      g.strokeStyle = outline; g.lineWidth = 1; g.stroke();
+      g.fillStyle = '#59636a'; g.beginPath(); g.arc(0, -32, 5.2, 0, TAU); g.fill();
+      g.fillStyle = '#2a2420'; g.fillRect(-4, -33, 8, 2);
+      // shield
+      g.fillStyle = '#8e2f27'; g.beginPath(); g.ellipse(-10, -17, 6, 8.5, 0, 0, TAU); g.fill();
+      g.strokeStyle = '#c9a15a'; g.lineWidth = 1.2; g.stroke();
+      // sword
+      g.strokeStyle = '#c9c2b0'; g.lineWidth = 2;
+      g.beginPath(); g.moveTo(8, -27); g.lineTo(9, -5); g.moveTo(5, -8); g.lineTo(12, -8); g.stroke();
+    } else if (kind === 'druid') {
+      g.strokeStyle = '#3a2a1c'; g.lineWidth = 2.8;
+      g.beginPath(); g.moveTo(-3, -7); g.lineTo(-4, 0); g.moveTo(3, -7); g.lineTo(4, 0); g.stroke();
+      g.fillStyle = '#4a3a24'; g.beginPath();
+      g.moveTo(-7, -27); g.lineTo(7, -27); g.lineTo(9, -1); g.lineTo(0, 2); g.lineTo(-9, -1); g.closePath(); g.fill();
+      g.fillStyle = '#6b5a3a'; g.fillRect(-4, -24, 8, 4);
+      g.fillStyle = skin; g.beginPath(); g.arc(0, -31, 4.2, 0, TAU); g.fill();
+      g.fillStyle = '#3a2f1d'; g.beginPath(); g.moveTo(0, -40); g.lineTo(7, -29); g.lineTo(-7, -29); g.closePath(); g.fill();
+      // staff / sickle
+      g.strokeStyle = '#6b4a2a'; g.lineWidth = 2;
+      g.beginPath(); g.moveTo(10, -38); g.lineTo(12, 0); g.stroke();
+      g.strokeStyle = '#b0a080'; g.lineWidth = 1.6;
+      g.beginPath(); g.arc(10, -37, 5, Math.PI * .2, Math.PI * 1.25); g.stroke();
+    } else if (kind === 'twig') {
+      g.strokeStyle = '#4a5a35'; g.lineWidth = 2.4;
+      g.beginPath(); g.moveTo(-4, 0); g.quadraticCurveTo(-8, -12, -2, -22); g.quadraticCurveTo(4, -14, 2, -4); g.stroke();
+      g.strokeStyle = '#6b7a4a'; g.lineWidth = 1.5;
+      g.beginPath(); g.moveTo(-3, -14); g.lineTo(-14, -22); g.moveTo(1, -18); g.lineTo(11, -26); g.moveTo(0, -8); g.lineTo(10, -4); g.stroke();
+      g.fillStyle = '#d9b36c';
+      g.beginPath(); g.arc(-2, -22, 1.5, 0, TAU); g.arc(3, -20, 1.2, 0, TAU); g.fill();
+      g.strokeStyle = 'rgba(150,120,185,.55)'; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(-2, -6); g.lineTo(-6, -1); g.moveTo(4, -8); g.lineTo(8, -2); g.stroke();
+    } else if (kind === 'frog') {
+      g.fillStyle = '#5f8a4a'; g.beginPath(); g.ellipse(0, -12, 11, 9, 0, 0, TAU); g.fill();
+      g.strokeStyle = outline; g.lineWidth = 1; g.stroke();
+      g.fillStyle = '#8faa6a'; g.beginPath(); g.ellipse(0, -7, 7, 4, 0, 0, TAU); g.fill();
+      g.fillStyle = '#6b7a3a';
+      g.beginPath(); g.ellipse(-10, -2, 5, 2.6, .3, 0, TAU); g.ellipse(10, -2, 5, 2.6, -.3, 0, TAU); g.fill();
+      g.fillStyle = '#d9d2a0';
+      g.beginPath(); g.arc(-4, -19, 3.2, 0, TAU); g.arc(4, -19, 3.2, 0, TAU); g.fill();
+      g.fillStyle = '#1a1409';
+      g.beginPath(); g.arc(-4, -19, 1.2, 0, TAU); g.arc(4, -19, 1.2, 0, TAU); g.fill();
+    }
+    g.restore();
+  }
+
   function drawUnit(u, now) {
     if (u.dead && u.kind !== 'tree') return;
     const cx = u.vx, cy = u.vy;
-    const radius = u.size === 2 ? 30 : 20;
+    const baseRx = u.size === 2 ? 31 : 24;
+    const baseRy = baseRx * .42;
+    const baseY = cy + 12;
+    const ring = u.side === 'party' ? '#69c3b0' : (u.side === 'wild' ? '#d9b36c' : '#cf6d5d');
     ctx.save();
-    if (u.done && u.side === 'party') ctx.globalAlpha = .55;
-    // shadow
-    ctx.fillStyle = 'rgba(0,0,0,.42)';
-    ctx.beginPath();
-    ctx.ellipse(cx, cy + radius * .72, radius * .95, radius * .32, 0, 0, TAU);
-    ctx.fill();
-    // selection glow
+    if (u.done && u.side === 'party') ctx.globalAlpha = .6;
+    // cast shadow
+    ctx.fillStyle = 'rgba(0,0,0,.52)';
+    ctx.beginPath(); ctx.ellipse(cx, baseY + 4, baseRx + 3, baseRy + 2, 0, 0, TAU); ctx.fill();
+    // selection
     if (u.id === state.selectedId) {
-      const pulse = .5 + .5 * Math.sin(now / 260);
-      const g = ctx.createRadialGradient(cx, cy, 6, cx, cy, radius + 20);
-      g.addColorStop(0, 'rgba(217,179,108,.22)');
+      const pulse = .5 + .5 * Math.sin(now / 240);
+      const g = ctx.createRadialGradient(cx, baseY - 12, 4, cx, baseY - 12, baseRx + 24);
+      g.addColorStop(0, 'rgba(217,179,108,.26)');
       g.addColorStop(1, 'rgba(217,179,108,0)');
       ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius + 20, 0, TAU);
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(232,196,124,' + (.5 + pulse * .35) + ')';
-      ctx.lineWidth = 1.5;
-      ctx.setLineDash([3, 5]);
-      ctx.lineDashOffset = -now / 60;
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius + 8, 0, TAU);
-      ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, baseY - 12, baseRx + 24, 0, TAU); ctx.fill();
+      ctx.strokeStyle = 'rgba(242,203,126,' + (.55 + pulse * .35) + ')';
+      ctx.lineWidth = 1.6; ctx.setLineDash([3, 5]); ctx.lineDashOffset = -now / 55;
+      ctx.beginPath(); ctx.ellipse(cx, baseY, baseRx + 5, baseRy + 4, 0, 0, TAU); ctx.stroke();
       ctx.setLineDash([]);
+      ctx.strokeStyle = 'rgba(217,179,108,.8)'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.ellipse(cx, baseY, baseRx, baseRy, 0, 0, TAU); ctx.stroke();
     }
-    // ring
-    const ring = u.side === 'party' ? '#69c3b0' : (u.side === 'wild' ? '#d9b36c' : '#cf6d5d');
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, 0, TAU);
-    ctx.fillStyle = 'rgba(7,11,8,.95)';
-    ctx.fill();
-    const g = ctx.createRadialGradient(cx - radius * .4, cy - radius * .5, 2, cx, cy, radius);
-    g.addColorStop(0, u.side === 'party' ? '#2b443a' : '#3a2a25');
-    g.addColorStop(1, '#0b100c');
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius - 2, 0, TAU);
-    ctx.fill();
-    ctx.strokeStyle = ring;
-    ctx.lineWidth = 2.1;
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius - 1, 0, TAU);
-    ctx.stroke();
-    // glyph
-    drawUnitGlyph(u.kind, cx, cy, u.size === 2 ? 30 : 22, u.side === 'party' ? '#e7e0cc' : '#e3d2c3');
-    // hp bar
-    const bw = u.size === 2 ? 62 : 42;
-    const bx = cx - bw / 2, by = cy - radius - 13;
-    ctx.fillStyle = 'rgba(3,5,4,.8)';
-    roundRect(ctx, bx, by, bw, 5, 2.5);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(255,255,255,.1)';
-    ctx.lineWidth = .8;
-    ctx.stroke();
-    ctx.fillStyle = u.side === 'party' ? '#6fc39d' : '#cf6d5d';
-    roundRect(ctx, bx + 1, by + 1, Math.max(0, (bw - 2) * (u.hp / u.maxHp)), 3, 1.5);
-    ctx.fill();
-    // name
+    // miniature base
+    const bg = ctx.createRadialGradient(cx - 5, baseY - 3, 2, cx, baseY, baseRx);
+    bg.addColorStop(0, '#3b2a1b'); bg.addColorStop(1, '#140d08');
+    ctx.fillStyle = bg;
+    ctx.beginPath(); ctx.ellipse(cx, baseY, baseRx, baseRy, 0, 0, TAU); ctx.fill();
+    ctx.strokeStyle = ring; ctx.lineWidth = 2.4; ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,240,210,.25)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.ellipse(cx, baseY - 1, baseRx - 3, baseRy - 2, 0, Math.PI * 1.05, Math.PI * 1.95); ctx.stroke();
+    // figure
+    drawMiniFigure(u, cx, baseY - 3, now);
+    // name and hp bar
+    const bw = u.size === 2 ? 62 : 44;
+    const bx = cx - bw / 2;
+    const by = baseY - 70;
+    ctx.fillStyle = 'rgba(5,4,2,.82)';
+    roundRect(ctx, bx, by, bw, 6, 3); ctx.fill();
+    ctx.strokeStyle = 'rgba(217,179,108,.25)'; ctx.lineWidth = .8; ctx.stroke();
+    ctx.fillStyle = u.side === 'party' ? '#79c99b' : '#d06a58';
+    roundRect(ctx, bx + 1, by + 1, Math.max(0, (bw - 2) * (u.hp / u.maxHp)), 4, 2); ctx.fill();
     if (!compactView) {
-      ctx.fillStyle = 'rgba(228,222,204,.9)';
+      ctx.fillStyle = 'rgba(240,226,196,.92)';
       ctx.font = '9px ' + getComputedStyle(document.body).fontFamily;
       ctx.textAlign = 'center';
       ctx.fillText(u.name, cx, by - 4);
     }
-    // status dots
+    // status tokens
     const dots = [];
     if (u.rooted) dots.push('#a98bd6');
     if (u.shieldRound === state.round) dots.push('#7fc6dd');
@@ -2793,24 +3806,17 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
     if (dots.length) {
       dots.forEach((c, i) => {
         ctx.fillStyle = c;
-        ctx.beginPath();
-        ctx.arc(cx - (dots.length - 1) * 4 + i * 8, cy + radius + 8, 2.1, 0, TAU);
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(cx - (dots.length - 1) * 4 + i * 8, baseY + baseRy + 4, 2, 0, TAU); ctx.fill();
       });
     }
-    // done check
+    // done token
     if (u.done && u.side === 'party') {
-      ctx.fillStyle = 'rgba(5,8,6,.8)';
-      ctx.beginPath();
-      ctx.arc(cx + radius - 4, cy - radius + 3, 7, 0, TAU);
-      ctx.fill();
-      ctx.strokeStyle = '#7fbf9f';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(cx + radius - 7, cy - radius + 3);
-      ctx.lineTo(cx + radius - 5, cy - radius + 6);
-      ctx.lineTo(cx + radius - 1, cy - radius);
-      ctx.stroke();
+      ctx.fillStyle = 'rgba(18,12,7,.92)';
+      ctx.beginPath(); ctx.arc(cx + baseRx - 2, baseY - 4, 7, 0, TAU); ctx.fill();
+      ctx.strokeStyle = '#c9a15a'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(cx + baseRx - 2, baseY - 4, 7, 0, TAU); ctx.stroke();
+      ctx.strokeStyle = '#a9d6a3'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(cx + baseRx - 5, baseY - 4); ctx.lineTo(cx + baseRx - 3, baseY - 1); ctx.lineTo(cx + baseRx + 1, baseY - 7); ctx.stroke();
     }
     ctx.restore();
   }
@@ -2996,7 +4002,10 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   $('#btnEnd').addEventListener('click', endPlayerPhase);
   $('#btnLog').addEventListener('click', () => openDrawer('log'));
   $('#btnWords').addEventListener('click', () => openDrawer('words'));
-  $('#btnHelp').addEventListener('click', () => openDrawer('help'));
+  $('#btnHelp').addEventListener('click', () => openTutorial(false));
+  $('#tutStart').addEventListener('click', () => closeTutorial(true));
+  $('#tutClose').addEventListener('click', () => closeTutorial(false));
+  $('#tutSkip').addEventListener('click', () => endTutorial());
   $('#mobileInfo').addEventListener('click', (e) => {
     const chip = e.target.closest('[data-foe]');
     if (!chip) return;
