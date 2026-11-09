@@ -23,6 +23,9 @@ async function expectHome(page) {
 async function startNewGame(page) {
   await page.goto('/');
   await expect(page.locator('.cover-title')).toHaveText('拾词者');
+  await expect(page.locator('.cover-cast')).toBeVisible();
+  await expect(page.locator('.cover-player .player-svg')).toBeVisible();
+  await expect(page.locator('.cover-foe .foe-svg')).toBeVisible();
   await page.getByRole('button', { name: '开始新的航程' }).click();
   await expectHome(page);
 }
@@ -30,6 +33,7 @@ async function startNewGame(page) {
 async function loadDemo(page) {
   await page.goto('/');
   await expect(page.locator('.cover-title')).toHaveText('拾词者');
+  await expect(page.locator('.cover-cast')).toBeVisible();
   await page.getByRole('button', { name: '体验演示存档' }).click();
   await expectHome(page);
   await expect(page.locator('#toast')).not.toHaveClass(/show/, { timeout: 6000 });
@@ -129,6 +133,9 @@ async function seedStory(page) {
   await page.reload({ waitUntil: 'networkidle' });
   await page.goto('/#/story');
   await expect(page.locator('[data-action="contract-accept"]')).toBeVisible();
+  await expect(page.locator('.story-cast')).toBeVisible();
+  await expect(page.locator('.story-player .player-svg')).toBeVisible();
+  await expect(page.locator('.story-npc .npc-svg')).toBeVisible();
 }
 
 async function seedBoss(page) {
@@ -448,6 +455,7 @@ test.describe('移动端', () => {
     await page.goto('/#/story');
     await expect(page.locator('[data-action="contract-accept"]')).toBeInViewport();
     await expect(page.locator('[data-action="contract-skip"]')).toBeInViewport();
+    await expect(page.locator('.story-cast')).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
   });
 

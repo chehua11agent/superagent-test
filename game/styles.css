@@ -560,9 +560,38 @@ svg {
     linear-gradient(180deg, rgba(4, 9, 13, 0.35) 0%, transparent 32%, rgba(4, 9, 13, 0.88) 82%, #050a0e 100%);
 }
 
+.cover-cast {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cover-actor {
+  position: absolute;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
+  mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 100%);
+}
+
+.cover-player {
+  bottom: 1%;
+  left: clamp(8px, 2vw, 46px);
+  width: clamp(150px, 19vw, 280px);
+  height: clamp(260px, 42vh, 440px);
+  opacity: 0.78;
+}
+
+.cover-foe {
+  right: clamp(0px, 1vw, 24px);
+  bottom: 0;
+  width: clamp(180px, 23vw, 340px);
+  height: clamp(300px, 50vh, 520px);
+  opacity: 0.74;
+}
+
 .cover-inner {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   margin: auto;
   width: min(880px, 92vw);
   padding: 9vh 0 12vh;
@@ -616,7 +645,7 @@ svg {
 
 .cover-foot {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -1432,6 +1461,90 @@ svg {
 }
 
 /* 剧情 */
+
+.story-cast {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.story-actor {
+  position: absolute;
+  bottom: clamp(240px, 40vh, 420px);
+  filter: drop-shadow(0 22px 30px rgba(0, 0, 0, 0.55));
+}
+
+.story-player {
+  left: clamp(10px, 6vw, 120px);
+  width: clamp(140px, 16vw, 240px);
+  height: clamp(220px, 31vh, 340px);
+}
+
+.story-npc {
+  right: clamp(10px, 5vw, 120px);
+  width: clamp(150px, 18vw, 260px);
+  height: clamp(240px, 33vh, 360px);
+}
+
+.story-tag {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  padding: 2px 8px;
+  border: 1px solid rgba(191, 227, 212, 0.22);
+  border-radius: 999px;
+  background: rgba(5, 10, 13, 0.72);
+  color: rgba(240, 231, 214, 0.6);
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.story-tag-npc {
+  border-color: rgba(227, 185, 120, 0.22);
+  color: rgba(240, 231, 214, 0.55);
+}
+
+.npc-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.npc-body {
+  transform-box: view-box;
+  transform-origin: 116px 362px;
+  animation: npc-breathe 7.6s ease-in-out infinite;
+}
+
+.npc-lantern {
+  transform-box: view-box;
+  transform-origin: 197px 88px;
+  animation: npc-lantern-sway 5.8s ease-in-out infinite;
+}
+
+@keyframes npc-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-4px) scaleY(1.006);
+  }
+}
+
+@keyframes npc-lantern-sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2.4deg);
+  }
+}
 
 .story-wrap {
   position: absolute;
@@ -3171,6 +3284,8 @@ svg {
 .reduce-motion .foe-eye,
 .reduce-motion .player-body,
 .reduce-motion .player-card,
+.reduce-motion .npc-body,
+.reduce-motion .npc-lantern,
 .reduce-motion .battle-player.is-casting .player-body,
 .reduce-motion .battle-player.is-casting .player-card,
 .reduce-motion .battle-player.is-hurt .player-body,
@@ -4854,5 +4969,39 @@ svg {
 
   .battle-stats {
     gap: 8px 12px;
+  }
+
+  .cover-player {
+    width: 26vw;
+    height: 20vh;
+    left: 0;
+    bottom: 12%;
+    opacity: 0.32;
+  }
+
+  .cover-foe {
+    width: 30vw;
+    height: 24vh;
+    right: 0;
+    bottom: 10%;
+    opacity: 0.3;
+  }
+
+  .story-player {
+    left: 2vw;
+    bottom: 69vh;
+    width: 24vw;
+    height: 16vh;
+  }
+
+  .story-npc {
+    right: 2vw;
+    bottom: 69vh;
+    width: 27vw;
+    height: 17vh;
+  }
+
+  .story-tag {
+    display: none;
   }
 }

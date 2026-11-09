@@ -413,3 +413,71 @@ export function playerPortraitSVG({ className = '' } = {}) {
     </g>
   </svg>`;
 }
+
+/**
+ * 剧情里的雾中客：戴斗笠、撑灯杆的渡口/守夜人剪影。
+ * 与玩家、守塔人区分：斗笠 + 灯杆，作为剧情场景里的“人”。
+ */
+export function npcPortraitSVG({ className = '' } = {}) {
+  return `
+  <svg class="npc-svg ${className}" viewBox="0 0 240 420" role="img" aria-label="雾中客的剪影">
+    <defs>
+      <linearGradient id="npc-coat" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0b1a20"/>
+        <stop offset="60%" stop-color="#061015"/>
+        <stop offset="100%" stop-color="#02080b"/>
+      </linearGradient>
+      <radialGradient id="npc-lamp" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffe6b0" stop-opacity="0.85"/>
+        <stop offset="38%" stop-color="#e3b978" stop-opacity="0.24"/>
+        <stop offset="100%" stop-color="#e3b978" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="npc-rim" x1="1" y1="0" x2="0" y2="0">
+        <stop offset="0%" stop-color="#9db9b2" stop-opacity="0.28"/>
+        <stop offset="26%" stop-color="#9db9b2" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#9db9b2" stop-opacity="0.05"/>
+      </linearGradient>
+    </defs>
+
+    <g class="npc-ground">
+      <ellipse cx="116" cy="394" rx="104" ry="24" fill="#071116" opacity="0.85"/>
+      <ellipse cx="116" cy="390" rx="78" ry="13" fill="#c8dedb" opacity="0.05"/>
+    </g>
+
+    <g class="npc-body">
+      <path d="M96 300 L88 364 L112 366 L116 312 Z" fill="#03090c"/>
+      <path d="M136 300 L144 364 L120 366 L116 312 Z" fill="#03090c"/>
+      <path d="M82 352 L114 354 L114 366 L80 364 Z" fill="#061115"/>
+      <path d="M150 352 L118 354 L118 366 L152 364 Z" fill="#061115"/>
+
+      <path class="npc-coat" d="M116 112 C 88 112 72 136 68 172 L 52 318 L 72 332 L 84 358 L 102 336 L 116 362 L 130 336 L 148 358 L 160 332 L 180 318 L 164 172 C 160 136 144 112 116 112 Z" fill="url(#npc-coat)"/>
+      <path class="npc-rim" d="M116 112 C 144 112 160 136 164 172 L 180 318 L 160 332 L 148 358" fill="none" stroke="url(#npc-rim)" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M116 168 L 110 338 M 94 186 L 86 322 M 138 186 L 146 322" stroke="#0b2027" stroke-width="2" fill="none" opacity="0.8"/>
+
+      <path class="npc-hat" d="M48 128 Q116 88 184 128 Q116 152 48 128 Z" fill="#061115"/>
+      <path class="npc-hat-top" d="M88 122 Q100 76 116 62 Q132 76 144 122 Z" fill="#0a1a20"/>
+      <path class="npc-hat-rim" d="M48 128 Q116 88 184 128" fill="none" stroke="#9db9b2" stroke-opacity="0.2"/>
+      <ellipse cx="116" cy="140" rx="21" ry="19" fill="#010406"/>
+      <circle cx="108" cy="141" r="1.8" fill="#f3d6a0" opacity="0.75"/>
+      <circle cx="124" cy="141" r="1.8" fill="#f3d6a0" opacity="0.75"/>
+
+      <path class="npc-arm" d="M74 180 C 58 202 56 228 64 248" fill="none" stroke="#050c10" stroke-width="13" stroke-linecap="round"/>
+      <path class="npc-pole" d="M196 44 L 188 386" stroke="#071318" stroke-width="5" stroke-linecap="round"/>
+      <path class="npc-pole-rim" d="M196 44 L 188 386" stroke="#9db9b2" stroke-width="1" opacity="0.16"/>
+      <path class="npc-arm" d="M164 184 C 182 200 190 224 190 244" fill="none" stroke="#050c10" stroke-width="12" stroke-linecap="round"/>
+
+      <g class="npc-lantern">
+        <circle cx="197" cy="88" r="46" fill="url(#npc-lamp)" opacity="0.9"/>
+        <path d="M194 66 L200 66 L200 74 L194 74 Z" fill="#0a1418"/>
+        <rect x="186" y="74" width="22" height="28" rx="3" fill="#0a1418" stroke="#e3b978" stroke-opacity="0.55"/>
+        <rect x="190" y="78" width="14" height="19" rx="2" fill="#f6dfae" opacity="0.9"/>
+        <path d="M197 82 C 202 87 202 92 197 95 C 192 92 192 87 197 82 Z" fill="#fff5d8" opacity="0.9"/>
+      </g>
+    </g>
+
+    <g class="npc-mist" fill="#c8dedb">
+      <ellipse cx="84" cy="380" rx="92" ry="14" opacity="0.05"/>
+      <ellipse cx="164" cy="398" rx="112" ry="16" opacity="0.05"/>
+    </g>
+  </svg>`;
+}

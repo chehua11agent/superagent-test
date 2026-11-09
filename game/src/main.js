@@ -1,4 +1,4 @@
-import { foePortraitSVG, playerPortraitSVG, worldSVG } from './art.js';
+import { foePortraitSVG, npcPortraitSVG, playerPortraitSVG, worldSVG } from './art.js';
 import { playCue } from './audio.js';
 import {
   createDemoSave,
@@ -204,6 +204,10 @@ function renderCover() {
     <main class="cover">
       ${worldSVG({ camera: 'map', time: 'night', weather: 'fog', className: 'cover-art', fit: 'slice' })}
       <div class="cover-veil"></div>
+      <div class="cover-cast" aria-hidden="true">
+        <div class="cover-actor cover-player">${playerPortraitSVG()}</div>
+        <div class="cover-actor cover-foe">${foePortraitSVG()}</div>
+      </div>
       <div class="cover-inner">
         <p class="eyebrow">CET-4 · 单词跑团 · 第一章原型</p>
         <h1 class="cover-title">拾词者</h1>
@@ -763,6 +767,10 @@ function renderStory() {
     <main class="screen stage-screen story-screen">
       ${worldSVG({ camera: scene.art.camera, time: scene.art.time, weather: scene.art.weather, className: 'stage-art' })}
       <div class="stage-veil"></div>
+      <div class="story-cast" aria-hidden="true">
+        <div class="story-actor story-player">${playerPortraitSVG()}<span class="story-tag">拾词者</span></div>
+        <div class="story-actor story-npc">${npcPortraitSVG()}<span class="story-tag story-tag-npc">雾中客</span></div>
+      </div>
       ${stageHud(scene)}
       <div class="story-wrap">
         <div class="panel story-panel" id="story-panel"></div>
