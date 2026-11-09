@@ -831,6 +831,66 @@ body::after{
   .overlay.scene-overlay .panel{max-height:58dvh;padding-bottom:calc(86px + env(safe-area-inset-bottom))}
 }
 
+
+/* memory brazier review minigame */
+.review-game{position:fixed;inset:0;z-index:75;display:grid;place-items:center;padding:16px;background:rgba(3,2,1,.68);backdrop-filter:blur(5px)}
+.review-game[hidden]{display:none!important}
+.review-panel{
+  position:relative;width:min(540px,95vw);max-height:calc(100dvh - 32px);overflow:auto;
+  padding:34px 24px 20px;border:1px solid #8b6a42;border-radius:10px;
+  background:
+    radial-gradient(circle at 50% -12%,rgba(255,170,80,.18),transparent 42%),
+    radial-gradient(circle at 15% 0%,rgba(255,255,255,.45),transparent 35%),
+    linear-gradient(180deg,#f4e6c9,#e0caa4 74%,#d0b88f);
+  color:#2b1a0d;box-shadow:0 3px 0 #6b4a2a,0 32px 90px rgba(0,0,0,.78),inset 0 0 0 1px rgba(255,255,255,.4);
+  animation:panelIn .3s cubic-bezier(.2,.7,.2,1) both;
+}
+.review-panel::before{content:"";position:absolute;inset:7px;border:1px solid rgba(139,106,66,.35);border-radius:6px;pointer-events:none}
+.review-panel .cc-kicker{text-align:center;margin-bottom:2px}
+.review-panel h2{margin:0 0 4px;text-align:center;font-family:var(--serif);font-size:30px;letter-spacing:.08em;color:#2b1a0d}
+.review-lead{margin:0 auto 12px;max-width:430px;text-align:center;font-size:11px;line-height:1.7;color:#5a3f24}
+.review-lead b{color:#8e2f27}
+.review-brazier{position:relative;width:58px;height:54px;margin:-18px auto 4px}
+.review-brazier .rb-bowl{position:absolute;left:6px;bottom:0;width:46px;height:15px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#d9b36c,#6b4a2a 70%,#2a180e);box-shadow:0 3px 0 #1a100a}
+.review-brazier .rb-flame{position:absolute;left:23px;bottom:14px;width:12px;height:24px;border-radius:50% 50% 45% 45%;background:radial-gradient(circle at 50% 70%,#fff0b0,#f2a34e 55%,rgba(230,110,40,.2));filter:blur(.3px);animation:candle 2.2s ease-in-out infinite;z-index:1}
+.review-brazier .rb-glow{position:absolute;left:-24px;bottom:-8px;width:106px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,90,.28),transparent 68%)}
+.review-status{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0 8px;font-size:10px;color:#6b4d2b}
+.review-status b{color:#2b1a0d;font-family:var(--mono);font-size:11px}
+.review-skip{border:1px solid rgba(139,106,66,.45);background:rgba(255,255,255,.2);color:#6b4d2b;border-radius:6px;font-size:9px;padding:3px 8px;cursor:pointer}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 auto}
+.review-card{
+  position:relative;min-height:88px;padding:6px;border:1px solid #8b6a42;border-radius:7px;
+  background:linear-gradient(160deg,#3a2517,#24150c);color:#e8d6b4;cursor:pointer;
+  box-shadow:0 2px 0 #120b06,0 5px 10px rgba(0,0,0,.35),inset 0 0 0 2px rgba(217,179,108,.08);
+  transition:transform .16s,background .2s,box-shadow .2s;display:grid;place-items:center;text-align:center;
+  font-family:var(--serif);font-size:15px;line-height:1.2;letter-spacing:.02em;
+}
+.review-card::before{content:"✦";font-size:22px;color:rgba(217,179,108,.55);text-shadow:0 0 10px rgba(217,179,108,.35)}
+.review-card:hover:not(:disabled){transform:translateY(-3px);border-color:#c9a15a}
+.review-card.up{background:linear-gradient(180deg,#f6ead2,#e2cda8);color:#2b1a0d;border-color:#c9a15a;font-size:15px}
+.review-card.up::before{content:none}
+.review-card.matched{border-color:#d9b36c;box-shadow:0 0 0 2px rgba(217,179,108,.45),0 0 20px rgba(217,179,108,.3);background:linear-gradient(180deg,#fff1d4,#e6cfa8)}
+.review-card.matched::after{content:"✦";position:absolute;right:4px;bottom:2px;font-size:11px;color:#8e2f27}
+.review-card:disabled{cursor:default}
+.review-card.matched:disabled{opacity:1}
+.review-card .rc-tag{display:block;font-family:var(--sans);font-size:8px;color:#8b5a2b;margin-top:5px;letter-spacing:.08em}
+.review-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.review-actions .btn{min-height:36px;padding:7px 14px;font-size:11px;border-color:#8b6a42;background:rgba(255,255,255,.25);color:#3d2a18}
+.review-actions .btn.primary{background:linear-gradient(180deg,#e2c084,#b98f4b);color:#1a1409}
+.review-note{font-size:9.5px;color:#6b4d2b;line-height:1.5}
+.review-rune{
+  position:absolute;right:6px;bottom:5px;font-family:var(--mono);font-size:9px;
+  color:#8b5a2b;background:rgba(255,255,255,.35);border:1px solid rgba(139,106,66,.35);
+  border-radius:4px;padding:0 3px;
+}
+.ability .review-rune{color:#8e2f27;border-color:rgba(142,47,39,.4);background:rgba(255,255,255,.4)}
+@media (max-width:760px){
+  .review-game{align-items:end;padding:0}
+  .review-panel{width:100%;max-height:90dvh;border-radius:14px 14px 0 0;border-bottom:none;padding:24px 14px calc(16px + env(safe-area-inset-bottom))}
+  .review-panel h2{font-size:25px}
+  .review-card{min-height:80px;font-size:14px}
+}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
 }
@@ -904,7 +964,7 @@ body::after{
       <button class="btn primary" type="button" id="tutStart">开始</button>
       <button class="btn" type="button" id="tutClose">跳过，自己试</button>
     </div>
-    <p class="cc-hint">认义：从 4 个中文里选；拼写：打出英文。答错不扣 HP，卡牌半效或重试。</p>
+    <p class="cc-hint">认义：从 4 个中文里选；拼写：打出英文。答错不扣 HP，卡牌半效或重试。开场战备会先开「记忆火盆」：配对词和义给词卡充能，跳过也不惩罚。</p>
   </div>
 </div>
 <div id="cardCheck" class="card-check" hidden>
@@ -918,6 +978,23 @@ body::after{
     <div class="cc-actions" id="ccActions"></div>
     <div class="cc-hint">认义成功：卡牌正常生效。拼写成功：额外 +2。答错会摊开答案，可重试或半效结算；复习失败不扣 HP。</div>
     <div class="cc-stamp" id="ccStamp" hidden></div>
+  </div>
+</div>
+<div id="reviewGame" class="review-game" hidden>
+  <div class="review-panel" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
+    <div class="review-brazier"><i class="rb-flame"></i><i class="rb-bowl"></i><i class="rb-glow"></i></div>
+    <div class="cc-kicker">MEMORY BRAZIER · 复习充能</div>
+    <h2 id="reviewTitle">记忆火盆</h2>
+    <p class="review-lead" id="reviewLead">翻开两张卡，把英文和中文配对。配对成功，对应词卡 <b>+2</b>；配错翻回，不扣 HP，可以继续试。</p>
+    <div class="review-status">
+      <span>已充能 <b id="reviewCount">0 / 3</b> 张词卡</span>
+      <button class="review-skip" type="button" id="reviewSkip">跳过</button>
+    </div>
+    <div id="reviewGrid" class="review-grid" aria-label="记忆配对卡片"></div>
+    <div class="review-actions">
+      <button class="btn primary" type="button" id="reviewDone">回到战斗</button>
+      <span class="review-note">复习不是门槛：配对成功会让词卡更强。</span>
+    </div>
   </div>
 </div>
 <div id="drawer" class="drawer" hidden>
@@ -981,8 +1058,8 @@ body::after{
       text:'德鲁伊喷出 poison；体质豁免失败就受到 1d12 毒伤害。' },
     { w:'thorn', zh:'刺；荆棘', group:'场景与目标', tag:'古树 · 被动', src:'操作补充',
       text:'古树有 thorn 护体；近战攻击它的人会被扎 2 点。' },
-    { w:'seed', zh:'种子', group:'场景与目标', tag:'古树 · 被动', src:'正文词',
-      text:'古树会播下 seed，从根边唤出新的枯枝怪。' },
+    { w:'seed', zh:'种子', group:'场景与目标', tag:'古树 · 种子', src:'正文词',
+      text:'古树的 seed 是村民害怕的东西；这一局它没有召唤。' },
     { w:'fruit', zh:'果实', group:'场景与目标', tag:'剧情物品', src:'正文词',
       text:'古树的 fruit 是村民寻找了很多年的东西。' },
     { w:'rescue', zh:'援救', group:'场景与目标', tag:'章节目标', src:'正文词',
@@ -1142,10 +1219,6 @@ body::after{
         saves:{ str:3, dex:-1, con:2, int:0, wis:1, cha:0 }, abilities:['sword'], thrall:true, traits:['bark'] }),
       makeEnemy({ id:'twig1', name:'枯枝怪', role:'Twig', kind:'twig', x:5, y:2, hp:4, ac:13, speed:4,
         saves:{ str:0, dex:2, con:1, int:0, wis:0, cha:0 }, abilities:['bite'], thrall:true, small:true, traits:['fireVuln'] }),
-      makeEnemy({ id:'twig2', name:'枯枝怪', role:'Twig', kind:'twig', x:6, y:6, hp:4, ac:13, speed:4,
-        saves:{ str:0, dex:2, con:1, int:0, wis:0, cha:0 }, abilities:['bite'], thrall:true, small:true, traits:['fireVuln'] }),
-      makeEnemy({ id:'twig3', name:'枯枝怪', role:'Twig', kind:'twig', x:4, y:5, hp:4, ac:13, speed:4,
-        saves:{ str:0, dex:2, con:1, int:0, wis:0, cha:0 }, abilities:['bite'], thrall:true, small:true, traits:['fireVuln'] }),
       makeEnemy({ id:'tree', name:'枯木古树', role:'The Tree', kind:'tree', x:7, y:3, size:2, hp:35, ac:10, speed:0,
         abilities:[], immobile:true, traits:['fireVuln','pierceResist','thorns'] }),
     ];
@@ -1177,11 +1250,12 @@ body::after{
       log: [],
       ticker: null,
       stats: { damage: 0, kills: 0, fires: 0 },
-      flags: { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0 },
+      flags: { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0, reviewRound: -1, reviewShown: false, checkTipShown: false },
       lastHint: '',
       sheetReturn: null,
       tutorial: { active: false, seen: false, step: 0 },
       check: null,
+      review: { open: false, cards: [], first: null, matched: 0, total: 3, lock: false },
     };
   }
 
@@ -1767,8 +1841,9 @@ body::after{
       const basic = a === u.abilities[0] ? ' basic' : '';
       const checkCls = a.check ? (' check' + (a.checkPassed ? ' passed' : '') + (a.checkFailed ? ' failed' : '')) : '';
       const badge = a.check ? `<span class="check-badge">${a.checkPassed ? '已过' : '认/拼'}</span>` : '';
+      const rune = a.reviewBonus ? `<span class="review-rune">✦+${a.reviewBonus}</span>` : '';
       return `<button type="button" class="ability${basic}${checkCls}" data-ability="${a.id}" ${disabled ? 'disabled' : ''} title="${esc(a.desc)}">
-        ${badge}
+        ${badge}${rune}
         <span class="uses">${remaining}</span>
         <span class="word">${esc(a.word)}</span>
         <span class="zh">${esc(a.zh)}</span>
@@ -1907,7 +1982,7 @@ body::after{
     state.pending = null;
     $('#ccWord').textContent = ab.word;
     $('#ccZh').textContent = '打出这张词卡前，先认出或拼出它';
-    $('#ccEffect').textContent = `${ab.desc} · 卡牌效果`;
+    $('#ccEffect').textContent = `${ab.desc} · 卡牌效果` + (ab.reviewBonus ? ` · 复习充能 +${ab.reviewBonus}` : '');
     $('#ccFeedback').textContent = '';
     $('#ccFeedback').className = 'cc-feedback';
     $('#ccStamp').hidden = true;
@@ -2030,6 +2105,135 @@ body::after{
     resolvePlayerAbility(u, ab, target, { skipCheck: true, half, spellBonus });
   }
 
+
+  /* ============================================================
+     Memory brazier: review as a minigame that charges word cards
+     ============================================================ */
+  const REVIEW_WORDS = ['shield', 'aim', 'magic', 'heal'];
+
+  function reviewAbility(word) {
+    for (const u of party()) {
+      for (const a of u.abilities) {
+        if (a.check && a.word === word) return a;
+      }
+    }
+    return null;
+  }
+
+  function openReviewGame(prep) {
+    if (!state || state.phase !== 'player' || state.review.open) return;
+    const words = shuffle(REVIEW_WORDS.slice()).slice(0, 3);
+    const cards = [];
+    for (const w of words) {
+      cards.push({ pair: w, side: 'en', text: w, up: false, matched: false });
+      cards.push({ pair: w, side: 'zh', text: wordMeaning(w), up: false, matched: false });
+    }
+    shuffle(cards);
+    state.review = { open: true, prep: !!prep, cards, first: null, matched: 0, total: 3, lock: false };
+    state.flags.reviewRound = state.round;
+    state.flags.reviewShown = true;
+    state.busy = true;
+    $('#reviewSkip').textContent = prep ? '跳过战备' : '跳过';
+    $('#reviewDone').textContent = prep ? '进入战斗' : '回到战斗';
+    $('#reviewLead').innerHTML = prep
+      ? '开局战备：翻开两张卡，把英文和中文配对。配对成功，对应词卡 <b>+2</b> 带入战斗；配错翻回，不扣 HP。'
+      : '翻开两张卡，把英文和中文配对。配对成功，对应词卡 <b>+2</b>；配错翻回，不扣 HP。';
+    $('#reviewGame').hidden = false;
+    renderReviewGrid();
+    renderUI();
+  }
+
+  function renderReviewGrid() {
+    const r = state.review;
+    if (!r || !r.open) return;
+    $('#reviewGrid').innerHTML = r.cards.map((c, i) => {
+      const cls = 'review-card' + (c.up ? ' up' : '') + (c.matched ? ' matched' : '');
+      return `<button type="button" class="${cls}" data-idx="${i}" data-pair="${esc(c.pair)}" ${c.matched ? 'disabled' : ''} aria-label="${c.up ? esc(c.text) : '未翻开的卡'}">
+        ${c.up ? esc(c.text) : ''}${c.matched ? '<span class="rc-tag">已充能</span>' : ''}
+      </button>`;
+    }).join('');
+    $('#reviewCount').textContent = `${r.matched} / ${r.total}`;
+  }
+
+  function flipReviewCard(idx) {
+    const r = state.review;
+    if (!r || !r.open || r.lock) return;
+    const c = r.cards[idx];
+    if (!c || c.matched || c.up) return;
+    c.up = true;
+    renderReviewGrid();
+    if (r.first === null) { r.first = idx; return; }
+    if (r.first === idx) return;
+    const a = r.cards[r.first];
+    r.lock = true;
+    if (a.pair === c.pair) {
+      a.matched = true; c.matched = true; a.up = true; c.up = true;
+      r.matched++;
+      r.first = null;
+      renderReviewGrid();
+      applyReviewBonus(a.pair);
+      setTimeout(() => {
+        r.lock = false;
+        if (r.matched >= r.total) setTicker('复习完成：配对成功的词卡已经充能');
+        else renderReviewGrid();
+      }, 320);
+    } else {
+      setTicker('没配上，翻回再试；不扣 HP');
+      setTimeout(() => {
+        a.up = false; c.up = false; r.first = null; r.lock = false;
+        renderReviewGrid();
+      }, 760);
+    }
+  }
+
+  function applyReviewBonus(word) {
+    const ab = reviewAbility(word);
+    if (!ab) return;
+    const cur = ab.reviewBonus || 0;
+    if (cur < 4) {
+      ab.reviewBonus = Math.min(4, cur + 2);
+      addLog(`记忆火盆：${word} 配对成功，${ab.zh} 充能 +2（当前 +${ab.reviewBonus}）。`, 'good');
+      setTicker(`复习充能：${ab.zh} +${ab.reviewBonus}`);
+    } else {
+      party().forEach((p) => { if (!p.dead) p.hp = Math.min(p.maxHp, p.hp + 2); });
+      addLog('记忆火盆：这张词卡已经充能满，改为全队回复 2 点生命。', 'good');
+      setTicker('词卡已满，改为全队回复 2');
+    }
+    renderAbilities();
+    renderParty();
+    renderActor();
+  }
+
+  function closeReviewGame() {
+    const r = state.review;
+    if (!r || !r.open) return;
+    const prep = !!r.prep;
+    $('#reviewGame').hidden = true;
+    r.open = false;
+    r.first = null;
+    state.busy = false;
+    renderUI();
+    if (prep) {
+      afterPrep();
+    } else {
+      setTicker('复习结束：配对成功的词卡已充能');
+    }
+  }
+
+  function afterPrep() {
+    if (!state || state.phase !== 'player') return;
+    state.busy = false;
+    if (!state.tutorial.seen) {
+      state.tutorial.active = false;
+      state.tutorial.step = 0;
+      openTutorial(true);
+    } else {
+      const first = party().find((u) => !u.dead);
+      if (first) selectUnit(first.id);
+      renderUI();
+    }
+  }
+
   /* ============================================================
      Overlay screens
      ============================================================ */
@@ -2080,7 +2284,7 @@ body::after{
     state.pending = null;
     state.busy = false;
     state.round = 0;
-    state.flags = { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0 };
+    state.flags = { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0, reviewRound: -1, reviewShown: false, checkTipShown: false };
     state.stats = { damage: 0, kills: 0, fires: 0 };
     state.units = createUnits();
     state.log = [];
@@ -2106,6 +2310,7 @@ body::after{
         <span><b>1</b>场战斗</span>
         <span><b>20</b>个四级词</span>
         <span><b>5e</b>怪物数值</span>
+        <span><b>1</b>次战备复习</span>
       </div>
       <div class="actions">
         <button class="btn primary" type="button" data-action="intro">进入庭院</button>
@@ -2135,17 +2340,17 @@ body::after{
         <div class="intro-word-card"><span class="iw-check">检定</span><span class="iw-en">magic</span><span class="iw-zh">魔法</span><span class="iw-tag">洛恩 · 飞弹</span></div>
         <div class="intro-word-card"><span class="iw-check">检定</span><span class="iw-en">heal</span><span class="iw-zh">治疗</span><span class="iw-tag">赛拉 · 回复</span></div>
         <div class="intro-word-card"><span class="iw-en">root</span><span class="iw-zh">根</span><span class="iw-tag">德鲁伊 · 缠绕</span></div>
-        <div class="intro-word-card"><span class="iw-en">seed</span><span class="iw-zh">种子</span><span class="iw-tag">古树 · 播种</span></div>
+        <div class="intro-word-card"><span class="iw-en">seed</span><span class="iw-zh">种子</span><span class="iw-tag">古树 · 种子</span></div>
         <div class="intro-word-card"><span class="iw-en">fruit</span><span class="iw-zh">果实</span><span class="iw-tag">剧情物品</span></div>
         <div class="intro-word-card"><span class="iw-en">rescue</span><span class="iw-zh">援救</span><span class="iw-tag">章节目标</span></div>
       </div>
-      <p class="intro-note">带“检定”的词会在战斗里变成卡牌：先认出/拼出，卡牌才生效；答错会摊开答案，效果减半，不会卡关。</p>
+      <p class="intro-note">带“检定”的词会在战斗里变成卡牌：先认出/拼出，卡牌才生效；答错会摊开答案，效果减半，不会卡关。开场战备会先开「记忆火盆」：配对词和义，给词卡充能。</p>
       <div class="actions">
         <button class="btn primary" type="button" data-action="start">开始战斗</button>
         <button class="btn" type="button" data-action="tutorial">怎么玩</button>
         <button class="btn ghost" type="button" data-action="cover">返回封面</button>
       </div>
-      <p class="note">4 名 3 级角色 · 敌方 6 个单位 · 目标：古树与德鲁伊都倒下。</p>
+      <p class="note">4 名 3 级角色 · 敌方 4 个单位（第 2 回合巨蛙加入）· 目标：古树与德鲁伊都倒下。</p>
     </div>`, null, { scene: true });
   }
 
@@ -2159,7 +2364,7 @@ body::after{
     state.effects = [];
     state.log = [];
     state.ticker = null;
-    state.flags = { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0 };
+    state.flags = { frog: false, treeDead: false, druidDead: false, lowTree: false, treeSpawns: 0, reviewRound: -1, reviewShown: false, checkTipShown: false };
     state.stats = { damage: 0, kills: 0, fires: 0 };
     state.units = createUnits();
     state.check = null;
@@ -2176,14 +2381,8 @@ body::after{
     addLog('第 1 回合 · 我方行动', 'round');
     banner('第 1 回合', 'Your Turn', 1100);
     renderUI();
-    if (!state.tutorial.seen) {
-      state.tutorial.active = false;
-      state.tutorial.step = 0;
-      openTutorial(true);
-    } else {
-      const first = party().find((u) => !u.dead);
-      if (first) selectUnit(first.id);
-    }
+    // Review is part of battle preparation: charge cards before the first turn.
+    openReviewGame(true);
   }
 
   function showVictory() {
@@ -2655,6 +2854,7 @@ body::after{
     if (ab.dmg === 'piercing' && traits.includes('pierceResist')) { total = Math.floor(total / 2); note = '（穿刺抗性 ÷2）'; }
     if (opts.mult && opts.mult !== 1) { total = Math.max(1, Math.floor(total * opts.mult)); note += '（半效）'; }
     if (opts.spellBonus) { total += 2; note += '（拼写 +2）'; }
+    if (opts.reviewBonus) { total += opts.reviewBonus; note += '（复习 +' + opts.reviewBonus + '）'; }
     if (ab.dmg === 'fire') state.stats.fires++;
     applyDamage(target, total, { source: attacker, note, damageType: ab.dmg, crit });
     return { hit: true, dmg: total };
@@ -2776,10 +2976,11 @@ body::after{
     renderUI();
     const mult = opts.half ? 0.5 : 1;
     const spellBonus = opts.spellBonus ? 2 : 0;
+    const reviewBonus = ab.reviewBonus || 0;
     const ranged = ab.range > 1 || ab.kind === 'auto';
     if (ab.kind === 'buff') {
       if (ab.effect === 'shield') {
-        const bonus = Math.max(2, Math.round(5 * mult)) + (opts.spellBonus ? 1 : 0);
+        const bonus = Math.max(2, Math.round(5 * mult)) + (opts.spellBonus ? 1 : 0) + reviewBonus;
         target.shieldRound = state.round;
         target.shieldBonus = bonus;
         addLog(`${u.name} 举起盾牌，为 ${target.name} 加上 ${bonus} 点 AC（持续到下一回合）。`, 'good');
@@ -2787,7 +2988,7 @@ body::after{
         spawnBurst(target.vx, target.vy, 'rgba(120,190,220,.7)', 12);
       }
     } else if (ab.kind === 'heal') {
-      const amount = Math.max(1, Math.floor((die(ab.dice[0], ab.dice[1]) + (ab.mod || 0)) * mult) + spellBonus);
+      const amount = Math.max(1, Math.floor((die(ab.dice[0], ab.dice[1]) + (ab.mod || 0)) * mult) + spellBonus + reviewBonus);
       target.hp = Math.min(target.maxHp, target.hp + amount);
       floatText(target.vx, target.vy - 30, '+' + amount, '#9fe0a8', 18);
       addLog(`${u.name} 用 ${ab.zh} 治疗 ${target.name}，回复 ${amount} 点生命。`, 'good');
@@ -2797,7 +2998,7 @@ body::after{
       await lunge(u, target);
       let total = 0;
       for (let i = 0; i < ab.darts; i++) total += die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
-      total = Math.max(1, Math.floor(total * mult) + spellBonus);
+      total = Math.max(1, Math.floor(total * mult) + spellBonus + reviewBonus);
       addLog(`${u.name} 释放 ${ab.zh}：${ab.darts} 枚飞弹，共 ${total} 点力场伤害。`, 'good');
       showDie('AUTO', '必中 · ' + ab.darts + ' 枚飞弹');
       addEffect({ type: 'bolt', x0: u.vx, y0: u.vy, x1: target.vx, y1: target.vy, color: '#b9a2ff', age: 0, dur: 520 });
@@ -2833,7 +3034,7 @@ body::after{
       if (!ranged) await lunge(u, target);
       else addEffect({ type: 'bolt', x0: u.vx, y0: u.vy, x1: target.vx, y1: target.vy, color: ab.dmg === 'fire' ? '#f0a05a' : '#d9d2b8', age: 0, dur: 420 });
       await sleep(REDUCED ? 0 : 180);
-      const hitResult = attackTarget(u, target, ab, { mult, spellBonus, half: opts.half });
+      const hitResult = attackTarget(u, target, ab, { mult, spellBonus, half: opts.half, reviewBonus });
       addEffect({ type: 'slash', x: target.vx, y: target.vy, angle: Math.atan2(target.vy - u.vy, target.vx - u.vx), color: ab.dmg === 'fire' ? '#f0a05a' : '#e8dfc8', age: 0, dur: 300 });
       if (!ranged && hitResult.hit && target.kind === 'tree' && !target.dead) {
         const thorn = 2;
@@ -2893,7 +3094,7 @@ body::after{
     banner('敌方行动', 'Enemy Phase', 1000);
     addLog('敌方行动', 'round');
     await sleep(REDUCED ? 0 : 700);
-    const order = ['druid', 'knight', 'twig1', 'twig2', 'twig3', 'frog'];
+    const order = ['druid', 'knight', 'twig1', 'frog'];
     for (const id of order) {
       if (state.phase !== 'enemy') break;
       const u = byId(id);
@@ -3064,26 +3265,6 @@ body::after{
      ============================================================ */
   async function endRound() {
     if (!state || state.phase !== 'enemy') return;
-    // The tree seeds a new blight every third round, at most twice.
-    if (!state.flags.treeDead && state.round >= 3 && state.flags.treeSpawns < 2) {
-      const twigs = state.units.filter((u) => u.kind === 'twig' && !u.dead);
-      if (twigs.length < 2) {
-        const t = tree();
-        const spots = [[6,3],[6,4],[7,2],[8,2],[7,5],[8,5],[6,2]].filter(([x, y]) =>
-          isFloor(x, y) && !unitAt(x, y));
-        if (spots.length) {
-          const [sx, sy] = spots[Math.floor(Math.random() * spots.length)];
-          const twig = makeEnemy({ id:'twig' + (++uid), name:'枯枝怪', role:'Twig', kind:'twig', x:sx, y:sy, hp:4, ac:13, speed:4,
-            saves:{ str:0, dex:2, con:1, int:0, wis:0, cha:0 }, abilities:['bite'], thrall:true, small:true, traits:['fireVuln'] });
-          state.units.push(twig);
-          state.flags.treeSpawns++;
-          addLog('古树抖落种子：一只新的枯枝怪从根边钻了出来。', 'hit');
-          banner('枯枝怪苏醒', 'A New Twig Blight', 1100);
-          spawnBurst(twig.vx, twig.vy, 'rgba(150,200,120,.8)', 18);
-          await sleep(REDUCED ? 0 : 900);
-        }
-      }
-    }
     // advance
     state.round++;
     state.phase = 'player';
@@ -4003,6 +4184,12 @@ body::after{
   $('#btnLog').addEventListener('click', () => openDrawer('log'));
   $('#btnWords').addEventListener('click', () => openDrawer('words'));
   $('#btnHelp').addEventListener('click', () => openTutorial(false));
+  $('#reviewSkip').addEventListener('click', closeReviewGame);
+  $('#reviewDone').addEventListener('click', closeReviewGame);
+  $('#reviewGrid').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-idx]');
+    if (b) flipReviewCard(Number(b.dataset.idx));
+  });
   $('#tutStart').addEventListener('click', () => closeTutorial(true));
   $('#tutClose').addEventListener('click', () => closeTutorial(false));
   $('#tutSkip').addEventListener('click', () => endTutorial());
@@ -4025,6 +4212,9 @@ body::after{
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      if (state.review.open) { closeReviewGame(); return; }
+      if (!$('#tutorial').hidden) { closeTutorial(false); return; }
+      if (!$('#cardCheck').hidden) { closeCardCheck(true); return; }
       if (state.drawer) { closeDrawer(); return; }
       if (cancelTargeting()) return;
       if (state.selectedId) deselect();
