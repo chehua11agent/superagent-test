@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>自适应词汇实验室 · 生词筛选 × 间隔复习</title>
+<meta name="description" content="用可复现的仿真比较自适应生词筛选、FSRS 间隔复习与熟悉词巡检；一个单页算法实验台。">
+<style>
+  :root {
+    --bg: #0b0f14;
+    --panel: #121922;
+    --panel-2: #18222d;
+    --line: #263241;
+    --ink: #e8eef5;
+    --muted: #93a2b4;
+    --dim: #65758a;
+    --brass: #d9b36c;
+    --brass-soft: rgba(217, 179, 108, .14);
+    --blue: #6aa9ff;
+    --green: #5ecb9a;
+    --amber: #e5a94e;
+    --red: #ef7d6d;
+    --purple: #b79cff;
+    --radius: 14px;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(900px 500px at 80% -10%, rgba(217, 179, 108, .08), transparent 60%),
+      radial-gradient(700px 400px at 0% 10%, rgba(106, 169, 255, .06), transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font: 15px/1.7 system-ui, -apple-system, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  a { color: var(--blue); text-underline-offset: 3px; }
+  a:hover { color: #9cc4ff; }
+  .skip {
+    position: absolute; left: -9999px; top: 8px; z-index: 50;
+    background: var(--brass); color: #1a1206; padding: 8px 14px; border-radius: 8px;
+  }
+  .skip:focus { left: 16px; }
+  .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+  header.hero { padding: 54px 0 20px; }
+  .kicker {
+    margin: 0 0 10px; color: var(--brass); font: 600 12px/1.4 var(--mono);
+    letter-spacing: .14em; text-transform: uppercase;
+  }
+  h1 { margin: 0; font-size: clamp(30px, 5vw, 52px); line-height: 1.12; letter-spacing: -.02em; }
+  h1 .thin { color: var(--muted); font-weight: 400; }
+  .lede { max-width: 760px; margin: 16px 0 0; color: var(--muted); font-size: 17px; }
+  .goals { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .goal {
+    border: 1px solid rgba(217, 179, 108, .28); background: var(--brass-soft);
+    color: #f0d9a8; border-radius: 999px; padding: 5px 12px; font-size: 13px;
+  }
+  .verdict {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin: 28px 0 0;
+  }
+  .verdict article {
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px;
+  }
+  .verdict h2 { margin: 0 0 6px; font-size: 14px; color: var(--brass); letter-spacing: .02em; }
+  .verdict p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+  .verdict strong { color: var(--ink); }
+
+  nav.tabs {
+    position: relative; z-index: 20; margin: 28px 0 20px;
+    display: flex; gap: 4px; padding: 6px;
+    background: rgba(11, 15, 20, .88); backdrop-filter: blur(12px);
+    border: 1px solid var(--line); border-radius: 12px;
+  }
+  nav.tabs button {
+    flex: 1; appearance: none; border: 0; border-radius: 8px; padding: 10px 12px;
+    background: transparent; color: var(--muted); font: inherit; font-weight: 600;
+    cursor: pointer; transition: background .15s ease, color .15s ease;
+  }
+  nav.tabs button:hover { color: var(--ink); background: rgba(255, 255, 255, .04); }
+  nav.tabs button[aria-selected="true"] { background: var(--brass); color: #1b1306; }
+  nav.tabs button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px;
+  }
+  .panel + .panel { margin-top: 16px; }
+  .panel h2 { margin: 0 0 6px; font-size: 20px; letter-spacing: -.01em; }
+  .panel h3 { margin: 0 0 8px; font-size: 15px; color: var(--brass); }
+  .panel p.sub { margin: 0 0 18px; color: var(--muted); }
+  .panel p { color: var(--muted); }
+  .panel strong { color: var(--ink); }
+  .panel code, .formula code {
+    font-family: var(--mono); font-size: .92em; color: #f1d7a3;
+    background: rgba(217, 179, 108, .09); border: 1px solid rgba(217, 179, 108, .16);
+    padding: 1px 5px; border-radius: 5px;
+  }
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .segmented { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .segmented button {
+    appearance: none; border: 0; background: transparent; color: var(--muted);
+    padding: 8px 12px; font: inherit; font-size: 13px; cursor: pointer;
+  }
+  .segmented button + button { border-left: 1px solid var(--line); }
+  .segmented button[aria-pressed="true"] { background: var(--brass-soft); color: var(--brass); }
+  .btn {
+    appearance: none; border: 1px solid rgba(217, 179, 108, .45); border-radius: 9px;
+    background: var(--brass); color: #1b1306; font: inherit; font-weight: 700;
+    padding: 8px 16px; cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.06); }
+  .btn.ghost { background: transparent; color: var(--brass); }
+  .btn:focus-visible, .segmented button:focus-visible, input[type="range"]:focus-visible {
+    outline: 2px solid var(--blue); outline-offset: 2px;
+  }
+  .status { color: var(--dim); font-size: 13px; }
+  .status.busy { color: var(--brass); }
+  .status::before { content: "●"; margin-right: 6px; color: currentColor; font-size: 10px; }
+
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0 6px; }
+  .metric {
+    border: 1px solid var(--line); border-radius: 12px; padding: 14px;
+    background: var(--panel-2);
+  }
+  .metric .k { color: var(--muted); font-size: 12px; }
+  .metric .v { font: 700 26px/1.2 var(--mono); margin-top: 4px; color: var(--ink); }
+  .metric .v small { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .metric .d { margin-top: 4px; font-size: 12px; color: var(--green); }
+  .metric .d.warn { color: var(--amber); }
+  .metric.bad .v { color: var(--red); }
+
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+  .chart-card {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--panel-2);
+    padding: 14px; min-width: 0;
+  }
+  .chart-card h3 { margin: 0 0 2px; color: var(--ink); font-size: 14px; }
+  .chart-card .hint { margin: 0 0 10px; color: var(--dim); font-size: 12px; }
+  canvas { display: block; width: 100%; height: 260px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+  .legend i.dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  .table-wrap { overflow-x: auto; margin-top: 14px; border: 1px solid var(--line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; background: rgba(255, 255, 255, .02); white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num { font-family: var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+  .tr-bad { background: rgba(239, 125, 109, .07); }
+  .tr-good { background: rgba(94, 203, 154, .06); }
+  .tag {
+    display: inline-block; border: 1px solid var(--line); border-radius: 999px;
+    padding: 1px 8px; font-size: 11px; color: var(--muted); white-space: nowrap;
+  }
+  .tag.u { color: var(--amber); border-color: rgba(229, 169, 78, .4); background: rgba(229, 169, 78, .08); }
+  .tag.k { color: var(--green); border-color: rgba(94, 203, 154, .35); background: rgba(94, 203, 154, .07); }
+  .tag.miss { color: var(--red); border-color: rgba(239, 125, 109, .4); background: rgba(239, 125, 109, .08); }
+
+  .trace-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 16px 0 4px; }
+  .trace-controls label { color: var(--muted); font-size: 13px; display: flex; align-items: center; gap: 10px; }
+  input[type="range"] { width: min(240px, 40vw); accent-color: var(--brass); }
+  .trace-summary { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+  .trace-summary b { color: var(--ink); font-family: var(--mono); }
+
+  .audit-box { margin-top: 18px; border: 1px dashed var(--line); border-radius: 12px; padding: 16px; }
+  .audit-box h3 { color: var(--ink); margin-bottom: 4px; }
+  .audit-box p { margin: 0 0 12px; font-size: 13px; }
+  .audit-out { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 10px; font-size: 13px; }
+  .audit-out b { font-family: var(--mono); color: var(--brass); }
+
+  .formula {
+    white-space: pre;
+    background: #0a0e13; border: 1px solid var(--line); border-radius: 10px;
+    padding: 16px 18px; overflow-x: auto; margin: 12px 0 18px;
+    font: 13.5px/1.9 var(--mono); color: #dce6f2;
+  }
+  .formula .c { color: var(--dim); }
+  .formula .g { color: var(--green); }
+  .formula .b { color: var(--blue); }
+  .formula .a { color: var(--amber); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .note {
+    border-left: 3px solid var(--brass); background: rgba(217, 179, 108, .06);
+    padding: 10px 14px; border-radius: 0 8px 8px 0; color: var(--muted); font-size: 13.5px;
+  }
+  .note b { color: var(--ink); }
+  ol.steps { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+  ol.steps li { margin: 6px 0; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .pill-row .tag { font-size: 12px; padding: 3px 10px; }
+
+  footer {
+    margin: 28px 0 50px; padding-top: 18px; border-top: 1px solid var(--line);
+    color: var(--dim); font-size: 12.5px;
+  }
+  footer p { margin: 4px 0; }
+  footer a { word-break: break-all; }
+  [hidden] { display: none !important; }
+
+  @media (max-width: 900px) {
+    .verdict { grid-template-columns: 1fr; }
+    .metric-grid { grid-template-columns: 1fr 1fr; }
+    .chart-grid, .two-col { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    #trace-table th:nth-child(7), #trace-table td:nth-child(7),
+    #trace-table th:nth-child(8), #trace-table td:nth-child(8),
+    #review-table th:nth-child(4), #review-table td:nth-child(4),
+    #review-table th:nth-child(7), #review-table td:nth-child(7) { display: none; }
+    .note-tag { display: none; }
+    .wrap { width: calc(100% - 24px); }
+    header.hero { padding-top: 34px; }
+    nav.tabs button { padding: 9px 6px; font-size: 13px; }
+    .panel { padding: 16px; }
+    .metric-grid { gap: 8px; }
+    .metric { padding: 11px; }
+    .metric .v { font-size: 21px; }
+    canvas { height: 230px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="kicker">Adaptive Vocab Lab · 可运行算法实验台</p>
+    <h1>生词筛选 <span class="thin">×</span> 间隔复习</h1>
+    <p class="lede">
+      一个单页仿真：每次只推进一个词。它要同时做到三件事——
+      从词库里快速找出<b>生词</b>，隔着越来越长的间隔复查<b>熟词</b>，
+      并在<b>遗忘</b>刚发生时把它抓出来。下面每张图都由页面里的算法实时跑出。
+    </p>
+    <div class="goals">
+      <span class="goal">① 选择中自动筛生词</span>
+      <span class="goal">② 间隔检查熟悉词</span>
+      <span class="goal">③ 快速检验遗忘词</span>
+    </div>
+    <div class="verdict">
+      <article>
+        <h2>筛选：信息量 × 生词倾向</h2>
+        <p>前 5 题用最大信息量估能力，之后贴着能力边界挑“大概率不认识”的词。12 题内，生词命中率约 <strong id="v-precision">—</strong>，比“固定 3 词 + 随机”的词汇量误差低约 <strong id="v-mae-delta">—</strong>。</p>
+      </article>
+      <article>
+        <h2>复习：FSRS 先影子模式</h2>
+        <p>在真实曲线接近 FSRS 的默认设定下，复习量少约 <strong id="v-review-save">—</strong>、保持率只差约 <strong id="v-retention-gap">—</strong> 个百分点，无效复习从 <strong id="v-waste-fixed">—</strong> 降到 <strong id="v-waste-fsrs">—</strong>。但换成指数/幂律曲线，FSRS 会反超固定阶梯——所以先影子跑，别直接替换。</p>
+      </article>
+      <article>
+        <h2>巡检：只在预算有余量时做</h2>
+        <p>到期词优先；剩下的名额才抽查熟词。答错先“次日确认”，区分手滑与真遗忘。巡检比例不是越高越好——硬留名额会挤掉到期复习。</p>
+      </article>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="tabs" role="tablist" aria-label="实验面板">
+      <button role="tab" id="tab-btn-screen" aria-controls="panel-screen" aria-selected="true">① 生词筛选</button>
+      <button role="tab" id="tab-btn-review" aria-controls="panel-review" aria-selected="false" tabindex="-1">② 间隔复习</button>
+      <button role="tab" id="tab-btn-formula" aria-controls="panel-formula" aria-selected="false" tabindex="-1">③ 公式与取舍</button>
+    </nav>
+
+    <section id="panel-screen" role="tabpanel" aria-labelledby="tab-btn-screen">
+      <div class="panel">
+        <h2>用尽量少的题，同时估出词汇量与找出单词</h2>
+        <p class="sub">每个点是一名虚拟学习者：词库按词频给出难度，答对率由 3PL 模型生成，答题含 20% 猜对。曲线是 200 名学习者的平均。</p>
+        <div class="controls">
+          <span class="status" id="screen-status">准备计算…</span>
+          <div class="segmented" role="group" aria-label="词库规模">
+            <button type="button" data-bank="48" aria-pressed="false">48 词</button>
+            <button type="button" data-bank="120" aria-pressed="true">120 词</button>
+            <button type="button" data-bank="240" aria-pressed="false">240 词</button>
+          </div>
+          <button type="button" class="btn ghost" id="screen-rerun">换一组样本</button>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric">
+            <div class="k">12 题词汇量误差（现状）</div>
+            <div class="v" id="s-mae-current">—</div>
+            <div class="d warn">固定 3 词 + 随机</div>
+          </div>
+          <div class="metric">
+            <div class="k">12 题词汇量误差（混合）</div>
+            <div class="v" id="s-mae-hybrid">—</div>
+            <div class="d" id="s-mae-delta">—</div>
+          </div>
+          <div class="metric">
+            <div class="k">生词命中率（混合，12 题）</div>
+            <div class="v" id="s-precision">—</div>
+            <div class="d">抽到的词里真正不认识的比例</div>
+          </div>
+          <div class="metric">
+            <div class="k">生词召回（混合，12 题）</div>
+            <div class="v" id="s-recall">—</div>
+            <div class="d">已找出的生词 / 全部生词</div>
+          </div>
+        </div>
+        <p class="hint" style="margin:6px 0 0;color:var(--dim);font-size:12.5px">
+          命中率衡量“每抽一个词，有多大概率是生词”；召回衡量“12 题能否覆盖全部生词”——后者天然有限，前者才是选择算法的效率。
+        </p>
+        <p class="hint" id="s-five" style="margin:4px 0 0;color:var(--gold,#d9b36c);font-size:12.5px"></p>
+        <p class="hint" style="margin:2px 0 0;color:var(--dim);font-size:12px">
+          页面是一次随机抽样；20 个种子的平均改善：5 题 −18%、12 题 −9.4%，生词命中 90.9% vs 62.0%（见调研文档 §4.5）。
+        </p>
+
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3>词汇量估计误差，随题数下降</h3>
+            <p class="hint">纵轴：估计词汇量与真实词汇量的平均绝对误差（词数）。越低越好。</p>
+            <canvas id="chart-mae" role="img" aria-label="不同选题策略的词汇量估计误差随题数变化折线图"></canvas>
+            <div class="legend" id="legend-mae"></div>
+            <details class="data-details"><summary>数据表</summary><div class="table-wrap"><table id="table-mae"></table></div></details>
+          </div>
+          <div class="chart-card">
+            <h3>12 题后的取舍：估得准 vs 找得狠</h3>
+            <p class="hint">横轴：词汇量误差（越左越好）；纵轴：生词命中率（越高越好）。左上角最理想。</p>
+            <canvas id="chart-tradeoff" role="img" aria-label="不同选题策略在词汇量误差与生词命中率上的散点图"></canvas>
+            <div class="legend" id="legend-tradeoff"></div>
+            <details class="data-details"><summary>数据表</summary><div class="table-wrap"><table id="table-tradeoff"></table></div></details>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>推演：一个学习者的 12 题</h2>
+        <p class="sub">词号是匿名编号，难度 b 越高越生僻。绿色是“抽到生词”，红色是“答错”。注意“猜对”的生词会被暂时当成熟词——这正是需要多题估计的原因。</p>
+        <div class="trace-controls">
+          <label>学习者能力 θ
+            <input type="range" id="theta" min="-1.2" max="1.2" step="0.1" value="0">
+            <b id="theta-val">0.0</b>
+          </label>
+          <button type="button" class="btn ghost" id="trace-rerun">换一个学习者</button>
+          <span class="status" id="trace-status">混合策略 · 12 题</span>
+        </div>
+        <div class="trace-summary" id="trace-summary"></div>
+        <div class="table-wrap">
+          <table id="trace-table">
+            <thead>
+              <tr>
+                <th class="num">题</th>
+                <th class="num">词号</th>
+                <th class="num">难度 b</th>
+                <th class="num">预测答对</th>
+                <th>真实</th>
+                <th>结果</th>
+                <th>选择理由</th>
+                <th class="num">估计词汇量</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="note" style="margin-top:16px">
+          <b>为什么前 5 题不直接挑最难的？</b> 因为还不知道你处在哪个水平。先估出 θ，后面的“难”才有意义。
+          纯挑最难能 98% 抽到生词，但词汇量误差会明显变差；纯最大信息能把误差压到最低，却只有四到五成是生词。
+          混合策略取中间：先估准，再贴着边界找。
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-review" role="tabpanel" aria-labelledby="tab-btn-review" hidden>
+      <div class="panel">
+        <h2>熟词少打扰，遗忘早发现</h2>
+        <p class="sub">90 天、每天 8 个复习名额、40 名虚拟学习者；包含隐藏的记忆偏差与偶发遗忘冲击，所以模型并不完美。复习量按“每词 90 天被复习几次”计。默认真实曲线是 FSRS；切到指数/幂律可以做压力测试。</p>
+        <div class="controls">
+          <span class="status" id="review-status">切到本页时计算…</span>
+          <button type="button" class="btn ghost" id="review-rerun">换一组样本</button>
+          <div class="segmented" role="group" aria-label="真实遗忘曲线">
+            <button type="button" data-truemodel="fsrs" aria-pressed="true">FSRS 曲线</button>
+            <button type="button" data-truemodel="exponential" aria-pressed="false">指数</button>
+            <button type="button" data-truemodel="power07" aria-pressed="false">幂律 0.7</button>
+          </div>
+        </div>
+        <p class="hint" id="review-model-note" style="margin:10px 0 0;color:var(--dim);font-size:12.5px"></p>
+
+        <div class="metric-grid">
+          <div class="metric">
+            <div class="k">FSRS 复习量 / 现状</div>
+            <div class="v" id="r-review-ratio">—</div>
+            <div class="d" id="r-review-save">—</div>
+          </div>
+          <div class="metric">
+            <div class="k">90 天后平均保持率（FSRS）</div>
+            <div class="v" id="r-retention-fsrs">—</div>
+            <div class="d">真实 R 的均值</div>
+          </div>
+          <div class="metric">
+            <div class="k">无效复习占比（现状 → FSRS）</div>
+            <div class="v" id="r-waste">—</div>
+            <div class="d">复习时真实 R &gt; 0.9 的比例</div>
+          </div>
+          <div class="metric">
+            <div class="k">遗忘发现延迟（现状 → FSRS）</div>
+            <div class="v" id="r-latency">—</div>
+            <div class="d">真实 R 跌破 0.7 到答错的天数</div>
+          </div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3>成本 vs 保持率</h3>
+            <p class="hint">横轴：每词复习次数（越左越省）；纵轴：90 天后平均真实保持率（越高越好）。左上角最理想。</p>
+            <canvas id="chart-review" role="img" aria-label="复习调度方法的成本与保持率散点图"></canvas>
+            <div class="legend" id="legend-review"></div>
+          </div>
+          <div class="chart-card">
+            <h3>指标明细</h3>
+            <p class="hint">“发现率”= 真实跌破 0.7 的词中，之后被考到并答错的比例；“静默”= 到最后仍低于 0.7 且没被发现的词。</p>
+            <div class="table-wrap" style="margin-top:4px"><table id="review-table"></table></div>
+          </div>
+        </div>
+
+        <div class="audit-box">
+          <h3>如果硬留巡检名额，会发生什么？</h3>
+          <p>把每天 8 个名额中的一部分固定留给“非到期熟词”。比例越高，熟词被检查得越勤，但到期复习会被挤掉。</p>
+          <label style="color:var(--muted);font-size:13px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            巡检名额占比
+            <input type="range" id="audit-share" min="0" max="0.3" step="0.1" value="0.1">
+            <b id="audit-val" style="color:var(--brass);font-family:var(--mono)">10%</b>
+            <button type="button" class="btn ghost" id="audit-run">计算巡检曲线</button>
+            <span class="status" id="audit-status">未计算</span>
+          </label>
+          <div class="audit-out" id="audit-out"></div>
+        </div>
+        <div class="note" style="margin-top:16px">
+          <b>结论：</b><span id="review-conclusion">真实曲线接近 FSRS 时，到期优先 + FSRS 最省；切到指数/幂律后，FSRS 的保持率反而低于固定阶梯。先影子跑、用真实答题数据校准，再决定是否换。</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-formula" role="tabpanel" aria-labelledby="tab-btn-formula" hidden>
+      <div class="panel">
+        <h2>一个推送分数，三个通道</h2>
+        <p class="sub">真正要推到玩家面前的词，按状态走不同通道；每个通道内部用同一个“优先级”函数排序。这样既有统一解释，又不会让某一类词饿死。</p>
+
+        <div class="formula">
+<span class="c">// 新词：估能力 + 找生词</span>
+Push_new(i) = <span class="b">I_i(θ)</span> + λ · <span class="a">(1 − p_i)</span> · v_i
+
+<span class="c">// 在学词：按遗忘风险排</span>
+Push_due(i) = <span class="g">(1 − R_i)</span> · (1 + α · lapse_i) · v_i
+
+<span class="c">// 熟词巡检：很久没见、且模型不确定</span>
+Push_audit(i) = β · (t_i / S_i)^γ · (1 + δ · lapse_i) · v_i
+
+<span class="c">// 每轮先满足到期队列，剩余名额才巡检</span>
+pick = argmax Push_lane(i)
+        </div>
+
+        <div class="two-col">
+          <div>
+            <h3>符号</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>符号</th><th>含义</th></tr></thead>
+              <tbody>
+                <tr><td><code>θ</code></td><td>学习者能力，EAP 后验均值</td></tr>
+                <tr><td><code>b_i</code></td><td>词难度，由词频分位映射</td></tr>
+                <tr><td><code>p_i</code></td><td>预测答对率，3PL：<code>0.2 + 0.8·σ(1.7(θ−b))</code></td></tr>
+                <tr><td><code>I_i(θ)</code></td><td>Fisher 信息量，衡量这题对估 θ 的价值</td></tr>
+                <tr><td><code>R_i</code></td><td>当前还记得的概率（FSRS 遗忘曲线）</td></tr>
+                <tr><td><code>S_i</code></td><td>稳定性：R 降到 0.9 所需天数</td></tr>
+                <tr><td><code>v_i</code></td><td>词的价值：词频、考点、剧情权重</td></tr>
+                <tr><td><code>lapse_i</code></td><td>累计遗忘次数</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+          <div>
+            <h3>默认参数</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>参数</th><th>默认</th><th>作用</th></tr></thead>
+              <tbody>
+                <tr><td>前 5 题</td><td>最大信息</td><td>先估 θ，避免“一上来就最难”</td></tr>
+                <tr><td>目标答对率</td><td>0.40</td><td>略低于 0.5，偏向找生词</td></tr>
+                <tr><td>λ</td><td>0.6</td><td>单分数版本的“生词倾向”</td></tr>
+                <tr><td>巡检占比</td><td>≤10%</td><td>只用预算余量，不硬挤到期词</td></tr>
+                <tr><td>FSRS 目标 R</td><td>0.90</td><td>到期阈值</td></tr>
+                <tr><td>答错确认</td><td>次日</td><td>区分手滑与真遗忘</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:24px">FSRS 的遗忘曲线</h3>
+        <div class="formula">
+R(t, S) = (1 + <span class="a">19/81</span> · t / S)<span class="g">^−0.5</span>        <span class="c">// S 天时 R = 0.9</span>
+I(r, S) = S / (19/81) · (r<span class="g">^−2</span> − 1)      <span class="c">// 达到目标保持率 r 的间隔</span>
+        </div>
+        <p>复习成功时 S 变长（间隔效应），失败时 S 缩短；D 记录这个词对你有多难。游戏里只有“对/错”两档，可映射为 FSRS 的 <code>Good / Again</code>。和 1/3/7/16 固定阶梯相比，它不再给所有词同一个 16 天上限，而是让稳定词逐渐拉开到数月。</p>
+
+        <h3>接进现有游戏的最小改法</h3>
+        <ol class="steps">
+          <li><b>保留 <code>game/src/srs.js</code> 的对外函数</b>，新增 <code>fsrs.js</code> 纯函数：<code>retrievability</code>、<code>intervalFor</code>、<code>fsrsUpdate</code>。旧的 stage 迁移为初始 S：<code>0.5 / 2 / 5 / 10</code> 天。</li>
+          <li><b>换掉 <code>nextNewWords</code> 的纯词频排序</b>：用上面的混合策略选当天新词，并把 <code>vocabEstimate</code> 接到词力；先只替换“探针”，不动剧情内容。</li>
+          <li><b>复习队列先到期、再巡检</b>：到期按 <code>R</code> 升序；剩余名额才按巡检分抽 1–2 个熟词。保留 1/3/7/16 作为开关回退。</li>
+          <li><b>答错先确认</b>：当天标记 <code>suspect</code>，次日复测；复测错才回短间隔，复测对则只轻微缩短 S。</li>
+          <li><b>用真实数据再校准</b>：仿真只能证明方向。上线后用真实答题记录拟合 FSRS 参数，并监控“预测 R vs 实际正确率”的校准曲线。</li>
+        </ol>
+
+        <div class="note" style="margin-top:18px">
+          <b>边界：</b>这是合成数据仿真，不是学习效果承诺。词库难度按词频分位生成，答题模型是 3PL；真实玩家会有语境、疲劳、猜题和母语迁移。
+          巡检比例、目标答对率、FSRS 参数都需要用真实数据重调。这个页面的作用是先把“方向”跑出来，再决定是否接进游戏。
+        </div>
+        <div class="pill-row">
+          <span class="tag">FSRS-4.5</span>
+          <span class="tag">3PL / EAP</span>
+          <span class="tag">Fisher 信息</span>
+          <span class="tag">间隔效应</span>
+          <span class="tag">Leitner / SM-2</span>
+          <span class="tag">Duolingo HLR</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>合成数据仿真 · 固定随机种子 · 结果可复现。完整调研、公式出处与取舍记录见仓库 <a href="https://github.com/chehua11agent/superagent-test/blob/main/docs/research/adaptive-vocab-scheduling.md">docs/research/adaptive-vocab-scheduling.md</a>。</p>
+    <p>算法参考：FSRS（open-spaced-repetition）、Duolingo Half-Life Regression（Settles &amp; Meeder, 2016）、IRT 计算机自适应测验、Anki leech 机制。</p>
+  </footer>
+</div>
+
+<script type="module">
+import { traceScreening } from './sim.js';
+
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+const COLORS = {
+  current: '#93a2b4',
+  random: '#65758a',
+  info50: '#6aa9ff',
+  frontier40: '#e5a94e',
+  soft: '#b79cff',
+  hybrid: '#5ecb9a',
+  fixed: '#93a2b4',
+  fsrs: '#6aa9ff',
+  risk: '#e5a94e',
+  three: '#5ecb9a'
+};
+const LABELS = {
+  current: '现状：固定 3 + 随机',
+  random: '均匀随机',
+  info50: '最大信息（≈60%）',
+  frontier40: '边界搜索（40%）',
+  soft: '单分数（信息×生词）',
+  hybrid: '混合（先估后猎）',
+  fixed: '现状 1/3/7/16',
+  fsrs: 'FSRS 到期',
+  risk: 'FSRS + 风险分',
+  three: 'FSRS + 余量巡检'
+};
+const SHORT = {
+  current: '现状', random: '随机', info50: '信息', frontier40: '边界',
+  soft: '单分', hybrid: '混合', fixed: '固定', fsrs: 'FSRS', risk: '风险', three: '巡检'
+};
+const SCREEN_METHODS = ['current', 'random', 'info50', 'frontier40', 'soft', 'hybrid'];
+const screenState = { bank: 120, seed: 7, data: null, loading: false };
+const reviewState = { seed: 11, trueModel: 'fsrs', data: null, loading: false, audit: null };
+const traceState = { seed: 7 };
+const TRUE_MODEL_LABELS = { fsrs: 'FSRS 曲线', exponential: '指数曲线', power07: '幂律 0.7 曲线' };
+
+function fmt(n, digits = 1) { return Number(n).toFixed(digits); }
+function pct(n, digits = 0) { return (n * 100).toFixed(digits) + '%'; }
+function tick() { return new Promise((r) => setTimeout(r, 20)); }
+
+function runInWorker(kind, args) {
+  return new Promise((resolve, reject) => {
+    let worker;
+    try {
+      worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+    } catch (err) {
+      reject(err);
+      return;
+    }
+    const done = (fn, value) => {
+      worker.terminate();
+      fn(value);
+    };
+    worker.onmessage = (e) => {
+      const { result, error } = e.data || {};
+      if (error) done(reject, new Error(error));
+      else done(resolve, result);
+    };
+    worker.onerror = (e) => done(reject, new Error(e.message || 'worker 计算失败'));
+    worker.postMessage({ kind, args });
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Canvas helpers
+// ---------------------------------------------------------------------------
+function prep(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  const w = Math.max(280, rect.width);
+  const h = Math.max(180, rect.height);
+  canvas.width = Math.round(w * dpr);
+  canvas.height = Math.round(h * dpr);
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+  ctx.font = '11px ui-monospace, Menlo, monospace';
+  return { ctx, w, h };
+}
+
+function axes(ctx, w, h, pad, opts) {
+  const { xMax, yMax, yMin = 0, xStep, yStep, xFmt, yFmt } = opts;
+  ctx.strokeStyle = 'rgba(147,162,180,.16)';
+  ctx.fillStyle = '#65758a';
+  ctx.lineWidth = 1;
+  for (let y = yMin; y <= yMax + 1e-9; y += yStep) {
+    const py = pad.t + (1 - (y - yMin) / (yMax - yMin)) * (h - pad.t - pad.b);
+    ctx.beginPath(); ctx.moveTo(pad.l, py); ctx.lineTo(w - pad.r, py); ctx.stroke();
+    ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+    ctx.fillText(yFmt(y), pad.l - 8, py);
+  }
+  for (let x = 0; x <= xMax + 1e-9; x += xStep) {
+    const px = pad.l + (x / xMax) * (w - pad.l - pad.r);
+    ctx.beginPath(); ctx.moveTo(px, pad.t); ctx.lineTo(px, h - pad.b); ctx.stroke();
+    ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    ctx.fillText(xFmt(x), px, h - pad.b + 7);
+  }
+  ctx.strokeStyle = 'rgba(147,162,180,.35)';
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, h - pad.b); ctx.lineTo(w - pad.r, h - pad.b); ctx.stroke();
+}
+
+function lineChart(canvas, series, opts) {
+  const { ctx, w, h } = prep(canvas);
+  const pad = { l: 48, r: 16, t: 14, b: 34 };
+  axes(ctx, w, h, pad, {
+    xMax: opts.xMax, yMax: opts.yMax, yMin: opts.yMin ?? 0,
+    xStep: opts.xStep ?? 4, yStep: opts.yStep ?? 1,
+    xFmt: (x) => String(Math.round(x)),
+    yFmt: opts.yFmt ?? ((y) => String(Math.round(y)))
+  });
+  const px = (x) => pad.l + (x / opts.xMax) * (w - pad.l - pad.r);
+  const py = (y) => pad.t + (1 - (y - (opts.yMin ?? 0)) / (opts.yMax - (opts.yMin ?? 0))) * (h - pad.t - pad.b);
+  for (const s of series) {
+    ctx.strokeStyle = s.color; ctx.lineWidth = s.width || 2;
+    ctx.setLineDash(s.dash || []);
+    ctx.beginPath();
+    s.points.forEach((p, i) => { i ? ctx.lineTo(px(p.x), py(p.y)) : ctx.moveTo(px(p.x), py(p.y)); });
+    ctx.stroke();
+    ctx.setLineDash([]);
+    if (s.dots !== false) {
+      for (const p of s.points) {
+        ctx.fillStyle = s.color;
+        ctx.beginPath(); ctx.arc(px(p.x), py(p.y), 2.6, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  }
+  ctx.fillStyle = '#65758a'; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+  if (opts.xLabel) ctx.fillText(opts.xLabel, (pad.l + w - pad.r) / 2, h - 2);
+}
+
+function scatterChart(canvas, points, opts) {
+  const { ctx, w, h } = prep(canvas);
+  const pad = { l: 52, r: 22, t: 18, b: 38 };
+  axes(ctx, w, h, pad, {
+    xMax: opts.xMax, yMax: opts.yMax, yMin: opts.yMin,
+    xStep: opts.xStep, yStep: opts.yStep,
+    xFmt: opts.xFmt, yFmt: opts.yFmt
+  });
+  const px = (x) => pad.l + (x / opts.xMax) * (w - pad.l - pad.r);
+  const py = (y) => pad.t + (1 - (y - opts.yMin) / (opts.yMax - opts.yMin)) * (h - pad.t - pad.b);
+  for (const p of points) {
+    ctx.fillStyle = COLORS[p.key] || '#d9b36c';
+    ctx.strokeStyle = '#0b0f14'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(px(p.x), py(p.y), 6, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    if (p.label) {
+      ctx.fillStyle = '#c8d4e2'; ctx.font = '11px system-ui, sans-serif';
+      ctx.textAlign = p.align || 'left'; ctx.textBaseline = 'middle';
+      ctx.fillText(p.label, px(p.x) + (p.align === 'right' ? -10 : 10), py(p.y) + (p.dy || 0));
+    }
+  }
+  ctx.fillStyle = '#65758a'; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+  if (opts.xLabel) ctx.fillText(opts.xLabel, (pad.l + w - pad.r) / 2, h - 2);
+}
+
+function legend(el, keys) {
+  el.innerHTML = keys.map((k) =>
+    `<span><i style="background:${COLORS[k] || '#d9b36c'}"></i>${LABELS[k] || k}</span>`
+  ).join('');
+}
+
+// ---------------------------------------------------------------------------
+// Screening
+// ---------------------------------------------------------------------------
+function screeningRows(data) {
+  const by = Object.fromEntries(data.result.map((r) => [r.key, r]));
+  const at = (k, n) => by[k].points[n - 1];
+  return { by, at };
+}
+
+function renderScreening() {
+  const { data } = screenState;
+  if (!data) return;
+  const { by, at } = screeningRows(data);
+  const cur = at('current', 12);
+  const hyb = at('hybrid', 12);
+  const delta = cur.mae ? (1 - hyb.mae / cur.mae) : 0;
+
+  $('#s-mae-current').textContent = fmt(cur.mae, 1) + ' 词';
+  $('#s-mae-hybrid').textContent = fmt(hyb.mae, 1) + ' 词';
+  $('#s-mae-delta').textContent = `比现状低 ${pct(delta)}`;
+  $('#s-precision').textContent = pct(hyb.precision);
+  $('#s-recall').textContent = pct(hyb.recall);
+  const cur5 = at('current', 5);
+  const hyb5 = at('hybrid', 5);
+  $('#s-five').textContent = `只测 5 题（接近当前战斗探针）：误差 ${fmt(cur5.mae, 1)} → ${fmt(hyb5.mae, 1)} 词（低 ${pct(1 - hyb5.mae / cur5.mae)}）。`;
+  $('#v-precision').textContent = pct(hyb.precision);
+  $('#v-mae-delta').textContent = pct(delta);
+
+  const series = SCREEN_METHODS.map((k) => ({
+    key: k, color: COLORS[k], width: k === 'hybrid' ? 3 : 1.8,
+    dash: k === 'current' ? [5, 4] : k === 'random' ? [2, 3] : [],
+    points: by[k].points.map((p) => ({ x: p.item, y: p.mae }))
+  }));
+  lineChart($('#chart-mae'), series, {
+    xMax: data.items, yMax: Math.ceil(Math.max(...series.flatMap((s) => s.points.map((p) => p.y))) + 2),
+    xStep: 4, yStep: 2, yFmt: (y) => String(Math.round(y)),
+    xLabel: '题数'
+  });
+  legend($('#legend-mae'), SCREEN_METHODS);
+  $('#table-mae').innerHTML = `
+    <thead><tr><th>策略</th><th class="num">5 题误差</th><th class="num">12 题误差</th><th class="num">16 题误差</th></tr></thead>
+    <tbody>${SCREEN_METHODS.map((k) => `<tr>
+      <td>${LABELS[k]}</td>
+      <td class="num">${fmt(at(k, 5).mae, 1)}</td>
+      <td class="num">${fmt(at(k, 12).mae, 1)}</td>
+      <td class="num">${fmt(at(k, Math.min(16, data.items)).mae, 1)}</td>
+    </tr>`).join('')}</tbody>`;
+
+  const pts = SCREEN_METHODS.map((k) => {
+    const p = at(k, 12);
+    return {
+      key: k, x: p.mae, y: p.precision,
+      label: SHORT[k],
+      align: k === 'frontier40' || k === 'soft' ? 'right' : 'left',
+      dy: k === 'current' ? -14 : k === 'random' ? 14 : k === 'hybrid' ? -14
+        : k === 'frontier40' ? 14 : k === 'info50' ? 14 : k === 'soft' ? -14 : 0
+    };
+  });
+  scatterChart($('#chart-tradeoff'), pts, {
+    xMax: Math.ceil(Math.max(...pts.map((p) => p.x)) + 1),
+    yMin: 0.3, yMax: 1, xStep: 1, yStep: 0.1,
+    xFmt: (x) => String(Math.round(x)), yFmt: (y) => pct(y),
+    xLabel: '词汇量误差（词）'
+  });
+  $('#legend-tradeoff').innerHTML = pts.map((p) =>
+    `<span><i class="dot" style="background:${COLORS[p.key]}"></i>${LABELS[p.key]}</span>`
+  ).join('');
+  $('#table-tradeoff').innerHTML = `
+    <thead><tr><th>策略</th><th class="num">误差</th><th class="num">生词命中</th><th class="num">生词召回</th></tr></thead>
+    <tbody>${SCREEN_METHODS.map((k) => {
+      const p = at(k, 12);
+      return `<tr><td>${LABELS[k]}</td><td class="num">${fmt(p.mae, 1)}</td>
+        <td class="num">${pct(p.precision)}</td><td class="num">${pct(p.recall)}</td></tr>`;
+    }).join('')}</tbody>`;
+}
+
+async function runScreeningData() {
+  if (screenState.loading) return;
+  screenState.loading = true;
+  const st = $('#screen-status');
+  st.classList.add('busy');
+  st.textContent = `计算 ${screenState.bank} 词 × 100 名学习者…`;
+  await tick();
+  try {
+    screenState.data = await runInWorker('screening', {
+      learners: 200,
+      words: screenState.bank,
+      items: 16,
+      seed: screenState.seed,
+      methods: SCREEN_METHODS
+    });
+    renderScreening();
+    st.classList.remove('busy');
+    st.textContent = `完成 · ${screenState.bank} 词 · 200 名学习者 · 种子 ${screenState.seed}`;
+  } catch (err) {
+    st.classList.remove('busy');
+    st.textContent = '计算失败：' + err.message;
+    console.error(err);
+  } finally {
+    screenState.loading = false;
+  }
+}
+
+function renderTrace() {
+  const theta = Number($('#theta').value);
+  $('#theta-val').textContent = theta.toFixed(1);
+  const t = traceScreening({ theta, words: 48, items: 12, seed: traceState.seed, method: 'hybrid' });
+  const unknownPct = t.unknownTotal ? pct(t.discovered / t.unknownTotal) : '—';
+  $('#trace-summary').innerHTML = `
+    <span>真实词汇量：<b>${t.trueVocabulary} / 48</b></span>
+    <span>12 题后估计：<b>${fmt(t.finalEstimate, 1)}</b></span>
+    <span>找到生词：<b>${t.discovered} / ${t.unknownTotal}</b>（${unknownPct}）</span>
+    <span>能力估计 θ̂：<b>${t.finalTheta.toFixed(2)}</b></span>`;
+  $('#trace-table tbody').innerHTML = t.rows.map((r) => {
+    const result = r.correct ? '<span class="tag k">对</span>' : '<span class="tag miss">错</span>';
+    const truth = r.isUnknown ? '<span class="tag u">生词</span>' : '<span class="tag">熟词</span>';
+    const note = r.isUnknown && r.correct ? '猜对，暂时漏网' : !r.isUnknown && !r.correct ? '熟词手滑' : '';
+    const cls = (r.isUnknown && r.correct) ? 'tr-bad' : (r.isUnknown && !r.correct) ? 'tr-good' : '';
+    return `<tr class="${cls}">
+      <td class="num">${r.step}</td>
+      <td class="num">#${String(r.id).padStart(2, '0')}</td>
+      <td class="num">${r.b.toFixed(2)}</td>
+      <td class="num">${pct(r.pPred)}</td>
+      <td>${truth}</td>
+      <td>${result}${note ? ` <span class="tag note-tag">${note}</span>` : ''}</td>
+      <td>${r.lane}</td>
+      <td class="num">${fmt(r.vEstimate, 1)}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ---------------------------------------------------------------------------
+// Review
+// ---------------------------------------------------------------------------
+function renderReview() {
+  const { data } = reviewState;
+  if (!data) return;
+  const by = Object.fromEntries(data.result.map((r) => [r.key, r]));
+  const fixed = by.fixed, fsrs = by.fsrs, three = by.three, risk = by.risk;
+  const ratio = fsrs.reviewsPerWord / fixed.reviewsPerWord;
+  $('#r-review-ratio').textContent = pct(ratio);
+  $('#r-review-save').textContent = `少 ${pct(1 - ratio)} 复习量`;
+  $('#r-retention-fsrs').textContent = pct(fsrs.retention, 1);
+  $('#r-waste').textContent = `${pct(fixed.waste)} → ${pct(fsrs.waste)}`;
+  $('#r-latency').textContent = `${fixed.medianLatency ?? '—'} → ${fsrs.medianLatency ?? '—'} 天`;
+  if (reviewState.trueModel === 'fsrs') {
+    $('#v-review-save').textContent = pct(1 - ratio);
+    $('#v-retention-gap').textContent = ((fixed.retention - fsrs.retention) * 100).toFixed(1);
+    $('#v-waste-fixed').textContent = pct(fixed.waste);
+    $('#v-waste-fsrs').textContent = pct(fsrs.waste);
+  }
+  const modelNote = reviewState.trueModel === 'fsrs'
+    ? '真实曲线 = FSRS：这是对 FSRS 最有利的设定；下表的收益应视为上限。'
+    : `真实曲线 = ${TRUE_MODEL_LABELS[reviewState.trueModel]}：FSRS 的遗忘曲线假设不再成立，保持率可能低于固定阶梯；这正说明上线前要用真实数据校准。`;
+  $('#review-model-note').textContent = modelNote;
+  const conclusion = reviewState.trueModel === 'fsrs'
+    ? '真实曲线接近 FSRS 时，到期优先 + FSRS 最省；固定阶梯约 41% 的复习发生在“其实还很熟”的时候。巡检只在名额有余量时做，是保险，不是主策略。'
+    : `真实曲线是${TRUE_MODEL_LABELS[reviewState.trueModel]}时，FSRS 的保持率反而低于固定阶梯（${pct(fsrs.retention, 1)} vs ${pct(fixed.retention, 1)}），静默遗忘更高。先影子跑、用真实数据校准，再决定是否替换。`;
+  $('#review-conclusion').textContent = conclusion;
+
+  const pts = ['fixed', 'fsrs', 'risk', 'three'].map((k) => ({
+    key: k, x: by[k].reviewsPerWord, y: by[k].retention,
+    label: '',
+    align: 'left', dy: 0
+  }));
+  const yValues = pts.map((p) => p.y);
+  const yMin = Math.max(0, Math.floor((Math.min(...yValues) - 0.03) * 10) / 10);
+  const yMax = Math.min(1, Math.ceil((Math.max(...yValues) + 0.02) * 10) / 10);
+  const yStep = (yMax - yMin) <= 0.2 ? 0.02 : 0.1;
+  scatterChart($('#chart-review'), pts, {
+    xMax: 5, yMin, yMax, xStep: 1, yStep,
+    xFmt: (x) => x.toFixed(1), yFmt: (y) => pct(y, 0),
+    xLabel: '每词复习次数'
+  });
+  $('#legend-review').innerHTML = pts.map((p) =>
+    `<span><i class="dot" style="background:${COLORS[p.key]}"></i>${LABELS[p.key]}</span>`
+  ).join('');
+  $('#review-table').innerHTML = `
+    <thead><tr><th>策略</th><th class="num">保持率</th><th class="num">复习量</th><th class="num">无效复习</th><th class="num">发现率</th><th class="num">延迟</th><th class="num">静默</th></tr></thead>
+    <tbody>${['fixed', 'fsrs', 'risk', 'three'].map((k) => {
+      const r = by[k];
+      return `<tr><td>${LABELS[k]}</td>
+        <td class="num">${pct(r.retention, 1)}</td>
+        <td class="num">${r.reviewsPerWord.toFixed(2)}</td>
+        <td class="num">${pct(r.waste)}</td>
+        <td class="num">${pct(r.detection)}</td>
+        <td class="num">${r.medianLatency ?? '—'} 天</td>
+        <td class="num">${pct(r.silent, 1)}</td></tr>`;
+    }).join('')}</tbody>`;
+
+  if (reviewState.audit) {
+    const rows = [0, 0.1, 0.2, 0.3].map((share) => {
+      const r = reviewState.audit[share];
+      return `<span>巡检 ${pct(share)}：保持率 <b>${pct(r.retention, 1)}</b> · 无效 <b>${pct(r.waste)}</b> · 静默 <b>${pct(r.silent, 1)}</b></span>`;
+    }).join('');
+    $('#audit-out').innerHTML = rows;
+  }
+}
+
+async function runReviewData() {
+  if (reviewState.loading) return;
+  reviewState.loading = true;
+  const st = $('#review-status');
+  st.classList.add('busy');
+  st.textContent = '计算 40 名学习者 × 90 天…';
+  await tick();
+  try {
+    reviewState.data = await runInWorker('scheduling', {
+      learners: 40, words: 160, days: 90, budget: 8,
+      shockRate: 0.0005, seed: reviewState.seed, trueModel: reviewState.trueModel,
+      methods: ['fixed', 'fsrs', 'risk', 'three'], auditShare: 0.1
+    });
+    renderReview();
+    st.classList.remove('busy');
+    st.textContent = `完成 · 40 名学习者 · 90 天 · ${TRUE_MODEL_LABELS[reviewState.trueModel]} · 种子 ${reviewState.seed}`;
+  } catch (err) {
+    st.classList.remove('busy');
+    st.textContent = '计算失败：' + err.message;
+    console.error(err);
+  } finally {
+    reviewState.loading = false;
+  }
+}
+
+async function runAuditSweep() {
+  if (reviewState.audit) return;
+  const st = $('#audit-status');
+  st.classList.add('busy');
+  st.textContent = '计算巡检曲线…';
+  await tick();
+  reviewState.audit = await runInWorker('audit', {
+    learners: 40, words: 160, days: 90, budget: 8,
+    shockRate: 0.0005, seed: reviewState.seed, trueModel: reviewState.trueModel
+  });
+  renderReview();
+  st.classList.remove('busy');
+  st.textContent = '完成';
+}
+
+// ---------------------------------------------------------------------------
+// Tabs & events
+// ---------------------------------------------------------------------------
+const tabs = $$('nav.tabs [role="tab"]');
+function selectTab(btn) {
+  tabs.forEach((b) => {
+    const on = b === btn;
+    b.setAttribute('aria-selected', String(on));
+    b.tabIndex = on ? 0 : -1;
+    const panel = document.getElementById(b.getAttribute('aria-controls'));
+    panel.hidden = !on;
+  });
+  if (btn.id === 'tab-btn-review' && !reviewState.data) runReviewData();
+  window.dispatchEvent(new Event('resize'));
+}
+tabs.forEach((b) => b.addEventListener('click', () => selectTab(b)));
+tabs.forEach((b, i) => b.addEventListener('keydown', (e) => {
+  if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+  e.preventDefault();
+  const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+  next.focus(); selectTab(next);
+}));
+
+$$('[data-bank]').forEach((b) => b.addEventListener('click', () => {
+  if (screenState.loading) return;
+  $$('[data-bank]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  screenState.bank = Number(b.dataset.bank);
+  screenState.seed += 1;
+  runScreeningData();
+}));
+$('#screen-rerun').addEventListener('click', () => {
+  if (screenState.loading) return;
+  screenState.seed += 1;
+  runScreeningData();
+});
+$('#review-rerun').addEventListener('click', () => {
+  if (reviewState.loading) return;
+  reviewState.seed += 1;
+  reviewState.audit = null;
+  runReviewData();
+});
+$$('[data-truemodel]').forEach((b) => b.addEventListener('click', () => {
+  if (reviewState.loading) return;
+  $$('[data-truemodel]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  reviewState.trueModel = b.dataset.truemodel;
+  reviewState.audit = null;
+  $('#audit-out').innerHTML = '';
+  $('#audit-status').textContent = '未计算';
+  $('#audit-status').classList.remove('busy');
+  runReviewData();
+}));
+$('#theta').addEventListener('input', renderTrace);
+$('#trace-rerun').addEventListener('click', () => {
+  const el = $('#theta');
+  el.value = (Math.random() * 2.4 - 1.2).toFixed(1);
+  traceState.seed += 1;
+  renderTrace();
+});
+$('#audit-share').addEventListener('input', (e) => {
+  $('#audit-val').textContent = pct(Number(e.target.value));
+});
+$('#audit-share').addEventListener('change', () => {
+  if (!reviewState.audit) runAuditSweep();
+});
+$('#audit-run').addEventListener('click', () => {
+  runAuditSweep();
+});
+
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (screenState.data) renderScreening();
+    if (reviewState.data) renderReview();
+  }, 120);
+});
+
+// Initial run：筛选与复习各用一个 Worker，互不阻塞。
+renderTrace();
+runScreeningData();
+runReviewData();
+</script>
+</body>
+</html>
