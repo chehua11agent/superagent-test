@@ -911,6 +911,26 @@ body::after{
 .review-panel.extinguished .review-brazier .rb-glow{opacity:.1}
 .review-card.spent{opacity:.38;filter:grayscale(1);cursor:not-allowed}
 .review-card.spent::after{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 5px,transparent 5px 10px)}
+/* word power calibration */
+.cal-game{z-index:78}
+.cal-panel{width:min(520px,95vw)}
+.cal-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0 4px;font-size:10px;color:#6b4d2b;font-family:var(--mono)}
+.cal-bar #calTier{color:#8e2f27;font-weight:700}
+.cal-word{font-family:var(--serif);font-size:42px;letter-spacing:.04em;text-align:center;color:#2b1a0d;margin:10px 0 12px;line-height:1.15;word-break:break-word}
+.cal-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cal-option{border:1px solid #8b6a42;border-radius:7px;background:linear-gradient(180deg,#f6ead2,#e2cda8);color:#2b1a0d;padding:10px 8px;font-size:13px;cursor:pointer;text-align:center;line-height:1.3;transition:transform .14s,border-color .2s,background .2s}
+.cal-option:hover:not(:disabled){transform:translateY(-2px);border-color:#c9a15a}
+.cal-option:disabled{cursor:default;opacity:.75}
+.cal-option.correct{border-color:#5d8a52;background:linear-gradient(180deg,#e7f0d8,#cfe0b8);box-shadow:0 0 0 2px rgba(93,138,82,.35)}
+.cal-option.wrong{border-color:#8e2f27;background:linear-gradient(180deg,#f3d9cf,#e2b9aa);box-shadow:0 0 0 2px rgba(142,47,39,.3)}
+.cal-feedback{margin:10px 0 0;font-size:11px;line-height:1.6;text-align:center;color:#4a321e}
+.cal-feedback b{color:#8e2f27}
+.cal-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}
+.cal-score{font-family:var(--serif);font-size:44px;text-align:center;color:#2b1a0d;line-height:1.1}
+.cal-level{text-align:center;font-size:13px;letter-spacing:.16em;color:#8e2f27;margin:2px 0 8px}
+.cal-missed{font-size:10px;line-height:1.7;color:#5a3f24;max-height:118px;overflow:auto;margin:6px 0;padding:7px;border:1px dashed rgba(139,106,66,.4);border-radius:6px}
+.cal-missed b{color:#2b1a0d}
+@media (max-width:760px){.cal-word{font-size:32px}.cal-options{grid-template-columns:1fr}.cal-option{padding:8px}.cal-panel{width:96vw}}
 /* hand-holding coach */
 .coach{position:fixed;top:calc(82px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(720px,94vw);z-index:72;pointer-events:none}
 .coach[hidden]{display:none!important}
@@ -1049,6 +1069,30 @@ body::after{
     <div class="review-actions">
       <button class="btn primary" type="button" id="reviewDone">回到战斗</button>
       <span class="review-note">复习是增强：失误不扣 HP，但 3 次后火盆熄灭，不能无限重试。</span>
+    </div>
+  </div>
+</div>
+<div id="calibration" class="review-game cal-game" hidden>
+  <div class="review-panel cal-panel" role="dialog" aria-modal="true" aria-labelledby="calTitle">
+    <div class="cc-kicker">VOCAB SIZE PROBE · 词汇量估计</div>
+    <h2 id="calTitle">词汇量估计</h2>
+    <div id="calQuiz">
+      <p class="review-lead" id="calLead">先抽 3 个词做初始估计，之后每回合再抽 1 个词做探针；每题只有 <b>一次机会</b>，答错不重试。估计越高，词力加成越高。</p>
+      <div class="cal-bar"><span id="calStep">1 / 3</span><span id="calTier">基础</span><span class="cal-score-mini" id="calScoreMini">0 对</span></div>
+      <div class="cal-word" id="calWord">strike</div>
+      <div class="cal-options" id="calOptions"></div>
+      <div class="cal-feedback" id="calFeedback" hidden></div>
+      <div class="cal-actions">
+        <button class="btn primary" type="button" id="calNext" hidden>下一个</button>
+        <button class="review-skip" type="button" id="calSkip">跳过初始估计</button>
+      </div>
+    </div>
+    <div id="calResult" hidden>
+      <div class="cal-score" id="calScoreBig">0 / 6</div>
+      <div class="cal-level" id="calLevel">见习</div>
+      <p class="review-lead" id="calPowerLine"></p>
+      <div class="cal-missed" id="calMissed"></div>
+      <div class="cal-actions"><button class="btn primary" type="button" id="calEnter">进入战备</button></div>
     </div>
   </div>
 </div>
@@ -1323,6 +1367,11 @@ body::after{
       check: null,
       review: { open: false, cards: [], first: null, matched: 0, total: 3, lock: false },
       coach: null,
+      wordPower: 0,
+      vocabSeen: [],
+      vocabCorrect: 0,
+      vocabEstimate: null,
+      vocabProbeRounds: [],
     };
   }
 
@@ -1848,6 +1897,11 @@ body::after{
     parts.push(`<div class="obj ${rescued ? 'done' : ''}" data-obj="rescue">
       <span class="dot"></span><span class="name">被缚者</span>
       <span class="val">${rescued ? '已解救' : (k ? '待解救' : '—')}</span></div>`);
+    const wp = state.wordPower || 0;
+    const est = state.vocabEstimate;
+    parts.push(`<div class="obj wordpower" data-obj="wordpower" title="词汇量估计：${est == null ? '未测' : est + '/20'}">
+      <span class="dot"></span><span class="name">词力</span>
+      <span class="val">${wp ? '+' + wp : '0'}</span></div>`);
     $('#objectives').innerHTML = parts.join('');
   }
 
@@ -2360,6 +2414,199 @@ body::after{
   }
 
 
+
+  /* ============================================================
+     Word power calibration
+     ============================================================ */
+  const VOCAB_TIER = {
+    strike:'基础', shield:'基础', arrow:'基础', sword:'基础', fruit:'基础', rescue:'基础',
+    aim:'进阶', flame:'进阶', magic:'进阶', heal:'进阶', root:'进阶', bark:'进阶', poison:'进阶', victory:'进阶', defeat:'进阶',
+    thorn:'挑战', seed:'挑战', surrender:'挑战', descend:'挑战', ancient:'挑战',
+  };
+  const VOCAB_BANK = WORD_CARDS.map((w) => ({ word: w.w, meaning: w.zh, tier: VOCAB_TIER[w.w] || '进阶' }));
+  const VOCAB_INITIAL = ['shield', 'magic', 'surrender'];
+  let cal = null;
+
+  function vocabEntry(word) {
+    return VOCAB_BANK.find((w) => w.word === word) || VOCAB_BANK[0];
+  }
+  function vocabOptions(entry) {
+    const others = shuffle(VOCAB_BANK.filter((w) => w.meaning !== entry.meaning).map((w) => w.meaning)).slice(0, 3);
+    return shuffle([entry.meaning, ...others]);
+  }
+  function refreshVocab() {
+    if (!state) return;
+    const seen = (state.vocabSeen || []).length;
+    if (!seen) {
+      state.vocabEstimate = null;
+      state.wordPower = 0;
+      return;
+    }
+    state.vocabEstimate = Math.round(20 * (state.vocabCorrect || 0) / seen);
+    state.wordPower = Math.min(4, Math.floor(state.vocabEstimate / 5));
+  }
+  function calibrationWords() {
+    return cal && cal.words ? cal.words[cal.i] : null;
+  }
+
+  function startCalibration() {
+    state.vocabSeen = [];
+    state.vocabCorrect = 0;
+    state.vocabEstimate = null;
+    state.wordPower = 0;
+    state.vocabProbeRounds = [];
+    const words = VOCAB_INITIAL.map(vocabEntry);
+    cal = {
+      mode: 'initial', i: 0, correct: 0, answered: false, missed: [], words,
+      order: words.map((w) => vocabOptions(w)),
+    };
+    $('#calTitle').textContent = '词汇量估计';
+    $('#calLead').innerHTML = '先抽 3 个词做初始估计；之后每回合再抽 1 个词做探针。每题只有 <b>一次机会</b>，答错不重试。';
+    $('#calSkip').textContent = '跳过初始估计';
+    $('#calSkip').hidden = false;
+    $('#calEnter').textContent = '进入战备';
+    $('#calibration').hidden = false;
+    $('#calQuiz').hidden = false;
+    $('#calResult').hidden = true;
+    $('#calNext').hidden = true;
+    $('#calFeedback').hidden = true;
+    renderCalibration();
+  }
+
+  function maybeStartVocabProbe() {
+    if (!state || state.phase !== 'player') return;
+    if (state.coach && state.coach.active) return;
+    if (state.round < 2 || state.round > 3) return;
+    if (!state.vocabProbeRounds) state.vocabProbeRounds = [];
+    if (state.vocabProbeRounds.includes(state.round)) return;
+    const seen = new Set(state.vocabSeen || []);
+    const pool = VOCAB_BANK.filter((w) => !seen.has(w.word));
+    if (!pool.length) return;
+    state.vocabProbeRounds.push(state.round);
+    const w = shuffle(pool)[0];
+    cal = {
+      mode: 'probe', i: 0, correct: 0, answered: false, missed: [], words: [w],
+      order: [vocabOptions(w)],
+    };
+    $('#calTitle').textContent = '词汇量探针';
+    $('#calLead').innerHTML = `第 ${state.round} 回合探针：再抽 1 个词，更新词汇量估计。每题只有 <b>一次机会</b>。`;
+    $('#calSkip').textContent = '跳过这次探针';
+    $('#calSkip').hidden = false;
+    $('#calEnter').textContent = '继续战斗';
+    $('#calibration').hidden = false;
+    $('#calQuiz').hidden = false;
+    $('#calResult').hidden = true;
+    $('#calNext').hidden = true;
+    $('#calFeedback').hidden = true;
+    state.busy = true;
+    renderCalibration();
+  }
+
+  function renderCalibration() {
+    if (!cal) return;
+    const w = cal.words[cal.i];
+    if (!w) { showCalibrationResult(); return; }
+    $('#calStep').textContent = (cal.i + 1) + ' / ' + cal.words.length;
+    $('#calTier').textContent = w.tier;
+    $('#calScoreMini').textContent = cal.correct + ' 对';
+    $('#calWord').textContent = w.word;
+    $('#calNext').hidden = true;
+    $('#calFeedback').hidden = true;
+    $('#calFeedback').innerHTML = '';
+    cal.answered = false;
+    $('#calOptions').innerHTML = cal.order[cal.i].map((opt) => `<button type="button" class="cal-option" data-opt="${esc(opt)}">${esc(opt)}</button>`).join('');
+    $('#calOptions').querySelectorAll('[data-opt]').forEach((b) => {
+      b.addEventListener('click', () => answerCalibration(b.dataset.opt, b));
+    });
+  }
+  function answerCalibration(opt, btn) {
+    if (!cal || cal.answered) return;
+    const w = cal.words[cal.i];
+    cal.answered = true;
+    const ok = opt === w.meaning;
+    if (ok) cal.correct++;
+    else cal.missed.push(w);
+    $('#calOptions').querySelectorAll('[data-opt]').forEach((b) => {
+      b.disabled = true;
+      if (b.dataset.opt === w.meaning) b.classList.add('correct');
+      else if (b === btn) b.classList.add('wrong');
+    });
+    $('#calScoreMini').textContent = cal.correct + ' 对';
+    $('#calFeedback').hidden = false;
+    $('#calFeedback').innerHTML = ok
+      ? `答对了。 <b>${esc(w.word)}</b> = ${esc(w.meaning)}。`
+      : `正确答案：<b>${esc(w.word)} = ${esc(w.meaning)}</b>。这次不重试，会留在估计里。`;
+    $('#calNext').hidden = false;
+    $('#calNext').textContent = cal.i + 1 >= cal.words.length ? '查看估计' : '下一个';
+  }
+  function nextCalibration() {
+    if (!cal) return;
+    cal.i++;
+    if (cal.i >= cal.words.length) { showCalibrationResult(); return; }
+    renderCalibration();
+  }
+  function applyCalibrationResult() {
+    if (!cal) return;
+    if (!state.vocabSeen) state.vocabSeen = [];
+    for (const w of cal.words) {
+      if (!state.vocabSeen.includes(w.word)) state.vocabSeen.push(w.word);
+    }
+    state.vocabCorrect = (state.vocabCorrect || 0) + cal.correct;
+    refreshVocab();
+  }
+  function showCalibrationResult() {
+    if (!cal) return;
+    applyCalibrationResult();
+    $('#calQuiz').hidden = true;
+    $('#calResult').hidden = false;
+    const est = state.vocabEstimate;
+    const pct = Math.round(est / 20 * 100);
+    const level = est >= 16 ? '博学' : est >= 10 ? '熟练' : '见习';
+    const wp = state.wordPower;
+    $('#calScoreBig').textContent = est + ' / 20';
+    $('#calLevel').textContent = level;
+    const seenN = (state.vocabSeen || []).length;
+    const prefix = cal.mode === 'initial' ? '初始估计' : '探针后估计';
+    $('#calPowerLine').innerHTML = `${prefix}（基于 ${seenN} 个探针）：估计认识 <b>${est}/20</b>（${pct}%）；词力 <b>+${wp}</b>：我方攻击 +${wp}、治疗 +${wp}、盾 +${wp} AC。`;
+    $('#calMissed').innerHTML = cal.missed.length
+      ? '<b>这次没答对：</b><br>' + cal.missed.map((m) => `${esc(m.word)} — ${esc(m.meaning)}（${esc(m.tier)}）`).join('<br>')
+      : '<b>这次全对。</b>';
+    $('#calEnter').textContent = cal.mode === 'initial' ? '进入战备' : '继续战斗';
+    $('#calEnter').dataset.mode = cal.mode;
+  }
+  function finishCalibration() {
+    if (!cal) return;
+    const mode = cal.mode;
+    const est = state.vocabEstimate;
+    const wp = state.wordPower;
+    $('#calibration').hidden = true;
+    cal = null;
+    if (mode === 'initial') {
+      beginBattle();
+    } else {
+      state.busy = false;
+      renderUI();
+      addLog(`词汇探针：估计认识 ${est}/20；词力 +${wp}。`, 'round');
+      setTicker(`词汇量估计更新：${est}/20，词力 +${wp}`);
+    }
+  }
+  function skipCalibration() {
+    const mode = cal ? cal.mode : 'initial';
+    $('#calibration').hidden = true;
+    cal = null;
+    if (mode === 'initial') {
+      state.wordPower = 0;
+      state.vocabSeen = [];
+      state.vocabCorrect = 0;
+      state.vocabEstimate = null;
+      beginBattle();
+    } else {
+      state.busy = false;
+      renderUI();
+      setTicker('跳过这次探针；词汇量估计暂不更新');
+    }
+  }
+
   /* ============================================================
      Hand-holding coach
      ============================================================ */
@@ -2495,7 +2742,7 @@ body::after{
   }
   function handleOverlayAction(action) {
     if (action === 'intro') beginIntro();
-    else if (action === 'start') beginBattle();
+    else if (action === 'start') startCalibration();
     else if (action === 'cover') showCover();
     else if (action === 'replay') beginBattle();
     else if (action === 'wordbook') openDrawer('words');
@@ -2524,6 +2771,7 @@ body::after{
     $('#tutorial').hidden = true;
     $('#coach').hidden = true;
     $('#cardCheck').hidden = true;
+    $('#calibration').hidden = true;
     $('#tutorialBar').hidden = true;
     clearTutPulse();
     closeDrawer();
@@ -2540,7 +2788,7 @@ body::after{
         <span><b>1</b>场战斗</span>
         <span><b>20</b>个四级词</span>
         <span><b>5e</b>怪物数值</span>
-        <span><b>1</b>次战备复习</span>
+        <span><b>1</b>次词汇量估计</span><span><b>1</b>次战备复习</span>
       </div>
       <div class="actions">
         <button class="btn primary" type="button" data-action="intro">进入庭院</button>
@@ -2575,9 +2823,9 @@ body::after{
         <div class="intro-word-card"><span class="iw-en">fruit</span><span class="iw-zh">果实</span><span class="iw-tag">剧情物品</span></div>
         <div class="intro-word-card"><span class="iw-en">rescue</span><span class="iw-zh">援救</span><span class="iw-tag">章节目标</span></div>
       </div>
-      <p class="intro-note">带“检定”的词会在战斗里变成卡牌：先认出/拼出，卡牌才生效；答错会摊开答案，效果减半，不会卡关。开场战备会先开「记忆火盆」：配对词和义，给词卡充能。</p>
+      <p class="intro-note">开局先做「词汇量估计」：只抽 3 个词做初始估计；之后每回合再抽 1 个词做探针，靠多次短测逐步逼近词汇量。估计越高，词力加成越高，直接加到词卡的伤害/回复/格挡上。带“检定”的词仍会在战斗里变成卡牌；答错会摊开答案，效果减半，不会卡关。</p>
       <div class="actions">
-        <button class="btn primary" type="button" data-action="start">开始战斗</button>
+        <button class="btn primary" type="button" data-action="start">开始词汇量估计</button>
         <button class="btn" type="button" data-action="coach">手把手教学</button>
         <button class="btn ghost" type="button" data-action="tutorial">怎么玩</button>
         <button class="btn ghost" type="button" data-action="cover">返回封面</button>
@@ -2605,6 +2853,7 @@ body::after{
     $('#tutorial').hidden = true;
     $('#coach').hidden = true;
     $('#cardCheck').hidden = true;
+    $('#calibration').hidden = true;
     $('#tutorialBar').hidden = true;
     clearTutPulse();
     closeDrawer();
@@ -2613,6 +2862,7 @@ body::after{
     addLog('你们踏入枯木庭院。紫色的菌光在头顶亮起。', 'round');
     addLog('流亡德鲁伊挡在古树前：“把武器放下，或者成为养料。”');
     addLog('第 1 回合 · 我方行动', 'round');
+    if (state.wordPower) addLog(`词力：+${state.wordPower}（估计词汇量 ${state.vocabEstimate}/20），我方攻击/治疗/盾 +${state.wordPower}。`, 'round');
     banner('第 1 回合', 'Your Turn', 1100);
     renderUI();
     // Review is part of battle preparation: charge cards before the first turn.
@@ -3176,6 +3426,8 @@ body::after{
     if (opts.mult && opts.mult !== 1) { total = Math.max(1, Math.floor(total * opts.mult)); note += '（半效）'; }
     if (opts.spellBonus) { total += 2; note += '（拼写 +2）'; }
     if (opts.reviewBonus) { total += opts.reviewBonus; note += '（复习 +' + opts.reviewBonus + '）'; }
+    const wordPower = attacker.side === 'party' ? (state.wordPower || 0) : 0;
+    if (wordPower) { total += wordPower; note += '（词力 +' + wordPower + '）'; }
     if (ab.dmg === 'fire') state.stats.fires++;
     applyDamage(target, total, { source: attacker, note, damageType: ab.dmg, crit });
     return { hit: true, dmg: total };
@@ -3302,7 +3554,7 @@ body::after{
     const ranged = ab.range > 1 || ab.kind === 'auto';
     if (ab.kind === 'buff') {
       if (ab.effect === 'shield') {
-        const bonus = Math.max(2, Math.round(5 * mult)) + (opts.spellBonus ? 1 : 0) + reviewBonus;
+        const bonus = Math.max(2, Math.round(5 * mult)) + (opts.spellBonus ? 1 : 0) + reviewBonus + (state.wordPower || 0);
         target.shieldRound = state.round;
         target.shieldBonus = bonus;
         addLog(`${u.name} 举起盾牌，为 ${target.name} 加上 ${bonus} 点 AC（持续到下一回合）。`, 'good');
@@ -3310,7 +3562,7 @@ body::after{
         spawnBurst(target.vx, target.vy, 'rgba(120,190,220,.7)', 12);
       }
     } else if (ab.kind === 'heal') {
-      const amount = Math.max(1, Math.floor((die(ab.dice[0], ab.dice[1]) + (ab.mod || 0)) * mult) + spellBonus + reviewBonus);
+      const amount = Math.max(1, Math.floor((die(ab.dice[0], ab.dice[1]) + (ab.mod || 0)) * mult) + spellBonus + reviewBonus + (state.wordPower || 0));
       target.hp = Math.min(target.maxHp, target.hp + amount);
       floatText(target.vx, target.vy - 30, '+' + amount, '#9fe0a8', 18);
       addLog(`${u.name} 用 ${ab.zh} 治疗 ${target.name}，回复 ${amount} 点生命。`, 'good');
@@ -3320,7 +3572,7 @@ body::after{
       await lunge(u, target);
       let total = 0;
       for (let i = 0; i < ab.darts; i++) total += die(ab.dice[0], ab.dice[1]) + (ab.mod || 0);
-      total = Math.max(1, Math.floor(total * mult) + spellBonus + reviewBonus);
+      total = Math.max(1, Math.floor(total * mult) + spellBonus + reviewBonus + (state.wordPower || 0));
       addLog(`${u.name} 释放 ${ab.zh}：${ab.darts} 枚飞弹，共 ${total} 点力场伤害。`, 'good');
       showDie('AUTO', '必中 · ' + ab.darts + ' 枚飞弹');
       addEffect({ type: 'bolt', x0: u.vx, y0: u.vy, x1: target.vx, y1: target.vy, color: '#b9a2ff', age: 0, dur: 520 });
@@ -3623,6 +3875,7 @@ body::after{
     banner(`第 ${state.round} 回合`, 'Your Turn', 1000);
     renderUI();
     updateHint();
+    if (state.round >= 2 && state.round <= 3) maybeStartVocabProbe();
     const first = party().find((u) => !u.dead);
     if (first) selectUnit(first.id, { silent: true });
     renderUI();
@@ -4582,6 +4835,9 @@ body::after{
   $('#tutStart').addEventListener('click', () => closeTutorial(true));
   $('#tutClose').addEventListener('click', () => closeTutorial(false));
   $('#tutSkip').addEventListener('click', () => endTutorial());
+  $('#calNext').addEventListener('click', nextCalibration);
+  $('#calSkip').addEventListener('click', skipCalibration);
+  $('#calEnter').addEventListener('click', finishCalibration);
   $('#coachSkip').addEventListener('click', () => { closeCoach(false); state.tutorial.seen = true; });
   $('#coachNext').addEventListener('click', () => {
     if (!state.coach) return;
