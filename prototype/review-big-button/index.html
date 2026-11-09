@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#050a0e" />
+    <meta
+      name="description"
+      content="《拾词者》复习界面原型：一句话 + 大按钮，一屏只做一个决定。"
+    />
+    <title>快速复习 · 一句话 + 大按钮（原型）</title>
+    <style>
+      :root {
+        --ink: #050a0e;
+        --ink-2: #081116;
+        --panel: rgba(12, 22, 27, 0.86);
+        --line: rgba(227, 185, 120, 0.17);
+        --line-strong: rgba(227, 185, 120, 0.42);
+        --gold: #e3b978;
+        --gold-deep: #c99a58;
+        --paper: #f0e7d6;
+        --paper-dim: #c9c2b3;
+        --muted: #8fa4a2;
+        --muted-dim: #6d817f;
+        --sea: #78b9ad;
+        --danger: #d77a66;
+        --ok: #94c4a5;
+        --serif: "Noto Serif SC", "Songti SC", "STSong", "Iowan Old Style", "Georgia", serif;
+        --sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Noto Sans", sans-serif;
+        --radius: 16px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        color-scheme: dark;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        justify-content: center;
+        background:
+          radial-gradient(ellipse at 18% -6%, rgba(43, 86, 88, 0.32), transparent 58%),
+          radial-gradient(ellipse at 92% 8%, rgba(227, 185, 120, 0.08), transparent 46%),
+          var(--ink);
+        color: var(--paper);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        mix-blend-mode: overlay;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        box-shadow: inset 0 0 180px rgba(0, 0, 0, 0.62);
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .skip {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 20;
+        transform: translateY(-160%);
+        padding: 10px 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 10px;
+        background: var(--ink-2);
+        color: var(--gold);
+        font-size: 13px;
+        transition: transform 0.15s ease;
+      }
+
+      .skip:focus {
+        transform: none;
+      }
+
+      .app {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 680px;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: clamp(14px, 3vh, 28px) clamp(16px, 5vw, 40px)
+          calc(18px + env(safe-area-inset-bottom));
+      }
+
+      /* ---------- 顶栏 ---------- */
+      .topbar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 0 0 auto;
+      }
+
+      .back {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        flex: 0 0 auto;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        color: var(--muted);
+        transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+      }
+
+      .back:hover {
+        color: var(--gold);
+        border-color: var(--line);
+        background: rgba(227, 185, 120, 0.05);
+      }
+
+      .brand {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      .title {
+        font-size: 14px;
+        letter-spacing: 0.06em;
+        color: var(--paper-dim);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .tag {
+        flex: 0 0 auto;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        color: var(--gold);
+        border: 1px solid rgba(227, 185, 120, 0.35);
+        border-radius: 999px;
+        padding: 0 7px;
+        line-height: 18px;
+      }
+
+      .count {
+        flex: 0 0 auto;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .track {
+        position: relative;
+        height: 2px;
+        margin-top: 10px;
+        border-radius: 2px;
+        background: rgba(240, 231, 214, 0.08);
+        overflow: hidden;
+        flex: 0 0 auto;
+      }
+
+      .track > span {
+        display: block;
+        height: 100%;
+        width: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+        transition: width 0.2s ease;
+      }
+
+      /* ---------- 主舞台 ---------- */
+      .stage {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 0;
+        padding: 14px 0;
+      }
+
+      .prompt {
+        margin: 0;
+        text-align: center;
+        font-size: 13px;
+        letter-spacing: 0.18em;
+        color: var(--gold);
+      }
+
+      .word {
+        margin: 4px 0 0;
+        text-align: center;
+        font-family: var(--serif);
+        font-size: clamp(3.1rem, 9vw, 5rem);
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: 0.01em;
+        text-shadow: 0 14px 44px rgba(0, 0, 0, 0.55);
+        overflow-wrap: anywhere;
+      }
+
+      .meta {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 8px;
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .meta .dot {
+        opacity: 0.45;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: clamp(18px, 4vh, 34px);
+      }
+
+      .option {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        min-height: 64px;
+        padding: 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: linear-gradient(180deg, rgba(18, 31, 37, 0.92), rgba(10, 19, 23, 0.92));
+        color: var(--paper);
+        font: inherit;
+        font-size: 17px;
+        font-weight: 500;
+        text-align: left;
+        cursor: pointer;
+        transition: border-color 0.15s ease, background 0.15s ease, transform 0.12s ease,
+          opacity 0.15s ease;
+      }
+
+      .option:hover:not(:disabled) {
+        border-color: var(--line-strong);
+        background: linear-gradient(180deg, rgba(27, 44, 50, 0.95), rgba(13, 24, 28, 0.95));
+      }
+
+      .option:active:not(:disabled) {
+        transform: scale(0.995);
+      }
+
+      .option:disabled {
+        cursor: default;
+      }
+
+      .option:disabled:not(.correct):not(.wrong) {
+        opacity: 0.45;
+      }
+
+      .option .key {
+        display: grid;
+        place-items: center;
+        width: 26px;
+        height: 26px;
+        flex: 0 0 auto;
+        border: 1px solid rgba(227, 185, 120, 0.32);
+        border-radius: 999px;
+        color: var(--gold);
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+        transition: color 0.15s ease, border-color 0.15s ease;
+      }
+
+      .option .label {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      .option .mark {
+        flex: 0 0 auto;
+        width: 18px;
+        text-align: center;
+        font-size: 15px;
+        opacity: 0;
+      }
+
+      .option.correct {
+        border-color: rgba(148, 196, 165, 0.72);
+        background: rgba(148, 196, 165, 0.11);
+      }
+
+      .option.correct .key {
+        color: var(--ok);
+        border-color: rgba(148, 196, 165, 0.5);
+      }
+
+      .option.correct .mark {
+        opacity: 1;
+        color: var(--ok);
+      }
+
+      .option.correct .mark::before {
+        content: "✓";
+      }
+
+      .option.wrong {
+        border-color: rgba(215, 122, 102, 0.72);
+        background: rgba(215, 122, 102, 0.11);
+      }
+
+      .option.wrong .mark {
+        opacity: 1;
+        color: var(--danger);
+      }
+
+      .option.wrong .mark::before {
+        content: "✕";
+      }
+
+      .hint {
+        margin: 14px 0 0;
+        text-align: center;
+        font-size: 12.5px;
+        letter-spacing: 0.02em;
+        color: var(--muted-dim);
+      }
+
+      /* ---------- 反馈 ---------- */
+      .feedback {
+        margin-top: 15px;
+        padding: 13px 16px 15px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, rgba(12, 22, 27, 0.94), rgba(8, 16, 20, 0.94));
+        animation: rise 0.16s ease-out;
+      }
+
+      .feedback.ok {
+        border-color: rgba(148, 196, 165, 0.34);
+      }
+
+      .feedback.bad {
+        border-color: rgba(215, 122, 102, 0.34);
+      }
+
+      .fb-head {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin: 0;
+        font-size: 12.5px;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+      }
+
+      .feedback.ok .fb-head {
+        color: var(--ok);
+      }
+
+      .feedback.bad .fb-head {
+        color: var(--danger);
+      }
+
+      .fb-head svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .fb-answer {
+        margin: 6px 0 0;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .fb-answer b {
+        font-family: var(--serif);
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+
+      .fb-example {
+        margin: 6px 0 0;
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--paper-dim);
+      }
+
+      .fb-example .en {
+        display: block;
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--paper);
+      }
+
+      .fb-example .zh {
+        display: block;
+        margin-top: 1px;
+        color: var(--muted);
+        font-size: 12.5px;
+      }
+
+      .fb-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 9px;
+      }
+
+      .chip {
+        font-size: 11.5px;
+        color: var(--gold);
+        border: 1px solid rgba(227, 185, 120, 0.3);
+        border-radius: 999px;
+        padding: 2px 9px;
+        letter-spacing: 0.02em;
+      }
+
+      .next {
+        width: 100%;
+        min-height: 54px;
+        margin-top: 12px;
+        border: 0;
+        border-radius: 13px;
+        background: linear-gradient(180deg, #e8c489, #c99a58);
+        color: #1b130a;
+        font: inherit;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: filter 0.15s ease, transform 0.12s ease;
+      }
+
+      .next:hover {
+        filter: brightness(1.06);
+      }
+
+      .next:active {
+        transform: scale(0.995);
+      }
+
+      /* ---------- 结束 ---------- */
+      .done {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 26px 0;
+        text-align: center;
+      }
+
+      .done-icon {
+        display: grid;
+        place-items: center;
+        width: 66px;
+        height: 66px;
+        border: 1px solid rgba(148, 196, 165, 0.45);
+        border-radius: 999px;
+        color: var(--ok);
+        background: rgba(148, 196, 165, 0.07);
+      }
+
+      .done-icon svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .done-eyebrow {
+        margin: 16px 0 0;
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        color: var(--gold);
+      }
+
+      .done h2 {
+        margin: 6px 0 0;
+        font-family: var(--serif);
+        font-size: clamp(2rem, 6vw, 2.6rem);
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
+      .done-copy {
+        margin: 6px 0 0;
+        font-size: 14px;
+        color: var(--paper-dim);
+      }
+
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin: 16px 0 0;
+      }
+
+      .stat {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        padding: 6px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(12, 22, 27, 0.7);
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .stat b {
+        font-size: 15px;
+        color: var(--paper);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .stat.ok b {
+        color: var(--ok);
+      }
+
+      .stat.bad b {
+        color: var(--danger);
+      }
+
+      .done-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        max-width: 340px;
+        margin-top: 22px;
+      }
+
+      .ghost {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        min-height: 50px;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: transparent;
+        color: var(--paper-dim);
+        font: inherit;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: color 0.15s ease, border-color 0.15s ease;
+      }
+
+      .ghost:hover {
+        color: var(--gold);
+        border-color: var(--line-strong);
+      }
+
+      a.ghost {
+        text-decoration: none;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 3px;
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @media (max-height: 740px) {
+        .stage {
+          justify-content: flex-start;
+          padding: 8px 0 4px;
+        }
+
+        .word {
+          font-size: clamp(2.4rem, 7.5vw, 3.2rem);
+        }
+
+        .options {
+          margin-top: 12px;
+          gap: 8px;
+        }
+
+        .option {
+          min-height: 52px;
+        }
+
+        .feedback {
+          margin-top: 10px;
+          padding: 10px 14px 12px;
+        }
+
+        .fb-example {
+          margin-top: 4px;
+        }
+
+        .next {
+          min-height: 50px;
+          margin-top: 8px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .app {
+          padding-left: 14px;
+          padding-right: 14px;
+        }
+
+        .option {
+          gap: 10px;
+          padding: 0 14px;
+          font-size: 16px;
+        }
+
+        .title {
+          font-size: 13px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#stage">跳到主要内容</a>
+    <main class="app" id="app">
+      <header class="topbar">
+        <a class="back" href="../../game/index.html" aria-label="返回游戏">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none"
+            stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </a>
+        <div class="brand">
+          <span class="title">记忆神殿 · 快速复习</span>
+          <span class="tag">原型</span>
+        </div>
+        <span class="count" id="count">1 / 8</span>
+      </header>
+      <div class="track" role="progressbar" aria-label="复习进度" aria-valuemin="1" aria-valuemax="8"
+        aria-valuenow="1" id="track">
+        <span id="bar"></span>
+      </div>
+
+      <section class="stage" id="stage" tabindex="-1">
+        <p class="prompt" id="prompt">这个词是什么意思？</p>
+        <h1 class="word" id="word" lang="en">harbor</h1>
+        <p class="meta">
+          <span id="pos">n.</span>
+          <span class="dot" aria-hidden="true">·</span>
+          <span id="ipa">/ˈhɑːbə/</span>
+        </p>
+        <div class="options" id="options" role="group" aria-labelledby="prompt"></div>
+        <p class="hint" id="hint">想不起来就选一个，答案会摊开。</p>
+        <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
+      </section>
+
+      <section class="done" id="done" hidden>
+        <span class="done-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+        </span>
+        <p class="done-eyebrow">复习清空</p>
+        <h2>记忆神殿安静了。</h2>
+        <p class="done-copy" id="done-copy">8 张卡都过了。新词配额已经解锁。</p>
+        <div class="stats" id="stats"></div>
+        <div class="done-actions">
+          <button class="next" type="button" id="restart">再来一轮</button>
+          <a class="ghost" href="../../game/index.html">返回游戏</a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // 题目数据来自 game/content/words.json 第一章；选项由 game/src/srs.js 的
+      // meaningOptions(word, words, 4, 'review') 预先算好，和当前游戏内复习完全一致。
+      const WORDS = [
+        {
+          id: "w_harbor",
+          lemma: "harbor",
+          ipa: "/ˈhɑːbə/",
+          pos: "n.",
+          meaning: "港口；避风港",
+          example_en: "Every road in the fog leads back to the harbor.",
+          example_zh: "雾里的每条路都通向港口。",
+          options: ["港口；避风港", "避开；避免", "稳固的；平稳的", "下沉；沉没"]
+        },
+        {
+          id: "w_distant",
+          lemma: "distant",
+          ipa: "/ˈdɪstənt/",
+          pos: "adj.",
+          meaning: "遥远的；远处的",
+          example_en: "A distant bell rings across the water.",
+          example_zh: "远处传来钟声，越过水面。",
+          options: ["避难所；庇护", "锋利的；尖锐的", "反射；映照；反思", "遥远的；远处的"]
+        },
+        {
+          id: "w_fare",
+          lemma: "fare",
+          ipa: "/fɛə(ɹ)/",
+          pos: "n.",
+          meaning: "船费；车费",
+          example_en: "The ferryman asks for a fare of one silver coin.",
+          example_zh: "摆渡人要一枚银币作船费。",
+          options: ["上升；上涨", "船费；车费", "到达；抵达", "甲板"]
+        },
+        {
+          id: "w_board",
+          lemma: "board",
+          ipa: "/bɔːd/",
+          pos: "v.",
+          meaning: "登上（船、车）",
+          example_en: "Board the ferry before the tide turns.",
+          example_zh: "趁潮水转向之前登船。",
+          options: ["沉默的；安静的", "阴影；影子", "登上（船、车）", "港口；避风港"]
+        },
+        {
+          id: "w_deck",
+          lemma: "deck",
+          ipa: "/dɛk/",
+          pos: "n.",
+          meaning: "甲板",
+          example_en: "The deck is wet and the lanterns sway.",
+          example_zh: "甲板湿滑，灯笼摇晃。",
+          options: ["平衡", "信任", "甲板", "提供；提议"]
+        },
+        {
+          id: "w_tide",
+          lemma: "tide",
+          ipa: "/taɪd/",
+          pos: "n.",
+          meaning: "潮水；潮汐",
+          example_en: "The tide is rising faster than it looks.",
+          example_zh: "潮水涨得比看上去快。",
+          options: ["到达；抵达", "甲板", "潮水；潮汐", "怀疑"]
+        },
+        {
+          id: "w_silent",
+          lemma: "silent",
+          ipa: "/ˈsaɪlənt/",
+          pos: "adj.",
+          meaning: "沉默的；安静的",
+          example_en: "The harbor is silent under the fog.",
+          example_zh: "雾下的港口一片寂静。",
+          options: ["下沉；沉没", "修理；修复", "港口；避风港", "沉默的；安静的"]
+        },
+        {
+          id: "w_arrive",
+          lemma: "arrive",
+          ipa: "/əˈɹaɪv/",
+          pos: "v.",
+          meaning: "到达；抵达",
+          example_en: "You arrive at the fog harbor with only a lantern.",
+          example_zh: "你提着一盏灯，抵达雾港。",
+          options: ["下沉；沉没", "天气", "上升；上涨", "到达；抵达"]
+        }
+      ];
+
+      const ICON_OK =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
+      const ICON_BAD =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+
+      const el = {
+        count: document.getElementById("count"),
+        track: document.getElementById("track"),
+        bar: document.getElementById("bar"),
+        stage: document.getElementById("stage"),
+        prompt: document.getElementById("prompt"),
+        word: document.getElementById("word"),
+        pos: document.getElementById("pos"),
+        ipa: document.getElementById("ipa"),
+        options: document.getElementById("options"),
+        hint: document.getElementById("hint"),
+        feedback: document.getElementById("feedback"),
+        done: document.getElementById("done"),
+        doneCopy: document.getElementById("done-copy"),
+        stats: document.getElementById("stats"),
+        restart: document.getElementById("restart")
+      };
+
+      const state = {
+        index: 0,
+        answered: false,
+        selected: -1,
+        correct: 0,
+        wrong: 0,
+        startedAt: performance.now()
+      };
+
+      function currentWord() {
+        return WORDS[state.index];
+      }
+
+      function formatDuration(ms) {
+        const total = Math.max(1, Math.round(ms / 1000));
+        const minutes = Math.floor(total / 60);
+        const seconds = total % 60;
+        return minutes > 0 ? `${minutes} 分 ${seconds} 秒` : `${seconds} 秒`;
+      }
+
+      function renderProgress() {
+        const total = WORDS.length;
+        const value = Math.min(total, state.index + (state.answered ? 1 : 0));
+        el.count.textContent = `${state.index + 1} / ${total}`;
+        el.bar.style.width = `${(value / total) * 100}%`;
+        el.track.setAttribute("aria-valuenow", String(state.index + 1));
+        el.track.setAttribute("aria-valuemax", String(total));
+      }
+
+      function renderCard() {
+        const word = currentWord();
+        state.answered = false;
+        state.selected = -1;
+
+        el.stage.hidden = false;
+        el.done.hidden = true;
+        el.prompt.textContent = "这个词是什么意思？";
+        el.word.textContent = word.lemma;
+        el.pos.textContent = word.pos;
+        el.ipa.textContent = word.ipa;
+        el.hint.hidden = false;
+        el.feedback.hidden = true;
+        el.feedback.innerHTML = "";
+        el.feedback.className = "feedback";
+
+        el.options.innerHTML = word.options
+          .map(
+            (option, index) =>
+              `<button class="option" type="button" data-index="${index}" aria-label="${index + 1}. ${option}">
+                 <span class="key" aria-hidden="true">${index + 1}</span>
+                 <span class="label">${option}</span>
+                 <span class="mark" aria-hidden="true"></span>
+               </button>`
+          )
+          .join("");
+
+        el.options.querySelectorAll(".option").forEach((button) => {
+          button.addEventListener("click", () => answer(Number(button.dataset.index)));
+        });
+
+        renderProgress();
+      }
+
+      function answer(index) {
+        if (state.answered) return;
+        const word = currentWord();
+        const isCorrect = word.options[index] === word.meaning;
+        state.answered = true;
+        state.selected = index;
+
+        const buttons = [...el.options.querySelectorAll(".option")];
+        buttons.forEach((button, buttonIndex) => {
+          button.disabled = true;
+          button.classList.toggle("correct", word.options[buttonIndex] === word.meaning);
+          button.classList.toggle("wrong", buttonIndex === index && !isCorrect);
+        });
+
+        if (isCorrect) state.correct += 1;
+        else state.wrong += 1;
+
+        const interval = isCorrect ? "3 天后" : "明天";
+        el.feedback.className = `feedback ${isCorrect ? "ok" : "bad"}`;
+        el.feedback.innerHTML = `
+          <p class="fb-head">${isCorrect ? ICON_OK : ICON_BAD}${isCorrect ? "认义对上了" : "认义差一点"}</p>
+          <p class="fb-answer"><b>${word.lemma}</b> ${word.ipa} · ${word.meaning}</p>
+          <p class="fb-example"><span class="en">${word.example_en}</span><span class="zh">${word.example_zh}</span></p>
+          <div class="fb-meta">
+            <span class="chip">认义下次：${interval}</span>
+            <span class="chip">${isCorrect ? "阶段 +1" : "回到 1 天"}</span>
+          </div>
+          <button class="next" type="button" data-action="next">${
+            state.index + 1 >= WORDS.length ? "完成复习" : "下一张"
+          }</button>`;
+        el.feedback.hidden = false;
+        el.hint.hidden = true;
+        el.feedback.querySelector('[data-action="next"]').addEventListener("click", next);
+        el.feedback.querySelector('[data-action="next"]').focus({ preventScroll: true });
+        renderProgress();
+      }
+
+      function next() {
+        if (!state.answered) return;
+        state.index += 1;
+        if (state.index >= WORDS.length) return finish();
+        renderCard();
+      }
+
+      function finish() {
+        const elapsed = performance.now() - state.startedAt;
+        el.stage.hidden = true;
+        el.done.hidden = false;
+        el.count.textContent = `${WORDS.length} / ${WORDS.length}`;
+        el.bar.style.width = "100%";
+        el.track.setAttribute("aria-valuenow", String(WORDS.length));
+        el.doneCopy.textContent = `${WORDS.length} 张卡都过了。新词配额已经解锁，下一轮会在到期日回来。`;
+        el.stats.innerHTML = `
+          <span class="stat ok"><b>${state.correct}</b> 认义答对</span>
+          <span class="stat bad"><b>${state.wrong}</b> 认义答错</span>
+          <span class="stat"><b>${formatDuration(elapsed)}</b> 用时</span>`;
+        el.restart.focus({ preventScroll: true });
+      }
+
+      function restart() {
+        state.index = 0;
+        state.correct = 0;
+        state.wrong = 0;
+        state.startedAt = performance.now();
+        el.done.hidden = true;
+        renderCard();
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.metaKey || event.ctrlKey || event.altKey) return;
+        if (!el.done.hidden) {
+          if (event.key === "r" || event.key === "R") {
+            event.preventDefault();
+            restart();
+          }
+          return;
+        }
+        if (!state.answered && /^[1-4]$/.test(event.key)) {
+          event.preventDefault();
+          answer(Number(event.key) - 1);
+        }
+      });
+
+      el.restart.addEventListener("click", restart);
+      renderCard();
+    </script>
+  </body>
+</html>
