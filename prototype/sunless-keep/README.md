@@ -1,6 +1,6 @@
 # The Sunless Keep
 
-A complete, playable **D&D 5e adventure prototype**: one short scenario, from the first conversation in the village to the last choice after the final battle. It is built as a real adventure framework — exploration, social encounters and grid combat all use 5e procedures — with an English-learning layer on top (highlighted words, Chinese, read-aloud).
+A complete, playable **D&D 5e adventure prototype**: one short scenario, from the first conversation in the village to the last choice after the final battle. It is built as a real adventure framework — exploration, social encounters and grid combat all use 5e procedures — with a **DM dialogue mode**, a full Chinese layer, and pre-generated neural read-aloud.
 
 > **Play online:** <https://chehua11agent.github.io/superagent-test/prototype/sunless-keep/>
 >
@@ -19,12 +19,24 @@ This is an adaptation of the first adventure in the 5e anthology the requester s
 | **One full scenario** | village → ravine → citadel gate → kobold court → goblin gate → twilight grove → coda → one of four endings |
 | **Three player characters** | choose any 3 of 4 level-3 pregens (fighter, rogue, wizard, cleric); you control the whole party |
 | **Three pillars** | exploration (checks, terrain, light pressure), social (insight / persuasion / intimidation / stealth), combat (initiative, grid, spells) |
+| **DM dialogue mode** | default view: the DM narrates in chat bubbles, you answer with choices, dice results come back as DM replies; switch to the document view any time |
+| **Neural read-aloud** | 71 pre-generated Edge Neural clips in the DM's voice (Ryan), bundled and offline; per-line play buttons; browser voice as fallback |
 | **Rules** | d20 checks and saves, advantage/disadvantage, AC and cover, critical hits, damage types, conditions, death saves, short rests, spell slots |
-| **Learning layer** | 47 highlighted CET-4 words with Chinese + example; **full Chinese UI** on by default (scene text, choices, combat controls, sheets, logs, endings); top-bar `中文` or inline `中文对照` switches back to English; browser read-aloud; word drawer |
+| **Learning layer** | 47 highlighted CET-4 words with Chinese + example; **full Chinese UI** on by default (scene text, choices, combat controls, sheets, logs, endings); top-bar `中文` or inline `中文对照` switches back to English; word drawer |
 | **Save** | automatic `localStorage` save between scenes; Continue from the title |
 | **Responsive** | desktop and phone; zoom controls and names on the token bases in combat |
 
-### The flow
+### DM mode
+
+On first load the scenario is a **conversation, not a page**:
+
+- The DM appears in a chat column and narrates each scene in order, one beat at a time, with English above and Chinese below.
+- Your options sit at the bottom as player choices; when a choice needs a roll you pick who tries it, the dice open, and the result is appended as a DM reply (success/failure, consequence, loot, clue).
+- Every DM line has a ▶ button that plays the bundled neural clip; the voice picker switches between **Ryan** (Edge neural, offline) and the browser's own voice.
+- `DM 对话` in the top bar toggles the conversation view; `文字阅读` returns to the original document layout with the same state.
+- Combat still uses the tactical board; after the fight the DM returns with a short aftermath conversation, then the next scene.
+
+## The flow
 
 1. **Oakvale, the Oak & Owl** — take the rescue job from Lady Vane. Four optional approaches; each changes what you know or carry.
 2. **The ravine** — study the ledge, move quietly, climb down. The first fight is two giant rats.
@@ -62,7 +74,7 @@ A full run is about **20–35 minutes**; combat can end a run early, and the def
 
 Chinese is **on by default across the whole interface**: scene titles, read-aloud and result cards, choice labels, objectives, combat controls, character sheets, item/spell/feature names, damage types, combat logs, aftermath, endings and stats. The English prose stays above its Chinese paragraph so the original is still there to learn from. The top-bar `中文 ✓` button and the inline `中文对照` button switch the whole interface back to English; the setting is saved.
 
-Every highlighted word opens a Chinese meaning and an example; the Words drawer lists all 47. Read-aloud uses the browser's SpeechSynthesis.
+Every highlighted word opens a Chinese meaning and an example; the Words drawer lists all 47. Read-aloud uses pre-generated **Edge Neural** audio (Ryan) where available; the browser's SpeechSynthesis is the fallback for lines outside the 71 bundled clips.
 
 ### Deliberate simplifications
 
@@ -87,6 +99,7 @@ prototype/sunless-keep/
   index.html      UI shell and CSS
   scenario.js     ALL content: pregens, monsters, scenes, encounters, endings, glossary
   i18n.js         Chinese UI/scene/combat/ending strings and log templates
+  audio/          pre-generated Edge Neural clips + manifest.json (Ryan voice)
   rules.js        5e rules engine (pure functions + combat state)
   app.js          screens, checks, combat UI, save/load
   README.md
@@ -158,7 +171,9 @@ The prototype was exercised in headless Chromium (Playwright) during development
 - **Spells and features**: magic missile, guiding bolt, burning hands, cure wounds, second wind, action surge, cunning action, preserve life; spell slots and short-rest recovery checked.
 - **Death saves**: dying character rolls, stabilises or dies, turn advances correctly.
 - **Save/continue**: localStorage round trip between scenes.
-- **Mobile 390×844**: title, scene, check modal, combat map, action bar, Chinese toggle and word popover; no horizontal page overflow and zero console errors.
+- **DM mode**, Bram / Orsa / Ilya: DM bubbles → choice → player bubble → DM result; `DM 对话`/`文字阅读` toggle round trip; combat → DM aftermath → next scene; 0 console errors.
+- **Neural audio**: manifest loads, first DM line plays `audio/ryan/<hash>.mp3` (HTTP 200/206), voice picker lists Ryan and browser fallback, page-mode Read aloud plays the paragraph sequence.
+- **Mobile 390×844**: DM chat, check modal, combat map, action bar, Chinese toggle and word popover; no horizontal page overflow and zero console errors.
 - **Direct file open**: `file://.../index.html` renders the title and starts a game.
 
 The before/after screenshots in `screenshots/` were captured from this repository:
@@ -190,5 +205,5 @@ The "before" is the existing word-card RPG, not the same screen as the new scena
 - The UI is a prototype; art is programmatic SVG, not hand-painted assets.
 - Save is local only and is not written during combat.
 - The English is written for a CET-4 learner but is not graded/levelled; the glossary is a curated 47-word subset, not a full vocabulary pipeline.
-- No audio files; read-aloud depends on the browser voice.
+- Neural audio is pre-generated for the 71 story lines only; dynamic combat logs and arbitrary words fall back to the browser voice. Only one narrator voice (Ryan) is bundled.
 - No server, account, telemetry or asynchronous play.
