@@ -892,6 +892,25 @@ body::after{
 }
 
 
+/* board zoom + pan */
+.board-zoom{position:absolute;left:8px;top:8px;z-index:7;display:flex;gap:3px;align-items:center;
+  padding:3px;border:1px solid rgba(217,179,108,.32);border-radius:7px;
+  background:rgba(8,12,9,.82);backdrop-filter:blur(4px);box-shadow:0 3px 10px rgba(0,0,0,.45)}
+.board-zoom button{min-width:24px;height:22px;padding:0 5px;border:1px solid rgba(217,179,108,.22);border-radius:5px;
+  background:rgba(217,179,108,.06);color:#e8d6b4;font-size:11px;line-height:1;cursor:pointer}
+.board-zoom button:hover:not(:disabled){border-color:rgba(217,179,108,.6);background:rgba(217,179,108,.14)}
+.board-zoom button:disabled{opacity:.32;cursor:default}
+.board-zoom button.active{border-color:#d9b36c;background:rgba(217,179,108,.25);color:#fff3d7}
+#board{transform-origin:50% 50%;transition:transform .14s ease;will-change:transform}
+.board-shell.panning #board{transition:none}
+.board-shell.hand #board{cursor:grab}
+.board-shell.hand #board:active{cursor:grabbing}
+@media (max-width:760px){.board-zoom{left:6px;top:6px;gap:2px;padding:2px}.board-zoom button{min-width:23px;height:21px;font-size:10px}}
+/* memory brazier limited mistakes */
+.review-panel.extinguished .review-brazier .rb-flame{opacity:.15;filter:grayscale(1)}
+.review-panel.extinguished .review-brazier .rb-glow{opacity:.1}
+.review-card.spent{opacity:.38;filter:grayscale(1);cursor:not-allowed}
+.review-card.spent::after{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 5px,transparent 5px 10px)}
 /* hand-holding coach */
 .coach{position:fixed;top:calc(82px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(720px,94vw);z-index:72;pointer-events:none}
 .coach[hidden]{display:none!important}
@@ -949,6 +968,12 @@ body::after{
   <main class="stage" id="stage">
     <div class="board-shell" id="boardShell">
       <canvas id="board" width="640" height="576" role="img" aria-label="枯木庭院战术地图：四名冒险者与流亡德鲁伊、树皮骑士、枯枝怪和古树的战斗"></canvas>
+      <div class="board-zoom" id="boardZoom" aria-label="棋盘缩放">
+        <button type="button" id="zoomOut" title="缩小棋盘" aria-label="缩小棋盘">−</button>
+        <button type="button" id="zoomReset" title="恢复 1:1" aria-label="恢复棋盘大小">1:1</button>
+        <button type="button" id="zoomIn" title="放大棋盘" aria-label="放大棋盘">+</button>
+        <button type="button" id="zoomHand" title="拖动画布" aria-label="拖动画布" aria-pressed="false">✥</button>
+      </div>
       <div id="banner" class="banner" aria-hidden="true"></div>
       <div id="inspect" class="inspect" hidden></div>
     </div>
@@ -1015,15 +1040,15 @@ body::after{
     <div class="review-brazier"><i class="rb-flame"></i><i class="rb-bowl"></i><i class="rb-glow"></i></div>
     <div class="cc-kicker">MEMORY BRAZIER · 复习充能</div>
     <h2 id="reviewTitle">记忆火盆</h2>
-    <p class="review-lead" id="reviewLead">翻开两张卡，把英文和中文配对。配对成功，对应词卡 <b>+2</b>；配错翻回，不扣 HP，可以继续试。</p>
+    <p class="review-lead" id="reviewLead">翻开两张卡，把英文和中文配对。配对成功，对应词卡 <b>+2</b>；配错翻回，不扣 HP，但只有 <b>3 次失误</b>，火盆熄灭后已充能的词卡保留。</p>
     <div class="review-status">
-      <span>已充能 <b id="reviewCount">0 / 3</b> 张词卡</span>
+      <span>已充能 <b id="reviewCount">0 / 3</b> · 失误 <b id="reviewMistakes">0 / 3</b></span>
       <button class="review-skip" type="button" id="reviewSkip">跳过</button>
     </div>
     <div id="reviewGrid" class="review-grid" aria-label="记忆配对卡片"></div>
     <div class="review-actions">
       <button class="btn primary" type="button" id="reviewDone">回到战斗</button>
-      <span class="review-note">复习不是门槛：配对成功会让词卡更强。</span>
+      <span class="review-note">复习是增强：失误不扣 HP，但 3 次后火盆熄灭，不能无限重试。</span>
     </div>
   </div>
 </div>
@@ -1173,6 +1198,8 @@ body::after{
   const REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const compactQuery = window.matchMedia ? window.matchMedia('(max-width: 760px)') : null;
   let compactView = compactQuery ? compactQuery.matches : false;
+  const view = { zoom: 1, panX: 0, panY: 0, hand: false };
+  let boardPan = null;
   if (compactQuery) {
     const onCompact = (e) => { compactView = e.matches; };
     if (compactQuery.addEventListener) compactQuery.addEventListener('change', onCompact);
@@ -2201,15 +2228,16 @@ body::after{
       cards.push({ pair: w, side: 'zh', text: wordMeaning(w), up: false, matched: false });
     }
     shuffle(cards);
-    state.review = { open: true, prep: !!prep, cards, first: null, matched: 0, total: 3, lock: false };
+    state.review = { open: true, prep: !!prep, cards, first: null, matched: 0, total: 3, mistakes: 0, maxMistakes: 3, extinguished: false, lock: false };
     state.flags.reviewRound = state.round;
     state.flags.reviewShown = true;
     state.busy = true;
+    $('#reviewSkip').hidden = false;
     $('#reviewSkip').textContent = prep ? '跳过战备' : '跳过';
     $('#reviewDone').textContent = prep ? '进入战斗' : '回到战斗';
     $('#reviewLead').innerHTML = prep
-      ? '开局战备：翻开两张卡，把英文和中文配对。配对成功，对应词卡 <b>+2</b> 带入战斗；配错翻回，不扣 HP。'
-      : '翻开两张卡，把英文和中文配对。配对成功，对应词卡 <b>+2</b>；配错翻回，不扣 HP。';
+      ? '开局战备：翻开两张卡，把英文和中文配对。配对成功，对应词卡 <b>+2</b> 带入战斗；配错翻回，不扣 HP，但只有 <b>3 次失误</b>，火盆熄灭后已充能的词卡保留。'
+      : '翻开两张卡，把英文和中文配对。配对成功，对应词卡 <b>+2</b>；配错翻回，不扣 HP，但只有 <b>3 次失误</b>，火盆熄灭后已充能的词卡保留。';
     $('#reviewGame').hidden = false;
     renderReviewGrid();
     renderUI();
@@ -2218,18 +2246,27 @@ body::after{
   function renderReviewGrid() {
     const r = state.review;
     if (!r || !r.open) return;
+    const spent = !!r.extinguished;
     $('#reviewGrid').innerHTML = r.cards.map((c, i) => {
-      const cls = 'review-card' + (c.up ? ' up' : '') + (c.matched ? ' matched' : '');
-      return `<button type="button" class="${cls}" data-idx="${i}" data-pair="${esc(c.pair)}" ${c.matched ? 'disabled' : ''} aria-label="${c.up ? esc(c.text) : '未翻开的卡'}">
+      const cls = 'review-card' + (c.up ? ' up' : '') + (c.matched ? ' matched' : '') + (!c.up && spent ? ' spent' : '');
+      return `<button type="button" class="${cls}" data-idx="${i}" data-pair="${esc(c.pair)}" ${(c.matched || spent) ? 'disabled' : ''} aria-label="${c.up ? esc(c.text) : '未翻开的卡'}">
         ${c.up ? esc(c.text) : ''}${c.matched ? '<span class="rc-tag">已充能</span>' : ''}
       </button>`;
     }).join('');
     $('#reviewCount').textContent = `${r.matched} / ${r.total}`;
+    const mEl = $('#reviewMistakes');
+    if (mEl) mEl.textContent = `${r.mistakes} / ${r.maxMistakes}`;
+    $('.review-panel').classList.toggle('extinguished', spent);
+    if (spent) {
+      $('#reviewLead').innerHTML = '火盆已经熄灭：失误达到 <b>3 次</b>，这次不能再翻牌。已经充能的词卡保留，可以直接进入战斗。';
+      $('#reviewSkip').hidden = true;
+      $('#reviewDone').textContent = '进入战斗';
+    }
   }
 
   function flipReviewCard(idx) {
     const r = state.review;
-    if (!r || !r.open || r.lock) return;
+    if (!r || !r.open || r.lock || r.extinguished) return;
     const c = r.cards[idx];
     if (!c || c.matched || c.up) return;
     c.up = true;
@@ -2250,10 +2287,21 @@ body::after{
         else renderReviewGrid();
       }, 320);
     } else {
-      setTicker('没配上，翻回再试；不扣 HP');
+      r.mistakes++;
+      const left = r.maxMistakes - r.mistakes;
+      if (r.mistakes >= r.maxMistakes) {
+        r.extinguished = true;
+        setTicker('火盆熄灭：失误 3 次，这次不能再翻牌；已充能的词卡保留');
+      } else {
+        setTicker(`没配上，翻回；剩余失误 ${left} 次。失误不扣 HP`);
+      }
       setTimeout(() => {
         a.up = false; c.up = false; r.first = null; r.lock = false;
         renderReviewGrid();
+        if (r.extinguished) {
+          addLog('记忆火盆熄灭了。配对成功的词卡保留，失误不扣 HP。', 'warn');
+          renderUI();
+        }
       }, 760);
     }
   }
@@ -2865,6 +2913,56 @@ body::after{
     return set;
   }
 
+  function applyView() {
+    if (!canvas) return;
+    const shell = $('#boardShell');
+    const z = view.zoom;
+    if (z <= 1) { view.panX = 0; view.panY = 0; }
+    const maxX = shell ? (shell.clientWidth * (z - 1)) / 2 : 0;
+    const maxY = shell ? (shell.clientHeight * (z - 1)) / 2 : 0;
+    view.panX = clamp(view.panX, -maxX, maxX);
+    view.panY = clamp(view.panY, -maxY, maxY);
+    canvas.style.transform = `translate(${view.panX}px,${view.panY}px) scale(${z})`;
+    if (shell) {
+      shell.classList.toggle('hand', view.hand);
+      shell.classList.toggle('panning', !!boardPan);
+    }
+    const zi = $('#zoomIn'), zo = $('#zoomOut'), zr = $('#zoomReset'), zh = $('#zoomHand');
+    if (zi) zi.disabled = z >= 2.5;
+    if (zo) zo.disabled = z <= 1;
+    if (zr) zr.disabled = z <= 1 && !view.panX && !view.panY;
+    if (zh) { zh.classList.toggle('active', view.hand); zh.setAttribute('aria-pressed', view.hand ? 'true' : 'false'); }
+  }
+  function setZoom(z) {
+    view.zoom = clamp(Math.round(z * 4) / 4, 1, 2.5);
+    if (view.zoom <= 1) { view.panX = 0; view.panY = 0; view.hand = false; }
+    applyView();
+  }
+  function startBoardPan(e) {
+    if (view.zoom <= 1) return;
+    boardPan = { id: e.pointerId, x: e.clientX, y: e.clientY, px: view.panX, py: view.panY };
+    if (canvas.setPointerCapture) { try { canvas.setPointerCapture(e.pointerId); } catch (err) {} }
+    window.addEventListener('pointermove', moveBoardPan, { passive: false });
+    window.addEventListener('pointerup', endBoardPan);
+    window.addEventListener('pointercancel', endBoardPan);
+    applyView();
+    e.preventDefault();
+  }
+  function moveBoardPan(e) {
+    if (!boardPan || e.pointerId !== boardPan.id) return;
+    view.panX = boardPan.px + (e.clientX - boardPan.x);
+    view.panY = boardPan.py + (e.clientY - boardPan.y);
+    applyView();
+  }
+  function endBoardPan(e) {
+    if (!boardPan) return;
+    boardPan = null;
+    window.removeEventListener('pointermove', moveBoardPan);
+    window.removeEventListener('pointerup', endBoardPan);
+    window.removeEventListener('pointercancel', endBoardPan);
+    applyView();
+  }
+
   function tileFromEvent(e) {
     const c = $('#board');
     const r = c.getBoundingClientRect();
@@ -2874,7 +2972,9 @@ body::after{
   }
 
   function onBoardPointerDown(e) {
-    if (!state || state.busy || state.phase !== 'player' || state.drawer) return;
+    if (!state) return;
+    if (view.hand) { startBoardPan(e); return; }
+    if (state.busy || state.phase !== 'player' || state.drawer) return;
     e.preventDefault();
     const { x, y } = tileFromEvent(e);
     if (x < 0 || y < 0 || x >= COLS || y >= ROWS) return;
@@ -3940,12 +4040,20 @@ body::after{
       roundRect(ctx, bx + 3, by + 3, Math.max(2, fw), 6, 3);
       ctx.fill();
     }
-    if (!compactView) {
-      ctx.fillStyle = t.dead ? 'rgba(190,180,160,.55)' : '#e7dcc4';
-      ctx.font = '9px ' + getComputedStyle(document.body).fontFamily;
-      ctx.textAlign = 'center';
-      ctx.fillText(t.dead ? '枯木古树 · 已倒下' : '枯木古树', cx, by - 5);
-    }
+    // nameplate attached to the trunk base
+    const fam = getComputedStyle(document.body).fontFamily;
+    ctx.font = '700 8.5px ' + fam;
+    const label = t.dead ? '枯木古树 · 已倒下' : '枯木古树';
+    const tw = ctx.measureText(label).width;
+    const pw = Math.max(44, tw + 10);
+    const py = cy + 24;
+    ctx.fillStyle = 'rgba(12,8,5,.94)';
+    roundRect(ctx, cx - pw / 2, py, pw, 10, 2.5); ctx.fill();
+    ctx.strokeStyle = 'rgba(217,179,108,.55)'; ctx.lineWidth = .8; ctx.stroke();
+    ctx.fillStyle = t.dead ? 'rgba(220,210,190,.62)' : '#e8d6b4';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(label, cx, py + 5.2);
+    ctx.textBaseline = 'alphabetic';
     ctx.restore();
   }
 
@@ -4201,12 +4309,19 @@ body::after{
     ctx.strokeStyle = 'rgba(217,179,108,.25)'; ctx.lineWidth = .8; ctx.stroke();
     ctx.fillStyle = u.side === 'party' ? '#79c99b' : '#d06a58';
     roundRect(ctx, bx + 1, by + 1, Math.max(0, (bw - 2) * (u.hp / u.maxHp)), 4, 2); ctx.fill();
-    if (!compactView) {
-      ctx.fillStyle = 'rgba(240,226,196,.92)';
-      ctx.font = '9px ' + getComputedStyle(document.body).fontFamily;
-      ctx.textAlign = 'center';
-      ctx.fillText(u.name, cx, by - 4);
-    }
+    // nameplate attached to the miniature base
+    const fam = getComputedStyle(document.body).fontFamily;
+    ctx.font = '700 ' + (u.size === 2 ? 8.5 : 7.5) + 'px ' + fam;
+    const nw = ctx.measureText(u.name).width;
+    const pw = Math.max(u.size === 2 ? 40 : 32, nw + 9);
+    const py = baseY + baseRy - 2;
+    ctx.fillStyle = 'rgba(12,8,5,.94)';
+    roundRect(ctx, cx - pw / 2, py, pw, 9, 2.5); ctx.fill();
+    ctx.strokeStyle = 'rgba(217,179,108,.55)'; ctx.lineWidth = .7; ctx.stroke();
+    ctx.fillStyle = '#e8d6b4';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(u.name, cx, py + 4.7);
+    ctx.textBaseline = 'alphabetic';
     // status tokens
     const dots = [];
     if (u.rooted) dots.push('#a98bd6');
@@ -4215,7 +4330,7 @@ body::after{
     if (dots.length) {
       dots.forEach((c, i) => {
         ctx.fillStyle = c;
-        ctx.beginPath(); ctx.arc(cx - (dots.length - 1) * 4 + i * 8, baseY + baseRy + 4, 2, 0, TAU); ctx.fill();
+        ctx.beginPath(); ctx.arc(cx - (dots.length - 1) * 4 + i * 8, baseY + baseRy + 13, 2, 0, TAU); ctx.fill();
       });
     }
     // done token
@@ -4443,6 +4558,17 @@ body::after{
   $('#board').addEventListener('pointerdown', onBoardPointerDown);
   $('#board').addEventListener('pointermove', onBoardPointerMove);
   $('#board').addEventListener('pointerleave', onBoardPointerLeave);
+  $('#board').addEventListener('pointerup', endBoardPan);
+  $('#board').addEventListener('pointercancel', endBoardPan);
+  $('#zoomIn').addEventListener('click', () => setZoom(view.zoom + .25));
+  $('#zoomOut').addEventListener('click', () => setZoom(view.zoom - .25));
+  $('#zoomReset').addEventListener('click', () => { setZoom(1); });
+  $('#zoomHand').addEventListener('click', () => { view.hand = !view.hand; if (view.hand && view.zoom <= 1) setZoom(1.5); applyView(); });
+  $('#board').addEventListener('wheel', (e) => {
+    e.preventDefault();
+    setZoom(view.zoom + (e.deltaY < 0 ? .25 : -.25));
+  }, { passive: false });
+  window.addEventListener('resize', () => { applyView(); });
   $('#btnEnd').addEventListener('click', endPlayerPhase);
   $('#btnLog').addEventListener('click', () => openDrawer('log'));
   $('#btnWords').addEventListener('click', () => openDrawer('words'));
