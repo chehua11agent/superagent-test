@@ -1476,9 +1476,10 @@ function openFeaturePicker(c) {
       </div><div class="m-actions"><button class="btn small" data-close>Cancel</button></div></div>`);
       $$('[data-cun]').forEach((x) => x.addEventListener('click', () => {
         $('#modalRoot').innerHTML = '';
-        if (x.dataset.cun === 'dash') { c.dash = true; c.bonusUsed = true; c.push(`${c.name} dashes as a bonus action.`, ''); }
-        if (x.dataset.cun === 'disengage') { c.disengaged = true; c.bonusUsed = true; c.push(`${c.name} disengages as a bonus action.`, ''); }
-        if (x.dataset.cun === 'hide') { const dc = 10 + Math.max(...c.combatants.filter((y) => y.side === 'enemy' && !y.dead).map((y) => Rules.abilityMod(y, 'wis'))); const r = Rules.check(c, 'stealth', dc); c.bonusUsed = true; if (r.ok) c.hidden = true; c.push(`${c.name} hides as a bonus action (${r.total} vs ${dc}) — ${r.ok ? 'success' : 'failure'}.`, r.ok ? 'heal' : ''); }
+        const combat = state.combat;
+        if (x.dataset.cun === 'dash') { c.dash = true; c.bonusUsed = true; combat.push(`${c.name} dashes as a bonus action.`, ''); }
+        if (x.dataset.cun === 'disengage') { c.disengaged = true; c.bonusUsed = true; combat.push(`${c.name} disengages as a bonus action.`, ''); }
+        if (x.dataset.cun === 'hide') { const dc = 10 + Math.max(...combat.combatants.filter((y) => y.side === 'enemy' && !y.dead).map((y) => Rules.abilityMod(y, 'wis'))); const r = Rules.check(c, 'stealth', dc); c.bonusUsed = true; if (r.ok) c.hidden = true; combat.push(`${c.name} hides as a bonus action (${r.total} vs ${dc}) — ${r.ok ? 'success' : 'failure'}.`, r.ok ? 'heal' : ''); }
         renderCombat();
       }));
       return;
