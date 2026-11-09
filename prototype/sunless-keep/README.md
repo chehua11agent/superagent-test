@@ -179,8 +179,8 @@ The prototype was exercised in headless Chromium (Playwright) during development
 The before/after screenshots in `screenshots/` were captured from this repository:
 
 - `before-main-cover-1440.png`, `before-main-cover-390.png` — the current `game/` prototype on main, the baseline this new page is meant to be compared against.
-- `after-title-1440.png`, `after-party-1440.png`, `after-village-1440.png`, `after-village-zh-1440.png`, `after-check-1440.png`, `after-boss-1440.png`, `after-ending-1440.png` — this page.
-- `after-title-390.png`, `after-village-390.png`, `after-boss-390.png` — phone layout.
+- `after-title-1440.png`, `after-dm-1440.png`, `after-dm-result-1440.png`, `after-check-1440.png`, `after-boss-1440.png`, `after-ending-1440.png` — this page, DM mode.
+- `after-dm-390.png`, `after-boss-390.png` — phone layout, DM mode.
 
 The "before" is the existing word-card RPG, not the same screen as the new scenario: this ticket adds a **separate playable page** rather than restyling the old one. The comparison is therefore product-baseline vs new prototype, not two takes of one screen; that limitation is stated rather than hidden.
 
