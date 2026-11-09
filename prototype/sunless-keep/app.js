@@ -28,7 +28,7 @@ const state = {
   combat: null,
   aftermath: null,
   endingId: null,
-  showZh: false,
+  showZh: true,
   sound: false,
   mapZoom: 1,
   selectedId: null,
@@ -128,7 +128,7 @@ function renderHud() {
       </button>`;
     }).join('');
   }
-  const zh = $('#zhBtn'); if (zh) { zh.classList.toggle('on', state.showZh); zh.setAttribute('aria-pressed', state.showZh); }
+  const zh = $('#zhBtn'); if (zh) { zh.textContent = state.showZh ? '中文 ✓' : '中文'; zh.classList.toggle('on', state.showZh); zh.setAttribute('aria-pressed', state.showZh); }
   const snd = $('#soundBtn'); if (snd) { snd.classList.toggle('on', state.sound); snd.setAttribute('aria-pressed', state.sound); }
   strip.querySelectorAll('[data-sheet]').forEach((b) => b.addEventListener('click', () => openSheet(getChar(b.dataset.sheet))));
 }
@@ -543,7 +543,8 @@ function bindGlobal() {
 function boot() {
   bindGlobal();
   const saved = loadGame();
-  if (saved) { state.showZh = !!saved.showZh; document.body.classList.toggle('show-zh', state.showZh); }
+  if (saved) state.showZh = !!saved.showZh;
+  document.body.classList.toggle('show-zh', state.showZh);
   renderTitle();
 }
 
@@ -616,6 +617,7 @@ function renderScene() {
         <div class="readaloud">
           ${readHtml}
           <button class="tts-btn" id="ttsBtn">▶ Read aloud</button>
+          <button class="tts-btn" id="zhInline">${state.showZh ? '中文对照：开' : '中文对照：关'}</button>
         </div>
         ${s.dm ? `<div class="dm-note">${esc(s.dm)}</div>` : ''}
         ${objectives ? `<div class="interact-title">Objectives</div><div class="objectives">${objectives}</div>` : ''}
@@ -632,6 +634,11 @@ function renderScene() {
     </div>`);
 
   $('#ttsBtn').addEventListener('click', () => speak(ttsText));
+  $('#zhInline').addEventListener('click', () => {
+    state.showZh = !state.showZh;
+    document.body.classList.toggle('show-zh', state.showZh);
+    renderHud(); renderScene(); saveGame();
+  });
   $$('[data-act]').forEach((b) => b.addEventListener('click', () => {
     if (b.dataset.done) return;
     const x = s.interactions.find((i) => i.id === b.dataset.act);

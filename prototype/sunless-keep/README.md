@@ -20,7 +20,7 @@ This is an adaptation of the first adventure in the 5e anthology the requester s
 | **Three player characters** | choose any 3 of 4 level-3 pregens (fighter, rogue, wizard, cleric); you control the whole party |
 | **Three pillars** | exploration (checks, terrain, light pressure), social (insight / persuasion / intimidation / stealth), combat (initiative, grid, spells) |
 | **Rules** | d20 checks and saves, advantage/disadvantage, AC and cover, critical hits, damage types, conditions, death saves, short rests, spell slots |
-| **Learning layer** | 47 highlighted CET-4 words with Chinese + example; Chinese toggle; browser read-aloud; word drawer |
+| **Learning layer** | 47 highlighted CET-4 words with Chinese + example; bilingual scene text on by default (top-bar `中文` or inline `中文对照` to hide); browser read-aloud; word drawer |
 | **Save** | automatic `localStorage` save between scenes; Continue from the title |
 | **Responsive** | desktop and phone; zoom controls and names on the token bases in combat |
 
@@ -57,6 +57,12 @@ A full run is about **20–35 minutes**; combat can end a run early, and the def
 | Class features | Second Wind, Action Surge, Cunning Action, Arcane Recovery (short rest), Preserve Life |
 | Rest | after a fight a short rest spends one Hit Die per character, resets short-rest features, and recovers two levels of wizard slots |
 | XP | awarded per defeated creature and per victory; pregens are level 3 and this vertical slice does not include level-up |
+
+## English-learning layer
+
+Chinese translations are **on by default** in the read-aloud and result cards, so a first-time player is never left with English only. The top-bar `中文` button and the inline `中文对照` button hide or show them. Interaction labels and rules terms stay in English on purpose — the goal is still to learn the 5e vocabulary.
+
+Every highlighted word opens a Chinese meaning and an example; the Words drawer lists all 47. Read-aloud uses the browser's SpeechSynthesis.
 
 ### Deliberate simplifications
 
