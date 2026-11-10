@@ -20,6 +20,7 @@
 | [`research/trpg-rules-survey.md`](research/trpg-rules-survey.md) | 跑团规则书与 GitHub 基建调研：Ironsworn / Fate / PbtA / Blades 的取舍、许可边界、技术组合 |
 | [`research/phb-story-dm-review.md`](research/phb-story-dm-review.md) | 5e《玩家手册》剧情设定、DM 指引与故事发展盘点 |
 | [`research/game-visual-solutions-survey.md`](research/game-visual-solutions-survey.md) | 游戏画面 / UI 现成方案与长线引擎调研：三条可视化路线、候选清单、许可证边界 |
+| [`research/5e-kiwee-crosscheck.md`](research/5e-kiwee-crosscheck.md) | 5e.kiwee.top（5etools 中文镜像）与我方 5e 资料对照：8 处译名、2014/2024 版本、页码基准与使用边界 |
 
 ## 内容与数据
 
