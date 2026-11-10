@@ -100,7 +100,7 @@
 | Three.js 最小 WebGL 场景（tree-shaken） | 537 KB | **133 KB** | 一个立方体 + 相机 + 光，不含任何业务 |
 | 最小场景 + OrbitControls | 560 KB | **138 KB** | 加一个轨道控制器 |
 | 战棋级依赖（glTF 加载 + 动画 + 阴影 + 雾 + 轨道控制） | 657 KB | **164 KB** | 仍**不含**模型、贴图、音频 |
-| PixiJS 8 最小 Application（全量入口，2D 对照） | 528 KB | **153 KB** | 说明 2D 渲染器也不比 Three.js 小多少 |
+| PixiJS 8 最小 Application（全量入口，2D 对照） | 528 KB | **153 KB** | 全量入口；tree-shaking 后会更小，说明 2D 渲染器也不是零成本 |
 
 结论：
 
