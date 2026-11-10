@@ -18,6 +18,7 @@
 | 文档 | 内容 |
 | --- | --- |
 | [`research/trpg-rules-survey.md`](research/trpg-rules-survey.md) | 跑团规则书与 GitHub 基建调研：Ironsworn / Fate / PbtA / Blades 的取舍、许可边界、技术组合 |
+| [`research/trpg-scenario-survey.md`](research/trpg-scenario-survey.md) | 剧本（模组）与配套规则调研：TftYP 选集逐篇评估、5e 免费短模组、开放许可剧本种子与版权边界 |
 | [`research/phb-story-dm-review.md`](research/phb-story-dm-review.md) | 5e《玩家手册》剧情设定、DM 指引与故事发展盘点 |
 | [`research/game-visual-solutions-survey.md`](research/game-visual-solutions-survey.md) | 游戏画面 / UI 现成方案与长线引擎调研：三条可视化路线、候选清单、许可证边界 |
 
