@@ -12,6 +12,8 @@ python3 -m http.server 8080
 ```
 
 > 页面只依赖本地静态文件，不需要构建、不需要联网。直接双击 `index.html` 也能看，但用本地服务器更接近线上。
+>
+> 仓库当前的 GitHub Pages source 指向旧分支 `agent/game-code-scenes-441375a5a563`，本页不会自动上线；需要本地打开，或先把 Pages source 切到 `main`。
 
 ## 三个方向
 

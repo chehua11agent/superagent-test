@@ -13,7 +13,7 @@
 1. **`dsh-engineering-skills` 是真的，内容也不是水货**，但它是从大型 Python / agent 系统里提炼的通用工程纪律，不是游戏开发包。6 个技能里，对当前项目直接有用的约 2 个（代码审查、CI 诊断），人物 / 怪物 / 道具 / 美术 / 画面相关的为 0。
 2. **更匹配我们的是 `gamedev-skills/awesome-gamedev-agent-skills`**（Apache-2.0，约 8.1k stars，77 个技能）。其中 `create-game-assets`（资产清单 / 来源 / 许可 / QA）、`game-ui-ux`（HUD / 响应式 / 焦点）、`game-feel`（打击感 / 动效）、`genres/card-game`、`genres/rpg` 与我们有直接关系；`web-engines/pixijs-rendering` 只在走 PixiJS 时用。**按需装 4–6 个，不要全量装 77 个。**
 3. **稳定性的最大缺口不是“缺一个技能”，而是仓库没有 CI。** 现有 25 个单元 / 内容测试和 10 个 Playwright E2E 只靠本地跑；PR #10 也记录了“仓库没有 CI workflow”。先补 GitHub Actions，再谈用 `ci-diagnosis-and-fix` 这类技能。
-4. **卡片化 / 资产化的关键不是“再画一批图”**，而是：统一的实体数据模型 + 一个卡片渲染器 + 带许可 / 来源 / 焦点的资产清单 + 校验脚本。原型已经用同一套数据渲染了人物、怪物、道具和词卡。
+4. **卡片化 / 资产化的关键不是“再画一批图”**，而是：统一的实体数据模型 + 一个卡片渲染器 + 带许可 / 来源 / 焦点的资产清单 + 校验脚本。原型已经用同一套数据渲染了人物 / 怪物 / 道具三类实体卡，以及词卡手牌。
 5. **画面瓶颈是美术资产与构图，不是 CSS。** 现有 `styles.css` 的纸感、噪点、暗色、金色细线已经是定制设计系统；继续堆 CSS 收益很低。给出 A–E 五条路线，推荐先用 **A（旧版画 / 图版）** 做一个战斗垂直切片，验证后再决定 **B（委托或 AI 立绘 + 暗场电影感）**。
 6. **不推荐**为了画面换 Phaser / WebGAL / 3D 引擎；也不推荐装整套“游戏工作室”多 agent 框架。当前是一个单机、DOM + SVG、25 个测试的保护得还不错的原型，重写的投入产出比很低。
 
@@ -253,7 +253,7 @@ DSH 是否加载 `~/.dsh/skills` 取决于当前 profile 的 skills 配置；本
 
 ## 6. 配套原型：三个方向
 
-**入口**：[`prototype/visual-directions/`](../../prototype/visual-directions/)（打开 `index.html`；PR 描述里有 raw.githack 预览链接）
+**入口**：[`prototype/visual-directions/`](../../prototype/visual-directions/)（打开 `index.html`；PR 描述里有截图与本地打开方式）
 
 - **A · 旧版画**：纸面、双线装裱、档案编号、公版铜版画；卡面像图版 / 档案卡。
 - **B · 夜航**：同一套结构，暗场、满幅海图、金色细线、发光卡框；最接近现在雾港的气质。
