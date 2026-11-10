@@ -171,6 +171,7 @@ const playBtn = $('#playBtn');
 const spellBtn = $('#spellBtn');
 const hint = $('#actionsHint');
 const enemyHpFill = $('#enemyCard .c-hp i');
+const enemyHpText = $('#enemyCard .c-stats b');
 const damageEl = $('#damage');
 
 function setSelected(next) {
@@ -217,6 +218,7 @@ playBtn.addEventListener('click', () => {
 
   enemyHp = Math.max(0, enemyHp - 15);
   enemyHpFill.style.width = `${(enemyHp / 45) * 100}%`;
+  enemyHpText.textContent = String(enemyHp);
   floatDamage();
   round = Math.min(3, round + 1);
   $('#roundNow').textContent = round;
