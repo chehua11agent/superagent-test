@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>词汇实验室 · Zork / 词库 / FSRS / IRT</title>
+  <meta name="description" content="一个独立的词汇技术实验台：Zork 式解析器、ECDICT 词库、FSRS 复习、IRT 测评。不是游戏，不接《拾词者》。">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#app">跳到内容</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">词</span>
+      <div>
+        <b>词汇实验室</b>
+        <small>Lexicon Lab · 独立实验台</small>
+      </div>
+    </div>
+    <nav class="tabs" aria-label="实验导航">
+      <button data-tab="overview" class="active">总览</button>
+      <button data-tab="parser">Zork 解析器</button>
+      <button data-tab="wordbank">词库 / ECDICT</button>
+      <button data-tab="fsrs">FSRS 复习</button>
+      <button data-tab="irt">IRT 测评</button>
+    </nav>
+    <div class="top-actions">
+      <button class="btn ghost sm" id="seed-demo">载入演示数据</button>
+      <button class="btn ghost sm" id="reset-all">重置</button>
+    </div>
+  </header>
+
+  <main id="app" class="page" tabindex="-1"></main>
+
+  <footer class="footer">
+    <p>这不是游戏，也不接《拾词者》。它只用来试技术：Zork 式解析、ECDICT 词库、FSRS 排程、IRT 测评。</p>
+    <p>示例词条来自 <a href="https://github.com/skywind3000/ECDICT" target="_blank" rel="noreferrer">ECDICT</a>（MIT）；游戏词与例句来自本仓库。所有状态只存在你的浏览器 localStorage 里，不上传。</p>
+    <p><a href="https://github.com/chehua11agent/superagent-test/pull/23" target="_blank" rel="noreferrer">调研与设计说明（PR #23）</a> · <a href="https://github.com/chehua11agent/superagent-test" target="_blank" rel="noreferrer">仓库</a></p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="data.js"></script>
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

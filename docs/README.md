@@ -20,6 +20,7 @@
 | [`research/trpg-rules-survey.md`](research/trpg-rules-survey.md) | 跑团规则书与 GitHub 基建调研：Ironsworn / Fate / PbtA / Blades 的取舍、许可边界、技术组合 |
 | [`research/phb-story-dm-review.md`](research/phb-story-dm-review.md) | 5e《玩家手册》剧情设定、DM 指引与故事发展盘点 |
 | [`research/game-visual-solutions-survey.md`](research/game-visual-solutions-survey.md) | 游戏画面 / UI 现成方案与长线引擎调研：三条可视化路线、候选清单、许可证边界 |
+| [`research/zork-vocab-mastery-assessment.md`](research/zork-vocab-mastery-assessment.md) | Zork 式玩法 / 词库掌握度 / 快速词汇测评：解析器取舍、ECDICT / Anki-FSRS 等可复用项目、20–25 题自适应定位与合成仿真 |
 
 ## 内容与数据
 
