@@ -141,7 +141,7 @@ function credibleInterval(posterior) {
   return [low, high];
 }
 
-function pickItem({ mode, itemIndex, posterior, thetaHat, seen, rng }) {
+function pickItem({ mode, itemIndex, thetaHat, seen, selectionRng }) {
   let bestIndex = -1;
   let bestScore = -Infinity;
   for (let i = 0; i < N; i += 1) {
@@ -153,7 +153,7 @@ function pickItem({ mode, itemIndex, posterior, thetaHat, seen, rng }) {
       score = itemIndex < HYBRID_INFO_COUNT
         ? information(thetaHat, B[i])
         : -Math.abs(probability(thetaHat, B[i]) - PROBE_TARGET);
-    } else score = rng();
+    } else score = selectionRng();
     if (score > bestScore) {
       bestScore = score;
       bestIndex = i;
@@ -173,11 +173,13 @@ function runOne({ mode, items, learners, seed }) {
     const theta = Math.max(-2.5, Math.min(2.5, normalDraw(rng)));
     const posterior = PRIOR.slice();
     const seen = new Uint8Array(N);
+    // 选题用独立随机流，保证各策略共享同一组学习者/作答随机数（common random numbers）。
+    const selectionRng = mulberry32(seed * 100000 + learner + 1);
     let hits = 0;
 
     for (let k = 0; k < items; k += 1) {
       const { mean: thetaHat } = posteriorMeanSd(posterior);
-      const item = pickItem({ mode, itemIndex: k, posterior, thetaHat, seen, rng });
+      const item = pickItem({ mode, itemIndex: k, thetaHat, seen, selectionRng });
       seen[item] = 1;
       if (B[item] > theta) hits += 1;
       const correct = rng() < probability(theta, B[item]) ? 1 : 0;
