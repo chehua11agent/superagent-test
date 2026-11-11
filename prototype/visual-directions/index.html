@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080c0e">
+<meta name="description" content="《拾词者 · 雾港》画面与卡片化方向探针：旧版画 / 夜航 / 朱墨木刻三个方向。">
+<title>拾词者 · 雾港 — 画面与卡片方向探针</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-dir="plate">
+<a class="skip" href="#main">跳到主要内容</a>
+
+<div class="app">
+  <header class="bar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">墨</span>
+      <span class="brand-text">
+        <b>拾词者 · 雾港</b>
+        <i>画面与卡片化 · 方向探针 <span class="dot">·</span> 非正式界面</i>
+      </span>
+    </div>
+
+    <nav class="dirs" aria-label="视觉方向">
+      <button class="dir is-on" data-dir="plate" aria-pressed="true">
+        <span class="dir-k">A</span>
+        <span class="dir-name">旧版画</span>
+        <span class="dir-sub">纸面 · 图版 · 档案卡</span>
+      </button>
+      <button class="dir" data-dir="night" aria-pressed="false">
+        <span class="dir-k">B</span>
+        <span class="dir-name">夜航</span>
+        <span class="dir-sub">暗场 · 满幅海图 · 金线</span>
+      </button>
+      <button class="dir" data-dir="cut" aria-pressed="false">
+        <span class="dir-k">C</span>
+        <span class="dir-name">朱墨木刻</span>
+        <span class="dir-sub">高对比 · 硬边 · 海报</span>
+      </button>
+    </nav>
+
+    <a class="back" href="../../game/" title="打开当前版本（需要本地服务器）">当前版本 ↗</a>
+  </header>
+
+  <p class="note" id="note" aria-live="polite"></p>
+
+  <main id="main">
+    <section class="stage" aria-label="第 4 幕词卡战斗的方向示意">
+      <div class="scene">
+        <img class="scene-art" src="assets/sea-storm.jpg" alt="公版铜版画《海上风暴》：风暴中的海岸、船只与远处的灯塔" fetchpriority="high">
+        <div class="scene-tone" aria-hidden="true"></div>
+        <div class="scene-fog" aria-hidden="true"></div>
+
+        <div class="scene-head">
+          <p class="eyebrow">第 4 幕 <span>·</span> 旧灯塔</p>
+          <h1>雾中守塔人</h1>
+          <p class="scene-sub">词卡战斗 <span>·</span> 第 <b id="roundNow">1</b> / 3 回合</p>
+        </div>
+
+        <div class="hud" aria-label="战斗状态">
+          <div class="hud-item">
+            <span class="hud-k">你</span>
+            <span class="hpbar"><i id="playerBar" style="width:100%"></i></span>
+            <span class="hud-v"><b id="playerHp">90</b>/90</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-k">词力</span>
+            <span class="pips" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="hud-v">3</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-k">雾</span>
+            <span class="hud-v">Ⅱ</span>
+          </div>
+        </div>
+
+        <p class="plate-caption">
+          图版 IV · 旧灯塔，风暴夜
+          <span>A Sea Storm, Joseph Vernet, 1752–64 · Met Open Access (CC0)</span>
+        </p>
+      </div>
+
+      <div class="table">
+        <div class="combatants">
+          <article class="combatant player" id="playerCard" aria-label="玩家角色卡"></article>
+          <article class="combatant enemy" id="enemyCard" aria-label="敌人角色卡"></article>
+          <p class="intent" id="intent">
+            <span class="intent-k">敌人意图</span>
+            <span class="intent-t">雾墙压过来，灯光被挤成一条细线。</span>
+          </p>
+          <p class="versus" aria-hidden="true">VS</p>
+        </div>
+
+        <div class="hand-wrap">
+          <div class="hand-head">
+            <span class="hand-title">手牌 <b>4</b></span>
+            <span class="hand-hint">选一张词卡，读出或拼出；英文要自己取出来。</span>
+          </div>
+          <div class="hand" id="hand" role="listbox" aria-label="词卡手牌"></div>
+          <div class="actions">
+            <button class="btn primary" id="playBtn" type="button">打出选中词卡</button>
+            <button class="btn ghost" type="button" id="spellBtn">拼出（输入）</button>
+            <span class="actions-hint" id="actionsHint">先点一张词卡。</span>
+          </div>
+        </div>
+
+        <div class="damage" id="damage" aria-hidden="true">−15</div>
+      </div>
+    </section>
+
+    <section class="gallery" aria-labelledby="galleryTitle">
+      <header class="section-head">
+        <p class="eyebrow">同一套实体数据 <span>·</span> 四张卡</p>
+        <h2 id="galleryTitle">人物、怪物、道具，不再只是剧情里的字</h2>
+        <p class="section-sub">
+          卡面由 <code>entities.json</code> 渲染：一张卡的数据同时供给图鉴、战斗、剧情与词书；
+          插画、许可、来源记在 <code>assets/manifest.json</code>。下面是同一套数据在 A 方向下的样子。
+        </p>
+      </header>
+      <div class="cards" id="gallery"></div>
+    </section>
+
+    <section class="data" aria-labelledby="dataTitle">
+      <header class="section-head">
+        <p class="eyebrow">资产化 <span>·</span> 不是再画一批图</p>
+        <h2 id="dataTitle">先有清单，再有美术</h2>
+        <p class="section-sub">
+          每张卡是一个可校验的实体：<code>id / kind / stats / abilities / art / source</code>。
+          美术资产必须带许可与来源，校验脚本拒绝没有署名的图；卡面渲染器只读数据，不写死在页面里。
+        </p>
+      </header>
+
+      <div class="data-grid">
+        <figure class="code-card">
+          <figcaption>怪物卡的数据（节选）</figcaption>
+          <pre><code>{
+  "id": "monster.fog-keeper",
+  "kind": "monster",
+  "name": "雾中守塔人",
+  "nameEn": "The Fog Keeper",
+  "rarity": "rare",
+  "stats": { "hp": 45, "ac": 13, "threat": 3 },
+  "abilities": [{
+    "name": "雾墙",
+    "text": "每回合结束，雾墙推进一格；被吞没时，下一次检定劣势。"
+  }],
+  "art": {
+    "src": "assets/lighthouse.jpg",
+    "focus": "50% 26%",
+    "license": "Public Domain",
+    "source": "Rider-Waite-Smith Tarot, 1909"
+  },
+  "words": ["guide", "signal", "warn", "reflect"],
+  "appearsIn": ["chapter-1/act-4"]
+}</code></pre>
+        </figure>
+
+        <div class="asset-table" role="table" aria-label="卡片插画资产清单">
+          <div class="asset-row asset-head" role="row">
+            <span role="columnheader">卡片</span>
+            <span role="columnheader">插画</span>
+            <span role="columnheader">许可</span>
+          </div>
+          <div class="asset-row" role="row"><span>人物 · 拾词者</span><span>Rider-Waite《隐者》</span><span>Public Domain</span></div>
+          <div class="asset-row" role="row"><span>怪物 · 守塔人</span><span>Henry Farrer《灯塔》</span><span>CC0 · Met</span></div>
+          <div class="asset-row" role="row"><span>怪物 · 雾中龙</span><span>Goltzius 铜版画，1588</span><span>CC0 · Met</span></div>
+          <div class="asset-row" role="row"><span>道具 · 透镜</span><span>Rider-Waite《星币一》</span><span>Public Domain</span></div>
+          <div class="asset-row" role="row"><span>场景 · 旧灯塔</span><span>Vernet《海上风暴》，1752–64</span><span>CC0 · Met</span></div>
+          <p class="asset-foot">
+            这些是方向探针用的公版占位图，不是最终美术。正式版应按实体重绘或委托，
+            并把「来源 / 许可 / 焦点 / 尺寸」写进清单；没有署名的图不进仓库。
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>
+      <b>方向探针</b>：1440 × 1000 桌面与 390 × 844 移动端实拍；不是正式界面，不含最终美术。
+      公版图版：Met Open Access（CC0）与 Rider-Waite-Smith Tarot（Public Domain）。
+    </p>
+    <p class="foot-fine">《拾词者 · 雾港》· 第一章原型 · 2026-11 · 由自动化代理制作</p>
+  </footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
