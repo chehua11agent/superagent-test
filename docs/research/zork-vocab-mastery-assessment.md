@@ -8,6 +8,8 @@
 | 需求依据 | 飞书 2026-11-11「zork 的原理也挺好……测出玩家对单词的掌握情况」；[设计文档](../design/cet4-vocab-rpg.md) §3 / §5.2 / §6.7 / §8.2；[双鉴定](../design/dual-check-design.md)；PR #17 的自适应抽词调研 |
 | 一句话结论 | Zork 值得借的是「世界模型 + 宽容解析器」，不是整台 Z-machine；词库应做成「4,530 词全局题库 + 每词多能力证据流」；一次测评只能估总量与分带覆盖，不能逐词验证——在合成题库上，20–25 题可把 4,530 词的估计误差压到约 5–6%，逐词真相仍要靠后续游戏证据。 |
 
+> 可运行原型（独立实验台，不接游戏）：[`prototype/lexicon-lab/`](../../prototype/lexicon-lab/)。在线预览：<https://chehua11agent.github.io/superagent-test/prototype/lexicon-lab/>（若尚未部署，先看 PR 里的本地截图）。
+
 ---
 
 ## 0. 结论先行

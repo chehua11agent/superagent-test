@@ -28,3 +28,5 @@ npm run test:e2e # Playwright 端到端测试
 ```
 
 详细说明、操作方式、已知边界与文件结构见 [`game/README.md`](game/README.md)。
+
+另有独立的**词汇实验室**（不接游戏，用来单独试 Zork 解析器 / ECDICT 词库 / FSRS 复习 / IRT 测评）：[`prototype/lexicon-lab/`](prototype/lexicon-lab/)。
