@@ -41,7 +41,7 @@
 
 **质量判断**：不是“AI 生成的空话”。内容来自真实事故（shell 卡死、PyPI 数据文件被 glob 压平、CI 批量红），有具体规则和反例；比大多数“角色提示词”扎实。但它**只有 1 star、8 月后没更新**，也没有游戏 / 美术 / 资产领域内容，不能把它当成“对我们这套开发有帮助过的技能”的证据。
 
-**安装建议**：不要全量装。第三方 skill 本质上是会进入 agent 上下文的提示词，等于让别人的流程影响我们每一次任务；装到 `~/.dsh/skills` 还会影响所有项目。若要用，最多装 `code-review-methodology` 和 `ci-diagnosis-and-fix`，先读一遍全文，再按我们的栈改写（去掉 SSE / DAG / PyPI 相关段落）。本 ticket 没有安装或启用任何第三方 skill。
+**安装建议**：不要全量装。第三方 skill 本质上是会进入 agent 上下文的提示词，等于让别人的流程影响我们每一次任务；装到 `~/.dsh/skills` 还会影响所有项目。若要用，最多装 `code-review-methodology` 和 `ci-diagnosis-and-fix`，先读一遍全文，再按我们的栈改写（去掉 SSE / DAG / PyPI 相关段落）。本 ticket 没有安装 `dsh-engineering-skills`；第 2 节里挑出的 5 个游戏技能已按用户要求装到 `~/.dsh/skills`（2026-11-11，当前会话已热加载）。
 
 ## 2. 更匹配的技能包（按需选，不要整套装）
 
@@ -72,7 +72,7 @@ cp -R <repo>/skills/disciplines/game-ui-ux ~/.dsh/skills/
 cp -R <repo>/skills/genres/card-game ~/.dsh/skills/
 ```
 
-DSH 是否加载 `~/.dsh/skills` 取决于当前 profile 的 skills 配置；本项目当前会话只注册了飞书 / GitHub 两个内置技能。**安装前先读全文，安装后用 `git diff` / 文件清单确认只多了预期目录**。第三方 skill 可能包含与项目无关甚至有害的指令，不要闭眼装整套。
+DSH 的 `dsh-skill-filesystem` 会把 `<project>/.dsh/skills`、`~/.dsh/skills` 等目录注册为技能源；本次安装到 `~/.dsh/skills` 后，当前会话的技能目录已热加载出 5 个新技能。**安装前先读全文，安装后用文件清单确认只多了预期目录**。第三方 skill 可能包含与项目无关甚至有害的指令，不要闭眼装整套。
 
 ## 3. 保持稳定性：先补 CI，再谈技能
 
@@ -253,7 +253,7 @@ DSH 是否加载 `~/.dsh/skills` 取决于当前 profile 的 skills 配置；本
 
 ## 6. 配套原型：三个方向
 
-**入口**：[`prototype/visual-directions/`](../../prototype/visual-directions/)（打开 `index.html`；PR 描述里有截图与本地打开方式）
+**入口**：[`prototype/visual-directions/`](../../prototype/visual-directions/)（打开 `index.html`；PR 描述里有截图与本地打开方式）。资产清单在 [`assets/manifest.json`](../../prototype/visual-directions/assets/manifest.json)，按 `create-game-assets` 技能的 manifest 字段记录尺寸、焦点、来源、许可与验证状态。
 
 - **A · 旧版画**：纸面、双线装裱、档案编号、公版铜版画；卡面像图版 / 档案卡。
 - **B · 夜航**：同一套结构，暗场、满幅海图、金色细线、发光卡框；最接近现在雾港的气质。

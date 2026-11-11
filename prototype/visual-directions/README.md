@@ -45,6 +45,8 @@ prototype/visual-directions/
 页面里的卡片数据是 `app.js` 中的 `ENTITIES` / `HAND` 常量，用于证明“一张卡 = 一条数据”；正式接入时应改为
 `game/content/entities.json` + `game/src/cards.js`（见调研文档第 4 节）。
 
+插画资产按 `create-game-assets` 技能的 manifest 字段登记在 [`assets/manifest.json`](assets/manifest.json)：尺寸、焦点、来源、许可、是否已在原生尺寸 / 引擎内复核。目前全部是 `placeholder`，不是 `production`。
+
 ## 边界
 
 - 只有一场战斗、四张手牌、四张实体卡；没有接入 `game/` 的 SRS / 存档 / 路由；

@@ -25,3 +25,5 @@ Rider-Waite-Smith 由 Pamela Colman Smith 绘制、William Rider & Son 于 1909 
 ## 处理说明
 
 页面用 CSS 对原图做灰度 / 棕褐 / 对比度处理，不修改原文件；卡片裁切由 `object-fit` / `object-position` 完成。
+
+尺寸、焦点、来源、许可与复核状态同时登记在 [`assets/manifest.json`](assets/manifest.json)；全部为 `placeholder`，不是最终美术。

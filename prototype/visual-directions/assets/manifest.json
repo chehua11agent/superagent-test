@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "project": "拾词者 · 雾港 — 画面与卡片方向探针",
+  "art_direction_brief": "../../docs/research/dsh-skills-and-visual-upgrade.md",
+  "note": "公版占位图，不是最终美术。正式版应按实体重绘或委托，并保留 source / license / focus。",
+  "assets": [
+    {
+      "id": "scene.old-lighthouse-storm",
+      "role": "battle background / 第 4 幕旧灯塔风暴夜",
+      "path": "sea-storm.jpg",
+      "status": "placeholder",
+      "technical": {
+        "dimensions": "1600x1000",
+        "alpha": false,
+        "anchor": "cover",
+        "frames": 1,
+        "filtering": "default"
+      },
+      "visual_locks": ["duotone", "edge-treatment", "vignette", "focus 50% 48%"],
+      "source": {
+        "kind": "sourced-public-domain",
+        "url_or_tool": "https://www.metmuseum.org/art/collection/search/811690",
+        "creator": "Joseph Vernet",
+        "created_at": "1752–64",
+        "license": "CC0",
+        "attribution": "Joseph Vernet, A Sea Storm, 1752–64. The Metropolitan Museum of Art, Open Access (CC0).",
+        "prompt_or_source_record": "Met Open Access original DP881951; cropped 12% per side, resized 1600x1000."
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "art.persona.wordpicker",
+      "role": "人物卡插画 / 拾词者",
+      "path": "hermit.jpg",
+      "status": "placeholder",
+      "technical": {
+        "dimensions": "720x1200",
+        "alpha": false,
+        "anchor": "cover",
+        "frames": 1,
+        "filtering": "default"
+      },
+      "visual_locks": ["line-weight", "lantern", "focus 50% 12%"],
+      "source": {
+        "kind": "sourced-public-domain",
+        "url_or_tool": "https://github.com/mixvlad/TarotCards",
+        "creator": "Pamela Colman Smith",
+        "created_at": "1909",
+        "license": "Public Domain",
+        "attribution": "Rider-Waite-Smith Tarot, The Hermit, 1909. Public Domain; scans via mixvlad/TarotCards (MIT).",
+        "prompt_or_source_record": "Rider-Waite 720px scan; no edits beyond CSS crop."
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "art.monster.fog-keeper",
+      "role": "怪物卡插画 / 雾中守塔人（灯塔象征）",
+      "path": "lighthouse.jpg",
+      "status": "placeholder",
+      "technical": {
+        "dimensions": "900x1200",
+        "alpha": false,
+        "anchor": "cover",
+        "frames": 1,
+        "filtering": "default"
+      },
+      "visual_locks": ["line-weight", "tower", "focus 50% 26%"],
+      "source": {
+        "kind": "sourced-public-domain",
+        "url_or_tool": "https://www.metmuseum.org/art/collection/search/382738",
+        "creator": "Henry Farrer",
+        "created_at": "1880",
+        "license": "CC0",
+        "attribution": "Henry Farrer, Lighthouse, 1880. The Metropolitan Museum of Art, Open Access (CC0).",
+        "prompt_or_source_record": "Met Open Access web-large DP818541; cropped 5% per side, resized 900x1200."
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "art.monster.fog-wyrm",
+      "role": "怪物卡插画 / 雾中龙",
+      "path": "dragon.jpg",
+      "status": "placeholder",
+      "technical": {
+        "dimensions": "1200x900",
+        "alpha": false,
+        "anchor": "cover",
+        "frames": 1,
+        "filtering": "default"
+      },
+      "visual_locks": ["line-weight", "dragon-head", "focus 50% 42%"],
+      "source": {
+        "kind": "sourced-public-domain",
+        "url_or_tool": "https://www.metmuseum.org/art/collection/search/399874",
+        "creator": "Hendrick Goltzius",
+        "created_at": "1588",
+        "license": "CC0",
+        "attribution": "Hendrick Goltzius, The Dragon Devouring the Companions of Cadmus, 1588. The Metropolitan Museum of Art, Open Access (CC0).",
+        "prompt_or_source_record": "Met Open Access web-large DP832056; cropped 5% per side, resized 1200x900."
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "art.item.keeper-lens",
+      "role": "道具卡插画 / 守塔人的透镜",
+      "path": "lens.jpg",
+      "status": "placeholder",
+      "technical": {
+        "dimensions": "720x1200",
+        "alpha": false,
+        "anchor": "cover",
+        "frames": 1,
+        "filtering": "default"
+      },
+      "visual_locks": ["line-weight", "coin-lens", "zoom 1.62 at 56% 31%"],
+      "source": {
+        "kind": "sourced-public-domain",
+        "url_or_tool": "https://github.com/mixvlad/TarotCards",
+        "creator": "Pamela Colman Smith",
+        "created_at": "1909",
+        "license": "Public Domain",
+        "attribution": "Rider-Waite-Smith Tarot, Ace of Pentacles, 1909. Public Domain; scans via mixvlad/TarotCards (MIT).",
+        "prompt_or_source_record": "Rider-Waite 720px scan; CSS crop/zoom only."
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": false,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    }
+  ]
+}
