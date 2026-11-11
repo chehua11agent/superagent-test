@@ -14,7 +14,7 @@ dsh-superagent test repository.
 
 - 总体设计：[`docs/design/cet4-vocab-rpg.md`](docs/design/cet4-vocab-rpg.md)
 - 玩法设计：[双鉴定](docs/design/dual-check-design.md)、[剧情→词卡战斗](docs/design/story-card-combat-design.md)、[内容样本《闭馆通知》](docs/design/sample-closing-notice.md)
-- 调研：[跑团规则书](docs/research/trpg-rules-survey.md)、[5e 玩家手册盘点](docs/research/phb-story-dm-review.md)、[画面/引擎](docs/research/game-visual-solutions-survey.md)
+- 调研：[跑团规则书](docs/research/trpg-rules-survey.md)、[5e 玩家手册盘点](docs/research/phb-story-dm-review.md)、[画面/引擎](docs/research/game-visual-solutions-survey.md)、[Zork 式玩法与词汇测评](docs/research/zork-vocab-mastery-assessment.md)
 - 词汇与知识库：[机制词汇表](docs/content/cet4-dnd-mechanics-vocab.md)、[四级大纲知识库](docs/content/cet4-syllabus-kb.md)、[素材录入核对](docs/content/cet4-materials-ingest.md)
 
 ## 可玩原型
