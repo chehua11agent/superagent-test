@@ -17,6 +17,7 @@
 
 | 文档 | 内容 |
 | --- | --- |
+| [`research/cet4-vocab-game-routes.md`](research/cet4-vocab-game-routes.md) | 四级词游戏化两条路线对比：「专门做四级游戏」vs「在游戏里嵌四级词」的证据、成本与选型建议 |
 | [`research/trpg-rules-survey.md`](research/trpg-rules-survey.md) | 跑团规则书与 GitHub 基建调研：Ironsworn / Fate / PbtA / Blades 的取舍、许可边界、技术组合 |
 | [`research/phb-story-dm-review.md`](research/phb-story-dm-review.md) | 5e《玩家手册》剧情设定、DM 指引与故事发展盘点 |
 | [`research/game-visual-solutions-survey.md`](research/game-visual-solutions-survey.md) | 游戏画面 / UI 现成方案与长线引擎调研：三条可视化路线、候选清单、许可证边界 |
