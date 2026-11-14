@@ -20,6 +20,7 @@
 | [`research/trpg-rules-survey.md`](research/trpg-rules-survey.md) | 跑团规则书与 GitHub 基建调研：Ironsworn / Fate / PbtA / Blades 的取舍、许可边界、技术组合 |
 | [`research/phb-story-dm-review.md`](research/phb-story-dm-review.md) | 5e《玩家手册》剧情设定、DM 指引与故事发展盘点 |
 | [`research/game-visual-solutions-survey.md`](research/game-visual-solutions-survey.md) | 游戏画面 / UI 现成方案与长线引擎调研：三条可视化路线、候选清单、许可证边界 |
+| [`research/3d-scene-assets-github.md`](research/3d-scene-assets-github.md) | 3D 场景 / 建模资源调研：GitHub 引擎与示例场景、CC0 资产来源、落地路线与许可证红线 |
 
 ## 内容与数据
 
