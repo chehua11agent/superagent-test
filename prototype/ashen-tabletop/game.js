@@ -165,10 +165,20 @@ function updateActTrack() { setAct(state.phase); }
 
 /* ---------------- world init ---------------- */
 
+const SCENE_BY_PHASE = { explore: 'courtyard', social: 'hall', combat: 'hall', rest: 'beacon', level: 'beacon' };
 function setWorldPhase(phase) {
   if (state.worldPhase === phase) return;
   state.worldPhase = phase;
   world.setPhase(phase);
+  world.setScene(SCENE_BY_PHASE[phase] || 'courtyard');
+  updateEnvButton();
+}
+function updateEnvButton() {
+  const b = document.getElementById('btn-env');
+  if (!b) return;
+  const env = world.getEnvironment();
+  b.textContent = env.label;
+  b.title = `当前环境：${env.label} · 点击切换`;
 }
 
 world = createWorld({
@@ -676,8 +686,6 @@ async function enterGate() {
   }
   state.phase = 'social';
   state.ada.ally = false;
-  state.worldPhase = 'social';
-  world.setPhase('social');
   world.setAdaAlly(false);
   syncTokens();
   renderParty();
@@ -784,8 +792,9 @@ async function startCombat() {
   state.phase = 'combat';
   state.social.resolved = true;
   state.ada.ally = !!state.flags.ally;
-  state.worldPhase = 'combat';
-  world.setPhase('combat');
+  setWorldPhase('combat');
+  world.setEnvironment('storm');
+  updateEnvButton();
   world.setAdaAlly(state.ada.ally);
   resetEnemies();
   state.targetId = 'knight';
@@ -820,6 +829,7 @@ async function startCombat() {
       if (v < 13) { h.frightened = 2; log(`${h.name} 失败（${v}），恐惧 2 轮：攻击劣势。`, 'log-bad'); }
       else log(`${h.name} 成功（${v}）。`, 'log-good');
     }
+    world.playSkill('knight', 'howl', 'knight');
     world.shake(0.5);
     sfx('lose');
   }
@@ -973,6 +983,8 @@ async function useAttack(hero, card) {
     success: hitFinal, text: crit ? '暴击！' : hitFinal ? '命中' : '未命中',
   });
   log(`${hero.name} 用${card.name}攻击${target.name}：d20 ${sign(hero.atk.mod)} = ${total} vs AC ${target.ac}${crit ? ' · 暴击' : ''}`, 'log-roll');
+  const attackKind = hero.id === 'bran' ? 'sword' : hero.id === 'vera' ? 'bow' : 'fire';
+  world.playSkill(hero.id, attackKind, target.id);
   hero.advNext = false; hero.helpAdv = false;
   await wait(600);
   if (hitFinal) {
@@ -1012,6 +1024,7 @@ async function useMagicMissile(hero, card) {
   hero.slots -= 1;
   showRoll({ title: `${hero.name} · 魔法飞弹`, values: [dmg.sum], used: dmg.sum, mod: 0, success: true, auto: true, text: '自动命中' });
   log(`${hero.name} 施放魔法飞弹：${dmg.text} = ${dmg.sum}，消耗 1 个法术位。`, 'log-hit');
+  world.playSkill(hero.id, 'magic', target.id);
   applyDamage(target, dmg.sum, hero.name);
   world.floatAt(target.id, `-${dmg.sum}`, 'dmg');
   world.shake(0.4);
@@ -1028,6 +1041,7 @@ function useSecondWind(hero, card) {
   const heal = rollDice([1, 10, 3]);
   hero.hp = Math.min(hero.maxHp, hero.hp + heal.sum);
   log(`${hero.name} 使用回气：${heal.text}，恢复 ${heal.sum} HP。`, 'log-good');
+  world.playSkill(hero.id, 'heal', hero.id);
   world.floatAt(hero.id, `+${heal.sum}`, 'heal');
   sfx('heal');
   markAction(hero, card);
@@ -1038,6 +1052,7 @@ function useHide(hero, card) {
   hero.advNext = true;
   hero.cardUses[card.id] = (hero.cardUses[card.id] ?? 1) - 1;
   log(`${hero.name} 隐入雪影：下一次攻击有优势。`, 'log-good');
+  world.playSkill(hero.id, 'hide', hero.id);
   markAction(hero, card);
   renderParty(); renderCombat();
 }
@@ -1048,6 +1063,7 @@ function useHelp(hero, card) {
   ally.helpAdv = true;
   hero.cardUses[card.id] = (hero.cardUses[card.id] ?? 1) - 1;
   log(`${hero.name} 协助${ally.name}：${ally.name} 的下一次攻击有优势。`, 'log-good');
+  world.playSkill(hero.id, 'help', ally.id);
   markAction(hero, card);
   renderParty(); renderCombat();
 }
@@ -1056,6 +1072,7 @@ function useDodge(hero, card) {
   hero.dodge = true;
   markAction(hero, card);
   log(`${hero.name} 进入防御姿态：直到下回合，攻击他的检定有劣势。`, 'log-good');
+  world.playSkill(hero.id, 'dodge', hero.id);
   renderParty(); renderCombat();
 }
 
@@ -1066,6 +1083,7 @@ async function useItem(hero, card) {
     const heal = rollDice([2, 4, 2]);
     hero.hp = Math.min(hero.maxHp, hero.hp + heal.sum);
     log(`${hero.name} 喝下治疗药水：${heal.text}，恢复 ${heal.sum} HP。`, 'log-good');
+    world.playSkill(hero.id, 'heal', hero.id);
     world.floatAt(hero.id, `+${heal.sum}`, 'heal');
     sfx('heal');
     markAction(hero, card);
@@ -1081,6 +1099,7 @@ async function useItem(hero, card) {
     const dmg = rollDice([2, 6, 0]);
     showRoll({ title: `${hero.name} · 火油`, values: [dmg.sum], used: dmg.sum, mod: 0, success: true, auto: true, text: '火焰伤害' });
     log(`${hero.name} 把火油砸在灰烬骑士身上：${dmg.text} = ${dmg.sum} 火焰伤害。`, 'log-hit');
+    world.playSkill(hero.id, 'oil', 'knight');
     applyDamage(knight, dmg.sum, hero.name);
     world.floatAt('knight', `-${dmg.sum}`, 'dmg');
     world.shake(0.4);
@@ -1190,6 +1209,7 @@ async function enemyAttack(e) {
     success: hit, text: crit ? '暴击！' : hit ? '命中' : '未命中',
   });
   log(`${e.name} 攻击${target.name}：d20 ${sign(e.atk)} = ${total} vs AC ${target.ac}${crit ? ' · 暴击' : ''}`, 'log-roll');
+  world.playSkill(e.id, 'enemy', target.id);
   await wait(600);
   if (hit) {
     let dmg = rollDice(e.dmg);
@@ -1213,6 +1233,7 @@ async function ashBurst(e) {
   c.ash = true;
   toast('灰烬爆发', 'is-bad');
   log('灰烬骑士半血：灰烬爆发，全体敏捷豁免 DC 13。', 'log-bad');
+  world.playSkill('knight', 'ash', 'knight');
   for (const id of ['bran', 'vera', 'oren']) {
     const h = state.party[id];
     if (h.down || h.dead) continue;
@@ -1286,8 +1307,7 @@ async function maybeEndCombat() {
     state.enemies.hound2.fled = true;
     state.phase = 'rest';
     setAct('rest');
-    state.worldPhase = 'rest';
-    world.setPhase('rest');
+    setWorldPhase('rest');
     world.setAdaAlly(state.ada.ally);
     world.setActive(null); world.setTarget(null);
     syncTokens(); renderParty();
@@ -1311,8 +1331,7 @@ function endDefeat() {
   if (state.combat) state.combat.ended = true;
   setBusy(false);
   sfx('lose');
-  state.worldPhase = 'level';
-  world.setPhase('level');
+  setWorldPhase('level');
   world.setActive(null); world.setTarget(null);
   state.phase = 'level';
   setAct('level');
@@ -1433,6 +1452,11 @@ function renderAll() {
   else if (state.phase === 'level') renderLevel();
 }
 
+$('#btn-env').addEventListener('click', () => {
+  world.cycleEnvironment();
+  updateEnvButton();
+  toast(`环境：${world.getEnvironment().label}`);
+});
 $('#btn-rules').addEventListener('click', openRules);
 $('#story-toggle').addEventListener('click', () => {
   const el = $('#story');
@@ -1474,8 +1498,6 @@ function init() {
     const e = state.enemies[id];
     world.setTokenMeta(id, { name: e.name, hp: e.hp, maxHp: e.maxHp, down: false, active: false, target: false });
   }
-  state.worldPhase = 'explore';
-  world.setPhase('explore');
   world.setActive('bran');
   renderExplore();
   renderParty();

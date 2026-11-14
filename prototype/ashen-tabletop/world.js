@@ -280,8 +280,8 @@ export function createWorld({ onPick } = {}) {
   scene.add(stars);
 
   const moon = new THREE.Sprite(new THREE.SpriteMaterial({ map: radialTex, color: '#dfe9ff', transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, toneMapped: false }));
-  moon.scale.setScalar(38);
-  moon.position.set(-100, 92, -230);
+  moon.scale.setScalar(26);
+  moon.position.set(-24, 52, -165);
   moon.userData.isFx = true;
   scene.add(moon);
   const moonGlow = glowSprite('#a8c4ff', 90, 0.18);
@@ -330,6 +330,9 @@ export function createWorld({ onPick } = {}) {
   table.position.y = -1.05;
   table.receiveShadow = true;
   scene.add(table);
+
+  const courtyard = new THREE.Group();
+  scene.add(courtyard);
 
   const groundGroup = new THREE.Group();
   const baseGeo = new THREE.CylinderGeometry(13.2, 15.2, 2.6, 18, 3);
@@ -422,7 +425,7 @@ export function createWorld({ onPick } = {}) {
     groundGroup.add(mesh(new THREE.SphereGeometry(s * 0.82, 7, 4), snowMat, { x, y: 0.45 + s * 0.2, z, sy: 0.25 }));
   }
 
-  scene.add(groundGroup);
+  courtyard.add(groundGroup);
 
   /* ---------------- gatehouse ---------------- */
 
@@ -542,20 +545,20 @@ export function createWorld({ onPick } = {}) {
   gateGroup.add(gateLantern);
 
   // cold beacon on the tower (the signal fire is still out)
-  const beacon = new THREE.Group();
-  beacon.position.set(0, 11.5, -2.1);
-  beacon.add(cyl(0.65, 0.8, 0.4, 10, ironMat, { y: 0 }));
-  beacon.add(sph(0.45, mat('#6f8fa8', { emissive: '#6f8fa8', emissiveIntensity: 0.5 }), { y: 0.25, sy: 0.4 }));
-  const beaconGlow = glowSprite('#6f8fa8', 2.4, 0.22);
-  beaconGlow.position.y = 0.35;
-  beacon.add(beaconGlow);
-  gateGroup.add(beacon);
-  const beaconLight = new THREE.PointLight('#9fc8ff', 16, 12, 2);
-  beaconLight.position.set(0, 12.2, -2.1);
-  gateGroup.add(beaconLight);
-  lanterns.push({ light: beaconLight, base: 16, phase: 2.6, steady: true });
+  const towerBeacon = new THREE.Group();
+  towerBeacon.position.set(0, 11.5, -2.1);
+  towerBeacon.add(cyl(0.65, 0.8, 0.4, 10, ironMat, { y: 0 }));
+  towerBeacon.add(sph(0.45, mat('#6f8fa8', { emissive: '#6f8fa8', emissiveIntensity: 0.5 }), { y: 0.25, sy: 0.4 }));
+  const towerBeaconGlow = glowSprite('#6f8fa8', 2.4, 0.22);
+  towerBeaconGlow.position.y = 0.35;
+  towerBeacon.add(towerBeaconGlow);
+  gateGroup.add(towerBeacon);
+  const towerBeaconLight = new THREE.PointLight('#9fc8ff', 16, 12, 2);
+  towerBeaconLight.position.set(0, 12.2, -2.1);
+  gateGroup.add(towerBeaconLight);
+  lanterns.push({ light: towerBeaconLight, base: 16, phase: 2.6, steady: true });
 
-  scene.add(gateGroup);
+  courtyard.add(gateGroup);
 
   /* ---------------- props ---------------- */
 
@@ -604,9 +607,9 @@ export function createWorld({ onPick } = {}) {
 
 
   const brazier1 = makeBrazier(5.4, -3.4, true);
-  scene.add(brazier1); registerProp(brazier1, 'brazier');
+  courtyard.add(brazier1); registerProp(brazier1, 'brazier');
   const brazier2 = makeBrazier(-6.0, -4.8, true);
-  scene.add(brazier2); registerProp(brazier2, 'brazier2');
+  courtyard.add(brazier2); registerProp(brazier2, 'brazier2');
 
   // wall torches
   for (const [x, z] of [[-1.7, -7.2], [1.7, -7.2]]) {
@@ -622,7 +625,7 @@ export function createWorld({ onPick } = {}) {
     torchGlow.position.set(0, 3.3, 0.3);
     g.add(torchGlow);
     g.position.set(x, 0, z + 0.7);
-    scene.add(g);
+    courtyard.add(g);
   }
 
   // broken cart
@@ -643,7 +646,7 @@ export function createWorld({ onPick } = {}) {
     cart.add(wheel);
   }
   cart.add(box(0.14, 0.14, 2.2, beamMat, { x: -1.3, y: 0.95, z: -1.3, rz: 0.4 }));
-  scene.add(cart); registerProp(cart, 'cart');
+  courtyard.add(cart); registerProp(cart, 'cart');
 
   function woodMat() { return mat('#4a3423', { map: woodTex, roughness: 0.95 }); }
 
@@ -670,7 +673,7 @@ export function createWorld({ onPick } = {}) {
   }
   crateGroup.add(barrel(4.1, -4.5, 0.9));
   crateGroup.add(barrel(4.8, -3.9, 0.7));
-  scene.add(crateGroup); registerProp(crateGroup, 'crates');
+  courtyard.add(crateGroup); registerProp(crateGroup, 'crates');
 
   // corpse (investigation)
   const corpse = new THREE.Group();
@@ -683,7 +686,7 @@ export function createWorld({ onPick } = {}) {
   corpse.add(box(0.9, 0.12, 0.16, bodyMat, { x: -0.35, y: 0.2, z: 0.42, rz: 0.4 }));
   corpse.add(box(0.9, 0.12, 0.16, bodyMat, { x: -0.35, y: 0.2, z: -0.42, rz: -0.4 }));
   for (let i = 0; i < 6; i++) corpse.add(box(0.1, 0.06, 0.3, mat('#c8b08c'), { x: 1.0 + rand() * 0.8, y: 0.12, z: -0.4 + rand() * 0.8, ry: rand() * 3 }));
-  scene.add(corpse); registerProp(corpse, 'corpse');
+  courtyard.add(corpse); registerProp(corpse, 'corpse');
 
   // drag marks
   const drag = new THREE.Group();
@@ -696,7 +699,7 @@ export function createWorld({ onPick } = {}) {
     strip.castShadow = false;
     drag.add(strip);
   }
-  scene.add(drag); registerProp(drag, 'tracks');
+  courtyard.add(drag); registerProp(drag, 'tracks');
 
   // broken shield / sword near corpse
   const gear = new THREE.Group();
@@ -705,7 +708,7 @@ export function createWorld({ onPick } = {}) {
   gear.add(cyl(0.42, 0.42, 0.08, 10, mat('#5b4a36'), { rx: Math.PI / 2 }));
   gear.add(cyl(0.08, 0.08, 0.1, 8, ironMat, { rx: Math.PI / 2, z: 0.04 }));
   gear.add(box(0.08, 0.1, 1.7, mat('#8b939c', { metalness: 0.5, roughness: 0.5 }), { x: 0.8, y: 0.05, z: 0.3, ry: 0.7 }));
-  scene.add(gear); registerProp(gear, 'gear');
+  courtyard.add(gear); registerProp(gear, 'gear');
 
   // stakes / palisade at the edges
   for (const [x, z, s] of [[-10.2, 2.4, 1], [-9.8, 1.2, 0.8], [10.2, 4.4, 0.9]]) {
@@ -714,10 +717,214 @@ export function createWorld({ onPick } = {}) {
       g.add(cone(0.14, 1.6 + rand() * 0.5, 4, beamMat, { x: -1.2 + i * 0.7, y: 0.8, z: rand() * 0.3, rz: 0.1 + rand() * 0.16 }));
     }
     g.position.set(x, 0.1, z); g.scale.setScalar(s);
-    scene.add(g); registerProp(g, `stakes-${x}`);
+    courtyard.add(g); registerProp(g, `stakes-${x}`);
   }
 
+
+  /* ---------------- hall / stairwell ---------------- */
+
+  function buildHall() {
+    const g = new THREE.Group();
+    g.visible = false;
+    const floor = mat('#6c7178', { map: stoneTex, roughness: 0.94 });
+    const darkStone = mat('#44484e', { map: stoneTex, roughness: 0.95 });
+    const plank = mat('#5c412b', { map: woodTex, roughness: 0.94 });
+
+    g.add(box(18, 0.2, 16, floor, { y: 0.1, z: 0.4 }));
+    // floor seams
+    for (let i = -8; i <= 8; i += 2) g.add(box(0.035, 0.012, 15.6, mat('#34383d'), { x: i, y: 0.205, z: 0.4, cast: false }));
+    for (let j = -7; j <= 8; j += 2) g.add(box(17.6, 0.012, 0.035, mat('#34383d'), { y: 0.206, z: j + 0.4, cast: false }));
+
+    // back and side walls
+    g.add(box(18, 5.2, 0.55, wallMat, { y: 2.6, z: -7.6 }));
+    g.add(box(0.55, 5.2, 16, wallMat, { x: -9, y: 2.6, z: 0.4 }));
+    g.add(box(0.55, 5.2, 16, wallMat, { x: 9, y: 2.6, z: 0.4 }));
+    g.add(box(18.5, 0.25, 0.7, beamMat, { y: 5.22, z: -7.6 }));
+    // wall beams
+    for (const x of [-8.8, -4.4, 4.4, 8.8]) {
+      g.add(box(0.16, 5.0, 0.12, beamMat, { x, y: 2.5, z: -7.3 }));
+    }
+    for (const y of [1.4, 3.4]) g.add(box(17.8, 0.14, 0.14, beamMat, { y, z: -7.3 }));
+
+    // doorway + staircase at back centre
+    g.add(box(2.7, 3.4, 0.22, mat('#06080b'), { y: 3.4, z: -7.32 }));
+    g.add(box(3.1, 0.36, 0.4, darkStone, { y: 5.05, z: -7.3 }));
+    for (let i = 0; i < 6; i++) {
+      const h = 0.18 * (i + 1);
+      g.add(box(4.0, h, 0.62, darkStone, { x: 0, y: h / 2 + 0.2, z: -4.0 - i * 0.58 }));
+      g.add(box(4.05, 0.04, 0.64, snowCapMat, { x: 0, y: h + 0.2, z: -4.0 - i * 0.58, cast: false }));
+    }
+    for (const x of [-2.15, 2.15]) {
+      g.add(box(0.12, 0.95, 3.9, ironMat, { x, y: 1.25, z: -5.1, rx: -0.24 }));
+      g.add(cyl(0.055, 0.055, 0.85, 5, ironMat, { x, y: 1.25, z: -3.25 }));
+    }
+    // stairs side torches
+    for (const x of [-2.9, 2.9]) {
+      const torch = cyl(0.05, 0.06, 1.1, 5, beamMat, { x, y: 2.0, z: -4.4 });
+      g.add(torch);
+      g.add(sph(0.13, mat('#ffbe72', { emissive: '#ff8a3a', emissiveIntensity: 2.6 }), { x, y: 2.55, z: -4.4 }));
+      const gl = glowSprite('#ff9a4c', 1.5, 0.4); gl.position.set(x, 2.55, -4.4); g.add(gl);
+      const sl = new THREE.PointLight('#ffa05a', 12, 7, 2);
+      sl.position.set(x, 2.5, -4.2); g.add(sl);
+      lanterns.push({ light: sl, base: 12, phase: 1.3 + x });
+    }
+
+    // columns and lintels
+    for (const x of [-5.4, 5.4]) {
+      for (const z of [-2.2, 2.6]) {
+        g.add(cyl(0.34, 0.48, 4.4, 8, wallDark, { x, y: 2.2, z }));
+        g.add(box(0.95, 0.22, 0.95, wallDark, { x, y: 4.35, z }));
+        g.add(box(0.8, 0.2, 0.8, snowCapMat, { x, y: 4.55, z }));
+      }
+    }
+    g.add(box(11.8, 0.25, 0.35, beamMat, { y: 4.5, z: -2.2 }));
+    g.add(box(11.8, 0.25, 0.35, beamMat, { y: 4.5, z: 2.6 }));
+
+    // table and benches
+    const hallAmbient = new THREE.PointLight('#c8ad8a', 42, 26, 2);
+    hallAmbient.position.set(0, 5.2, 3.2); g.add(hallAmbient);
+    lanterns.push({ light: hallAmbient, base: 42, phase: 0.6, steady: true });
+    const hallCool = new THREE.PointLight('#8fa8c8', 22, 20, 2);
+    hallCool.position.set(0, 4.4, -3.0); g.add(hallCool);
+    lanterns.push({ light: hallCool, base: 22, phase: 2.1, steady: true });
+
+    g.add(box(4.4, 0.16, 1.6, plank, { x: -5.5, y: 1.05, z: 0.8 }));
+    for (const x of [-7.35, -3.65]) {
+      for (const z of [0.15, 1.45]) g.add(box(0.16, 0.95, 0.16, beamMat, { x, y: 0.58, z }));
+    }
+    for (const z of [-0.15, 1.75]) g.add(box(4.4, 0.12, 0.36, beamMat, { x: -5.5, y: 0.72, z }));
+    // table props: candle, tankards, papers
+    for (const [x, z] of [[-6.6, 0.5], [-5.2, 1.1], [-4.4, 0.6]]) {
+      g.add(cyl(0.12, 0.14, 0.2, 7, mat('#b8874e', { metalness: 0.4 }), { x, y: 1.22, z }));
+    }
+    g.add(box(0.55, 0.03, 0.4, mat('#d9cfb8'), { x: -5.9, y: 1.15, z: 0.8, ry: 0.25, cast: false }));
+    g.add(cyl(0.05, 0.06, 0.32, 6, mat('#d8d0bd'), { x: -4.6, y: 1.3, z: 0.55 }));
+    g.add(cone(0.07, 0.2, 5, mat('#ffd38a', { emissive: '#ffb35c', emissiveIntensity: 2.6 }), { x: -4.6, y: 1.55, z: 0.55, cast: false }));
+    const tableLight = new THREE.PointLight('#ffb36a', 24, 10, 2);
+    tableLight.position.set(-4.6, 1.7, 0.6); g.add(tableLight);
+    lanterns.push({ light: tableLight, base: 24, phase: 1.9 });
+
+    // hearth
+    const hearth = new THREE.Group();
+    hearth.position.set(6.3, 0.2, -6.3);
+    hearth.add(box(3.2, 2.5, 0.7, darkStone, { y: 1.25, z: -0.2 }));
+    hearth.add(box(2.0, 1.15, 0.7, mat('#1a1512'), { y: 0.58, z: 0.15 }));
+    hearth.add(cyl(1.0, 1.15, 0.25, 8, darkStone, { y: 0.14, z: 0.5 }));
+    const hf = cone(0.5, 1.2, 6, new THREE.MeshBasicMaterial({ color: '#ff8a3a', transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }), { y: 0.9, z: 0.55 });
+    hf.castShadow = false; hearth.add(hf);
+    const hgl = glowSprite('#ff8a3a', 3.0, 0.4); hgl.position.set(0, 0.9, 0.5); hearth.add(hgl);
+    const hearthLight = new THREE.PointLight('#ff9a4c', 38, 13, 2);
+    hearthLight.position.set(0, 1.2, 0.8); hearth.add(hearthLight);
+    lanterns.push({ light: hearthLight, base: 38, phase: 4.2 });
+    g.add(hearth);
+
+    // hanging lanterns
+    for (const [x, z, p] of [[-4.2, 1.8, 0.7], [4.6, -1.6, 2.2]]) {
+      const l = new THREE.Group();
+      l.add(cyl(0.02, 0.02, 1.1, 4, ironMat, { y: 4.0 }));
+      l.add(box(0.3, 0.38, 0.3, ironMat, { y: 3.4 }));
+      l.add(box(0.2, 0.26, 0.2, mat('#ffd8a0', { emissive: '#ffb35c', emissiveIntensity: 2.8 }), { y: 3.4, cast: false }));
+      l.add(glowSprite('#ffb45e', 2.0, 0.45)).position.set(0, 3.4, 0);
+      const li = new THREE.PointLight('#ffb45e', 24, 11, 2);
+      li.position.set(0, 3.3, 0.2); l.add(li);
+      lanterns.push({ light: li, base: 24, phase: p });
+      l.position.set(x, 0, z); g.add(l);
+    }
+
+    // banners on back wall
+    for (const x of [-7.2, 7.2]) {
+      g.add(cyl(0.05, 0.06, 3.4, 5, beamMat, { x, y: 3.9, z: -7.2 }));
+      const b = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 2.2, 5, 7), new THREE.MeshStandardMaterial({ map: bannerTex, roughness: 0.9, side: THREE.DoubleSide }));
+      b.position.set(x + 0.7, 3.6, -7.18); b.castShadow = true; g.add(b);
+    }
+
+    // wall shields / kit
+    for (const [x, z] of [[-6.8, -7.2], [6.9, -7.2], [8.7, -2.0]]) {
+      const sh = cyl(0.42, 0.42, 0.08, 10, mat('#5a4633'), { x, y: 2.8, z, rx: Math.PI / 2, ry: 0 });
+      g.add(sh);
+      g.add(cyl(0.08, 0.08, 0.1, 8, ironMat, { x, y: 2.8, z: z + 0.05, rx: Math.PI / 2 }));
+    }
+
+    // barrels / crates / rug
+    const barrel = (x, z) => {
+      const b = cyl(0.38, 0.34, 0.92, 9, plank, { x, y: 0.66, z });
+      g.add(b);
+      for (const y of [0.35, 0.98]) g.add(cyl(0.4, 0.4, 0.06, 9, ironMat, { x, y, z }));
+    };
+    barrel(-8.0, 4.0); barrel(-7.2, 4.9); barrel(7.7, 4.4);
+    g.add(box(0.9, 0.9, 0.9, plank, { x: 7.3, y: 0.65, z: 1.5, ry: 0.2 }));
+    g.add(box(0.7, 0.7, 0.7, plank, { x: 8.0, y: 0.55, z: 2.3, ry: -0.3 }));
+    const rug = box(5.6, 0.02, 2.6, mat('#5a2b2a', { roughness: 1 }), { x: -0.4, y: 0.22, z: 4.1, cast: false });
+    g.add(rug);
+    for (let i = 0; i < 40; i++) {
+      g.add(box(0.35, 0.01, 0.03, mat('#9b6c52', { roughness: 1 }), { x: -2.9 + rand() * 5.2, y: 0.235, z: 3.0 + rand() * 2.2, ry: rand() * 3, cast: false }));
+    }
+
+    // snow at the threshold
+    for (let i = 0; i < 8; i++) {
+      g.add(mesh(new THREE.SphereGeometry(0.3 + rand() * 0.45, 6, 4), snowMat, { x: -8.6 + rand() * 17, y: 0.24, z: 7.8 + rand() * 0.8, sy: 0.22 }));
+    }
+    return g;
+  }
+
+  /* ---------------- beacon top ---------------- */
+
+  let beaconFire = null;
+  let beaconFlames = null;
+  let beaconLight = null;
+
+  function buildBeacon() {
+    const g = new THREE.Group();
+    g.visible = false;
+    const plate = mat('#70747a', { map: stoneTex, roughness: 0.92 });
+    const dark = mat('#474b51', { map: stoneTex });
+
+    g.add(cyl(9.0, 9.4, 0.35, 24, plate, { y: 0.12 }));
+    // crenellated ring
+    for (let i = 0; i < 24; i++) {
+      const a = (i / 24) * Math.PI * 2;
+      if (Math.abs(a - Math.PI / 2) < 0.22) continue; // stair gap at front
+      g.add(box(1.55, 0.95, 0.6, plate, { x: Math.cos(a) * 8.5, y: 0.62, z: Math.sin(a) * 8.5, ry: -a }));
+      g.add(box(1.3, 1.25, 0.7, plate, { x: Math.cos(a) * 8.5, y: 1.05, z: Math.sin(a) * 8.5, ry: -a }));
+      g.add(box(1.12, 0.07, 0.62, snowCapMat, { x: Math.cos(a) * 8.5, y: 1.72, z: Math.sin(a) * 8.5, ry: -a }));
+    }
+    // beacon pedestal and bowl
+    g.add(box(4.4, 0.35, 4.4, dark, { y: 0.36, z: -1.5 }));
+    g.add(box(3.0, 0.25, 3.0, plate, { y: 0.62, z: -1.5 }));
+    g.add(cyl(1.25, 1.55, 0.9, 10, ironMat, { y: 1.05, z: -1.5 }));
+    g.add(cyl(1.0, 1.0, 0.2, 10, mat('#2a1b12'), { y: 1.48, z: -1.5 }));
+    const flame = cone(1.0, 3.4, 7, new THREE.MeshBasicMaterial({ color: '#ff8a3a', transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }), { y: 3.1, z: -1.5 });
+    flame.castShadow = false; g.add(flame);
+    const inner = cone(0.55, 2.2, 6, new THREE.MeshBasicMaterial({ color: '#ffe2a0', transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }), { y: 2.9, z: -1.5 });
+    g.add(inner);
+    beaconFlames = [flame, inner];
+    const glow = glowSprite('#ff8a3a', 8.0, 0.5); glow.position.set(0, 3.0, -1.5); g.add(glow);
+    beaconLight = new THREE.PointLight('#ff9a4c', 40, 22, 2);
+    beaconLight.position.set(0, 3.2, -1.5); g.add(beaconLight);
+    lanterns.push({ light: beaconLight, base: 40, phase: 1.2, steady: true });
+    beaconFire = g;
+
+    // flagpole
+    g.add(cyl(0.07, 0.09, 6.0, 6, beamMat, { x: 3.0, y: 3.2, z: -3.2 }));
+    const flag = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 2.3, 5, 7), new THREE.MeshStandardMaterial({ map: bannerTex, roughness: 0.9, side: THREE.DoubleSide }));
+    flag.position.set(3.8, 4.7, -3.2); flag.castShadow = true; g.add(flag);
+
+    // barrels, kit
+    for (const [x, z] of [[-7.0, 2.0], [-6.4, 1.2]]) {
+      g.add(cyl(0.36, 0.33, 0.85, 9, woodMat(), { x, y: 0.72, z }));
+      for (const y of [0.4, 1.0]) g.add(cyl(0.38, 0.38, 0.05, 9, ironMat, { x, y, z }));
+    }
+    return g;
+  }
+
+  const hall = buildHall();
+  const beacon = buildBeacon();
+  scene.add(hall, beacon);
+
   /* ---------------- dice tray ---------------- */
+
+  const diceRig = new THREE.Group();
+  scene.add(diceRig);
 
   const tray = new THREE.Group();
   tray.position.set(0, 0.28, 8.2);
@@ -728,7 +935,7 @@ export function createWorld({ onPick } = {}) {
   }
   tray.traverse((o) => { if (o.isMesh) o.userData.pick = { kind: 'dice' }; });
   pickables.push(tray);
-  scene.add(tray);
+  diceRig.add(tray);
 
   // a candle at the table edge lifts the dice and the party
   const candle = new THREE.Group();
@@ -743,7 +950,7 @@ export function createWorld({ onPick } = {}) {
   candleGlow.position.y = 0.8;
   candle.add(candleGlow);
   lanterns.push({ light: candleLight, base: 16, phase: 1.1 });
-  scene.add(candle);
+  diceRig.add(candle);
 
   const TRAY_TOP = tray.position.y + 0.13;
   const DICE_RADIUS = 0.52;
@@ -808,7 +1015,7 @@ export function createWorld({ onPick } = {}) {
   dice[1].position.set(0.95, TRAY_TOP + 0.46, 8.2);
   dice[0].rotation.set(0.3, 0.8, 0.1);
   dice[1].rotation.set(0.7, -0.4, 0.2);
-  for (const d of dice) scene.add(d);
+  for (const d of dice) diceRig.add(d);
 
   // park second die by default
   dice[1].visible = false;
@@ -944,7 +1151,7 @@ export function createWorld({ onPick } = {}) {
     label.className = 'token-tag';
     label.dataset.id = id;
     tagLayer.appendChild(label);
-    tokens.set(id, { id, group: g, mini, label, hp: 1, maxHp: 1, down: false, active: false, target: false, side: 'party' });
+    tokens.set(id, { id, group: g, mini, refs: mini.userData.refs || null, baseY: 0.12, label, hp: 1, maxHp: 1, down: false, active: false, target: false, side: 'party' });
     pickables.push(g);
     scene.add(g);
     return g;
@@ -953,6 +1160,7 @@ export function createWorld({ onPick } = {}) {
   // Bran
   {
     const p = person({ coat: '#4a5158', coat2: '#7c2d2d', pants: '#2c2d33', armor: true, accent: '#c9a35d', hat: 'helm', cloak: true, scale: 1.02 });
+    p.group.userData.refs = p.refs;
     addSword(p.refs.armR.lower, 1, 1.1);
     addShield(p.refs.armL.lower, -1);
     p.group.rotation.y = 0.15;
@@ -962,6 +1170,7 @@ export function createWorld({ onPick } = {}) {
   // Vera
   {
     const p = person({ coat: '#405346', coat2: '#26352c', pants: '#2a2824', hat: 'hood', accent: '#b98d55', cloak: true, scale: 0.9, skin: '#d3a47f' });
+    p.group.userData.refs = p.refs;
     const bow = new THREE.Group();
     bow.add(new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.035, 5, 12, Math.PI * 1.4), beamMat));
     bow.rotation.set(Math.PI / 2, 0.2, 0.4);
@@ -974,6 +1183,7 @@ export function createWorld({ onPick } = {}) {
   // Oren
   {
     const p = person({ coat: '#33445f', coat2: '#4d6687', pants: '#23262e', accent: '#b98d55', cloak: true, scale: 1.0, skin: '#d9b08a' });
+    p.group.userData.refs = p.refs;
     const staff = new THREE.Group();
     staff.add(cyl(0.035, 0.045, 2.2, 6, beamMat, { y: 1.1 }));
     const orb = sph(0.14, mat('#9fc8e6', { emissive: '#6db6e8', emissiveIntensity: 2.5 }), { y: 2.2 });
@@ -990,6 +1200,7 @@ export function createWorld({ onPick } = {}) {
   // Ada
   {
     const p = person({ coat: '#4d4a43', coat2: '#37352f', pants: '#2a2924', hat: 'hood', accent: '#b98d55', cloak: true, scale: 0.94, skin: '#caa07b' });
+    p.group.userData.refs = p.refs;
     const spear = new THREE.Group();
     spear.add(cyl(0.028, 0.028, 2.3, 6, beamMat, { y: 1.15 }));
     spear.add(cone(0.08, 0.32, 5, mat('#9aa1a8', { metalness: 0.6 }), { y: 2.45 }));
@@ -1114,7 +1325,101 @@ export function createWorld({ onPick } = {}) {
     hotspots.set(id, { group: g, ring, gem, glow, label, title: data.title, done: false, success: false });
     g.userData.hotspot = true;
     pickables.push(g);
-    scene.add(g);
+    courtyard.add(g);
+  }
+
+
+  /* ---------------- scenes / token positions ---------------- */
+
+  const SCENES = { courtyard, hall, beacon };
+  const SCENE_HOMES = {
+    courtyard: {
+      landscape: { pos: new THREE.Vector3(16.5, 13.6, 20.5), target: new THREE.Vector3(0, 1.0, 0.4), fov: 42 },
+      portrait: { pos: new THREE.Vector3(26, 18, 33), target: new THREE.Vector3(0, 1.4, 4.4), fov: 52 },
+      env: 'ash',
+    },
+    hall: {
+      landscape: { pos: new THREE.Vector3(0, 12.2, 20.5), target: new THREE.Vector3(0, 1.2, 0.4), fov: 46 },
+      portrait: { pos: new THREE.Vector3(0, 16.5, 26.0), target: new THREE.Vector3(0, 1.5, 2.0), fov: 56 },
+      env: 'moon',
+    },
+    beacon: {
+      landscape: { pos: new THREE.Vector3(13.8, 10.8, 17.2), target: new THREE.Vector3(0, 1.3, 1.4), fov: 44 },
+      portrait: { pos: new THREE.Vector3(21, 16, 26.5), target: new THREE.Vector3(0, 1.6, 2.6), fov: 52 },
+      env: 'beacon',
+    },
+  };
+
+  const DICE_POS = {
+    courtyard: [0, 0, 0],
+    hall: [-5.6, 0, -6.2],
+    beacon: [-4.6, 0, -6.0],
+  };
+
+  const TOKEN_POS = {
+    courtyard: {
+      bran: [-3.3, 0.12, 4.6, 0.15], vera: [0.1, 0.12, 4.9, -0.2], oren: [3.4, 0.12, 4.7, 0.3],
+      ada: [-2.9, 0.12, -2.8, 0.1], knight: [0.4, 0.12, -2.2, 0.1],
+      hound1: [-2.6, 0.12, -2.6, 0.3], hound2: [3.1, 0.12, -2.6, -0.3],
+    },
+    hall: {
+      bran: [-3.0, 0.32, 4.4, 0.15], vera: [0.2, 0.32, 4.8, -0.2], oren: [3.2, 0.32, 4.4, 0.3],
+      ada: [-2.7, 0.32, -0.7, 0.1], knight: [0.8, 0.32, -2.4, 0.1],
+      hound1: [-2.4, 0.32, -3.2, 0.3], hound2: [3.2, 0.32, -3.2, -0.3],
+    },
+    beacon: {
+      bran: [-2.3, 0.32, 3.9, 0.2], vera: [0.1, 0.32, 4.5, -0.1], oren: [2.5, 0.32, 3.9, -0.2],
+      ada: [-2.2, 0.32, 1.9, 0.1], knight: [0, 0.32, -2.2, 0.1],
+      hound1: [-2.6, 0.32, -2.6, 0.3], hound2: [3.1, 0.32, -2.6, -0.3],
+    },
+  };
+
+  let currentScene = 'courtyard';
+  let sceneInitialized = false;
+  let ashfall = null;
+  let envState = null;
+
+  function sceneHome(name = currentScene) {
+    const h = SCENE_HOMES[name] || SCENE_HOMES.courtyard;
+    return isPortrait() ? h.portrait : h.landscape;
+  }
+
+  function applyTokenPositions(name) {
+    const table = TOKEN_POS[name] || TOKEN_POS.courtyard;
+    for (const [id, pos] of Object.entries(table)) {
+      const t = tokens.get(id);
+      if (!t) continue;
+      t.group.position.set(pos[0], pos[1], pos[2]);
+      t.group.rotation.y = pos[3];
+      t.baseY = pos[1];
+    }
+    tokens.get('ada')?.group.rotation.y ?? null;
+  }
+
+  function setScene(name) {
+    if (!SCENES[name]) name = 'courtyard';
+    const changed = currentScene !== name || !sceneInitialized;
+    for (const [key, group] of Object.entries(SCENES)) group.visible = key === name;
+    currentScene = name;
+    sceneInitialized = true;
+    applyTokenPositions(name);
+    if (diceRig) { const dp = DICE_POS[name] || DICE_POS.courtyard; diceRig.position.set(dp[0], dp[1], dp[2]); }
+    if (snowfall) snowfall.visible = name !== 'hall';
+    if (ashfall) ashfall.visible = name !== 'hall';
+    if (changed) {
+      const h = sceneHome(name);
+      camera.fov = h.fov;
+      camera.updateProjectionMatrix();
+      tweenCamera(h.pos.clone(), h.target.clone(), 0.95);
+      // light per scene
+      if (name === 'beacon') {
+        if (beaconFlames) beaconFlames.forEach((f) => { f.visible = true; });
+        if (beaconLight) beaconLight.intensity = 34;
+      }
+      const def = SCENE_HOMES[name].env;
+      setEnvironment(def, true);
+    }
+    updateLabels();
   }
 
   /* ---------------- snowfall / embers ---------------- */
@@ -1128,7 +1433,7 @@ export function createWorld({ onPick } = {}) {
   }
   const snowGeo = new THREE.BufferGeometry();
   snowGeo.setAttribute('position', new THREE.BufferAttribute(snowPos, 3));
-  const snowMatPts = new THREE.PointsMaterial({ color: '#e8f2fb', size: 0.09, transparent: true, opacity: 0.8, depthWrite: false, toneMapped: false });
+  const snowMatPts = new THREE.PointsMaterial({ color: '#e8f2fb', size: 0.045, transparent: true, opacity: 0.8, depthWrite: false, toneMapped: false });
   const snowfall = new THREE.Points(snowGeo, snowMatPts);
   snowfall.userData.isFx = true;
   scene.add(snowfall);
@@ -1146,6 +1451,135 @@ export function createWorld({ onPick } = {}) {
   const embers = new THREE.Points(emberGeo, emberMat);
   embers.userData.isFx = true;
   scene.add(embers);
+
+
+  // ash / snow storm layer
+  {
+    const ashCount = 260;
+    const ap = new Float32Array(ashCount * 3);
+    for (let i = 0; i < ashCount; i++) {
+      ap[i * 3] = (rand() - 0.5) * 26;
+      ap[i * 3 + 1] = rand() * 12;
+      ap[i * 3 + 2] = (rand() - 0.5) * 26;
+    }
+    const ag = new THREE.BufferGeometry();
+    ag.setAttribute('position', new THREE.BufferAttribute(ap, 3));
+    const am = new THREE.PointsMaterial({ color: '#a89a8a', size: 0.04, transparent: true, opacity: 0.0, depthWrite: false, toneMapped: false });
+    ashfall = new THREE.Points(ag, am);
+    ashfall.userData.isFx = true;
+    ashfall.visible = false;
+    scene.add(ashfall);
+  }
+
+  /* ---------------- environment presets ---------------- */
+
+  const ENV_DEFS = {
+    ash: {
+      label: '灰雪', top: '#070b14', bottom: '#263445', glow: '#9db4d0', glowS: 0.28,
+      fog: '#16202b', fogD: 0.017, moonC: '#b6cef2', moonI: 2.7,
+      hemiC: '#8299bd', hemiG: '#252830', hemiI: 1.05, fillI: 0.9,
+      exp: 1.28, snow: 0.85, ash: 0.22, stars: 0.55, moonOp: 0.5, lantern: 1.0, fire: 1.0,
+    },
+    moon: {
+      label: '月夜', top: '#03060f', bottom: '#101c2c', glow: '#b9d0ee', glowS: 0.24,
+      fog: '#0b1420', fogD: 0.014, moonC: '#c6d8f7', moonI: 3.6,
+      hemiC: '#8da4c8', hemiG: '#1e2129', hemiI: 1.15, fillI: 1.0,
+      exp: 1.34, snow: 0.5, ash: 0.0, stars: 0.95, moonOp: 0.95, lantern: 1.15, fire: 0.9,
+    },
+    storm: {
+      label: '风暴', top: '#080a0c', bottom: '#333940', glow: '#8e959c', glowS: 0.18,
+      fog: '#252c33', fogD: 0.032, moonC: '#9aa6b8', moonI: 0.9,
+      hemiC: '#6e7784', hemiG: '#181a1e', hemiI: 0.55, fillI: 0.45,
+      exp: 1.08, snow: 1.5, ash: 1.2, stars: 0.0, moonOp: 0.1, lantern: 0.9, fire: 0.8,
+    },
+    beacon: {
+      label: '烽火', top: '#0a101c', bottom: '#5a3427', glow: '#ffb36a', glowS: 0.35,
+      fog: '#2e2522', fogD: 0.012, moonC: '#d6c3b4', moonI: 1.8,
+      hemiC: '#a08a78', hemiG: '#2a201b', hemiI: 0.85, fillI: 0.9,
+      exp: 1.3, snow: 0.35, ash: 0.4, stars: 0.35, moonOp: 0.3, lantern: 1.35, fire: 1.5,
+    },
+  };
+
+  function envSnapshot(def) {
+    return {
+      top: new THREE.Color(def.top), bottom: new THREE.Color(def.bottom), glow: new THREE.Color(def.glow),
+      glowS: def.glowS, fog: new THREE.Color(def.fog), fogD: def.fogD,
+      moonC: new THREE.Color(def.moonC), moonI: def.moonI,
+      hemiC: new THREE.Color(def.hemiC), hemiG: new THREE.Color(def.hemiG), hemiI: def.hemiI,
+      fillI: def.fillI, exp: def.exp, snow: def.snow, ash: def.ash,
+      stars: def.stars, moonOp: def.moonOp, lantern: def.lantern, fire: def.fire,
+    };
+  }
+  function envLerp(a, b, k) {
+    for (const key of ['glowS', 'fogD', 'moonI', 'hemiI', 'fillI', 'exp', 'snow', 'ash', 'stars', 'moonOp', 'lantern', 'fire']) {
+      a[key] += (b[key] - a[key]) * k;
+    }
+    for (const key of ['top', 'bottom', 'glow', 'fog', 'moonC', 'hemiC', 'hemiG']) a[key].lerp(b[key], k);
+  }
+  function applyEnvironment(e) {
+    if (!e) return;
+    skyMat.uniforms.topColor.value.copy(e.top);
+    skyMat.uniforms.bottomColor.value.copy(e.bottom);
+    skyMat.uniforms.glowColor.value.copy(e.glow);
+    skyMat.uniforms.glowStrength.value = e.glowS;
+    scene.fog.color.copy(e.fog);
+    scene.fog.density = e.fogD;
+    hemi.color.copy(e.hemiC);
+    hemi.groundColor.copy(e.hemiG);
+    hemi.intensity = e.hemiI;
+    moonLight.color.copy(e.moonC);
+    moonLight.intensity = e.moonI;
+    fill.intensity = e.fillI;
+    renderer.toneMappingExposure = e.exp;
+    starMat.opacity = e.stars;
+    moon.material.opacity = e.moonOp;
+    moonGlow.material.opacity = 0.18 * Math.max(0.1, e.moonOp);
+    snowMatPts.opacity = 0.82 * e.snow;
+    emberMat.opacity = 0.42 * (0.7 + e.fire * 0.3);
+    if (ashfall) ashfall.material.opacity = 0.55 * e.ash;
+    if (snowfall) snowfall.visible = currentScene !== 'hall' && e.snow > 0.04;
+    if (ashfall) ashfall.visible = currentScene !== 'hall' && e.ash > 0.04;
+    if (beaconFlames) {
+      const fire = currentScene === 'beacon' ? Math.max(1, e.fire) : e.fire;
+      beaconFlames.forEach((f, i) => {
+        f.visible = currentScene === 'beacon' || fire > 0.95;
+        f.scale.set(0.8 + fire * 0.18, 0.85 + fire * 0.22, 0.8 + fire * 0.18);
+      });
+    }
+    if (beaconLight) beaconLight.intensity = 34 * (0.7 + e.fire * 0.3);
+  }
+  function setEnvironment(name, instant = false) {
+    const def = ENV_DEFS[name] || ENV_DEFS.ash;
+    const target = envSnapshot(def);
+    if (!envState) {
+      envState = { name: ENV_DEFS[name] ? name : 'ash', cur: envSnapshot(def), target };
+      applyEnvironment(envState.cur);
+      return envState.name;
+    }
+    envState.name = ENV_DEFS[name] ? name : 'ash';
+    envState.target = target;
+    if (instant) {
+      envState.cur = envSnapshot(def);
+      applyEnvironment(envState.cur);
+    }
+    return envState.name;
+  }
+  function updateEnvironment(dt) {
+    if (!envState) return;
+    const k = Math.min(1, dt * 2.4);
+    envLerp(envState.cur, envState.target, k);
+    applyEnvironment(envState.cur);
+  }
+  function cycleEnvironment() {
+    const order = ['ash', 'moon', 'storm', 'beacon'];
+    const i = order.indexOf(envState?.name);
+    const next = order[(i + 1) % order.length];
+    setEnvironment(next);
+    return next;
+  }
+  function getEnvironment() {
+    return { name: envState?.name || 'ash', label: ENV_DEFS[envState?.name || 'ash'].label };
+  }
 
   /* ---------------- interaction ---------------- */
 
@@ -1273,11 +1707,13 @@ export function createWorld({ onPick } = {}) {
     controls.update();
     animateDice(Math.min(rawDt, 0.4));
 
+    updateEnvironment(dt);
+
     // snow
     const sp = snowGeo.attributes.position.array;
     for (let i = 0; i < snowCount; i++) {
-      sp[i * 3 + 1] -= dt * (0.7 + (i % 7) * 0.06);
-      sp[i * 3] += Math.sin(t * 0.5 + i) * dt * 0.15;
+      sp[i * 3 + 1] -= dt * (0.7 + (i % 7) * 0.06) * (0.7 + (envState?.cur.snow || 0.8));
+      sp[i * 3] += Math.sin(t * 0.5 + i) * dt * (0.15 + (envState?.cur.snow || 0.8) * 0.2);
       if (sp[i * 3 + 1] < 0.1) {
         sp[i * 3 + 1] = 15;
         sp[i * 3] = (rand() - 0.5) * 30;
@@ -1294,9 +1730,25 @@ export function createWorld({ onPick } = {}) {
     }
     emberGeo.attributes.position.needsUpdate = true;
 
+    // ash
+    if (ashfall && ashfall.visible) {
+      const ap = ashfall.geometry.attributes.position.array;
+      const wind = envState?.cur.ash || 0;
+      for (let i = 0; i < 260; i++) {
+        ap[i * 3] += dt * (0.35 + wind * 0.9) * (0.6 + (i % 5) * 0.15);
+        ap[i * 3 + 1] -= dt * (0.35 + (i % 7) * 0.04);
+        if (ap[i * 3 + 1] < 0.1 || ap[i * 3] > 16) {
+          ap[i * 3] = -14 + rand() * 18;
+          ap[i * 3 + 1] = 9 + rand() * 5;
+          ap[i * 3 + 2] = (rand() - 0.5) * 26;
+        }
+      }
+      ashfall.geometry.attributes.position.needsUpdate = true;
+    }
+
     // braziers
     for (const l of lanterns) {
-      l.light.intensity = l.base * (0.9 + Math.sin(t * 9 + l.phase) * 0.06 + Math.sin(t * 23 + l.phase) * 0.03);
+      l.light.intensity = l.base * (envState?.cur.lantern || 1) * (0.9 + Math.sin(t * 9 + l.phase) * 0.06 + Math.sin(t * 23 + l.phase) * 0.03);
     }
     for (const p of [brazier1, brazier2]) {
       if (p.userData.flames) {
@@ -1334,10 +1786,12 @@ export function createWorld({ onPick } = {}) {
     // tokens breathing
     for (const tk of tokens.values()) {
       if (!tk.group.visible) continue;
-      const baseY = 0.12;
+      const baseY = tk.baseY ?? 0.12;
       tk.group.position.y = baseY + Math.sin(t * 1.3 + tk.group.position.x) * 0.008;
     }
 
+    updateEffects(dt);
+    updateActions(dt);
     updateLabels();
     renderer.render(scene, camera);
 
@@ -1374,13 +1828,6 @@ export function createWorld({ onPick } = {}) {
     if (!isCombat) {
       activeRing.visible = false;
       targetRing.visible = false;
-    }
-    // camera subtle framing per phase
-    if (isCombat) {
-      if (isPortrait()) tweenCamera(new THREE.Vector3(23, 17.5, 29), new THREE.Vector3(0, 1.2, -1.2), 0.9);
-      else tweenCamera(new THREE.Vector3(13.5, 11.5, 18.5), new THREE.Vector3(0, 1.1, -1.2), 0.9);
-    } else if (isExplore) {
-      tweenCamera(HOME.pos.clone(), HOME.target.clone(), 0.9);
     }
   }
 
@@ -1490,18 +1937,203 @@ export function createWorld({ onPick } = {}) {
     setTimeout(() => el.remove(), 1200);
   }
 
+
+  /* ---------------- skill VFX / action animations ---------------- */
+
+  const fxLayer = new THREE.Group();
+  scene.add(fxLayer);
+  const effects = [];
+
+  function fxMat(color, opacity = 0.85) {
+    return new THREE.MeshBasicMaterial({ color, transparent: true, opacity, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false, side: THREE.DoubleSide });
+  }
+  function burstAt(pos, color, count = 10, power = 1) {
+    const g = new THREE.Group();
+    const m = fxMat(color, 0.9);
+    const parts = [];
+    for (let i = 0; i < count; i++) {
+      const p = new THREE.Mesh(new THREE.SphereGeometry(0.035 + rand() * 0.045, 5, 4), m);
+      p.position.copy(pos);
+      const a = rand() * Math.PI * 2, e = rand() * Math.PI - Math.PI / 2;
+      const v = new THREE.Vector3(Math.cos(a) * Math.cos(e), Math.sin(e) * 0.9 + 0.35, Math.sin(a) * Math.cos(e)).multiplyScalar((0.8 + rand() * 1.4) * power);
+      g.add(p); parts.push({ m: p, v });
+    }
+    fxLayer.add(g);
+    effects.push({ kind: 'burst', t: 0, dur: 0.5 + rand() * 0.15, group: g, mat: m, parts });
+  }
+  function flashAt(pos, color, size = 3.4) {
+    const sp = glowSprite(color, size, 0.9);
+    sp.position.copy(pos);
+    fxLayer.add(sp);
+    effects.push({ kind: 'flash', t: 0, dur: 0.22, sprite: sp, size });
+  }
+  function ringAt(pos, color, size = 1, dur = 0.55) {
+    const geo = new THREE.RingGeometry(0.34 * size, 0.48 * size, 28);
+    const m = fxMat(color, 0.8);
+    const mesh = new THREE.Mesh(geo, m);
+    mesh.rotation.x = -Math.PI / 2;
+    mesh.position.set(pos.x, 0.22, pos.z);
+    fxLayer.add(mesh);
+    effects.push({ kind: 'ring', t: 0, dur, mesh, mat: m, size });
+  }
+  function slashAt(pos, color) {
+    const m = fxMat(color, 0.9);
+    const mesh = new THREE.Mesh(new THREE.TorusGeometry(0.72, 0.055, 4, 18, Math.PI * 1.2), m);
+    mesh.position.copy(pos);
+    mesh.rotation.set(Math.PI / 2, rand() * Math.PI, rand() * 0.7);
+    mesh.scale.setScalar(0.7);
+    fxLayer.add(mesh);
+    effects.push({ kind: 'slash', t: 0, dur: 0.3, mesh, mat: m });
+  }
+  function projectileAt(from, to, color, size = 0.1, dur = 0.4, arc = 1.0) {
+    const m = fxMat(color, 1);
+    const mesh = new THREE.Mesh(new THREE.SphereGeometry(size, 8, 6), m);
+    const glow = glowSprite(color, size * 8, 0.65);
+    glow.position.copy(mesh.position);
+    mesh.add(glow);
+    mesh.position.copy(from);
+    fxLayer.add(mesh);
+    effects.push({ kind: 'proj', t: 0, dur, mesh, mat: m, from: from.clone(), to: to.clone(), color, arc, target: to.clone() });
+  }
+  function beamAt(from, to, color) {
+    const dir = to.clone().sub(from);
+    const len = dir.length();
+    if (len < 0.01) return;
+    const m = fxMat(color, 0.8);
+    const mesh = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, len, 5), m);
+    mesh.position.copy(from).addScaledVector(dir, 0.5);
+    mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+    fxLayer.add(mesh);
+    effects.push({ kind: 'beam', t: 0, dur: 0.32, mesh, mat: m });
+  }
+  function updateEffects(dt) {
+    for (let i = effects.length - 1; i >= 0; i--) {
+      const e = effects[i];
+      e.t += dt;
+      const k = Math.min(1, e.t / e.dur);
+      if (e.kind === 'proj') {
+        const p = e.from.clone().lerp(e.to, k);
+        p.y += Math.sin(k * Math.PI) * e.arc;
+        e.mesh.position.copy(p);
+        if (k >= 1) {
+          fxLayer.remove(e.mesh);
+          flashAt(e.to, e.color, 2.6);
+          burstAt(e.to, e.color, 11, 1.0);
+          effects.splice(i, 1);
+        }
+      } else if (e.kind === 'burst') {
+        const fade = 1 - k;
+        e.mat.opacity = 0.9 * fade;
+        for (const p of e.parts) {
+          p.v.y -= 0.9 * dt;
+          p.m.position.addScaledVector(p.v, dt);
+        }
+        if (k >= 1) { fxLayer.remove(e.group); effects.splice(i, 1); }
+      } else if (e.kind === 'flash') {
+        const fade = 1 - k;
+        e.sprite.material.opacity = 0.9 * fade;
+        e.sprite.scale.setScalar(e.size * (0.7 + k * 0.7));
+        if (k >= 1) { fxLayer.remove(e.sprite); effects.splice(i, 1); }
+      } else if (e.kind === 'ring' || e.kind === 'slash' || e.kind === 'beam') {
+        e.mat.opacity = 0.85 * (1 - k);
+        if (e.kind === 'ring') e.mesh.scale.setScalar(1 + k * 2.6 * e.size);
+        if (e.kind === 'slash') e.mesh.scale.setScalar(0.7 + k * 1.3);
+        if (k >= 1) { fxLayer.remove(e.mesh); effects.splice(i, 1); }
+      }
+    }
+  }
+  function startAction(id, kind) {
+    const t = tokens.get(id);
+    if (!t) return;
+    t.action = { t: 0, dur: 0.5, kind };
+  }
+  function updateActions(dt) {
+    for (const tk of tokens.values()) {
+      if (!tk.action) continue;
+      const a = tk.action;
+      a.t += dt;
+      const k = Math.min(1, a.t / a.dur);
+      const p = Math.sin(k * Math.PI);
+      const r = tk.refs;
+      if (r) {
+        r.armR.upper.rotation.x = 0;
+        r.armL.upper.rotation.x = 0;
+        r.torso.rotation.y = 0;
+        r.torso.rotation.x = 0;
+        r.hip.position.y = 0.92;
+        if (a.kind === 'sword') { r.armR.upper.rotation.x = -1.55 * p; r.torso.rotation.y = 0.34 * p; r.hip.position.y = 0.92 + 0.04 * p; }
+        else if (a.kind === 'bow') { r.armL.upper.rotation.x = -1.25 * p; r.armR.upper.rotation.x = -1.15 * p; r.torso.rotation.y = -0.18 * p; }
+        else if (a.kind === 'fire' || a.kind === 'magic') { r.armR.upper.rotation.x = -1.7 * p; r.armL.upper.rotation.x = -0.5 * p; }
+        else if (a.kind === 'hide') { r.torso.rotation.x = 0.35 * p; r.hip.position.y = 0.92 - 0.12 * p; }
+        else if (a.kind === 'help' || a.kind === 'heal') { r.armR.upper.rotation.x = -1.5 * p; r.armL.upper.rotation.x = -1.2 * p; }
+        else if (a.kind === 'dodge') { r.torso.rotation.z = 0.18 * p; }
+      }
+      if (k >= 1) {
+        if (r) {
+          r.armR.upper.rotation.x = 0; r.armL.upper.rotation.x = 0;
+          r.torso.rotation.y = 0; r.torso.rotation.x = 0; r.torso.rotation.z = 0;
+          r.hip.position.y = 0.92;
+        }
+        tk.action = null;
+      }
+    }
+  }
+  function playSkill(actorId, kind, targetId = null) {
+    const a = tokens.get(actorId);
+    const b = tokens.get(targetId || actorId);
+    const ap = a ? a.group.position.clone().add(new THREE.Vector3(0, 1.15, 0)) : new THREE.Vector3();
+    const bp = b ? b.group.position.clone().add(new THREE.Vector3(0, 1.0, 0)) : ap.clone();
+    startAction(actorId, kind);
+    switch (kind) {
+      case 'sword':
+        slashAt(bp, '#ffe0b0'); flashAt(bp, '#ffd08a', 3.0); burstAt(bp, '#ffd08a', 8, 0.8); shakeIt(0.35); break;
+      case 'bow':
+        projectileAt(ap, bp, '#e0c99a', 0.1, 0.4, 0.45); shakeIt(0.12); break;
+      case 'fire':
+        projectileAt(ap, bp, '#ff9a4c', 0.2, 0.52, 1.1); flashAt(bp, '#ff7a3a', 4.4); burstAt(bp, '#ff7a3a', 16, 1.15); shakeIt(0.32); break;
+      case 'magic':
+        for (let i = 0; i < 3; i++) {
+          setTimeout(() => projectileAt(ap.clone().add(new THREE.Vector3((i - 1) * 0.28, 0.1 * i, 0)), bp.clone().add(new THREE.Vector3((i - 1) * 0.2, 0, 0)), '#8fdcff', 0.14, 0.4, 0.8), i * 90);
+        }
+        flashAt(bp, '#9fe4ff', 4.4); burstAt(bp, '#9fe4ff', 14, 1.1); shakeIt(0.22); break;
+      case 'hide':
+        burstAt(ap, '#8a8f95', 18, 1.2); ringAt(a.group.position, '#7ba08b', 1.2); shakeIt(0.1); break;
+      case 'help':
+        beamAt(ap, bp, '#e6c27a'); ringAt(b.group.position, '#e6c27a', 1.1); burstAt(bp, '#ffe0a0', 8, 0.7); break;
+      case 'dodge':
+        ringAt(a.group.position, '#7f9dc9', 1.5); burstAt(ap, '#9fc8ff', 8, 0.6); break;
+      case 'heal':
+        ringAt(b.group.position, '#86c69a', 1.4); burstAt(bp, '#a8e0b0', 16, 0.8); break;
+      case 'oil':
+        projectileAt(ap, bp, '#d8954a', 0.12, 0.5, 1.1); setTimeout(() => { burstAt(bp, '#ff7a3a', 22, 1.6); ringAt(b.group.position, '#ff8a3a', 1.8); shakeIt(0.5); }, 520); break;
+      case 'howl':
+        ringAt(a.group.position, '#b34a3f', 2.6); flashAt(ap, '#b34a3f', 6.0); burstAt(ap, '#b34a3f', 18, 1.4); shakeIt(0.55); break;
+      case 'ash':
+        ringAt(a.group.position, '#b06a4a', 2.2); flashAt(a.group.position.clone().add(new THREE.Vector3(0,1,0)), '#c88454', 6.0); burstAt(ap, '#c88454', 20, 1.2); shakeIt(0.4); break;
+      case 'enemy':
+        slashAt(bp, '#d05a45'); flashAt(bp, '#d05a45', 2.6); burstAt(bp, '#d05a45', 9, 0.9); shakeIt(0.3); break;
+      case 'die':
+        burstAt(bp, '#a06a4a', 26, 1.5); ringAt(b.group.position, '#a06a4a', 1.8); break;
+      default:
+        burstAt(bp, '#c9a35d', 6, 0.5);
+    }
+  }
+
   function resetCamera() {
-    const h = homeConfig();
+    const h = sceneHome();
     camera.fov = h.fov;
     camera.updateProjectionMatrix();
     tweenCamera(h.pos.clone(), h.target.clone(), 0.9);
   }
 
+  setScene('courtyard');
+
   return {
     scene, camera, controls, tokens, hotspots, dice, tray,
-    setPhase, setToken, setTokenMeta, setActive, setTarget, setHotspot, setAdaAlly,
-    roll, shake: shakeIt, floatAt, resetCamera, setHome: resetCamera,
-    scatterDice,
+    setPhase, setScene, setEnvironment, cycleEnvironment, getEnvironment,
+    setToken, setTokenMeta, setActive, setTarget, setHotspot, setAdaAlly,
+    roll, shake: shakeIt, floatAt, resetCamera, setHome: resetCamera, playSkill, playEffect: playSkill,
+    scatterDice, get sceneName() { return currentScene; },
     get phaseHomes() { return HOMES; },
   };
 }
