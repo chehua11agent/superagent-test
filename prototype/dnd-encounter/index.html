@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#14100c" />
+    <meta
+      name="description"
+      content="《苔灯旅店》——一个 D&D 式的剧情 × 检定 × 回合制战斗演示，四个 CET-4 单词贯穿一夜。"
+    />
+    <title>苔灯旅店 · D&amp;D 式一夜 — 剧情 × 检定 × 回合制战斗</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2314100c'/%3E%3Cpath d='M16 5 26 11v10L16 27 6 21V11z' fill='none' stroke='%23c9a227' stroke-width='1.6'/%3E%3Ctext x='16' y='20' font-family='serif' font-size='12' fill='%23f0e6d2' text-anchor='middle'%3E20%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="topbar" id="topbar" hidden>
+      <div class="brand">
+        <span class="brand-seal" aria-hidden="true">苔</span>
+        <span class="brand-copy">
+          <span class="brand-name">苔灯旅店</span>
+          <span class="brand-sub">D&amp;D 式一夜 · 演示</span>
+        </span>
+      </div>
+      <div class="hud">
+        <div class="hud-stat" title="生命值">
+          <span class="hud-label">生命</span>
+          <span class="hp-track hud-hp"><i id="hud-hp-fill"></i></span>
+          <span class="hud-value" id="hud-hp-text">28/28</span>
+        </div>
+        <div class="hud-stat hud-stat--tight" title="护甲等级">
+          <span class="hud-label">AC</span>
+          <span class="hud-value" id="hud-ac">14</span>
+        </div>
+        <div class="hud-stat hud-stat--tight" title="法术位">
+          <span class="hud-label">法术位</span>
+          <span class="hud-value" id="hud-slots">●●</span>
+        </div>
+        <button class="ghost-btn ghost-btn--small" id="btn-words" type="button">
+          词笺 <span class="badge" id="word-count">0</span>
+        </button>
+        <button class="icon-btn" id="btn-sound" type="button" aria-label="关闭音效" title="音效开关">
+          <span id="sound-icon" aria-hidden="true">♪</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ── 封面 ───────────────────────────────────────────── -->
+      <section class="screen screen--title" data-screen="title" aria-labelledby="title-h1">
+        <div class="title-grid">
+          <div class="title-copy">
+            <p class="kicker">CET-4 · 剧情 × 检定 × 回合制战斗 · 约 5 分钟</p>
+            <h1 class="title" id="title-h1">
+              <span class="title-cn">苔灯旅店</span>
+              <span class="title-en">ONE NIGHT AT THE MOSS LANTERN</span>
+            </h1>
+            <p class="tagline">
+              雾夜，桥头。一个没有脸的抄写员，<br />
+              每夜从账本上抄走一个词。
+            </p>
+            <p class="title-lead">
+              你带着四个词走进旅店：<b>ward</b> 守护、<b>scorch</b> 灼烧、<b>mend</b> 修补、<b>daze</b> 恍惚。
+              先用它们讲完一段故事，再用它们打一场回合制战斗。
+            </p>
+            <div class="title-actions">
+              <button class="primary-btn" id="btn-start" type="button">推门进去</button>
+              <button class="ghost-btn" id="btn-rules" type="button">怎么玩</button>
+            </div>
+            <ul class="title-rules">
+              <li><b>剧情</b> · 3 段选择，d20 + 调整值对抗 DC，失败也继续。</li>
+              <li><b>战斗</b> · 先攻、AC、伤害骰、优势/劣势、法术位。</li>
+              <li><b>词汇</b> · 四个四级词既是剧情道具，也是战斗动作。</li>
+            </ul>
+            <p class="title-note">单页演示 · 无需安装 · 手机与桌面均可玩 · 没有存档</p>
+
+            <details class="about">
+              <summary>这张演示想验证什么？</summary>
+              <ul>
+                <li>D&amp;D 的「检定 + 分支」能不能让故事选择真的有重量，而不是换皮的选择题。</li>
+                <li>先攻、AC、伤害骰、法术位这套回合制，能不能撑起「词 = 行动」的节奏。</li>
+                <li>内容成本：这一夜大约是一幕的量；乘以 12 幕，值不值得写。</li>
+              </ul>
+              <p>看完后只要你一句判断：这种玩法对《拾词者》有没有可取之处。</p>
+            </details>
+          </div>
+
+          <div class="title-art" aria-hidden="true">
+            <svg viewBox="0 0 420 520" class="inn-svg">
+              <defs>
+                <radialGradient id="moonGlow" cx="0.5" cy="0.5" r="0.5">
+                  <stop offset="0" stop-color="#f0e6d2" stop-opacity="0.55" />
+                  <stop offset="1" stop-color="#f0e6d2" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient id="nightSky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0e0b08" />
+                  <stop offset="1" stop-color="#221a12" />
+                </linearGradient>
+                <linearGradient id="windowLight" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#e8b75a" />
+                  <stop offset="1" stop-color="#9a5a24" />
+                </linearGradient>
+                <filter id="soft"><feGaussianBlur stdDeviation="6" /></filter>
+              </defs>
+              <rect width="420" height="520" fill="url(#nightSky)" />
+              <circle cx="318" cy="96" r="52" fill="url(#moonGlow)" />
+              <circle cx="318" cy="96" r="26" fill="#efe4c8" opacity="0.85" />
+              <path d="M0 350h420v170H0z" fill="#0b0907" />
+              <path d="M0 372c60-16 110 14 170 0s120-22 180-4 70 8 70 8v144H0z" fill="#14100c" />
+              <!-- 旅店 -->
+              <path d="M96 236 210 160l114 76v176H96z" fill="#1d1712" stroke="#3a2e20" stroke-width="2" />
+              <path d="M78 240 210 150l132 90-12 12-120-78-120 78z" fill="#2b2118" stroke="#4a3a26" stroke-width="2" />
+              <rect x="138" y="286" width="52" height="60" fill="url(#windowLight)" opacity="0.9" />
+              <rect x="232" y="286" width="52" height="60" fill="url(#windowLight)" opacity="0.65" />
+              <rect x="138" y="286" width="52" height="60" fill="none" stroke="#4a3a26" stroke-width="4" />
+              <rect x="232" y="286" width="52" height="60" fill="none" stroke="#4a3a26" stroke-width="4" />
+              <path d="M138 316h52M164 286v60M232 316h52M258 286v60" stroke="#4a3a26" stroke-width="3" />
+              <rect x="196" y="348" width="44" height="64" fill="#0f0b08" stroke="#4a3a26" stroke-width="3" />
+              <circle cx="232" cy="382" r="3" fill="#c9a227" />
+              <!-- 招牌 -->
+              <path d="M120 250h44" stroke="#4a3a26" stroke-width="3" />
+              <path d="M122 250v26M162 250v26" stroke="#4a3a26" stroke-width="2" />
+              <rect x="118" y="254" width="48" height="22" rx="3" fill="#2b2118" stroke="#c9a227" stroke-width="1.4" />
+              <text x="142" y="270" font-family="serif" font-size="12" fill="#e6cd8a" text-anchor="middle">苔灯</text>
+              <!-- 门灯 -->
+              <g class="lantern-glow">
+                <circle cx="196" cy="336" r="26" fill="#e8b75a" opacity="0.18" filter="url(#soft)" />
+                <path d="M196 320v-6" stroke="#4a3a26" stroke-width="3" />
+                <path d="M187 322h18l-3 16h-12z" fill="#3a2e20" stroke="#c9a227" stroke-width="1.5" />
+                <path d="M190 326h12l-2 9h-8z" fill="#e8b75a" />
+              </g>
+              <!-- 桥 -->
+              <path d="M0 470c70-40 150-34 210-10s140 40 210 8v52H0z" fill="#181310" />
+              <path d="M0 470c70-40 150-34 210-10s140 40 210 8" fill="none" stroke="#3a2e20" stroke-width="3" />
+              <path d="M20 452v40M80 440v46M150 432v50M280 444v42M350 444v40" stroke="#2b2118" stroke-width="4" />
+              <!-- 雾 -->
+              <g class="fog" opacity="0.5">
+                <ellipse cx="120" cy="430" rx="150" ry="26" fill="#cfc3a6" opacity="0.10" />
+                <ellipse cx="300" cy="452" rx="170" ry="30" fill="#cfc3a6" opacity="0.08" />
+              </g>
+              <!-- 抬笔的人影 -->
+              <g class="scribe-shadow">
+                <path d="M330 420c4-30 10-58 26-64 14-6 26 16 24 42-2 24-4 44-8 56h-40z" fill="#0a0806" opacity="0.85" />
+                <circle cx="358" cy="344" r="14" fill="#0a0806" opacity="0.9" />
+                <path d="M356 340l-18-30" stroke="#0a0806" stroke-width="5" stroke-linecap="round" />
+                <path d="M338 310l-8-14" stroke="#c9a227" stroke-width="2" />
+              </g>
+            </svg>
+            <p class="title-art-caption">“钟响三下，人就恍惚，站在原地等它抄完。”</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 剧情 ───────────────────────────────────────────── -->
+      <section class="screen screen--story" data-screen="story" aria-labelledby="story-title" hidden>
+        <div class="story-grid">
+          <div class="story-side">
+            <div class="scene-art" id="scene-art"></div>
+            <aside class="sheet" aria-label="角色卡">
+              <h2 class="sheet-title">拾词者 · 角色卡</h2>
+              <dl class="sheet-stats">
+                <div><dt>生命</dt><dd id="sheet-hp">28 / 28</dd></div>
+                <div><dt>护甲</dt><dd id="sheet-ac">14</dd></div>
+                <div><dt>命中</dt><dd>+5</dd></div>
+                <div><dt>法术豁免</dt><dd>DC 13</dd></div>
+                <div><dt>法术位</dt><dd id="sheet-slots">2</dd></div>
+                <div><dt>药水</dt><dd id="sheet-potions">1</dd></div>
+              </dl>
+              <h3 class="sheet-sub">随身物</h3>
+              <ul class="sheet-items" id="sheet-items"></ul>
+              <h3 class="sheet-sub">你在这一夜的选择</h3>
+              <ul class="sheet-flags" id="sheet-flags"></ul>
+            </aside>
+          </div>
+
+          <div class="story-panel">
+            <p class="scene-kicker" id="story-kicker">第 1 幕 · 桥头</p>
+            <h1 class="story-title" id="story-title" tabindex="-1">雾里的两盏灯</h1>
+            <div class="story-text" id="story-text"></div>
+            <div class="story-result" id="story-result" hidden></div>
+            <div class="choices" id="story-choices"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 战斗 ───────────────────────────────────────────── -->
+      <section class="screen screen--combat" data-screen="combat" aria-labelledby="combat-title" hidden>
+        <h1 class="visually-hidden" id="combat-title">雾中战斗</h1>
+        <div class="combat-grid">
+          <div class="combat-main">
+            <div class="turn-line">
+              <span id="combat-round">第 1 回合</span>
+              <span class="turn-sep" aria-hidden="true"></span>
+              <span id="combat-turn">你的回合</span>
+              <span class="turn-sep" aria-hidden="true"></span>
+              <span id="combat-initiative">先攻：18 / 9</span>
+            </div>
+
+            <div class="arena">
+              <article class="combatant combatant--enemy" id="enemy-card">
+                <div class="combatant-art" id="enemy-art" aria-hidden="true"></div>
+                <div class="combatant-head">
+                  <h2 class="combatant-name">抄写员</h2>
+                  <span class="ac-badge" title="护甲等级">AC <b id="enemy-ac">12</b></span>
+                </div>
+                <div class="hp-block">
+                  <div class="hp-line"><span>生命</span><span id="enemy-hp-text">26 / 26</span></div>
+                  <span class="hp-track hp-track--enemy"><i id="enemy-hp-fill"></i></span>
+                </div>
+                <p class="intent" id="enemy-intent"><span class="intent-label">下一步</span><span id="enemy-intent-text">墨针 · 1d6+2</span></p>
+              </article>
+
+              <div class="vs" aria-hidden="true">VS</div>
+
+              <article class="combatant combatant--player" id="player-card">
+                <div class="combatant-art combatant-art--player" id="player-art" aria-hidden="true"></div>
+                <div class="combatant-head">
+                  <h2 class="combatant-name">你 · 拾词者</h2>
+                  <span class="ac-badge" title="护甲等级">AC <b id="player-ac">14</b></span>
+                </div>
+                <div class="hp-block">
+                  <div class="hp-line"><span>生命</span><span id="player-hp-text">28 / 28</span></div>
+                  <span class="hp-track hp-track--player"><i id="player-hp-fill"></i></span>
+                </div>
+                <p class="player-resources" id="player-resources"></p>
+              </article>
+            </div>
+
+            <div class="action-rail" id="action-rail" aria-label="战斗动作">
+              <div class="rail-status" id="rail-status"></div>
+              <div class="spell-row" id="spell-row"></div>
+              <div class="utility-row">
+                <button class="action-btn" id="btn-attack" type="button" data-key="1">
+                  <span class="action-icon" aria-hidden="true">⚔</span>
+                  <span class="action-copy"><b>长剑攻击</b><small>d20+5 vs AC 12 · 1d8+3</small></span>
+                  <kbd>1</kbd>
+                </button>
+                <button class="action-btn" id="btn-dodge" type="button" data-key="2">
+                  <span class="action-icon" aria-hidden="true">◇</span>
+                  <span class="action-copy"><b>闪避</b><small>它的攻击有劣势</small></span>
+                  <kbd>2</kbd>
+                </button>
+                <button class="action-btn" id="btn-potion" type="button" data-key="3">
+                  <span class="action-icon" aria-hidden="true">✚</span>
+                  <span class="action-copy"><b>治疗药水</b><small>2d4+2 · 剩余 <span id="potion-count">1</span></small></span>
+                  <kbd>3</kbd>
+                </button>
+                <button class="action-btn" id="btn-bell" type="button" data-key="4" hidden>
+                  <span class="action-icon" aria-hidden="true">♨</span>
+                  <span class="action-copy"><b>苔铃</b><small>感知豁免 DC 13 · 恍惚</small></span>
+                  <kbd>4</kbd>
+                </button>
+              </div>
+              <p class="action-hint" id="action-hint">选择动作。词术要先想起词义才能真正施放。</p>
+            </div>
+          </div>
+
+          <aside class="combat-log" aria-label="战斗记录">
+            <h2 class="log-title">战报</h2>
+            <div class="log" id="log" role="log" aria-live="polite"></div>
+            <p class="log-hint">d20 + 加值 ≥ DC / AC 即成功；掷出 20 暴击，掷出 1 必失手。词术要先答对词义。</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ── 结算 ───────────────────────────────────────────── -->
+      <section class="screen screen--review" data-screen="review" aria-labelledby="review-title" hidden>
+        <div class="review-wrap">
+          <p class="kicker">结算 · 复习</p>
+          <h1 class="review-title" id="review-title" tabindex="-1">四个词，明天再见</h1>
+          <p class="review-lead" id="review-lead"></p>
+
+          <div class="word-grid" id="review-words"></div>
+
+          <div class="review-quiz">
+            <h2>离开之前，两件小事</h2>
+            <div class="quiz-item" id="quiz-1">
+              <p class="quiz-q"><b>1.</b> 「守护；防护」是下面哪个词？</p>
+              <div class="quiz-options" id="quiz-1-options"></div>
+              <p class="quiz-feedback" id="quiz-1-feedback" hidden></p>
+            </div>
+            <div class="quiz-item" id="quiz-2">
+              <p class="quiz-q"><b>2.</b> 拼出「修补」：<span class="quiz-hint">/mend/</span></p>
+              <div class="quiz-input-row">
+                <input id="quiz-2-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="输入英文单词" aria-label="输入“修补”的英文拼写" />
+                <button class="ghost-btn" id="quiz-2-check" type="button">检查</button>
+              </div>
+              <p class="quiz-feedback" id="quiz-2-feedback" hidden></p>
+            </div>
+            <div class="review-actions">
+              <button class="primary-btn" id="btn-review-done" type="button" hidden>收下这一夜</button>
+            </div>
+          </div>
+
+          <div class="review-final" id="review-final" hidden>
+            <h2>演示结束</h2>
+            <p id="review-final-text"></p>
+            <div class="title-actions">
+              <button class="primary-btn" id="btn-restart" type="button">再走一遍</button>
+              <button class="ghost-btn" id="btn-cover" type="button">回到封面</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 词笺 -->
+    <dialog class="dlg dlg--glossary" id="dlg-glossary" aria-labelledby="glossary-title">
+      <div class="dlg-head">
+        <h2 id="glossary-title">词笺</h2>
+        <button class="icon-btn dlg-close" type="button" data-close aria-label="关闭">×</button>
+      </div>
+      <p class="dlg-sub">这一夜你遇到的四个 CET-4 词。战斗中被抄走的词会标出来。</p>
+      <ul class="glossary-list" id="glossary-list"></ul>
+    </dialog>
+
+    <!-- 规则 -->
+    <dialog class="dlg dlg--rules" id="dlg-rules" aria-labelledby="rules-title">
+      <div class="dlg-head">
+        <h2 id="rules-title">怎么玩</h2>
+        <button class="icon-btn dlg-close" type="button" data-close aria-label="关闭">×</button>
+      </div>
+      <div class="rules-body">
+        <h3>检定</h3>
+        <p>掷 d20，加调整值，对比难度（DC）。≥ DC 成功。检定失败不会卡关，只会改变结果与代价。</p>
+        <h3>战斗</h3>
+        <ul>
+          <li><b>先攻</b>：d20 + 敏捷调整值，决定行动顺序。</li>
+          <li><b>攻击</b>：d20 + 命中加值 vs AC；命中后掷伤害骰。掷出 20 暴击（伤害骰翻倍），掷出 1 必定落空。</li>
+          <li><b>优势 / 劣势</b>：掷两次 d20，取高 / 取低。</li>
+          <li><b>词术</b>：消耗 1 个法术位；先选出正确词义，选错则法术溃散、本回合结束。</li>
+          <li><b>闪避</b>：直到你的下回合，敌人攻击你有劣势。</li>
+        </ul>
+        <h3>词</h3>
+        <p>四个词在剧情里先出现，然后在战斗里变成动作。战斗结束后，它们会进入复习。</p>
+      </div>
+    </dialog>
+
+    <!-- 词义检定 -->
+    <dialog class="dlg dlg--wordcheck" id="dlg-wordcheck" aria-labelledby="wc-title">
+      <div class="dlg-head">
+        <h2 id="wc-title">施放 <span id="wc-word">ward</span></h2>
+        <button class="icon-btn dlg-close" type="button" data-close aria-label="关闭">×</button>
+      </div>
+      <p class="dlg-sub">先想起它的意思。选错，这个法术就散了。</p>
+      <div class="wc-options" id="wc-options"></div>
+      <p class="wc-feedback" id="wc-feedback" hidden></p>
+    </dialog>
+
+    <noscript>
+      <p class="noscript">这个演示需要启用 JavaScript。</p>
+    </noscript>
+    <script src="game.js"></script>
+  </body>
+</html>
