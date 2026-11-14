@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#14110d" />
     <meta
       name="description"
-      content="《灰烬岗哨》——一局 5e 跑团演示：探索、社交、战斗、短休、升级，用 SRD 5.1 规则跑完一幕原创剧本。"
+      content="《灰烬岗哨》——按 5e 玩家手册的种族、职业、背景建三名角色，再用一幕原创剧本跑完探索、社交、战斗、短休、升级。"
     />
     <title>灰烬岗哨 · 一局 5e 跑团演示</title>
     <link
@@ -25,7 +25,7 @@
         <span class="brand-mark" aria-hidden="true">岗</span>
         <span class="brand-copy">
           <span class="brand-name">灰烬岗哨</span>
-          <span class="brand-sub">5e 跑团演示 · SRD 5.1</span>
+          <span class="brand-sub">5e 跑团演示 · 手册对照</span>
         </span>
       </div>
       <div class="hud">
@@ -42,7 +42,7 @@
       <section class="screen screen--title" data-screen="title" aria-labelledby="title-h1">
         <div class="title-grid">
           <div class="title-copy">
-            <p class="kicker">一局 5e 跑团 · 原创剧本 · 约 8–10 分钟</p>
+            <p class="kicker">5e 玩家手册 · 原创剧本 · 约 8–10 分钟</p>
             <h1 class="title" id="title-h1">
               <span class="title-cn">灰烬岗哨</span>
               <span class="title-en">THE ASHEN WATCH</span>
@@ -50,9 +50,10 @@
             <p class="tagline">烽火三天没点。你们是最后一批上去的人。</p>
             <p class="title-lead">
               这是一个<b>排除其他所有东西、单独成立</b>的 D&amp;D 演示：没有背单词，也没有别的玩法。
-              用 5e 规则（SRD 5.1）和一个原创一幕剧本，把跑团的几个主要环节各走一遍。
+              按 5e 玩家手册的种族、职业、背景与规则，用一个原创一幕剧本，把跑团的几个主要环节各走一遍。
             </p>
             <ul class="phase-list">
+              <li><span>00</span><b>角色</b>· 种族、职业、背景</li>
               <li><span>01</span><b>探索</b>· 检定、线索、陷阱</li>
               <li><span>02</span><b>社交</b>· 态度、说服、洞悉</li>
               <li><span>03</span><b>战斗</b>· 先攻、AC、法术</li>
@@ -60,11 +61,11 @@
               <li><span>05</span><b>成长</b>· 战利品、经验、升级</li>
             </ul>
             <div class="title-actions">
-              <button class="primary-btn" id="btn-start" type="button">进入岗哨</button>
+              <button class="primary-btn" id="btn-start" type="button">创建队伍</button>
               <button class="ghost-btn" id="btn-rules-title" type="button">先看规则书</button>
             </div>
             <p class="title-note">
-              单页演示 · 无需安装 · 手机可玩 · 基于 SRD 5.1（CC-BY-4.0），剧本与文本为原创
+              单页演示 · 无需安装 · 手机可玩 · 按 5e 玩家手册的规则结构；手册原文未复制，文字为摘要与原创
             </p>
           </div>
 
@@ -120,6 +121,27 @@
               </g>
             </svg>
             <p class="art-caption">“点火的不是你们。是三天前就该点火的那些人。”</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 创建角色 ─────────────────────────────────────── -->
+      <section class="screen screen--create" data-screen="create" aria-labelledby="create-title" hidden>
+        <div class="create-wrap">
+          <p class="kicker">第 0 幕 · 创建角色 · 5e 玩家手册 第 1 章</p>
+          <h1 class="create-title" id="create-title" tabindex="-1">先造三个人</h1>
+          <p class="create-lead">
+            5e 的角色由 <b>种族、职业、背景、属性</b> 组成。这里用《玩家手册》的选项做三张角色卡：
+            职业与子职业固定，种族与背景可以换。种族给属性与特性，背景给技能；手册原文没有复制，
+            数值按手册规则推导，HP / AC 用预置装备值以便演示平衡。
+          </p>
+          <div class="create-grid" id="create-grid"></div>
+          <p class="create-note">
+            属性调整值 =（属性 − 10）÷ 2 向下取整 · 熟练加值 +2 · 技能 = 属性调整值 + 熟练（若熟练）。
+          </p>
+          <div class="create-actions">
+            <button class="primary-btn" id="btn-create-start" type="button">带着这三个人出发</button>
+            <button class="ghost-btn" id="btn-create-reset" type="button">恢复推荐组合</button>
           </div>
         </div>
       </section>
@@ -186,11 +208,11 @@
     <!-- 规则书 -->
     <dialog class="dlg dlg--rules" id="dlg-rules" aria-labelledby="rules-title">
       <div class="dlg-head">
-        <h2 id="rules-title">规则书 · SRD 5.1 摘要</h2>
+        <h2 id="rules-title">规则书 · 5e 手册摘要</h2>
         <button class="icon-btn dlg-close" type="button" data-close aria-label="关闭">×</button>
       </div>
       <p class="dlg-sub">
-        这里只写本演示实际用到的规则摘要，不是《玩家手册》的替代；完整规则见 SRD 5.1（CC-BY-4.0）。
+        这里写本演示实际用到的 5e 规则摘要与手册对照，不是《玩家手册》的替代，也没有复制手册原文。
       </p>
       <nav class="rules-nav" id="rules-nav" aria-label="规则目录"></nav>
       <div class="rules-body" id="rules-body"></div>

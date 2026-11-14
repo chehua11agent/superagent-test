@@ -24,64 +24,206 @@
       id: "bran",
       name: "布兰",
       cls: "战士 3",
+      subclass: "冠军",
       icon: "⚔",
       hp: 31,
       maxHp: 31,
       ac: 17,
-      init: 1,
       prof: 2,
+      race: "human",
+      bg: "soldier",
       stats: { str: 16, dex: 12, con: 14, int: 10, wis: 12, cha: 12 },
       atk: { name: "长剑", mod: 5, dice: [1, 8, 3], type: "挥砍" },
       main: "str",
-      skills: { athletics: 5, intimidation: 3, perception: 3 },
-      saves: { str: 5, con: 4 },
+      classSkills: ["athletics", "perception"],
+      saveProfs: ["str", "con"],
       secondWind: 1,
+      classFeature: "精通重击：掷出 19–20 即暴击",
       rest: "回气恢复",
       tag: "前排",
-      note: "31 HP · AC 17",
     },
     {
       id: "vera",
       name: "薇拉",
       cls: "游荡者 3",
+      subclass: "盗贼",
       icon: "➶",
       hp: 24,
       maxHp: 24,
       ac: 14,
-      init: 4,
       prof: 2,
+      race: "halfling",
+      bg: "criminal",
       stats: { str: 8, dex: 18, con: 12, int: 12, wis: 14, cha: 14 },
       atk: { name: "短弓", mod: 6, dice: [1, 6, 4], type: "穿刺" },
       sneak: true,
       main: "dex",
-      skills: { stealth: 6, survival: 4, persuasion: 4, insight: 4 },
-      saves: { dex: 6 },
+      classSkills: ["stealth", "survival", "persuasion", "insight"],
+      saveProfs: ["dex"],
+      classFeature: "快手：药水 / 火油不消耗动作（每场一次）",
       rest: "无特殊资源",
       tag: "偷袭",
-      note: "24 HP · AC 14",
     },
     {
       id: "oren",
       name: "奥伦",
       cls: "法师 3",
+      subclass: "塑能师",
       icon: "✦",
       hp: 20,
       maxHp: 20,
       ac: 12,
-      init: 2,
       prof: 2,
+      race: "highElf",
+      bg: "sage",
       stats: { str: 8, dex: 14, con: 12, int: 18, wis: 12, cha: 10 },
       atk: { name: "火焰箭", mod: 6, dice: [1, 10, 0], type: "火焰", spell: true },
       main: "int",
-      skills: { investigation: 6, insight: 3, arcana: 6 },
-      saves: { int: 6, wis: 3 },
+      classSkills: ["investigation", "insight", "arcana"],
+      saveProfs: ["int", "wis"],
       slots: 3,
       maxSlots: 3,
+      classFeature: "塑形法术：范围法术不伤队友（演示未展开）",
       rest: "奥术恢复 +1 法术位",
       tag: "法术",
-      note: "20 HP · AC 12",
     },
   ];
+
+  const SKILL_STAT = {
+    athletics: "str",
+    acrobatics: "dex",
+    sleight: "dex",
+    stealth: "dex",
+    arcana: "int",
+    history: "int",
+    investigation: "int",
+    nature: "int",
+    religion: "int",
+    animal: "wis",
+    insight: "wis",
+    medicine: "wis",
+    perception: "wis",
+    survival: "wis",
+    deception: "cha",
+    intimidation: "cha",
+    performance: "cha",
+    persuasion: "cha",
+  };
+
+  const SKILL_NAME = {
+    athletics: "运动",
+    acrobatics: "杂技",
+    sleight: "巧手",
+    stealth: "隐匿",
+    arcana: "奥秘",
+    history: "历史",
+    investigation: "调查",
+    nature: "自然",
+    religion: "宗教",
+    animal: "驯兽",
+    insight: "洞悉",
+    medicine: "医药",
+    perception: "察觉",
+    survival: "生存",
+    deception: "欺瞒",
+    intimidation: "威吓",
+    performance: "表演",
+    persuasion: "说服",
+  };
+
+  const RACES = {
+    human: {
+      name: "人类",
+      bonuses: { str: 1, dex: 1, con: 1, int: 1, wis: 1, cha: 1 },
+      skills: [],
+      features: ["全属性 +1", "额外语言"],
+      note: "PHB 人类：均衡、没有黑暗视觉",
+    },
+    highElf: {
+      name: "高等精灵",
+      bonuses: { dex: 2, int: 1 },
+      skills: ["perception"],
+      features: ["敏捷 +2、智力 +1", "黑暗视觉", "精类血统", "察觉熟练"],
+      note: "PHB 高等精灵：敏捷、智力与察觉",
+    },
+    halfling: {
+      name: "轻足半身人",
+      bonuses: { dex: 2, cha: 1 },
+      skills: [],
+      features: ["敏捷 +2、魅力 +1", "幸运（攻击掷 1 可重掷）", "勇敢", "灵活"],
+      note: "PHB 轻足半身人：敏捷、幸运",
+    },
+  };
+
+  const BACKGROUNDS = {
+    soldier: {
+      name: "士兵",
+      skills: ["athletics", "intimidation"],
+      feature: "军衔：同袍会认你的身份",
+      note: "PHB 士兵：运动、威吓、军衔",
+    },
+    criminal: {
+      name: "罪犯",
+      skills: ["deception", "stealth"],
+      feature: "犯罪联系人：知道城里的暗线",
+      note: "PHB 罪犯：欺瞒、隐匿、犯罪联系人",
+    },
+    sage: {
+      name: "智者",
+      skills: ["arcana", "history"],
+      feature: "研究者：知道该去查哪本书",
+      note: "PHB 智者：奥秘、历史、研究者",
+    },
+  };
+
+  function buildParty(creation) {
+    return HEROES.map((h) => {
+      const choice = creation[h.id] || { race: h.race, bg: h.bg };
+      const race = RACES[choice.race] || RACES[h.race];
+      const bg = BACKGROUNDS[choice.bg] || BACKGROUNDS[h.bg];
+      const stats = { ...h.stats };
+      Object.entries(race.bonuses).forEach(([k, v]) => {
+        stats[k] += v;
+      });
+      const skillSet = Array.from(new Set([...h.classSkills, ...bg.skills, ...race.skills]));
+      const skills = {};
+      skillSet.forEach((sk) => {
+        skills[sk] = mod(stats[SKILL_STAT[sk]]) + h.prof;
+      });
+      const saves = {};
+      h.saveProfs.forEach((st) => {
+        saves[st] = mod(stats[st]) + h.prof;
+      });
+      return {
+        ...h,
+        stats,
+        race: choice.race,
+        bg: choice.bg,
+        raceName: race.name,
+        bgName: bg.name,
+        skills,
+        skillList: skillSet,
+        saves,
+        init: mod(stats.dex),
+        atk: { ...h.atk, mod: mod(stats[h.main]) + h.prof },
+        features: [...race.features, bg.feature, h.classFeature].filter(Boolean),
+        critMin: h.id === "bran" ? 19 : 20,
+        lucky: choice.race === "halfling",
+        fastHands: h.id === "vera",
+        hp: h.hp,
+        maxHp: h.maxHp,
+        advNext: false,
+        dodge: false,
+        frightened: 0,
+        down: false,
+        dead: false,
+        deathSaves: { ok: 0, fail: 0 },
+        stable: false,
+        slots: h.slots ?? 0,
+        secondWind: h.secondWind ?? 0,
+      };
+    });
+  }
 
   const ADA = {
     id: "ada",
@@ -116,6 +258,7 @@
       sub: "奥伦 · 调查 +4 · DC 12",
       who: "oren",
       skill: "调查",
+      skillKey: "investigation",
       mod: 4,
       dc: 12,
       success: "门闩是从里面落下的，窗框上有一道新划痕——侧窗没锁。进去时你们不用再爬那道破门。",
@@ -128,6 +271,7 @@
       sub: "薇拉 · 生存 +4 · DC 13",
       who: "vera",
       skill: "生存",
+      skillKey: "survival",
       mod: 4,
       dc: 13,
       success: "拖痕从门缝一直延伸到侧窗，很深，很慢。有东西把一个人拖了进去。你们记住了它的路线——战斗第一回合，攻击有优势。",
@@ -140,6 +284,7 @@
       sub: "布兰 · 运动 +5 · DC 12",
       who: "bran",
       skill: "运动",
+      skillKey: "athletics",
       mod: 5,
       dc: 12,
       success: "你搬开焦尸，下面压着一枚村子的铜徽和一瓶没碎的治疗药水。艾达会认得这枚徽章。",
@@ -149,6 +294,22 @@
   ];
 
   const RULES = [
+    {
+      id: "phb",
+      title: "手册对照（5e 玩家手册）",
+      html: `<p>本演示按《玩家手册》的章节结构组织：先建角色，再探索、社交、战斗、短休与升级。种族、职业、背景、技能、豁免、先攻、AC、施法位等术语都来自 5e 手册。</p>
+        <ul>
+          <li><b>第 1 章 · 创建角色</b>：种族 / 职业 / 背景 / 属性 / 调整值 / 熟练加值。</li>
+          <li><b>第 2 章 · 种族</b>：人类、高等精灵、轻足半身人。</li>
+          <li><b>第 3 章 · 职业</b>：战士（冠军）、游荡者（盗贼）、法师（塑能师）。</li>
+          <li><b>第 5 章 · 装备</b>：链甲与盾、皮甲、短弓、法术书（预置，不展开购买）。</li>
+          <li><b>第 7–9 章 · 属性检定 / 冒险 / 战斗</b>：d20 + 调整值 vs DC、优势 / 劣势、先攻、AC、豁免、死亡豁免。</li>
+          <li><b>第 10 章 · 施法</b>：法术位、法术攻击、魔法飞弹。</li>
+          <li><b>第 11 章 · 法术</b>：火焰箭、魔法飞弹；短休奥术恢复。</li>
+        </ul>
+        <p>手册原文、表格与美术没有复制进本页；这里的规则文字是摘要，剧本与角色描述为原创。</p>
+        <span class="cite">5e Player's Handbook 章节结构 · 机制参考 SRD 5.1（CC-BY-4.0）</span>`,
+    },
     {
       id: "check",
       title: "检定（Ability Check）",
@@ -222,37 +383,32 @@
 
   /* ─────────────────────────── 状态 ─────────────────────────── */
 
-  const fresh = () => ({
-    screen: "title",
-    phase: "探索",
-    party: HEROES.map((h) => ({
-      ...h,
-      stats: { ...h.stats },
-      hp: h.hp,
-      maxHp: h.maxHp,
-      baseAc: h.ac,
-      advNext: false,
-      dodge: false,
-      frightened: 0,
-      down: false,
-      dead: false,
-      deathSaves: { ok: 0, fail: 0 },
-      stable: false,
-      slots: h.slots ?? 0,
-      secondWind: h.secondWind ?? 0,
-    })),
-    ada: null,
-    items: { potions: 1, oil: false, badge: false },
-    flags: { gate: false, tracks: false, corpse: false, ally: false, hostile: false, mercy: false, truth: false, key: false, advantageInit: false },
-    explore: { attempted: {}, done: 0, entered: false },
-    social: { attempted: {}, done: false },
-    rest: { bran: false, vera: false, oren: false, arcane: false },
-    combat: null,
-    stats: { checksOk: 0, checksFail: 0, rounds: 0, damageDealt: 0, damageTaken: 0, potions: 0 },
-    sound: true,
-    rulesOpen: "check",
-    epilogue: null,
+  const defaultCreation = () => ({
+    bran: { race: "human", bg: "soldier" },
+    vera: { race: "halfling", bg: "criminal" },
+    oren: { race: "highElf", bg: "sage" },
   });
+
+  const fresh = () => {
+    const creation = defaultCreation();
+    return {
+      screen: "title",
+      phase: "创建",
+      creation,
+      party: buildParty(creation),
+      ada: null,
+      items: { potions: 1, oil: false, badge: false },
+      flags: { gate: false, tracks: false, corpse: false, ally: false, hostile: false, mercy: false, truth: false, key: false, advantageInit: false },
+      explore: { attempted: {}, done: 0, entered: false },
+      social: { attempted: {}, done: false },
+      rest: { bran: false, vera: false, oren: false, arcane: false },
+      combat: null,
+      stats: { checksOk: 0, checksFail: 0, rounds: 0, damageDealt: 0, damageTaken: 0, potions: 0 },
+      sound: true,
+      rulesOpen: "phb",
+      epilogue: null,
+    };
+  };
 
   let S = fresh();
 
@@ -494,6 +650,78 @@
     });
   }
 
+  function skillOf(pcId, key, fallback = 0) {
+    const pc = pcById(pcId);
+    const v = pc && pc.skills ? pc.skills[key] : undefined;
+    return typeof v === "number" ? v : fallback;
+  }
+
+  function skillLabel(pcId, key, fallback = 0) {
+    const pc = pcById(pcId);
+    return `${pc.name} · ${SKILL_NAME[key]} ${sign(skillOf(pcId, key, fallback))}`;
+  }
+
+  /* ─────────────────────────── 创建角色 ─────────────────────────── */
+
+  function showCreation() {
+    S.phase = "创建";
+    setProgress("创建");
+    showScreen("create");
+    drawCreate();
+  }
+
+  function drawCreate() {
+    const preview = buildParty(S.creation);
+    const grid = $("#create-grid");
+    if (!grid) return;
+    grid.innerHTML = preview.map(creationCardHTML).join("");
+    $$("[data-race]").forEach((b) => {
+      b.addEventListener("click", () => {
+        S.creation[b.dataset.pcid].race = b.dataset.race;
+        drawCreate();
+      });
+    });
+    $$("[data-bg]").forEach((b) => {
+      b.addEventListener("click", () => {
+        S.creation[b.dataset.pcid].bg = b.dataset.bg;
+        drawCreate();
+      });
+    });
+  }
+
+  function creationCardHTML(pc) {
+    const choice = S.creation[pc.id];
+    const stats = pc.stats;
+    const skillText = pc.skillList.map((sk) => `${SKILL_NAME[sk]} ${sign(pc.skills[sk])}`).join(" · ");
+    return `<article class="create-card" data-pc="${pc.id}">
+      <div class="create-head">
+        <span class="pc-portrait" aria-hidden="true">${pc.icon}</span>
+        <div>
+          <div class="create-name">${pc.name}</div>
+          <div class="create-sub">${pc.cls} · ${pc.subclass} · ${pc.raceName} / ${pc.bgName}</div>
+        </div>
+      </div>
+      <div class="create-row">
+        <span class="create-label">种族 · PHB 第 2 章</span>
+        <div class="chips">${Object.entries(RACES)
+          .map(([k, r]) => `<button type="button" class="chip ${choice.race === k ? "is-on" : ""}" data-race="${k}" data-pcid="${pc.id}" title="${r.note}">${r.name}</button>`)
+          .join("")}</div>
+      </div>
+      <div class="create-row">
+        <span class="create-label">背景 · PHB 第 4 章</span>
+        <div class="chips">${Object.entries(BACKGROUNDS)
+          .map(([k, b]) => `<button type="button" class="chip ${choice.bg === k ? "is-on" : ""}" data-bg="${k}" data-pcid="${pc.id}" title="${b.note}">${b.name}</button>`)
+          .join("")}</div>
+      </div>
+      <div class="create-preview">
+        <span>属性 <b>力 ${stats.str} 敏 ${stats.dex} 体 ${stats.con} 智 ${stats.int} 感 ${stats.wis} 魅 ${stats.cha}</b></span>
+        <span>攻击 <b>${pc.atk.name} ${sign(pc.atk.mod)}</b> · 先攻 <b>${sign(pc.init)}</b> · HP <b>${pc.hp}</b> · AC <b>${pc.ac}</b></span>
+        <span>技能：${skillText}</span>
+        <span class="create-feat">特性：${pc.features.join(" · ")}</span>
+      </div>
+    </article>`;
+  }
+
   /* ─────────────────────────── 探索 ─────────────────────────── */
 
   function startExplore() {
@@ -508,9 +736,10 @@
     const poiHTML = POIS.map((p) => {
       const a = S.explore.attempted[p.id];
       const cls = a ? ` is-${a}` : "";
+      const m = skillOf(p.who, p.skillKey, p.mod);
       return `<button class="poi-card${cls}" type="button" data-poi="${p.id}" ${a ? "disabled" : ""}>
         <b>${p.title}</b>
-        <small>${p.sub}</small>
+        <small>${p.who === "oren" ? "奥伦" : p.who === "vera" ? "薇拉" : "布兰"} · ${SKILL_NAME[p.skillKey]} ${sign(m)} · DC ${p.dc}</small>
         <span class="poi-state">${a === "ok" ? "已查明" : a === "fail" ? "没查出什么" : "可调查"}</span>
       </button>`;
     }).join("");
@@ -543,8 +772,8 @@
     const hero = S.party.find((h) => h.id === poi.who);
     rollCheck({
       who: `${hero.name}（${hero.cls.split(" ")[0]}）`,
-      skill: poi.skill,
-      mod: poi.mod,
+      skill: SKILL_NAME[poi.skillKey],
+      mod: skillOf(poi.who, poi.skillKey, poi.mod),
       dc: poi.dc,
       successText: poi.success,
       failText: poi.fail,
@@ -619,14 +848,14 @@
     }
     opts.push({
       label: "「我们是来点烽火的。」",
-      sub: "薇拉 · 说服 +4 · DC 13",
+      sub: `${skillLabel("vera", "persuasion", 4)} · DC 13`,
       tag: "社交",
       disabled: att.persuade,
       onClick: () => socialCheck("persuade"),
     });
     opts.push({
       label: "观察她握矛的手",
-      sub: "奥伦 · 洞悉 +3 · DC 12",
+      sub: `${skillLabel("oren", "insight", 3)} · DC 12`,
       tag: "社交",
       disabled: att.insight,
       onClick: () => socialCheck("insight"),
@@ -642,7 +871,7 @@
     }
     opts.push({
       label: "「让开，我们自己上去。」",
-      sub: "布兰 · 威吓 +3 · DC 14",
+      sub: `${skillLabel("bran", "intimidation", 3)} · DC 14`,
       tag: "社交",
       disabled: att.intimidate,
       onClick: () => socialCheck("intimidate"),
@@ -737,32 +966,40 @@
     if (S.resultPending || S.social.attempted[kind]) return;
     const map = {
       persuade: {
+        pcId: "vera",
         who: "薇拉（游荡者）",
         skill: "说服",
+        skillKey: "persuasion",
         mod: 4,
         dc: 13,
         ok: "艾达的矛尖放低了。「点烽火的柴在楼上。你们最好真的是来点火的。」她把钥匙和一小瓶火油塞给薇拉。",
         fail: "「来点火的不会带刀站在门口。」她的矛没有放下。你们可以从她身侧挤过去，但她不会帮忙。",
       },
       insight: {
+        pcId: "oren",
         who: "奥伦（法师）",
         skill: "洞悉",
+        skillKey: "insight",
         mod: 3,
         dc: 12,
         ok: "你注意到她说「上面那个东西」时，说的是「他」。楼梯上那件旧斗篷，和她的是一对。",
         fail: "她把自己裹得很紧，你看不出什么。",
       },
       intimidate: {
+        pcId: "bran",
         who: "布兰（战士）",
         skill: "威吓",
+        skillKey: "intimidation",
         mod: 3,
         dc: 14,
         ok: "布兰往前走了一步。艾达退到墙边，把钥匙扔在地上。「拿去吧。别指望我替你们收尸。」",
         fail: "艾达笑了，笑得很干。「你吓不到一个已经守了三夜的人。」她退进楼梯的阴影里。",
       },
       mercy: {
+        pcId: "ada",
         who: "艾达（守夜人）",
         skill: "剧情",
+        skillKey: "",
         mod: 0,
         dc: 0,
         ok: "「他叫凯尔。」艾达说，「三天前他上去点火，就再也没下来。如果你们能……别让他烧掉最后那面旗。」",
@@ -788,10 +1025,11 @@
       });
       return;
     }
+    const modValue = c.skillKey ? skillOf(c.pcId, c.skillKey, c.mod) : c.mod;
     rollCheck({
       who: c.who,
       skill: c.skill,
-      mod: c.mod,
+      mod: modValue,
       dc: c.dc,
       successText: c.ok,
       failText: c.fail,
@@ -829,6 +1067,7 @@
       ended: false,
       howlDone: false,
       ashDone: false,
+      fastHandsUsed: false,
       log: [],
     };
     S.party.forEach((pc) => {
@@ -1205,9 +1444,14 @@
       // 闪避只影响防御，不影响攻击
     }
     const mode = adv && dis ? "normal" : adv ? "adv" : dis ? "dis" : "normal";
-    const roll = rollD20(mode);
+    let roll = rollD20(mode);
+    if (pc.lucky && roll.used === 1) {
+      const second = d(20);
+      addLog(`${pc.name} 的幸运触发：重掷 d20 → ${second}。`, "good");
+      roll = { a: roll.a, b: roll.b, used: second, mode };
+    }
     const total = roll.used + pc.atk.mod;
-    const isCrit = roll.used === 20;
+    const isCrit = roll.used === 20 || (pc.critMin && roll.used >= pc.critMin);
     const hit = roll.used === 20 || (roll.used !== 1 && total >= e.ac);
     if (!hit) {
       addLog(`${pc.name} 用${pc.atk.name}：d20 ${roll.used}${mode !== "normal" ? `（${mode === "adv" ? "优势" : "劣势"}）` : ""} + ${pc.atk.mod} = ${total} vs AC ${e.ac}，落空。`, "info");
@@ -1244,6 +1488,16 @@
     sfx("magic");
     if (checkVictory()) return;
     afterAction();
+  }
+
+  function fastHandsFollowup(pc) {
+    const C = S.combat;
+    if (!C || C.ended || !pc.fastHands || C.fastHandsUsed) return false;
+    C.fastHandsUsed = true;
+    C.awaiting = true;
+    addLog("快手：这次使用不消耗动作，薇拉还能再行动一次。", "good");
+    drawCombat();
+    return true;
   }
 
   function playerSecondWind() {
@@ -1305,6 +1559,7 @@
     addLog(`${pc.name} 灌下治疗药水：恢复 <b>${heal}</b> 点生命。`, "good");
     sfx("heal");
     drawCombat();
+    if (fastHandsFollowup(pc)) return;
     afterAction();
   }
 
@@ -1318,6 +1573,7 @@
     addLog(`${pc.name} 把火油泼向骑士，火舌顺着铁甲缝烧进去：<b>${dmg}</b> 点火焰伤害。`, "good");
     sfx("hit");
     if (checkVictory()) return;
+    if (fastHandsFollowup(pc)) return;
     afterAction();
   }
 
@@ -1782,13 +2038,26 @@
     $("#btn-start").addEventListener("click", () => {
       ensureAudio();
       S = fresh();
+      showCreation();
+    });
+    $("#btn-create-start").addEventListener("click", () => {
+      ensureAudio();
+      S.party = buildParty(S.creation);
       startExplore();
     });
-    $("#btn-rules").addEventListener("click", () => openRules(S.phase === "战斗" ? "combat" : "check"));
-    $("#btn-rules-title").addEventListener("click", () => openRules("check"));
-    $("#rules-link").addEventListener("click", () => {
-      const map = { 探索: "check", 社交: "check", 短休: "rest", 成长: "level", 战斗: "combat" };
+    $("#btn-create-reset").addEventListener("click", () => {
+      S.creation = defaultCreation();
+      drawCreate();
+      sfx("magic");
+    });
+    $("#btn-rules").addEventListener("click", () => {
+      const map = { 创建: "phb", 战斗: "combat", 短休: "rest", 成长: "level" };
       openRules(map[S.phase] || "check");
+    });
+    $("#btn-rules-title").addEventListener("click", () => openRules("phb"));
+    $("#rules-link").addEventListener("click", () => {
+      const map = { 创建: "phb", 探索: "check", 社交: "check", 短休: "rest", 成长: "level", 战斗: "combat" };
+      openRules(map[S.phase] || "phb");
     });
     $("#btn-sound").addEventListener("click", () => {
       S.sound = !S.sound;
