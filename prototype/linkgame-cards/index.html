@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f4f3f0">
+<title>单词连连看 · 道具卡解锁原型</title>
+<style>
+:root{
+  --bg:#f4f3f0;
+  --surface:#fffefd;
+  --surface-soft:#f8f7f4;
+  --text:#292724;
+  --muted:#777169;
+  --faint:#9a948b;
+  --line:#e4e0d9;
+  --line-strong:#d4cec4;
+  --accent:#d9772b;
+  --accent-deep:#bd6120;
+  --accent-soft:#fff0e2;
+  --success:#2f8f5b;
+  --success-soft:#eaf6ef;
+  --warning:#a66a08;
+  --warning-soft:#fff5dc;
+  --danger:#c24e45;
+  --danger-soft:#fff0ed;
+  --seal-bg:#3a352e;
+  --seal-gold:#d9b26a;
+  --radius-lg:18px;
+  --radius-md:12px;
+  --radius-sm:9px;
+  --font-body:"Avenir Next","Segoe UI Variable","PingFang SC","Microsoft YaHei",sans-serif;
+  --font-mono:"SFMono-Regular","Cascadia Code",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);color:var(--text);font-family:var(--font-body);line-break:strict}
+body{margin:0;min-width:300px;background:
+  radial-gradient(1200px 500px at 50% -260px,rgba(217,119,43,.07),transparent 70%),
+  var(--bg)}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 30%,transparent);outline-offset:2px}
+[hidden]{display:none!important}
+.app{width:min(920px,100%);margin:0 auto;padding:32px 24px 48px}
+
+.topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:20px}
+.heading-copy{min-width:0}
+.eyebrow{font-size:12px;line-height:1.4;color:var(--accent);font-weight:650;letter-spacing:.04em;margin-bottom:6px}
+h1{font-size:30px;line-height:1.2;letter-spacing:-.03em;font-weight:700;margin:0 0 8px;text-wrap:balance;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+h1 .badge{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent-deep);font-size:12px;letter-spacing:.01em;font-weight:700;border:1px solid color-mix(in srgb,var(--accent) 22%,transparent)}
+.heading-copy p{font-size:14px;line-height:1.65;color:var(--muted);margin:0;text-wrap:pretty}
+.toolbar{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.button{min-height:40px;padding:0 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:650;border:1px solid transparent;transition:background .16s,border-color .16s,transform .16s;white-space:nowrap}
+.button:active{transform:translateY(1px)}
+.button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.button.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+.button.secondary{background:var(--surface);color:var(--text);border-color:var(--line)}
+.button.secondary:hover{background:var(--surface-soft);border-color:var(--line-strong)}
+
+.game-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px;box-shadow:0 18px 40px -36px rgba(41,39,36,.35)}
+.round-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:14px}
+.round-meta span:first-child{font-weight:650;color:var(--text)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.stat{background:var(--surface-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:9px 12px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.stat span{font-size:11px;line-height:1.2;color:var(--muted)}
+.stat strong{font-size:18px;line-height:1.15;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.progress-track{height:6px;background:var(--surface-soft);border:1px solid var(--line);border-radius:99px;overflow:hidden;margin-bottom:14px}
+.progress-track span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--accent),#e6a15e);border-radius:99px;transition:width .3s ease}
+
+.board-wrap{position:relative;background:var(--surface-soft);border:1px solid var(--line);border-radius:var(--radius-md);padding:12px;overflow:hidden}
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;min-height:80px;position:relative;z-index:1}
+.tile{width:100%;height:72px;min-width:0;padding:7px 6px;border:1px solid var(--line-strong);border-radius:var(--radius-md);background:var(--surface);color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;position:relative;transition:background .15s,color .15s,border-color .15s,transform .15s,opacity .25s,visibility .25s}
+.tile:hover:not(.removed){border-color:var(--accent);transform:translateY(-1px)}
+.tile-lang{font-size:10px;line-height:1;color:var(--faint);font-weight:700;letter-spacing:.04em}
+.tile-text{display:-webkit-box;max-width:100%;font-size:14px;line-height:1.28;font-weight:650;text-align:center;overflow:hidden;overflow-wrap:anywhere;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.tile.selected{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.tile.selected .tile-lang{color:var(--accent)}
+.tile.correct{background:var(--success-soft);border-color:var(--success);color:var(--success)}
+.tile.correct .tile-lang{color:var(--success)}
+.tile.wrong{background:var(--danger-soft);border-color:var(--danger);color:var(--danger);animation:shake .26s ease}
+.tile.wrong .tile-lang{color:var(--danger)}
+.tile.hint{animation:hintPulse 1s ease-in-out infinite;border-color:var(--accent);background:var(--accent-soft);color:var(--accent-deep)}
+.tile.hint .tile-lang{color:var(--accent-deep)}
+.tile.removed{visibility:hidden;opacity:0;pointer-events:none}
+.tile.swept{animation:sweepAway .5s ease forwards;pointer-events:none}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}55%{transform:translateX(3px)}80%{transform:translateX(-2px)}}
+@keyframes hintPulse{0%,100%{box-shadow:0 0 0 0 rgba(217,119,43,.25)}50%{box-shadow:0 0 0 5px rgba(217,119,43,.14)}}
+@keyframes sweepAway{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(-10px) rotate(-4deg);opacity:0}}
+.link-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible}
+
+.game-status{margin:14px 2px 0;font-size:13px;line-height:1.55;color:var(--muted);min-height:20px}
+.game-status strong{color:var(--text)}
+
+/* ---------- 道具卡 ---------- */
+.cards{margin-top:22px;border-top:1px dashed var(--line-strong);padding-top:18px}
+.cards-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.cards-title-wrap{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;min-width:0}
+.cards-head h2{font-size:16px;line-height:1.2;font-weight:750;margin:0;letter-spacing:-.01em}
+.cards-sub{font-size:11.5px;color:var(--muted)}
+.cards-note{font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.item-card{position:relative;height:196px;perspective:1000px;min-width:0}
+.card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.item-card.unlocked .card-inner{transform:rotateY(180deg)}
+.item-card.unlocking::after{content:"";position:absolute;inset:-5px;border-radius:19px;border:2px solid var(--seal-gold);opacity:0;animation:unlockRing 1.1s ease-out}
+.item-card.jiggle{animation:jiggle .3s ease}
+@keyframes unlockRing{0%{opacity:.9;transform:scale(.97)}100%{opacity:0;transform:scale(1.06)}}
+@keyframes jiggle{0%,100%{transform:translateX(0)}30%{transform:translateX(-3px)}65%{transform:translateX(3px)}}
+
+.cover,.face{position:absolute;inset:0;border-radius:14px;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.cover{
+  border:1px solid rgba(217,178,106,.45);
+  background:
+    radial-gradient(circle at 50% 16%,rgba(217,178,106,.18),transparent 46%),
+    repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 5px,transparent 5px 11px),
+    linear-gradient(158deg,#443e35 0%,#332e28 55%,#292520 100%);
+  color:#efe3cc;padding:13px 10px 12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 0 0 4px rgba(0,0,0,.12),0 10px 22px -18px rgba(0,0,0,.7);
+  overflow:hidden;
+}
+.cover::before{content:"?";position:absolute;right:6px;bottom:-14px;font-size:74px;font-weight:700;line-height:1;color:rgba(217,178,106,.07);pointer-events:none}
+.cover::after{content:"";position:absolute;inset:6px;border:1px dashed rgba(217,178,106,.28);border-radius:10px;pointer-events:none}
+.cover:not(:disabled):active{transform:scale(.99)}
+.cover:disabled{cursor:default}
+.cover-seal{width:38px;height:38px;border-radius:50%;border:1px solid rgba(196,101,84,.75);background:radial-gradient(circle at 35% 30%,#a24a3c,#7e3128);color:#f1cfc5;display:grid;place-items:center;font-size:14px;font-weight:700;letter-spacing:.08em;box-shadow:inset 0 0 0 3px rgba(0,0,0,.14),0 4px 10px -6px #000;position:relative;z-index:1}
+.cover-title{font-size:10.5px;letter-spacing:.28em;color:rgba(239,227,204,.62);font-weight:650;position:relative;z-index:1}
+.cover-req{font-size:13px;line-height:1.3;font-weight:700;color:#f4e6c9;position:relative;z-index:1}
+.cover-req b{color:var(--seal-gold);font-size:15px}
+.cover-track{width:78%;height:5px;background:rgba(0,0,0,.32);border-radius:99px;overflow:hidden;position:relative;z-index:1;border:1px solid rgba(217,178,106,.16)}
+.cover-track span{display:block;width:0;height:100%;background:linear-gradient(90deg,#b98c42,var(--seal-gold));border-radius:99px;transition:width .35s ease}
+.cover-count{font-size:10.5px;color:rgba(239,227,204,.7);font-variant-numeric:tabular-nums;position:relative;z-index:1}
+.cover-count b{color:var(--seal-gold);font-weight:700}
+
+.face{transform:rotateY(180deg);visibility:hidden;background:linear-gradient(180deg,#fffefd,#fbfaf6);border:1px solid var(--line-strong);padding:13px 11px 11px;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;box-shadow:0 12px 24px -22px rgba(41,39,36,.5)}
+.item-card.unlocked .face{visibility:visible}
+.item-card.used .face{background:var(--surface-soft);border-color:var(--line)}
+.item-card.used .face-icon,.item-card.used .face-name,.item-card.used .face-desc{opacity:.55}
+.face-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--surface-soft);border:1px solid var(--line);flex:none}
+.face-icon svg{width:20px;height:20px}
+.face-name{font-size:14px;font-weight:750;line-height:1.2;letter-spacing:.01em}
+.face-desc{margin:0;font-size:11px;line-height:1.45;color:var(--muted);flex:1;display:flex;align-items:center;text-wrap:balance}
+.use-btn{width:100%;min-height:32px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:#fff;font-size:12px;font-weight:700;transition:background .15s,transform .15s;flex:none}
+.use-btn:hover{background:var(--accent-deep)}
+.use-btn:active{transform:translateY(1px)}
+.use-btn:disabled{background:var(--surface-soft);border-color:var(--line);color:var(--faint);cursor:default}
+.used-stamp{display:none;font-size:10.5px;font-weight:700;letter-spacing:.2em;color:var(--faint);border:1px solid var(--line-strong);border-radius:999px;padding:3px 9px;transform:rotate(-6deg)}
+.item-card.used .used-stamp{display:inline-block}
+.item-card.used .use-btn{display:none}
+
+.rule-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px;padding-top:16px;border-top:1px dashed var(--line)}
+.rule-strip div{display:flex;flex-direction:column;gap:4px}
+.rule-strip strong{font-size:12px;line-height:1.3;color:var(--text);font-weight:700}
+.rule-strip span{font-size:11.5px;line-height:1.5;color:var(--muted)}
+
+.result{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
+.result-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.result-heading h2{font-size:22px;line-height:1.2;margin:0;letter-spacing:-.02em}
+.result-grade{display:inline-flex;align-items:center;height:28px;padding:0 11px;border-radius:999px;background:var(--accent-soft);color:var(--accent-deep);font-size:12px;font-weight:700;border:1px solid color-mix(in srgb,var(--accent) 24%,transparent)}
+.result-note{margin:8px 0 0;font-size:12.5px;line-height:1.6;color:var(--muted)}
+.result-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:16px 0}
+.result-metrics div{background:var(--surface-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 12px;display:flex;flex-direction:column;gap:4px}
+.result-metrics strong{font-size:20px;line-height:1.15;font-variant-numeric:tabular-nums}
+.result-metrics span{font-size:11px;color:var(--muted)}
+.result-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+.proto-note{margin-top:22px;padding:16px 18px;border:1px dashed var(--line-strong);border-radius:var(--radius-md);background:color-mix(in srgb,var(--surface) 60%,transparent);font-size:12px;line-height:1.65;color:var(--muted)}
+.proto-note strong{display:block;color:var(--text);font-size:12.5px;margin-bottom:5px}
+.proto-note p{margin:0 0 6px}
+.proto-note p:last-child{margin:0}
+.proto-note .dim{color:var(--faint);font-size:11.5px}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);z-index:60;max-width:min(92vw,560px);padding:11px 16px;border-radius:12px;background:#2f2b25;color:#f6ead2;font-size:12.5px;line-height:1.4;box-shadow:0 14px 34px -16px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;display:flex;align-items:center;gap:8px}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast .dot{width:7px;height:7px;border-radius:50%;background:var(--seal-gold);flex:none;box-shadow:0 0 0 3px rgba(217,178,106,.18)}
+
+@media(max-width:720px){
+  .app{padding:24px 16px 36px}
+  .topbar{align-items:flex-start;flex-direction:column;gap:14px}
+  .toolbar{width:100%;justify-content:flex-start}
+  .board{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tile{height:66px}
+  .rule-strip{grid-template-columns:1fr;gap:10px}
+  .rule-strip div{display:grid;grid-template-columns:88px minmax(0,1fr);gap:8px}
+  .rule-strip strong{margin:0}
+  .result-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .item-card{height:188px}
+}
+@media(max-width:460px){
+  h1{font-size:26px}
+  .game-panel{padding:14px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat{padding:8px 11px}
+  .stat strong{font-size:17px}
+  .board-wrap{padding:8px}
+  .board{gap:7px}
+  .tile{height:62px;padding:5px 4px}
+  .tile-text{font-size:12.5px}
+  .round-meta{align-items:flex-start;flex-direction:column;gap:4px}
+  .result-heading{align-items:flex-start;flex-direction:column}
+  .card-grid{gap:8px}
+  .item-card{height:180px}
+  .cover{padding:10px 6px 9px;gap:6px}
+  .cover-seal{width:32px;height:32px;font-size:12px}
+  .cover-title{font-size:9.5px;letter-spacing:.2em}
+  .cover-req{font-size:11.5px}
+  .cover-req b{font-size:13px}
+  .cover-count{font-size:9.5px}
+  .face{padding:11px 7px 9px;gap:5px}
+  .face-icon{width:28px;height:28px;border-radius:9px}
+  .face-icon svg{width:17px;height:17px}
+  .face-name{font-size:12.5px}
+  .face-desc{font-size:10px;line-height:1.35}
+  .use-btn{min-height:28px;font-size:11px}
+  .rule-strip div{grid-template-columns:92px minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="topbar">
+    <div class="heading-copy">
+      <div class="eyebrow">可玩原型 · 连连看 × 道具卡</div>
+      <h1>单词连连看 <span class="badge">道具卡版</span></h1>
+      <p>先连词，再开卡：每连对一对，下面被盖住的封印就松动一格；连够了才翻面，翻开才能用。</p>
+    </div>
+    <div class="toolbar">
+      <button id="restart-btn" class="button secondary" type="button">重新开始</button>
+    </div>
+  </header>
+
+  <section class="game-panel" aria-label="单词连连看">
+    <div class="round-meta">
+      <span id="round-label">标准 · 6 个单词 · 9 组配对 · 5 个多余方块</span>
+      <span>多义词要连完所有义项</span>
+    </div>
+    <div class="stats" aria-label="本轮状态">
+      <div class="stat"><span>已配对</span><strong id="progress-value">0 / 9</strong></div>
+      <div class="stat"><span>多余方块</span><strong id="distractor-value">5</strong></div>
+      <div class="stat"><span>用时</span><strong id="time-value">00:00</strong></div>
+      <div class="stat"><span>错配</span><strong id="error-value">0</strong></div>
+    </div>
+    <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+
+    <div id="board-wrap" class="board-wrap">
+      <div id="board" class="board" aria-label="英文单词与中文释义方块"></div>
+      <svg id="link-layer" class="link-layer" aria-hidden="true"></svg>
+    </div>
+    <div id="game-status" class="game-status" aria-live="polite">先点一个方块，再点它的中英搭档；多义词可以连续连多个义项。</div>
+
+    <section class="cards" aria-labelledby="cards-title">
+      <div class="cards-head">
+        <div class="cards-title-wrap">
+          <h2 id="cards-title">道具卡</h2>
+          <span class="cards-sub">随机 3 张 · 被封印盖住 · 配对解锁</span>
+        </div>
+        <span class="cards-note" id="cards-note">已连 0 对 · 解锁 0 / 3</span>
+      </div>
+      <div id="card-grid" class="card-grid"></div>
+    </section>
+
+    <div class="rule-strip" aria-label="道具卡规则">
+      <div><strong>盖着就看不见</strong><span>卡背只写还差几对；认不出是哪张，也没法提前用。</span></div>
+      <div><strong>连够才翻面</strong><span>每连对一对，所有封印一起长一格；进度到了自动裁开。</span></div>
+      <div><strong>翻开不等于用了</strong><span>翻开后点「使用」才生效；用不用、什么时候用，自己决定。</span></div>
+    </div>
+  </section>
+
+  <section id="result" class="result" hidden aria-live="polite">
+    <div class="result-heading">
+      <div>
+        <div class="eyebrow">清场完成</div>
+        <h2>本轮结束</h2>
+      </div>
+      <span id="result-grade" class="result-grade">顺利清场</span>
+    </div>
+    <p class="result-note">这轮主要看道具卡：解锁了几张、你有没有真的点「使用」、用起来顺不顺手。</p>
+    <div class="result-metrics">
+      <div><strong id="final-time">00:00</strong><span>用时</span></div>
+      <div><strong id="final-errors">0</strong><span>错配</span></div>
+      <div><strong id="final-unlocked">0 / 3</strong><span>解锁道具</span></div>
+      <div><strong id="final-used">0</strong><span>实际使用</span></div>
+    </div>
+    <div class="result-actions">
+      <button id="again-btn" class="button primary" type="button">再来一局</button>
+    </div>
+  </section>
+
+  <footer class="proto-note">
+    <strong>这个原型在试什么</strong>
+    <p>道具不是白送的：先用「封印」盖住，靠连连看的配对进度一格一格松开；解锁后才翻面，翻开后才能用。重点试三件事：被盖住时，你会不会为了开卡多连几对；集满进度、封印「啪」地翻开那一下爽不爽；开出来的卡你舍不舍得用。</p>
+    <p class="dim">参数都是占位：3 张卡、分别要 2 / 3 / 4 对解锁、4 种效果随机抽 3 种。真要做进游戏，卡池、解锁条件和英语学习目标（比如错词、难词）怎么挂，都可以再调。</p>
+  </footer>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"><span class="dot"></span><span id="toast-text"></span></div>
+
+<script>
+(() => {
+  'use strict';
+
+  const WORDS = [
+    { id: 'bank', en: 'bank', meanings: ['银行', '河岸'] },
+    { id: 'spring', en: 'spring', meanings: ['春天', '弹簧'] },
+    { id: 'light', en: 'light', meanings: ['光', '轻的'] },
+    { id: 'adapt', en: 'adapt', meanings: ['适应'] },
+    { id: 'quiet', en: 'quiet', meanings: ['安静的'] },
+    { id: 'principal', en: 'principal', meanings: ['校长'] }
+  ];
+  const DISTRACTORS = ['adopt', 'quite', 'principle', 'carpet', 'whisper'];
+  const TOTAL_PAIRS = WORDS.reduce((sum, word) => sum + word.meanings.length, 0);
+  const TOTAL_DISTRACTORS = DISTRACTORS.length;
+  const UNLOCK_NEEDS = [2, 3, 4];
+
+  const ICONS = {
+    peek: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.6 15.6 21 21"/><path d="M8.5 10.5h4"/></svg>',
+    mix: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h4l8 10h4"/><path d="M4 17h4l3-3.8"/><path d="m17 4 3 3-3 3"/><path d="m17 14 3 3-3 3"/></svg>',
+    broom: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 14 7-7 7 7-5 5H5z"/><path d="M10 20h11"/><path d="m10 7 3-3 7 7-3 3"/></svg>',
+    chain: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>'
+  };
+
+  const ITEM_POOL = [
+    { id: 'peek', name: '透视镜', desc: '高亮一组还能连的配对', color: '#3f7fbf' },
+    { id: 'mix', name: '洗牌器', desc: '把剩下的方块重新排一遍', color: '#96702f' },
+    { id: 'broom', name: '清道夫', desc: '扫掉一个多余方块', color: '#7d5aa6' },
+    { id: 'chain', name: '连锁器', desc: '自动连掉一组正确配对', color: '#c2523f' }
+  ];
+
+  const boardEl = document.getElementById('board');
+  const boardWrap = document.getElementById('board-wrap');
+  const linkLayer = document.getElementById('link-layer');
+  const statusEl = document.getElementById('game-status');
+  const progressValue = document.getElementById('progress-value');
+  const distractorValue = document.getElementById('distractor-value');
+  const timeValue = document.getElementById('time-value');
+  const errorValue = document.getElementById('error-value');
+  const progressBar = document.getElementById('progress-bar');
+  const cardsNote = document.getElementById('cards-note');
+  const cardGrid = document.getElementById('card-grid');
+  const resultEl = document.getElementById('result');
+  const resultGrade = document.getElementById('result-grade');
+  const finalTime = document.getElementById('final-time');
+  const finalErrors = document.getElementById('final-errors');
+  const finalUnlocked = document.getElementById('final-unlocked');
+  const finalUsed = document.getElementById('final-used');
+  const toastEl = document.getElementById('toast');
+  const toastText = document.getElementById('toast-text');
+  const restartBtn = document.getElementById('restart-btn');
+  const againBtn = document.getElementById('again-btn');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  let state = null;
+  let generation = 0;
+  let timerId = null;
+  let toastTimer = null;
+
+  const shuffle = (items) => {
+    const array = items.slice();
+    for (let i = array.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
+  const pad = (n) => String(n).padStart(2, '0');
+  const formatTime = (seconds) => `${pad(Math.floor(seconds / 60))}:${pad(seconds % 60)}`;
+  const meaningKey = (wordId, index) => `zh:${wordId}:${index}`;
+
+  function later(callback, delay) {
+    const expected = generation;
+    return window.setTimeout(() => {
+      if (expected === generation) callback();
+    }, delay);
+  }
+
+  function createState() {
+    const tiles = [];
+    WORDS.forEach((word) => {
+      tiles.push({ key: `en:${word.id}`, type: 'en', wordId: word.id, text: word.en, lang: 'EN' });
+      word.meanings.forEach((meaning, index) => {
+        tiles.push({ key: meaningKey(word.id, index), type: 'meaning', wordId: word.id, meaningIndex: index, text: meaning, lang: '中' });
+      });
+    });
+    shuffle(DISTRACTORS).forEach((word) => {
+      tiles.push({ key: `d:${word}`, type: 'distractor', text: word, lang: 'EN' });
+    });
+
+    const drawn = shuffle(ITEM_POOL).slice(0, 3);
+    const cards = drawn.map((item, index) => ({
+      id: item.id,
+      name: item.name,
+      desc: item.desc,
+      color: item.color,
+      need: UNLOCK_NEEDS[index],
+      unlocked: false,
+      used: false
+    }));
+
+    return {
+      tiles: shuffle(tiles),
+      matches: 0,
+      errors: 0,
+      selectedKey: null,
+      locked: false,
+      finished: false,
+      meaningMatched: new Set(),
+      removedTiles: new Set(),
+      distractorsLeft: TOTAL_DISTRACTORS,
+      cards,
+      tileEls: new Map(),
+      cardEls: new Map(),
+      startedAt: null,
+      elapsed: 0,
+      interval: null,
+      hintTimer: null
+    };
+  }
+
+  function tileByKey(key) {
+    return state ? state.tiles.find((tile) => tile.key === key) : null;
+  }
+
+  function wordOf(tile) {
+    return WORDS.find((word) => word.id === tile.wordId) || null;
+  }
+
+  function isWordComplete(word) {
+    return word.meanings.every((_, index) => state.meaningMatched.has(meaningKey(word.id, index)));
+  }
+
+  function canUse(card) {
+    if (!card.unlocked || card.used || state.finished || state.locked) return false;
+    if (card.id === 'peek' || card.id === 'chain') return !!availablePair();
+    if (card.id === 'broom') return state.tiles.some((tile) => tile.type === 'distractor' && !state.removedTiles.has(tile.key));
+    if (card.id === 'mix') return state.tiles.some((tile) => !state.removedTiles.has(tile.key));
+    return false;
+  }
+
+  function availablePair() {
+    const pairs = [];
+    WORDS.forEach((word) => {
+      word.meanings.forEach((_, index) => {
+        const key = meaningKey(word.id, index);
+        if (!state.meaningMatched.has(key)) {
+          pairs.push([tileByKey(`en:${word.id}`), tileByKey(key)]);
+        }
+      });
+    });
+    return pairs.length ? pairs[Math.floor(Math.random() * pairs.length)] : null;
+  }
+
+  function setStatus(html) {
+    statusEl.innerHTML = html;
+  }
+
+  function showToast(message) {
+    toastText.innerHTML = message;
+    toastEl.classList.add('show');
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => toastEl.classList.remove('show'), 2600);
+  }
+
+  function startTimer() {
+    if (state.startedAt !== null) return;
+    state.startedAt = Date.now();
+    state.interval = window.setInterval(() => {
+      state.elapsed = Math.floor((Date.now() - state.startedAt) / 1000);
+      timeValue.textContent = formatTime(state.elapsed);
+    }, 250);
+  }
+
+  function stopTimer() {
+    if (!state) return;
+    if (state.interval) window.clearInterval(state.interval);
+    state.interval = null;
+    if (state.startedAt !== null) {
+      state.elapsed = Math.floor((Date.now() - state.startedAt) / 1000);
+      timeValue.textContent = formatTime(state.elapsed);
+    }
+  }
+
+  function updateStats() {
+    progressValue.textContent = `${state.matches} / ${TOTAL_PAIRS}`;
+    progressBar.style.width = `${(state.matches / TOTAL_PAIRS) * 100}%`;
+    distractorValue.textContent = String(state.distractorsLeft);
+    errorValue.textContent = String(state.errors);
+    timeValue.textContent = formatTime(state.elapsed);
+  }
+
+  function renderBoard() {
+    boardEl.innerHTML = '';
+    state.tileEls.clear();
+    state.tiles.forEach((tile) => {
+      const el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'tile';
+      el.dataset.key = tile.key;
+      el.setAttribute('aria-pressed', 'false');
+      el.setAttribute('aria-label', tile.type === 'meaning' ? `中文释义：${tile.text}` : `英文单词：${tile.text}`);
+      const lang = document.createElement('span');
+      lang.className = 'tile-lang';
+      lang.textContent = tile.type === 'meaning' ? '中文' : '英文';
+      const text = document.createElement('span');
+      text.className = 'tile-text';
+      text.textContent = tile.text;
+      el.append(lang, text);
+      el.addEventListener('click', () => onTileClick(tile.key));
+      boardEl.appendChild(el);
+      state.tileEls.set(tile.key, el);
+    });
+  }
+
+  function buildCard(card) {
+    const cardEl = document.createElement('article');
+    cardEl.className = 'item-card';
+    cardEl.dataset.item = card.id;
+    cardEl.innerHTML = `
+      <div class="card-inner">
+        <button class="cover" type="button" aria-label="封印中的道具卡，还差 ${card.need} 对解锁">
+          <span class="cover-seal" aria-hidden="true">封</span>
+          <span class="cover-title">道具封印</span>
+          <span class="cover-req">配对 <b>${card.need}</b> 对</span>
+          <span class="cover-track" aria-hidden="true"><span></span></span>
+          <span class="cover-count">0 / ${card.need}</span>
+        </button>
+        <div class="face" aria-hidden="true" inert>
+          <span class="face-icon" style="color:${card.color}">${ICONS[card.id]}</span>
+          <div class="face-name">${card.name}</div>
+          <p class="face-desc">${card.desc}</p>
+          <span class="used-stamp">已使用</span>
+          <button class="use-btn" type="button">使用</button>
+        </div>
+      </div>`;
+
+    const cover = cardEl.querySelector('.cover');
+    const face = cardEl.querySelector('.face');
+    const useBtn = cardEl.querySelector('.use-btn');
+    cover.addEventListener('click', () => {
+      if (card.unlocked) return;
+      const left = Math.max(card.need - state.matches, 0);
+      cardEl.classList.remove('jiggle');
+      void cardEl.offsetWidth;
+      cardEl.classList.add('jiggle');
+      later(() => cardEl.classList.remove('jiggle'), 320);
+      if (left > 0) {
+        setStatus(`这张还盖着：再连 <strong>${left}</strong> 对就能裁开封印，墨迹底下是什么，现在看不到。`);
+      }
+    });
+    useBtn.addEventListener('click', () => useCard(card.id));
+    state.cardEls.set(card.id, cardEl);
+    return cardEl;
+  }
+
+  function renderCards() {
+    cardGrid.innerHTML = '';
+    state.cardEls.clear();
+    state.cards.forEach((card) => {
+      cardGrid.appendChild(buildCard(card));
+      updateCard(card, false);
+    });
+  }
+
+  function updateCard(card, justUnlocked) {
+    const el = state.cardEls.get(card.id);
+    if (!el) return;
+    const covered = Math.min(state.matches, card.need);
+    const bar = el.querySelector('.cover-track span');
+    const count = el.querySelector('.cover-count');
+    if (bar) bar.style.width = `${(covered / card.need) * 100}%`;
+    if (count) count.textContent = `${covered} / ${card.need}`;
+    const cover = el.querySelector('.cover');
+    if (cover && !card.unlocked) {
+      cover.setAttribute('aria-label', `封印中的道具卡，还差 ${Math.max(card.need - state.matches, 0)} 对解锁`);
+    }
+    if (card.unlocked) {
+      el.classList.add('unlocked');
+      const face = el.querySelector('.face');
+      if (face) {
+        face.removeAttribute('inert');
+        face.setAttribute('aria-hidden', 'false');
+      }
+      const coverEl = el.querySelector('.cover');
+      if (coverEl) {
+        coverEl.disabled = true;
+        coverEl.setAttribute('aria-label', '封印已解除');
+      }
+      const useBtn = el.querySelector('.use-btn');
+      if (useBtn) useBtn.disabled = card.used;
+    }
+    el.classList.toggle('used', card.used);
+    if (justUnlocked) {
+      el.classList.add('unlocking');
+      later(() => el.classList.remove('unlocking'), 1300);
+    }
+  }
+
+  function updateCards(justCard) {
+    state.cards.forEach((card) => {
+      if (!card.unlocked && state.matches >= card.need) {
+        card.unlocked = true;
+        updateCard(card, true);
+        showToast(`封印解除 · ${card.name}`);
+        setStatus(`封印解除：<strong>${card.name}</strong>（${card.desc}）。翻开不等于用了，点「使用」才生效。`);
+      } else {
+        updateCard(card, false);
+      }
+    });
+    const unlocked = state.cards.filter((card) => card.unlocked).length;
+    cardsNote.textContent = `已连 ${state.matches} 对 · 解锁 ${unlocked} / ${state.cards.length}`;
+    if (justCard) updateCard(justCard, false);
+  }
+
+  function clearSelection() {
+    if (!state.selectedKey) return;
+    const prev = state.tileEls.get(state.selectedKey);
+    if (prev) {
+      prev.classList.remove('selected');
+      prev.setAttribute('aria-pressed', 'false');
+    }
+    state.selectedKey = null;
+  }
+
+  function selectTile(tile) {
+    state.selectedKey = tile.key;
+    const el = state.tileEls.get(tile.key);
+    if (el) {
+      el.classList.add('selected');
+      el.setAttribute('aria-pressed', 'true');
+    }
+    setStatus(`已选「${tile.text}」，再点它的中英搭档。`);
+  }
+
+  function onTileClick(key) {
+    if (!state || state.finished || state.locked) return;
+    const tile = tileByKey(key);
+    const el = state.tileEls.get(key);
+    if (!tile || !el || el.classList.contains('removed') || state.removedTiles.has(key)) return;
+    startTimer();
+    if (state.selectedKey === key) {
+      clearSelection();
+      setStatus('取消选择。再点一个方块重新开始。');
+      return;
+    }
+    if (!state.selectedKey) {
+      selectTile(tile);
+      return;
+    }
+    const first = tileByKey(state.selectedKey);
+    clearSelection();
+    if (!first) return;
+    if (isValidPair(first, tile)) matchPair(first, tile);
+    else registerMiss(first, tile);
+  }
+
+  function isValidPair(a, b) {
+    const en = a.type === 'en' ? a : b.type === 'en' ? b : null;
+    const zh = a.type === 'meaning' ? a : b.type === 'meaning' ? b : null;
+    return !!en && !!zh && en.wordId === zh.wordId && !state.meaningMatched.has(zh.key);
+  }
+
+  function drawLink(elA, elB, tone) {
+    if (!elA || !elB) return;
+    const wrapRect = boardWrap.getBoundingClientRect();
+    const a = elA.getBoundingClientRect();
+    const b = elB.getBoundingClientRect();
+    const x1 = a.left + a.width / 2 - wrapRect.left;
+    const y1 = a.top + a.height / 2 - wrapRect.top;
+    const x2 = b.left + b.width / 2 - wrapRect.left;
+    const y2 = b.top + b.height / 2 - wrapRect.top;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+    line.setAttribute('stroke', tone === 'bad' ? '#c24e45' : '#2f8f5b');
+    line.setAttribute('stroke-width', '2.5');
+    line.setAttribute('stroke-linecap', 'round');
+    line.setAttribute('stroke-dasharray', '6 5');
+    line.setAttribute('opacity', '0.9');
+    linkLayer.appendChild(line);
+    later(() => line.remove(), 700);
+  }
+
+  function matchPair(enTile, zhTile) {
+    state.locked = true;
+    state.matches += 1;
+    state.meaningMatched.add(zhTile.key);
+    const enEl = state.tileEls.get(enTile.key);
+    const zhEl = state.tileEls.get(zhTile.key);
+    const word = wordOf(enTile);
+    const complete = word ? isWordComplete(word) : false;
+    if (enEl) enEl.classList.add('correct');
+    if (zhEl) zhEl.classList.add('correct');
+    drawLink(enEl, zhEl, 'ok');
+    updateStats();
+    updateCards();
+    setStatus(`配对成功：<strong>${word.en}</strong> — ${zhTile.text}${complete ? '（这个词的义项连完了）' : ''}。`);
+    later(() => {
+      if (zhEl) removeTileElement(zhEl, zhTile.key);
+      if (complete && enEl) removeTileElement(enEl, enTile.key);
+      if (enEl) enEl.classList.remove('correct');
+      if (zhEl) zhEl.classList.remove('correct');
+      state.locked = false;
+      if (state.matches >= TOTAL_PAIRS) finishRound();
+    }, 520);
+  }
+
+  function removeTileElement(el, key) {
+    el.classList.add('removed');
+    el.disabled = true;
+    state.removedTiles.add(key);
+  }
+
+  function registerMiss(a, b) {
+    state.locked = true;
+    state.errors += 1;
+    updateStats();
+    const elA = state.tileEls.get(a.key);
+    const elB = state.tileEls.get(b.key);
+    if (elA) elA.classList.add('wrong');
+    if (elB) elB.classList.add('wrong');
+    drawLink(elA, elB, 'bad');
+    setStatus(`不是一对：「${a.text}」和「${b.text}」搭不上，错配 +1。`);
+    later(() => {
+      if (elA) elA.classList.remove('wrong');
+      if (elB) elB.classList.remove('wrong');
+      state.locked = false;
+    }, 560);
+  }
+
+  function useCard(itemId) {
+    const card = state.cards.find((item) => item.id === itemId);
+    if (!card) return;
+    if (!card.unlocked) {
+      setStatus('这张还盖着，先多连几对把封印松开。');
+      return;
+    }
+    if (card.used || state.finished) return;
+    if (state.locked) {
+      setStatus('等一下，刚才那对还在结算。');
+      return;
+    }
+    if (!canUse(card)) {
+      const reason = card.id === 'broom' ? '现在没有可扫的多余方块了。' : '现在没有合适的配对可用。';
+      setStatus(`「${card.name}」暂时用不上：${reason}`);
+      return;
+    }
+
+    clearSelection();
+    card.used = true;
+    updateCard(card, false);
+
+    if (card.id === 'peek') {
+      clearHint();
+      const pair = availablePair();
+      pair.forEach((tile) => {
+        const el = state.tileEls.get(tile.key);
+        if (el) el.classList.add('hint');
+      });
+      state.hintTimer = later(() => {
+        pair.forEach((tile) => {
+          const el = state.tileEls.get(tile.key);
+          if (el) el.classList.remove('hint');
+        });
+      }, 2800);
+      setStatus(`透视镜：看「<strong>${pair[0].text}</strong>」和「${pair[1].text}」——方块在闪，抓住机会。`);
+    } else if (card.id === 'mix') {
+      const all = state.tiles;
+      const orders = shuffle(all.map((_, index) => index));
+      all.forEach((tile, index) => {
+        const el = state.tileEls.get(tile.key);
+        if (el) el.style.order = String(orders[index]);
+      });
+      setStatus('洗牌器：剩下的方块换了位置，眼熟的那对可能已经拆开了。');
+    } else if (card.id === 'broom') {
+      const targets = state.tiles.filter((tile) => tile.type === 'distractor' && !state.removedTiles.has(tile.key));
+      const target = targets[Math.floor(Math.random() * targets.length)];
+      const el = state.tileEls.get(target.key);
+      if (el) {
+        el.classList.add('swept');
+        later(() => removeTileElement(el, target.key), 480);
+      }
+      state.distractorsLeft = Math.max(state.distractorsLeft - 1, 0);
+      updateStats();
+      setStatus(`清道夫：扫掉了「<strong>${target.text}</strong>」——它没有中文搭档，只会占地方。`);
+    } else if (card.id === 'chain') {
+      const pair = availablePair();
+      const [enTile, zhTile] = pair;
+      setStatus(`连锁器：自动连上「<strong>${enTile.text}</strong>」和「${zhTile.text}」。`);
+      matchPair(enTile, zhTile);
+    }
+
+    updateCards();
+    cardsNote.textContent = `已连 ${state.matches} 对 · 解锁 ${state.cards.filter((item) => item.unlocked).length} / ${state.cards.length}`;
+  }
+
+  function clearHint() {
+    document.querySelectorAll('.tile.hint').forEach((el) => el.classList.remove('hint'));
+  }
+
+  function finishRound() {
+    if (state.finished) return;
+    state.finished = true;
+    state.locked = true;
+    stopTimer();
+    clearHint();
+    const left = state.tiles.filter((tile) => tile.type === 'distractor' && !state.removedTiles.has(tile.key));
+    left.forEach((tile, index) => {
+      const el = state.tileEls.get(tile.key);
+      if (!el) return;
+      later(() => {
+        el.classList.add('swept');
+        state.removedTiles.add(tile.key);
+      }, index * 80);
+    });
+    state.distractorsLeft = 0;
+    updateStats();
+    setStatus('全部正确配对已连完，剩下的多余方块自动清场。');
+    later(() => {
+      if (!state.finished) return;
+      const unlocked = state.cards.filter((card) => card.unlocked).length;
+      const used = state.cards.filter((card) => card.used).length;
+      finalTime.textContent = formatTime(state.elapsed);
+      finalErrors.textContent = String(state.errors);
+      finalUnlocked.textContent = `${unlocked} / ${state.cards.length}`;
+      finalUsed.textContent = String(used);
+      let grade = '跌跌撞撞清场';
+      if (state.errors === 0 && used === state.cards.length) grade = '零失误 · 道具全开';
+      else if (state.errors === 0) grade = '零失误清场';
+      else if (used >= 2) grade = '会拆封印的人';
+      else if (state.errors <= 2) grade = '顺利清场';
+      resultGrade.textContent = grade;
+      resultEl.hidden = false;
+      if (!reduceMotion.matches) {
+        resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 700);
+  }
+
+  function resetRound() {
+    generation += 1;
+    if (state && state.interval) window.clearInterval(state.interval);
+    if (state && state.hintTimer) window.clearTimeout(state.hintTimer);
+    stopTimer();
+    toastEl.classList.remove('show');
+    clearHint();
+    linkLayer.innerHTML = '';
+    resultEl.hidden = true;
+    state = createState();
+    renderBoard();
+    renderCards();
+    updateStats();
+    updateCards();
+    setStatus('先点一个方块，再点它的中英搭档；多义词可以连续连多个义项。');
+  }
+
+  restartBtn.addEventListener('click', resetRound);
+  againBtn.addEventListener('click', resetRound);
+
+  resetRound();
+})();
+</script>
+</body>
+</html>
