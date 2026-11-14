@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080b10">
+  <meta name="description" content="灰烬岗哨 3D 桌面切片：一幕 5e 剧本，3D 骰子、技能卡、角色与道具指示物。">
+  <title>灰烬岗哨 · 3D 桌面切片</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23080b10'/%3E%3Cpath d='M16 4l3 8 8 4-8 4-3 8-3-8-8-4 8-4z' fill='%23e6b06a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <canvas id="scene" aria-label="灰烬岗哨三维桌面：雪地岗哨、角色与怪物指示物、三维骰子"></canvas>
+
+  <div class="hud">
+    <div class="grain" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <p class="eyebrow">ASHEN WATCH <span>/</span> 3D TABLETOP</p>
+        <div class="brand-line">
+          <h1>灰烬岗哨</h1>
+          <p class="sub">剧本 × 5e 规则 × 3D 骰子</p>
+        </div>
+      </div>
+
+      <div class="act-track" id="act-track" aria-label="剧本进度">
+        <span class="act is-on" data-act="explore"><b>一</b>探索</span>
+        <span class="act" data-act="social"><b>二</b>社交</span>
+        <span class="act" data-act="combat"><b>三</b>战斗</span>
+        <span class="act" data-act="rest"><b>四</b>短休</span>
+        <span class="act" data-act="level"><b>五</b>成长</span>
+      </div>
+
+      <div class="tools">
+        <button type="button" class="tool" id="btn-rules">规则书</button>
+        <button type="button" class="tool" id="btn-reset">重置视角</button>
+        <button type="button" class="tool tool--ghost" id="btn-restart">重开</button>
+      </div>
+    </header>
+
+    <aside class="party-panel" id="party" aria-label="队伍状态"></aside>
+
+    <section class="story-panel" id="story" aria-live="polite">
+      <div class="story-head">
+        <p class="story-kicker" id="story-kicker">幕一 · 探索</p>
+        <h2 id="story-title">岗哨外</h2>
+        <button type="button" class="story-toggle" id="story-toggle" aria-label="收起剧情">收起</button>
+      </div>
+      <div class="story-body" id="story-body"></div>
+      <div class="story-actions" id="story-actions"></div>
+      <div class="story-log" id="story-log" aria-label="掷骰与战斗记录"></div>
+    </section>
+
+    <div class="turnbar" id="turnbar" hidden></div>
+
+    <section class="hand-panel" id="hand-panel">
+      <div class="hand-head">
+        <div>
+          <p class="hand-owner" id="hand-owner">探索</p>
+          <p class="hand-hint" id="hand-hint">点场景里的调查点，或直接用右侧选项</p>
+        </div>
+        <div class="dice-box">
+          <p class="dice-status" id="dice-status">d20 已在桌上</p>
+          <button type="button" class="dice-btn" id="btn-roll"><span>d20</span> 自由掷骰</button>
+        </div>
+      </div>
+      <div class="hand" id="hand"></div>
+    </section>
+
+    <div class="tags" id="tags" aria-hidden="true"></div>
+    <div class="roll-banner" id="roll-banner" hidden></div>
+    <div class="toast" id="toast" hidden></div>
+
+    <div class="modal" id="modal" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button type="button" class="icon-btn modal-close" id="btn-modal-close" aria-label="关闭">×</button>
+        <p class="modal-kicker" id="modal-kicker"></p>
+        <h2 id="modal-title"></h2>
+        <p class="modal-sub" id="modal-sub"></p>
+        <div class="modal-body" id="modal-body"></div>
+        <div class="modal-actions" id="modal-actions"></div>
+      </div>
+    </div>
+
+    <aside class="rules-drawer" id="rules" aria-label="规则书" hidden>
+      <div class="rules-head">
+        <div>
+          <p class="drawer-kicker">RULES · SRD 5.1</p>
+          <h2>规则书</h2>
+        </div>
+        <button type="button" class="icon-btn" id="btn-rules-close" aria-label="关闭规则书">×</button>
+      </div>
+      <div class="rules-tabs" id="rules-tabs"></div>
+      <div class="rules-body" id="rules-body"></div>
+      <p class="rules-note">机制参考 SRD 5.1（CC-BY-4.0）；剧本、角色与文本原创，未复制《玩家手册》译文或 WotC 官方美术。</p>
+    </aside>
+
+    <p class="table-hint" id="table-hint">拖拽旋转 · 滚轮缩放 · 点角色 / 道具 / 骰子</p>
+  </div>
+
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <p class="eyebrow">THE ASHEN WATCH</p>
+      <h2>正在铺开桌面</h2>
+      <div class="loader-bar"><i></i></div>
+      <p class="loader-note">雪 · 灰 · 一枚 d20</p>
+    </div>
+  </div>
+
+  <div class="fallback" id="fallback" hidden>
+    <h2>这台设备暂时铺不开桌面</h2>
+    <p>需要浏览器支持 WebGL 2。试试最新版 Chrome / Edge / Safari，并确认没有关闭硬件加速。</p>
+  </div>
+
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three.module.min.js" } }
+  </script>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
