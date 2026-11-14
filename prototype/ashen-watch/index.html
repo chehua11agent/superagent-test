@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#14110d" />
+    <meta
+      name="description"
+      content="《灰烬岗哨》——一局 5e 跑团演示：探索、社交、战斗、短休、升级，用 SRD 5.1 规则跑完一幕原创剧本。"
+    />
+    <title>灰烬岗哨 · 一局 5e 跑团演示</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2314110d'/%3E%3Cpath d='M16 5 26 11v10L16 27 6 21V11z' fill='none' stroke='%23c8752f' stroke-width='1.6'/%3E%3Cpath d='M16 10v9M13 13h6' stroke='%23e7d8b8' stroke-width='1.6'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="topbar" id="topbar" hidden>
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">岗</span>
+        <span class="brand-copy">
+          <span class="brand-name">灰烬岗哨</span>
+          <span class="brand-sub">5e 跑团演示 · SRD 5.1</span>
+        </span>
+      </div>
+      <div class="hud">
+        <span class="scene-progress" id="scene-progress">序幕</span>
+        <button class="ghost-btn ghost-btn--small" id="btn-rules" type="button">规则书</button>
+        <button class="icon-btn" id="btn-sound" type="button" aria-label="关闭音效" title="音效开关">
+          <span id="sound-icon" aria-hidden="true">♪</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ── 封面 ─────────────────────────────────────────── -->
+      <section class="screen screen--title" data-screen="title" aria-labelledby="title-h1">
+        <div class="title-grid">
+          <div class="title-copy">
+            <p class="kicker">一局 5e 跑团 · 原创剧本 · 约 8–10 分钟</p>
+            <h1 class="title" id="title-h1">
+              <span class="title-cn">灰烬岗哨</span>
+              <span class="title-en">THE ASHEN WATCH</span>
+            </h1>
+            <p class="tagline">烽火三天没点。你们是最后一批上去的人。</p>
+            <p class="title-lead">
+              这是一个<b>排除其他所有东西、单独成立</b>的 D&amp;D 演示：没有背单词，也没有别的玩法。
+              用 5e 规则（SRD 5.1）和一个原创一幕剧本，把跑团的几个主要环节各走一遍。
+            </p>
+            <ul class="phase-list">
+              <li><span>01</span><b>探索</b>· 检定、线索、陷阱</li>
+              <li><span>02</span><b>社交</b>· 态度、说服、洞悉</li>
+              <li><span>03</span><b>战斗</b>· 先攻、AC、法术</li>
+              <li><span>04</span><b>短休</b>· 生命骰、资源恢复</li>
+              <li><span>05</span><b>成长</b>· 战利品、经验、升级</li>
+            </ul>
+            <div class="title-actions">
+              <button class="primary-btn" id="btn-start" type="button">进入岗哨</button>
+              <button class="ghost-btn" id="btn-rules-title" type="button">先看规则书</button>
+            </div>
+            <p class="title-note">
+              单页演示 · 无需安装 · 手机可玩 · 基于 SRD 5.1（CC-BY-4.0），剧本与文本为原创
+            </p>
+          </div>
+
+          <div class="title-art" aria-hidden="true">
+            <svg viewBox="0 0 460 560" class="watch-svg">
+              <defs>
+                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0b0907" />
+                  <stop offset="0.65" stop-color="#241a12" />
+                  <stop offset="1" stop-color="#3a2416" />
+                </linearGradient>
+                <radialGradient id="ember" cx="0.5" cy="0.5" r="0.5">
+                  <stop offset="0" stop-color="#e07a2f" stop-opacity="0.55" />
+                  <stop offset="1" stop-color="#e07a2f" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#2b241d" />
+                  <stop offset="1" stop-color="#15120e" />
+                </linearGradient>
+              </defs>
+              <rect width="460" height="560" fill="url(#sky)" />
+              <circle cx="352" cy="86" r="60" fill="url(#ember)" opacity="0.6" />
+              <path d="M0 420c70-18 130 12 210 0s170-22 250 4v136H0z" fill="#0c0a08" />
+              <path d="M0 438c80-22 150 12 240-2s160 16 220 2" fill="none" stroke="#2c2116" stroke-width="2" />
+              <!-- 岗哨 -->
+              <path d="M148 430V190l82-94 82 94v240z" fill="url(#stone)" stroke="#3b2f22" stroke-width="2" />
+              <path d="M138 194h184l-10-14H148z" fill="#3b2f22" />
+              <path d="M222 104 312 200H132z" fill="#1a1510" stroke="#4a3927" stroke-width="2" />
+              <rect x="196" y="232" width="68" height="76" fill="#0f0b08" stroke="#4a3927" stroke-width="3" />
+              <path d="M196 270h68M230 232v76" stroke="#4a3927" stroke-width="2" />
+              <path d="M196 232l24-18h44l20 16" fill="none" stroke="#4a3927" stroke-width="2" />
+              <!-- 烽火台 -->
+              <path d="M206 150h52l-8 34h-36z" fill="#2b241d" stroke="#4a3927" stroke-width="2" />
+              <g class="ember-glow">
+                <circle cx="232" cy="140" r="46" fill="url(#ember)" />
+                <path d="M232 118c10 10 14 20 10 28-3 6-9 9-16 9s-13-4-14-11c-1-8 5-15 12-21 3 8 8 9 8 5 0-4-1-7 0-10z" fill="#e07a2f" opacity="0.85" />
+              </g>
+              <!-- 门与台阶 -->
+              <path d="M212 430v-58a20 20 0 0 1 40 0v58z" fill="#080604" stroke="#3b2f22" stroke-width="3" />
+              <path d="M188 430h88l16 18h-120z" fill="#1a1510" stroke="#3b2f22" stroke-width="2" />
+              <!-- 灰与雾 -->
+              <g class="ash" opacity="0.55">
+                <circle cx="80" cy="150" r="1.2" fill="#d9c9a8" />
+                <circle cx="120" cy="96" r="1" fill="#d9c9a8" />
+                <circle cx="340" cy="170" r="1.3" fill="#d9c9a8" />
+                <circle cx="300" cy="120" r="1" fill="#d9c9a8" />
+                <circle cx="390" cy="240" r="1.1" fill="#d9c9a8" />
+                <circle cx="60" cy="260" r="1" fill="#d9c9a8" />
+              </g>
+              <g class="fog" opacity="0.5">
+                <ellipse cx="120" cy="470" rx="170" ry="26" fill="#cfc3a6" opacity="0.08" />
+                <ellipse cx="340" cy="500" rx="190" ry="30" fill="#cfc3a6" opacity="0.06" />
+              </g>
+            </svg>
+            <p class="art-caption">“点火的不是你们。是三天前就该点火的那些人。”</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 剧情 / 探索 / 社交 / 短休 ─────────────────────── -->
+      <section class="screen screen--story" data-screen="story" aria-labelledby="scene-title" hidden>
+        <div class="story-grid">
+          <div class="story-main">
+            <div class="scene-art" id="scene-art"></div>
+            <div class="scene-panel">
+              <div class="scene-head">
+                <span class="phase-badge" id="phase-badge">探索</span>
+                <button class="rules-link" id="rules-link" type="button">这一环节的规则</button>
+              </div>
+              <h1 class="scene-title" id="scene-title" tabindex="-1">灰烬岗哨</h1>
+              <div class="scene-text" id="scene-text"></div>
+              <div class="scene-result" id="scene-result" hidden></div>
+              <div class="scene-extra" id="scene-extra"></div>
+              <div class="choices" id="scene-choices"></div>
+            </div>
+          </div>
+          <aside class="party-panel" id="party-panel" aria-label="队伍"></aside>
+        </div>
+      </section>
+
+      <!-- ── 战斗 ─────────────────────────────────────────── -->
+      <section class="screen screen--combat" data-screen="combat" aria-labelledby="combat-title" hidden>
+        <h1 class="visually-hidden" id="combat-title">战斗</h1>
+        <div class="initiative" id="initiative" aria-label="先攻顺序"></div>
+        <div class="combat-grid">
+          <div class="combat-main">
+            <div class="enemies" id="enemies"></div>
+            <div class="active-panel" id="active-panel"></div>
+            <div class="party-strip" id="party-strip"></div>
+          </div>
+          <aside class="combat-side">
+            <h2 class="log-title">战报</h2>
+            <div class="log" id="combat-log" role="log" aria-live="polite"></div>
+            <p class="log-hint">
+              攻击 = d20 + 命中加值 vs AC；命中后掷伤害。20 暴击、1 必失。0 HP 时进入死亡豁免。
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ── 尾声 ─────────────────────────────────────────── -->
+      <section class="screen screen--epilogue" data-screen="epilogue" aria-labelledby="epilogue-title" hidden>
+        <div class="epilogue-wrap">
+          <p class="kicker">尾声</p>
+          <h1 class="epilogue-title" id="epilogue-title" tabindex="-1">烽火</h1>
+          <div class="epilogue-text" id="epilogue-text"></div>
+          <div class="phase-summary" id="phase-summary"></div>
+          <div class="epilogue-actions">
+            <button class="primary-btn" id="btn-replay" type="button">再跑一遍</button>
+            <button class="ghost-btn" id="btn-cover" type="button">回到封面</button>
+          </div>
+          <p class="epilogue-note">
+            本演示使用 SRD 5.1 的通用机制；剧本、角色、文本与画面为原创，未使用《玩家手册》译文或 Wizards of the Coast 的美术。
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- 规则书 -->
+    <dialog class="dlg dlg--rules" id="dlg-rules" aria-labelledby="rules-title">
+      <div class="dlg-head">
+        <h2 id="rules-title">规则书 · SRD 5.1 摘要</h2>
+        <button class="icon-btn dlg-close" type="button" data-close aria-label="关闭">×</button>
+      </div>
+      <p class="dlg-sub">
+        这里只写本演示实际用到的规则摘要，不是《玩家手册》的替代；完整规则见 SRD 5.1（CC-BY-4.0）。
+      </p>
+      <nav class="rules-nav" id="rules-nav" aria-label="规则目录"></nav>
+      <div class="rules-body" id="rules-body"></div>
+    </dialog>
+
+    <noscript><p class="noscript">这个演示需要启用 JavaScript。</p></noscript>
+    <script src="game.js"></script>
+  </body>
+</html>
