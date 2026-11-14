@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3ede1" />
+    <meta
+      name="description"
+      content="《拾词者 · 词塔》——一个画面简约的肉鸽卡牌小原型：每张牌是一个 CET-4 单词，爬上五层遗忘之塔。"
+    />
+    <title>拾词者 · 词塔 — 极简肉鸽卡牌原型</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23f3ede1'/%3E%3Crect x='5' y='5' width='22' height='22' rx='2' fill='none' stroke='%23a63f2c'/%3E%3Ctext x='16' y='23' font-family='serif' font-size='18' fill='%23a63f2c' text-anchor='middle'%3E%E8%AF%8D%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="topbar" id="topbar" hidden>
+      <div class="brand">
+        <span class="brand-seal" aria-hidden="true">拾</span>
+        <span class="brand-name brand-name--full">拾词者 · 词塔</span>
+        <span class="brand-name brand-name--short">词塔</span>
+      </div>
+      <div class="hud">
+        <div class="hp-hud" aria-label="生命值">
+          <span class="hp-hud-label">生命</span>
+          <span class="hp-track"><i id="hud-hp-fill"></i></span>
+          <span class="hp-hud-text" id="hud-hp-text">80/80</span>
+        </div>
+        <span class="floor-hud" id="hud-floor">第 1 层</span>
+        <button class="ghost-btn ghost-btn--small" id="btn-deck" type="button">牌组</button>
+        <button class="icon-btn" id="btn-sound" type="button" aria-label="关闭音效" title="音效开关">
+          <span id="sound-icon"></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ── 标题 ─────────────────────────────────────────── -->
+      <section class="screen screen--title" data-screen="title" aria-labelledby="title-h1">
+        <div class="title-grid">
+          <div class="title-copy">
+            <p class="kicker">CET-4 · 肉鸽卡牌 · 极简原型</p>
+            <h1 id="title-h1" class="title">
+              <span class="title-cn">词塔</span>
+              <span class="title-en">WORD TOWER</span>
+            </h1>
+            <p class="tagline">忘掉的词，会变成塔里的怪物。<br />把它们一张张打回去。</p>
+            <div class="title-actions">
+              <button class="primary-btn" id="btn-start" type="button">开始攀登</button>
+              <button class="ghost-btn" id="btn-howto" type="button">怎么玩</button>
+            </div>
+            <ul class="title-rules">
+              <li><b>5 层</b> · 普通战斗、精英与首领，约 5 分钟。</li>
+              <li><b>每回合 3 点费用</b>，打出手牌；敌人下一步的意图可见。</li>
+              <li><b>三选一</b>把新词卡加入牌组，篝火可以休息或打磨。</li>
+            </ul>
+            <p class="title-note">进度不保存 · 手机与桌面均可玩</p>
+          </div>
+
+          <div class="tower-art" aria-hidden="true">
+            <div class="tower-line"></div>
+            <div class="stack-card stack-card--back">
+              <span class="stack-word">forget</span>
+              <span class="stack-zh">遗忘</span>
+            </div>
+            <div class="stack-card stack-card--mid">
+              <span class="stack-word">shelter</span>
+              <span class="stack-zh">庇护</span>
+            </div>
+            <div class="stack-card stack-card--front">
+              <span class="stack-cost">1</span>
+              <span class="stack-word">sharp</span>
+              <span class="stack-ipa">/ʃɑːp/</span>
+              <span class="stack-zh">锋利的</span>
+              <span class="stack-rule">造成 6 点伤害</span>
+              <span class="stack-seal">攻</span>
+            </div>
+            <p class="tower-caption">五层 · 一副越打越厚的牌</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 地图 ─────────────────────────────────────────── -->
+      <section class="screen screen--map" data-screen="map" aria-labelledby="map-title" hidden>
+        <div class="screen-head">
+          <p class="kicker">攀登路线</p>
+          <h2 id="map-title">第 <span id="map-floor">1</span> / 5 层</h2>
+          <p class="sub">选择下一处落脚点。分岔走过一条，另一条就关闭了。</p>
+        </div>
+        <div class="map" id="map" aria-label="词塔地图"></div>
+        <div class="map-foot">
+          <span>已走 <b id="map-steps">0</b> 步</span>
+          <span class="legend">
+            <span class="legend-item"><i class="legend-dot legend-dot--battle"></i>战斗</span>
+            <span class="legend-item"><i class="legend-dot legend-dot--rest"></i>篝火</span>
+            <span class="legend-item"><i class="legend-dot legend-dot--elite"></i>精英</span>
+          </span>
+        </div>
+      </section>
+
+      <!-- ── 战斗 ─────────────────────────────────────────── -->
+      <section class="screen screen--combat" data-screen="combat" aria-labelledby="combat-title" hidden>
+        <h2 class="visually-hidden" id="combat-title">战斗</h2>
+        <div class="combat">
+          <div class="turn-line">
+            <span id="turn-label">第 1 回合</span>
+            <span class="turn-sep" aria-hidden="true"></span>
+            <span id="combat-floor">第 1 层</span>
+            <span class="turn-sep" aria-hidden="true"></span>
+            <span id="combat-kind">战斗</span>
+          </div>
+
+          <div class="enemy-zone">
+            <div class="intent" id="intent" aria-live="polite"></div>
+            <div class="enemy" id="enemy">
+              <div class="enemy-art" id="enemy-art"></div>
+              <div class="enemy-name">
+                <span class="enemy-zh" id="enemy-zh">怀疑</span>
+                <span class="enemy-word" id="enemy-word">doubt</span>
+              </div>
+              <div class="bar enemy-bar"><i id="enemy-hp-fill"></i></div>
+              <div class="enemy-meta">
+                <span id="enemy-hp-text">30 / 30</span>
+                <span class="block-chip block-chip--enemy" id="enemy-block" hidden>格挡 <b>0</b></span>
+              </div>
+            </div>
+            <p class="combat-note" id="combat-note">选择一张词卡打出。</p>
+          </div>
+
+          <div class="hand-zone">
+            <div class="player-line">
+              <div class="energy" id="energy" aria-label="剩余费用"></div>
+              <div class="pile-counts">
+                <span class="pile" id="draw-pile">牌库 <b>5</b></span>
+                <span class="pile" id="discard-pile">弃牌 <b>0</b></span>
+                <span class="block-chip" id="player-block" hidden>格挡 <b>0</b></span>
+              </div>
+              <button class="end-turn" id="btn-end" type="button">
+                结束回合 <kbd>E</kbd>
+              </button>
+            </div>
+            <div class="hand" id="hand" aria-label="手牌"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 战利品 ───────────────────────────────────────── -->
+      <section class="screen screen--reward" data-screen="reward" aria-labelledby="reward-title" hidden>
+        <div class="screen-head">
+          <p class="kicker">战利品</p>
+          <h2 id="reward-title">选一张词卡</h2>
+          <p class="sub" id="reward-sub">把它加入牌组，或者跳过。</p>
+        </div>
+        <div class="reward-cards" id="reward-cards"></div>
+        <button class="text-btn" id="btn-skip" type="button">跳过，继续向上</button>
+      </section>
+
+      <!-- ── 篝火 ─────────────────────────────────────────── -->
+      <section class="screen screen--campfire" data-screen="campfire" aria-labelledby="campfire-title" hidden>
+        <div class="campfire-wrap">
+          <div class="fire-art" id="fire-art" aria-hidden="true"></div>
+          <p class="kicker">休整</p>
+          <h2 id="campfire-title">篝火</h2>
+          <p class="campfire-sub" id="campfire-sub">火还亮着。你可以坐一会儿，或者磨一磨手里的词。</p>
+          <div class="campfire-options" id="campfire-options"></div>
+          <div class="campfire-result" id="campfire-result" hidden></div>
+        </div>
+      </section>
+
+      <!-- ── 结算 ─────────────────────────────────────────── -->
+      <section class="screen screen--result" data-screen="result" aria-labelledby="result-title" hidden>
+        <div class="result-wrap">
+          <p class="kicker" id="result-kicker">本局结束</p>
+          <h2 id="result-title" class="result-title">登顶</h2>
+          <p class="result-line" id="result-line"></p>
+          <div class="stats" id="result-stats"></div>
+          <div class="result-actions">
+            <button class="primary-btn" id="btn-again" type="button">再爬一次</button>
+            <button class="ghost-btn" id="btn-result-deck" type="button">查看牌组</button>
+          </div>
+          <p class="result-note">这是原型：没有存档，也不会记录学习数据。</p>
+        </div>
+      </section>
+    </main>
+
+    <div class="overlay" id="overlay" hidden>
+      <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+        <div class="sheet-head">
+          <h2 id="overlay-title">牌组</h2>
+          <button class="icon-btn" id="overlay-close" type="button" aria-label="关闭">✕</button>
+        </div>
+        <div class="sheet-body" id="overlay-body"></div>
+      </div>
+    </div>
+
+    <div class="sr-live" id="live" aria-live="polite"></div>
+
+    <script src="game.js" defer></script>
+  </body>
+</html>
