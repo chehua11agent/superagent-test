@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0f0c">
+  <meta name="description" content="凡戴尔的失落矿坑 3D 桌面切片：开场故事、选人动画、三猪小径哥布林伏击；3D 骰子与技能卡。">
+  <title>凡戴尔的失落矿坑 · 3D 桌面</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0f0c'/%3E%3Cpath d='M16 4l7 12-7 12-7-12z' fill='%23d3a45f'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <canvas id="scene" aria-label="凡戴尔的失落矿坑三维桌面：三猪小径、马车、死马、哥布林与角色指示物、三维骰子"></canvas>
+  <div class="tags" id="tags" aria-hidden="true"></div>
+
+  <!-- 开场故事 -->
+  <section class="intro-screen" id="intro" aria-live="polite">
+    <div class="intro-shade" aria-hidden="true"></div>
+    <div class="intro-corner"><span>LOST MINE OF PHANDELVER</span><i>3D TABLETOP · 5E</i></div>
+    <div class="intro-main">
+      <p class="intro-kicker" id="intro-kicker">序章 · 剑湾北地</p>
+      <h1 class="intro-title" id="intro-title">凡戴尔的<br>失落矿坑</h1>
+      <div class="intro-letter" id="intro-letter" hidden>
+        <p class="letter-head">致愿意跑一趟的伙计</p>
+        <p>把车赶到凡达林，找巴特恩。<br>十枚金币。路上别多问。</p>
+        <p class="letter-sign">—— 冈德伦 · 寻石者</p>
+      </div>
+      <p class="intro-body" id="intro-body"></p>
+      <p class="intro-note" id="intro-note"></p>
+      <div class="intro-actions">
+        <button type="button" class="btn-primary" id="btn-intro-next">继续 <span>→</span></button>
+        <button type="button" class="btn-ghost" id="btn-intro-skip">跳过开场</button>
+      </div>
+      <div class="intro-dots" id="intro-dots"></div>
+    </div>
+    <p class="intro-foot">非官方同人演示 · 机制参考 SRD 5.1 · 不使用官方美术</p>
+  </section>
+
+  <!-- 选人 -->
+  <section class="select-screen" id="select" hidden>
+    <header class="select-head">
+      <p class="eyebrow">STEP 1 / 3 · PARTY</p>
+      <h1>选择你的队伍</h1>
+      <p>从四名预生成角色里选 <b>3</b> 名。点角色卡或桌面上的模型。</p>
+    </header>
+    <div class="select-count"><span id="select-count">0</span><i>/ 3</i></div>
+    <div class="hero-pool" id="hero-pool"></div>
+    <footer class="select-actions">
+      <button type="button" class="btn-ghost" id="btn-select-back">返回开场</button>
+      <button type="button" class="btn-primary" id="btn-start" disabled>出发 · 三猪小径</button>
+    </footer>
+  </section>
+
+  <!-- HUD -->
+  <div class="hud" id="hud" hidden>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <p class="eyebrow">LOST MINE OF PHANDELVER <span>/</span> 3D TABLETOP</p>
+        <div class="brand-line">
+          <h1>失落矿坑</h1>
+          <p class="sub">开场 · 选人 · 三猪小径</p>
+        </div>
+      </div>
+
+      <div class="act-track" id="act-track" aria-label="剧本进度">
+        <span class="act is-on" data-act="intro"><b>一</b>序章</span>
+        <span class="act" data-act="trail"><b>二</b>伏击</span>
+        <span class="act" data-act="cave"><b>三</b>巢穴</span>
+      </div>
+
+      <div class="tools">
+        <button type="button" class="tool tool--env" id="btn-env" title="切换环境：晨雾 / 阴雨 / 黄昏 / 夜">阴雨</button>
+        <button type="button" class="tool" id="btn-rules">规则书</button>
+        <button type="button" class="tool" id="btn-reset">重置视角</button>
+        <button type="button" class="tool tool--ghost" id="btn-restart">重开</button>
+      </div>
+    </header>
+
+    <aside class="party-panel" id="party" aria-label="队伍状态"></aside>
+
+    <section class="story-panel" id="story" aria-live="polite">
+      <div class="story-head">
+        <p class="story-kicker" id="story-kicker">第一幕 · 三猪小径</p>
+        <h2 id="story-title">两匹死马</h2>
+        <button type="button" class="story-toggle" id="story-toggle" aria-label="收起剧情">收起</button>
+      </div>
+      <div class="story-body" id="story-body"></div>
+      <div class="story-actions" id="story-actions"></div>
+      <div class="story-log" id="story-log" aria-label="掷骰与战斗记录"></div>
+    </section>
+
+    <div class="turnbar" id="turnbar" hidden></div>
+
+    <section class="hand-panel" id="hand-panel">
+      <div class="hand-head">
+        <div>
+          <p class="hand-owner" id="hand-owner">三猪小径</p>
+          <p class="hand-hint" id="hand-hint">先观察树林，再决定是否动手</p>
+        </div>
+        <div class="dice-box">
+          <p class="dice-status" id="dice-status">d20 已在桌上</p>
+          <button type="button" class="dice-btn" id="btn-roll"><span>d20</span> 自由掷骰</button>
+        </div>
+      </div>
+      <div class="hand" id="hand"></div>
+    </section>
+
+    <div class="roll-banner" id="roll-banner" hidden></div>
+    <div class="toast" id="toast" hidden></div>
+
+    <div class="modal" id="modal" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button type="button" class="icon-btn modal-close" id="btn-modal-close" aria-label="关闭">×</button>
+        <p class="modal-kicker" id="modal-kicker"></p>
+        <h2 id="modal-title"></h2>
+        <p class="modal-sub" id="modal-sub"></p>
+        <div class="modal-body" id="modal-body"></div>
+        <div class="modal-actions" id="modal-actions"></div>
+      </div>
+    </div>
+
+    <aside class="rules-drawer" id="rules" aria-label="规则书" hidden>
+      <div class="rules-head">
+        <div>
+          <p class="drawer-kicker">RULES · SRD 5.1</p>
+          <h2>规则书</h2>
+        </div>
+        <button type="button" class="icon-btn" id="btn-rules-close" aria-label="关闭规则书">×</button>
+      </div>
+      <div class="rules-tabs" id="rules-tabs"></div>
+      <div class="rules-body" id="rules-body"></div>
+      <p class="rules-note">机制参考 SRD 5.1（CC-BY-4.0）；模组结构参考用户提供的 LMoP PDF，文本与画面为本切片原创改写，不使用官方美术。</p>
+    </aside>
+
+    <p class="table-hint" id="table-hint">拖拽旋转 · 滚轮缩放 · 点角色 / 哥布林 / 骰子</p>
+  </div>
+
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <p class="eyebrow">THE TRIBOAR TRAIL</p>
+      <h2>正在铺开三猪小径</h2>
+      <div class="loader-bar"><i></i></div>
+      <p class="loader-note">雨 · 泥土 · 一枚 d20</p>
+    </div>
+  </div>
+
+  <div class="fallback" id="fallback" hidden>
+    <h2>这台设备暂时铺不开桌面</h2>
+    <p>需要浏览器支持 WebGL 2。试试最新版 Chrome / Edge / Safari，并确认没有关闭硬件加速。</p>
+  </div>
+
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three.module.min.js" } }
+  </script>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
