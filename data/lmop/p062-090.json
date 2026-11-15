@@ -1,0 +1,4410 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-15",
+  "dataset": {
+    "id": "lmop-p062-090",
+    "type": "adventure_excerpt",
+    "title": "《凡戴尔的失落矿坑》第 62–90 页结构化录入",
+    "book": "Lost Mine of Phandelver",
+    "edition": "D&D 5e (2014)",
+    "language": "zh-CN",
+    "scope": [
+      "PART 4 潮音洞之声",
+      "附录A 魔法物品",
+      "附录B 怪物",
+      "备注"
+    ]
+  },
+  "source": {
+    "file_name": "凡度尔的失落矿坑（Lost Mine of Phandelver）.pdf",
+    "publisher": "Wizards of the Coast",
+    "pdf_total_pages": 80,
+    "requested_pages": "62-90",
+    "processed_pdf_pages": "54-79",
+    "processed_footers": "53-78",
+    "page_basis": "用户按目录页码指认范围（PART 4 第62页、附录A 第75页、附录B 第78页、备注第89页）；实际提供的 PDF 共80页，目录页码与 PDF 页脚约差9页，本文件按章节名对齐到 PDF 第54–79页。",
+    "translation_source": "纯美苹果园",
+    "translators": [
+      "庞西瓦",
+      "琉璃",
+      "cherng9"
+    ]
+  },
+  "policy": {
+    "prose": "omitted",
+    "reason": "公开仓库不收录模组译文正文；只保留名称、页码、分类、规则机械值与生成式摘要。",
+    "copyright": "模组版权归 Wizards of the Coast；中文整合仅用于学习交流，如涉侵权请于24小时内删除。"
+  },
+  "page_map": {
+    "toc_start": {
+      "part4": 62,
+      "appendix_a": 75,
+      "appendix_b": 78,
+      "notes": 89
+    },
+    "pdf": {
+      "part4": "54-64",
+      "appendix_a": "65-67",
+      "appendix_b": "68-78",
+      "notes": "79"
+    }
+  },
+  "field_guide": {
+    "chapters": "章节与附录总览，含等级、经验基准、游荡怪物表与地下城通用特征。",
+    "scenes": "PART 4 的20个区域；含区域编号、PDF页码、特征、遭遇、NPC、检定与奖励引用。",
+    "npcs": "本段出现的剧情人物；status 为 dead / captive / active / mentioned。",
+    "monsters": "附录B的怪物数据卡；字段对齐仓库 data/mm 的怪物库命名，含 CR、XP 与 PART 4 出现位置。",
+    "checks": "检定与豁免索引；dc 为 null 表示被动检定或流程判定。",
+    "rewards": "宝藏、经验值、临时增益与陷阱索引；coins 为货币，items 引用 magic_items。",
+    "magic_items": "附录A的11件魔法物品，以及PART 4区域15的两件特殊魔法物品。",
+    "notes": "版权、翻译、页码与未收录数据卡等备注。"
+  },
+  "counts": {
+    "chapters": 4,
+    "scenes": 20,
+    "npcs": 8,
+    "monsters": 22,
+    "checks": 21,
+    "rewards": 13,
+    "magic_items": 13,
+    "notes": 5
+  },
+  "chapters": [
+    {
+      "id": "lmop:chapter:part-4-wave-echo-cave",
+      "type": "chapter",
+      "name": "PART 4 潮音洞之声",
+      "name_en": "PART 4: Wave Echo Cave",
+      "toc_start_page": 62,
+      "pdf_pages": "54-64",
+      "summary": "凡度林东方十五里的失落矿坑。寻石者兄弟找到入口后被黑蜘蛛奈兹纳尔跟踪；队伍在此寻找法术工场并阻止黑蜘蛛。",
+      "level": 4,
+      "recommended_xp": 2700,
+      "xp_rules": [
+        "怪物 XP 按附录B的数据卡计算，不再逐条写入遭遇描述。",
+        "额外 XP 写在奖励段落：救出南镀并存活 200 XP；活捉奈兹纳尔并押送可获双倍 XP。"
+      ],
+      "dungeon_features": {
+        "environment": "非常寒冷、潮湿，但意外地通风良好；微风从区域1吹到区域16。",
+        "ceilings": "矿道10尺；房间20尺；天然洞穴30尺并带钟乳石。",
+        "doors": "默认6尺高、4尺宽，6英寸厚石板，铁把手与绞链；多数门适合矮人体型。",
+        "light": "默认无光源。",
+        "walls": "多数为打磨石头；区域14、15、19、20用合适的石块砌成。",
+        "stalagmites": "天然洞穴中常见，可作掩蔽。"
+      },
+      "wandering_monsters": {
+        "trigger": "队伍在同一区域停留过久时掷 d20；17–20 触发一次遭遇，DM 也可直接决定触发。",
+        "table_dice": "d12",
+        "rows": [
+          {
+            "roll": "1-3",
+            "monster": "蚊蝠",
+            "monster_en": "Stirge",
+            "count": "2d4",
+            "monster_id": "lmop:monster:stirge"
+          },
+          {
+            "roll": "4-5",
+            "monster": "食尸鬼",
+            "monster_en": "Ghoul",
+            "count": "1d4",
+            "monster_id": "lmop:monster:ghoul"
+          },
+          {
+            "roll": "6",
+            "monster": "掘地怪",
+            "monster_en": "Grick",
+            "count": "1d4",
+            "monster_id": "lmop:monster:grick"
+          },
+          {
+            "roll": "7-8",
+            "monster": "熊地精",
+            "monster_en": "Bugbear",
+            "count": "1d4",
+            "monster_id": "lmop:monster:bugbear"
+          },
+          {
+            "roll": "9",
+            "monster": "骷髅",
+            "monster_en": "Skeleton",
+            "count": "1d6",
+            "monster_id": "lmop:monster:skeleton"
+          },
+          {
+            "roll": "10",
+            "monster": "僵尸",
+            "monster_en": "Zombie",
+            "count": "1d6",
+            "monster_id": "lmop:monster:zombie"
+          },
+          {
+            "roll": "11-12",
+            "monster": "赭色果冻怪",
+            "monster_en": "Ochre Jelly",
+            "count": "1",
+            "monster_id": null,
+            "note": "附录B未收录数据卡，使用时另查《怪物图鉴》。"
+          }
+        ]
+      },
+      "key_encounters_note": "潮音洞之声中的所有遭遇都是关键遭遇。",
+      "scene_ids": [
+        "lmop:scene:area-1",
+        "lmop:scene:area-2",
+        "lmop:scene:area-3",
+        "lmop:scene:area-4",
+        "lmop:scene:area-5",
+        "lmop:scene:area-6",
+        "lmop:scene:area-7",
+        "lmop:scene:area-8",
+        "lmop:scene:area-9",
+        "lmop:scene:area-10",
+        "lmop:scene:area-11",
+        "lmop:scene:area-12",
+        "lmop:scene:area-13",
+        "lmop:scene:area-14",
+        "lmop:scene:area-15",
+        "lmop:scene:area-16",
+        "lmop:scene:area-17",
+        "lmop:scene:area-18",
+        "lmop:scene:area-19",
+        "lmop:scene:area-20"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 54
+      },
+      "brief": "PART 4 · 等级4 · 20个区域 · 目标：法术工场与黑蜘蛛"
+    },
+    {
+      "id": "lmop:chapter:appendix-a-magic-items",
+      "type": "chapter",
+      "name": "附录A 魔法物品",
+      "name_en": "Appendix A: Magic Items",
+      "toc_start_page": 75,
+      "pdf_pages": "65-67",
+      "summary": "本模组出现的魔法物品规则：11个条目，含通用+1护甲/武器、靴子、手套、法杖、魔杖、戒指与药水。",
+      "item_count": 11,
+      "item_ids": [
+        "lmop:item:plus-1-armor",
+        "lmop:item:plus-1-weapon",
+        "lmop:item:boots-of-striding-and-springing",
+        "lmop:item:gauntlets-of-ogre-power",
+        "lmop:item:staff-of-spider",
+        "lmop:item:wand-of-magic-missiles",
+        "lmop:item:staff-of-defense",
+        "lmop:item:ring-of-protection",
+        "lmop:item:potion-of-invisibility",
+        "lmop:item:potion-of-vitality",
+        "lmop:item:potion-of-healing"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 65
+      },
+      "brief": "附录A · 11件魔法物品 · 非凡/珍稀/非常珍稀"
+    },
+    {
+      "id": "lmop:chapter:appendix-b-monsters",
+      "type": "chapter",
+      "name": "附录B 怪物",
+      "name_en": "Appendix B: Monsters",
+      "toc_start_page": 78,
+      "pdf_pages": "68-78",
+      "summary": "本模组使用的怪物与NPC数据卡，共22个条目；含哥布林、狼、熊地精、红烙印恶霸、骷髅、独眼怪、邪恶法师、蚊蝠、食尸鬼、食人魔、大地精、兽人、枭熊、僵尸、枯枝怪、巨蛛、年轻绿龙、信徒、掘地兽、燃烧之颅、变形怪与黑蜘蛛奈兹纳尔。",
+      "monster_count": 22,
+      "monster_ids": [
+        "lmop:monster:goblin",
+        "lmop:monster:wolf",
+        "lmop:monster:bugbear",
+        "lmop:monster:redbrand-ruffian",
+        "lmop:monster:skeleton",
+        "lmop:monster:spectator",
+        "lmop:monster:evil-mage",
+        "lmop:monster:stirge",
+        "lmop:monster:ghoul",
+        "lmop:monster:ogre",
+        "lmop:monster:hobgoblin",
+        "lmop:monster:orc",
+        "lmop:monster:owlbear",
+        "lmop:monster:zombie",
+        "lmop:monster:twig-blight",
+        "lmop:monster:giant-spider",
+        "lmop:monster:young-green-dragon",
+        "lmop:monster:acolyte",
+        "lmop:monster:grick",
+        "lmop:monster:flameskull",
+        "lmop:monster:doppelganger",
+        "lmop:monster:nezznar"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 68
+      },
+      "brief": "附录B · 22个怪物/NPC数据卡 · CR 1/8–8"
+    },
+    {
+      "id": "lmop:chapter:notes",
+      "type": "chapter",
+      "name": "备注",
+      "name_en": "Notes",
+      "toc_start_page": 89,
+      "pdf_pages": "79",
+      "summary": "免责声明、翻译与整理信息。",
+      "note_ids": [
+        "lmop:note:copyright",
+        "lmop:note:translation-credits",
+        "lmop:note:page-mapping",
+        "lmop:note:missing-statblocks",
+        "lmop:note:translation-names"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 79
+      },
+      "brief": "备注 · 版权、译者、页码与缺失数据卡说明"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "lmop:scene:area-1",
+      "type": "scene",
+      "area": 1,
+      "name": "洞窟入口",
+      "name_en": "Cave Entrance",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 56,
+      "summary": "寻石者兄弟的营地；死去的矮人矿工塔登躺在补给旁，东北部有坍塌深坑。",
+      "features": [
+        "天然矿道入口通往大型天然洞穴，由天然石柱与三根石笋支撑。",
+        "西部石柱后方有三个铺盖和补给：面粉、盐、腌肉、油灯、灯油、十字镐、铲子等。",
+        "东北部坍塌成10尺宽、20尺深的坑，麻绳系在石笋上垂到坑底。",
+        "坑底粗糙矿道通往西北的区域2和东方的区域3。"
+      ],
+      "connections": [
+        "lmop:scene:area-2",
+        "lmop:scene:area-3"
+      ],
+      "encounters": [],
+      "npc_ids": [
+        "lmop:npc:tharden"
+      ],
+      "check_ids": [
+        "lmop:check:area-1-pit-climb"
+      ],
+      "reward_ids": [
+        "lmop:reward:area-1-boots"
+      ],
+      "notes": [
+        "塔登是刚铎的兄弟，被黑蜘蛛杀害；另一兄弟南镀被囚禁在区域20。",
+        "矮人补给可能有用途，但没有实质价值。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 56
+      },
+      "brief": "区域1 · 洞窟入口 · 寻石者营地 · 深坑 DC15 · 跑跳靴"
+    },
+    {
+      "id": "lmop:scene:area-2",
+      "type": "scene",
+      "area": 2,
+      "name": "矿道",
+      "name_en": "Mine Tunnels",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 56,
+      "summary": "迷宫般的原始矿道，天花板只有6尺高，尽头多是开挖到一半的死路。",
+      "features": [
+        "许多交叉通道，天花板6尺。",
+        "死路是矿工放弃挖掘留下的。",
+        "一只耐心的赭色果冻怪潜伏在此，会尾随队伍并等待落单目标。"
+      ],
+      "connections": [
+        "lmop:scene:area-1",
+        "lmop:scene:area-3",
+        "lmop:scene:area-4",
+        "lmop:scene:area-5",
+        "lmop:scene:area-6"
+      ],
+      "encounters": [
+        {
+          "monster_id": null,
+          "name": "赭色果冻怪",
+          "name_en": "Ochre Jelly",
+          "count": "1",
+          "note": "附录B未收录数据卡；使用《怪物图鉴》。"
+        }
+      ],
+      "npc_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "notes": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 56
+      },
+      "brief": "区域2 · 矿道 · 赭色果冻怪1只（无附录数据卡）"
+    },
+    {
+      "id": "lmop:scene:area-3",
+      "type": "scene",
+      "area": 3,
+      "name": "旧入口",
+      "name_en": "Old Entrance",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 57,
+      "summary": "数百年前被崩塌埋葬的旧入口；矮人与兽人的骸骨散落，天花板攀着十只蚊蝠。",
+      "features": [
+        "30尺高的天然洞穴，许多矿道在此交错。",
+        "墙上刻着矮人与侏儒矿工的简单图样。",
+        "约两打穿着腐朽盔甲的骷髅散落在地，既有矮人也有兽人。",
+        "半打未点燃的大黄铜油灯放在墙角和岩壁边。",
+        "十只蚊蝠攀在天花板上，因猎物稀少而饥饿。"
+      ],
+      "connections": [
+        "lmop:scene:area-1",
+        "lmop:scene:area-2"
+      ],
+      "encounters": [
+        {
+          "monster_id": "lmop:monster:stirge",
+          "name": "蚊蝠",
+          "name_en": "Stirge",
+          "count": "10",
+          "note": "若角色观察地板骷髅而未观察天花板，会被突袭；被动察觉高于蚊蝠的敏捷（潜行）检定则不被突袭。"
+        }
+      ],
+      "npc_ids": [],
+      "check_ids": [
+        "lmop:check:area-3-stirge-ambush"
+      ],
+      "reward_ids": [],
+      "notes": [
+        "蚊蝠从天花板降落攻击；未被突袭的角色能听见翅膀拍打声。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 57
+      },
+      "brief": "区域3 · 旧入口 · 蚊蝠10只 · 被动察觉对抗潜行"
+    },
+    {
+      "id": "lmop:scene:area-4",
+      "type": "scene",
+      "area": 4,
+      "name": "老旧的守卫间",
+      "name_en": "Old Guardroom",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 57,
+      "summary": "兽人进攻时被迅速攻占的守卫室；碎石与骸骨间有九具骷髅会重新组合。",
+      "features": [
+        "碎裂的石椅与崩塌的天花板碎石充斥房间。",
+        "废墟中有石制床铺、倒塌的武器架与矮人/兽人骸骨。",
+        "任何活物进入时，骷髅开始搅拌并结合成9只骷髅。"
+      ],
+      "connections": [
+        "lmop:scene:area-2"
+      ],
+      "encounters": [
+        {
+          "monster_id": "lmop:monster:skeleton",
+          "name": "骷髅",
+          "name_en": "Skeleton",
+          "count": "9",
+          "note": "活物进入房间时组合并攻击，战斗到被摧毁。"
+        }
+      ],
+      "npc_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "notes": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 57
+      },
+      "brief": "区域4 · 老旧守卫间 · 骷髅9只"
+    },
+    {
+      "id": "lmop:scene:area-5",
+      "type": "scene",
+      "area": 5,
+      "name": "试金者的办公室",
+      "name_en": "Assayer's Office",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 57,
+      "summary": "矿坑试金师称量与估价的办公室；柜台后有一个上锁的铁制保险箱。",
+      "features": [
+        "大型石制柜台把房间分成两半，柜台上放着三个沾满灰尘的铁秤。",
+        "北方挖出的小隔间散落着纸张碎片；数百年历史的纸张一碰就碎。",
+        "隔间中有死去已久的侏儒与兽人尸体。",
+        "懂矮人语的角色能从碎片中辨认重量与支出记录。"
+      ],
+      "connections": [
+        "lmop:scene:area-2"
+      ],
+      "encounters": [],
+      "npc_ids": [],
+      "check_ids": [
+        "lmop:check:area-5-strongbox-lock"
+      ],
+      "reward_ids": [
+        "lmop:reward:area-5-strongbox"
+      ],
+      "notes": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 57
+      },
+      "brief": "区域5 · 试金者办公室 · 保险箱 DC20 · 600cp/180sp/90ep/60gp"
+    },
+    {
+      "id": "lmop:scene:area-6",
+      "type": "scene",
+      "area": 6,
+      "name": "南部营房",
+      "name_en": "Southern Barracks",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 57,
+      "summary": "矿工轮班休息的营房；三只食尸鬼正在骸骨堆中咀嚼。",
+      "features": [
+        "老旧石床沿墙整齐排列，房间中央有装满旧煤的锈铁火盆。",
+        "半打矮人与兽人骸骨散落，伴随铠甲碎片。",
+        "三只来自区域9群落的食尸鬼蹲在骸骨边。"
+      ],
+      "connections": [
+        "lmop:scene:area-2",
+        "lmop:scene:area-9"
+      ],
+      "encounters": [
+        {
+          "monster_id": "lmop:monster:ghoul",
+          "name": "食尸鬼",
+          "name_en": "Ghoul",
+          "count": "3",
+          "note": "在骸骨堆中进食；会攻击活物。"
+        }
+      ],
+      "npc_ids": [],
+      "check_ids": [
+        "lmop:check:area-6-hear-ghouls"
+      ],
+      "reward_ids": [],
+      "notes": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 57
+      },
+      "brief": "区域6 · 南部营房 · 食尸鬼3只 · 聆听 DC10"
+    },
+    {
+      "id": "lmop:scene:area-7",
+      "type": "scene",
+      "area": 7,
+      "name": "废弃的储藏间",
+      "name_en": "Abandoned Storeroom",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 58,
+      "summary": "保存完好的储藏间，是矿坑中安全的休息点；门可以从内部挡住。",
+      "features": [
+        "东墙崩塌成大量碎石。",
+        "北方有一扇微开的门通往大储藏间。",
+        "沾满灰尘的小桶整齐放在墙边，因年代久远而破损开裂。",
+        "桶内物品早已蒸发殆尽。",
+        "没有怪物会来这里。"
+      ],
+      "connections": [
+        "lmop:scene:area-2"
+      ],
+      "encounters": [],
+      "npc_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "notes": [
+        "可作为安全的长休/短休点。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 58
+      },
+      "brief": "区域7 · 废弃储藏间 · 安全休息点"
+    },
+    {
+      "id": "lmop:scene:area-8",
+      "type": "scene",
+      "area": 8,
+      "name": "真菌洞窟",
+      "name_en": "Fungi Cavern",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 58,
+      "summary": "覆盖着发光真菌的洞窟；穿越时会释放毒气。",
+      "features": [
+        "密集奇怪的真菌毯覆盖大部分地面，约1尺高；石笋上的真菌可长到5尺。",
+        "部分真菌发出绿色磷光，可让生物不用光源或黑暗视觉看清洞窟。",
+        "大多数真菌无害；覆盖地面的真菌毯在生物穿越时散发毒气。"
+      ],
+      "connections": [
+        "lmop:scene:area-2"
+      ],
+      "encounters": [],
+      "npc_ids": [],
+      "check_ids": [
+        "lmop:check:area-8-toxic-gas"
+      ],
+      "reward_ids": [],
+      "notes": [
+        "毒气持续1分钟后消散；消散前每个在洞窟内结束回合的活物都要重新豁免。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 58
+      },
+      "brief": "区域8 · 真菌洞窟 · 毒气 DC11 体质豁免 · 3d6 毒素"
+    },
+    {
+      "id": "lmop:scene:area-9",
+      "type": "scene",
+      "area": 9,
+      "name": "大洞穴",
+      "name_en": "Great Cavern",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 58,
+      "summary": "曾是宴会厅、会议区与矿工食堂的三层大洞穴；七只食尸鬼潜伏在西边高地。",
+      "features": [
+        "陡峭悬崖把洞穴分成三个高低差区域：两边高、中间低。",
+        "石刻阶梯可攀上两旁高地。",
+        "中间低地放两张旧大桌与一对旧火盆；东边高地有一张小桌。",
+        "数十具矮人战士、侏儒、兽人与食人魔遗骸证明这里曾发生惨烈战斗。",
+        "西边高地的阴影中潜伏七只食尸鬼，会注意光源或声音并迅速下来攻击。"
+      ],
+      "connections": [
+        "lmop:scene:area-6",
+        "lmop:scene:area-10"
+      ],
+      "encounters": [
+        {
+          "monster_id": "lmop:monster:ghoul",
+          "name": "食尸鬼",
+          "name_en": "Ghoul",
+          "count": "7",
+          "note": "潜伏在西边高地，饥饿且战斗到被摧毁。"
+        }
+      ],
+      "npc_ids": [],
+      "check_ids": [
+        "lmop:check:area-9-cliff-climb"
+      ],
+      "reward_ids": [],
+      "notes": [
+        "悬崖10尺高；攀爬失败或被击落会受1d6钝击伤害并倒地。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 58
+      },
+      "brief": "区域9 · 大洞穴 · 食尸鬼7只 · 悬崖 DC12 运动"
+    },
+    {
+      "id": "lmop:scene:area-10",
+      "type": "scene",
+      "area": 10,
+      "name": "黑水池",
+      "name_en": "Dark Pool",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 58,
+      "summary": "深黑色的地下水池；池底有一具古代人类巫师骸骨，带着两枚白金戒指与魔法飞弹魔杖。",
+      "features": [
+        "水池占据洞穴很大一部分，水色深黑。",
+        "岸边有破损的薄贝壳，空气中有鱼腥味。",
+        "池子中央20尺深；东北支流约3尺深，水面离天花板仅2–3尺，可通往区域18。",
+        "池底离岸10尺、水下10尺处有一具骸骨，肋骨插着箭矢。"
+      ],
+      "connections": [
+        "lmop:scene:area-9",
+        "lmop:scene:area-18"
+      ],
+      "encounters": [],
+      "npc_ids": [],
+      "check_ids": [],
+      "reward_ids": [
+        "lmop:reward:area-10-skeleton"
+      ],
+      "notes": [
+        "探索池水即可发现骸骨；骸骨是古代凡戴尔人类巫师，死于兽人入侵。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 58
+      },
+      "brief": "区域10 · 黑水池 · 白金戒指2枚 · 魔法飞弹魔杖"
+    },
+    {
+      "id": "lmop:scene:area-11",
+      "type": "scene",
+      "area": 11,
+      "name": "北部营房",
+      "name_en": "Northern Barracks",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 59,
+      "summary": "奈兹纳尔的前线营房；五只熊地精在此阻挡不死生物，东门被木桌路障挡住。",
+      "features": [
+        "东门从内部挡住，需成功力量检定强行打开。",
+        "门边聆听可听见熊地精用哥布林腔调抱怨饥饿。",
+        "老旧石床沿墙排成一线，房间中央有铁火盆照明取暖。",
+        "从西部进入时会看到用剩余木桌搭成的路障。",
+        "五只熊地精是奈兹纳尔的忠诚手下，负责阻挡食尸鬼、僵尸等不死生物去区域19报信。"
+      ],
+      "connections": [
+        "lmop:scene:area-9",
+        "lmop:scene:area-12"
+      ],
+      "encounters": [
+        {
+          "monster_id": "lmop:monster:bugbear",
+          "name": "熊地精",
+          "name_en": "Bugbear",
+          "count": "5",
+          "note": "最大一只带着腰包（15cp、13ep、一瓶活力药水）。"
+        }
+      ],
+      "npc_ids": [],
+      "check_ids": [
+        "lmop:check:area-11-force-door",
+        "lmop:check:area-11-hear-bugbears"
+      ],
+      "reward_ids": [
+        "lmop:reward:area-11-bugbear-pouch"
+      ],
+      "notes": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 59
+      },
+      "brief": "区域11 · 北部营房 · 熊地精5只 · 破门 DC20 · 聆听 DC10"
+    },
+    {
+      "id": "lmop:scene:area-12",
+      "type": "scene",
+      "area": 12,
+      "name": "冶炼洞窟",
+      "name_en": "Smelting Cavern",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 59,
+      "summary": "矿坑冶炼核心；高炉、风箱与水车渠道已干涸，八具僵尸与一个燃烧之颅守卫。",
+      "features": [
+        "高炉与机械化风箱由水车驱动，但高炉冰冷无光。",
+        "旁边堆着煤炭与一车未炼矿石。",
+        "水车安装在10尺宽、穿过房间地板的渠道中，渠道已干涸。",
+        "出口在西、南、东；干涸渠道为北边与东边提供通路。",
+        "超过一打干枯尸体散落房间，八具矮人战士尸体变成僵尸。",
+        "一个燃烧之颅漂浮在绿色火焰中，奉古老命令阻止入侵者。",
+        "渠道底部离地面5尺，无需检定即可进出；渠道顶在离开房间后只有5尺高。"
+      ],
+      "connections": [
+        "lmop:scene:area-11",
+        "lmop:scene:area-13"
+      ],
+      "encounters": [
+        {
+          "monster_id": "lmop:monster:zombie",
+          "name": "僵尸",
+          "name_en": "Zombie",
+          "count": "8",
+          "note": "会追逐踏入房间的活物，但不会追出区域超过1轮。"
+        },
+        {
+          "monster_id": "lmop:monster:flameskull",
+          "name": "燃烧之颅",
+          "name_en": "Flameskull",
+          "count": "1",
+          "note": "更智慧的守卫，执行古老命令阻止入侵者通过。"
+        }
+      ],
+      "npc_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "notes": [
+        "渠道可用于绕过区域12的不死生物，但奈兹纳尔尚未发现。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 59
+      },
+      "brief": "区域12 · 冶炼洞窟 · 僵尸8只 + 燃烧之颅1个"
+    },
+    {
+      "id": "lmop:scene:area-13",
+      "type": "scene",
+      "area": 13,
+      "name": "明亮的洞穴",
+      "name_en": "Bright Cavern",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 59,
+      "summary": "天花板矿物吸收并放出光线，如同夜空；两座人类比例的石制建筑已部分坍塌。",
+      "features": [
+        "天花板矿物吸收光线再放出，形成夜空般的景象。",
+        "数十具骷髅被碎石压垮，散落在地上。",
+        "洞穴足够容纳两座独立建筑；两座建筑都按人类比例建造，与矿坑其他区域的矮人门廊/家具不同。",
+        "两座建筑都部分坍塌、砖墙焦黑、门破碎烧焦。",
+        "洞穴被小悬崖分成两半，由短阶梯连接；出口在北、南、西。",
+        "受损建筑分别是区域14与区域15。",
+        "天花板矿物漂亮但没有魔法灵光或价值。"
+      ],
+      "connections": [
+        "lmop:scene:area-12",
+        "lmop:scene:area-14",
+        "lmop:scene:area-15"
+      ],
+      "encounters": [],
+      "npc_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "notes": [
+        "熟练于奥秘的角色能感到微妙的法术灵光；靠近区域15时灵光更强。",
+        "区域13的破坏与骷髅是数百年前兽人与雇佣法师攻入矿坑时的法术战斗痕迹。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 59
+      },
+      "brief": "区域13 · 明亮洞穴 · 通往区域14/15 · 无主动怪物"
+    },
+    {
+      "id": "lmop:scene:area-14",
+      "type": "scene",
+      "area": 14,
+      "name": "法师的居所",
+      "name_en": "Wizard's Quarters",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 60,
+      "summary": "被爆炸破坏的法师客房；缚灵莫尔梅斯克从地板下飘出，守着焦黑铁箱与法术书。",
+      "features": [
+        "门已破损，铁绞链部分融化；搬开或撬开需要成功力量检定。",
+        "尘土、灰烬、烧黑墙壁与碎石显示这里曾发生破坏性爆炸。",
+        "桌椅、书柜与床都被烧焦或散裂，但其他东西保存完好。",
+        "一个焦黑铁箱放在其中一张床的床脚边。",
+        "缚灵莫尔梅斯克在有活物踏入时从地板下飘上来。",
+        "书架上只有少数书册被魔法保存，大多与历史有关，其中一本藏着一张地图。"
+      ],
+      "connections": [
+        "lmop:scene:area-13"
+      ],
+      "encounters": [
+        {
+          "monster_id": null,
+          "name": "缚灵莫尔梅斯克",
+          "name_en": "Mormesk the Wraith",
+          "count": "1",
+          "note": "附录B未收录缚灵数据卡；使用《怪物图鉴》。"
+        }
+      ],
+      "npc_ids": [
+        "lmop:npc:mormesk"
+      ],
+      "check_ids": [
+        "lmop:check:area-14-force-door",
+        "lmop:check:area-14-mormesk-persuasion",
+        "lmop:check:area-14-map-investigation"
+      ],
+      "reward_ids": [
+        "lmop:reward:area-14-chest",
+        "lmop:reward:area-14-spellbook-map"
+      ],
+      "notes": [
+        "莫尔梅斯克会倾听角色的说法，确认他们没有伤害他或夺取宝物的意图。",
+        "他可鉴定魔法物品（尤其卷轴）、法术书与奥秘知识；礼物价值需通过魅力（说服）检定让他信服。",
+        "他不会放弃焦黑铁箱中的木管；若角色愿意杀掉区域15的观察者眼魔，他可能提供部分钱币或宝石。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 60
+      },
+      "brief": "区域14 · 法师居所 · 缚灵莫尔梅斯克 · 铁箱与法术书地图"
+    },
+    {
+      "id": "lmop:scene:area-15",
+      "type": "scene",
+      "area": 15,
+      "name": "法术工场",
+      "name_en": "The Forge of Spells",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 61,
+      "summary": "凡戴尔条约中矮人、侏儒与巫师同盟强化装备的地方；观察者眼魔守着绿色火焰火盆与两件魔法物品。",
+      "features": [
+        "北门烧焦破碎，铁绞链部分融化；强行打开需要成功力量检定。",
+        "西边双开门看起来只是有些破损，微微打开。",
+        "大型工作间在古代法术战斗中被严重破坏；角落两张工作桌烧焦，石墙灰泥被烧掉。",
+        "房间中央石制基座上有一个小火盆，绿色火焰舞动闪烁；火盆与基座似乎未被摧毁。",
+        "火盆后飘着一个约4尺直径的球状生物，四根眼柱各两根从身体中央伸出，中央是一只大眼睛。",
+        "观察者眼魔是受人类巫师召唤的守卫，因矿坑被攻击时的法术干扰而变得疯狂，仍相信矿坑在运作。",
+        "北边小房间是独立工作间，用于强化、抛光、上漆等最终处理，也几乎完全被毁。"
+      ],
+      "connections": [
+        "lmop:scene:area-13",
+        "lmop:scene:area-14"
+      ],
+      "encounters": [
+        {
+          "monster_id": "lmop:monster:spectator",
+          "name": "观察者眼魔",
+          "name_en": "Spectator",
+          "count": "1",
+          "note": "原文数据卡译作“独眼怪”；一旦队伍试图带走区域中任何物品就会攻击。"
+        }
+      ],
+      "npc_ids": [],
+      "check_ids": [
+        "lmop:check:area-15-force-door",
+        "lmop:check:area-15-spectator-deception",
+        "lmop:check:area-15-brazier-arcana"
+      ],
+      "reward_ids": [
+        "lmop:reward:area-15-forge-treasure",
+        "lmop:reward:area-15-forge-buff"
+      ],
+      "notes": [
+        "观察者眼魔被蒙蔽后会消失并回到原本位面。",
+        "绿色火焰火盆是整个洞穴魔法力量的源头；魔法已随年月衰退，无法再永久强化魔法物品。",
+        "任何非魔法武器或护甲在绿火中浸沐1分钟，会变成+1魔法物品，持续1d12小时；火盆无法移出法术工场。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 61
+      },
+      "brief": "区域15 · 法术工场 · 观察者眼魔1只 · 护光者/龙之守护 · 绿火+1增益"
+    },
+    {
+      "id": "lmop:scene:area-16",
+      "type": "scene",
+      "area": 16,
+      "name": "轰鸣声的洞穴",
+      "name_en": "Booming Cavern",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 62,
+      "summary": "潮音洞之声得名的水声洞穴；每两分钟有一次水浪涌入，水位短暂上升10尺。",
+      "features": [
+        "狭窄岩壁边俯瞰充满浪潮的大洞穴。",
+        "有节奏的轰鸣声在矿坑中此处最响；鲜活水浪从水道进入并拍打岩壁。",
+        "南墙岩壁边离水面15尺高。",
+        "水浪每两分钟涌入，提升10尺水位；一分钟后恢复约20尺正常深度。",
+        "回声显示这里可能是东北方更大洞穴的支洞。"
+      ],
+      "connections": [
+        "lmop:scene:area-15"
+      ],
+      "encounters": [],
+      "npc_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "notes": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 62
+      },
+      "brief": "区域16 · 轰鸣声洞穴 · 周期性水浪 · 无怪物"
+    },
+    {
+      "id": "lmop:scene:area-17",
+      "type": "scene",
+      "area": 17,
+      "name": "古老的河床",
+      "name_en": "Old Riverbed",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 62,
+      "summary": "从区域10流向区域18的旧水道；如今干涸，可绕过区域12的不死生物。",
+      "features": [
+        "通道只有4尺高，被许多圆石和鹅卵石阻碍。",
+        "曾是河床，现在没有水流。",
+        "古代地震摧毁区域18地面后，水流改道。",
+        "可作为可通行道路绕开区域12的不死生物。"
+      ],
+      "connections": [
+        "lmop:scene:area-10",
+        "lmop:scene:area-18"
+      ],
+      "encounters": [],
+      "npc_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "notes": [
+        "奈兹纳尔尚未发现这条通道。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 62
+      },
+      "brief": "区域17 · 古老河床 · 绕过区域12的秘密通道"
+    },
+    {
+      "id": "lmop:scene:area-18",
+      "type": "scene",
+      "area": 18,
+      "name": "崩塌的洞穴",
+      "name_en": "Collapsed Cavern",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 62,
+      "summary": "奈兹纳尔的仆从占据的崩塌洞穴；三只熊地精与变形怪瓦拉克在20尺深裂谷中搜寻宝藏。",
+      "features": [
+        "宽广大裂谷占据山洞东半部。",
+        "水流从西墙流出，流下裂谷并向北流。",
+        "几条绳索用铁桩固定在裂谷西部边缘，可通往谷底。",
+        "三只熊地精驻扎：两只清理谷底石块，一只守卫西半边。",
+        "变形怪瓦拉克以卓尔男性样貌监督熊地精。",
+        "裂谷20尺深；不用绳子上下需要成功力量（运动）检定，结果小于5会坠落。",
+        "黑蜘蛛的占卜指示裂谷底部有有价值宝藏。"
+      ],
+      "connections": [
+        "lmop:scene:area-10",
+        "lmop:scene:area-17",
+        "lmop:scene:area-19"
+      ],
+      "encounters": [
+        {
+          "monster_id": "lmop:monster:bugbear",
+          "name": "熊地精",
+          "name_en": "Bugbear",
+          "count": "3",
+          "note": "战斗中若主要洞穴发生战斗，谷底熊地精会爬绳加入。"
+        },
+        {
+          "monster_id": "lmop:monster:doppelganger",
+          "name": "变形怪瓦拉克",
+          "name_en": "Vhalak",
+          "count": "1",
+          "note": "以卓尔男性样貌出现；若两只熊地精死亡，会撤退到区域19报信。"
+        }
+      ],
+      "npc_ids": [
+        "lmop:npc:vhalak"
+      ],
+      "check_ids": [
+        "lmop:check:area-18-chasm-climb",
+        "lmop:check:area-18-find-gauntlets"
+      ],
+      "reward_ids": [
+        "lmop:reward:area-18-gauntlets"
+      ],
+      "notes": [
+        "巨石下有一具碎裂的矮人骷髅，戴着食人魔力量手套；视线难以察觉。",
+        "每名尝试寻找的生物每小时可掷一次感知（察觉）。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 62
+      },
+      "brief": "区域18 · 崩塌洞穴 · 熊地精3只 + 变形怪 · 食人魔力量手套"
+    },
+    {
+      "id": "lmop:scene:area-19",
+      "type": "scene",
+      "area": 19,
+      "name": "杜马松的神殿",
+      "name_en": "Temple of Dumathoin",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 63,
+      "summary": "奈兹纳尔的总部；六根破损大理石柱、九尺高矮人神像与营地。黑蜘蛛、四只巨蛛与两只熊地精在此。",
+      "features": [
+        "六根破损大理石柱沿大厅墙边排列。",
+        "北边尽头有九尺高的矮人雕像坐在宝座上，大腿横放石制战锤；大颗祖母绿宝石是雕像眼睛。",
+        "地板尘土与碎石被扫到一旁，雕像前有营地：半打铺盖和包裹围绕粗制火坑。",
+        "西边两根柱子之间有一张木桌，散落笔记和地图，显示奈兹纳尔探索矿坑的成效。",
+        "黑色皮革袋子放在纸张中央。",
+        "两只熊地精站在桌前，中间是穿黑色皮甲与长袍的黑暗精灵奈兹纳尔，手持黑色长杖，杖顶雕刻蜘蛛。",
+        "奈兹纳尔带四只至死保卫主人的巨蛛；蜘蛛会躲在柱子后，奈兹纳尔对自己施放隐身术，并在蜘蛛攻击后加入战局。",
+        "雕像眼睛的祖母绿是精巧玻璃赝品；靠近观察可发现，强咒语保护并带防护系魔法灵光。",
+        "一旦一颗眼睛被弄下，靠墙柱子会碎裂并引发天花板崩塌。"
+      ],
+      "connections": [
+        "lmop:scene:area-18",
+        "lmop:scene:area-20"
+      ],
+      "encounters": [
+        {
+          "monster_id": "lmop:monster:nezznar",
+          "name": "奈兹纳尔（黑蜘蛛）",
+          "name_en": "Nezznar the Black Spider",
+          "count": "1",
+          "note": "带蜘蛛法杖与区域20钥匙；会对角色好奇，可能询问身份、效忠组织、兴趣与目标。"
+        },
+        {
+          "monster_id": "lmop:monster:giant-spider",
+          "name": "巨蛛",
+          "name_en": "Giant Spider",
+          "count": "4",
+          "note": "躲在柱子后，尝试用蛛网束缚入侵者。"
+        },
+        {
+          "monster_id": "lmop:monster:bugbear",
+          "name": "熊地精",
+          "name_en": "Bugbear",
+          "count": "2",
+          "note": "站在桌前护卫奈兹纳尔。"
+        },
+        {
+          "monster_id": "lmop:monster:doppelganger",
+          "name": "变形怪（可选）",
+          "name_en": "Doppelganger",
+          "count": "1",
+          "note": "若区域18的瓦拉克撤退到此，会变成南镀的模样，作为奈兹纳尔的筹码。"
+        }
+      ],
+      "npc_ids": [
+        "lmop:npc:nezznar",
+        "lmop:npc:vhalak"
+      ],
+      "check_ids": [
+        "lmop:check:area-19-statue-eyes",
+        "lmop:check:area-19-pry-eye",
+        "lmop:check:area-19-ceiling-collapse"
+      ],
+      "reward_ids": [
+        "lmop:reward:area-19-nezznar",
+        "lmop:reward:area-19-statue-eyes",
+        "lmop:reward:area-19-nezznar-capture"
+      ],
+      "notes": [
+        "雕像为杜马松，矮人的矿坑之神；熟练于宗教的角色可认出。",
+        "区域18的生物能听见此处战斗，若未被处理，会在三轮后到达并在奈兹纳尔的蜘蛛之后行动。",
+        "若角色俘虏奈兹纳尔并带到凡度林镇长大厅，他会一直被关押到西达尔·荷温特或其他领主联盟代表将他押往绝冬城。",
+        "除非角色在奈兹纳尔牢房外守卫，Halia Thornton 会将他放走并送往散塔林会支部。",
+        "解决奈兹纳尔与手下后，此处是安全舒适的休息点。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 63
+      },
+      "brief": "区域19 · 杜马松神殿 · 奈兹纳尔+巨蛛4+熊地精2 · 雕像眼陷阱 · 宝藏"
+    },
+    {
+      "id": "lmop:scene:area-20",
+      "type": "scene",
+      "area": 20,
+      "name": "祭司的居所",
+      "name_en": "Priest's Quarters",
+      "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+      "pdf_page": 64,
+      "summary": "奈兹纳尔用作牢房的祭司居所；南镀·寻石者被绑着昏迷在石地板上。",
+      "features": [
+        "门锁着，需要盗贼工具与成功敏捷检定，或使用奈兹纳尔的铁钥匙。",
+        "除非队伍维持潜行，房间内的行动会吸引区域19的奈兹纳尔与手下，促使卓尔派巨蛛探查。",
+        "墙上帘幕布满尘土；房间有床和火盆。",
+        "一个状况很糟的矮人被绑着，倒在冰冷石地板上昏迷不醒。",
+        "这里原是服侍杜马松神殿的祭司房间，奈兹纳尔认为更适合当牢房。"
+      ],
+      "connections": [
+        "lmop:scene:area-19"
+      ],
+      "encounters": [],
+      "npc_ids": [
+        "lmop:npc:nundro"
+      ],
+      "check_ids": [
+        "lmop:check:area-20-door-lock"
+      ],
+      "reward_ids": [
+        "lmop:reward:area-20-nundro"
+      ],
+      "notes": [
+        "被绑者是南镀，三位寻石者兄弟中最年轻的矮人平民。",
+        "奈兹纳尔饶过他，是认为矮人可能知道一些矿坑的秘密；自俘虏以来每天审问一两次。",
+        "南镀获救后非常感激，会在队伍待在潮音洞之声期间跟随他们；他对矿坑布局了解不多。"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 64
+      },
+      "brief": "区域20 · 祭司居所 · 南镀获救200XP · 门锁 DC15"
+    }
+  ],
+  "npcs": [
+    {
+      "id": "lmop:npc:tharden",
+      "type": "npc",
+      "name": "塔登·寻石者",
+      "name_en": "Tharden Rockseeker",
+      "race": "矮人",
+      "role": "寻石者兄弟之一；遇难矿工",
+      "status": "dead",
+      "location_id": "lmop:scene:area-1",
+      "description": "刚铎的兄弟，被黑蜘蛛杀害；尸体在区域1营地，脚上穿着跑跳靴。",
+      "statblock_id": null,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 56
+      },
+      "brief": "塔登·寻石者 · 矮人 · 死亡 · 区域1 · 跑跳靴"
+    },
+    {
+      "id": "lmop:npc:nundro",
+      "type": "npc",
+      "name": "南镀·寻石者",
+      "name_en": "Nundro Rockseeker",
+      "race": "矮人",
+      "role": "寻石者兄弟中最年轻者；囚犯",
+      "status": "captive",
+      "location_id": "lmop:scene:area-20",
+      "description": "被奈兹纳尔囚禁在区域20；救出并存活可获200 XP。获救后跟随队伍，但对矿坑布局了解不多。",
+      "statblock_id": null,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 64
+      },
+      "brief": "南镀·寻石者 · 矮人 · 囚犯 · 区域20 · 获救200XP"
+    },
+    {
+      "id": "lmop:npc:mormesk",
+      "type": "npc",
+      "name": "莫尔梅斯克",
+      "name_en": "Mormesk",
+      "race": "缚灵（原人类法师）",
+      "role": "区域14的缚灵守卫",
+      "status": "active",
+      "location_id": "lmop:scene:area-14",
+      "description": "生前是强大法师，死于兽人进攻；领导矿坑中的不死生物。可用魔法物品、法术书或奥秘知识交换生命；愿以钱币或宝石换队伍杀死观察者眼魔。",
+      "statblock_id": null,
+      "statblock_note": "附录B未收录缚灵数据卡；使用《怪物图鉴》。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 60
+      },
+      "brief": "莫尔梅斯克 · 缚灵 · 区域14 · 可交涉"
+    },
+    {
+      "id": "lmop:npc:nezznar",
+      "type": "npc",
+      "name": "奈兹纳尔（黑蜘蛛）",
+      "name_en": "Nezznar the Black Spider",
+      "race": "卓尔精灵",
+      "role": "主要反派；潮音洞之声的幕后主使",
+      "status": "active",
+      "location_id": "lmop:scene:area-19",
+      "description": "寻找法术工场；带蜘蛛法杖与区域20钥匙。被活捉并押送可获双倍XP；Halia Thornton 可能将他放走并送往散塔林会。",
+      "statblock_id": "lmop:monster:nezznar",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 63
+      },
+      "brief": "奈兹纳尔 · 卓尔精灵 · 区域19 · 黑蜘蛛 · 可活捉"
+    },
+    {
+      "id": "lmop:npc:vhalak",
+      "type": "npc",
+      "name": "瓦拉克",
+      "name_en": "Vhalak",
+      "race": "变形怪",
+      "role": "区域18的监工",
+      "status": "active",
+      "location_id": "lmop:scene:area-18",
+      "description": "以卓尔男性样貌监督熊地精；若两只熊地精死亡则撤退到区域19；在区域19可变成南镀的模样。",
+      "statblock_id": "lmop:monster:doppelganger",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 62
+      },
+      "brief": "瓦拉克 · 变形怪 · 区域18 · 可撤退到区域19"
+    },
+    {
+      "id": "lmop:npc:gundren",
+      "type": "npc",
+      "name": "刚铎·寻石者",
+      "name_en": "Gundren Rockseeker",
+      "race": "矮人",
+      "role": "寻石者兄弟之长；被黑蜘蛛俘虏（前文）",
+      "status": "mentioned",
+      "location_id": null,
+      "description": "塔登与南镀的兄弟；本段只被提及。",
+      "statblock_id": null,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 54
+      },
+      "brief": "刚铎·寻石者 · 矮人 · 本段仅提及"
+    },
+    {
+      "id": "lmop:npc:sildar",
+      "type": "npc",
+      "name": "西达尔·荷温特",
+      "name_en": "Sildar Hallwinter",
+      "race": "人类战士",
+      "role": "领主联盟代表（前文）",
+      "status": "mentioned",
+      "location_id": null,
+      "description": "可将被俘的奈兹纳尔押往绝冬城审判；本段只被提及。",
+      "statblock_id": null,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 63
+      },
+      "brief": "西达尔·荷温特 · 人类战士 · 本段仅提及"
+    },
+    {
+      "id": "lmop:npc:halia",
+      "type": "npc",
+      "name": "哈利娅·桑顿",
+      "name_en": "Halia Thornton",
+      "race": "人类",
+      "role": "散塔林会代理人（前文）",
+      "status": "mentioned",
+      "location_id": null,
+      "description": "可能从牢中放走奈兹纳尔并送往散塔林会支部；本段只被提及。",
+      "statblock_id": null,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 64
+      },
+      "brief": "哈利娅·桑顿 · 人类 · 本段仅提及"
+    }
+  ],
+  "monsters": [
+    {
+      "id": "lmop:monster:goblin",
+      "type": "monster",
+      "name": "哥布林",
+      "name_en": "Goblin",
+      "size": [
+        "小型"
+      ],
+      "creature_type": "类人生物",
+      "creature_tags": [
+        "哥布林种"
+      ],
+      "alignment": "中立邪恶",
+      "armor_class": 15,
+      "armor_class_note": "皮甲，盾",
+      "hit_points": 7,
+      "hit_points_formula": "2d6",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 8,
+        "dex": 14,
+        "con": 10,
+        "int": 10,
+        "wis": 8,
+        "cha": 8
+      },
+      "saving_throws": null,
+      "skills": {
+        "潜行": "+6"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 9"
+      ],
+      "passive_perception": 9,
+      "languages": [
+        "通用语",
+        "哥布林语"
+      ],
+      "challenge_rating": "1/4",
+      "challenge_rating_numeric": 0.25,
+      "xp": 50,
+      "traits": [
+        {
+          "name": "灵活逃脱",
+          "description": "每个自己的行动轮可额外执行一次撤离或躲藏动作。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "短弯刀",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 4,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d6+2"
+          ],
+          "damage_types": [
+            "挥砍"
+          ]
+        },
+        {
+          "name": "短弓",
+          "kind": "action",
+          "attack": "远程武器",
+          "to_hit": 4,
+          "range": "80/320 尺",
+          "damage_dice": [
+            "1d6+2"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 68
+      },
+      "brief": "小型 类人生物（哥布林种） · AC 15 · HP 7 · CR 1/4 · 50 XP"
+    },
+    {
+      "id": "lmop:monster:wolf",
+      "type": "monster",
+      "name": "狼",
+      "name_en": "Wolf",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "野兽",
+      "creature_tags": [],
+      "alignment": "无阵营",
+      "armor_class": 13,
+      "armor_class_note": "天生护甲",
+      "hit_points": 11,
+      "hit_points_formula": "2d8+2",
+      "speed": "步行 40 尺",
+      "speed_ft": {
+        "walk": 40
+      },
+      "abilities": {
+        "str": 12,
+        "dex": 15,
+        "con": 12,
+        "int": 3,
+        "wis": 12,
+        "cha": 6
+      },
+      "saving_throws": null,
+      "skills": {
+        "察觉": "+3",
+        "潜行": "+4"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "被动察觉 13"
+      ],
+      "passive_perception": 13,
+      "languages": [],
+      "challenge_rating": "1/4",
+      "challenge_rating_numeric": 0.25,
+      "xp": 50,
+      "traits": [
+        {
+          "name": "敏锐听觉与嗅觉",
+          "description": "在依赖听觉或嗅觉的感知（察觉）检定上具有优势。"
+        },
+        {
+          "name": "群战",
+          "description": "若5尺内有能行动的盟友，攻击检定具有优势。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "咬击",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 4,
+          "reach_ft": 5,
+          "damage_dice": [
+            "2d4+2"
+          ],
+          "damage_types": [
+            "穿刺"
+          ],
+          "description": "若目标是生物，需通过 DC11 力量豁免，失败则被击倒。"
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 68
+      },
+      "brief": "中型 野兽 · AC 13 · HP 11 · CR 1/4 · 50 XP"
+    },
+    {
+      "id": "lmop:monster:bugbear",
+      "type": "monster",
+      "name": "熊地精",
+      "name_en": "Bugbear",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "类人生物",
+      "creature_tags": [
+        "哥布林种"
+      ],
+      "alignment": "混乱邪恶",
+      "armor_class": 16,
+      "armor_class_note": "厚皮甲，盾",
+      "hit_points": 27,
+      "hit_points_formula": "5d8+5",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 15,
+        "dex": 14,
+        "con": 13,
+        "int": 8,
+        "wis": 11,
+        "cha": 9
+      },
+      "saving_throws": null,
+      "skills": {
+        "潜行": "+6",
+        "求生": "+2"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 10"
+      ],
+      "passive_perception": 10,
+      "languages": [
+        "通用语",
+        "哥布林语"
+      ],
+      "challenge_rating": "1",
+      "challenge_rating_numeric": 1,
+      "xp": 200,
+      "traits": [
+        {
+          "name": "嗜血",
+          "description": "使用近战武器命中时，额外造成一次武器伤害骰（已包含在动作伤害中）。"
+        },
+        {
+          "name": "突击",
+          "description": "战斗第一轮成功突袭命中时，目标额外受7（2d6）点伤害。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "晨星",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 4,
+          "reach_ft": 5,
+          "damage_dice": [
+            "2d8+2"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        },
+        {
+          "name": "标枪",
+          "kind": "action",
+          "attack": "近战或远程武器",
+          "to_hit": 4,
+          "reach_ft": 5,
+          "range": "30/120 尺",
+          "damage_dice": [
+            "1d6+2",
+            "2d6+2"
+          ],
+          "damage_types": [
+            "穿刺"
+          ],
+          "description": "远程命中5（1d6+2）；近战命中9（2d6+2）。"
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [
+        {
+          "scene_id": "lmop:scene:area-11",
+          "count": "5"
+        },
+        {
+          "scene_id": "lmop:scene:area-18",
+          "count": "3"
+        },
+        {
+          "scene_id": "lmop:scene:area-19",
+          "count": "2"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 68
+      },
+      "brief": "中型 类人生物（哥布林种） · AC 16 · HP 27 · CR 1 · 200 XP"
+    },
+    {
+      "id": "lmop:monster:redbrand-ruffian",
+      "type": "monster",
+      "name": "红烙印恶霸",
+      "name_en": "Redbrand Ruffian",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "类人生物",
+      "creature_tags": [
+        "人类"
+      ],
+      "alignment": "中立邪恶",
+      "armor_class": 14,
+      "armor_class_note": "结实的皮甲",
+      "hit_points": 16,
+      "hit_points_formula": "3d8+3",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 11,
+        "dex": 14,
+        "con": 12,
+        "int": 9,
+        "wis": 9,
+        "cha": 11
+      },
+      "saving_throws": null,
+      "skills": {
+        "威吓": "+2"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "被动察觉 9"
+      ],
+      "passive_perception": 9,
+      "languages": [
+        "通用语"
+      ],
+      "challenge_rating": "1/2",
+      "challenge_rating_numeric": 0.5,
+      "xp": 100,
+      "traits": [],
+      "actions": [
+        {
+          "name": "多重攻击",
+          "kind": "action",
+          "description": "进行两次近战攻击。"
+        },
+        {
+          "name": "短剑",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 4,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d6+2"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 69
+      },
+      "brief": "中型 类人生物（人类） · AC 14 · HP 16 · CR 1/2 · 100 XP"
+    },
+    {
+      "id": "lmop:monster:skeleton",
+      "type": "monster",
+      "name": "骷髅",
+      "name_en": "Skeleton",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "亡灵",
+      "creature_tags": [],
+      "alignment": "守序邪恶",
+      "armor_class": 13,
+      "armor_class_note": "残破的盔甲",
+      "hit_points": 13,
+      "hit_points_formula": "2d8+4",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 10,
+        "dex": 14,
+        "con": 15,
+        "int": 6,
+        "wis": 8,
+        "cha": 5
+      },
+      "saving_throws": null,
+      "skills": {},
+      "damage_vulnerabilities": [
+        "钝击"
+      ],
+      "damage_resistances": [],
+      "damage_immunities": [
+        "毒素"
+      ],
+      "condition_immunities": [
+        "中毒"
+      ],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 9"
+      ],
+      "passive_perception": 9,
+      "languages": [
+        "能听懂生前会的语言，但不能说话"
+      ],
+      "challenge_rating": "1/4",
+      "challenge_rating_numeric": 0.25,
+      "xp": 50,
+      "traits": [],
+      "actions": [
+        {
+          "name": "短剑",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 4,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d6+2"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        },
+        {
+          "name": "短弓",
+          "kind": "action",
+          "attack": "远程武器",
+          "to_hit": 4,
+          "range": "80/320 尺",
+          "damage_dice": [
+            "1d6+2"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [
+        {
+          "scene_id": "lmop:scene:area-4",
+          "count": "9"
+        },
+        {
+          "scene_id": null,
+          "count": "1d6",
+          "note": "游荡怪物表 9"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 69
+      },
+      "brief": "中型 亡灵 · AC 13 · HP 13 · CR 1/4 · 50 XP"
+    },
+    {
+      "id": "lmop:monster:spectator",
+      "type": "monster",
+      "name": "独眼怪（观察者眼魔）",
+      "name_en": "Spectator",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "异怪",
+      "creature_tags": [],
+      "alignment": "中立邪恶",
+      "armor_class": 15,
+      "armor_class_note": "天生护甲",
+      "hit_points": 45,
+      "hit_points_formula": "6d8+18",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 14,
+        "dex": 16,
+        "con": 16,
+        "int": 13,
+        "wis": 10,
+        "cha": 8
+      },
+      "saving_throws": null,
+      "skills": {
+        "奥秘": "+3",
+        "洞察": "+4",
+        "察觉": "+2",
+        "潜行": "+5"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "真视 120 尺",
+        "被动察觉 12"
+      ],
+      "passive_perception": 12,
+      "languages": [
+        "地底通用语"
+      ],
+      "challenge_rating": "2",
+      "challenge_rating_numeric": 2,
+      "xp": 450,
+      "traits": [
+        {
+          "name": "敏锐视觉",
+          "description": "在依赖视线的感知（察觉）检定上具有优势。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "多重攻击",
+          "kind": "action",
+          "description": "用爪子进行两次攻击。"
+        },
+        {
+          "name": "爪击",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 4,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d6+3"
+          ],
+          "damage_types": [
+            "挥砍"
+          ]
+        },
+        {
+          "name": "腐朽凝视",
+          "kind": "action",
+          "save_dc": 12,
+          "save_ability": "体质",
+          "range": "30 尺",
+          "damage_dice": [
+            "3d6"
+          ],
+          "damage_types": [
+            "黯蚀"
+          ],
+          "description": "选择一个30尺内能看见的目标，失败受10（3d6）黯蚀伤害。"
+        },
+        {
+          "name": "奇特洞察",
+          "kind": "action",
+          "range": "30 尺",
+          "description": "选择一个30尺内能看见的目标，以魅力（唬弄）对抗独眼怪的感知（洞察）；若独眼怪获胜，得知该生物的一个秘密或事实。"
+        }
+      ],
+      "reactions": [],
+      "extraction_note": "原文只列 30 尺步行速度，未列飞行速度。",
+      "part4_encounters": [
+        {
+          "scene_id": "lmop:scene:area-15",
+          "count": "1"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 70
+      },
+      "brief": "中型 异怪 · AC 15 · HP 45 · CR 2 · 450 XP"
+    },
+    {
+      "id": "lmop:monster:evil-mage",
+      "type": "monster",
+      "name": "邪恶法师",
+      "name_en": "Evil Mage",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "类人生物",
+      "creature_tags": [
+        "人类"
+      ],
+      "alignment": "守序邪恶",
+      "armor_class": 12,
+      "armor_class_note": null,
+      "hit_points": 22,
+      "hit_points_formula": "5d8",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 9,
+        "dex": 14,
+        "con": 11,
+        "int": 17,
+        "wis": 12,
+        "cha": 11
+      },
+      "saving_throws": {
+        "智力": "+5",
+        "感知": "+3"
+      },
+      "skills": {
+        "奥秘": "+6",
+        "历史": "+5"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "被动察觉 11"
+      ],
+      "passive_perception": 11,
+      "languages": [
+        "通用语",
+        "龙语",
+        "矮人语",
+        "精灵语"
+      ],
+      "challenge_rating": "1",
+      "challenge_rating_numeric": 1,
+      "xp": 200,
+      "traits": [
+        {
+          "name": "施法能力",
+          "description": "4级法师，施法属性为智力（法术豁免 DC13，法术攻击命中 +5）。戏法（随意）：亮光、法师之手、电爪；1环（4个法术位）：魅惑人类、魔法飞弹；2环（3个法术位）：人类定身、迷雾步。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "长杖",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 1,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d8-1"
+          ],
+          "damage_types": [
+            "钝击"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 70
+      },
+      "brief": "中型 类人生物（人类） · AC 12 · HP 22 · CR 1 · 200 XP"
+    },
+    {
+      "id": "lmop:monster:stirge",
+      "type": "monster",
+      "name": "蚊蝠",
+      "name_en": "Stirge",
+      "size": [
+        "微型"
+      ],
+      "creature_type": "野兽",
+      "creature_tags": [],
+      "alignment": "无阵营",
+      "armor_class": 14,
+      "armor_class_note": "天生护甲",
+      "hit_points": 2,
+      "hit_points_formula": "1d4",
+      "speed": "步行 10 尺、飞行 40 尺",
+      "speed_ft": {
+        "walk": 10,
+        "fly": 40
+      },
+      "abilities": {
+        "str": 4,
+        "dex": 16,
+        "con": 11,
+        "int": 2,
+        "wis": 8,
+        "cha": 6
+      },
+      "saving_throws": null,
+      "skills": {},
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 9"
+      ],
+      "passive_perception": 9,
+      "languages": [],
+      "challenge_rating": "1/8",
+      "challenge_rating_numeric": 0.125,
+      "xp": 25,
+      "traits": [],
+      "actions": [
+        {
+          "name": "吸血",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 5,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d4+3"
+          ],
+          "damage_types": [
+            "穿刺"
+          ],
+          "description": "命中后附着在目标身上；附着时不再攻击，但在自己回合开始时使目标因失血失去5（1d4+3）点生命值。花费5尺移动力可自行脱离；吸取目标10点HP或目标死亡后脱离；任何生物可用一个动作解除附着。"
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [
+        {
+          "scene_id": "lmop:scene:area-3",
+          "count": "10"
+        },
+        {
+          "scene_id": null,
+          "count": "2d4",
+          "note": "游荡怪物表 1-3"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 71
+      },
+      "brief": "微型 野兽 · AC 14 · HP 2 · CR 1/8 · 25 XP"
+    },
+    {
+      "id": "lmop:monster:ghoul",
+      "type": "monster",
+      "name": "食尸鬼",
+      "name_en": "Ghoul",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "亡灵",
+      "creature_tags": [],
+      "alignment": "混乱邪恶",
+      "armor_class": 12,
+      "armor_class_note": null,
+      "hit_points": 22,
+      "hit_points_formula": "5d8",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 13,
+        "dex": 15,
+        "con": 10,
+        "int": 7,
+        "wis": 10,
+        "cha": 6
+      },
+      "saving_throws": null,
+      "skills": {},
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [
+        "毒素"
+      ],
+      "condition_immunities": [
+        "魅惑",
+        "力竭",
+        "中毒"
+      ],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 10"
+      ],
+      "passive_perception": 10,
+      "languages": [
+        "通用语"
+      ],
+      "challenge_rating": "1",
+      "challenge_rating_numeric": 1,
+      "xp": 200,
+      "traits": [],
+      "actions": [
+        {
+          "name": "啃咬",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 2,
+          "reach_ft": 5,
+          "damage_dice": [
+            "2d6+2"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        },
+        {
+          "name": "爪抓",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 4,
+          "reach_ft": 5,
+          "damage_dice": [
+            "2d4+2"
+          ],
+          "damage_types": [
+            "挥砍"
+          ],
+          "description": "若非精灵或亡灵，目标需通过 DC10 体质豁免，否则麻痹1分钟；目标可在自己每个回合结束时再次豁免。"
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [
+        {
+          "scene_id": "lmop:scene:area-6",
+          "count": "3"
+        },
+        {
+          "scene_id": "lmop:scene:area-9",
+          "count": "7"
+        },
+        {
+          "scene_id": null,
+          "count": "1d4",
+          "note": "游荡怪物表 4-5"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 71
+      },
+      "brief": "中型 亡灵 · AC 12 · HP 22 · CR 1 · 200 XP"
+    },
+    {
+      "id": "lmop:monster:ogre",
+      "type": "monster",
+      "name": "食人魔",
+      "name_en": "Ogre",
+      "size": [
+        "大型"
+      ],
+      "creature_type": "巨人",
+      "creature_tags": [],
+      "alignment": "混乱邪恶",
+      "armor_class": 11,
+      "armor_class_note": "皮甲",
+      "hit_points": 59,
+      "hit_points_formula": "7d10+21",
+      "speed": "步行 40 尺",
+      "speed_ft": {
+        "walk": 40
+      },
+      "abilities": {
+        "str": 19,
+        "dex": 8,
+        "con": 16,
+        "int": 5,
+        "wis": 7,
+        "cha": 7
+      },
+      "saving_throws": null,
+      "skills": {},
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 8"
+      ],
+      "passive_perception": 8,
+      "languages": [
+        "通用语",
+        "巨人语"
+      ],
+      "challenge_rating": "2",
+      "challenge_rating_numeric": 2,
+      "xp": 450,
+      "traits": [],
+      "actions": [
+        {
+          "name": "大木棒",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 6,
+          "reach_ft": 5,
+          "damage_dice": [
+            "2d8+4"
+          ],
+          "damage_types": [
+            "钝击"
+          ]
+        },
+        {
+          "name": "标枪",
+          "kind": "action",
+          "attack": "近战或远程武器",
+          "to_hit": 6,
+          "reach_ft": 5,
+          "range": "30/120 尺",
+          "damage_dice": [
+            "2d6+4"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 72
+      },
+      "brief": "大型 巨人 · AC 11 · HP 59 · CR 2 · 450 XP"
+    },
+    {
+      "id": "lmop:monster:hobgoblin",
+      "type": "monster",
+      "name": "大地精",
+      "name_en": "Hobgoblin",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "类人生物",
+      "creature_tags": [
+        "哥布林种"
+      ],
+      "alignment": "守序邪恶",
+      "armor_class": 18,
+      "armor_class_note": "锁子甲，盾",
+      "hit_points": 11,
+      "hit_points_formula": "2d8+2",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 13,
+        "dex": 12,
+        "con": 12,
+        "int": 10,
+        "wis": 10,
+        "cha": 9
+      },
+      "saving_throws": null,
+      "skills": {},
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 10"
+      ],
+      "passive_perception": 10,
+      "languages": [
+        "通用语",
+        "哥布林语"
+      ],
+      "challenge_rating": "1/2",
+      "challenge_rating_numeric": 0.5,
+      "xp": 100,
+      "traits": [
+        {
+          "name": "军队优势",
+          "description": "每轮一次，若命中的生物5尺内有未乏力的盟友，额外造成7（2d6）点伤害。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "长剑",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 3,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d8+1"
+          ],
+          "damage_types": [
+            "挥砍"
+          ]
+        },
+        {
+          "name": "长弓",
+          "kind": "action",
+          "attack": "远程武器",
+          "to_hit": 3,
+          "range": "150/600 尺",
+          "damage_dice": [
+            "1d8+1"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 72
+      },
+      "brief": "中型 类人生物（哥布林种） · AC 18 · HP 11 · CR 1/2 · 100 XP"
+    },
+    {
+      "id": "lmop:monster:orc",
+      "type": "monster",
+      "name": "兽人",
+      "name_en": "Orc",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "类人生物",
+      "creature_tags": [
+        "兽人"
+      ],
+      "alignment": "混乱邪恶",
+      "armor_class": 13,
+      "armor_class_note": "皮甲",
+      "hit_points": 15,
+      "hit_points_formula": "2d8+6",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 16,
+        "dex": 12,
+        "con": 16,
+        "int": 7,
+        "wis": 11,
+        "cha": 10
+      },
+      "saving_throws": null,
+      "skills": {
+        "威吓": "+2"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 10"
+      ],
+      "passive_perception": 10,
+      "languages": [
+        "通用语",
+        "兽人语"
+      ],
+      "challenge_rating": "1/2",
+      "challenge_rating_numeric": 0.5,
+      "xp": 100,
+      "traits": [
+        {
+          "name": "侵略性",
+          "description": "作为附加动作，可朝一个能看见的敌对生物移动一次速度。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "巨斧",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 5,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d12+3"
+          ],
+          "damage_types": [
+            "挥砍"
+          ]
+        },
+        {
+          "name": "标枪",
+          "kind": "action",
+          "attack": "远程武器",
+          "to_hit": 5,
+          "range": "30/120 尺",
+          "damage_dice": [
+            "1d6+3"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 72
+      },
+      "brief": "中型 类人生物（兽人） · AC 13 · HP 15 · CR 1/2 · 100 XP"
+    },
+    {
+      "id": "lmop:monster:owlbear",
+      "type": "monster",
+      "name": "枭熊",
+      "name_en": "Owlbear",
+      "size": [
+        "大型"
+      ],
+      "creature_type": "怪物",
+      "creature_tags": [],
+      "alignment": "无阵营",
+      "armor_class": 13,
+      "armor_class_note": "天生护甲",
+      "hit_points": 59,
+      "hit_points_formula": "7d10+21",
+      "speed": "步行 40 尺",
+      "speed_ft": {
+        "walk": 40
+      },
+      "abilities": {
+        "str": 20,
+        "dex": 12,
+        "con": 17,
+        "int": 3,
+        "wis": 12,
+        "cha": 7
+      },
+      "saving_throws": null,
+      "skills": {
+        "察觉": "+3"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 13"
+      ],
+      "passive_perception": 13,
+      "languages": [],
+      "challenge_rating": "3",
+      "challenge_rating_numeric": 3,
+      "xp": 700,
+      "traits": [
+        {
+          "name": "敏锐听觉与嗅觉",
+          "description": "在依赖听觉或嗅觉的感知（察觉）检定上具有优势。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "多重攻击",
+          "kind": "action",
+          "description": "进行一次鸟喙攻击与一次爪击。"
+        },
+        {
+          "name": "鸟喙",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 7,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d10+5"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        },
+        {
+          "name": "爪击",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 7,
+          "reach_ft": 5,
+          "damage_dice": [
+            "2d8+5"
+          ],
+          "damage_types": [
+            "挥砍"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 73
+      },
+      "brief": "大型 怪物 · AC 13 · HP 59 · CR 3 · 700 XP"
+    },
+    {
+      "id": "lmop:monster:zombie",
+      "type": "monster",
+      "name": "僵尸",
+      "name_en": "Zombie",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "亡灵",
+      "creature_tags": [],
+      "alignment": "中立邪恶",
+      "armor_class": 8,
+      "armor_class_note": null,
+      "hit_points": 22,
+      "hit_points_formula": "3d8+9",
+      "speed": "步行 20 尺",
+      "speed_ft": {
+        "walk": 20
+      },
+      "abilities": {
+        "str": 13,
+        "dex": 6,
+        "con": 16,
+        "int": 3,
+        "wis": 6,
+        "cha": 5
+      },
+      "saving_throws": {
+        "感知": "+0"
+      },
+      "skills": {},
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [
+        "毒素"
+      ],
+      "condition_immunities": [
+        "中毒"
+      ],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 8"
+      ],
+      "passive_perception": 8,
+      "languages": [
+        "理解生前的所有语言，但不会说"
+      ],
+      "challenge_rating": "1/4",
+      "challenge_rating_numeric": 0.25,
+      "xp": 50,
+      "traits": [
+        {
+          "name": "不死顽强",
+          "description": "若一次攻击将 HP 削减到0（且不是光耀伤害或重击），需通过 DC5+伤害值的体质检定；成功则 HP 降为1。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "拍打",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 3,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d6+1"
+          ],
+          "damage_types": [
+            "钝击"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [
+        {
+          "scene_id": "lmop:scene:area-12",
+          "count": "8"
+        },
+        {
+          "scene_id": null,
+          "count": "1d6",
+          "note": "游荡怪物表 10"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 73
+      },
+      "brief": "中型 亡灵 · AC 8 · HP 22 · CR 1/4 · 50 XP"
+    },
+    {
+      "id": "lmop:monster:twig-blight",
+      "type": "monster",
+      "name": "枯枝怪",
+      "name_en": "Twig Blight",
+      "size": [
+        "小型"
+      ],
+      "creature_type": "植物",
+      "creature_tags": [],
+      "alignment": "中立邪恶",
+      "armor_class": 13,
+      "armor_class_note": "天生护甲",
+      "hit_points": 4,
+      "hit_points_formula": "1d6+1",
+      "speed": "步行 20 尺",
+      "speed_ft": {
+        "walk": 20
+      },
+      "abilities": {
+        "str": 6,
+        "dex": 13,
+        "con": 12,
+        "int": 4,
+        "wis": 8,
+        "cha": 3
+      },
+      "saving_throws": null,
+      "skills": {
+        "潜行": "+3"
+      },
+      "damage_vulnerabilities": [
+        "火焰"
+      ],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [
+        "目盲",
+        "耳聋"
+      ],
+      "senses": [
+        "盲视 60 尺（超出则无法看见）",
+        "被动察觉 9"
+      ],
+      "passive_perception": 9,
+      "languages": [
+        "理解通用语，但不会说"
+      ],
+      "challenge_rating": "1/8",
+      "challenge_rating_numeric": 0.125,
+      "xp": 25,
+      "traits": [
+        {
+          "name": "错觉外观",
+          "description": "在植物环境中保持不动时，看起来就像枯枝，可在不依赖掩蔽的情况下躲藏。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "爪击",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 3,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d4+1"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 73
+      },
+      "brief": "小型 植物 · AC 13 · HP 4 · CR 1/8 · 25 XP"
+    },
+    {
+      "id": "lmop:monster:giant-spider",
+      "type": "monster",
+      "name": "巨蛛",
+      "name_en": "Giant Spider",
+      "size": [
+        "大型"
+      ],
+      "creature_type": "野兽",
+      "creature_tags": [],
+      "alignment": "无阵营",
+      "armor_class": 14,
+      "armor_class_note": "天生护甲",
+      "hit_points": 26,
+      "hit_points_formula": "4d10+4",
+      "speed": "步行 30 尺、攀爬 30 尺",
+      "speed_ft": {
+        "walk": 30,
+        "climb": 30
+      },
+      "abilities": {
+        "str": 14,
+        "dex": 16,
+        "con": 12,
+        "int": 2,
+        "wis": 11,
+        "cha": 4
+      },
+      "saving_throws": null,
+      "skills": {
+        "潜行": "+7"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "盲视 10 尺",
+        "黑暗视觉 60 尺",
+        "被动察觉 10"
+      ],
+      "passive_perception": 10,
+      "languages": [],
+      "challenge_rating": "1",
+      "challenge_rating_numeric": 1,
+      "xp": 200,
+      "traits": [
+        {
+          "name": "蛛行",
+          "description": "可攀越困难表面，包括倒挂在天花板上，无需能力检定。"
+        },
+        {
+          "name": "蛛网感官",
+          "description": "与蛛网接触时，能得知同一蛛网上其他生物的确切位置。"
+        },
+        {
+          "name": "蛛网爬行者",
+          "description": "忽略任何由蛛网造成的限制效果。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "咬",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 5,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d8+3"
+          ],
+          "damage_types": [
+            "穿刺"
+          ],
+          "description": "命中后目标需通过 DC11 体质豁免，失败受9（2d8）毒素伤害，成功则减半。若毒素伤害将目标 HP 降为0，目标伤势稳定但中毒且麻痹1小时。"
+        },
+        {
+          "name": "蛛网",
+          "kind": "action",
+          "attack": "远程武器",
+          "to_hit": 5,
+          "range": "30/60 尺",
+          "recharge": "5-6",
+          "description": "命中则目标被蛛网束缚；被束缚目标可用一个动作通过 DC12 力量检定挣脱。蛛网也可被攻击摧毁（AC10，HP5，火焰易伤，免疫钝击、毒素、心灵伤害）。"
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [
+        {
+          "scene_id": "lmop:scene:area-19",
+          "count": "4"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 74
+      },
+      "brief": "大型 野兽 · AC 14 · HP 26 · CR 1 · 200 XP"
+    },
+    {
+      "id": "lmop:monster:young-green-dragon",
+      "type": "monster",
+      "name": "年轻绿龙",
+      "name_en": "Young Green Dragon",
+      "size": [
+        "大型"
+      ],
+      "creature_type": "龙",
+      "creature_tags": [],
+      "alignment": "守序邪恶",
+      "armor_class": 18,
+      "armor_class_note": "天生护甲",
+      "hit_points": 136,
+      "hit_points_formula": "16d10+48",
+      "speed": "步行 40 尺、飞行 60 尺、游泳 40 尺",
+      "speed_ft": {
+        "walk": 40,
+        "fly": 60,
+        "swim": 40
+      },
+      "abilities": {
+        "str": 19,
+        "dex": 12,
+        "con": 17,
+        "int": 16,
+        "wis": 13,
+        "cha": 15
+      },
+      "saving_throws": {
+        "敏捷": "+4",
+        "体质": "+6",
+        "感知": "+4",
+        "魅力": "+5"
+      },
+      "skills": {
+        "唬弄": "+5",
+        "察觉": "+7",
+        "潜行": "+4"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [
+        "毒素"
+      ],
+      "condition_immunities": [
+        "中毒"
+      ],
+      "senses": [
+        "盲视 30 尺",
+        "黑暗视觉 120 尺",
+        "被动察觉 17"
+      ],
+      "passive_perception": 17,
+      "languages": [
+        "通用语",
+        "龙语"
+      ],
+      "challenge_rating": "8",
+      "challenge_rating_numeric": 8,
+      "xp": 3900,
+      "traits": [
+        {
+          "name": "两栖",
+          "description": "可在水下呼吸空气。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "多重攻击",
+          "kind": "action",
+          "description": "进行一次咬击与两次爪击。"
+        },
+        {
+          "name": "咬",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 7,
+          "reach_ft": 10,
+          "damage_dice": [
+            "2d10+4",
+            "2d6"
+          ],
+          "damage_types": [
+            "穿刺",
+            "毒素"
+          ],
+          "description": "命中造成15（2d10+4）穿刺伤害与7（2d6）毒素伤害。"
+        },
+        {
+          "name": "爪击",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 7,
+          "reach_ft": 5,
+          "damage_dice": [
+            "2d6+4"
+          ],
+          "damage_types": [
+            "挥砍"
+          ]
+        },
+        {
+          "name": "毒素喷吐",
+          "kind": "action",
+          "recharge": "5-6",
+          "save_dc": 16,
+          "save_ability": "体质",
+          "area": "30 尺锥状",
+          "damage_dice": [
+            "12d6"
+          ],
+          "damage_types": [
+            "毒素"
+          ],
+          "description": "范围内生物进行 DC16 体质豁免，失败受42（12d6）毒素伤害，成功则减半。"
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 74
+      },
+      "brief": "大型 龙 · AC 18 · HP 136 · CR 8 · 3900 XP"
+    },
+    {
+      "id": "lmop:monster:acolyte",
+      "type": "monster",
+      "name": "信徒",
+      "name_en": "Acolyte",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "类人生物",
+      "creature_tags": [
+        "任何种族"
+      ],
+      "alignment": "任何非善良阵营",
+      "armor_class": 12,
+      "armor_class_note": "皮甲",
+      "hit_points": 9,
+      "hit_points_formula": "2d8",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 10,
+        "dex": 12,
+        "con": 10,
+        "int": 10,
+        "wis": 11,
+        "cha": 10
+      },
+      "saving_throws": null,
+      "skills": {
+        "唬弄": "+2",
+        "宗教": "+2"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "被动察觉 10"
+      ],
+      "passive_perception": 10,
+      "languages": [
+        "任何语言（通常是通用语）"
+      ],
+      "challenge_rating": "1/8",
+      "challenge_rating_numeric": 0.125,
+      "xp": 25,
+      "traits": [
+        {
+          "name": "奉献",
+          "description": "在对抗魅惑或恐惧的豁免检定上具有优势。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "弯刀",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 3,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d6+1"
+          ],
+          "damage_types": [
+            "挥砍"
+          ]
+        }
+      ],
+      "reactions": [],
+      "extraction_note": "原文数据卡未列出施法能力。",
+      "part4_encounters": [],
+      "used_in_part4": false,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 75
+      },
+      "brief": "中型 类人生物（任何种族） · AC 12 · HP 9 · CR 1/8 · 25 XP"
+    },
+    {
+      "id": "lmop:monster:grick",
+      "type": "monster",
+      "name": "掘地兽",
+      "name_en": "Grick",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "怪物",
+      "creature_tags": [],
+      "alignment": "中立",
+      "armor_class": 14,
+      "armor_class_note": "天生护甲",
+      "hit_points": 27,
+      "hit_points_formula": "6d8",
+      "speed": "步行 30 尺、攀爬 30 尺",
+      "speed_ft": {
+        "walk": 30,
+        "climb": 30
+      },
+      "abilities": {
+        "str": 14,
+        "dex": 14,
+        "con": 11,
+        "int": 3,
+        "wis": 14,
+        "cha": 5
+      },
+      "saving_throws": null,
+      "skills": {},
+      "damage_vulnerabilities": [],
+      "damage_resistances": [
+        "非魔法武器造成的钝击、穿刺、挥砍"
+      ],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 12"
+      ],
+      "passive_perception": 12,
+      "languages": [],
+      "challenge_rating": "2",
+      "challenge_rating_numeric": 2,
+      "xp": 450,
+      "traits": [
+        {
+          "name": "岩石伪装",
+          "description": "在岩石地形上进行敏捷（潜行）检定时具有优势。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "多重攻击",
+          "kind": "action",
+          "description": "用触手攻击一次；若命中，可用喙对同一目标再攻击一次。"
+        },
+        {
+          "name": "触手",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 4,
+          "reach_ft": 5,
+          "damage_dice": [
+            "2d6+2"
+          ],
+          "damage_types": [
+            "挥砍"
+          ]
+        },
+        {
+          "name": "喙",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 4,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d6+2"
+          ],
+          "damage_types": [
+            "穿刺"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [
+        {
+          "scene_id": null,
+          "count": "1d4",
+          "note": "游荡怪物表 6"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 75
+      },
+      "brief": "中型 怪物 · AC 14 · HP 27 · CR 2 · 450 XP"
+    },
+    {
+      "id": "lmop:monster:flameskull",
+      "type": "monster",
+      "name": "燃烧之颅",
+      "name_en": "Flameskull",
+      "size": [
+        "微型"
+      ],
+      "creature_type": "亡灵",
+      "creature_tags": [],
+      "alignment": "中立邪恶",
+      "armor_class": 13,
+      "armor_class_note": null,
+      "hit_points": 40,
+      "hit_points_formula": "9d4+18",
+      "speed": "步行 30 尺、飞行 40 尺",
+      "speed_ft": {
+        "walk": 30,
+        "fly": 40
+      },
+      "abilities": {
+        "str": 1,
+        "dex": 17,
+        "con": 14,
+        "int": 16,
+        "wis": 10,
+        "cha": 11
+      },
+      "saving_throws": null,
+      "skills": {
+        "奥秘": "+5",
+        "察觉": "+2"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [
+        "闪电",
+        "黯蚀",
+        "穿刺"
+      ],
+      "damage_immunities": [
+        "寒冷",
+        "火焰",
+        "毒素"
+      ],
+      "condition_immunities": [
+        "魅惑",
+        "恐惧",
+        "麻痹",
+        "中毒"
+      ],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 12"
+      ],
+      "passive_perception": 12,
+      "languages": [
+        "通用语"
+      ],
+      "challenge_rating": "4",
+      "challenge_rating_numeric": 4,
+      "xp": 1100,
+      "traits": [
+        {
+          "name": "幻像",
+          "description": "可发出半径15尺的昏暗光芒，或15尺明亮+15尺昏暗光芒；可用一个动作切换。"
+        },
+        {
+          "name": "魔法抗力",
+          "description": "对抗魔法或其他魔法效果的豁免检定具有优势。"
+        },
+        {
+          "name": "复生",
+          "description": "若被摧毁，除非残余被浇圣水、被解除魔法或解除诅咒，否则1小时后恢复全部生命值。"
+        },
+        {
+          "name": "施法",
+          "description": "5级施法者，施法属性为智力（法术豁免 DC13，法术攻击命中 +5），只需语言成分。戏法：法师之手；1级（3个法术位）：魔法飞弹、护盾术；2级（2个法术位）：朦胧术、炽焰法球；3级（1个法术位）：火球术。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "多重攻击",
+          "kind": "action",
+          "description": "用火焰射线进行两次攻击。"
+        },
+        {
+          "name": "火焰射线",
+          "kind": "action",
+          "attack": "远程法术攻击",
+          "to_hit": 5,
+          "range": "30 尺",
+          "damage_dice": [
+            "3d6"
+          ],
+          "damage_types": [
+            "火焰"
+          ]
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [
+        {
+          "scene_id": "lmop:scene:area-12",
+          "count": "1"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 76
+      },
+      "brief": "微型 亡灵 · AC 13 · HP 40 · CR 4 · 1100 XP"
+    },
+    {
+      "id": "lmop:monster:doppelganger",
+      "type": "monster",
+      "name": "变形怪",
+      "name_en": "Doppelganger",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "怪物",
+      "creature_tags": [
+        "变形怪"
+      ],
+      "alignment": "绝对中立",
+      "armor_class": 14,
+      "armor_class_note": null,
+      "hit_points": 52,
+      "hit_points_formula": "8d8+16",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 11,
+        "dex": 18,
+        "con": 14,
+        "int": 11,
+        "wis": 12,
+        "cha": 14
+      },
+      "saving_throws": null,
+      "skills": {
+        "唬弄": "+6",
+        "洞察": "+3"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [
+        "魅惑"
+      ],
+      "senses": [
+        "黑暗视觉 60 尺",
+        "被动察觉 11"
+      ],
+      "passive_perception": 11,
+      "languages": [
+        "通用语"
+      ],
+      "challenge_rating": "3",
+      "challenge_rating_numeric": 3,
+      "xp": 700,
+      "traits": [
+        {
+          "name": "变形者",
+          "description": "可用动作变成见过的任何小型或中型类人生物，或变回自然形态；属性除体型外不变，装备不转换，死亡时恢复原形。"
+        },
+        {
+          "name": "突袭者",
+          "description": "对任何被它突袭的生物，攻击检定具有优势。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "多重攻击",
+          "kind": "action",
+          "description": "进行两次近战攻击。"
+        },
+        {
+          "name": "挥击",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 6,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d6+4"
+          ],
+          "damage_types": [
+            "钝击"
+          ]
+        },
+        {
+          "name": "读心术",
+          "kind": "action",
+          "description": "可读取60尺内一个生物的表层想法；可穿透障碍，但3尺厚木头/泥土、2尺厚石头、2英寸金属或一片铅板可阻挡。目标在距离内时可持续读取，直到专注被打破；读取期间对目标的洞察、唬弄、威吓、说服检定具有优势。"
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [
+        {
+          "scene_id": "lmop:scene:area-18",
+          "count": "1",
+          "note": "瓦拉克，以卓尔男性样貌出现。"
+        },
+        {
+          "scene_id": "lmop:scene:area-19",
+          "count": "1",
+          "note": "若从区域18撤退，会变成南镀的模样。"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 77
+      },
+      "brief": "中型 怪物（变形怪） · AC 14 · HP 52 · CR 3 · 700 XP"
+    },
+    {
+      "id": "lmop:monster:nezznar",
+      "type": "monster",
+      "name": "奈兹纳尔（黑蜘蛛）",
+      "name_en": "Nezznar the Black Spider",
+      "size": [
+        "中型"
+      ],
+      "creature_type": "类人生物",
+      "creature_tags": [
+        "精灵"
+      ],
+      "alignment": "中立邪恶",
+      "armor_class": 11,
+      "armor_class_note": "法师护甲时 AC 14",
+      "hit_points": 27,
+      "hit_points_formula": "6d8",
+      "speed": "步行 30 尺",
+      "speed_ft": {
+        "walk": 30
+      },
+      "abilities": {
+        "str": 9,
+        "dex": 13,
+        "con": 10,
+        "int": 16,
+        "wis": 14,
+        "cha": 13
+      },
+      "saving_throws": {
+        "敏捷": "+5",
+        "感知": "+4"
+      },
+      "skills": {
+        "奥秘": "+5",
+        "潜行": "+3",
+        "察觉": "+4"
+      },
+      "damage_vulnerabilities": [],
+      "damage_resistances": [],
+      "damage_immunities": [],
+      "condition_immunities": [],
+      "senses": [
+        "黑暗视觉 120 尺",
+        "被动察觉 14"
+      ],
+      "passive_perception": 14,
+      "languages": [
+        "精灵语",
+        "地底通用语"
+      ],
+      "challenge_rating": "2",
+      "challenge_rating_numeric": 2,
+      "xp": 450,
+      "traits": [
+        {
+          "name": "特殊装备",
+          "description": "拥有一支蜘蛛法杖。"
+        },
+        {
+          "name": "精裔血统",
+          "description": "对抗魅惑的豁免具有优势，魔法不能使其陷入睡眠。"
+        },
+        {
+          "name": "光敏性",
+          "description": "在阳光下进行的攻击具有劣势。"
+        },
+        {
+          "name": "天生法术",
+          "description": "以下法术无需物品：随意施展舞光术；每天一次黑暗术；每天一次妖火（豁免 DC12）。"
+        },
+        {
+          "name": "施法",
+          "description": "4级施法者，施法属性为智力（法术豁免 DC13，法术攻击命中 +5）。戏法：法师之手、冷冻射线、电爪；1环（4个法术位）：法师护甲、魔法飞弹、护盾术；2环（3个法术位）：隐身、暗示。"
+        }
+      ],
+      "actions": [
+        {
+          "name": "蜘蛛法杖",
+          "kind": "action",
+          "attack": "近战武器",
+          "to_hit": 1,
+          "reach_ft": 5,
+          "damage_dice": [
+            "1d6-1",
+            "1d6"
+          ],
+          "damage_types": [
+            "钝击",
+            "毒素"
+          ],
+          "description": "命中造成1d6-1（平均2）钝击伤害与1d6毒素伤害。"
+        }
+      ],
+      "reactions": [],
+      "part4_encounters": [
+        {
+          "scene_id": "lmop:scene:area-19",
+          "count": "1"
+        }
+      ],
+      "used_in_part4": true,
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 77
+      },
+      "brief": "中型 类人生物（精灵） · AC 11（法师护甲14） · HP 27 · CR 2 · 450 XP"
+    }
+  ],
+  "checks": [
+    {
+      "id": "lmop:check:area-1-pit-climb",
+      "type": "check",
+      "scene_id": "lmop:scene:area-1",
+      "label": "攀爬入口深坑",
+      "dc": 15,
+      "dc_label": "DC15",
+      "ability": "力量",
+      "skill": "运动",
+      "kind": "ability_check",
+      "trigger": "不用绳子上下入口东北部的20尺深坑。",
+      "success": "正常上下。",
+      "failure": "检定结果低于10会坠落，每10尺受1d6钝击伤害并在坑底倒地。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 56
+      },
+      "brief": "区域1 · 力量（运动）DC15 · 深坑攀爬"
+    },
+    {
+      "id": "lmop:check:area-3-stirge-ambush",
+      "type": "check",
+      "scene_id": "lmop:scene:area-3",
+      "label": "蚊蝠突袭",
+      "dc": null,
+      "dc_label": "被动察觉对抗潜行",
+      "ability": "感知",
+      "skill": "察觉",
+      "kind": "passive",
+      "trigger": "角色观察地板骷髅而未观察天花板时，蚊蝠降落攻击。",
+      "success": "被动察觉高于蚊蝠的敏捷（潜行）检定则不被突袭。",
+      "failure": "被动察觉较低的角色被突袭。",
+      "note": "DM只掷一次蚊蝠的潜行。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 57
+      },
+      "brief": "区域3 · 被动察觉对抗蚊蝠潜行 · 突袭判定"
+    },
+    {
+      "id": "lmop:check:area-5-strongbox-lock",
+      "type": "check",
+      "scene_id": "lmop:scene:area-5",
+      "label": "打开铁制保险箱",
+      "dc": 20,
+      "dc_label": "DC20",
+      "ability": "敏捷",
+      "skill": "盗贼工具",
+      "kind": "ability_check",
+      "trigger": "柜台后的上锁铁制保险箱。",
+      "success": "打开保险箱，取得600cp、180sp、90ep、60gp。",
+      "failure": "无法打开。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 57
+      },
+      "brief": "区域5 · 敏捷（盗贼工具）DC20 · 保险箱"
+    },
+    {
+      "id": "lmop:check:area-6-hear-ghouls",
+      "type": "check",
+      "scene_id": "lmop:scene:area-6",
+      "label": "听见食尸鬼咀嚼",
+      "dc": 10,
+      "dc_label": "DC10",
+      "ability": "感知",
+      "skill": "察觉",
+      "kind": "ability_check",
+      "trigger": "在半开的门边聆听。",
+      "success": "听见细微的嘎吱声和碎裂声，察觉房内有三只食尸鬼。",
+      "failure": "没有察觉。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 57
+      },
+      "brief": "区域6 · 感知（察觉）DC10 · 发现食尸鬼"
+    },
+    {
+      "id": "lmop:check:area-8-toxic-gas",
+      "type": "check",
+      "scene_id": "lmop:scene:area-8",
+      "label": "真菌毒气",
+      "dc": 11,
+      "dc_label": "DC11",
+      "ability": "体质",
+      "skill": null,
+      "kind": "saving_throw",
+      "trigger": "生物试图穿越真菌洞窟时。",
+      "success": "不受影响。",
+      "failure": "受3d6毒素伤害并中毒10分钟。",
+      "repeat": "毒气持续1分钟；消散前每个在洞窟内结束回合的活物必须重新豁免。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 58
+      },
+      "brief": "区域8 · 体质豁免 DC11 · 3d6毒素+中毒10分钟"
+    },
+    {
+      "id": "lmop:check:area-9-cliff-climb",
+      "type": "check",
+      "scene_id": "lmop:scene:area-9",
+      "label": "攀爬大洞穴悬崖",
+      "dc": 12,
+      "dc_label": "DC12",
+      "ability": "力量",
+      "skill": "运动",
+      "kind": "ability_check",
+      "trigger": "攀爬大洞穴10尺高的悬崖。",
+      "success": "正常攀爬。",
+      "failure": "失败或被击落者受1d6钝击伤害并倒地。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 58
+      },
+      "brief": "区域9 · 力量（运动）DC12 · 10尺悬崖"
+    },
+    {
+      "id": "lmop:check:area-11-force-door",
+      "type": "check",
+      "scene_id": "lmop:scene:area-11",
+      "label": "强行打开东门",
+      "dc": 20,
+      "dc_label": "DC20",
+      "ability": "力量",
+      "skill": null,
+      "kind": "ability_check",
+      "trigger": "北部营房东门被从内部挡住。",
+      "success": "强行打开门。",
+      "failure": "门保持关闭。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 59
+      },
+      "brief": "区域11 · 力量 DC20 · 强行开门"
+    },
+    {
+      "id": "lmop:check:area-11-hear-bugbears",
+      "type": "check",
+      "scene_id": "lmop:scene:area-11",
+      "label": "听见熊地精抱怨",
+      "dc": 10,
+      "dc_label": "DC10",
+      "ability": "感知",
+      "skill": "察觉",
+      "kind": "ability_check",
+      "trigger": "在门边聆听。",
+      "success": "听见粗哑声音用哥布林腔调抱怨饥饿。",
+      "failure": "没有察觉。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 59
+      },
+      "brief": "区域11 · 感知（察觉）DC10 · 发现熊地精"
+    },
+    {
+      "id": "lmop:check:area-14-force-door",
+      "type": "check",
+      "scene_id": "lmop:scene:area-14",
+      "label": "搬开法师居所的门",
+      "dc": 15,
+      "dc_label": "DC15",
+      "ability": "力量",
+      "skill": null,
+      "kind": "ability_check",
+      "trigger": "门已破损，铁绞链部分融化。",
+      "success": "搬开或撬开门。",
+      "failure": "门无法打开。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 60
+      },
+      "brief": "区域14 · 力量 DC15 · 破门"
+    },
+    {
+      "id": "lmop:check:area-14-mormesk-persuasion",
+      "type": "check",
+      "scene_id": "lmop:scene:area-14",
+      "label": "说服莫尔梅斯克",
+      "dc": 10,
+      "dc_label": "DC10",
+      "ability": "魅力",
+      "skill": "说服",
+      "kind": "ability_check",
+      "trigger": "角色提供魔法物品、法术书或奥秘知识，换取莫尔梅斯克相信礼物有价值。",
+      "success": "缚灵相信物品价值，允许角色阅读书籍并保留秘密地图。",
+      "failure": "缚灵不接受礼物。",
+      "note": "无论礼物如何，缚灵不会放弃焦黑铁箱中的木管；若角色愿杀观察者眼魔，他可能给部分钱币或宝石。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 60
+      },
+      "brief": "区域14 · 魅力（说服）DC10 · 与缚灵交涉"
+    },
+    {
+      "id": "lmop:check:area-14-map-investigation",
+      "type": "check",
+      "scene_id": "lmop:scene:area-14",
+      "label": "鉴定法术书中的地图",
+      "dc": 12,
+      "dc_label": "DC12",
+      "ability": "智力",
+      "skill": "调查",
+      "kind": "ability_check",
+      "trigger": "检查藏在书封中的地图。",
+      "success": "鉴定地图，上面显示一个可自行创造的地城地点，可作为下一次冒险的引子。",
+      "failure": "无法辨认地图。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 60
+      },
+      "brief": "区域14 · 智力（调查）DC12 · 法术书地图"
+    },
+    {
+      "id": "lmop:check:area-15-force-door",
+      "type": "check",
+      "scene_id": "lmop:scene:area-15",
+      "label": "强行打开法术工场北门",
+      "dc": 15,
+      "dc_label": "DC15",
+      "ability": "力量",
+      "skill": null,
+      "kind": "ability_check",
+      "trigger": "北门烧焦破碎，铁绞链部分融化。",
+      "success": "强行打开门。",
+      "failure": "门保持关闭。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 61
+      },
+      "brief": "区域15 · 力量 DC15 · 强行开北门"
+    },
+    {
+      "id": "lmop:check:area-15-spectator-deception",
+      "type": "check",
+      "scene_id": "lmop:scene:area-15",
+      "label": "欺骗观察者眼魔",
+      "dc": 15,
+      "dc_label": "DC15",
+      "ability": "魅力",
+      "skill": "唬弄",
+      "kind": "ability_check",
+      "trigger": "角色声称队伍成员是为潮音洞之声主人工作的巫师，被派来解除观察者眼魔的雇佣契约。",
+      "success": "观察者眼魔相信契约解除，消失并回到原本位面。",
+      "failure": "观察者眼魔不相信。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 61
+      },
+      "brief": "区域15 · 魅力（唬弄）DC15 · 支走观察者眼魔"
+    },
+    {
+      "id": "lmop:check:area-15-brazier-arcana",
+      "type": "check",
+      "scene_id": "lmop:scene:area-15",
+      "label": "鉴别绿色火焰火盆",
+      "dc": 15,
+      "dc_label": "DC15",
+      "ability": "智力",
+      "skill": "奥秘",
+      "kind": "ability_check",
+      "trigger": "检查燃烧绿色火焰的火盆。",
+      "success": "鉴别出火盆是整个洞穴魔法力量的源头；魔法已衰退，无法永久强化物品，但仍可临时赋予+1。",
+      "failure": "无法鉴别。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 61
+      },
+      "brief": "区域15 · 智力（奥秘）DC15 · 绿火火盆"
+    },
+    {
+      "id": "lmop:check:area-18-chasm-climb",
+      "type": "check",
+      "scene_id": "lmop:scene:area-18",
+      "label": "攀爬崩塌裂谷",
+      "dc": 10,
+      "dc_label": "DC10",
+      "ability": "力量",
+      "skill": "运动",
+      "kind": "ability_check",
+      "trigger": "不用绳索上下20尺深的裂谷。",
+      "success": "正常上下。",
+      "failure": "结果小于5会坠落，每10尺受1d6钝击伤害并在底部倒地。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 62
+      },
+      "brief": "区域18 · 力量（运动）DC10 · 20尺裂谷"
+    },
+    {
+      "id": "lmop:check:area-18-find-gauntlets",
+      "type": "check",
+      "scene_id": "lmop:scene:area-18",
+      "label": "寻找巨石下的手套",
+      "dc": 20,
+      "dc_label": "DC20",
+      "ability": "感知",
+      "skill": "察觉",
+      "kind": "ability_check",
+      "trigger": "在裂谷底部寻找巨石下难以察觉的矮人骷髅。",
+      "success": "找到食人魔力量手套。",
+      "failure": "没有找到。",
+      "repeat": "每名尝试寻找的生物每小时可掷一次。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 62
+      },
+      "brief": "区域18 · 感知（察觉）DC20 · 食人魔力量手套"
+    },
+    {
+      "id": "lmop:check:area-19-statue-eyes",
+      "type": "check",
+      "scene_id": "lmop:scene:area-19",
+      "label": "识破雕像宝石是赝品",
+      "dc": 15,
+      "dc_label": "DC15",
+      "ability": "智力",
+      "skill": "调查",
+      "kind": "ability_check",
+      "trigger": "靠近观察雕像的祖母绿眼睛。",
+      "success": "发现珠宝是不值钱的玻璃赝品。",
+      "failure": "以为宝石价值连城。",
+      "note": "有强大咒语保护，侦测魔法显示防护系灵光。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 63
+      },
+      "brief": "区域19 · 智力（调查）DC15 · 识破玻璃眼"
+    },
+    {
+      "id": "lmop:check:area-19-pry-eye",
+      "type": "check",
+      "scene_id": "lmop:scene:area-19",
+      "label": "撬下雕像宝石眼睛",
+      "dc": 10,
+      "dc_label": "DC10",
+      "ability": "力量",
+      "skill": null,
+      "kind": "ability_check",
+      "trigger": "爬上雕像并撬下一颗宝石眼睛。",
+      "success": "弄下一颗眼睛，但触发天花板崩塌。",
+      "failure": "无法弄下。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 63
+      },
+      "brief": "区域19 · 力量 DC10 · 撬雕像眼并触发崩塌"
+    },
+    {
+      "id": "lmop:check:area-19-ceiling-collapse",
+      "type": "check",
+      "scene_id": "lmop:scene:area-19",
+      "label": "躲避天花板崩塌",
+      "dc": 15,
+      "dc_label": "DC15",
+      "ability": "敏捷",
+      "skill": null,
+      "kind": "saving_throw",
+      "trigger": "一颗雕像眼睛被弄下后，靠墙柱子碎裂，天花板崩塌。",
+      "success": "伤害减半。",
+      "failure": "受4d10钝击伤害并倒地。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 63
+      },
+      "brief": "区域19 · 敏捷豁免 DC15 · 崩塌4d10"
+    },
+    {
+      "id": "lmop:check:area-20-door-lock",
+      "type": "check",
+      "scene_id": "lmop:scene:area-20",
+      "label": "打开祭司居所门锁",
+      "dc": 15,
+      "dc_label": "DC15",
+      "ability": "敏捷",
+      "skill": "盗贼工具",
+      "kind": "ability_check",
+      "trigger": "通往区域20的门锁着。",
+      "success": "开锁；也可使用奈兹纳尔的铁钥匙。",
+      "failure": "无法打开。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 64
+      },
+      "brief": "区域20 · 敏捷（盗贼工具）DC15 · 门锁"
+    },
+    {
+      "id": "lmop:check:wandering-monsters",
+      "type": "check",
+      "scene_id": null,
+      "label": "游荡怪物判定",
+      "dc": null,
+      "dc_label": "d20 17-20",
+      "ability": null,
+      "skill": null,
+      "kind": "procedure",
+      "trigger": "队伍在同一区域停留过久时。",
+      "success": "掷 d20，17–20 触发一次遭遇；DM 也可直接决定触发。",
+      "failure": "无遭遇。",
+      "note": "触发后掷 d12 对照游荡怪物表。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 54
+      },
+      "brief": "游荡怪物 · d20 17-20 · 触发后掷 d12"
+    }
+  ],
+  "rewards": [
+    {
+      "id": "lmop:reward:area-1-boots",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-1",
+      "label": "塔登脚上的跑跳靴",
+      "kind": "treasure",
+      "coins": null,
+      "items": [
+        {
+          "item_id": "lmop:item:boots-of-striding-and-springing",
+          "name": "跑跳靴",
+          "qty": 1
+        }
+      ],
+      "xp": 0,
+      "description": "塔登穿着跑跳靴；奈兹纳尔匆忙探索矿坑而忽略了它。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 56
+      },
+      "brief": "区域1 · 跑跳靴 ×1"
+    },
+    {
+      "id": "lmop:reward:area-5-strongbox",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-5",
+      "label": "试金者保险箱",
+      "kind": "treasure",
+      "coins": {
+        "cp": 600,
+        "sp": 180,
+        "ep": 90,
+        "gp": 60,
+        "pp": 0
+      },
+      "items": [],
+      "xp": 0,
+      "description": "柜台后的上锁铁制保险箱，需 DC20 敏捷（盗贼工具）。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 57
+      },
+      "brief": "区域5 · 600cp/180sp/90ep/60gp"
+    },
+    {
+      "id": "lmop:reward:area-10-skeleton",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-10",
+      "label": "黑水池底部骸骨",
+      "kind": "treasure",
+      "coins": null,
+      "items": [
+        {
+          "item_id": null,
+          "name": "白金戒指",
+          "qty": 2,
+          "value_gp_each": 75
+        },
+        {
+          "item_id": "lmop:item:wand-of-magic-missiles",
+          "name": "魔法飞弹魔杖",
+          "qty": 1
+        }
+      ],
+      "xp": 0,
+      "description": "古代凡戴尔人类巫师的骸骨，肋骨折断处插着箭矢；探索池水即可发现。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 58
+      },
+      "brief": "区域10 · 白金戒指2枚（75gp/枚）· 魔法飞弹魔杖"
+    },
+    {
+      "id": "lmop:reward:area-11-bugbear-pouch",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-11",
+      "label": "最大熊地精的腰包",
+      "kind": "treasure",
+      "coins": {
+        "cp": 15,
+        "sp": 0,
+        "ep": 13,
+        "gp": 0,
+        "pp": 0
+      },
+      "items": [
+        {
+          "item_id": "lmop:item:potion-of-vitality",
+          "name": "活力药水",
+          "qty": 1
+        }
+      ],
+      "xp": 0,
+      "description": "五只熊地精中最大的一只带着腰包。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 59
+      },
+      "brief": "区域11 · 15cp/13ep · 活力药水 ×1"
+    },
+    {
+      "id": "lmop:reward:area-14-chest",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-14",
+      "label": "莫尔梅斯克的焦黑铁箱",
+      "kind": "treasure",
+      "coins": {
+        "cp": 1100,
+        "sp": 160,
+        "ep": 50,
+        "gp": 0,
+        "pp": 0
+      },
+      "items": [
+        {
+          "item_id": null,
+          "name": "钻石",
+          "qty": 3,
+          "value_gp_each": 100
+        },
+        {
+          "item_id": null,
+          "name": "装饰铂金丝的木管",
+          "qty": 1,
+          "value_gp_each": 150
+        }
+      ],
+      "xp": 0,
+      "description": "焦黑铁箱没有上锁；缚灵不会放弃其中装饰铂金丝的木管。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 61
+      },
+      "brief": "区域14 · 1100cp/160sp/50ep · 钻石3颗 · 铂金丝木管"
+    },
+    {
+      "id": "lmop:reward:area-14-spellbook-map",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-14",
+      "label": "法术书与秘密地图",
+      "kind": "treasure",
+      "coins": null,
+      "items": [
+        {
+          "item_id": null,
+          "name": "法术书",
+          "qty": 1,
+          "note": "少数被魔法保存的书册，大多与历史有关。"
+        },
+        {
+          "item_id": null,
+          "name": "书封中的地图",
+          "qty": 1,
+          "note": "DC12 智力（调查）鉴定；显示一个可自行创造的地城地点，作为下一次冒险引子。"
+        }
+      ],
+      "xp": 0,
+      "description": "书架上的书册大多与历史有关，其中一本藏有地图；莫尔梅斯克允许角色阅读书籍并保留地图。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 61
+      },
+      "brief": "区域14 · 法术书 · 秘密地图（DC12调查）"
+    },
+    {
+      "id": "lmop:reward:area-15-forge-treasure",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-15",
+      "label": "法术工场东南角工作桌",
+      "kind": "treasure",
+      "coins": null,
+      "items": [
+        {
+          "item_id": "lmop:item:lightbringer",
+          "name": "护光者",
+          "qty": 1
+        },
+        {
+          "item_id": "lmop:item:dragonguard",
+          "name": "龙之守护",
+          "qty": 1
+        }
+      ],
+      "xp": 0,
+      "description": "观察者眼魔看守的物品中最后剩下的两件：护光者与龙之守护。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 61
+      },
+      "brief": "区域15 · 护光者（+1钉锤）· 龙之守护（+1胸甲）"
+    },
+    {
+      "id": "lmop:reward:area-15-forge-buff",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-15",
+      "label": "绿火临时强化",
+      "kind": "benefit",
+      "coins": null,
+      "items": [],
+      "xp": 0,
+      "description": "任何非魔法武器或护甲在绿火中浸沐1分钟，会变成+1魔法物品，持续1d12小时。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 61
+      },
+      "brief": "区域15 · 绿火浸沐1分钟 · +1武器/护甲 1d12小时"
+    },
+    {
+      "id": "lmop:reward:area-18-gauntlets",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-18",
+      "label": "裂谷巨石下的手套",
+      "kind": "treasure",
+      "coins": null,
+      "items": [
+        {
+          "item_id": "lmop:item:gauntlets-of-ogre-power",
+          "name": "食人魔力量手套",
+          "qty": 1
+        }
+      ],
+      "xp": 0,
+      "description": "碎裂的矮人骷髅戴着食人魔力量手套；需 DC20 感知（察觉）找到，每名生物每小时可掷一次。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 62
+      },
+      "brief": "区域18 · 食人魔力量手套 ×1（DC20察觉）"
+    },
+    {
+      "id": "lmop:reward:area-19-nezznar",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-19",
+      "label": "奈兹纳尔的装备与宝藏袋",
+      "kind": "treasure",
+      "coins": {
+        "cp": 0,
+        "sp": 0,
+        "ep": 190,
+        "gp": 130,
+        "pp": 15
+      },
+      "items": [
+        {
+          "item_id": "lmop:item:potion-of-healing",
+          "name": "治疗药水",
+          "qty": 1
+        },
+        {
+          "item_id": "lmop:item:staff-of-spider",
+          "name": "蜘蛛法杖",
+          "qty": 1
+        },
+        {
+          "item_id": null,
+          "name": "铁钥匙",
+          "qty": 1,
+          "note": "钥匙头如铁砧，可打开通往区域20的门。"
+        },
+        {
+          "item_id": null,
+          "name": "小宝石",
+          "qty": 9,
+          "value_gp_each": 10
+        },
+        {
+          "item_id": null,
+          "name": "铂金矮人麦酒杯",
+          "qty": 1,
+          "value_gp_each": 100
+        }
+      ],
+      "xp": 0,
+      "description": "奈兹纳尔随身带治疗药水与蜘蛛法杖；黑色皮革袋中有190ep、130gp、15pp、九颗小宝石与铂金矮人麦酒杯。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 64
+      },
+      "brief": "区域19 · 蜘蛛法杖 · 治疗药水 · 190ep/130gp/15pp · 宝石9颗 · 麦酒杯"
+    },
+    {
+      "id": "lmop:reward:area-19-statue-eyes",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-19",
+      "label": "雕像的祖母绿眼睛",
+      "kind": "trap",
+      "coins": null,
+      "items": [
+        {
+          "item_id": null,
+          "name": "玻璃赝品宝石",
+          "qty": 2,
+          "note": "看似祖母绿，实为不值钱的玻璃；撬下会触发天花板崩塌（DC15敏捷豁免，4d10钝击）。"
+        }
+      ],
+      "xp": 0,
+      "description": "雕像眼睛是精巧玻璃赝品，有强大咒语保护；撬下眼睛会引发柱子碎裂与天花板崩塌。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 63
+      },
+      "brief": "区域19 · 假宝石陷阱 · 撬下触发4d10崩塌"
+    },
+    {
+      "id": "lmop:reward:area-19-nezznar-capture",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-19",
+      "label": "活捉奈兹纳尔",
+      "kind": "xp",
+      "coins": null,
+      "items": [],
+      "xp": null,
+      "xp_note": "若奈兹纳尔被活捉并送往西达尔或凡度林镇长处，奖励队伍两倍经验值。",
+      "description": "活捉比击杀更有利；但 Halia Thornton 可能将他放走。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 64
+      },
+      "brief": "区域19 · 活捉奈兹纳尔 · 双倍XP"
+    },
+    {
+      "id": "lmop:reward:area-20-nundro",
+      "type": "reward",
+      "scene_id": "lmop:scene:area-20",
+      "label": "救出南镀",
+      "kind": "xp",
+      "coins": null,
+      "items": [],
+      "xp": 200,
+      "xp_note": "若南镀被救出并存活于冒险中，将200XP均分给队伍角色。",
+      "description": "南镀是寻石者兄弟中最年轻者，被囚禁在区域20。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 64
+      },
+      "brief": "区域20 · 救出南镀并存活 · 200XP"
+    }
+  ],
+  "magic_items": [
+    {
+      "id": "lmop:item:plus-1-armor",
+      "type": "magic_item",
+      "name": "+1 护甲",
+      "name_en": "+1 Armor",
+      "item_type": "护甲（通用）",
+      "rarity": "非凡",
+      "rarity_code": "uncommon",
+      "attunement": false,
+      "description": "穿戴此护甲时获得额外 +1 AC。",
+      "appendix_a": true,
+      "found_at": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 65
+      },
+      "brief": "+1 护甲 · 非凡 · AC +1"
+    },
+    {
+      "id": "lmop:item:plus-1-weapon",
+      "type": "magic_item",
+      "name": "+1 武器",
+      "name_en": "+1 Weapon",
+      "item_type": "武器（通用）",
+      "rarity": "非凡",
+      "rarity_code": "uncommon",
+      "attunement": false,
+      "description": "攻击与伤害检定获得 +1 加值。",
+      "appendix_a": true,
+      "found_at": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 65
+      },
+      "brief": "+1 武器 · 非凡 · 攻击/伤害 +1"
+    },
+    {
+      "id": "lmop:item:boots-of-striding-and-springing",
+      "type": "magic_item",
+      "name": "跑跳靴",
+      "name_en": "Boots of Striding and Springing",
+      "item_type": "奇物",
+      "rarity": "非凡",
+      "rarity_code": "uncommon",
+      "attunement": true,
+      "description": "步行速度改为30尺（除非原本更高）；移动受阻碍或穿重甲也不会减速；跳跃距离为正常3倍，但不能超过剩余移动力。",
+      "appendix_a": true,
+      "found_at": [
+        "lmop:scene:area-1"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 65
+      },
+      "brief": "跑跳靴 · 非凡（需调谐）· 速度30/跳跃3倍"
+    },
+    {
+      "id": "lmop:item:gauntlets-of-ogre-power",
+      "type": "magic_item",
+      "name": "食人魔力量手套",
+      "name_en": "Gauntlets of Ogre Power",
+      "item_type": "奇物",
+      "rarity": "非凡",
+      "rarity_code": "uncommon",
+      "attunement": true,
+      "description": "穿戴时力量值变为19；若力量已为19或更高则无效果。",
+      "appendix_a": true,
+      "found_at": [
+        "lmop:scene:area-18"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 65
+      },
+      "brief": "食人魔力量手套 · 非凡（需调谐）· 力量19"
+    },
+    {
+      "id": "lmop:item:staff-of-spider",
+      "type": "magic_item",
+      "name": "蜘蛛法杖",
+      "name_en": "Staff of Spider",
+      "item_type": "法杖",
+      "rarity": "非凡",
+      "rarity_code": "uncommon",
+      "attunement": true,
+      "description": "可当木棍使用；用此法杖发动的伤害检定额外造成1d6毒素伤害。10发充能，黎明恢复1d6+4；耗尽最后一发时掷d20，若为1则破碎成灰。可施蛛行术（1充能）或蛛网术（2充能，豁免DC15）。",
+      "appendix_a": true,
+      "found_at": [
+        "lmop:scene:area-19"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 65
+      },
+      "brief": "蜘蛛法杖 · 非凡（需调谐）· +1d6毒素 · 10充能"
+    },
+    {
+      "id": "lmop:item:wand-of-magic-missiles",
+      "type": "magic_item",
+      "name": "魔法飞弹魔杖",
+      "name_en": "Wand of Magic Missiles",
+      "item_type": "魔杖",
+      "rarity": "非凡",
+      "rarity_code": "uncommon",
+      "attunement": true,
+      "description": "7发充能，黎明恢复1d6+1；耗尽最后一发时掷d20，若为1则破碎成灰。持握时可用1个动作消耗至少1发充能施放魔法飞弹，每多消耗1发提升1环。",
+      "appendix_a": true,
+      "found_at": [
+        "lmop:scene:area-10"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 65
+      },
+      "brief": "魔法飞弹魔杖 · 非凡（需调谐）· 7充能"
+    },
+    {
+      "id": "lmop:item:staff-of-defense",
+      "type": "magic_item",
+      "name": "防御法杖",
+      "name_en": "Staff of Defense",
+      "item_type": "法杖",
+      "rarity": "非凡",
+      "rarity_code": "uncommon",
+      "attunement": true,
+      "description": "持握时 AC +1。10发充能，黎明恢复1d6+4；耗尽最后一发时掷d20，若为1则破碎成灰。可施法师护甲（1充能）或护盾术（2充能）。",
+      "appendix_a": true,
+      "found_at": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 66
+      },
+      "brief": "防御法杖 · 非凡（需调谐）· AC+1 · 10充能"
+    },
+    {
+      "id": "lmop:item:ring-of-protection",
+      "type": "magic_item",
+      "name": "防御之戒",
+      "name_en": "Ring of Protection",
+      "item_type": "戒指",
+      "rarity": "珍稀",
+      "rarity_code": "rare",
+      "attunement": true,
+      "description": "佩戴后所有豁免检定与 AC 均 +1。",
+      "appendix_a": true,
+      "found_at": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 66
+      },
+      "brief": "防御之戒 · 珍稀（需调谐）· AC/豁免+1"
+    },
+    {
+      "id": "lmop:item:potion-of-invisibility",
+      "type": "magic_item",
+      "name": "隐身药水",
+      "name_en": "Potion of Invisibility",
+      "item_type": "药水",
+      "rarity": "非常珍稀",
+      "rarity_code": "very rare",
+      "attunement": false,
+      "description": "容器看似空的，但能感觉到液体。饮用后隐身1小时；携带或穿戴的物品一同隐形；攻击或施法立即结束效果。",
+      "appendix_a": true,
+      "found_at": [],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 66
+      },
+      "brief": "隐身药水 · 非常珍稀 · 隐身1小时"
+    },
+    {
+      "id": "lmop:item:potion-of-vitality",
+      "type": "magic_item",
+      "name": "活力药水",
+      "name_en": "Potion of Vitality",
+      "item_type": "药水",
+      "rarity": "非常珍稀",
+      "rarity_code": "very rare",
+      "attunement": false,
+      "description": "消除所有力竭，治愈所有疾病与毒素；接下来24小时内投生命骰恢复的生命值为生命骰最大值。",
+      "appendix_a": true,
+      "found_at": [
+        "lmop:scene:area-11"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 66
+      },
+      "brief": "活力药水 · 非常珍稀 · 解除力竭/疾病/毒素"
+    },
+    {
+      "id": "lmop:item:potion-of-healing",
+      "type": "magic_item",
+      "name": "治疗药水",
+      "name_en": "Potion of Healing",
+      "item_type": "药水",
+      "rarity": "稀有度可变（模组中为普通）",
+      "rarity_code": "varies",
+      "attunement": false,
+      "description": "恢复由药水稀有度决定的生命值；模组中出现的均为普通治疗药水，回复2d4+2点生命值。",
+      "appendix_a": true,
+      "found_at": [
+        "lmop:scene:area-19"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 67
+      },
+      "brief": "治疗药水 · 普通 · 回复2d4+2"
+    },
+    {
+      "id": "lmop:item:lightbringer",
+      "type": "magic_item",
+      "name": "护光者",
+      "name_en": "Lightbringer",
+      "item_type": "武器（钉锤）",
+      "rarity": "非凡",
+      "rarity_code": "uncommon",
+      "attunement": false,
+      "description": "+1钉锤，锤头塑成旭日模样，由坚实黄铜制成；持有者下令时如火炬般发光；发光时对不死生物造成额外1d6光耀伤害。",
+      "appendix_a": false,
+      "found_at": [
+        "lmop:scene:area-15"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 62
+      },
+      "brief": "护光者 · +1钉锤 · 发光时对不死+1d6光耀"
+    },
+    {
+      "id": "lmop:item:dragonguard",
+      "type": "magic_item",
+      "name": "龙之守护",
+      "name_en": "Dragonguard",
+      "item_type": "护甲（胸甲）",
+      "rarity": "非凡",
+      "rarity_code": "uncommon",
+      "attunement": false,
+      "description": "+1胸甲，有金龙图像；由绝冬城一位名为 Tergon 的人类英雄创造；穿戴者对抗龙族吐息攻击的豁免具有优势。",
+      "appendix_a": false,
+      "found_at": [
+        "lmop:scene:area-15"
+      ],
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 62
+      },
+      "brief": "龙之守护 · +1胸甲 · 对龙息豁免优势"
+    }
+  ],
+  "notes": [
+    {
+      "id": "lmop:note:copyright",
+      "type": "note",
+      "topic": "版权与使用范围",
+      "text": "模组由 Wizards of the Coast 发布，一切权利归其所有；中文整合仅用于学习交流，如涉侵权请于24小时内删除。本文件只存结构化字段与生成式摘要，不收录原文长段文本。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 79
+      },
+      "brief": "版权归 WotC · 仅结构化字段 · 学习交流"
+    },
+    {
+      "id": "lmop:note:translation-credits",
+      "type": "note",
+      "topic": "翻译与整理",
+      "text": "翻译自纯美苹果园。译者：庞西瓦（前言、第一章）；琉璃（第一章后半部分、第二章）；cherng9（第二章后半部分、第三章、第四章）。整理：HXQXH；初步整理与校对由该整合的整理者完成。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 79
+      },
+      "brief": "纯美苹果园 · 译者庞西瓦/琉璃/cherng9"
+    },
+    {
+      "id": "lmop:note:page-mapping",
+      "type": "note",
+      "topic": "页码说明",
+      "text": "用户按目录页码 62–90 指认范围；实际提供的 PDF 共80页。PART 4 起于 PDF 第54页，附录A 为65–67页，附录B 为68–78页，备注为79页；PDF 页脚为53–78，与目录页码约差9页。本文件按章节名而非目录数字对齐。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 79
+      },
+      "brief": "目录62-90 vs PDF54-79 · 按章节名对齐"
+    },
+    {
+      "id": "lmop:note:missing-statblocks",
+      "type": "note",
+      "topic": "未收录的数据卡",
+      "text": "赭色果冻怪（区域2、游荡怪物表11–12）与缚灵莫尔梅斯克（区域14）在正文出现，但附录B未给出数据卡；使用时需另查《怪物图鉴》。本文件在这两处保留名称与遭遇信息，不补写数据。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 78
+      },
+      "brief": "赭色果冻怪与缚灵无附录数据卡"
+    },
+    {
+      "id": "lmop:note:translation-names",
+      "type": "note",
+      "topic": "译名说明",
+      "text": "原文存在同一生物的不同译名：观察者眼魔（区域15）在附录B数据卡中译作“独眼怪”；掘地怪（游荡怪物表）在附录B中译作“掘地兽”；奈兹纳尔在附录B中又作“那兹纳尔”。本文件以正文常用译名为主，并在 name_en 或备注中保留英文名。",
+      "source": {
+        "book": "LMoP",
+        "pdf_page": 78
+      },
+      "brief": "观察者眼魔/独眼怪 · 掘地怪/掘地兽 · 奈兹纳尔/那兹纳尔"
+    }
+  ]
+}
