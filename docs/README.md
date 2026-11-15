@@ -28,6 +28,7 @@
 | [`content/cet4-dnd-mechanics-vocab.md`](content/cet4-dnd-mechanics-vocab.md) | DnD 5e 机制 × CET-4 词汇映射：5 类机制、150 词、可玩点子与知识库核对 |
 | [`content/cet4-syllabus-kb.md`](content/cet4-syllabus-kb.md) | 四级大纲知识库的 OCR 方法、覆盖与限制 |
 | [`content/cet4-materials-ingest.md`](content/cet4-materials-ingest.md) | 两本四级素材的页级录入完整性核对与出题素材用法 |
+| [`content/mm-library.md`](content/mm-library.md) | 5e《怪物图鉴》结构化录入与分类库：450 条、六维分类、查询与校验 |
 
 机器可读数据在 [`data/`](../data/)：
 
@@ -36,6 +37,7 @@
 | [`cet4-dnd-vocab.json`](../data/cet4-dnd-vocab.json) | 150 个映射词的同源导入数据 |
 | [`cet4-syllabus-kb.json`](../data/cet4-syllabus-kb.json) | 4530 个唯一四级大纲词头（释义、Unit、Part、页码） |
 | [`cet4-materials/manifest.json`](../data/cet4-materials/manifest.json) | 两本扫描书的页数、字符数与 SHA-256 清单；全文因版权不公开 |
+| [`mm/manifest.json`](../data/mm/manifest.json) | 5e MM 结构化库清单：450 条怪物、分类计数与 SHA-256 |
 
 ## 来源
 

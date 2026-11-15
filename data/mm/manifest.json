@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-15T13:39:35.772Z",
+  "book": {
+    "title": "Monster Manual",
+    "edition": "2014",
+    "abbr": "MM",
+    "publisher": "Wizards of the Coast"
+  },
+  "source": {
+    "dataset": "5etools 中文镜像（5e.kiwee.top）",
+    "url": "https://5e.kiwee.top/data/",
+    "snapshot": "2026-11-15",
+    "translator": "不全书",
+    "translation_license": "CC BY-NC-SA 4.0（译文；本库不复制正文）",
+    "page_basis": "英文原版 MM 页码"
+  },
+  "policy": {
+    "prose": "omitted",
+    "reason": "公开仓库不收录 MM 译文正文；只保留名称、页码、分类、规则机械值与生成式摘要。",
+    "private_text_pack": "data/mm-private/text.json（不提交，可用 scripts/mm-query.mjs --with-text 合并）"
+  },
+  "counts": {
+    "monster": 450,
+    "legendary": 37,
+    "lair": 5,
+    "spellcaster": 83,
+    "shapechanger": 23,
+    "reactions": 18,
+    "by_type": {
+      "humanoid": 74,
+      "aberration": 19,
+      "celestial": 7,
+      "construct": 16,
+      "monstrosity": 53,
+      "elemental": 23,
+      "undead": 32,
+      "plant": 14,
+      "fiend": 37,
+      "giant": 13,
+      "beast": 100,
+      "dragon": 51,
+      "fey": 7,
+      "ooze": 4
+    },
+    "by_size": {
+      "medium": 196,
+      "large": 133,
+      "small": 30,
+      "huge": 39,
+      "tiny": 37,
+      "gargantuan": 15
+    },
+    "by_cr_tier": {
+      "cr-0-4": 293,
+      "cr-5-10": 96,
+      "cr-11-16": 36,
+      "cr-21-plus": 13,
+      "cr-17-20": 12
+    },
+    "by_environment": {
+      "mountain": 53,
+      "underdark": 124,
+      "unmarked": 85,
+      "grassland": 84,
+      "forest": 135,
+      "coastal": 48,
+      "hill": 90,
+      "swamp": 55,
+      "urban": 84,
+      "desert": 79,
+      "underwater": 23,
+      "arctic": 39
+    },
+    "by_group": {
+      "angel": 3,
+      "animated-object": 3,
+      "beholder": 3,
+      "dinosaur": 6,
+      "chromatic-dragon": 20,
+      "metallic-dragon": 20,
+      "genie": 4,
+      "lycanthrope": 5,
+      "modron": 5,
+      "sphinx": 2
+    }
+  },
+  "files": [
+    {
+      "path": "data/mm/monsters.json",
+      "records": 450,
+      "bytes": 2119297,
+      "sha256": "0f2d2a42054f79eeacda5745261f81f35580e0b5257e43f84d20bab9f85ca618"
+    },
+    {
+      "path": "data/mm/taxonomy.json",
+      "records": 1,
+      "bytes": 96679,
+      "sha256": "5cb48b20066d2de7b9b54cd56cede7a002bcd1e95093226365630072ebfc4fd8"
+    }
+  ],
+  "notes": [
+    "中文名来自 5etools 中文镜像（不全书），以 name_en 作为稳定标识。",
+    "正文描述未入库；动作只保留名称、命中/豁免、射程、伤害骰与类型、充能/使用次数等机械字段。",
+    "CR 为 2014 MM 原值；巢穴 CR 与鬼婆集会 CR 单独存放。",
+    "环境标签来自 5etools 的 environment 字段；未标注的条目归入「未标注」。",
+    "本库包含 MM 2014 的 450 条怪物数据，含变体条目（如吸血鬼施法者/战士、多种纳迦）与 2024 重印条目的 2014 版本。"
+  ]
+}
