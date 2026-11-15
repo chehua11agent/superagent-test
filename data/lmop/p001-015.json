@@ -1,0 +1,2343 @@
+{
+  "schemaVersion": "1.0.0",
+  "datasetId": "lmop-p001-015",
+  "generatedDate": "2026-11-15",
+  "schema": {
+    "description": "《凡戴尔的失落矿坑》第 1–15 页的结构化派生数据：章节、场景、NPC、怪物、检定 DC、奖励与经验里程碑。",
+    "idConventions": "所有记录使用稳定的 slug；场景 id 以 scene- 开头，NPC 以 npc- 开头，怪物以 monster- 开头，检定以 check- 开头，奖励以 reward- 开头。",
+    "crossReferences": "场景通过 sceneIds/nextSceneId/childSceneIds 关联；检定通过 sceneId 归属；奖励通过 sceneId 与 itemIds 关联；怪物通过 appearances[].sceneId 关联。",
+    "copyright": "本文件只记录结构化事实、数值与摘要，不收录模组原文；引用页码均为书页页码。"
+  },
+  "module": {
+    "id": "lmop",
+    "title": "凡戴尔的失落矿坑",
+    "titleEn": "Lost Mine of Phandelver",
+    "edition": "D&D 5e",
+    "language": "zh-CN",
+    "publisher": "Wizards of the Coast",
+    "sourceType": "中文翻译版 PDF",
+    "note": "本模组面向地下城主，包含完整冒险、魔法物品与生物；配套规则手册提供主持所需规则。"
+  },
+  "source": {
+    "file": "lost-mine.pdf",
+    "pageRange": [
+      1,
+      15
+    ],
+    "pdfPageRange": [
+      2,
+      16
+    ],
+    "pageOffset": 1,
+    "totalPdfPages": 80,
+    "coverage": [
+      "前言",
+      "主持游戏",
+      "PART 1 哥布林之矢"
+    ],
+    "pageMap": [
+      {
+        "page": 1,
+        "pdfPage": 2,
+        "content": "前言；主持战役；地下城主"
+      },
+      {
+        "page": 2,
+        "pdfPage": 3,
+        "content": "能力检定 DC 的设定；词汇表；背景"
+      },
+      {
+        "page": 3,
+        "pdfPage": 4,
+        "content": "剑湾区域地图（整页）"
+      },
+      {
+        "page": 4,
+        "pdfPage": 5,
+        "content": "概述（四部分）；冒险开始：在凡度林见"
+      },
+      {
+        "page": 5,
+        "pdfPage": 6,
+        "content": "PART 1 开场；哥布林突袭"
+      },
+      {
+        "page": 6,
+        "pdfPage": 7,
+        "content": "突袭细节；发展"
+      },
+      {
+        "page": 7,
+        "pdfPage": 8,
+        "content": "巴森；休息；哥布林小径；陷阱；75 XP；克拉格莫窝点；主要特征"
+      },
+      {
+        "page": 8,
+        "pdfPage": 9,
+        "content": "窝点主要特征；哥布林知道的事（开始）"
+      },
+      {
+        "page": 9,
+        "pdfPage": 10,
+        "content": "哥布林知道的事（续）；区域 1；区域 2；区域 3"
+      },
+      {
+        "page": 10,
+        "pdfPage": 11,
+        "content": "区域 3 续；区域 4；冒险地图边栏；天桥；脆弱平台"
+      },
+      {
+        "page": 11,
+        "pdfPage": 12,
+        "content": "区域 5 天桥；洪水；区域 6 生活间"
+      },
+      {
+        "page": 12,
+        "pdfPage": 13,
+        "content": "区域 6 续；西达尔；一米克；区域 7 双子池"
+      },
+      {
+        "page": 13,
+        "pdfPage": 14,
+        "content": "宝藏（一米克钱袋）；NPC 队员；区域 7 续；区域 8；火坑"
+      },
+      {
+        "page": 14,
+        "pdfPage": 15,
+        "content": "区域 8 续；宝藏；后续；275 XP"
+      },
+      {
+        "page": 15,
+        "pdfPage": 16,
+        "content": "整页插画（哥布林），无正文"
+      }
+    ],
+    "gaps": [
+      "目录标注的附录 B（怪物，第 78 页起）与备注（第 89 页起）未包含在该 PDF 中；PDF 共 80 页，第 79 页为免责声明、第 80 页为空白模板。",
+      "本文件只覆盖第 1–15 页；PART 2 及以后不在本文件范围内。",
+      "第 3 页区域地图与第 6、8 页战斗地图为图像；本文件只记录图表元数据、比例与图例，不转录地图图像。"
+    ]
+  },
+  "party": {
+    "size": "4–5 名 1 级 PC",
+    "startLevel": 1,
+    "endLevel": 5,
+    "levelAfterChunk": 2,
+    "note": "本模组为 4–5 名 1 级 PC 设计，冒险结束时约 5 级；完成 PART 1 后应升到 2 级。"
+  },
+  "chapters": [
+    {
+      "id": "chapter-00-introduction",
+      "number": 0,
+      "title": "前言",
+      "titleEn": "Introduction",
+      "pages": [
+        1,
+        4
+      ],
+      "summary": "面向地下城主的开篇：说明模组用途、主持战役与地下城主的职责、能力检定 DC 的设定、词汇表、背景故事、四部分冒险概述，以及推荐的开场钩子。",
+      "sections": [
+        {
+          "id": "sec-intro-purpose",
+          "title": "模组用途",
+          "page": 1,
+          "summary": "本书包含完整的 D&D 模组、其中出现的魔法物品与生物，并介绍被遗忘的国度；配套的规则手册提供主持时用到的全部规则。",
+          "keyPoints": [
+            "面向地下城主（DM）",
+            "包含完整模组与怪物/魔法物品",
+            "介绍被遗忘的国度世设",
+            "配套规则手册提供规则"
+          ]
+        },
+        {
+          "id": "sec-running-campaign",
+          "title": "主持战役",
+          "page": 1,
+          "summary": "本模组为 4–5 名 1 级 PC 提供冒险，结束时约 5 级；故事主要发生在无冬城附近，位于被遗忘国度的剑湾/北地。无需精通被遗忘国度设定。",
+          "keyPoints": [
+            "4–5 名 1 级 PC",
+            "冒险结束时约 5 级",
+            "主要发生在无冬城附近",
+            "剑湾区域，属于北地"
+          ]
+        },
+        {
+          "id": "sec-dm-role",
+          "title": "地下城主",
+          "page": 1,
+          "summary": "DM 是裁判、叙述者，也扮演怪物与 NPC；DM 与玩家并非敌对，职责是用有趣的遭遇与考验挑战玩家、保持节奏并公平应用规则。规则服务于游戏，不应束缚 DM。",
+          "keyPoints": [
+            "结果无法预期时由 DM 裁定",
+            "DM 确定故事节奏与挑战",
+            "DM 扮演怪物、恶棍与其他 NPC",
+            "公平应用规则，确保大家乐在其中"
+          ]
+        },
+        {
+          "id": "sec-dc-guidance",
+          "title": "能力检定 DC 的设定",
+          "page": 2,
+          "summary": "当结果不确定时，先问三个问题：需要什么检定、到底有多难、成功/失败会带来什么结果；再按难度选用 DC 10/15/20。显而易见或基本不可能的事无需检定。",
+          "threeQuestions": [
+            "需要什么检定",
+            "到底有多难",
+            "检定成功/失败会带来什么结果"
+          ],
+          "dcScale": [
+            {
+              "difficulty": "简单",
+              "dc": 10,
+              "description": "基本的技能就能够完成的任务"
+            },
+            {
+              "difficulty": "中等",
+              "dc": 15,
+              "description": "需要一些进阶的技巧才能完成的任务"
+            },
+            {
+              "difficulty": "困难",
+              "dc": 20,
+              "description": "需要高超技巧、专业训练和一些运气才能完成的任务"
+            }
+          ],
+          "ruleId": "rule-dc-scale"
+        },
+        {
+          "id": "sec-glossary",
+          "title": "词汇表",
+          "page": 2,
+          "summary": "模组使用的关键术语：角色（PC）、非玩家角色（NPC）、蓝字（应大声念出的描述性文字）、十日（被遗忘国度的一周，一个月三个十日）。",
+          "termIds": [
+            "term-character",
+            "term-npc",
+            "term-blue-text",
+            "term-tenday",
+            "term-party"
+          ]
+        },
+        {
+          "id": "sec-background",
+          "title": "背景",
+          "page": 2,
+          "summary": "五百年前，矮人与侏儒氏族签订凡戴尔协定，共享回浪洞下的富矿与魔法力量；人类施法者将其转化为法术工厂，凡度林因此繁荣。兽人入侵时矿坑被毁，回浪洞位置失落。数百年后人类重建凡度林；寻石者三兄弟找到入口，准备重开矿坑。黑蜘蛛控制当地强盗与哥布林部落，派间谍跟踪寻石者，企图独吞矿坑。",
+          "keyFacts": [
+            "凡戴尔协定：矮人与侏儒共享回浪洞矿藏",
+            "回浪洞富含魔法力量，曾被用作法术工厂",
+            "兽人法师率军攻占，战斗摧毁矿坑，入口失落",
+            "寻石者三兄弟找到入口，准备重开矿坑",
+            "黑蜘蛛控制强盗与哥布林，派间谍跟踪寻石者"
+          ],
+          "entityIds": [
+            "faction-rockseeker-brothers",
+            "faction-black-spider-network",
+            "npc-black-spider"
+          ]
+        },
+        {
+          "id": "sec-overview",
+          "title": "概述",
+          "page": 4,
+          "summary": "冒险分为四部分：哥布林之矢、凡度林之役、黑蜘蛛之网、潮音洞之声。本文件详细录入第一部分，其余部分只在概述层面记录。",
+          "parts": [
+            {
+              "part": 1,
+              "title": "哥布林之矢",
+              "titleEn": "Goblin Arrows",
+              "summary": "PC 在前往凡度林的路上遭哥布林突袭；哥布林抓走了刚铎·寻石者与保镖西达尔。PC 追踪到哥布林窝点，救出西达尔，并得知刚铎与地图被送往克拉格莫城堡。",
+              "detail": "本文件 chapter-01-goblin-arrows"
+            },
+            {
+              "part": 2,
+              "title": "凡度林之役",
+              "titleEn": "Phandalin",
+              "summary": "PC 到达凡度林，发现小镇被红烙印帮派劫掠；帮派由“水晶之杖”阿尔布克领导，听命于黑蜘蛛。PC 在老庄园附近的要塞找到阿尔布克。",
+              "detail": "超出本分卷页范围"
+            },
+            {
+              "part": 3,
+              "title": "黑蜘蛛之网",
+              "titleEn": "The Spider's Web",
+              "summary": "PC 在凡度林周边短途冒险中寻找黑蜘蛛与失落矿脉的线索：古枭井的神秘法师、女妖的指引、飞龙屯的兽人、雷霆树镇的废墟。线索指向克拉格莫城堡与卓尔聂兹那。",
+              "detail": "超出本分卷页范围"
+            },
+            {
+              "part": 4,
+              "title": "潮音洞之声",
+              "titleEn": "Wave Echo Cave",
+              "summary": "失落的回浪洞矿脉被不死生物与奇怪怪物占领；聂兹那在矿脉中寻找传奇法术力量。PC 可在此为刚铎报仇、清理矿脉并与黑蜘蛛做个了断。",
+              "detail": "超出本分卷页范围"
+            }
+          ]
+        },
+        {
+          "id": "sec-adventure-hook",
+          "title": "冒险开始：在凡度林见",
+          "page": 4,
+          "summary": "推荐开场：刚铎·寻石者委托 PC 把一车补给送到凡度林，承诺每人 10 gp；刚铎与西达尔已提前出发。",
+          "hook": {
+            "id": "hook-meet-in-phandalin",
+            "patronNpcId": "npc-gundren-rockseeker",
+            "destination": "凡度林交易站（巴森小栈）",
+            "payment": "每名 PC 10 gp",
+            "condition": "将补给平安送到凡度林",
+            "rewardId": "reward-hook-payment",
+            "sourceNote": "原文此处写作“RAT 驿站/邮站”；结合上下文，目的地应是凡度林的交易站（巴森小栈）。"
+          }
+        }
+      ]
+    },
+    {
+      "id": "chapter-01-goblin-arrows",
+      "number": 1,
+      "title": "哥布林之矢",
+      "titleEn": "Goblin Arrows",
+      "pages": [
+        5,
+        15
+      ],
+      "summary": "PC 从无冬城前往凡度林，在三猪小道遭 4 只哥布林伏击；追踪小径到克拉格莫窝点，穿过陷阱与洞穴区域 1–8，救出西达尔、击败熊地精克拉格，获得战利品与里程碑经验。",
+      "levelRange": [
+        1,
+        2
+      ],
+      "sceneIds": [
+        "scene-travel-to-phandalin",
+        "scene-goblin-ambush",
+        "scene-goblin-trail",
+        "scene-cragmaw-hideout",
+        "scene-area-1-entrance",
+        "scene-area-2-guardpost",
+        "scene-area-3-wolf-den",
+        "scene-area-4-steep-passage",
+        "scene-area-5-bridge",
+        "scene-area-6-goblin-den",
+        "scene-area-7-twin-pools",
+        "scene-area-8-klargs-cave",
+        "scene-aftermath"
+      ],
+      "xpMilestoneIds": [
+        "xp-75-reach-hideout",
+        "xp-275-clear-hideout"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "scene-travel-to-phandalin",
+      "chapterId": "chapter-01-goblin-arrows",
+      "name": "前往凡度林",
+      "pages": [
+        5
+      ],
+      "type": "setup",
+      "location": "无冬城 → 南部大道 → 三猪小道",
+      "summary": "PC 驾驶满载补给的马车，从无冬城出发，沿南部大道走几天后向东转入三猪小道；距凡度林还有半天路程时，遭遇克拉格莫哥布林。",
+      "readAloudSummary": "转弯处两匹死马挡路，马身插着黑羽箭，道路两旁树枝低垂、灌木密集。",
+      "cargo": {
+        "description": "面粉袋、几桶咸肉、两桶啤酒、铲子、长矛、铁棍、5 盏有油的牛眼灯等补给与食物。",
+        "valueGp": 100,
+        "itemIds": [
+          "item-wagon-cargo"
+        ]
+      },
+      "partyPrep": [
+        "PC 互相介绍角色。",
+        "说明各自如何认识刚铎·寻石者；可提示刚铎是幼年玩伴或曾帮助过 PC。",
+        "确定队伍队形：谁在前探路、谁殿后；使用“在凡度林见”开场时需 1–2 名 PC 驾驶马车。"
+      ],
+      "wagonRules": "任何 PC 都可驾驶马车，无需特殊技巧；无人执鞭时马车停在原地。",
+      "checkIds": [],
+      "nextSceneId": "scene-goblin-ambush"
+    },
+    {
+      "id": "scene-goblin-ambush",
+      "chapterId": "chapter-01-goblin-arrows",
+      "name": "哥布林突袭",
+      "pages": [
+        5,
+        6,
+        7
+      ],
+      "type": "combat",
+      "location": "三猪小道，距凡度林约半天路程",
+      "summary": "4 只哥布林藏在道路两侧灌木中，等 PC 接近马尸时发动伏击；击败 3 只后最后 1 只逃跑。",
+      "readAloudSummary": "两匹死马横在路中，鞍囊被洗劫，旁边有一个空的皮地图匣。",
+      "trigger": "当有人到达马的尸体时，哥布林发动攻击。",
+      "encounter": {
+        "groups": [
+          {
+            "monsterId": "monster-goblin",
+            "count": 4,
+            "deployment": "道路两侧各 2 只；2 只从灌木中冲出近战，2 只在 30 尺外远程攻击。"
+          }
+        ],
+        "surprise": {
+          "checkId": "check-goblin-ambush-surprise",
+          "note": "PC 无法突袭哥布林；哥布林可突袭部分 PC。哥布林用 d20+6 隐匿对抗 PC 被动感知；被动感知低于结果的 PC 被突袭，战斗第一轮无法行动。"
+        },
+        "morale": "3 只哥布林被击败后，最后 1 只尝试逃向小径。",
+        "tactics": "2 只哥布林从灌木中冲出近战，2 只在 30 尺外远程攻击；远程哥布林利用灌木掩护。"
+      },
+      "investigation": {
+        "horses": "若使用“在凡度林见”开场，近距离调查可发现两匹马属于刚铎与西达尔，已死约 1 天，箭伤是死因。",
+        "saddlebags": "鞍囊已被洗劫一空。",
+        "mapCase": "旁边有一个空的皮地图匣。",
+        "itemIds": [
+          "item-empty-map-case"
+        ]
+      },
+      "developments": [
+        "队伍战败：哥布林把 PC 敲晕、洗劫，并把货车赶回克拉格莫窝点；PC 仍可前往凡度林，在巴森小栈购置新装备后回到遇袭处追踪。",
+        "俘虏哥布林：用近战武器把哥布林打到 0 HP 可将其敲晕；几分钟后醒来可审问（见“哥布林知道的事”）。俘虏也可能被说服带路，避开陷阱直达窝点。",
+        "失去踪迹：若队伍跟丢或直接前往凡度林，跳到 PART 2。艾尔玛·巴森会告知刚铎未按时抵达、近期哥布林强盗滋扰，建议休息后回遇袭处调查；利涅·灰风可提供更多信息。"
+      ],
+      "checkIds": [
+        "check-goblin-ambush-surprise"
+      ],
+      "nextSceneId": "scene-goblin-trail"
+    },
+    {
+      "id": "scene-goblin-trail",
+      "chapterId": "chapter-01-goblin-arrows",
+      "name": "哥布林小径",
+      "pages": [
+        7
+      ],
+      "type": "exploration",
+      "location": "三猪小道西北方向的小径",
+      "summary": "PC 在灌木后发现一条向西北的小径；沿途有套圈陷阱和陷坑，尽头是 5 英里外的克拉格莫窝点。",
+      "checkIds": [
+        "check-trail-survival",
+        "check-snare-passive",
+        "check-snare-perception",
+        "check-snare-dex-save",
+        "check-pit-passive",
+        "check-pit-perception",
+        "check-pit-dex-save"
+      ],
+      "travelNotes": [
+        "小径通往西北方向 5 英里外的克拉格莫窝点。",
+        "队伍可把货车赶离大道并拴好两头牛。",
+        "沿途确认队形很重要，因为哥布林在路上布了两个陷阱。"
+      ],
+      "hazardIds": [
+        "hazard-snare",
+        "hazard-pit"
+      ],
+      "xpMilestoneId": "xp-75-reach-hideout",
+      "nextSceneId": "scene-cragmaw-hideout",
+      "rewardIds": [
+        "reward-ambush-milestone"
+      ]
+    },
+    {
+      "id": "scene-cragmaw-hideout",
+      "chapterId": "chapter-01-goblin-arrows",
+      "name": "克拉格莫窝点",
+      "pages": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "type": "location",
+      "location": "三猪小道西北 5 英里，山脚洞穴",
+      "summary": "克拉格莫部落的哥布林在洞中设伏、养狼、蓄水，由熊地精克拉格统领。",
+      "features": [
+        {
+          "name": "天花板",
+          "description": "大部分洞室与通道高约 20–30 尺，倾斜拱顶覆盖钟乳石。"
+        },
+        {
+          "name": "灯光",
+          "description": "区域 1、2 为室外；其余区域除非特别说明完全黑暗。"
+        },
+        {
+          "name": "地面",
+          "description": "有碎石沙砾的区域为困难地形。"
+        },
+        {
+          "name": "声音",
+          "description": "暗溪发出沉闷声响；洞内生物可通过 DC15 感知（察觉）检定聆听附近活动。"
+        },
+        {
+          "name": "石笋",
+          "description": "可提供隐蔽。"
+        },
+        {
+          "name": "暗溪",
+          "description": "深 2 尺，冰冷缓慢，可轻松涉水。"
+        }
+      ],
+      "goblinKnowledge": [
+        {
+          "reveal": "洞内大约不到 20 只哥布林。",
+          "page": 8
+        },
+        {
+          "reveal": "头目是熊地精克拉格，听从克拉格莫城堡的格罗尔王。",
+          "page": 8
+        },
+        {
+          "reveal": "克拉格莫城堡在窝点东北约 20 英里外的无冬森林中。",
+          "page": 8
+        },
+        {
+          "reveal": "格罗尔王命令克拉格活捉刚铎·寻石者，连同所有物品带回城堡；这是黑蜘蛛的委托。",
+          "page": 8
+        },
+        {
+          "reveal": "刚铎和地图已被送往格罗尔王；人类保镖西达尔被关在“储藏室”（区域 6）。",
+          "page": 9
+        }
+      ],
+      "checkIds": [
+        "check-cave-listen"
+      ],
+      "childSceneIds": [
+        "scene-area-1-entrance",
+        "scene-area-2-guardpost",
+        "scene-area-3-wolf-den",
+        "scene-area-4-steep-passage",
+        "scene-area-5-bridge",
+        "scene-area-6-goblin-den",
+        "scene-area-7-twin-pools",
+        "scene-area-8-klargs-cave"
+      ],
+      "mapId": "map-cragmaw-hideout"
+    },
+    {
+      "id": "scene-area-1-entrance",
+      "chapterId": "chapter-01-goblin-arrows",
+      "parentSceneId": "scene-cragmaw-hideout",
+      "name": "区域1 洞口",
+      "pages": [
+        9
+      ],
+      "type": "location",
+      "areaNumber": 1,
+      "summary": "小径尽头是山腹中的大型洞穴；灌木遮掩下流出浅溪，溪右有一条狭窄干燥的小道通往洞内。",
+      "readAloudSummary": "沿小径前进 5 英里后，看到藏在山腹中的大型洞穴；浓密灌木下流出浅溪，溪右有狭窄干燥小道。",
+      "features": [
+        "区域 2 的灌木丛无法从溪流西边直接穿过。"
+      ],
+      "developments": [
+        "区域 2 的守卫在偷懒；若 PC 大声争吵、露营、砍树枝等弄出响声，守卫会发现他们并从灌木丛攻击，获得四分之三掩蔽。"
+      ],
+      "checkIds": [],
+      "nextSceneId": "scene-area-2-guardpost"
+    },
+    {
+      "id": "scene-area-2-guardpost",
+      "chapterId": "chapter-01-goblin-arrows",
+      "parentSceneId": "scene-cragmaw-hideout",
+      "name": "区域2 哥布林暗哨",
+      "pages": [
+        9
+      ],
+      "type": "location",
+      "areaNumber": 2,
+      "summary": "溪东岸的荆棘丛后有一处哨岗，2 只哥布林藏在木板下守望。",
+      "readAloudSummary": "溪东岸有一小片三面合围的荆棘丛，木板压在灌木上，适合潜伏守望。",
+      "encounter": {
+        "groups": [
+          {
+            "monsterId": "monster-goblin",
+            "count": 2
+          }
+        ],
+        "tactics": "若 PC 在区域 1 已被发现，哥布林用弓箭突袭；否则在 PC 涉溪时注意到他们，双方都不会被突袭。若 PC 小心移动或有人在前探路，可突袭哥布林。",
+        "stealthCheckId": "check-area2-stealth"
+      },
+      "features": [
+        "荆棘丛为困难地形；穿过荆棘攻击的生物获得半掩蔽。"
+      ],
+      "checkIds": [
+        "check-area2-stealth"
+      ],
+      "nextSceneId": "scene-area-3-wolf-den"
+    },
+    {
+      "id": "scene-area-3-wolf-den",
+      "chapterId": "chapter-01-goblin-arrows",
+      "parentSceneId": "scene-cragmaw-hideout",
+      "name": "区域3 狼舍",
+      "pages": [
+        9,
+        10
+      ],
+      "type": "location",
+      "areaNumber": 3,
+      "summary": "洞口通道东侧的斗室关着 3 只狼；其中 2 只被锁链拴在入口石笋下的铁棍上。狼会攻击任何非哥布林的生物。",
+      "readAloudSummary": "几级高低不平的石阶通向狭小潮湿的斗室，尽头只剩陡峭裂缝，弥漫牲畜恶臭；两匹狼被锁链拴住，传来咆哮与铁链声。",
+      "encounter": {
+        "groups": [
+          {
+            "monsterId": "monster-wolf",
+            "count": 3,
+            "notes": "文中明确其中 2 只被锁链拴住；狼够不到站在石阶上的目标。"
+          }
+        ],
+        "tactics": "邻近洞窟的哥布林会忽略狼战斗的声音；哥布林或熊地精可用动作松开狼。"
+      },
+      "checkIds": [
+        "check-wolf-animal-handling",
+        "check-chimney-climb",
+        "check-wolf-break-chain"
+      ],
+      "features": [
+        {
+          "name": "安抚狼",
+          "description": "DC15 感知（驯养动物）可让 3 只狼放行；给狼喂食则 DC 降为 10。"
+        },
+        {
+          "name": "狭缝/烟道",
+          "description": "东墙狭缝是天然烟道，向上爬 30 尺到区域 8；底部堆满从上方扔下的垃圾。"
+        },
+        {
+          "name": "狼挣脱",
+          "description": "每轮只要有生物在狼的视线内，狼可做 DC15 力量检定；成功则把铁棍拽弯，锁链脱开。"
+        }
+      ],
+      "hazardIds": [
+        "hazard-chimney-fall"
+      ],
+      "nextSceneId": "scene-area-4-steep-passage"
+    },
+    {
+      "id": "scene-area-4-steep-passage",
+      "chapterId": "chapter-01-goblin-arrows",
+      "parentSceneId": "scene-cragmaw-hideout",
+      "name": "区域4 陡峭的通道",
+      "pages": [
+        10
+      ],
+      "type": "location",
+      "areaNumber": 4,
+      "summary": "从洞口后主通道陡峭向上，溪流冲击西岸；阴影中，穿过溪流，西岸有一条支路。",
+      "features": [
+        "从这里开始，没有黑暗视觉的 PC 需要点灯。",
+        "西路被碎石和峭壁阻隔，视为困难地形。",
+        "两峭壁之间的平台非常脆弱，负重超过 100 磅会松脱并一路向东滚落；平台上的生物需 DC10 敏捷豁免，失败受 2d6 钝击并倒地，成功伤害减半。"
+      ],
+      "checkIds": [
+        "check-platform-collapse",
+        "check-bridge-spot-guard"
+      ],
+      "hazardIds": [
+        "hazard-collapsing-platform"
+      ],
+      "nextSceneId": "scene-area-5-bridge"
+    },
+    {
+      "id": "scene-area-5-bridge",
+      "chapterId": "chapter-01-goblin-arrows",
+      "parentSceneId": "scene-cragmaw-hideout",
+      "name": "区域5 天桥",
+      "pages": [
+        10,
+        11
+      ],
+      "type": "location",
+      "areaNumber": 5,
+      "summary": "主通道上方的横贯隧道处有哥布林哨岗；一座摇摇晃晃的木桥横跨溪流 20 尺上方，连接东西两条隧道。",
+      "readAloudSummary": "溪流通道持续向上转向东，沿溪有石阶，前方大洞窟传来瀑布轰鸣；一座木桥在头顶 20 尺处横跨通道。",
+      "encounter": {
+        "groups": [
+          {
+            "monsterId": "monster-goblin",
+            "count": 1,
+            "notes": "桥上一名哥布林守卫，非常懒散。"
+          }
+        ],
+        "tactics": "若发现 PC，守卫会向区域 7 发信号放水，然后向下方 PC 投掷标枪。若 PC 无光源，可尝试潜行通过。",
+        "spotCheckId": "check-bridge-spot-guard",
+        "stealthCheckId": "check-area5-stealth"
+      },
+      "checkIds": [
+        "check-bridge-spot-guard",
+        "check-area5-stealth",
+        "check-bridge-wall-climb",
+        "check-bridge-collapse-save",
+        "check-flood-dex-save",
+        "check-flood-str-save"
+      ],
+      "hazardIds": [
+        "hazard-bridge-collapse",
+        "hazard-flood"
+      ],
+      "objectIds": [
+        "object-area5-bridge"
+      ],
+      "features": [
+        {
+          "name": "桥",
+          "description": "木桥距溪流 20 尺；AC 5，HP 10；HP 降到 0 时倒塌。桥上的生物需 DC10 敏捷豁免，失败受 2d6 钝击并倒地；成功抓住桥，但仍需爬上去才能安全。"
+        },
+        {
+          "name": "攀爬",
+          "description": "沿洞窟石壁爬上桥需要 DC15 力量（运动）检定；石壁被水流冲刷得很光滑。"
+        }
+      ],
+      "nextSceneId": "scene-area-6-goblin-den"
+    },
+    {
+      "id": "scene-area-6-goblin-den",
+      "chapterId": "chapter-01-goblin-arrows",
+      "parentSceneId": "scene-cragmaw-hideout",
+      "name": "区域6 哥布林生活间",
+      "pages": [
+        11,
+        12
+      ],
+      "type": "location",
+      "areaNumber": 6,
+      "summary": "窝点哥布林的休息处，10 尺高石壁把洞窟分成高低两部分，由陡峭石梯相连；6 只哥布林在此，包括 12 HP 的头目一米克；西达尔被捆在南部，仅剩 1 HP。",
+      "readAloudSummary": "大洞窟被 10 尺高石壁分成高低两部分，石梯相连；空气中有做饭的薄烟和兽皮、哥布林的刺鼻气味。",
+      "encounter": {
+        "groups": [
+          {
+            "monsterId": "monster-goblin",
+            "count": 5,
+            "notes": "普通哥布林在地势低的北部，靠近出入口，照看灶火。"
+          },
+          {
+            "monsterId": "monster-goblin-boss",
+            "count": 1,
+            "notes": "一米克在地势高的南部休息，12 HP。"
+          }
+        ],
+        "tactics": "一米克看到 PC 往上走时，会抓起西达尔拖到 10 尺崖边，威胁停手；他想取代克拉格，提出用区域 8 克拉格的头换西达尔。若 PC 拒绝，他把西达尔推下 10 尺崖（1d6 钝击，HP 降到 0），然后继续战斗。",
+        "negotiation": "一米克想赶走克拉格当一把手；即使 PC 拿来克拉格的头，他也会强迫 PC 再交一大笔赎金。西达尔会警告 PC 不要相信哥布林。"
+      },
+      "npcIds": [
+        "npc-sildar-hallwinter",
+        "npc-yeemik"
+      ],
+      "hazardIds": [
+        "hazard-yeemik-push"
+      ],
+      "rewardIds": [
+        "reward-yeemik-pouch"
+      ],
+      "developments": [
+        "西达尔被捆在洞窟南部，毒打与折磨令他十分虚弱，只剩 1 HP。",
+        "动作快的 PC 可在西达尔被推下后尝试稳定他的伤势。",
+        "获救并治疗后，西达尔加入队伍，希望尽快前往凡度林；他没有武器和盔甲，可使用哥布林的短剑或借一把武器。"
+      ],
+      "nextSceneId": "scene-area-7-twin-pools"
+    },
+    {
+      "id": "scene-area-7-twin-pools",
+      "chapterId": "chapter-01-goblin-arrows",
+      "parentSceneId": "scene-cragmaw-hideout",
+      "name": "区域7 双子池",
+      "pages": [
+        12,
+        13
+      ],
+      "type": "location",
+      "areaNumber": 7,
+      "summary": "半个洞窟被两个大型蓄水池占据；瀑布从东壁高处冲入，溪流从西侧流出；3 只哥布林守卫，石坝可放水淹没主通道。",
+      "readAloudSummary": "两个大蓄水池占据半个洞窟，狭窄瀑布从东壁高处冲下，西侧开口形成溪流；低矮碎石墙围成水池，瀑布轰鸣盖过其他声音。",
+      "encounter": {
+        "groups": [
+          {
+            "monsterId": "monster-goblin",
+            "count": 3
+          }
+        ],
+        "tactics": "若收到区域 5 的警告，守卫进入戒备；瀑布声让区域 8 很难听到这里战斗，反之亦然。战斗中会有 1 只哥布林溜到区域 8 警告克拉格。",
+        "dam": "只要区域 5 发出信号，守卫就会放空蓄水池，使溪流上涨，触发洪水。"
+      },
+      "features": [
+        {
+          "name": "石坝",
+          "description": "哥布林建起的简易石坝作为机关墙；区域 5 发出信号后，守卫放空水池，溪流上涨。"
+        },
+        {
+          "name": "瀑布噪音",
+          "description": "区域 7 与区域 8 之间很难听到对方战斗的声音。"
+        }
+      ],
+      "hazardIds": [
+        "hazard-flood"
+      ],
+      "nextSceneId": "scene-area-8-klargs-cave"
+    },
+    {
+      "id": "scene-area-8-klargs-cave",
+      "chapterId": "chapter-01-goblin-arrows",
+      "parentSceneId": "scene-cragmaw-hideout",
+      "name": "区域8 克拉格的洞窟",
+      "pages": [
+        13,
+        14
+      ],
+      "type": "location",
+      "areaNumber": 8,
+      "summary": "克拉格亲自看守抢来的货物；洞窟南角堆满补给与货品，西侧地面斜向下通入黑暗窄口，北侧宽入口有天然石阶，中央火坑烧得正旺；克拉格、宠物狼裂皮和 2 只哥布林在此。",
+      "readAloudSummary": "麻袋与板条箱堆在南角，西边地面斜向下消失在黑暗中，北边宽入口有石阶，中央火坑煤火正旺。",
+      "encounter": {
+        "groups": [
+          {
+            "monsterId": "monster-bugbear",
+            "count": 1,
+            "notes": "克拉格，窝点头目。"
+          },
+          {
+            "monsterId": "monster-wolf-ripper",
+            "count": 1,
+            "notes": "克拉格的宠物狼裂皮。"
+          },
+          {
+            "monsterId": "monster-goblin",
+            "count": 2
+          }
+        ],
+        "tactics": "若区域 7 警告了克拉格，他与裂皮躲在石笋后，哥布林藏在补给堆后，准备伏击；若未获警告，PC 很可能突袭成功；最容易的方式是从区域 3 爬烟道过来。若狼先被杀，克拉格会试图爬烟道从区域 3 逃走。"
+      },
+      "npcIds": [
+        "npc-klarg"
+      ],
+      "hazardIds": [
+        "hazard-fire-pit"
+      ],
+      "rewardIds": [
+        "reward-klarg-chest",
+        "reward-lionshield-supplies"
+      ],
+      "features": [
+        {
+          "name": "火坑",
+          "description": "踏入火坑受 1 点火焰伤害；跌入火坑受 1d6 火焰伤害；每个生物每轮只受一次同类型伤害。"
+        },
+        {
+          "name": "天然烟道",
+          "description": "西墙开孔形成天然烟道，向下 30 尺通往区域 3；通行规则见区域 3。"
+        },
+        {
+          "name": "补给堆",
+          "description": "躲在成堆麻袋与板条箱后的生物获得半掩蔽；货物上多有蓝色狮子徽记，属于凡度林的狮盾商会；搜索补给堆可找到克拉格的小金库。"
+        }
+      ],
+      "nextSceneId": "scene-aftermath"
+    },
+    {
+      "id": "scene-aftermath",
+      "chapterId": "chapter-01-goblin-arrows",
+      "name": "后续与升级",
+      "pages": [
+        14
+      ],
+      "type": "conclusion",
+      "summary": "下一阶段冒险发生在凡度林；PC 可送货、护送西达尔、追寻背景目标，或前往克拉格莫城堡（PART 3）。探索窝点并击败克拉格及其走狗完成里程碑，每名 PC 获得 275 XP，足够升到 2 级。",
+      "nextSteps": [
+        "若以“在凡度林见”开局，把货物运到巴森小栈领取报酬。",
+        "若救下西达尔，护送他前往凡度林（他支付 50 gp）。",
+        "PC 背景可能驱使他们去凡度林见某些 NPC。",
+        "也可去寻找克拉格莫城堡（PART 3），或直接进入 PART 2。"
+      ],
+      "xpMilestoneId": "xp-275-clear-hideout",
+      "levelUp": 2,
+      "checkIds": [],
+      "nextChapterHint": "chapter-02-phandalin（超出本分卷页范围）",
+      "rewardIds": [
+        "reward-hideout-milestone",
+        "reward-level-up"
+      ]
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc-gundren-rockseeker",
+      "name": "刚铎·寻石者",
+      "nameEn": "Gundren Rockseeker",
+      "aliases": [
+        "刚铎-寻石者",
+        "刚铎寻石者"
+      ],
+      "pages": [
+        4,
+        5,
+        6,
+        8,
+        12
+      ],
+      "role": "矮人；寻石者三兄弟之一；冒险委托者",
+      "status": "被哥布林伏击并俘获，连同地图被送往克拉格莫城堡/格罗尔王；本段无法救出",
+      "summary": "刚铎雇用 PC 把补给送到凡度林，承诺每人 10 gp。他显然为某件事激动，却闭口不提目的，只说兄弟发现了“好东西”。他与西达尔先行出发，随后在三猪小道被克拉格莫哥布林伏击。",
+      "goals": [
+        "重开回浪洞矿坑"
+      ],
+      "relationships": [
+        {
+          "npcId": "npc-sildar-hallwinter",
+          "relation": "同行保镖；在深水城相识"
+        },
+        {
+          "npcId": "npc-tharden-rockseeker",
+          "relation": "兄弟"
+        },
+        {
+          "npcId": "npc-nundro-rockseeker",
+          "relation": "兄弟"
+        }
+      ],
+      "factionIds": [
+        "faction-rockseeker-brothers"
+      ]
+    },
+    {
+      "id": "npc-sildar-hallwinter",
+      "name": "西达尔·荷温特",
+      "nameEn": "Sildar Hallwinter",
+      "aliases": [
+        "西达尔 荷温特",
+        "西达尔—荷温特"
+      ],
+      "pages": [
+        4,
+        5,
+        6,
+        12,
+        13
+      ],
+      "role": "人类战士；深水城狮鹫骑士团荣誉成员；领主联盟特工",
+      "status": "被囚禁于区域 6，仅剩 1 HP；获救并治疗后加入队伍",
+      "summary": "五十岁左右的好心男人，深水城狮鹫骑士团的荣誉成员，也是领主联盟特工。他在深水城遇到刚铎，同意护送其回凡度林；同时想调查失踪的领主联盟同僚伊阿诺·阿布雷克。",
+      "goals": [
+        "调查伊阿诺·阿布雷克的失踪",
+        "协助刚铎重开古老矿洞",
+        "帮助凡度林再次成为繁荣的商贸中心"
+      ],
+      "clues": [
+        {
+          "id": "clue-rockseeker-cave",
+          "text": "寻石者三兄弟（刚铎、塔登、南镀）最近确认了凡戴尔协定中提到的回浪洞位置；此时可告诉 PC“背景”章节前两段。",
+          "page": 12
+        },
+        {
+          "id": "clue-klarg-orders",
+          "text": "克拉格受命伏击刚铎；西达尔听哥布林说刚铎被带去黑蜘蛛那里，但不知道黑蜘蛛是谁或是什么。",
+          "page": 12
+        },
+        {
+          "id": "clue-map-castle",
+          "text": "刚铎原有一张标注回浪洞位置的地图，被俘时抢走；西达尔认为刚铎和地图被送到克拉格莫城堡。他不知道城堡位置，但认为凡度林可能有人知道；被俘哥布林也可能被说服泄露位置。",
+          "page": 12
+        },
+        {
+          "id": "clue-iarno-missing",
+          "text": "西达尔在凡度林的联络人是人类法师伊阿诺·阿布雷克；法师两个月前抵达凡度林建立联盟支部后失踪，西达尔前来调查。",
+          "page": 12
+        }
+      ],
+      "offers": [
+        {
+          "description": "若 PC 护送他到凡度林，他支付 50 gp；目前身上没钱，但到达后一天内能借到。",
+          "rewardId": "reward-sildar-escort"
+        }
+      ],
+      "combat": "没有武器和盔甲；可使用哥布林的短剑或从玩家那里借一把武器。加入队伍后若对战斗胜利起重要作用，也要平分经验。",
+      "relationships": [
+        {
+          "npcId": "npc-gundren-rockseeker",
+          "relation": "在深水城相识，护送他回凡度林"
+        },
+        {
+          "npcId": "npc-iarno-albrek",
+          "relation": "领主联盟同僚；前来调查其失踪"
+        }
+      ],
+      "factionIds": [
+        "faction-lords-alliance",
+        "faction-griffon-knights"
+      ]
+    },
+    {
+      "id": "npc-klarg",
+      "name": "克拉格",
+      "nameEn": "Klarg",
+      "pages": [
+        7,
+        8,
+        13,
+        14
+      ],
+      "role": "熊地精；克拉格莫窝点头目",
+      "status": "区域 8 首领；可被击败或逃跑；一米克可能要求用他的头交换西达尔",
+      "summary": "奉格罗尔王之命在此抢劫守卫薄弱的货队与旅人；几天前接到城堡的新指示：伏击矮人刚铎·寻石者及其同伴。他满脑子白日梦，觉得自己正走在成为伟大战争之王的路上，喜欢用第三人称自称；哥布林们对他的暴政怨忿不已。",
+      "goals": [
+        "成为伟大的战争之王",
+        "守住抢来的财物"
+      ],
+      "tactics": "若区域 7 警告，他与宠物狼裂皮躲在石笋后，哥布林藏在补给堆后伏击；若未获警告，可能被 PC 突袭；若狼先被杀，他会试图爬烟道从区域 3 逃走。",
+      "relationships": [
+        {
+          "npcId": "npc-king-grol",
+          "relation": "上级；听从格罗尔王的命令"
+        },
+        {
+          "npcId": "npc-yeemik",
+          "relation": "副手一米克想取代他"
+        },
+        {
+          "npcId": "npc-black-spider",
+          "relation": "格罗尔王背后的委托人"
+        }
+      ],
+      "monsterId": "monster-bugbear",
+      "factionIds": [
+        "faction-cragmaw-tribe"
+      ]
+    },
+    {
+      "id": "npc-yeemik",
+      "name": "一米克",
+      "nameEn": "Yeemik",
+      "pages": [
+        11,
+        12,
+        13
+      ],
+      "role": "哥布林头目；克拉格莫窝点二首领",
+      "status": "区域 6 首领；可谈判或被击败",
+      "summary": "一米克想赶走克拉格当一把手。看到 PC 往上走时，他会抓起西达尔拖到 10 尺崖边威胁停手，并提出用克拉格的头换西达尔；即使交易达成，他也会强索更多赎金。",
+      "hp": 12,
+      "tactics": "抓西达尔当人质；若 PC 拒绝提议，把西达尔推下 10 尺崖（1d6 钝击，HP 降到 0），然后继续战斗。",
+      "treasure": "小钱袋里装着 3 颗金牙（每颗 1 gp）和 15 银。",
+      "relationships": [
+        {
+          "npcId": "npc-klarg",
+          "relation": "上级；一米克想取代他"
+        },
+        {
+          "npcId": "npc-sildar-hallwinter",
+          "relation": "人质"
+        }
+      ],
+      "monsterId": "monster-goblin-boss",
+      "factionIds": [
+        "faction-cragmaw-tribe"
+      ]
+    },
+    {
+      "id": "npc-elmar-barthen",
+      "name": "艾尔玛·巴森",
+      "nameEn": "Elmar Barthen",
+      "aliases": [
+        "艾尔玛-巴森"
+      ],
+      "pages": [
+        7
+      ],
+      "role": "巴森小栈老板",
+      "status": "未出场；若队伍跳过小径直接去凡度林，他会来找 PC",
+      "summary": "若 PC 直接前往凡度林，艾尔玛找到他们，告知刚铎·寻石者未能按时抵达，讲述近期哥布林强盗的滋扰，建议休息后回遇袭处调查。"
+    },
+    {
+      "id": "npc-linene-graywind",
+      "name": "利涅·灰风",
+      "nameEn": "Linene Graywind",
+      "aliases": [
+        "利涅涅-灰风"
+      ],
+      "pages": [
+        7
+      ],
+      "role": "狮盾商会成员",
+      "status": "未出场；可提供更多哥布林袭击的信息",
+      "summary": "若 PC 想了解更多哥布林袭击的事，可以去找狮盾商会的利涅·灰风。",
+      "factionIds": [
+        "faction-lionshield-coster"
+      ]
+    },
+    {
+      "id": "npc-king-grol",
+      "name": "格罗尔王",
+      "nameEn": "King Grol",
+      "aliases": [
+        "金格尔（概述页译名）"
+      ],
+      "pages": [
+        4,
+        8
+      ],
+      "role": "克拉格莫哥布林部落首领；驻克拉格莫城堡",
+      "status": "本段未出场；刚铎与地图被送到他那里",
+      "summary": "格罗尔王前几日命令克拉格完成黑蜘蛛的委托：留心刚铎·寻石者，活捉他，连所有物品一起带回城堡。刚铎和地图已按指示送到他那里。",
+      "relationships": [
+        {
+          "npcId": "npc-klarg",
+          "relation": "下属"
+        },
+        {
+          "npcId": "npc-black-spider",
+          "relation": "委托人"
+        }
+      ],
+      "factionIds": [
+        "faction-cragmaw-tribe"
+      ]
+    },
+    {
+      "id": "npc-black-spider",
+      "name": "黑蜘蛛",
+      "nameEn": "The Black Spider",
+      "aliases": [
+        "聂兹那",
+        "Nezznar"
+      ],
+      "pages": [
+        4,
+        8
+      ],
+      "role": "幕后反派；控制当地强盗帮派与哥布林部落",
+      "status": "本段未正面出场；通过格罗尔王与克拉格间接行动",
+      "summary": "神秘人物，控制当地强盗与哥布林部落，派间谍跟踪寻石者兄弟，企图独吞回浪洞矿坑。概述揭示其真名是聂兹那，一名卓尔。",
+      "goals": [
+        "独占回浪洞矿坑"
+      ],
+      "relationships": [
+        {
+          "npcId": "npc-king-grol",
+          "relation": "通过委托控制克拉格莫部落"
+        },
+        {
+          "npcId": "npc-klarg",
+          "relation": "间接下达活捉刚铎的命令"
+        }
+      ],
+      "factionIds": [
+        "faction-black-spider-network"
+      ]
+    },
+    {
+      "id": "npc-iarno-albrek",
+      "name": "伊阿诺·阿布雷克",
+      "nameEn": "Iarno Albrek",
+      "aliases": [
+        "伊阿诺-阿布雷克"
+      ],
+      "pages": [
+        12
+      ],
+      "role": "人类法师；领主联盟成员；西达尔的同僚",
+      "status": "两个月前抵达凡度林建立联盟支部后失踪；本段未出场",
+      "summary": "西达尔在凡度林的联络人。法师两个月前抵达凡度林并受命建立领主联盟支部，随后失去联系；西达尔前来调查。",
+      "relationships": [
+        {
+          "npcId": "npc-sildar-hallwinter",
+          "relation": "领主联盟同僚"
+        }
+      ],
+      "factionIds": [
+        "faction-lords-alliance"
+      ]
+    },
+    {
+      "id": "npc-tharden-rockseeker",
+      "name": "塔登·寻石者",
+      "nameEn": "Tharden Rockseeker",
+      "pages": [
+        12
+      ],
+      "role": "矮人；寻石者三兄弟之一",
+      "status": "本段未出场",
+      "summary": "与刚铎、南镀一起确认了回浪洞的位置。",
+      "relationships": [
+        {
+          "npcId": "npc-gundren-rockseeker",
+          "relation": "兄弟"
+        },
+        {
+          "npcId": "npc-nundro-rockseeker",
+          "relation": "兄弟"
+        }
+      ],
+      "factionIds": [
+        "faction-rockseeker-brothers"
+      ]
+    },
+    {
+      "id": "npc-nundro-rockseeker",
+      "name": "南镀·寻石者",
+      "nameEn": "Nundro Rockseeker",
+      "pages": [
+        12
+      ],
+      "role": "矮人；寻石者三兄弟之一",
+      "status": "本段未出场",
+      "summary": "与刚铎、塔登一起确认了回浪洞的位置。",
+      "relationships": [
+        {
+          "npcId": "npc-gundren-rockseeker",
+          "relation": "兄弟"
+        },
+        {
+          "npcId": "npc-tharden-rockseeker",
+          "relation": "兄弟"
+        }
+      ],
+      "factionIds": [
+        "faction-rockseeker-brothers"
+      ]
+    }
+  ],
+  "factions": [
+    {
+      "id": "faction-cragmaw-tribe",
+      "name": "克拉格莫部落",
+      "nameEn": "Cragmaw tribe",
+      "pages": [
+        7,
+        8
+      ],
+      "summary": "三猪小道一带的哥布林部落，成员把牙磨得锋利；首领格罗尔王驻克拉格莫城堡，窝点头目是熊地精克拉格。",
+      "leaderNpcId": "npc-king-grol",
+      "base": "克拉格莫城堡（Cragmaw Castle）"
+    },
+    {
+      "id": "faction-lionshield-coster",
+      "name": "狮盾商会",
+      "nameEn": "Lionshield Coster",
+      "pages": [
+        7,
+        14
+      ],
+      "summary": "凡度林的商行，货物上有蓝色狮子徽记；利涅·灰风是其成员。PC 归还被抢补给可获得 50 gp 与商会的友谊。",
+      "members": [
+        "npc-linene-graywind"
+      ]
+    },
+    {
+      "id": "faction-lords-alliance",
+      "name": "领主联盟",
+      "nameEn": "Lords' Alliance",
+      "pages": [
+        12
+      ],
+      "summary": "由一群政治家联合成立，以维护共同利益和安全为目的；成员负责城市安全并提前解决威胁。西达尔与伊阿诺都是其成员。",
+      "members": [
+        "npc-sildar-hallwinter",
+        "npc-iarno-albrek"
+      ]
+    },
+    {
+      "id": "faction-griffon-knights",
+      "name": "狮鹫骑士团",
+      "nameEn": "Griffon Knights",
+      "pages": [
+        12
+      ],
+      "summary": "深水城的骑士团；西达尔·荷温特是其荣誉成员。",
+      "members": [
+        "npc-sildar-hallwinter"
+      ]
+    },
+    {
+      "id": "faction-rockseeker-brothers",
+      "name": "寻石者兄弟",
+      "nameEn": "Rockseeker brothers",
+      "pages": [
+        4,
+        12
+      ],
+      "summary": "刚铎、塔登、南镀三兄弟；他们找到了回浪洞入口，准备重开矿坑。",
+      "members": [
+        "npc-gundren-rockseeker",
+        "npc-tharden-rockseeker",
+        "npc-nundro-rockseeker"
+      ]
+    },
+    {
+      "id": "faction-redbrands",
+      "name": "红烙印",
+      "nameEn": "Redbrands",
+      "pages": [
+        4
+      ],
+      "summary": "凡度林的黑帮，由“水晶之杖”阿尔布克领导，听命于黑蜘蛛。属于 PART 2 内容，本文件只在概述中记录。",
+      "scope": "overview"
+    },
+    {
+      "id": "faction-black-spider-network",
+      "name": "黑蜘蛛的势力",
+      "nameEn": "The Black Spider's network",
+      "pages": [
+        4,
+        8
+      ],
+      "summary": "黑蜘蛛控制的当地强盗帮派与哥布林部落；通过格罗尔王与克拉格行动。",
+      "leaderNpcId": "npc-black-spider"
+    }
+  ],
+  "monsters": [
+    {
+      "id": "monster-goblin",
+      "name": "哥布林",
+      "nameEn": "Goblin",
+      "type": "类人生物",
+      "pages": [
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "appearances": [
+        {
+          "sceneId": "scene-goblin-ambush",
+          "count": 4,
+          "notes": "道路两侧各 2 只；2 只近战、2 只远程。"
+        },
+        {
+          "sceneId": "scene-area-2-guardpost",
+          "count": 2,
+          "notes": "荆棘丛后的暗哨。"
+        },
+        {
+          "sceneId": "scene-area-5-bridge",
+          "count": 1,
+          "notes": "天桥守卫。"
+        },
+        {
+          "sceneId": "scene-area-6-goblin-den",
+          "count": 5,
+          "notes": "普通哥布林；另有 1 只 12 HP 的头目。"
+        },
+        {
+          "sceneId": "scene-area-7-twin-pools",
+          "count": 3,
+          "notes": "蓄水池守卫。"
+        },
+        {
+          "sceneId": "scene-area-8-klargs-cave",
+          "count": 2,
+          "notes": "克拉格的部下。"
+        }
+      ],
+      "sourceFacts": [
+        "隐匿技能调整 +6（第 6 页）。",
+        "使用短剑、弓和标枪（第 6、10、12 页）。",
+        "洞内总数不到 20 只（第 8 页）。",
+        "部落成员把牙磨尖，看起来凶残（第 7 页）。"
+      ],
+      "statBlockStatus": "本 PDF 第 1–15 页未包含哥布林数据；目录标注的附录 B 不在该 PDF 中。",
+      "notes": "本条目只记录原文明确给出的事实与数量，不补写 AC/HP 等未出现的数值。"
+    },
+    {
+      "id": "monster-goblin-boss",
+      "name": "哥布林头目（一米克）",
+      "nameEn": "Goblin boss (Yeemik)",
+      "type": "类人生物",
+      "variantOf": "monster-goblin",
+      "pages": [
+        11,
+        12
+      ],
+      "appearances": [
+        {
+          "sceneId": "scene-area-6-goblin-den",
+          "count": 1,
+          "notes": "一米克，窝点二首领；地位高于普通哥布林。"
+        }
+      ],
+      "sourceFacts": [
+        "12 HP（第 11 页）。",
+        "想取代克拉格；抓西达尔当人质并强索赎金（第 12 页）。"
+      ],
+      "statBlockStatus": "本 PDF 第 1–15 页未包含完整数据；只明确给出 12 HP。",
+      "notes": "可作为哥布林变体使用；其他数值原文未给出。"
+    },
+    {
+      "id": "monster-wolf",
+      "name": "狼",
+      "nameEn": "Wolf",
+      "type": "野兽",
+      "pages": [
+        9,
+        10
+      ],
+      "appearances": [
+        {
+          "sceneId": "scene-area-3-wolf-den",
+          "count": 3,
+          "notes": "其中 2 只被锁链拴住；够不到站在石阶上的目标。"
+        }
+      ],
+      "sourceFacts": [
+        "会攻击任何非哥布林的生物（第 9 页）。",
+        "每轮只要有生物在视线内，可做 DC15 力量检定挣脱锁链（第 10 页）。",
+        "哥布林或熊地精可用动作松开狼（第 10 页）。",
+        "可用 DC15 感知（驯养动物）安抚；给食则 DC 10（第 9 页）。"
+      ],
+      "statBlockStatus": "本 PDF 第 1–15 页未包含狼的数据。",
+      "notes": "本条目只记录原文明确给出的事实，不补写 AC/HP 等未出现的数值。"
+    },
+    {
+      "id": "monster-wolf-ripper",
+      "name": "裂皮",
+      "nameEn": "Ripper",
+      "type": "野兽（狼）",
+      "variantOf": "monster-wolf",
+      "pages": [
+        13,
+        14
+      ],
+      "appearances": [
+        {
+          "sceneId": "scene-area-8-klargs-cave",
+          "count": 1,
+          "notes": "克拉格的宠物狼。"
+        }
+      ],
+      "sourceFacts": [
+        "克拉格的宠物狼，与克拉格一起躲在石笋后伏击（第 13 页）。",
+        "若先被杀，克拉格会试图爬烟道逃跑（第 14 页）。"
+      ],
+      "statBlockStatus": "本 PDF 第 1–15 页未包含狼的数据。",
+      "notes": "作为狼的具名个体，不另造数值。"
+    },
+    {
+      "id": "monster-bugbear",
+      "name": "熊地精（克拉格）",
+      "nameEn": "Bugbear (Klarg)",
+      "type": "类人生物",
+      "pages": [
+        7,
+        8,
+        13,
+        14
+      ],
+      "appearances": [
+        {
+          "sceneId": "scene-area-8-klargs-cave",
+          "count": 1,
+          "notes": "克拉格，窝点头目。"
+        }
+      ],
+      "sourceFacts": [
+        "克拉格是熊地精，窝点头目（第 7 页）。",
+        "听从格罗尔王，受黑蜘蛛委托活捉刚铎（第 8 页）。",
+        "满脑子战争之王的白日梦，用第三人称自称；哥布林对他的暴政不满（第 13 页）。",
+        "若狼先被杀，会爬烟道逃跑（第 14 页）。"
+      ],
+      "statBlockStatus": "本 PDF 第 1–15 页未包含熊地精数据。",
+      "notes": "本条目只记录原文明确给出的事实，不补写 AC/HP 等未出现的数值。"
+    }
+  ],
+  "checks": [
+    {
+      "id": "check-goblin-ambush-surprise",
+      "sceneId": "scene-goblin-ambush",
+      "page": 6,
+      "kind": "contest",
+      "ability": "敏捷",
+      "skill": "隐匿",
+      "dc": null,
+      "formula": "哥布林 d20 + 6 对抗每名 PC 的被动感知",
+      "success": "哥布林隐匿结果高于 PC 被动感知时，该 PC 被突袭，战斗第一轮无法行动。",
+      "failure": "PC 未被突袭。",
+      "sourceLabel": "隐匿技能调整 +6 / 被动洞察",
+      "notes": "原文称“被动感知（洞察）”；本文件按 5e 标准技能名写作“察觉/感知”。",
+      "actor": "哥布林"
+    },
+    {
+      "id": "check-trail-survival",
+      "sceneId": "scene-goblin-trail",
+      "page": 7,
+      "kind": "ability-check",
+      "ability": "感知",
+      "skill": "野外生存",
+      "dc": 10,
+      "success": "发现小径最近约有十二只哥布林来去，并从伏击点拖走两个人形生物。",
+      "failure": "未发现这些痕迹，由 DM 决定后果。"
+    },
+    {
+      "id": "check-snare-passive",
+      "sceneId": "scene-goblin-trail",
+      "page": 7,
+      "kind": "passive",
+      "ability": "感知",
+      "skill": "察觉",
+      "dc": 12,
+      "formula": "最前面探路 PC 的被动感知 ≥ 12 时自动发现套圈陷阱",
+      "success": "自动发现套圈陷阱。",
+      "failure": "需要做 DC12 感知（察觉）检定。"
+    },
+    {
+      "id": "check-snare-perception",
+      "sceneId": "scene-goblin-trail",
+      "page": 7,
+      "kind": "ability-check",
+      "ability": "感知",
+      "skill": "察觉",
+      "dc": 12,
+      "success": "发现隐藏的套圈陷阱。",
+      "failure": "未发现；需要进行 DC10 敏捷豁免避免被套住。"
+    },
+    {
+      "id": "check-snare-dex-save",
+      "sceneId": "scene-goblin-trail",
+      "page": 7,
+      "kind": "saving-throw",
+      "ability": "敏捷",
+      "dc": 10,
+      "success": "避开套索。",
+      "failure": "PC 被套索套住并倒吊在 10 尺高的树上，陷入束缚状态直到套索被割断；割断后坠落受 1d6 钝击伤害，除非被同伴小心放下。",
+      "hazardId": "hazard-snare"
+    },
+    {
+      "id": "check-pit-passive",
+      "sceneId": "scene-goblin-trail",
+      "page": 7,
+      "kind": "passive",
+      "ability": "感知",
+      "skill": "察觉",
+      "dc": 15,
+      "formula": "打头 PC 的被动感知 ≥ 15 时自动发现陷坑",
+      "success": "自动发现陷坑。",
+      "failure": "需要做 DC15 感知（察觉）检定。"
+    },
+    {
+      "id": "check-pit-perception",
+      "sceneId": "scene-goblin-trail",
+      "page": 7,
+      "kind": "ability-check",
+      "ability": "感知",
+      "skill": "察觉",
+      "dc": 15,
+      "success": "发现被哥布林伪装过的陷坑。",
+      "failure": "未发现；需要进行 DC10 敏捷豁免避开。"
+    },
+    {
+      "id": "check-pit-dex-save",
+      "sceneId": "scene-goblin-trail",
+      "page": 7,
+      "kind": "saving-throw",
+      "ability": "敏捷",
+      "dc": 10,
+      "success": "避开陷坑。",
+      "failure": "掉下 10 尺深陷坑，受 1d6 钝击伤害；四边不陡，可轻松爬出。",
+      "hazardId": "hazard-pit"
+    },
+    {
+      "id": "check-cave-listen",
+      "sceneId": "scene-cragmaw-hideout",
+      "page": 8,
+      "kind": "ability-check",
+      "ability": "感知",
+      "skill": "察觉",
+      "dc": 15,
+      "success": "听到附近的活动。",
+      "failure": "未听到，由 DM 决定后果。"
+    },
+    {
+      "id": "check-area2-stealth",
+      "sceneId": "scene-area-2-guardpost",
+      "page": 9,
+      "kind": "contest",
+      "ability": "敏捷",
+      "skill": "潜行",
+      "dc": null,
+      "formula": "每个移动的 PC 做敏捷（潜行）检定，对抗哥布林的被动感知",
+      "success": "避免被哥布林突袭；若 PC 小心移动或有人在前探路，还可能突袭哥布林。",
+      "failure": "被哥布林注意到，双方都不会被突袭（若在区域 1 已被发现则哥布林用弓箭突袭）。"
+    },
+    {
+      "id": "check-wolf-animal-handling",
+      "sceneId": "scene-area-3-wolf-den",
+      "page": 9,
+      "kind": "ability-check",
+      "ability": "感知",
+      "skill": "驯养动物",
+      "dc": 15,
+      "success": "三只狼放 PC 穿过斗室。",
+      "failure": "狼仍敌对，由 DM 决定后果。",
+      "notes": "若给狼喂食，DC 降为 10。"
+    },
+    {
+      "id": "check-chimney-climb",
+      "sceneId": "scene-area-3-wolf-den",
+      "page": 9,
+      "kind": "ability-check",
+      "ability": "力量",
+      "skill": "运动",
+      "dc": 10,
+      "success": "以半速沿烟道上下。",
+      "failure": "检定结果 6–9：原地不动；5 及以下：坠落，每 10 尺受 1d6 钝击伤害，直到掉到烟道底部。",
+      "hazardId": "hazard-chimney-fall"
+    },
+    {
+      "id": "check-wolf-break-chain",
+      "sceneId": "scene-area-3-wolf-den",
+      "page": 10,
+      "kind": "ability-check",
+      "ability": "力量",
+      "skill": null,
+      "dc": 15,
+      "actor": "狼",
+      "success": "把铁棍拽弯，锁链从铁棍上脱开。",
+      "failure": "锁链未脱开。",
+      "notes": "每轮只要有生物在狼的视线内，狼就能尝试一次。"
+    },
+    {
+      "id": "check-bridge-spot-guard",
+      "sceneId": "scene-area-4-steep-passage",
+      "relatedSceneIds": [
+        "scene-area-5-bridge"
+      ],
+      "page": 10,
+      "kind": "contest",
+      "ability": "感知",
+      "skill": "察觉",
+      "dc": null,
+      "formula": "PC 感知（察觉）对抗哥布林敏捷（潜行）",
+      "success": "发现守卫桥的哥布林。",
+      "failure": "未发现守卫。",
+      "notes": "区域 5 重复同样的察觉对抗。若哥布林没有潜行或举着火把靠近桥，它们会注意到 PC；若其敏捷（潜行）高于 PC 被动感知，则行动不被发觉。"
+    },
+    {
+      "id": "check-platform-collapse",
+      "sceneId": "scene-area-4-steep-passage",
+      "page": 10,
+      "kind": "saving-throw",
+      "ability": "敏捷",
+      "dc": 10,
+      "trigger": "平台负重超过 100 磅，整块松脱并一路向东滚落",
+      "success": "伤害减半。",
+      "failure": "受 2d6 钝击伤害并倒地。",
+      "hazardId": "hazard-collapsing-platform"
+    },
+    {
+      "id": "check-bridge-wall-climb",
+      "sceneId": "scene-area-5-bridge",
+      "page": 11,
+      "kind": "ability-check",
+      "ability": "力量",
+      "skill": "运动",
+      "dc": 15,
+      "success": "沿洞窟石壁爬上桥。",
+      "failure": "未能爬上，由 DM 决定后果。",
+      "notes": "20 尺高石壁凹凸不平，但被水流冲刷得很光滑。"
+    },
+    {
+      "id": "check-bridge-collapse-save",
+      "sceneId": "scene-area-5-bridge",
+      "page": 11,
+      "kind": "saving-throw",
+      "ability": "敏捷",
+      "dc": 10,
+      "trigger": "木桥 HP 降到 0 时倒塌",
+      "success": "抓住桥，但必须爬上去才能安全。",
+      "failure": "坠落并受 2d6 钝击伤害，倒地。",
+      "hazardId": "hazard-bridge-collapse"
+    },
+    {
+      "id": "check-flood-dex-save",
+      "sceneId": "scene-area-5-bridge",
+      "page": 11,
+      "kind": "saving-throw",
+      "ability": "敏捷",
+      "dc": 10,
+      "trigger": "洪水从区域 7 冲下时，位于区域 4 废弃通道或通往区域 3 石阶上的生物",
+      "success": "跳出洪水奔泻路线。",
+      "failure": "可再做一次 DC15 力量豁免尝试抓住身边物体；再次失败则被冲倒并冲到区域 1，沿途受 1d6 钝击伤害。",
+      "hazardId": "hazard-flood"
+    },
+    {
+      "id": "check-flood-str-save",
+      "sceneId": "scene-area-5-bridge",
+      "page": 11,
+      "kind": "saving-throw",
+      "ability": "力量",
+      "dc": 15,
+      "trigger": "第一次 DC10 敏捷豁免失败后",
+      "success": "抓住身边任何东西，避免被洪水冲走。",
+      "failure": "被冲倒并冲到区域 1，沿途受 1d6 钝击伤害。",
+      "hazardId": "hazard-flood"
+    },
+    {
+      "id": "check-area5-stealth",
+      "sceneId": "scene-area-5-bridge",
+      "page": 11,
+      "kind": "contest",
+      "ability": "敏捷",
+      "skill": "潜行",
+      "dc": null,
+      "formula": "若 PC 没有光源，每名 PC 可做敏捷（潜行）对抗哥布林被动感知，尝试不被注意到地缓慢通过",
+      "success": "未被守卫发现。",
+      "failure": "被守卫发现，守卫发信号放水并投掷标枪。"
+    }
+  ],
+  "rewards": [
+    {
+      "id": "reward-hook-payment",
+      "sceneId": null,
+      "page": 4,
+      "type": "currency",
+      "description": "刚铎承诺把补给送到凡度林后，每名 PC 获得 10 gp。",
+      "amount": 10,
+      "currency": "gp",
+      "per": "每名 PC",
+      "condition": "将补给平安送到凡度林交易站",
+      "grantedByNpcId": "npc-gundren-rockseeker"
+    },
+    {
+      "id": "reward-ambush-milestone",
+      "sceneId": "scene-goblin-trail",
+      "page": 7,
+      "type": "xp",
+      "description": "击败伏击的哥布林并发现克拉格莫窝点，完成第一个里程碑。",
+      "amount": 75,
+      "per": "每名 PC",
+      "xpMilestoneId": "xp-75-reach-hideout"
+    },
+    {
+      "id": "reward-yeemik-pouch",
+      "sceneId": "scene-area-6-goblin-den",
+      "page": 13,
+      "type": "loot",
+      "description": "一米克的小钱袋：3 颗金牙（每颗 1 gp）和 15 银。",
+      "itemIds": [
+        "item-gold-teeth"
+      ],
+      "currency": [
+        {
+          "amount": 15,
+          "unit": "sp"
+        }
+      ],
+      "sourceNote": "钱袋内容写在区域 6 之后的“宝藏”节（第 13 页）；属于区域 6 的一米克。"
+    },
+    {
+      "id": "reward-sildar-escort",
+      "sceneId": "scene-area-6-goblin-den",
+      "page": 12,
+      "type": "currency",
+      "description": "若 PC 护送西达尔到凡度林，他支付 50 gp；他现在身上没钱，但到达后一天内能借到。",
+      "amount": 50,
+      "currency": "gp",
+      "condition": "护送西达尔到凡度林",
+      "grantedByNpcId": "npc-sildar-hallwinter"
+    },
+    {
+      "id": "reward-lionshield-supplies",
+      "sceneId": "scene-area-8-klargs-cave",
+      "page": 14,
+      "type": "currency-and-reputation",
+      "description": "把被抢的补给还给凡度林的狮盾商会，可获得 50 gp 奖励与狮盾商会的友谊。",
+      "amount": 50,
+      "currency": "gp",
+      "condition": "用货车把补给运回凡度林并交还狮盾商会",
+      "factionId": "faction-lionshield-coster"
+    },
+    {
+      "id": "reward-klarg-chest",
+      "sceneId": "scene-area-8-klargs-cave",
+      "page": 14,
+      "type": "loot",
+      "description": "克拉格藏在补给堆中的小金库：600 铜币、110 银币、2 瓶治疗药水、1 只镶嵌黄金眼睛的翡翠青蛙。",
+      "itemIds": [
+        "item-klarg-chest",
+        "item-healing-potion",
+        "item-jade-frog"
+      ],
+      "currency": [
+        {
+          "amount": 600,
+          "unit": "cp"
+        },
+        {
+          "amount": 110,
+          "unit": "sp"
+        }
+      ],
+      "condition": "搜索补给堆找到小金库"
+    },
+    {
+      "id": "reward-hideout-milestone",
+      "sceneId": "scene-aftermath",
+      "page": 14,
+      "type": "xp",
+      "description": "探索克拉格莫窝点并打倒克拉格及其走狗，完成冒险里程碑。",
+      "amount": 275,
+      "per": "每名 PC",
+      "xpMilestoneId": "xp-275-clear-hideout"
+    },
+    {
+      "id": "reward-level-up",
+      "sceneId": "scene-aftermath",
+      "page": 14,
+      "type": "level-up",
+      "description": "275 XP 应足够 PC 升到 2 级；在冒险继续前帮助玩家升级。",
+      "level": 2,
+      "condition": "获得 275 XP 里程碑"
+    }
+  ],
+  "items": [
+    {
+      "id": "item-wagon-cargo",
+      "name": "马车补给",
+      "pages": [
+        5
+      ],
+      "type": "goods",
+      "description": "面粉袋、几桶咸肉、两桶啤酒、铲子、长矛、铁棍、5 盏有油的牛眼灯等。",
+      "valueGp": 100,
+      "questItem": true,
+      "notes": "PC 受托把补给送到凡度林；总价值约 100 gp。"
+    },
+    {
+      "id": "item-gundren-map",
+      "name": "刚铎的地图",
+      "pages": [
+        6,
+        12
+      ],
+      "type": "quest-item",
+      "description": "标注了回浪洞位置的地图；刚铎被俘时被哥布林抢走，据信已送往克拉格莫城堡。",
+      "status": "被夺走，不在 PC 手中",
+      "questItem": true
+    },
+    {
+      "id": "item-empty-map-case",
+      "name": "空的皮地图匣",
+      "pages": [
+        6
+      ],
+      "type": "clue",
+      "description": "在遇袭处的马匹旁发现的空皮地图匣；说明地图已被取走。",
+      "status": "在现场可发现"
+    },
+    {
+      "id": "item-healing-potion",
+      "name": "治疗药水",
+      "nameEn": "Potion of Healing",
+      "pages": [
+        14
+      ],
+      "type": "potion",
+      "quantity": 2,
+      "effect": "喝下后回复 2d4+2 点 HP。",
+      "location": "克拉格的小金库"
+    },
+    {
+      "id": "item-jade-frog",
+      "name": "翡翠青蛙",
+      "pages": [
+        14
+      ],
+      "type": "treasure",
+      "description": "镶嵌黄金眼睛的翡翠青蛙，很小，能正好塞进衣服口袋。",
+      "location": "克拉格的小金库",
+      "valueGp": null
+    },
+    {
+      "id": "item-gold-teeth",
+      "name": "金牙",
+      "pages": [
+        13
+      ],
+      "type": "treasure",
+      "quantity": 3,
+      "valueGpEach": 1,
+      "description": "一米克小钱袋里的 3 颗金牙，每颗值 1 gp。",
+      "location": "一米克的小钱袋"
+    },
+    {
+      "id": "item-sildar-equipment",
+      "name": "西达尔的装备",
+      "pages": [
+        13
+      ],
+      "type": "lost-item",
+      "description": "西达尔的装备已经和刚铎一起送到克拉格莫城堡；本段无法取回。",
+      "status": "丢失，送往克拉格莫城堡"
+    },
+    {
+      "id": "item-goblin-short-sword",
+      "name": "哥布林短剑",
+      "pages": [
+        12
+      ],
+      "type": "weapon",
+      "description": "西达尔没有武器和盔甲，可使用哥布林的短剑或从玩家那里借一把武器。",
+      "status": "可从哥布林处取得"
+    },
+    {
+      "id": "item-klarg-chest",
+      "name": "克拉格的小金库",
+      "pages": [
+        14
+      ],
+      "type": "container",
+      "description": "藏在补给堆中的宝箱，内有 600 铜币、110 银币、2 瓶治疗药水与翡翠青蛙。",
+      "location": "区域 8 补给堆",
+      "rewardId": "reward-klarg-chest"
+    }
+  ],
+  "hazards": [
+    {
+      "id": "hazard-snare",
+      "name": "套圈陷阱",
+      "sceneId": "scene-goblin-trail",
+      "page": 7,
+      "description": "隐藏的套索会把失败的 PC 倒吊在 10 尺高的树上，陷入束缚状态直到套索被割断；割断后坠落受 1d6 钝击伤害，除非被同伴小心放下。",
+      "damage": "1d6 钝击",
+      "condition": "束缚"
+    },
+    {
+      "id": "hazard-pit",
+      "name": "陷坑",
+      "sceneId": "scene-goblin-trail",
+      "page": 7,
+      "description": "6 尺宽、10 尺深、被哥布林伪装过的陷坑；失败者掉下并受 1d6 钝击伤害。四边不陡，可轻松爬出。",
+      "damage": "1d6 钝击",
+      "depthFt": 10
+    },
+    {
+      "id": "hazard-chimney-fall",
+      "name": "烟道坠落",
+      "sceneId": "scene-area-3-wolf-den",
+      "page": 9,
+      "description": "沿烟道攀爬失败（检定 5 及以下）会坠落，每 10 尺受 1d6 钝击伤害，直到掉到烟道底部。",
+      "damage": "每 10 尺 1d6 钝击"
+    },
+    {
+      "id": "hazard-collapsing-platform",
+      "name": "脆弱平台",
+      "sceneId": "scene-area-4-steep-passage",
+      "page": 10,
+      "description": "两峭壁之间的平台负重超过 100 磅会松脱并一路向东滚落；平台上的生物 DC10 敏捷豁免，失败受 2d6 钝击并倒地，成功伤害减半。",
+      "damage": "2d6 钝击",
+      "condition": "倒地"
+    },
+    {
+      "id": "hazard-bridge-collapse",
+      "name": "木桥倒塌",
+      "sceneId": "scene-area-5-bridge",
+      "page": 11,
+      "description": "木桥 HP 降到 0 时倒塌；桥上的生物 DC10 敏捷豁免，失败坠落受 2d6 钝击并倒地，成功抓住桥但必须爬上去才能安全。",
+      "damage": "2d6 钝击",
+      "condition": "倒地"
+    },
+    {
+      "id": "hazard-flood",
+      "name": "洪水",
+      "sceneId": "scene-area-5-bridge",
+      "page": 11,
+      "description": "区域 7 放水后，洪水从区域 7 冲到区域 1，威胁所有隧道中的生物（区域 5 天桥与成功攀上洞壁者除外）。区域 4 废弃通道与通往区域 3 石阶上的生物需 DC10 敏捷豁免；失败再做 DC15 力量豁免；再次失败被冲到区域 1，沿途受 1d6 钝击伤害。",
+      "damage": "1d6 钝击",
+      "savingThrows": [
+        "DC10 敏捷",
+        "DC15 力量"
+      ]
+    },
+    {
+      "id": "hazard-fire-pit",
+      "name": "火坑",
+      "sceneId": "scene-area-8-klargs-cave",
+      "page": 13,
+      "description": "踏入火坑受 1 点火焰伤害；跌入火坑受 1d6 火焰伤害；每个生物每轮只受一次同类型伤害。",
+      "damage": "1 点火焰 / 1d6 火焰"
+    },
+    {
+      "id": "hazard-yeemik-push",
+      "name": "一米克推落西达尔",
+      "sceneId": "scene-area-6-goblin-den",
+      "page": 12,
+      "description": "若 PC 拒绝一米克的提议，他把西达尔推下 10 尺崖；西达尔受 1d6 钝击伤害，HP 降到 0。动作快的 PC 可尝试稳定他的伤势。",
+      "damage": "1d6 钝击",
+      "target": "npc-sildar-hallwinter"
+    }
+  ],
+  "objects": [
+    {
+      "id": "object-area5-bridge",
+      "name": "区域5 木桥",
+      "sceneId": "scene-area-5-bridge",
+      "page": 11,
+      "type": "destructible-object",
+      "ac": 5,
+      "hp": 10,
+      "description": "横跨溪流 20 尺上方的简陋木桥，连接东西两条隧道；HP 降到 0 时倒塌。",
+      "collapseHazardId": "hazard-bridge-collapse"
+    }
+  ],
+  "xpMilestones": [
+    {
+      "id": "xp-75-reach-hideout",
+      "page": 7,
+      "amount": 75,
+      "per": "每名 PC",
+      "condition": "击败伏击的哥布林并发现克拉格莫窝点",
+      "sceneId": "scene-goblin-trail",
+      "rewardId": "reward-ambush-milestone"
+    },
+    {
+      "id": "xp-275-clear-hideout",
+      "page": 14,
+      "amount": 275,
+      "per": "每名 PC",
+      "condition": "探索克拉格莫窝点并打倒克拉格及其走狗",
+      "sceneId": "scene-aftermath",
+      "rewardId": "reward-hideout-milestone",
+      "levelUp": 2
+    }
+  ],
+  "maps": [
+    {
+      "id": "map-sword-coast-region",
+      "name": "剑湾区域地图",
+      "page": 3,
+      "type": "region-map",
+      "scale": "1 hex = 5 miles",
+      "labels": [
+        {
+          "labelEn": "Neverwinter",
+          "nameZh": "无冬城",
+          "type": "city"
+        },
+        {
+          "labelEn": "Thundertree",
+          "nameZh": "雷霆树镇",
+          "type": "ruins"
+        },
+        {
+          "labelEn": "Conyberry",
+          "type": "ruins"
+        },
+        {
+          "labelEn": "Old Owl Well",
+          "nameZh": "古枭井",
+          "type": "point-of-interest"
+        },
+        {
+          "labelEn": "Phandalin",
+          "nameZh": "凡度林",
+          "type": "town"
+        },
+        {
+          "labelEn": "Leilon",
+          "type": "town"
+        },
+        {
+          "labelEn": "Triboar Trail",
+          "nameZh": "三猪小道",
+          "type": "trail"
+        },
+        {
+          "labelEn": "The High Road",
+          "nameZh": "大道",
+          "type": "road"
+        },
+        {
+          "labelEn": "Neverwinter Wood",
+          "nameZh": "无冬森林",
+          "type": "forest"
+        },
+        {
+          "labelEn": "Mount Hotenow",
+          "type": "peak"
+        },
+        {
+          "labelEn": "Starmetal Hills",
+          "type": "hills"
+        },
+        {
+          "labelEn": "Ice Spire Peak",
+          "type": "peak"
+        },
+        {
+          "labelEn": "Sword Mountains",
+          "type": "mountains"
+        },
+        {
+          "labelEn": "Kryptgarden Forest",
+          "type": "forest"
+        },
+        {
+          "labelEn": "Mere of Dead Men",
+          "type": "marsh"
+        }
+      ],
+      "notes": "地图原文标签为英文；nameZh 只填原文正文已出现的中文译名，其余留空。"
+    },
+    {
+      "id": "map-road-to-phandalin",
+      "name": "前往凡度林的道路（遭遇地图）",
+      "page": 6,
+      "type": "battle-map",
+      "scale": "1 square = 10 feet",
+      "labels": [
+        {
+          "labelEn": "Brush",
+          "nameZh": "灌木"
+        },
+        {
+          "labelEn": "Escarpment",
+          "nameZh": "峭壁"
+        },
+        {
+          "labelEn": "Path",
+          "nameZh": "小径"
+        },
+        {
+          "labelEn": "Tree",
+          "nameZh": "树"
+        }
+      ],
+      "sceneId": "scene-goblin-ambush",
+      "notes": "图例中文为本文件直译，便于检索；地图原文为英文。"
+    },
+    {
+      "id": "map-cragmaw-hideout",
+      "name": "克拉格莫窝点地图",
+      "page": 8,
+      "type": "dungeon-map",
+      "scale": "1 square = 5 feet",
+      "areas": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "labels": [
+        {
+          "labelEn": "Briars",
+          "nameZh": "荆棘"
+        },
+        {
+          "labelEn": "Bridge",
+          "nameZh": "桥"
+        },
+        {
+          "labelEn": "Escarpment",
+          "nameZh": "峭壁"
+        },
+        {
+          "labelEn": "Rapids",
+          "nameZh": "急流"
+        },
+        {
+          "labelEn": "Rubble",
+          "nameZh": "碎石"
+        },
+        {
+          "labelEn": "Stalagmite",
+          "nameZh": "石笋"
+        },
+        {
+          "labelEn": "Steps",
+          "nameZh": "石阶"
+        },
+        {
+          "labelEn": "Stone Wall",
+          "nameZh": "石墙"
+        },
+        {
+          "labelEn": "Supplies",
+          "nameZh": "补给"
+        }
+      ],
+      "sceneId": "scene-cragmaw-hideout",
+      "notes": "图例中文为本文件直译，便于检索；地图原文为英文。"
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-dc-scale",
+      "title": "DC 设定",
+      "page": 2,
+      "summary": "按任务难度选 DC：简单 10、中等 15、困难 20；显而易见或基本不可能的事无需检定。",
+      "details": [
+        "需要什么检定",
+        "到底有多难",
+        "检定成功/失败会带来什么结果"
+      ]
+    },
+    {
+      "id": "rule-read-aloud",
+      "title": "蓝字朗读",
+      "page": 2,
+      "summary": "模组中的蓝字是描述性文字，应由 DM 大声念给玩家听。"
+    },
+    {
+      "id": "rule-tenday",
+      "title": "十日",
+      "page": 2,
+      "summary": "被遗忘国度的一周有十天，称为一个十日；一个月有三个十日，共三十天。"
+    },
+    {
+      "id": "rule-rest",
+      "title": "短休息与长休息",
+      "page": 7,
+      "summary": "遇袭后队伍可能需要休息；具体规则见规则书的短休息与长休息部分。"
+    },
+    {
+      "id": "rule-adventure-map",
+      "title": "冒险地图的使用",
+      "page": 10,
+      "summary": "模组地图只给 DM 看，包含密门、隐藏陷阱等玩家不应看到的元素；不是所有地点都需要地图。室内地图可用 5 尺或 10 尺方格；需要时用罗盘描述方位。"
+    },
+    {
+      "id": "rule-npc-party",
+      "title": "NPC 队员",
+      "page": 13,
+      "summary": "NPC 短期加入队伍时：让玩家做重要决定；NPC 不会无理由置自己于不利；NPC 有自己的生活与目标，只在有益时加入；NPC 若对战斗胜利起重要作用，也要平分经验。"
+    },
+    {
+      "id": "rule-xp",
+      "title": "经验发放",
+      "page": 14,
+      "summary": "打倒怪物、解除陷阱、与 NPC 互动及完成任务都可获得经验；完成里程碑时按每名 PC 发放。"
+    },
+    {
+      "id": "rule-nonviolent-xp",
+      "title": "非暴力解决同样给经验",
+      "page": 14,
+      "summary": "若 PC 以非暴力方式解除怪物造成的威胁，同样奖励他们打倒怪物应得的经验。"
+    }
+  ],
+  "glossary": [
+    {
+      "id": "term-character",
+      "term": "角色",
+      "termEn": "Character",
+      "page": 2,
+      "definition": "特指由玩家扮演的角色，是任何 D&D 冒险的核心。"
+    },
+    {
+      "id": "term-party",
+      "term": "队伍",
+      "termEn": "Party",
+      "page": 2,
+      "definition": "一群共同冒险的角色。"
+    },
+    {
+      "id": "term-npc",
+      "term": "非玩家角色",
+      "termEn": "NPC",
+      "page": 2,
+      "definition": "地下城主扮演的角色，其行为由 DM 决定。"
+    },
+    {
+      "id": "term-blue-text",
+      "term": "蓝字",
+      "termEn": "Read-aloud text",
+      "page": 2,
+      "definition": "模组中描述性的文字，应由 DM 大声念出来。"
+    },
+    {
+      "id": "term-tenday",
+      "term": "十日",
+      "termEn": "Tenday",
+      "page": 2,
+      "definition": "被遗忘国度的一周，有十天；一个月三个十日，共三十天。"
+    }
+  ],
+  "overviewMentions": [
+    {
+      "id": "overview-redbrands",
+      "name": "红烙印",
+      "nameEn": "Redbrands",
+      "type": "faction",
+      "part": 2,
+      "page": 4,
+      "note": "凡度林的黑帮，由“水晶之杖”阿尔布克领导，听命于黑蜘蛛。"
+    },
+    {
+      "id": "overview-glasstaff",
+      "name": "水晶之杖 / 阿尔布克",
+      "nameEn": "Glasstaff / Albrek",
+      "type": "npc",
+      "part": 2,
+      "page": 4,
+      "note": "红烙印的领导人，听命于黑蜘蛛；PC 在老庄园附近的要塞找到他。"
+    },
+    {
+      "id": "overview-old-owl-well",
+      "name": "古枭井",
+      "nameEn": "Old Owl Well",
+      "type": "location",
+      "part": 3,
+      "page": 4,
+      "note": "一位神秘法师的所在地。"
+    },
+    {
+      "id": "overview-banshee",
+      "name": "女妖",
+      "nameEn": "Banshee",
+      "type": "creature",
+      "part": 3,
+      "page": 4,
+      "note": "可为冒险者提供指引。"
+    },
+    {
+      "id": "overview-wyvern-tor",
+      "name": "飞龙屯",
+      "nameEn": "Wyvern Tor",
+      "type": "location",
+      "part": 3,
+      "page": 4,
+      "note": "有兽人盘踞。"
+    },
+    {
+      "id": "overview-thundertree",
+      "name": "雷霆树镇",
+      "nameEn": "Thundertree",
+      "type": "location",
+      "part": 3,
+      "page": 4,
+      "note": "废墟，需要调查。"
+    },
+    {
+      "id": "overview-nezznar",
+      "name": "聂兹那",
+      "nameEn": "Nezznar",
+      "type": "npc",
+      "part": 3,
+      "page": 4,
+      "note": "卓尔，黑蜘蛛的真名。"
+    },
+    {
+      "id": "overview-wave-echo-cave",
+      "name": "潮音洞 / 回浪洞",
+      "nameEn": "Wave Echo Cave",
+      "type": "location",
+      "part": 4,
+      "page": 4,
+      "note": "失落矿脉所在，被不死生物和奇怪怪物占领。"
+    }
+  ],
+  "validation": {
+    "method": "python3 -m json.tool + 自定义交叉引用检查",
+    "checks": [
+      "JSON 可解析",
+      "所有 sceneId/npcId/monsterId/checkId/rewardId/itemId 交叉引用存在",
+      "所有页面编号在 1–15 范围内",
+      "检定实例的 DC 只使用原文出现的 10/12/15（通用难度表另含 DC20）",
+      "货币、XP、HP 数值与原文核对",
+      "未收录模组原文全文"
+    ],
+    "result": "passed",
+    "checkedDate": "2026-11-15",
+    "knownGaps": [
+      "本 PDF 未包含附录 B 怪物数据；怪物条目只记录名称、数量、角色与原文明确给出的数值（哥布林隐匿 +6、哥布林头目 12 HP、西达尔 1 HP 等）。",
+      "中文翻译存在译名不一致：凡度林/凡德林、格罗尔王/金格尔、回浪洞/潮音洞；本文件以 PART 1 正文用法为准并在 aliases 中记录别名。",
+      "译文距离单位“里/英里”混用；本文件按英文原版的英里数统一记录（如 5 英里、20 英里）。",
+      "第 15 页为整页插画，无正文；第 3 页为区域地图，均不产生场景文本。",
+      "本文件不覆盖 PART 2–4 的详细内容，只在概述中保留必要线索。"
+    ]
+  }
+}

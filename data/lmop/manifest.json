@@ -1,0 +1,805 @@
+{
+  "schema_version": "lmop-v1",
+  "generated_at": "2026-11-15",
+  "book": {
+    "title": "凡戴尔的失落矿坑",
+    "title_en": "Lost Mine of Phandelver",
+    "abbr": "LMoP",
+    "edition": "D&D 5e Starter Set (2014)",
+    "publisher": "Wizards of the Coast",
+    "language": "zh-CN",
+    "party": {
+      "size": "4–5 名 1 级 PC",
+      "start_level": 1,
+      "end_level": 5
+    }
+  },
+  "source": {
+    "type": "中文翻译版 PDF（80 页）",
+    "translators": [
+      "庞西瓦",
+      "琉璃",
+      "cherng9"
+    ],
+    "translation_source": "纯美苹果园",
+    "note": "四段分别录入后合并为一个数据集；各段页码口径见 parts[].page_basis。"
+  },
+  "policy": {
+    "prose": "omitted",
+    "verbatim_text": false,
+    "reason": "公开仓库不收录模组译文正文；只保留结构化字段、页码与生成式摘要。",
+    "copyright": "模组版权归 Wizards of the Coast；中文整合仅用于学习交流，如涉侵权请于 24 小时内删除。"
+  },
+  "page_convention": {
+    "rule": "不同分卷的页码基准不同，记录保留各分卷原有页码字段，不统一换算；引用时以 parts[].page_basis 为准。",
+    "parts": {
+      "part_1": "书内印刷页码 1–15；PDF 物理页 2–16（PDF 第 1 页为封面，书内页 = PDF 页 − 1）。",
+      "part_2": "书内印刷页码 16–33；PDF 物理页 17–34（PDF 第 16 页为整页插图）。",
+      "part_3": "任务范围按 PDF 目录（TOC）标为 34–61；正文页脚在 52 结束，记录使用页脚 34–52、PDF 35–53。",
+      "part_4": "任务范围按 TOC 标为 62–90；实际 PDF 共 80 页，按章节内容对齐到 PDF 54–79（页脚约 53–78）。记录使用 PDF 页码。"
+    }
+  },
+  "counts": {
+    "records": 463,
+    "parts": 4,
+    "chapters": 8,
+    "scenes": 65,
+    "npcs": 70,
+    "factions": 7,
+    "monsters": 53,
+    "checks": 95,
+    "rewards": 103,
+    "items": 9,
+    "hazards": 8,
+    "objects": 1,
+    "xpMilestones": 2,
+    "maps": 3,
+    "rules": 8,
+    "glossary": 5,
+    "overviewMentions": 8,
+    "magic_items": 13,
+    "notes": 5
+  },
+  "unique_counts": {
+    "chapter": 8,
+    "check": 95,
+    "faction": 7,
+    "glossary_term": 5,
+    "hazard": 8,
+    "item": 9,
+    "magic_item": 13,
+    "map": 3,
+    "monster": 32,
+    "note": 5,
+    "npc": 53,
+    "object": 1,
+    "overview_mention": 8,
+    "reward": 103,
+    "rule": 8,
+    "scene": 65,
+    "xp_milestone": 2
+  },
+  "parts": [
+    {
+      "id": "lmop:part:1",
+      "order": 1,
+      "title": "前言与 PART 1 哥布林之矢",
+      "chapter": "前言；第一章 哥布林之矢",
+      "source_file": "p001-015.json",
+      "schema_version": "1.0.0",
+      "page_range": "1-15",
+      "pdf_page_range": "2-16",
+      "record_page_range": "1-15",
+      "page_basis": "书内印刷页码 1–15；PDF 物理页 2–16（PDF 第 1 页为封面，书内页 = PDF 页 − 1）。",
+      "page_bounds": {
+        "printed": [
+          1,
+          15
+        ],
+        "pdf": [
+          2,
+          16
+        ]
+      },
+      "source_note": "书内第 1–15 页；含前言、主持游戏与 PART 1 哥布林之矢。",
+      "counts": {
+        "chapters": 2,
+        "scenes": 13,
+        "npcs": 11,
+        "factions": 7,
+        "monsters": 5,
+        "checks": 20,
+        "rewards": 8,
+        "items": 9,
+        "hazards": 8,
+        "objects": 1,
+        "xpMilestones": 2,
+        "maps": 3,
+        "rules": 8,
+        "glossary": 5,
+        "overviewMentions": 8
+      },
+      "validation": {
+        "result": "passed",
+        "method": "python3 -m json.tool + 自定义交叉引用检查",
+        "known_gaps": [
+          "本 PDF 未包含附录 B 怪物数据；怪物条目只记录名称、数量、角色与原文明确给出的数值（哥布林隐匿 +6、哥布林头目 12 HP、西达尔 1 HP 等）。",
+          "中文翻译存在译名不一致：凡度林/凡德林、格罗尔王/金格尔、回浪洞/潮音洞；本文件以 PART 1 正文用法为准并在 aliases 中记录别名。",
+          "译文距离单位“里/英里”混用；本文件按英文原版的英里数统一记录（如 5 英里、20 英里）。",
+          "第 15 页为整页插画，无正文；第 3 页为区域地图，均不产生场景文本。",
+          "本文件不覆盖 PART 2–4 的详细内容，只在概述中保留必要线索。"
+        ]
+      },
+      "records": 110,
+      "bytes": 81941,
+      "sha256": "ffad66e8a2fe1e43d416bd8024dc26c9475be46fea5432083b4aa3d211c57c52"
+    },
+    {
+      "id": "lmop:part:2",
+      "order": 2,
+      "title": "PART 2 凡度林之役",
+      "chapter": "第二章 凡度林之役",
+      "source_file": "p016-033.json",
+      "schema_version": "lmop-v1",
+      "page_range": "16-33",
+      "pdf_page_range": "17-34",
+      "record_page_range": "16-33",
+      "page_basis": "书内印刷页码 16–33；PDF 物理页 17–34（PDF 第 16 页为整页插图）。",
+      "page_bounds": {
+        "printed": [
+          16,
+          33
+        ],
+        "pdf": [
+          17,
+          34
+        ]
+      },
+      "source_note": "书内第 16–33 页；凡度林镇、红烙印大本营与相关 NPC/遭遇。",
+      "counts": {
+        "chapters": 1,
+        "scenes": 25,
+        "npcs": 25,
+        "monsters": 7,
+        "checks": 21,
+        "rewards": 31
+      },
+      "validation": {
+        "result": "passed",
+        "method": "python3 -m json.tool + 自定义交叉引用检查 + 关键页图像复核",
+        "known_gaps": [
+          "本文件只覆盖 PART 2（书内第 16–33 页 / PDF 第 17–34 页）；第 3 章及以后只保留任务指向。",
+          "怪物条目只记录原文明确给出的数量、XP 与特殊信息，不补写原文未出现的 AC/HP 数据。",
+          "中文译文/OCR 存在名称差异：水晶之杖（OCR 有“水水晶之杖”重字）、伊阿诺-阿布雷克/阿博瑞克、大眼怪/独眼怪、回浪洞穴/潮音洞穴、雷树镇/雷霆树废墟；本文件以正文常用译名为主，并在 aliases 中保留别名。",
+          "PDF 第 16 页为整页插图；书内第 16 页对应 PDF 第 17 页。",
+          "不含模组原文段落，只保留结构化摘要。"
+        ]
+      },
+      "records": 110,
+      "bytes": 78592,
+      "sha256": "8a84868dbf96a5ee6127672b4a2640de39b7e0261640467b7150a8b11dd711be"
+    },
+    {
+      "id": "lmop:part:3",
+      "order": 3,
+      "title": "PART 3 黑蜘蛛之网",
+      "chapter": "第三章 黑蜘蛛之网",
+      "source_file": "p034-061.json",
+      "schema_version": "lmop-v1",
+      "page_range": "34-61",
+      "pdf_page_range": "35-53",
+      "record_page_range": "34-52",
+      "page_basis": "任务范围按 PDF 目录（TOC）标为 34–61；正文页脚在 52 结束，记录使用页脚 34–52、PDF 35–53。",
+      "page_bounds": {
+        "printed": [
+          34,
+          52
+        ],
+        "pdf": [
+          35,
+          53
+        ]
+      },
+      "source_note": "PART 3 全部正文；TOC 页码与页脚页码存在偏移，已按章节内容对齐。",
+      "counts": {
+        "chapters": 1,
+        "scenes": 7,
+        "npcs": 26,
+        "monsters": 19,
+        "checks": 33,
+        "rewards": 51
+      },
+      "validation": {
+        "result": "passed",
+        "method": "python3 -m json.tool + 自定义交叉引用检查",
+        "known_gaps": [
+          "PDF 目录把 PART 3 标为 34-61，但本 PDF 页脚在 52 结束、PART 4 从 53 开始；目录页码与页脚存在偏移。本文件按 PART 3 章节内容完整录入（PDF 35-53 / 页脚 34-52）。",
+          "本 PDF 只把 PART 3 正文印到页脚 52；本文件不包含 PART 4 与附录。",
+          "部分怪物只记录名称、数量、HP（若原文给出）与图鉴/附录B引用；未复制完整属性块。",
+          "中文翻译存在译名不一致（红烙印/红烙铁印、克拉葛摩/克格莫、潮音洞穴/潮音洞之声）；本文件以 PART 3 正文用法为准。"
+        ]
+      },
+      "records": 137,
+      "bytes": 196950,
+      "sha256": "9ca6778c47daf7c9b4aa4c337627cad2a2395cc25745a757242bfe94ba22a4c3"
+    },
+    {
+      "id": "lmop:part:4",
+      "order": 4,
+      "title": "PART 4 潮音洞之声与附录 A/B",
+      "chapter": "PART 4 潮音洞之声；附录 A 魔法物品；附录 B 怪物；备注",
+      "source_file": "p062-090.json",
+      "schema_version": "1.0.0",
+      "page_range": "62-90",
+      "pdf_page_range": "54-79",
+      "record_page_range": "54-79",
+      "page_basis": "任务范围按 TOC 标为 62–90；实际 PDF 共 80 页，按章节内容对齐到 PDF 54–79（页脚约 53–78）。记录使用 PDF 页码。",
+      "page_bounds": {
+        "printed": [
+          53,
+          78
+        ],
+        "pdf": [
+          54,
+          79
+        ]
+      },
+      "source_note": "PART 4 二十个区域、附录 A 魔法物品、附录 B 怪物数据卡与版权/译名备注。",
+      "counts": {
+        "chapters": 4,
+        "scenes": 20,
+        "npcs": 8,
+        "monsters": 22,
+        "checks": 21,
+        "rewards": 13,
+        "magic_items": 13,
+        "notes": 5
+      },
+      "validation": {
+        "result": "passed",
+        "method": "段内自检（见 PR #32）",
+        "known_gaps": []
+      },
+      "records": 106,
+      "bytes": 133193,
+      "sha256": "dfa25340432ae1707b43824f5a77ad9a11c3af8bbf6b1271fda99d884df7bc4c"
+    }
+  ],
+  "cross_part_entities": [
+    {
+      "id": "monster-bugbear",
+      "type": "monster",
+      "parts": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "segment_ids": [
+        "monster-bugbear",
+        "monster-bugbear",
+        "lmop:monster:bugbear",
+        "lmop:monster:bugbear"
+      ],
+      "names": [
+        "熊地精",
+        "熊地精（克拉格）"
+      ]
+    },
+    {
+      "id": "monster-doppelganger",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:doppelganger",
+        "lmop:monster:doppelganger"
+      ],
+      "names": [
+        "变形怪"
+      ]
+    },
+    {
+      "id": "monster-ghoul",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:ghoul",
+        "lmop:monster:ghoul"
+      ],
+      "names": [
+        "食尸鬼"
+      ]
+    },
+    {
+      "id": "monster-giant-spider",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:giant-spider",
+        "lmop:monster:giant-spider"
+      ],
+      "names": [
+        "巨蛛"
+      ]
+    },
+    {
+      "id": "monster-goblin",
+      "type": "monster",
+      "parts": [
+        1,
+        3,
+        4
+      ],
+      "segment_ids": [
+        "monster-goblin",
+        "lmop:monster:goblin",
+        "lmop:monster:goblin"
+      ],
+      "names": [
+        "哥布林"
+      ]
+    },
+    {
+      "id": "monster-grick",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:grick",
+        "lmop:monster:grick"
+      ],
+      "names": [
+        "掘地兽"
+      ]
+    },
+    {
+      "id": "monster-hobgoblin",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:hobgoblin",
+        "lmop:monster:hobgoblin"
+      ],
+      "names": [
+        "大地精"
+      ]
+    },
+    {
+      "id": "monster-ogre",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:ogre",
+        "lmop:monster:ogre"
+      ],
+      "names": [
+        "食人魔"
+      ]
+    },
+    {
+      "id": "monster-orc",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:orc",
+        "lmop:monster:orc"
+      ],
+      "names": [
+        "兽人"
+      ]
+    },
+    {
+      "id": "monster-owlbear",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:owlbear",
+        "lmop:monster:owlbear"
+      ],
+      "names": [
+        "枭熊"
+      ]
+    },
+    {
+      "id": "monster-redbrand-ruffian",
+      "type": "monster",
+      "parts": [
+        2,
+        4
+      ],
+      "segment_ids": [
+        "monster-redbrand-ruffian",
+        "lmop:monster:redbrand-ruffian"
+      ],
+      "names": [
+        "红烙印恶霸"
+      ]
+    },
+    {
+      "id": "monster-skeleton",
+      "type": "monster",
+      "parts": [
+        2,
+        4
+      ],
+      "segment_ids": [
+        "monster-skeleton",
+        "lmop:monster:skeleton"
+      ],
+      "names": [
+        "骷髅"
+      ]
+    },
+    {
+      "id": "monster-stirge",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:stirge",
+        "lmop:monster:stirge"
+      ],
+      "names": [
+        "蚊蝠"
+      ]
+    },
+    {
+      "id": "monster-twig-blight",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:twig-blight",
+        "lmop:monster:twig-blight"
+      ],
+      "names": [
+        "枯枝怪"
+      ]
+    },
+    {
+      "id": "monster-wolf",
+      "type": "monster",
+      "parts": [
+        1,
+        3,
+        4
+      ],
+      "segment_ids": [
+        "monster-wolf",
+        "lmop:monster:wolf",
+        "lmop:monster:wolf"
+      ],
+      "names": [
+        "狼"
+      ]
+    },
+    {
+      "id": "monster-young-green-dragon",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:young-green-dragon",
+        "lmop:monster:young-green-dragon"
+      ],
+      "names": [
+        "年轻绿龙",
+        "青年绿龙"
+      ]
+    },
+    {
+      "id": "monster-zombie",
+      "type": "monster",
+      "parts": [
+        3,
+        4
+      ],
+      "segment_ids": [
+        "lmop:monster:zombie",
+        "lmop:monster:zombie"
+      ],
+      "names": [
+        "僵尸"
+      ]
+    },
+    {
+      "id": "npc-agatha",
+      "type": "npc",
+      "parts": [
+        2,
+        3
+      ],
+      "segment_ids": [
+        "npc-agatha",
+        "lmop:npc:agatha"
+      ],
+      "names": [
+        "爱嘉莎",
+        "阿嘉莎"
+      ]
+    },
+    {
+      "id": "npc-black-spider",
+      "type": "npc",
+      "parts": [
+        1,
+        2,
+        3
+      ],
+      "segment_ids": [
+        "npc-black-spider",
+        "npc-black-spider",
+        "lmop:npc:black-spider"
+      ],
+      "names": [
+        "黑蜘蛛"
+      ]
+    },
+    {
+      "id": "npc-daran-edermath",
+      "type": "npc",
+      "parts": [
+        2,
+        3
+      ],
+      "segment_ids": [
+        "npc-daran-edermath",
+        "lmop:npc:daran-edermath"
+      ],
+      "names": [
+        "达朗-埃德玛",
+        "达朗·埃德玛"
+      ]
+    },
+    {
+      "id": "npc-elmar-barthen",
+      "type": "npc",
+      "parts": [
+        1,
+        2
+      ],
+      "segment_ids": [
+        "npc-elmar-barthen",
+        "npc-elmar-barthen"
+      ],
+      "names": [
+        "艾尔玛-巴森",
+        "艾尔玛·巴森"
+      ]
+    },
+    {
+      "id": "npc-gundren-rockseeker",
+      "type": "npc",
+      "parts": [
+        1,
+        3
+      ],
+      "segment_ids": [
+        "npc-gundren-rockseeker",
+        "lmop:npc:gundren-rockseeker"
+      ],
+      "names": [
+        "刚铎·寻石者"
+      ]
+    },
+    {
+      "id": "npc-harbin-wester",
+      "type": "npc",
+      "parts": [
+        2,
+        3
+      ],
+      "segment_ids": [
+        "npc-harbin-wester",
+        "lmop:npc:harbin-wester"
+      ],
+      "names": [
+        "哈宾-威斯特",
+        "哈宾·威斯特"
+      ]
+    },
+    {
+      "id": "npc-iarno-albrek",
+      "type": "npc",
+      "parts": [
+        1,
+        2,
+        3
+      ],
+      "segment_ids": [
+        "npc-iarno-albrek",
+        "npc-iarno-albrek",
+        "lmop:npc:iarno-albrek"
+      ],
+      "names": [
+        "伊阿诺-阿布雷克",
+        "伊阿诺·阿布雷克",
+        "伊阿诺“水晶之杖”艾伯瑞克"
+      ]
+    },
+    {
+      "id": "npc-king-grol",
+      "type": "npc",
+      "parts": [
+        1,
+        3
+      ],
+      "segment_ids": [
+        "npc-king-grol",
+        "lmop:npc:king-grol"
+      ],
+      "names": [
+        "格罗尔王",
+        "葛罗尔王"
+      ]
+    },
+    {
+      "id": "npc-linene-graywind",
+      "type": "npc",
+      "parts": [
+        1,
+        2
+      ],
+      "segment_ids": [
+        "npc-linene-graywind",
+        "npc-linene-graywind"
+      ],
+      "names": [
+        "利涅·灰风",
+        "利涅涅-灰风"
+      ]
+    },
+    {
+      "id": "npc-mirna-dendrar",
+      "type": "npc",
+      "parts": [
+        2,
+        3
+      ],
+      "segment_ids": [
+        "npc-mirna-dendrar",
+        "lmop:npc:mirna-dendrar"
+      ],
+      "names": [
+        "Mirna Dendrar",
+        "米尔娜-丹度"
+      ]
+    },
+    {
+      "id": "npc-qelline-alderleaf",
+      "type": "npc",
+      "parts": [
+        2,
+        3
+      ],
+      "segment_ids": [
+        "npc-qelline-alderleaf",
+        "lmop:npc:qelline-alderleaf"
+      ],
+      "names": [
+        "埃琳-阿黛尔利芙",
+        "埃琳·阿黛尔利芙"
+      ]
+    },
+    {
+      "id": "npc-reidoth",
+      "type": "npc",
+      "parts": [
+        2,
+        3
+      ],
+      "segment_ids": [
+        "npc-reidoth",
+        "lmop:npc:reidoth"
+      ],
+      "names": [
+        "莱多斯"
+      ]
+    },
+    {
+      "id": "npc-sildar-hallwinter",
+      "type": "npc",
+      "parts": [
+        1,
+        2,
+        3
+      ],
+      "segment_ids": [
+        "npc-sildar-hallwinter",
+        "npc-sildar-hallwinter",
+        "lmop:npc:sildar-hallwinter"
+      ],
+      "names": [
+        "西达尔-荷温特",
+        "西达尔·荷温特"
+      ]
+    },
+    {
+      "id": "npc-sister-garaele",
+      "type": "npc",
+      "parts": [
+        2,
+        3
+      ],
+      "segment_ids": [
+        "npc-sister-garaele",
+        "lmop:npc:sister-garaele"
+      ],
+      "names": [
+        "加拉尔修女"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "data/lmop/p001-015.json",
+      "part": 1,
+      "schema_version": "1.0.0",
+      "records": 110,
+      "bytes": 81941,
+      "sha256": "ffad66e8a2fe1e43d416bd8024dc26c9475be46fea5432083b4aa3d211c57c52"
+    },
+    {
+      "path": "data/lmop/p016-033.json",
+      "part": 2,
+      "schema_version": "lmop-v1",
+      "records": 110,
+      "bytes": 78592,
+      "sha256": "8a84868dbf96a5ee6127672b4a2640de39b7e0261640467b7150a8b11dd711be"
+    },
+    {
+      "path": "data/lmop/p034-061.json",
+      "part": 3,
+      "schema_version": "lmop-v1",
+      "records": 137,
+      "bytes": 196950,
+      "sha256": "9ca6778c47daf7c9b4aa4c337627cad2a2395cc25745a757242bfe94ba22a4c3"
+    },
+    {
+      "path": "data/lmop/p062-090.json",
+      "part": 4,
+      "schema_version": "1.0.0",
+      "records": 106,
+      "bytes": 133193,
+      "sha256": "dfa25340432ae1707b43824f5a77ad9a11c3af8bbf6b1271fda99d884df7bc4c"
+    }
+  ],
+  "notes": [
+    "四个分卷各自独立完整；同一实体可能在多个分卷以不同或相同的 id 出现，见 cross_part_entities。跨分卷合并实体时请按 id 去重。",
+    "各分卷内部引用为分卷内有效；跨分卷引用未建立，调用方需按 cross_part_entities 或 name_en 关联。",
+    "页码存在三种口径：书内印刷页（PART 1/2）、印刷页 + PDF 页（PART 3）、PDF 页（PART 4 及附录）。",
+    "译名不统一，例如西达尔·荷温特/西达尔-荷温特、伊阿诺·阿布雷克/艾伯瑞克、雷霆树镇/雷树镇、潮音洞/回浪洞、爱嘉莎/阿嘉莎；name_en 可作稳定键。",
+    "公开数据不含译文正文；只保留结构化字段、数值与生成式摘要。",
+    "怪物附录并非覆盖全部遭遇：赭色果冻怪、缚灵莫尔梅斯克等在正文出现但附录无数据卡，分卷记录中已注明。",
+    "PART 2 的章节 id 为 ch02-phandalin，未使用其它分卷的 chapter-/lmop:chapter: 前缀；消费方应按记录类型而非 id 前缀识别章节。"
+  ]
+}
