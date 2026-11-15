@@ -1,0 +1,685 @@
+{
+ "schema_version": "lmop-rules-v1",
+ "generated_at": "2026-11-15",
+ "source": "D&D 5e (2014) 玩家手册（PHB）、地下城主指南（DMG）、怪物图鉴（MM）与《凡戴尔的失落矿坑》",
+ "rules": [
+  {
+   "id": "rule-ability-check",
+   "title": "属性检定",
+   "title_en": "Ability Check",
+   "category": "core",
+   "source": "PHB 第7章",
+   "summary": "d20 + 属性调整值 + 熟练加值（如适用）对抗 DC；DM 只在结果不确定且有失败代价时要求检定。",
+   "used_for": [
+    "技能检定",
+    "力量（运动）",
+    "敏捷（潜行/杂技）",
+    "智力（调查/历史/奥秘/宗教）",
+    "感知（察觉/洞察/生存）",
+    "魅力（说服/欺瞒/威吓）"
+   ]
+  },
+  {
+   "id": "rule-skill",
+   "title": "技能检定",
+   "title_en": "Skill Check",
+   "category": "core",
+   "source": "PHB 第7章",
+   "summary": "技能是属性检定的常见组合；熟练则加熟练加值。模组中的“感知（侦查）”按 5e 标准写作感知（察觉）。",
+   "used_for": [
+    "察觉",
+    "调查",
+    "运动",
+    "杂技",
+    "潜行",
+    "驯养动物",
+    "说服",
+    "欺瞒",
+    "威吓",
+    "历史",
+    "奥秘",
+    "宗教",
+    "生存"
+   ]
+  },
+  {
+   "id": "rule-passive-check",
+   "title": "被动检定",
+   "title_en": "Passive Check",
+   "category": "core",
+   "source": "PHB 第7章",
+   "summary": "10 + 全部调整值（含熟练）作为被动分数，用于不主动掷骰的持续察觉；模组常用被动察觉/侦查发现隐藏事物。",
+   "used_for": [
+    "被动察觉",
+    "被动侦查",
+    "隐藏陷阱/密门",
+    "埋伏"
+   ]
+  },
+  {
+   "id": "rule-contest",
+   "title": "对抗检定",
+   "title_en": "Contest",
+   "category": "core",
+   "source": "PHB 第7章",
+   "summary": "双方各掷属性检定，结果高者胜；平局维持原状。常用于潜行对抗察觉、唬弄对抗洞察。",
+   "used_for": [
+    "潜行对抗察觉",
+    "唬弄对抗洞察",
+    "擒抱/推撞（另见战斗）"
+   ]
+  },
+  {
+   "id": "rule-group-check",
+   "title": "团体检定",
+   "title_en": "Group Check",
+   "category": "core",
+   "source": "PHB 第7章",
+   "summary": "全队各掷一次；至少一半成功则全队成功。模组的集体唬弄/潜行可按此处理，也可按原文逐人判定。",
+   "used_for": [
+    "集体唬弄",
+    "集体潜行",
+    "全队攀爬"
+   ]
+  },
+  {
+   "id": "rule-dc",
+   "title": "难度等级",
+   "title_en": "Difficulty Class",
+   "category": "core",
+   "source": "PHB 第7章",
+   "summary": "简单 10、中等 15、困难 20、非常困难 25、几乎不可能 30；模组给出具体 DC 时以模组为准。",
+   "used_for": [
+    "所有 DC",
+    "陷阱",
+    "锁",
+    "攀爬",
+    "社交"
+   ]
+  },
+  {
+   "id": "rule-advantage",
+   "title": "优势与劣势",
+   "title_en": "Advantage / Disadvantage",
+   "category": "core",
+   "source": "PHB 第7章",
+   "summary": "有优势掷两个 d20 取高，有劣势取低；多个优势/劣势不叠加。",
+   "used_for": [
+    "完善扮演",
+    "有利环境",
+    "被束缚/中毒等不利"
+   ]
+  },
+  {
+   "id": "rule-saving-throw",
+   "title": "豁免检定",
+   "title_en": "Saving Throw",
+   "category": "core",
+   "source": "PHB 第7章",
+   "summary": "d20 + 属性调整值（+熟练，若职业/怪物有）对抗 DC；成功/失败按法术或陷阱说明结算。",
+   "used_for": [
+    "敏捷豁免",
+    "体质豁免",
+    "力量豁免",
+    "陷阱",
+    "毒气",
+    "洪水"
+   ]
+  },
+  {
+   "id": "rule-stealth",
+   "title": "潜行",
+   "title_en": "Stealth",
+   "category": "core",
+   "source": "PHB 第7章",
+   "summary": "敏捷（潜行）检定；离开掩护或发出声响时 DM 可要求重掷。未察觉的敌人可被突袭。",
+   "used_for": [
+    "潜行接近",
+    "埋伏",
+    "绕过哨兵"
+   ]
+  },
+  {
+   "id": "rule-animal-handling",
+   "title": "驯养动物",
+   "title_en": "Animal Handling",
+   "category": "core",
+   "source": "PHB 第7章",
+   "summary": "感知（驯养动物）检定，用于安抚、驾驭或让动物放行；喂食等有利条件可降低 DC。",
+   "used_for": [
+    "安抚狼",
+    "驾驭坐骑",
+    "动物态度"
+   ]
+  },
+  {
+   "id": "rule-climb",
+   "title": "攀爬",
+   "title_en": "Climbing",
+   "category": "core",
+   "source": "PHB 第8章",
+   "summary": "攀爬通常消耗额外移动；困难岩壁可要求力量（运动）检定。模组给出 DC 时以模组为准。",
+   "used_for": [
+    "攀爬烟道",
+    "攀爬石壁",
+    "上下裂谷"
+   ]
+  },
+  {
+   "id": "rule-social",
+   "title": "社交互动",
+   "title_en": "Social Interaction",
+   "category": "core",
+   "source": "PHB 第8章",
+   "summary": "用魅力检定（说服/欺瞒/威吓）改变 NPC 态度；扮演与把柄可给优势/劣势，DM 设定 DC。",
+   "used_for": [
+    "谈判",
+    "唬弄",
+    "威吓",
+    "打听消息"
+   ]
+  },
+  {
+   "id": "rule-initiative",
+   "title": "先攻",
+   "title_en": "Initiative",
+   "category": "combat",
+   "source": "PHB 第9章",
+   "summary": "战斗开始时每人掷敏捷检定排序； surprise 轮按突袭规则处理。",
+   "used_for": [
+    "战斗开始",
+    "突袭轮"
+   ]
+  },
+  {
+   "id": "rule-surprise",
+   "title": "突袭",
+   "title_en": "Surprise",
+   "category": "combat",
+   "source": "PHB 第9章",
+   "summary": "未察觉对方的一方在首轮不能行动，且直到其回合结束前攻击者对其有优势。",
+   "used_for": [
+    "哥布林伏击",
+    "掘地兽扑击",
+    "潜入房间"
+   ]
+  },
+  {
+   "id": "rule-cover",
+   "title": "掩护",
+   "title_en": "Cover",
+   "category": "combat",
+   "source": "PHB 第9章",
+   "summary": "半掩护 +2 AC/敏捷豁免，四分之三掩护 +5，全掩护不能成为目标；模组中的荆棘、石笋、射箭孔按此处理。",
+   "used_for": [
+    "荆棘",
+    "石笋",
+    "射箭孔",
+    "瓦砾",
+    "木桌"
+   ]
+  },
+  {
+   "id": "rule-action",
+   "title": "动作与回合",
+   "title_en": "Actions / Turn",
+   "category": "combat",
+   "source": "PHB 第9章",
+   "summary": "每回合可移动 + 一个动作 + 可能的附赠动作/反应；攻击、施法、疾走、撤离、躲藏、准备、搜索、使用物品各占动作。",
+   "used_for": [
+    "战斗行动",
+    "破门",
+    "灭火",
+    "救人"
+   ]
+  },
+  {
+   "id": "rule-condition",
+   "title": "状态",
+   "title_en": "Conditions",
+   "category": "combat",
+   "source": "PHB 附录A",
+   "summary": "状态（倒地、束缚、擒抱、中毒、恐慌、目盲等）各自规定移动、攻击、检定与豁免的修正。",
+   "used_for": [
+    "倒地",
+    "束缚",
+    "中毒",
+    "恐慌",
+    "擒抱"
+   ]
+  },
+  {
+   "id": "rule-prone",
+   "title": "倒地",
+   "title_en": "Prone",
+   "category": "combat",
+   "source": "PHB 附录A",
+   "summary": "倒地者近战攻击有优势、远程攻击有劣势；起身消耗一半移动力；近战攻击倒地者有优势。",
+   "used_for": [
+    "坠落",
+    "平台滑落",
+    "桥塌",
+    "推倒"
+   ]
+  },
+  {
+   "id": "rule-restrained",
+   "title": "束缚",
+   "title_en": "Restrained",
+   "category": "combat",
+   "source": "PHB 附录A",
+   "summary": "束缚者速度 0，攻击有劣势，敏捷豁免有劣势，受攻击有优势。",
+   "used_for": [
+    "套索",
+    "锁链",
+    "铁项圈"
+   ]
+  },
+  {
+   "id": "rule-poisoned",
+   "title": "中毒",
+   "title_en": "Poisoned",
+   "category": "combat",
+   "source": "PHB 附录A",
+   "summary": "中毒者攻击检定与属性检定有劣势。",
+   "used_for": [
+    "毒气",
+    "醉酒",
+    "毒刃"
+   ]
+  },
+  {
+   "id": "rule-frightened",
+   "title": "恐慌",
+   "title_en": "Frightened",
+   "category": "combat",
+   "source": "PHB 附录A",
+   "summary": "恐慌者攻击/检定有劣势，且不能主动靠近恐惧源；可在回合结束重试豁免（若允许）。",
+   "used_for": [
+    "龙威",
+    "恐惧效果"
+   ]
+  },
+  {
+   "id": "rule-flying",
+   "title": "飞行",
+   "title_en": "Flying",
+   "category": "combat",
+   "source": "PHB 第8/9章",
+   "summary": "飞行生物可移动并停留空中；被击倒/速度归零会坠落。",
+   "used_for": [
+    "绿龙",
+    "蚊蝠",
+    "飞行追击"
+   ]
+  },
+  {
+   "id": "rule-death",
+   "title": "死亡与稳定伤势",
+   "title_en": "Death & Stabilization",
+   "category": "combat",
+   "source": "PHB 第9章",
+   "summary": "HP 0 时倒地昏迷并开始死亡豁免；受治疗或稳定后可恢复。模组中 NPC 也可能处于 0 HP 稳定状态。",
+   "used_for": [
+    "西达尔 1 HP",
+    "刚铎 0 HP",
+    "南镀昏迷",
+    "稳定伤势"
+   ]
+  },
+  {
+   "id": "rule-difficult-terrain",
+   "title": "困难地形",
+   "title_en": "Difficult Terrain",
+   "category": "exploration",
+   "source": "PHB 第8章",
+   "summary": "每移动 1 尺消耗 2 尺移动力；碎石、荆棘、深雪、浅水等可按困难地形处理。",
+   "used_for": [
+    "碎石",
+    "荆棘",
+    "浅水",
+    "瓦砾",
+    "裂谷底"
+   ]
+  },
+  {
+   "id": "rule-light",
+   "title": "光源与视觉",
+   "title_en": "Light & Vision",
+   "category": "exploration",
+   "source": "PHB 第8章",
+   "summary": "明亮光可正常视物，微光只能看清轮廓（对依赖视觉的检定有劣势），黑暗为重度遮蔽。",
+   "used_for": [
+    "黑暗洞穴",
+    "油灯",
+    "篝火",
+    "微光"
+   ]
+  },
+  {
+   "id": "rule-darkvision",
+   "title": "黑暗视觉",
+   "title_en": "Darkvision",
+   "category": "exploration",
+   "source": "PHB 第8章",
+   "summary": "在黑暗视觉范围内把黑暗视为微光；不能分辨颜色，只能看轮廓。",
+   "used_for": [
+    "洞穴探索",
+    "无光区域",
+    "哥布林/矮人"
+   ]
+  },
+  {
+   "id": "rule-falling",
+   "title": "坠落",
+   "title_en": "Falling",
+   "category": "exploration",
+   "source": "PHB 第8章",
+   "summary": "每坠落 10 尺受 1d6 钝击伤害，落地即倒地；坠落伤害上限 20d6。",
+   "used_for": [
+    "裂谷",
+    "深坑",
+    "桥塌",
+    "烟道"
+   ]
+  },
+  {
+   "id": "rule-water",
+   "title": "水下与涉水",
+   "title_en": "Water / Swimming",
+   "category": "exploration",
+   "source": "PHB 第8章",
+   "summary": "涉水按困难地形；深水需游泳，长时间游泳可能疲劳/窒息。",
+   "used_for": [
+    "浅溪",
+    "黑水池",
+    "支流",
+    "水浪"
+   ]
+  },
+  {
+   "id": "rule-flood",
+   "title": "洪水与冲走",
+   "title_en": "Flood",
+   "category": "exploration",
+   "source": "PHB 第8章 + 模组区域5",
+   "summary": "洪水按模组：DC10 敏捷豁免避开，失败再 DC15 力量豁免抓住固定物，否则被冲到区域1并受 1d6 钝击。",
+   "used_for": [
+    "区域5 天桥",
+    "区域7 石坝",
+    "双子池放水"
+   ]
+  },
+  {
+   "id": "rule-rest",
+   "title": "短休息与长休息",
+   "title_en": "Resting",
+   "category": "exploration",
+   "source": "PHB 第8章",
+   "summary": "短休息 1 小时可花生命骰回复；长休息 8 小时回复全部 HP/生命骰的一半。安全房间可按模组作为休息点。",
+   "used_for": [
+    "安全储藏间",
+    "旅舍",
+    "德鲁伊小屋"
+   ]
+  },
+  {
+   "id": "rule-travel",
+   "title": "旅行与速度",
+   "title_en": "Travel Pace",
+   "category": "exploration",
+   "source": "PHB 第8章 + 模组",
+   "summary": "队伍每天约 10 小时走 24 英里，休息 8 小时，其余 6 小时扎营/觅食；困难地形减半。",
+   "used_for": [
+    "区域地图旅行",
+    "三猪小径",
+    "凡度林周边"
+   ]
+  },
+  {
+   "id": "rule-random-encounter",
+   "title": "随机遭遇",
+   "title_en": "Random Encounters",
+   "category": "exploration",
+   "source": "模组 + DMG",
+   "summary": "白天/夜晚各掷 d20，17–20 触发；再掷 d12 查表。用于表现野外与矿坑并不安全。",
+   "used_for": [
+    "三猪小径",
+    "潮音洞游荡怪物"
+   ]
+  },
+  {
+   "id": "rule-trap",
+   "title": "陷阱",
+   "title_en": "Traps",
+   "category": "hazards",
+   "source": "DMG 第5章 + PHB",
+   "summary": "陷阱有触发、察觉（被动/主动）、解除与效果；模组给出 DC、伤害与豁免。",
+   "used_for": [
+    "套圈",
+    "陷坑",
+    "崩塌天花板",
+    "雕像眼"
+   ]
+  },
+  {
+   "id": "rule-fire",
+   "title": "火焰伤害",
+   "title_en": "Fire Damage",
+   "category": "hazards",
+   "source": "PHB 第9章",
+   "summary": "火焰伤害按来源结算；持续接触/站在火中可每回合受伤。",
+   "used_for": [
+    "火坑",
+    "燃烧之颅",
+    "火盆",
+    "绿火"
+   ]
+  },
+  {
+   "id": "rule-lock",
+   "title": "锁与盗贼工具",
+   "title_en": "Locks & Thieves' Tools",
+   "category": "objects",
+   "source": "PHB 第5/7章",
+   "summary": "用盗贼工具 + 敏捷检定开锁；也可用力量破坏（模组给 DC）。",
+   "used_for": [
+    "木门锁",
+    "铁门锁",
+    "保险箱",
+    "牢门"
+   ]
+  },
+  {
+   "id": "rule-break-object",
+   "title": "破坏物件",
+   "title_en": "Breaking Objects",
+   "category": "objects",
+   "source": "PHB 第8/9章",
+   "summary": "物件有 AC/HP；模组为门/桥给出 AC 5、HP 10 或力量 DC。",
+   "used_for": [
+    "破门",
+    "砍桥",
+    "砸箱",
+    "破窗"
+   ]
+  },
+  {
+   "id": "rule-secret-door",
+   "title": "密门",
+   "title_en": "Secret Doors",
+   "category": "objects",
+   "source": "DMG 第5章",
+   "summary": "密门混在石墙中；10 尺内被动察觉 15 发现，主动搜索 DC10；模组可能另有说明。",
+   "used_for": [
+    "红烙印密门",
+    "城堡帆布入口",
+    "地窖密门"
+   ]
+  },
+  {
+   "id": "rule-weapon",
+   "title": "武器与护甲",
+   "title_en": "Weapons & Armor",
+   "category": "objects",
+   "source": "PHB 第5章",
+   "summary": "武器伤害、射程、轻型/双手等属性；护甲影响 AC。",
+   "used_for": [
+    "武器架",
+    "染血锁子甲",
+    "长剑",
+    "弩"
+   ]
+  },
+  {
+   "id": "rule-xp",
+   "title": "经验值与等级",
+   "title_en": "Experience & Leveling",
+   "category": "rewards",
+   "source": "PHB 第8章 + 模组",
+   "summary": "击败怪物、解除陷阱、完成任务给 XP；达到阈值升级。模组也用里程碑（如 275 XP 升 2 级）。",
+   "used_for": [
+    "遭遇 XP",
+    "里程碑",
+    "升级"
+   ]
+  },
+  {
+   "id": "rule-treasure",
+   "title": "宝藏与钱币",
+   "title_en": "Treasure",
+   "category": "rewards",
+   "source": "PHB 第5/8章",
+   "summary": "钱币 10 cp = 1 sp，10 sp = 1 gp，10 gp = 1 pp；宝石/艺术品按模组价值。",
+   "used_for": [
+    "金币",
+    "宝石",
+    "货物",
+    "保险箱"
+   ]
+  },
+  {
+   "id": "rule-magic-item",
+   "title": "魔法物品",
+   "title_en": "Magic Items",
+   "category": "rewards",
+   "source": "PHB 第12章 + 附录A",
+   "summary": "魔法物品有稀有度；部分需同调。模组中的 +1 武器/护甲、魔杖、卷轴按此处理。",
+   "used_for": [
+    "+1 长剑",
+    "魔法飞弹魔杖",
+    "护光者",
+    "龙之守护",
+    "跑跳靴"
+   ]
+  },
+  {
+   "id": "rule-spell-scroll",
+   "title": "法术卷轴",
+   "title_en": "Spell Scroll",
+   "category": "rewards",
+   "source": "PHB 第11章 + DMG",
+   "summary": "卷轴记载一个法术，按卷轴规则施放；一次性消耗。",
+   "used_for": [
+    "魅惑人类卷轴",
+    "火球卷轴",
+    "占卜卷轴",
+    "黑暗术卷轴"
+   ]
+  },
+  {
+   "id": "rule-attunement",
+   "title": "同调",
+   "title_en": "Attunement",
+   "category": "rewards",
+   "source": "PHB 第12章",
+   "summary": "部分魔法物品需短休息同调后才能使用；同调数量有限。",
+   "used_for": [
+    "魔法物品",
+    "+1 物品"
+   ]
+  },
+  {
+   "id": "rule-quest",
+   "title": "任务与奖励",
+   "title_en": "Quests & Rewards",
+   "category": "rewards",
+   "source": "模组",
+   "summary": "NPC 任务给出目标、地点、报酬与失败后果；完成/失败影响阵营与后续。",
+   "used_for": [
+    "凡度林任务",
+    "护送",
+    "悬赏"
+   ]
+  },
+  {
+   "id": "rule-monster-stat",
+   "title": "怪物数据卡",
+   "title_en": "Monster Stat Block",
+   "category": "monsters",
+   "source": "MM / 附录B",
+   "summary": "怪物按 AC、HP、速度、属性、豁免、技能、抗性、感官、语言、CR/XP 与动作/特性运行；模组附录B给本作怪物。",
+   "used_for": [
+    "哥布林",
+    "熊地精",
+    "食尸鬼",
+    "绿龙",
+    "观察者眼魔"
+   ]
+  },
+  {
+   "id": "rule-npc-party",
+   "title": "NPC 队员",
+   "title_en": "NPC Party Members",
+   "category": "monsters",
+   "source": "模组 p.11–13",
+   "summary": "NPC 短期入队时由 DM 扮演；让玩家做决定，NPC 不无故牺牲自己；若对战斗胜利起重要作用，也平分 XP。",
+   "used_for": [
+    "西达尔",
+    "刚铎",
+    "南镀",
+    "Droop"
+   ]
+  },
+  {
+   "id": "rule-spellcasting",
+   "title": "施法",
+   "title_en": "Spellcasting",
+   "category": "magic",
+   "source": "PHB 第10章",
+   "summary": "施法时间、射程、成分、持续时间、专注与豁免 DC；NPC 法师/眼魔按数据卡施法。",
+   "used_for": [
+    "伊阿诺",
+    "观察者眼魔",
+    "奈兹纳尔",
+    "卷轴"
+   ]
+  },
+  {
+   "id": "rule-healing",
+   "title": "治疗与生命值",
+   "title_en": "Healing",
+   "category": "magic",
+   "source": "PHB 第8/9章",
+   "summary": "治疗药水/法术回复 HP；0 HP 时治疗可唤醒。",
+   "used_for": [
+    "治疗药水",
+    "稳定伤势",
+    "休息"
+   ]
+  },
+  {
+   "id": "rule-tool",
+   "title": "工具与技能",
+   "title_en": "Tools",
+   "category": "objects",
+   "source": "PHB 第5/7章",
+   "summary": "盗贼工具、铁匠工具等可让特定检定加入熟练加值；无工具也可尝试，但可能劣势/不可。",
+   "used_for": [
+    "盗贼工具",
+    "开锁",
+    "拆陷阱"
+   ]
+  }
+ ]
+}
