@@ -44,11 +44,12 @@
     <div class="brand">
       <span class="brand-mark">◈</span>
       <div>
-        <b>克拉格莫窝点</b>
-        <small>3D 场景切片 · Cragmaw Hideout</small>
+        <b id="brand-title">克拉格莫窝点</b>
+        <small id="brand-sub">3D 场景切片 · Cragmaw Hideout</small>
       </div>
     </div>
     <div class="top-actions">
+      <button id="btn-scenes" class="chip" title="切换地图">地图 · 克拉格莫窝点</button>
       <button id="btn-view" class="chip" title="切换第一/第三人称">第三人称</button>
       <button id="btn-torch" class="chip" title="开关火把（F）">火把 开</button>
       <button id="btn-map" class="chip" title="打开 2D 地图">2D 地图</button>
@@ -72,6 +73,14 @@
       <div><span>出口</span><b id="area-exits">—</b></div>
       <div><span>敌人</span><b id="area-monsters">—</b></div>
     </div>
+  </aside>
+
+  <aside id="region-panel" class="area-panel region-panel hidden">
+    <p class="eyebrow">区域图 · 剑湾</p>
+    <h2>剑湾区域地图</h2>
+    <p class="summary">拖动旋转桌面，滚轮缩放；点击地点查看名称、hex、对应场景与旅行距离。</p>
+    <div id="region-selected" class="region-selected">尚未选择地点</div>
+    <div id="region-travel" class="region-travel"></div>
   </aside>
 
   <div id="minimap-wrap" class="minimap-wrap hidden">
@@ -103,6 +112,19 @@
   <div id="touch-ui" class="touch-ui hidden">
     <div id="joystick" class="joystick"><div id="joystick-knob" class="joystick-knob"></div></div>
     <div id="look-zone" class="look-zone"></div>
+  </div>
+
+  <div id="scene-picker" class="scene-picker hidden" role="dialog" aria-modal="true">
+    <div class="picker-card">
+      <header>
+        <div>
+          <p class="eyebrow">SCENE SELECT</p>
+          <h2>选择地图 / 场景</h2>
+        </div>
+        <button id="scene-close" class="chip">关闭</button>
+      </header>
+      <div id="scene-grid" class="scene-grid"></div>
+    </div>
   </div>
 
   <div id="error" class="error hidden">

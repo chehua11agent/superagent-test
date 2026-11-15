@@ -49,11 +49,25 @@ const WATER = {
     waterfall: { x: 216, y: 44, w: 18, h: 26 },
     branch: { width: 9, points: [[86, 100], [91, 116], [101, 132], [111, 146], [108, 160]] },
   },
-  'map-redbrand-hideout': null,
+  'map-redbrand-hideout': {
+    planes: [{ x: 236, y: 100, w: 32, h: 88 }],
+  },
+  'map-wave-echo-cave': {
+    planes: [
+      { x: 122, y: 222, w: 36, h: 74 },
+      { x: 402, y: 52, w: 96, h: 124 },
+      { x: 154, y: 360, w: 40, h: 30 },
+    ],
+  },
 };
 const BRIDGE = {
-  'map-cragmaw-hideout': { from: [145, 48], to: [191, 48], width: 8, planks: 14, height: 0.18 },
+  'map-cragmaw-hideout': [{ from: [145, 48], to: [191, 48], width: 8, planks: 14, height: 0.18 }],
+  'map-redbrand-hideout': [
+    { from: [74, 104], to: [111, 104], width: 5, planks: 10, height: 0.18 },
+    { from: [74, 150], to: [111, 150], width: 5, planks: 10, height: 0.18 },
+  ],
 };
+const OUTDOOR = new Set(['battlemap', 'site', 'town']);
 
 /* ------------------------------------------------------------------ materials */
 function canvasTexture(draw, size = 128) {
@@ -110,7 +124,7 @@ function makeWaterfallTexture() {
     }
   }, 128);
 }
-function makeLabelTexture(text, accent = '#f1cf8f') {
+export function makeLabelTexture(text, accent = '#f1cf8f') {
   const c = document.createElement('canvas');
   c.width = 512; c.height = 128;
   const ctx = c.getContext('2d');
@@ -164,6 +178,18 @@ function makeWater(map, cx, cz) {
     roughness: 0.18, metalness: 0.15, side: THREE.DoubleSide,
     emissive: 0x0b2e33, emissiveIntensity: 0.6,
   });
+  if (cfg.planes) {
+    for (const p of cfg.planes) {
+      const geo = new THREE.PlaneGeometry(p.w, p.h);
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.rotation.x = -Math.PI / 2;
+      mesh.position.set(p.x + p.w / 2 - cx, 0.12, p.y + p.h / 2 - cz);
+      mesh.renderOrder = 2;
+      group.add(mesh);
+    }
+    group.userData.tex = tex;
+    return group;
+  }
   function ribbon(pts, width) {
   const verts = [], uvs = [], idx = [];
   let acc = 0;
@@ -215,8 +241,15 @@ function makeWater(map, cx, cz) {
   group.userData.tex = tex;
   return group;
 }
-function makeBridge(cfg, cx, cz) {
-  if (!cfg) return null;
+function makeBridge(cfgs, cx, cz) {
+  if (!cfgs || !cfgs.length) return null;
+  const group = new THREE.Group();
+  for (const cfg of cfgs) {
+    group.add(makeOneBridge(cfg, cx, cz));
+  }
+  return group;
+}
+function makeOneBridge(cfg, cx, cz) {
   const group = new THREE.Group();
   const a = new THREE.Vector3(cfg.from[0] - cx, 0, cfg.from[1] - cz);
   const b = new THREE.Vector3(cfg.to[0] - cx, 0, cfg.to[1] - cz);
@@ -391,6 +424,84 @@ function makeSacks(x, z) {
   return g;
 }
 
+
+function makeTree(x, z, scale = 1) {
+  const g = new THREE.Group();
+  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.25 * scale, 0.42 * scale, 4 * scale, 6), new THREE.MeshStandardMaterial({ color: 0x4b3624, roughness: 1 }));
+  trunk.position.set(x, 2 * scale, z); g.add(trunk);
+  const leaf = new THREE.MeshStandardMaterial({ color: 0x2e4628, roughness: 1, flatShading: true });
+  for (let i = 0; i < 3; i++) {
+    const c = new THREE.Mesh(new THREE.ConeGeometry((2.6 - i * 0.5) * scale, 3.4 * scale, 7), leaf);
+    c.position.set(x, (4.2 + i * 1.7) * scale, z); g.add(c);
+  }
+  return g;
+}
+function makeCart(x, z, rot = 0) {
+  const g = new THREE.Group();
+  const wood = new THREE.MeshStandardMaterial({ color: 0x5a3f27, roughness: 1 });
+  const bed = new THREE.Mesh(new THREE.BoxGeometry(5.6, 0.4, 3.2), wood); bed.position.set(x, 1.6, z); g.add(bed);
+  for (const s of [-1, 1]) {
+    const side = new THREE.Mesh(new THREE.BoxGeometry(5.6, 1.2, 0.25), wood); side.position.set(x, 2.2, z + s * 1.5); g.add(side);
+    const wheel = new THREE.Mesh(new THREE.TorusGeometry(1.05, 0.18, 5, 10), wood); wheel.position.set(x + s * 2.4, 1.1, z - 1.8); wheel.rotation.y = Math.PI / 2; g.add(wheel);
+  }
+  const shaft = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.2, 4.2), wood); shaft.position.set(x, 1.5, z + 3); g.add(shaft);
+  g.rotation.y = rot; return g;
+}
+function makeHorse(x, z, dead = false) {
+  const g = new THREE.Group();
+  const coat = new THREE.MeshStandardMaterial({ color: dead ? 0x4a3a2a : 0x6a4b32, roughness: 1 });
+  const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.85, 2.6, 3, 7), coat);
+  body.rotation.z = Math.PI / 2; body.position.set(x, dead ? 0.7 : 2, z); g.add(body);
+  const neck = new THREE.Mesh(new THREE.CapsuleGeometry(0.4, 1.3, 2, 6), coat);
+  neck.position.set(x, dead ? 1 : 2.8, z + 1.5); neck.rotation.x = dead ? 1.1 : 0.5; g.add(neck);
+  const head = new THREE.Mesh(new THREE.CapsuleGeometry(0.35, 0.9, 2, 6), coat);
+  head.position.set(x, dead ? 0.6 : 3.5, z + 2.2); head.rotation.x = 1.2; g.add(head);
+  if (!dead) for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.18, 2.2, 5), coat);
+    leg.position.set(x + sx * 0.5, 1, z + sz * 1.1); g.add(leg);
+  }
+  return g;
+}
+function makeWell(x, z) {
+  const g = new THREE.Group();
+  const stone = new THREE.MeshStandardMaterial({ color: 0x655d50, roughness: 1 });
+  const ring = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.4, 1.2, 12), stone); ring.position.set(x, 0.6, z); g.add(ring);
+  const water = new THREE.Mesh(new THREE.CircleGeometry(1.7, 12), new THREE.MeshBasicMaterial({ color: 0x1a3038 })); water.rotation.x = -Math.PI / 2; water.position.set(x, 1.05, z); g.add(water);
+  for (const s of [-1, 1]) {
+    const post = new THREE.Mesh(new THREE.BoxGeometry(0.2, 4, 0.2), new THREE.MeshStandardMaterial({ color: 0x4a3420 })); post.position.set(x + s * 1.7, 2, z); g.add(post);
+  }
+  const roof = new THREE.Mesh(new THREE.ConeGeometry(2.6, 1.2, 4), new THREE.MeshStandardMaterial({ color: 0x4b3624 })); roof.position.set(x, 4.3, z); roof.rotation.y = Math.PI / 4; g.add(roof);
+  return g;
+}
+function makeBoard(x, z, rot = 0) {
+  const g = new THREE.Group();
+  const wood = new THREE.MeshStandardMaterial({ color: 0x5b422a, roughness: 1 });
+  const post = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.2, 4, 5), wood); post.position.set(x, 2, z); g.add(post);
+  const panel = new THREE.Mesh(new THREE.BoxGeometry(3.2, 2, 0.16), new THREE.MeshStandardMaterial({ color: 0x8a7450, roughness: 1 })); panel.position.set(x, 3.6, z); panel.rotation.y = rot; g.add(panel);
+  return g;
+}
+function makeField(x, z, w = 20, d = 14) {
+  const g = new THREE.Group();
+  const soil = new THREE.Mesh(new THREE.BoxGeometry(w, 0.12, d), new THREE.MeshStandardMaterial({ color: 0x4a3a22, roughness: 1 })); soil.position.set(x, 0.07, z); g.add(soil);
+  const crop = new THREE.MeshStandardMaterial({ color: 0x687d3b, roughness: 1 });
+  for (let i = 0; i < 18; i++) {
+    const c = new THREE.Mesh(new THREE.ConeGeometry(0.22, 1.1, 4), crop);
+    c.position.set(x + rand(-w / 2 + 1, w / 2 - 1), 0.6, z + rand(-d / 2 + 1, d / 2 - 1)); g.add(c);
+  }
+  return g;
+}
+function makeStall(x, z, rot = 0) {
+  const g = new THREE.Group();
+  const wood = new THREE.MeshStandardMaterial({ color: 0x5a4028, roughness: 1 });
+  const cloth = new THREE.MeshStandardMaterial({ color: 0x7a3f2e, roughness: 1 });
+  const table = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.1, 2), wood); table.position.set(x, 0.9, z); g.add(table);
+  for (const s of [-1, 1]) {
+    const post = new THREE.Mesh(new THREE.BoxGeometry(0.18, 3.2, 0.18), wood); post.position.set(x + s * 2, 1.6, z - 0.8); g.add(post);
+  }
+  const roof = new THREE.Mesh(new THREE.BoxGeometry(5.2, 0.18, 2.8), cloth); roof.position.set(x, 3.3, z - 0.8); roof.rotation.x = -0.15; g.add(roof);
+  g.rotation.y = rot; return g;
+}
+
 /* ------------------------------------------------------------------ actors */
 function makeGoblin(scale = 1) {
   const g = new THREE.Group();
@@ -446,6 +557,97 @@ function makeBugbear(scale = 1) {
   g.userData = { kind: 'bugbear', phase: rand(0, 6.28) };
   return g;
 }
+
+function makeHumanoid({ color = 0x3d2f22, skin = 0x8a7a62, scale = 1, tall = 1, glowingEyes = false } = {}) {
+  const g = new THREE.Group();
+  const cloth = new THREE.MeshStandardMaterial({ color, roughness: 0.95 });
+  const flesh = new THREE.MeshStandardMaterial({ color: skin, roughness: 0.9 });
+  const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.75 * tall, 1.8 * tall, 3, 7), cloth); body.position.y = 2.3 * tall; g.add(body);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.7 * tall, 7, 5), flesh); head.position.y = 4.1 * tall; g.add(head);
+  for (const s of [-1, 1]) {
+    const arm = new THREE.Mesh(new THREE.CapsuleGeometry(0.18 * tall, 1.3 * tall, 2, 5), flesh); arm.position.set(s * 0.85 * tall, 2.5 * tall, 0.05); arm.rotation.z = s * 0.1; g.add(arm);
+    if (glowingEyes) {
+      const eye = new THREE.Mesh(new THREE.SphereGeometry(0.08, 5, 4), new THREE.MeshBasicMaterial({ color: 0xffc46a })); eye.position.set(s * 0.24 * tall, 4.2 * tall, 0.6 * tall); g.add(eye);
+    }
+  }
+  g.scale.setScalar(scale);
+  return g;
+}
+function makeSpider(scale = 1) {
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.SphereGeometry(1.3, 8, 6), new THREE.MeshStandardMaterial({ color: 0x221d1a, roughness: 0.6 })); body.position.y = 1.3; g.add(body);
+  const legMat = new THREE.MeshStandardMaterial({ color: 0x1a1614, roughness: 0.7 });
+  for (let i = 0; i < 8; i++) {
+    const a = (i / 8) * Math.PI * 2;
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.12, 3.2, 4), legMat);
+    leg.position.set(Math.cos(a) * 1.2, 1.1, Math.sin(a) * 1.2);
+    leg.rotation.z = Math.PI / 2.6; leg.rotation.y = -a; g.add(leg);
+  }
+  g.scale.setScalar(scale); return g;
+}
+function makeDragon(scale = 1) {
+  const g = new THREE.Group();
+  const green = new THREE.MeshStandardMaterial({ color: 0x3f6b36, roughness: 0.8 });
+  const dark = new THREE.MeshStandardMaterial({ color: 0x2a4a28, roughness: 0.8 });
+  const body = new THREE.Mesh(new THREE.CapsuleGeometry(1.8, 4.4, 3, 8), green); body.rotation.z = Math.PI / 2; body.position.y = 3; g.add(body);
+  const neck = new THREE.Mesh(new THREE.CapsuleGeometry(0.8, 3, 2, 7), green); neck.position.set(0, 4.2, 3.2); neck.rotation.x = 0.6; g.add(neck);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(1.2, 7, 5), green); head.position.set(0, 5.8, 4.6); g.add(head);
+  for (const s of [-1, 1]) {
+    const wing = new THREE.Mesh(new THREE.ConeGeometry(3.4, 7, 4), dark); wing.position.set(s * 2.8, 4.2, -0.5); wing.rotation.z = s * -1.15; wing.scale.z = 0.18; g.add(wing);
+    const eye = new THREE.Mesh(new THREE.SphereGeometry(0.12, 5, 4), new THREE.MeshBasicMaterial({ color: 0xffd36e })); eye.position.set(s * 0.5, 6.1, 5.2); g.add(eye);
+  }
+  const tail = new THREE.Mesh(new THREE.ConeGeometry(0.6, 5, 6), green); tail.position.set(0, 2.6, -4.4); tail.rotation.x = -1.1; g.add(tail);
+  g.scale.setScalar(scale); return g;
+}
+function makeTwig(scale = 1) {
+  const g = new THREE.Group();
+  const wood = new THREE.MeshStandardMaterial({ color: 0x4b3a26, roughness: 1 });
+  const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.35, 1.6, 2, 5), wood); body.position.y = 1.5; g.add(body);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.45, 6, 4), wood); head.position.y = 2.9; g.add(head);
+  for (const s of [-1, 1]) for (let i = 0; i < 3; i++) {
+    const branch = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.08, 1.3, 3), wood);
+    branch.position.set(s * (0.5 + i * 0.18), 1.5 + i * 0.3, 0); branch.rotation.z = s * (0.8 + i * 0.2); g.add(branch);
+  }
+  g.scale.setScalar(scale); return g;
+}
+function makeStirge(scale = 1) {
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.35, 6, 4), new THREE.MeshStandardMaterial({ color: 0x5a2a22, roughness: 0.8 })); body.position.y = 2; g.add(body);
+  for (const s of [-1, 1]) {
+    const wing = new THREE.Mesh(new THREE.ConeGeometry(0.5, 1.4, 3), new THREE.MeshStandardMaterial({ color: 0x3a1c18, side: THREE.DoubleSide })); wing.position.set(s * 0.5, 2.2, 0); wing.rotation.z = s * -1.2; g.add(wing);
+  }
+  const beak = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.7, 4), new THREE.MeshStandardMaterial({ color: 0x2a1a14 })); beak.position.set(0, 1.9, 0.45); beak.rotation.x = Math.PI / 2; g.add(beak);
+  g.scale.setScalar(scale); return g;
+}
+function makeOwlbear(scale = 1) {
+  const g = new THREE.Group();
+  const fur = new THREE.MeshStandardMaterial({ color: 0x5d4a32, roughness: 1 });
+  const body = new THREE.Mesh(new THREE.CapsuleGeometry(1.4, 2.6, 3, 7), fur); body.position.y = 2.4; g.add(body);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(1.1, 8, 6), fur); head.position.set(0, 4.2, 0.7); g.add(head);
+  const beak = new THREE.Mesh(new THREE.ConeGeometry(0.35, 1.1, 5), new THREE.MeshStandardMaterial({ color: 0xc9a24a, roughness: 0.7 })); beak.position.set(0, 4.1, 1.7); beak.rotation.x = Math.PI / 2; g.add(beak);
+  for (const s of [-1, 1]) {
+    const ear = new THREE.Mesh(new THREE.ConeGeometry(0.28, 0.8, 4), fur); ear.position.set(s * 0.65, 5.1, 0.6); g.add(ear);
+    const claw = new THREE.Mesh(new THREE.CapsuleGeometry(0.25, 1.2, 2, 5), fur); claw.position.set(s * 1.1, 1.2, 0.4); g.add(claw);
+  }
+  g.scale.setScalar(scale); return g;
+}
+function makeMonster(id, scale = 1) {
+  const key = String(id).toLowerCase();
+  if (key.includes('dragon')) return makeDragon(scale * 1.5);
+  if (key.includes('owl')) return makeOwlbear(scale * 1.2);
+  if (key.includes('spider')) return makeSpider(scale);
+  if (key.includes('twig')) return makeTwig(scale);
+  if (key.includes('stirge')) return makeStirge(scale * 1.4);
+  if (key.includes('wolf')) return makeWolf(scale);
+  if (key.includes('bugbear')) return makeBugbear(scale * 1.15);
+  if (key.includes('skeleton')) return makeHumanoid({ color: 0x8a8172, skin: 0xcfc3a8, scale, tall: 0.95, glowingEyes: true });
+  if (key.includes('zombie')) return makeHumanoid({ color: 0x3d4a32, skin: 0x7a8a62, scale, tall: 1, glowingEyes: true });
+  if (key.includes('ghoul')) return makeHumanoid({ color: 0x4a3f36, skin: 0xa89a82, scale, tall: 0.95, glowingEyes: true });
+  if (key.includes('goblin')) return makeGoblin(scale);
+  if (key.includes('nezznar') || key.includes('iarno') || key.includes('mage') || key.includes('doppelganger')) return makeHumanoid({ color: 0x2a2230, skin: 0x6a5a6a, scale, tall: 1.05, glowingEyes: true });
+  return makeHumanoid({ color: 0x3d2f22, skin: 0xa8845f, scale, tall: 1, glowingEyes: false });
+}
+
 function makeHero() {
   const g = new THREE.Group();
   const cloak = new THREE.MeshStandardMaterial({ color: 0x4b3224, roughness: 0.95 });
@@ -481,15 +683,16 @@ function makeHero() {
 
 function makeWalls(map, areas, cx, cz) {
   const group = new THREE.Group();
-  const wallMat = new THREE.MeshStandardMaterial({ color: 0x3a3027, roughness: 1, flatShading: true, emissive: 0x0b0907, emissiveIntensity: 0.7 });
-  const edgeMat = new THREE.MeshStandardMaterial({ color: 0x4a3d30, roughness: 1, flatShading: true, emissive: 0x0b0907, emissiveIntensity: 0.6 });
+  const wallMat = new THREE.MeshStandardMaterial({ color: map.kind === 'town' ? 0x6b5540 : map.kind === 'site' ? 0x564736 : 0x3a3027, roughness: 1, flatShading: true, emissive: 0x0b0907, emissiveIntensity: 0.5 });
+  const edgeMat = new THREE.MeshStandardMaterial({ color: map.kind === 'town' ? 0x7a6248 : 0x4a3d30, roughness: 1, flatShading: true, emissive: 0x0b0907, emissiveIntensity: 0.45 });
   const connSegs = (map.connections || []).map((c) => {
     const a = areas.find((x) => x.area_id === c.from), b = areas.find((x) => x.area_id === c.to);
     return a && b ? [a.centroid, b.centroid, c.type, c.width_ft || 5] : null;
   }).filter(Boolean);
   for (const area of areas) {
     const pts = area.footprint;
-    const h = Math.min(16, Math.max(8, area.ceiling_ft || 12)) * rand(0.82, 1.02);
+    const maxH = map.kind === 'town' ? 10 : map.kind === 'site' ? 8 : 16;
+    const h = Math.min(maxH, Math.max(6, area.ceiling_ft || maxH)) * rand(0.82, 1.02);
     for (let i = 0; i < pts.length; i++) {
       const p1 = pts[i], p2 = pts[(i + 1) % pts.length];
       const dx = p2[0] - p1[0], dz = p2[1] - p1[1];
@@ -524,7 +727,7 @@ function makeWalls(map, areas, cx, cz) {
     }
   }
   // door / passage frames
-  for (const c of map.connections || []) {
+  if (map.kind === 'dungeon') for (const c of map.connections || []) {
     if (!['door','gate','stairs','stone_steps','main_passage','tunnel','mine_tunnel','double_door','corridor','curtain'].includes(c.type)) continue;
     const a = areas.find((x) => x.area_id === c.from), b = areas.find((x) => x.area_id === c.to);
     if (!a || !b) continue;
@@ -588,8 +791,22 @@ function makeCaveMouth(cx, cz) {
   return g;
 }
 
+
+function makeRoof(area, cx, cz, map) {
+  const shape = new THREE.Shape();
+  const pts = area.footprint;
+  shape.moveTo(pts[0][0] - cx, -(pts[0][1] - cz));
+  for (let i = 1; i < pts.length; i++) shape.lineTo(pts[i][0] - cx, -(pts[i][1] - cz));
+  shape.closePath();
+  const geo = new THREE.ExtrudeGeometry(shape, { depth: 0.5, bevelEnabled: false });
+  geo.rotateX(-Math.PI / 2);
+  const mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: map.kind === 'town' ? 0x6a3e28 : 0x4a2f22, roughness: 0.95 }));
+  mesh.position.y = 8.6;
+  return mesh;
+}
+
 /* ------------------------------------------------------------------ build */
-export function buildWorld({ map, crossref, rules }) {
+export function buildWorld({ map, crossref, rules, spawnNo = 1 }) {
   const group = new THREE.Group();
   const cx = map.canvas.width / 2;
   const cz = map.canvas.height / 2;
@@ -598,26 +815,35 @@ export function buildWorld({ map, crossref, rules }) {
   const floorTex = makeFloorTexture();
   const rulesById = new Map((rules?.rules || []).map((r) => [r.id, r.title]));
   const crById = new Map((crossref?.records || []).map((r) => [r.record_id, r]));
+  const outdoor = OUTDOOR.has(map.kind);
 
-  // cave shell
+  // cave shell / outdoor ground
   const radius = Math.max(map.canvas.width, map.canvas.height) * 0.72;
-  const shell = new THREE.Mesh(
-    new THREE.CylinderGeometry(radius, radius * 1.04, 92, 40, 1, true),
-    new THREE.MeshStandardMaterial({ color: 0x171310, roughness: 1, side: THREE.BackSide })
-  );
-  shell.position.y = 45; group.add(shell);
-  const ceiling = new THREE.Mesh(
-    new THREE.CircleGeometry(radius, 40),
-    new THREE.MeshStandardMaterial({ color: 0x0d0b09, roughness: 1, side: THREE.DoubleSide })
-  );
-  ceiling.rotation.x = Math.PI / 2; ceiling.position.y = 44; group.add(ceiling);
-  const voidPlane = new THREE.Mesh(
-    new THREE.PlaneGeometry(map.canvas.width * 2, map.canvas.height * 2),
-    new THREE.MeshStandardMaterial({ color: 0x070605, roughness: 1 })
-  );
-  voidPlane.rotation.x = -Math.PI / 2; voidPlane.position.y = -0.7; group.add(voidPlane);
+  if (!outdoor) {
+    const shell = new THREE.Mesh(
+      new THREE.CylinderGeometry(radius, radius * 1.04, 92, 40, 1, true),
+      new THREE.MeshStandardMaterial({ color: 0x171310, roughness: 1, side: THREE.BackSide })
+    );
+    shell.position.y = 45; group.add(shell);
+    const ceiling = new THREE.Mesh(
+      new THREE.CircleGeometry(radius, 40),
+      new THREE.MeshStandardMaterial({ color: 0x0d0b09, roughness: 1, side: THREE.DoubleSide })
+    );
+    ceiling.rotation.x = Math.PI / 2; ceiling.position.y = 44; group.add(ceiling);
+    const voidPlane = new THREE.Mesh(
+      new THREE.PlaneGeometry(map.canvas.width * 2, map.canvas.height * 2),
+      new THREE.MeshStandardMaterial({ color: 0x070605, roughness: 1 })
+    );
+    voidPlane.rotation.x = -Math.PI / 2; voidPlane.position.y = -0.7; group.add(voidPlane);
+  } else {
+    const ground = new THREE.Mesh(
+      new THREE.PlaneGeometry(map.canvas.width * 2.2, map.canvas.height * 2.2),
+      new THREE.MeshStandardMaterial({ color: map.kind === 'battlemap' ? 0x4b462f : 0x3f4a2f, roughness: 1 })
+    );
+    ground.rotation.x = -Math.PI / 2; ground.position.y = -0.6; group.add(ground);
+  }
 
-  group.add(makeWalls(map, map.areas.map((a) => ({ ...a, centroid: polygonCentroid(a.footprint) })), cx, cz));
+  if (map.kind !== 'battlemap') group.add(makeWalls(map, map.areas.map((a) => ({ ...a, centroid: polygonCentroid(a.footprint) })), cx, cz));
   if (map.id === 'map-cragmaw-hideout') { const mouth = makeCaveMouth(cx, cz); group.add(mouth); group.userData.caveMouth = mouth; }
 
   // floors + edges + labels
@@ -648,25 +874,42 @@ export function buildWorld({ map, crossref, rules }) {
     byId.set(a.area_id, area);
   });
 
+  if (map.kind === 'town') {
+    for (const area of areas) {
+      if (/绿地|果园|农田|广场|小径|林地/.test(area.name)) continue;
+      if ((area.ceiling_ft || 0) < 10) continue;
+      group.add(makeRoof(area, cx, cz, map));
+    }
+  }
+
   // water + bridge
   const water = makeWater(map, cx, cz);
   if (water) group.add(water);
   const bridge = makeBridge(BRIDGE[map.id], cx, cz);
   if (bridge) group.add(bridge);
 
-  // rocks / stalagmites around the shell
-  for (let i = 0; i < 16; i++) {
-    const a = (i / 26) * Math.PI * 2 + rand(-0.1, 0.1);
-    const r = radius * rand(0.86, 0.98);
-    const rock = makeRock(Math.cos(a) * r, Math.sin(a) * r, rand(1.2, 3.6));
-    rock.position.y = rand(2, 10); group.add(rock);
-  }
-  for (let i = 0; i < 10; i++) {
-    const a = rand(0, Math.PI * 2); const r = rand(radius * 0.35, radius * 0.8);
-    const x = Math.cos(a) * r, z = Math.sin(a) * r;
-    if (!pointInAny(x + cx, z + cz, map.areas)) continue;
-    if (rand() < 0.5) group.add(makeStalagmite(x, z, rand(2, 7)));
-    else group.add(makeRock(x, z, rand(0.4, 1.1)));
+  // rocks / trees around the shell
+  if (!outdoor) {
+    for (let i = 0; i < 16; i++) {
+      const a = (i / 16) * Math.PI * 2 + rand(-0.1, 0.1);
+      const r = radius * rand(0.86, 0.98);
+      const rock = makeRock(Math.cos(a) * r, Math.sin(a) * r, rand(1.2, 3.6));
+      rock.position.y = rand(2, 10); group.add(rock);
+    }
+    for (let i = 0; i < 10; i++) {
+      const a = rand(0, Math.PI * 2); const r = rand(radius * 0.35, radius * 0.8);
+      const x = Math.cos(a) * r, z = Math.sin(a) * r;
+      if (!pointInAny(x + cx, z + cz, map.areas)) continue;
+      if (rand() < 0.5) group.add(makeStalagmite(x, z, rand(2, 7)));
+      else group.add(makeRock(x, z, rand(0.4, 1.1)));
+    }
+  } else {
+    for (let i = 0; i < 34; i++) {
+      const a = rand(0, Math.PI * 2); const r = rand(radius * 0.72, radius * 1.02);
+      const x = Math.cos(a) * r, z = Math.sin(a) * r;
+      if (pointInAny(x + cx, z + cz, map.areas)) continue;
+      group.add(rand() < 0.65 ? makeTree(x, z, rand(0.7, 1.4)) : makeBush(x, z, rand(0.8, 1.6)));
+    }
   }
 
   // props
@@ -700,6 +943,14 @@ export function buildWorld({ map, crossref, rules }) {
       else if (/雕像/.test(label)) obj = makeStatue(x, z);
       else if (/锁链|铁棍/.test(label)) obj = makeBones(x, z);
       else if (/灌木|荆棘|树丛/.test(label)) obj = makeBush(x, z, rand(0.7, 1.4));
+      else if (/树|森林|果园|苹果树/.test(label)) obj = makeTree(x, z, rand(0.7, 1.3));
+      else if (/马/.test(label)) obj = makeHorse(x, z, /死马/.test(label));
+      else if (/车|货车|马车/.test(label)) obj = makeCart(x, z, rand(-0.4, 0.4));
+      else if (/井/.test(label)) obj = makeWell(x, z);
+      else if (/告示|牌/.test(label)) obj = makeBoard(x, z, rand(-0.3, 0.3));
+      else if (/农田|田地/.test(label)) obj = makeField(x, z, rand(12, 24), rand(8, 16));
+      else if (/摊位|市场/.test(label)) obj = makeStall(x, z, rand(-0.4, 0.4));
+      else if (/建筑|房屋|小屋|农舍|酒馆|商店|旅舍|大厅|神殿|庄园|塔|工坊|住宅|小院|门廊|马厩/.test(label)) obj = null;
       else if (/水池|瀑布|桥/.test(label)) obj = null;
       else if (rand() < 0.45) obj = makeCrate(x, z, rand(0.5, 0.9));
       if (obj) { group.add(obj); props.push(obj); }
@@ -707,7 +958,7 @@ export function buildWorld({ map, crossref, rules }) {
   }
 
   // guaranteed central fire pit (area 8)
-  const klargArea = areas.find((a) => a.no === 8);
+  const klargArea = map.id === 'map-cragmaw-hideout' ? areas.find((a) => a.no === 8) : null;
   if (klargArea) {
     const fire = addFire(group, klargArea.world.x, klargArea.world.z, 1.35, true);
     fire.userData.light.intensity = 50;
@@ -720,20 +971,13 @@ export function buildWorld({ map, crossref, rules }) {
     const list = area.record?.monsters || [];
     let slot = 0;
     for (const m of list) {
-      const count = Math.min(6, Math.max(1, Number(m.count) || 1));
+      const count = Math.min(4, Math.max(1, Number(m.count) || 1));
       for (let i = 0; i < count; i++) {
         const id = String(m.monster_id || '');
-        const isBoss = /bugbear/.test(id) && area.no === 8;
-        const isWolf = /wolf/.test(id);
-        const isGoblin = /goblin/.test(id);
-        if (!isBoss && !isWolf && !isGoblin && !/bugbear/.test(id)) continue;
+        const isBoss = /bugbear/.test(id) && area.no === 8 && map.id === 'map-cragmaw-hideout';
         const angle = (slot / Math.max(1, count)) * Math.PI * 2 + rand(-0.5, 0.5);
-        const r = rand(4, 12);
-        const isBugbear = /bugbear/.test(id);
-        const obj = isBoss ? makeBugbear(1.45)
-          : isWolf ? makeWolf(rand(0.9, 1.2))
-          : isBugbear ? makeBugbear(rand(1.0, 1.2))
-          : makeGoblin(rand(0.9, 1.15));
+        const r = rand(4, 13);
+        const obj = makeMonster(id, isBoss ? 1.45 : rand(0.9, 1.12));
         obj.position.set(area.world.x + Math.cos(angle) * r, 0, area.world.z + Math.sin(angle) * r);
         obj.rotation.y = rand(0, Math.PI * 2);
         obj.userData.base = obj.position.clone();
@@ -754,15 +998,15 @@ export function buildWorld({ map, crossref, rules }) {
 
   // hero
   const hero = makeHero();
-  const spawnArea = areas.find((a) => a.no === 1) || areas[0];
+  const spawnArea = areas.find((a) => a.no === Number(spawnNo)) || areas.find((a) => a.no === 1) || areas[0];
   hero.position.copy(spawnArea.world).add(new THREE.Vector3(0, 0, 8));
   group.add(hero);
 
   // torches at key spots
   const torches = [];
-  const torchSpots = [
+  const torchSpots = map.id === 'map-cragmaw-hideout' ? [
     [areas.find((a) => a.no === 5)?.world, 2],
-  ].filter(([v]) => v);
+  ].filter(([v]) => v) : [];
   for (const [v, n] of torchSpots) {
     for (let i = 0; i < n; i++) {
       const angle = (i / n) * Math.PI * 2;
