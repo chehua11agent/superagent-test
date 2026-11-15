@@ -144,7 +144,7 @@ md.push('### 4.2 对照覆盖');
 md.push('');
 const cov = cr.coverage;
 md.push(`- 源记录 **${cov.records_total}** 条（含 4 个分卷的场景、红烙印/雷霆树镇/克拉格莫城堡的内嵌区域，以及 1 条全局规则记录）。`);
-md.push(`- 检定/豁免 **${cov.checks_total}** 条，已映射 **${cov.checks_mapped}** 条；奖励 **${cov.rewards_total}** 条，已映射 **${cov.rewards_mapped}** 条；危险 **${cov.hazards_total}** 条；怪物条目 **${cov.monsters_total}** 条。`);
+md.push(`- 检定/豁免/流程判定 **${cov.checks_total}** 条，已映射 **${cov.checks_mapped}** 条；奖励 **${cov.rewards_total}** 条，已映射 **${cov.rewards_mapped}** 条；危险 **${cov.hazards_total}** 条；怪物条目 **${cov.monsters_total}** 条。`);
 md.push(`- 使用规则 **${cov.rules_used.length}** 条，未使用 **${cov.rules_unused.length}** 条；没有未解析的检定或奖励引用。`);
 md.push(`- 缺少附录数据卡的怪物：${cov.missing_stat_blocks.map((x) => '`' + x + '`').join('、')}。${cov.missing_stat_block_note || ''}`);
 md.push('');

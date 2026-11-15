@@ -54,7 +54,7 @@
   "hazards_total": 8,
   "rewards_total": 103,
   "rewards_mapped": 103,
-  "unassigned_rewards": [
+  "global_rewards": [
    {
     "reward_id": "reward-hook-payment",
     "type": "currency",
@@ -65,6 +65,7 @@
     ]
    }
   ],
+  "global_reward_note": "未绑定到具体场景/区域的全局奖励（如开场护送报酬）挂在 module:lmop 上。",
   "unresolved_rewards": [],
   "monsters_total": 73,
   "missing_stat_blocks": [
