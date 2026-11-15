@@ -48,7 +48,7 @@
 
 | 原型 | 内容 |
 | --- | --- |
-| [`../prototype/lmop-3d/`](../prototype/lmop-3d/) | 把 `data/lmop/maps.json` 的克拉格莫窝点生成成可走入的 3D 洞穴；含区域触发、HUD、小地图、移动端摇杆 |
+| [`../prototype/lmop-3d/`](../prototype/lmop-3d/) | 把 `data/lmop/maps.json` 的 8 张地图生成成可切换的 3D 场景集：克拉格莫窝点、红烙印、城堡、潮音洞、雷霆树镇、凡度林、突袭点与剑湾 3D 沙盘 |
 
 ## 来源
 
