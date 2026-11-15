@@ -4,7 +4,7 @@
   "generatedDate": "2026-11-15",
   "schema": {
     "description": "《凡戴尔的失落矿坑》第 1–15 页的结构化派生数据：章节、场景、NPC、怪物、检定 DC、奖励与经验里程碑。",
-    "idConventions": "所有记录使用 lmop 前缀的稳定 slug；场景 id 以 scene- 开头，NPC 以 npc- 开头，怪物以 monster- 开头，检定以 check- 开头，奖励以 reward- 开头。",
+    "idConventions": "所有记录使用稳定的 slug；场景 id 以 scene- 开头，NPC 以 npc- 开头，怪物以 monster- 开头，检定以 check- 开头，奖励以 reward- 开头。",
     "crossReferences": "场景通过 sceneIds/nextSceneId/childSceneIds 关联；检定通过 sceneId 归属；奖励通过 sceneId 与 itemIds 关联；怪物通过 appearances[].sceneId 关联。",
     "copyright": "本文件只记录结构化事实、数值与摘要，不收录模组原文；引用页码均为书页页码。"
   },
@@ -114,12 +114,12 @@
     ],
     "gaps": [
       "目录标注的附录 B（怪物，第 78 页起）与备注（第 89 页起）未包含在该 PDF 中；PDF 共 80 页，第 79 页为免责声明、第 80 页为空白模板。",
-      "本文件只覆盖第 1–15 页；PART 2 及以后由其他分卷处理。",
+      "本文件只覆盖第 1–15 页；PART 2 及以后不在本文件范围内。",
       "第 3 页区域地图与第 6、8 页战斗地图为图像；本文件只记录图表元数据、比例与图例，不转录地图图像。"
     ]
   },
   "party": {
-    "size": "4–5 名玩家",
+    "size": "4–5 名 1 级 PC",
     "startLevel": 1,
     "endLevel": 5,
     "levelAfterChunk": 2,
@@ -376,7 +376,7 @@
           "note": "PC 无法突袭哥布林；哥布林可突袭部分 PC。哥布林用 d20+6 隐匿对抗 PC 被动感知；被动感知低于结果的 PC 被突袭，战斗第一轮无法行动。"
         },
         "morale": "3 只哥布林被击败后，最后 1 只尝试逃向小径。",
-        "tactics": "哥布林优先攻击靠近马尸的 PC；远程哥布林利用灌木掩护。"
+        "tactics": "2 只哥布林从灌木中冲出近战，2 只在 30 尺外远程攻击；远程哥布林利用灌木掩护。"
       },
       "investigation": {
         "horses": "若使用“在凡度林见”开场，近距离调查可发现两匹马属于刚铎与西达尔，已死约 1 天，箭伤是死因。",
@@ -488,7 +488,7 @@
         },
         {
           "reveal": "刚铎和地图已被送往格罗尔王；人类保镖西达尔被关在“储藏室”（区域 6）。",
-          "page": 8
+          "page": 9
         }
       ],
       "checkIds": [
@@ -1002,7 +1002,7 @@
         13
       ],
       "role": "哥布林头目；克拉格莫窝点二首领",
-      "status": "区域 6 首领；可谈判、被击败或被绕过",
+      "status": "区域 6 首领；可谈判或被击败",
       "summary": "一米克想赶走克拉格当一把手。看到 PC 往上走时，他会抓起西达尔拖到 10 尺崖边威胁停手，并提出用克拉格的头换西达尔；即使交易达成，他也会强索更多赎金。",
       "hp": 12,
       "tactics": "抓西达尔当人质；若 PC 拒绝提议，把西达尔推下 10 尺崖（1d6 钝击，HP 降到 0），然后继续战斗。",
@@ -1203,7 +1203,7 @@
       "name": "狮盾商会",
       "nameEn": "Lionshield Coster",
       "pages": [
-        6,
+        7,
         14
       ],
       "summary": "凡度林的商行，货物上有蓝色狮子徽记；利涅·灰风是其成员。PC 归还被抢补给可获得 50 gp 与商会的友谊。",
@@ -1444,7 +1444,8 @@
       "success": "哥布林隐匿结果高于 PC 被动感知时，该 PC 被突袭，战斗第一轮无法行动。",
       "failure": "PC 未被突袭。",
       "sourceLabel": "隐匿技能调整 +6 / 被动洞察",
-      "notes": "原文称“被动感知（洞察）”；本文件按 5e 标准技能名写作“察觉/感知”。"
+      "notes": "原文称“被动感知（洞察）”；本文件按 5e 标准技能名写作“察觉/感知”。",
+      "actor": "哥布林"
     },
     {
       "id": "check-trail-survival",
@@ -1712,7 +1713,7 @@
           "unit": "sp"
         }
       ],
-      "sourceNote": "钱袋内容写在区域 8 后的“宝藏”节；属于区域 6 的一米克。"
+      "sourceNote": "钱袋内容写在区域 6 之后的“宝藏”节（第 13 页）；属于区域 6 的一米克。"
     },
     {
       "id": "reward-sildar-escort",
@@ -1841,7 +1842,7 @@
       "id": "item-gold-teeth",
       "name": "金牙",
       "pages": [
-        14
+        13
       ],
       "type": "treasure",
       "quantity": 3,
@@ -1853,7 +1854,7 @@
       "id": "item-sildar-equipment",
       "name": "西达尔的装备",
       "pages": [
-        14
+        13
       ],
       "type": "lost-item",
       "description": "西达尔的装备已经和刚铎一起送到克拉格莫城堡；本段无法取回。",
@@ -2092,7 +2093,8 @@
           "nameZh": "树"
         }
       ],
-      "sceneId": "scene-goblin-ambush"
+      "sceneId": "scene-goblin-ambush",
+      "notes": "图例中文为本文件直译，便于检索；地图原文为英文。"
     },
     {
       "id": "map-cragmaw-hideout",
@@ -2148,7 +2150,8 @@
           "nameZh": "补给"
         }
       ],
-      "sceneId": "scene-cragmaw-hideout"
+      "sceneId": "scene-cragmaw-hideout",
+      "notes": "图例中文为本文件直译，便于检索；地图原文为英文。"
     }
   ],
   "rules": [
@@ -2178,7 +2181,7 @@
     {
       "id": "rule-rest",
       "title": "短休息与长休息",
-      "page": 6,
+      "page": 7,
       "summary": "遇袭后队伍可能需要休息；具体规则见规则书的短休息与长休息部分。"
     },
     {
@@ -2190,7 +2193,7 @@
     {
       "id": "rule-npc-party",
       "title": "NPC 队员",
-      "page": 12,
+      "page": 13,
       "summary": "NPC 短期加入队伍时：让玩家做重要决定；NPC 不会无理由置自己于不利；NPC 有自己的生活与目标，只在有益时加入；NPC 若对战斗胜利起重要作用，也要平分经验。"
     },
     {
