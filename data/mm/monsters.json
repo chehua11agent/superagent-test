@@ -72581,13 +72581,16 @@
         "uses": null,
         "legendary_cost": null,
         "damage_dice": [
-          "2d6 + 4"
+          "2d6 + 4",
+          "7d6"
         ],
         "average_damage": [
-          11
+          11,
+          24
         ],
         "damage_types": [
-          "穿刺"
+          "穿刺",
+          "毒素"
         ],
         "parts": [
           {
@@ -72595,6 +72598,12 @@
             "average_damage": 11,
             "damage_type": "穿刺",
             "save_dc": null
+          },
+          {
+            "damage_dice": "7d6",
+            "average_damage": 24,
+            "damage_type": "毒素",
+            "save_dc": 15
           }
         ]
       }
@@ -74885,13 +74894,16 @@
         "uses": null,
         "legendary_cost": null,
         "damage_dice": [
-          "2d4 + 3"
+          "2d4 + 3",
+          "3d6"
         ],
         "average_damage": [
-          8
+          8,
+          10
         ],
         "damage_types": [
-          "挥砍"
+          "挥砍",
+          "毒素"
         ],
         "parts": [
           {
@@ -74899,6 +74911,12 @@
             "average_damage": 8,
             "damage_type": "挥砍",
             "save_dc": null
+          },
+          {
+            "damage_dice": "3d6",
+            "average_damage": 10,
+            "damage_type": "毒素",
+            "save_dc": 14
           }
         ]
       },
@@ -89543,14 +89561,17 @@
         "legendary_cost": null,
         "damage_dice": [
           "2d6",
-          "1d6"
+          "1d6",
+          "4d6"
         ],
         "average_damage": [
           7,
-          3
+          3,
+          14
         ],
         "damage_types": [
-          "穿刺"
+          "穿刺",
+          "毒素"
         ],
         "parts": [
           {
@@ -89564,6 +89585,12 @@
             "average_damage": 3,
             "damage_type": "穿刺",
             "save_dc": null
+          },
+          {
+            "damage_dice": "4d6",
+            "average_damage": 14,
+            "damage_type": "毒素",
+            "save_dc": 10
           }
         ]
       }
@@ -92073,13 +92100,16 @@
         "uses": null,
         "legendary_cost": null,
         "damage_dice": [
-          "1d6 + 3"
+          "1d6 + 3",
+          "7d6"
         ],
         "average_damage": [
-          6
+          6,
+          24
         ],
         "damage_types": [
-          "穿刺"
+          "穿刺",
+          "毒素"
         ],
         "parts": [
           {
@@ -92087,6 +92117,12 @@
             "average_damage": 6,
             "damage_type": "穿刺",
             "save_dc": null
+          },
+          {
+            "damage_dice": "7d6",
+            "average_damage": 24,
+            "damage_type": "毒素",
+            "save_dc": 15
           }
         ]
       },

@@ -196,3 +196,16 @@ test('query sorting and result shape are stable', () => {
   assert.equal(ancient[0].name, '远古红龙');
   assert.equal(ancient[0].size[0], '超巨型');
 });
+
+test('save-for-half secondary damage is kept as its own part', () => {
+  const wyvern = byEn('Wyvern');
+  const stinger = actionsNamed(wyvern, 'Stinger');
+  assert.deepEqual(stinger.damage_dice, ['2d6 + 4', '7d6']);
+  assert.deepEqual(stinger.damage_types, ['穿刺', '毒素']);
+  assert.equal(stinger.parts[1].save_dc, 15);
+  assert.equal(stinger.parts[1].damage_type, '毒素');
+
+  const assassin = actionsNamed(byEn('Assassin'), 'Shortsword');
+  assert.deepEqual(assassin.damage_dice, ['1d6 + 3', '7d6']);
+  assert.equal(assassin.parts[1].save_dc, 15);
+});

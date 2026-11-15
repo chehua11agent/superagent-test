@@ -594,6 +594,13 @@ const parseAction = (action, kind) => {
     statClause.match(/(?:射程|范围)\s*([0-9]+(?:\s*\/\s*[0-9]+)?)\s*(?:尺|英尺)/)?.[1]?.replace(/\s+/g, '') ?? null;
 
   const parts = parseDamageParts(damageClause ?? raw);
+  if (saveDc && saveSource && saveSource !== damageClause && /伤害减半/.test(saveSource)) {
+    for (const part of parseDamageParts(saveSource)) {
+      if (!parts.some((p) => p.damage_dice === part.damage_dice && p.average_damage === part.average_damage)) {
+        parts.push({ ...part, save_dc: saveDc });
+      }
+    }
+  }
   const damageDice = parts.map((p) => p.damage_dice);
   const averageDamage = parts.map((p) => p.average_damage);
   const damageTypes = unique(parts.flatMap((p) => [p.damage_type, ...(p.damage_type_options ?? [])]));

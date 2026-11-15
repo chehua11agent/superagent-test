@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-15T13:39:35.772Z",
+  "generated_at": "2026-11-15T15:37:34.835Z",
   "book": {
     "title": "Monster Manual",
     "edition": "2014",
@@ -89,8 +89,8 @@
     {
       "path": "data/mm/monsters.json",
       "records": 450,
-      "bytes": 2119297,
-      "sha256": "0f2d2a42054f79eeacda5745261f81f35580e0b5257e43f84d20bab9f85ca618"
+      "bytes": 2120125,
+      "sha256": "03b5d37b3ca2e3b724c8e4c01fc5c9e74274b6820c9e6c21d5ce9f6fd9e6cb80"
     },
     {
       "path": "data/mm/taxonomy.json",
