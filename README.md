@@ -1,15 +1,14 @@
-# superagent-test
+# superagent-test 原型预览
 
-dsh-superagent test repository.
+旧的一批游戏原型页已清理，保留单词算法与词库相关预览：
 
-## 拾词者 · 雾港（游戏原型）
+- [自适应词汇算法实验台](prototype/adaptive-vocab/)
+- [词汇实验室（Zork / ECDICT / FSRS / IRT）](prototype/lexicon-lab/)
+- [失落矿坑 · 单词检定](prototype/lost-mine/)
+- [连连看 + 道具卡](prototype/linkgame-cards/)
+- [无光城塞（Sunless Keep）](prototype/sunless-keep/)
 
-用英语玩的文字跑团《拾词者》第一章可玩原型：12 幕、48 个 CET-4 词、1/3/7/16 天复习、词行动与章节 BOSS。
+词库录入资料与 SRS 单词算法在主分支：
 
-```bash
-npm run serve   # http://127.0.0.1:4173/
-npm test        # SRS / 内容 / 通关集成测试
-npm run test:e2e # 10 个 Playwright 端到端测试
-```
-
-详细说明、已知边界与文件结构见 [`game/README.md`](game/README.md)。另有一个 10 词 / 3 幕 / 5 节点的内容位置样本：[`docs/sample-closing-notice.md`](docs/sample-closing-notice.md)，以及“认识 vs 会拼”的双鉴定（A/E/C 已接入）设计提案：[`docs/dual-check-design.md`](docs/dual-check-design.md)；剧情→词卡战斗：[`docs/story-card-combat-design.md`](docs/story-card-combat-design.md)。设计文档见 [PR #2](https://github.com/chehua11agent/superagent-test/pull/2)（`docs/cet4-vocab-rpg.md`，尚未合并）。
+- 词库数据：https://github.com/chehua11agent/superagent-test/tree/main/data
+- 单词算法：https://github.com/chehua11agent/superagent-test/blob/main/lib/srs.js
