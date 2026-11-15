@@ -1,0 +1,916 @@
+{
+  "abilities": [
+    {
+      "id": "phb:ability:str",
+      "type": "ability",
+      "name": "力量",
+      "name_en": "STR",
+      "skills": [
+        "phb:skill:athletics"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 173,
+        "srd": true
+      },
+      "brief": "力量（STR）"
+    },
+    {
+      "id": "phb:ability:dex",
+      "type": "ability",
+      "name": "敏捷",
+      "name_en": "DEX",
+      "skills": [
+        "phb:skill:acrobatics",
+        "phb:skill:sleight-of-hand",
+        "phb:skill:stealth"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 173,
+        "srd": true
+      },
+      "brief": "敏捷（DEX）"
+    },
+    {
+      "id": "phb:ability:con",
+      "type": "ability",
+      "name": "体质",
+      "name_en": "CON",
+      "skills": [],
+      "source": {
+        "book": "PHB",
+        "page": 173,
+        "srd": true
+      },
+      "brief": "体质（CON）"
+    },
+    {
+      "id": "phb:ability:int",
+      "type": "ability",
+      "name": "智力",
+      "name_en": "INT",
+      "skills": [
+        "phb:skill:arcana",
+        "phb:skill:history",
+        "phb:skill:investigation",
+        "phb:skill:nature",
+        "phb:skill:religion"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 173,
+        "srd": true
+      },
+      "brief": "智力（INT）"
+    },
+    {
+      "id": "phb:ability:wis",
+      "type": "ability",
+      "name": "感知",
+      "name_en": "WIS",
+      "skills": [
+        "phb:skill:animal-handling",
+        "phb:skill:insight",
+        "phb:skill:medicine",
+        "phb:skill:perception",
+        "phb:skill:survival"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 173,
+        "srd": true
+      },
+      "brief": "感知（WIS）"
+    },
+    {
+      "id": "phb:ability:cha",
+      "type": "ability",
+      "name": "魅力",
+      "name_en": "CHA",
+      "skills": [
+        "phb:skill:deception",
+        "phb:skill:intimidation",
+        "phb:skill:performance",
+        "phb:skill:persuasion"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 173,
+        "srd": true
+      },
+      "brief": "魅力（CHA）"
+    }
+  ],
+  "skills": [
+    {
+      "id": "phb:skill:arcana",
+      "type": "skill",
+      "name": "奥秘",
+      "name_en": "Arcana",
+      "ability": "智力",
+      "source": {
+        "book": "PHB",
+        "page": 177,
+        "srd": true
+      },
+      "brief": "奥秘 · 智力"
+    },
+    {
+      "id": "phb:skill:performance",
+      "type": "skill",
+      "name": "表演",
+      "name_en": "Performance",
+      "ability": "魅力",
+      "source": {
+        "book": "PHB",
+        "page": 179,
+        "srd": true
+      },
+      "brief": "表演 · 魅力"
+    },
+    {
+      "id": "phb:skill:perception",
+      "type": "skill",
+      "name": "察觉",
+      "name_en": "Perception",
+      "ability": "感知",
+      "source": {
+        "book": "PHB",
+        "page": 178,
+        "srd": true
+      },
+      "brief": "察觉 · 感知"
+    },
+    {
+      "id": "phb:skill:investigation",
+      "type": "skill",
+      "name": "调查",
+      "name_en": "Investigation",
+      "ability": "智力",
+      "source": {
+        "book": "PHB",
+        "page": 178,
+        "srd": true
+      },
+      "brief": "调查 · 智力"
+    },
+    {
+      "id": "phb:skill:insight",
+      "type": "skill",
+      "name": "洞悉",
+      "name_en": "Insight",
+      "ability": "感知",
+      "source": {
+        "book": "PHB",
+        "page": 178,
+        "srd": true
+      },
+      "brief": "洞悉 · 感知"
+    },
+    {
+      "id": "phb:skill:history",
+      "type": "skill",
+      "name": "历史",
+      "name_en": "History",
+      "ability": "智力",
+      "source": {
+        "book": "PHB",
+        "page": 177,
+        "srd": true
+      },
+      "brief": "历史 · 智力"
+    },
+    {
+      "id": "phb:skill:deception",
+      "type": "skill",
+      "name": "欺瞒",
+      "name_en": "Deception",
+      "ability": "魅力",
+      "source": {
+        "book": "PHB",
+        "page": 178,
+        "srd": true
+      },
+      "brief": "欺瞒 · 魅力"
+    },
+    {
+      "id": "phb:skill:sleight-of-hand",
+      "type": "skill",
+      "name": "巧手",
+      "name_en": "Sleight of Hand",
+      "ability": "敏捷",
+      "source": {
+        "book": "PHB",
+        "page": 177,
+        "srd": true
+      },
+      "brief": "巧手 · 敏捷"
+    },
+    {
+      "id": "phb:skill:survival",
+      "type": "skill",
+      "name": "求生",
+      "name_en": "Survival",
+      "ability": "感知",
+      "source": {
+        "book": "PHB",
+        "page": 178,
+        "srd": true
+      },
+      "brief": "求生 · 感知"
+    },
+    {
+      "id": "phb:skill:acrobatics",
+      "type": "skill",
+      "name": "特技",
+      "name_en": "Acrobatics",
+      "ability": "敏捷",
+      "source": {
+        "book": "PHB",
+        "page": 176,
+        "srd": true
+      },
+      "brief": "特技 · 敏捷"
+    },
+    {
+      "id": "phb:skill:intimidation",
+      "type": "skill",
+      "name": "威吓",
+      "name_en": "Intimidation",
+      "ability": "魅力",
+      "source": {
+        "book": "PHB",
+        "page": 179,
+        "srd": true
+      },
+      "brief": "威吓 · 魅力"
+    },
+    {
+      "id": "phb:skill:animal-handling",
+      "type": "skill",
+      "name": "驯兽",
+      "name_en": "Animal Handling",
+      "ability": "感知",
+      "source": {
+        "book": "PHB",
+        "page": 178,
+        "srd": true
+      },
+      "brief": "驯兽 · 感知"
+    },
+    {
+      "id": "phb:skill:medicine",
+      "type": "skill",
+      "name": "医药",
+      "name_en": "Medicine",
+      "ability": "感知",
+      "source": {
+        "book": "PHB",
+        "page": 178,
+        "srd": true
+      },
+      "brief": "医药 · 感知"
+    },
+    {
+      "id": "phb:skill:stealth",
+      "type": "skill",
+      "name": "隐匿",
+      "name_en": "Stealth",
+      "ability": "敏捷",
+      "source": {
+        "book": "PHB",
+        "page": 177,
+        "srd": true
+      },
+      "brief": "隐匿 · 敏捷"
+    },
+    {
+      "id": "phb:skill:persuasion",
+      "type": "skill",
+      "name": "游说",
+      "name_en": "Persuasion",
+      "ability": "魅力",
+      "source": {
+        "book": "PHB",
+        "page": 179,
+        "srd": true
+      },
+      "brief": "游说 · 魅力"
+    },
+    {
+      "id": "phb:skill:athletics",
+      "type": "skill",
+      "name": "运动",
+      "name_en": "Athletics",
+      "ability": "力量",
+      "source": {
+        "book": "PHB",
+        "page": 175,
+        "srd": true
+      },
+      "brief": "运动 · 力量"
+    },
+    {
+      "id": "phb:skill:nature",
+      "type": "skill",
+      "name": "自然",
+      "name_en": "Nature",
+      "ability": "智力",
+      "source": {
+        "book": "PHB",
+        "page": 178,
+        "srd": true
+      },
+      "brief": "自然 · 智力"
+    },
+    {
+      "id": "phb:skill:religion",
+      "type": "skill",
+      "name": "宗教",
+      "name_en": "Religion",
+      "ability": "智力",
+      "source": {
+        "book": "PHB",
+        "page": 178,
+        "srd": true
+      },
+      "brief": "宗教 · 智力"
+    }
+  ],
+  "actions": [
+    {
+      "id": "phb:action:disengage",
+      "type": "action",
+      "name": "撤离",
+      "name_en": "Disengage",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 192,
+        "srd": true
+      },
+      "brief": "撤离 · 1 动作"
+    },
+    {
+      "id": "phb:action:hide",
+      "type": "action",
+      "name": "躲藏",
+      "name_en": "Hide",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 192,
+        "srd": true
+      },
+      "brief": "躲藏 · 1 动作"
+    },
+    {
+      "id": "phb:action:attack",
+      "type": "action",
+      "name": "攻击",
+      "name_en": "Attack",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 192,
+        "srd": true
+      },
+      "brief": "攻击 · 1 分钟"
+    },
+    {
+      "id": "phb:action:dodge",
+      "type": "action",
+      "name": "回避",
+      "name_en": "Dodge",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 192,
+        "srd": true
+      },
+      "brief": "回避 · 1 动作"
+    },
+    {
+      "id": "phb:action:improvising-an-action",
+      "type": "action",
+      "name": "即兴发挥的一次动作",
+      "name_en": "Improvising an Action",
+      "time": "多类",
+      "source": {
+        "book": "PHB",
+        "page": 193,
+        "srd": false
+      },
+      "brief": "即兴发挥的一次动作 · 多类"
+    },
+    {
+      "id": "phb:action:dash",
+      "type": "action",
+      "name": "疾走",
+      "name_en": "Dash",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 192,
+        "srd": true
+      },
+      "brief": "疾走 · 1 动作"
+    },
+    {
+      "id": "phb:action:escape-a-grapple",
+      "type": "action",
+      "name": "结束擒抱",
+      "name_en": "Escape a Grapple",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 195,
+        "srd": true
+      },
+      "brief": "结束擒抱 · 1 动作"
+    },
+    {
+      "id": "phb:action:opportunity-attack",
+      "type": "action",
+      "name": "借机攻击",
+      "name_en": "Opportunity Attack",
+      "time": "1 反应",
+      "source": {
+        "book": "PHB",
+        "page": 195,
+        "srd": true
+      },
+      "brief": "借机攻击 · 1 反应"
+    },
+    {
+      "id": "phb:action:other-activity",
+      "type": "action",
+      "name": "其他动作",
+      "name_en": "Other Activity",
+      "time": "多类",
+      "source": {
+        "book": "PHB",
+        "page": 190,
+        "srd": true
+      },
+      "brief": "其他动作 · 多类"
+    },
+    {
+      "id": "phb:action:grapple",
+      "type": "action",
+      "name": "擒抱",
+      "name_en": "Grapple",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 195,
+        "srd": true
+      },
+      "brief": "擒抱 · 1 动作"
+    },
+    {
+      "id": "phb:action:cast-a-spell",
+      "type": "action",
+      "name": "施展法术",
+      "name_en": "Cast a Spell",
+      "time": "多类",
+      "source": {
+        "book": "PHB",
+        "page": 192,
+        "srd": true
+      },
+      "brief": "施展法术 · 多类"
+    },
+    {
+      "id": "phb:action:use-an-object",
+      "type": "action",
+      "name": "使用物件",
+      "name_en": "Use an Object",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 193,
+        "srd": true
+      },
+      "brief": "使用物件 · 1 动作"
+    },
+    {
+      "id": "phb:action:two-weapon-fighting",
+      "type": "action",
+      "name": "双武器战斗",
+      "name_en": "Two-Weapon Fighting",
+      "time": "1 附赠动作",
+      "source": {
+        "book": "PHB",
+        "page": 195,
+        "srd": true
+      },
+      "brief": "双武器战斗 · 1 附赠动作"
+    },
+    {
+      "id": "phb:action:search",
+      "type": "action",
+      "name": "搜索",
+      "name_en": "Search",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 193,
+        "srd": true
+      },
+      "brief": "搜索 · 1 动作"
+    },
+    {
+      "id": "phb:action:shove",
+      "type": "action",
+      "name": "推撞",
+      "name_en": "Shove",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 195,
+        "srd": true
+      },
+      "brief": "推撞 · 1 动作"
+    },
+    {
+      "id": "phb:action:stabilize-a-creature",
+      "type": "action",
+      "name": "稳定伤势",
+      "name_en": "Stabilize a Creature",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 197,
+        "srd": true
+      },
+      "brief": "稳定伤势 · 1 动作"
+    },
+    {
+      "id": "phb:action:help",
+      "type": "action",
+      "name": "协助",
+      "name_en": "Help",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 192,
+        "srd": true
+      },
+      "brief": "协助 · 1 动作"
+    },
+    {
+      "id": "phb:action:ready",
+      "type": "action",
+      "name": "预备",
+      "name_en": "Ready",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 193,
+        "srd": true
+      },
+      "brief": "预备 · 1 动作"
+    },
+    {
+      "id": "phb:action:end-concentration",
+      "type": "action",
+      "name": "终止专注",
+      "name_en": "End Concentration",
+      "time": "自由",
+      "source": {
+        "book": "PHB",
+        "page": 203,
+        "srd": true
+      },
+      "brief": "终止专注 · 自由"
+    },
+    {
+      "id": "phb:action:don-or-doff-a-shield",
+      "type": "action",
+      "name": "装备或卸除盾牌",
+      "name_en": "Don or Doff a Shield",
+      "time": "1 动作",
+      "source": {
+        "book": "PHB",
+        "page": 146,
+        "srd": true
+      },
+      "brief": "装备或卸除盾牌 · 1 动作"
+    }
+  ],
+  "languages": [
+    {
+      "id": "phb:language:dwarvish",
+      "type": "language",
+      "name": "矮人语",
+      "name_en": "Dwarvish",
+      "kind": "standard",
+      "kind_label": "标准",
+      "typical_speakers": [
+        "矮人"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "矮人语 · 标准语言"
+    },
+    {
+      "id": "phb:language:halfling",
+      "type": "language",
+      "name": "半身人语",
+      "name_en": "Halfling",
+      "kind": "standard",
+      "kind_label": "标准",
+      "typical_speakers": [
+        "半身人"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "半身人语 · 标准语言"
+    },
+    {
+      "id": "phb:language:thieves-cant",
+      "type": "language",
+      "name": "盗贼黑话",
+      "name_en": "Thieves' Cant",
+      "kind": "secret",
+      "kind_label": "秘密",
+      "typical_speakers": [
+        "刺客",
+        "游荡者"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 94,
+        "srd": true
+      },
+      "brief": "盗贼黑话 · 秘密语言"
+    },
+    {
+      "id": "phb:language:druidic",
+      "type": "language",
+      "name": "德鲁伊语",
+      "name_en": "Druidic",
+      "kind": "secret",
+      "kind_label": "秘密",
+      "typical_speakers": [
+        "德鲁伊/德鲁伊",
+        "树人"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 64,
+        "srd": true
+      },
+      "brief": "德鲁伊语 · 秘密语言"
+    },
+    {
+      "id": "phb:language:undercommon",
+      "type": "language",
+      "name": "地底通用语",
+      "name_en": "Undercommon",
+      "kind": "exotic",
+      "kind_label": "异族",
+      "typical_speakers": [
+        "幽暗地域商人"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "地底通用语 · 异族语言"
+    },
+    {
+      "id": "phb:language:goblin",
+      "type": "language",
+      "name": "地精语",
+      "name_en": "Goblin",
+      "kind": "standard",
+      "kind_label": "标准",
+      "typical_speakers": [
+        "类地精"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "地精语 · 标准语言"
+    },
+    {
+      "id": "phb:language:elvish",
+      "type": "language",
+      "name": "精灵语",
+      "name_en": "Elvish",
+      "kind": "standard",
+      "kind_label": "标准",
+      "typical_speakers": [
+        "精灵"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "精灵语 · 标准语言"
+    },
+    {
+      "id": "phb:language:giant",
+      "type": "language",
+      "name": "巨人语",
+      "name_en": "Giant",
+      "kind": "standard",
+      "kind_label": "标准",
+      "typical_speakers": [
+        "食人魔",
+        "巨人"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "巨人语 · 标准语言"
+    },
+    {
+      "id": "phb:language:infernal",
+      "type": "language",
+      "name": "炼狱语",
+      "name_en": "Infernal",
+      "kind": "exotic",
+      "kind_label": "异族",
+      "typical_speakers": [
+        "魔鬼"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "炼狱语 · 异族语言"
+    },
+    {
+      "id": "phb:language:draconic",
+      "type": "language",
+      "name": "龙语",
+      "name_en": "Draconic",
+      "kind": "exotic",
+      "kind_label": "异族",
+      "typical_speakers": [
+        "龙",
+        "龙裔"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "龙语 · 异族语言"
+    },
+    {
+      "id": "phb:language:sylvan",
+      "type": "language",
+      "name": "木族语",
+      "name_en": "Sylvan",
+      "kind": "exotic",
+      "kind_label": "异族",
+      "typical_speakers": [
+        "精类生物"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "木族语 · 异族语言"
+    },
+    {
+      "id": "phb:language:deep-speech",
+      "type": "language",
+      "name": "深潜语",
+      "name_en": "Deep Speech",
+      "kind": "exotic",
+      "kind_label": "异族",
+      "typical_speakers": [
+        "夺心魔",
+        "眼魔"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "深潜语 · 异族语言"
+    },
+    {
+      "id": "phb:language:abyssal",
+      "type": "language",
+      "name": "深渊语",
+      "name_en": "Abyssal",
+      "kind": "exotic",
+      "kind_label": "异族",
+      "typical_speakers": [
+        "恶魔"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "深渊语 · 异族语言"
+    },
+    {
+      "id": "phb:language:orc",
+      "type": "language",
+      "name": "兽人语",
+      "name_en": "Orc",
+      "kind": "standard",
+      "kind_label": "标准",
+      "typical_speakers": [
+        "兽人"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "兽人语 · 标准语言"
+    },
+    {
+      "id": "phb:language:celestial",
+      "type": "language",
+      "name": "天界语",
+      "name_en": "Celestial",
+      "kind": "exotic",
+      "kind_label": "异族",
+      "typical_speakers": [
+        "天族"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "天界语 · 异族语言"
+    },
+    {
+      "id": "phb:language:common",
+      "type": "language",
+      "name": "通用语",
+      "name_en": "Common",
+      "kind": "standard",
+      "kind_label": "标准",
+      "typical_speakers": [
+        "人类"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "通用语 · 标准语言"
+    },
+    {
+      "id": "phb:language:primordial",
+      "type": "language",
+      "name": "原初语",
+      "name_en": "Primordial",
+      "kind": "exotic",
+      "kind_label": "异族",
+      "typical_speakers": [
+        "元素"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "原初语 · 异族语言"
+    },
+    {
+      "id": "phb:language:gnomish",
+      "type": "language",
+      "name": "侏儒语",
+      "name_en": "Gnomish",
+      "kind": "standard",
+      "kind_label": "标准",
+      "typical_speakers": [
+        "侏儒"
+      ],
+      "source": {
+        "book": "PHB",
+        "page": 123,
+        "srd": true
+      },
+      "brief": "侏儒语 · 标准语言"
+    }
+  ]
+}

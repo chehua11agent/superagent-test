@@ -1,0 +1,988 @@
+[
+  {
+    "id": "phb:monster:ape",
+    "type": "monster",
+    "name": "猿",
+    "name_en": "Ape",
+    "size": [
+      "中型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 12,
+    "hit_points": 19,
+    "speed": "步行 30 尺、攀爬 30 尺",
+    "abilities": {
+      "str": 16,
+      "dex": 14,
+      "con": 14,
+      "int": 6,
+      "wis": 12,
+      "cha": 7
+    },
+    "skills": {
+      "运动": "+5",
+      "察觉": "+3"
+    },
+    "senses": null,
+    "languages": null,
+    "challenge_rating": "1/2",
+    "actions": [
+      {
+        "name": "多重攻击",
+        "name_en": "Multiattack",
+        "attack": null,
+        "to_hit": null,
+        "save_dc": null,
+        "reach_ft": null,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [],
+        "damage_types": [],
+        "parts": []
+      },
+      {
+        "name": "拳击",
+        "name_en": "Fist",
+        "attack": "近战武器",
+        "to_hit": 5,
+        "save_dc": null,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [
+          "1d6 + 3"
+        ],
+        "average_damage": [
+          6
+        ],
+        "damage_types": [
+          "钝击"
+        ],
+        "parts": [
+          {
+            "average_damage": 6,
+            "damage_dice": [
+              "1d6 + 3"
+            ],
+            "damage_type": "钝击",
+            "save_dc": null
+          }
+        ]
+      },
+      {
+        "name": "掷石",
+        "name_en": "Rock",
+        "attack": "远程武器",
+        "to_hit": 5,
+        "save_dc": null,
+        "reach_ft": null,
+        "range": "25/50",
+        "damage_dice": [
+          "1d6 + 3"
+        ],
+        "average_damage": [
+          6
+        ],
+        "damage_types": [
+          "钝击"
+        ],
+        "parts": [
+          {
+            "average_damage": 6,
+            "damage_dice": [
+              "1d6 + 3"
+            ],
+            "damage_type": "钝击",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "中型 野兽 · AC 12 · HP 19 · 步行 30 尺、攀爬 30 尺 · CR 1/2"
+  },
+  {
+    "id": "phb:monster:baboon",
+    "type": "monster",
+    "name": "狒狒",
+    "name_en": "Baboon",
+    "size": [
+      "小型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 12,
+    "hit_points": 3,
+    "speed": "步行 30 尺、攀爬 30 尺",
+    "abilities": {
+      "str": 8,
+      "dex": 14,
+      "con": 11,
+      "int": 4,
+      "wis": 12,
+      "cha": 6
+    },
+    "skills": null,
+    "senses": null,
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "啃咬",
+        "name_en": "Bite",
+        "attack": "近战武器",
+        "to_hit": 1,
+        "save_dc": null,
+        "reach_ft": null,
+        "range": "5",
+        "damage_dice": [
+          "1d4 - 1"
+        ],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "穿刺"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [
+              "1d4 - 1"
+            ],
+            "damage_type": "穿刺",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "小型 野兽 · AC 12 · HP 3 · 步行 30 尺、攀爬 30 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:badger",
+    "type": "monster",
+    "name": "獾",
+    "name_en": "Badger",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 10,
+    "hit_points": 3,
+    "speed": "步行 20 尺、掘地 5 尺",
+    "abilities": {
+      "str": 4,
+      "dex": 11,
+      "con": 12,
+      "int": 2,
+      "wis": 12,
+      "cha": 5
+    },
+    "skills": null,
+    "senses": [
+      "黑暗视觉 30 尺"
+    ],
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "啃咬",
+        "name_en": "Bite",
+        "attack": "近战武器",
+        "to_hit": 2,
+        "save_dc": null,
+        "reach_ft": null,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "穿刺"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "穿刺",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 10 · HP 3 · 步行 20 尺、掘地 5 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:bat",
+    "type": "monster",
+    "name": "蝙蝠",
+    "name_en": "Bat",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 12,
+    "hit_points": 1,
+    "speed": "步行 5 尺、飞行 30 尺",
+    "abilities": {
+      "str": 2,
+      "dex": 15,
+      "con": 8,
+      "int": 2,
+      "wis": 12,
+      "cha": 4
+    },
+    "skills": null,
+    "senses": [
+      "盲视 60 尺"
+    ],
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "啃咬",
+        "name_en": "Bite",
+        "attack": "近战武器",
+        "to_hit": 0,
+        "save_dc": null,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "穿刺"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "穿刺",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 12 · HP 1 · 步行 5 尺、飞行 30 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:cat",
+    "type": "monster",
+    "name": "猫",
+    "name_en": "Cat",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 12,
+    "hit_points": 2,
+    "speed": "步行 40 尺、攀爬 30 尺",
+    "abilities": {
+      "str": 3,
+      "dex": 15,
+      "con": 10,
+      "int": 3,
+      "wis": 12,
+      "cha": 7
+    },
+    "skills": {
+      "察觉": "+3",
+      "隐匿": "+4"
+    },
+    "senses": null,
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "爪击",
+        "name_en": "Claws",
+        "attack": "近战武器",
+        "to_hit": 0,
+        "save_dc": null,
+        "reach_ft": null,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "挥砍"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "挥砍",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 12 · HP 2 · 步行 40 尺、攀爬 30 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:crab",
+    "type": "monster",
+    "name": "蟹",
+    "name_en": "Crab",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 11,
+    "hit_points": 2,
+    "speed": "步行 20 尺、游泳 20 尺",
+    "abilities": {
+      "str": 2,
+      "dex": 11,
+      "con": 10,
+      "int": 1,
+      "wis": 8,
+      "cha": 2
+    },
+    "skills": {
+      "隐匿": "+2"
+    },
+    "senses": [
+      "盲视 30 尺"
+    ],
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "爪击",
+        "name_en": "Claw",
+        "attack": "近战武器",
+        "to_hit": 0,
+        "save_dc": null,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "钝击"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "钝击",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 11 · HP 2 · 步行 20 尺、游泳 20 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:frog",
+    "type": "monster",
+    "name": "青蛙",
+    "name_en": "Frog",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 11,
+    "hit_points": 1,
+    "speed": "步行 20 尺、游泳 20 尺",
+    "abilities": {
+      "str": 1,
+      "dex": 13,
+      "con": 8,
+      "int": 1,
+      "wis": 8,
+      "cha": 3
+    },
+    "skills": {
+      "察觉": "+1",
+      "隐匿": "+3"
+    },
+    "senses": [
+      "黑暗视觉 30 尺"
+    ],
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 11 · HP 1 · 步行 20 尺、游泳 20 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:hawk",
+    "type": "monster",
+    "name": "隼",
+    "name_en": "Hawk",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 13,
+    "hit_points": 1,
+    "speed": "步行 10 尺、飞行 60 尺",
+    "abilities": {
+      "str": 5,
+      "dex": 16,
+      "con": 8,
+      "int": 2,
+      "wis": 14,
+      "cha": 6
+    },
+    "skills": {
+      "察觉": "+4"
+    },
+    "senses": null,
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "禽爪",
+        "name_en": "Talons",
+        "attack": "近战武器",
+        "to_hit": 5,
+        "save_dc": null,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "挥砍"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "挥砍",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 13 · HP 1 · 步行 10 尺、飞行 60 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:lizard",
+    "type": "monster",
+    "name": "蜥蜴",
+    "name_en": "Lizard",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 10,
+    "hit_points": 2,
+    "speed": "步行 20 尺、攀爬 20 尺",
+    "abilities": {
+      "str": 2,
+      "dex": 11,
+      "con": 10,
+      "int": 1,
+      "wis": 8,
+      "cha": 3
+    },
+    "skills": null,
+    "senses": [
+      "黑暗视觉 30 尺"
+    ],
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "啃咬",
+        "name_en": "Bite",
+        "attack": "近战武器",
+        "to_hit": 0,
+        "save_dc": null,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "穿刺"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "穿刺",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 10 · HP 2 · 步行 20 尺、攀爬 20 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:owl",
+    "type": "monster",
+    "name": "猫头鹰",
+    "name_en": "Owl",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 11,
+    "hit_points": 1,
+    "speed": "步行 5 尺、飞行 60 尺",
+    "abilities": {
+      "str": 3,
+      "dex": 13,
+      "con": 8,
+      "int": 2,
+      "wis": 12,
+      "cha": 7
+    },
+    "skills": {
+      "察觉": "+3",
+      "隐匿": "+3"
+    },
+    "senses": [
+      "黑暗视觉 120 尺"
+    ],
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "禽爪",
+        "name_en": "Talons",
+        "attack": "近战武器",
+        "to_hit": 3,
+        "save_dc": null,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "挥砍"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "挥砍",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 11 · HP 1 · 步行 5 尺、飞行 60 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:poisonous-snake",
+    "type": "monster",
+    "name": "毒蛇",
+    "name_en": "Poisonous Snake",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 13,
+    "hit_points": 2,
+    "speed": "步行 30 尺、游泳 30 尺",
+    "abilities": {
+      "str": 2,
+      "dex": 16,
+      "con": 11,
+      "int": 1,
+      "wis": 10,
+      "cha": 3
+    },
+    "skills": null,
+    "senses": [
+      "盲视 10 尺"
+    ],
+    "languages": null,
+    "challenge_rating": "1/8",
+    "actions": [
+      {
+        "name": "啃咬",
+        "name_en": "Bite",
+        "attack": "近战武器",
+        "to_hit": 5,
+        "save_dc": 10,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [
+          "2d4"
+        ],
+        "average_damage": [
+          1,
+          5
+        ],
+        "damage_types": [
+          "穿刺",
+          "毒素"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "穿刺",
+            "save_dc": null
+          },
+          {
+            "average_damage": null,
+            "damage_dice": [],
+            "damage_type": null,
+            "save_dc": 10
+          },
+          {
+            "average_damage": 5,
+            "damage_dice": [
+              "2d4"
+            ],
+            "damage_type": "毒素",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 13 · HP 2 · 步行 30 尺、游泳 30 尺 · CR 1/8"
+  },
+  {
+    "id": "phb:monster:rat",
+    "type": "monster",
+    "name": "老鼠",
+    "name_en": "Rat",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 10,
+    "hit_points": 1,
+    "speed": "步行 20 尺",
+    "abilities": {
+      "str": 2,
+      "dex": 11,
+      "con": 9,
+      "int": 2,
+      "wis": 10,
+      "cha": 4
+    },
+    "skills": null,
+    "senses": [
+      "黑暗视觉 30 尺"
+    ],
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "啃咬",
+        "name_en": "Bite",
+        "attack": "近战武器",
+        "to_hit": 0,
+        "save_dc": null,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "穿刺"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "穿刺",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 10 · HP 1 · 步行 20 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:raven",
+    "type": "monster",
+    "name": "渡鸦",
+    "name_en": "Raven",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 12,
+    "hit_points": 1,
+    "speed": "步行 10 尺、飞行 50 尺",
+    "abilities": {
+      "str": 2,
+      "dex": 14,
+      "con": 8,
+      "int": 2,
+      "wis": 12,
+      "cha": 6
+    },
+    "skills": {
+      "察觉": "+3"
+    },
+    "senses": null,
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "喙啄",
+        "name_en": "Beak",
+        "attack": "近战武器",
+        "to_hit": 4,
+        "save_dc": null,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "穿刺"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "穿刺",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 12 · HP 1 · 步行 10 尺、飞行 50 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:spider",
+    "type": "monster",
+    "name": "蜘蛛",
+    "name_en": "Spider",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 12,
+    "hit_points": 1,
+    "speed": "步行 20 尺、攀爬 20 尺",
+    "abilities": {
+      "str": 2,
+      "dex": 14,
+      "con": 8,
+      "int": 1,
+      "wis": 10,
+      "cha": 2
+    },
+    "skills": {
+      "隐匿": "+4"
+    },
+    "senses": [
+      "黑暗视觉 30 尺"
+    ],
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "啃咬",
+        "name_en": "Bite",
+        "attack": "近战武器",
+        "to_hit": 4,
+        "save_dc": 9,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [
+          "1d4"
+        ],
+        "average_damage": [
+          1,
+          2
+        ],
+        "damage_types": [
+          "穿刺",
+          "毒素"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "穿刺",
+            "save_dc": null
+          },
+          {
+            "average_damage": null,
+            "damage_dice": [],
+            "damage_type": null,
+            "save_dc": 9
+          },
+          {
+            "average_damage": 2,
+            "damage_dice": [
+              "1d4"
+            ],
+            "damage_type": "毒素",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 12 · HP 1 · 步行 20 尺、攀爬 20 尺 · CR 0"
+  },
+  {
+    "id": "phb:monster:weasel",
+    "type": "monster",
+    "name": "鼬",
+    "name_en": "Weasel",
+    "size": [
+      "微型"
+    ],
+    "creature_type": "野兽",
+    "alignment": "无阵营",
+    "armor_class": 13,
+    "hit_points": 1,
+    "speed": "步行 30 尺",
+    "abilities": {
+      "str": 3,
+      "dex": 16,
+      "con": 8,
+      "int": 2,
+      "wis": 12,
+      "cha": 3
+    },
+    "skills": {
+      "察觉": "+3",
+      "隐匿": "+5"
+    },
+    "senses": null,
+    "languages": null,
+    "challenge_rating": "0",
+    "actions": [
+      {
+        "name": "啃咬",
+        "name_en": "Bite",
+        "attack": "近战武器",
+        "to_hit": 5,
+        "save_dc": null,
+        "reach_ft": 5,
+        "range": null,
+        "damage_dice": [],
+        "average_damage": [
+          1
+        ],
+        "damage_types": [
+          "穿刺"
+        ],
+        "parts": [
+          {
+            "average_damage": 1,
+            "damage_dice": [],
+            "damage_type": "穿刺",
+            "save_dc": null
+          }
+        ]
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": null,
+      "srd": true,
+      "note": "PHB 附录 D；数据与 MM 同名条目一致"
+    },
+    "brief": "微型 野兽 · AC 13 · HP 1 · 步行 30 尺 · CR 0"
+  }
+]

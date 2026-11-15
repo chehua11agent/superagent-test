@@ -28,6 +28,7 @@
 | [`content/cet4-dnd-mechanics-vocab.md`](content/cet4-dnd-mechanics-vocab.md) | DnD 5e 机制 × CET-4 词汇映射：5 类机制、150 词、可玩点子与知识库核对 |
 | [`content/cet4-syllabus-kb.md`](content/cet4-syllabus-kb.md) | 四级大纲知识库的 OCR 方法、覆盖与限制 |
 | [`content/cet4-materials-ingest.md`](content/cet4-materials-ingest.md) | 两本四级素材的页级录入完整性核对与出题素材用法 |
+| [`content/phb-library.md`](content/phb-library.md) | 5e PHB 结构化录入与分类库：覆盖、字段、来源/版权、页码基准、查询与扩展 |
 
 机器可读数据在 [`data/`](../data/)：
 
@@ -36,6 +37,7 @@
 | [`cet4-dnd-vocab.json`](../data/cet4-dnd-vocab.json) | 150 个映射词的同源导入数据 |
 | [`cet4-syllabus-kb.json`](../data/cet4-syllabus-kb.json) | 4530 个唯一四级大纲词头（释义、Unit、Part、页码） |
 | [`cet4-materials/manifest.json`](../data/cet4-materials/manifest.json) | 两本扫描书的页数、字符数与 SHA-256 清单；全文因版权不公开 |
+| [`phb/`](../data/phb/) | 5e PHB 结构化库：种族/职业/法术/装备/背景/专长/状态/神祇/位面/附录 D 生物，含 manifest 与 taxonomy |
 
 ## 来源
 

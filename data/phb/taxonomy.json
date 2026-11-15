@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "book": "PHB",
+  "edition": "2014",
+  "groups": [
+    {
+      "id": "character",
+      "label": "角色创建",
+      "categories": [
+        {
+          "id": "race",
+          "label": "种族",
+          "files": [
+            "races.json"
+          ],
+          "count": 9
+        },
+        {
+          "id": "subrace",
+          "label": "亚种",
+          "files": [
+            "races.json"
+          ],
+          "count": 10
+        },
+        {
+          "id": "class",
+          "label": "职业",
+          "files": [
+            "classes.json"
+          ],
+          "count": 12
+        },
+        {
+          "id": "subclass",
+          "label": "子职业",
+          "files": [
+            "subclasses.json"
+          ],
+          "count": 40
+        },
+        {
+          "id": "class-feature",
+          "label": "职业特性",
+          "files": [
+            "class-features.json"
+          ],
+          "count": 487
+        },
+        {
+          "id": "background",
+          "label": "背景",
+          "files": [
+            "backgrounds.json"
+          ],
+          "count": 20
+        },
+        {
+          "id": "feat",
+          "label": "专长",
+          "files": [
+            "feats.json"
+          ],
+          "count": 42
+        }
+      ]
+    },
+    {
+      "id": "rules",
+      "label": "规则参考",
+      "categories": [
+        {
+          "id": "ability",
+          "label": "属性",
+          "files": [
+            "rules.json"
+          ],
+          "count": 6
+        },
+        {
+          "id": "skill",
+          "label": "技能",
+          "files": [
+            "rules.json"
+          ],
+          "count": 18
+        },
+        {
+          "id": "action",
+          "label": "动作",
+          "files": [
+            "rules.json"
+          ],
+          "count": 20
+        },
+        {
+          "id": "condition",
+          "label": "状态",
+          "files": [
+            "conditions.json"
+          ],
+          "count": 15
+        },
+        {
+          "id": "language",
+          "label": "语言",
+          "files": [
+            "rules.json"
+          ],
+          "count": 18
+        }
+      ]
+    },
+    {
+      "id": "magic",
+      "label": "魔法",
+      "categories": [
+        {
+          "id": "spell",
+          "label": "法术",
+          "files": [
+            "spells.json"
+          ],
+          "count": 361
+        }
+      ]
+    },
+    {
+      "id": "equipment",
+      "label": "装备",
+      "categories": [
+        {
+          "id": "item",
+          "label": "物品",
+          "files": [
+            "equipment.json"
+          ],
+          "count": 259
+        }
+      ]
+    },
+    {
+      "id": "world",
+      "label": "世界",
+      "categories": [
+        {
+          "id": "deity",
+          "label": "神祇",
+          "files": [
+            "deities.json"
+          ],
+          "count": 195
+        },
+        {
+          "id": "plane",
+          "label": "位面",
+          "files": [
+            "planes.json"
+          ],
+          "count": 31
+        }
+      ]
+    },
+    {
+      "id": "bestiary",
+      "label": "生物",
+      "categories": [
+        {
+          "id": "monster",
+          "label": "野兽与魔宠",
+          "files": [
+            "monsters.json"
+          ],
+          "count": 15
+        }
+      ]
+    }
+  ]
+}

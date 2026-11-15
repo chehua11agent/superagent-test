@@ -1,0 +1,1188 @@
+[
+  {
+    "id": "phb:feat:charger",
+    "type": "feat",
+    "name": "冲锋手",
+    "name_en": "Charger",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 165,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:dungeon-delver",
+    "type": "feat",
+    "name": "地城探索者",
+    "name_en": "Dungeon Delver",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 166,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:shield-master",
+    "type": "feat",
+    "name": "盾牌大师",
+    "name_en": "Shield Master",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 170,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:spell-sniper",
+    "type": "feat",
+    "name": "法术射手",
+    "name_en": "Spell Sniper",
+    "prerequisite": [
+      "施法能力"
+    ],
+    "ability": null,
+    "grants": {
+      "additionalSpells": [
+        {
+          "ENG_name": "Bard Spells",
+          "name": "吟游诗人法术",
+          "ability": "cha",
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=吟游诗人|spell attack=m;r;o",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "ENG_name": "Cleric Spells",
+          "name": "牧师法术",
+          "ability": "wis",
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=牧师|spell attack=m;r;o",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "ENG_name": "Druid Spells",
+          "name": "德鲁伊法术",
+          "ability": "wis",
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=德鲁伊|spell attack=m;r;o",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "ENG_name": "Sorcerer Spells",
+          "name": "术士法术",
+          "ability": "cha",
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=术士|spell attack=m;r;o",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "ENG_name": "Warlock Spells",
+          "name": "魔契师法术",
+          "ability": "cha",
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=魔契师|spell attack=m;r;o",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "ENG_name": "Wizard Spells",
+          "name": "法师法术",
+          "ability": "int",
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=法师|spell attack=m;r;o",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 170,
+      "srd": false
+    },
+    "brief": "专长 · 前置 施法能力"
+  },
+  {
+    "id": "phb:feat:defensive-duelist",
+    "type": "feat",
+    "name": "防御式决斗",
+    "name_en": "Defensive Duelist",
+    "prerequisite": [
+      "敏捷 13+"
+    ],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 165,
+      "srd": false
+    },
+    "brief": "专长 · 前置 敏捷 13+"
+  },
+  {
+    "id": "phb:feat:observant",
+    "type": "feat",
+    "name": "观察力",
+    "name_en": "Observant",
+    "prerequisite": [],
+    "ability": "1 项自选（智力/感知）",
+    "grants": {
+      "ability": [
+        {
+          "choose": {
+            "from": [
+              "智力",
+              "感知"
+            ],
+            "amount": 1
+          }
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 168,
+      "srd": false
+    },
+    "brief": "专长 · 无前置 · 属性 1 项自选（智力/感知）"
+  },
+  {
+    "id": "phb:feat:tough",
+    "type": "feat",
+    "name": "健壮",
+    "name_en": "Tough",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 170,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:alert",
+    "type": "feat",
+    "name": "警觉",
+    "name_en": "Alert",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 165,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:tavern-brawler",
+    "type": "feat",
+    "name": "酒馆斗殴者",
+    "name_en": "Tavern Brawler",
+    "prerequisite": [],
+    "ability": "1 项自选（力量/体质）",
+    "grants": {
+      "ability": [
+        {
+          "choose": {
+            "from": [
+              "力量",
+              "体质"
+            ],
+            "amount": 1
+          }
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 170,
+      "srd": false
+    },
+    "brief": "专长 · 无前置 · 属性 1 项自选（力量/体质）"
+  },
+  {
+    "id": "phb:feat:great-weapon-master",
+    "type": "feat",
+    "name": "巨武器大师",
+    "name_en": "Great Weapon Master",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 167,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:mobile",
+    "type": "feat",
+    "name": "灵活移动",
+    "name_en": "Mobile",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {
+      "traitTags": [
+        "Speed"
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 168,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:inspiring-leader",
+    "type": "feat",
+    "name": "领袖之证",
+    "name_en": "Inspiring Leader",
+    "prerequisite": [
+      "魅力 13+"
+    ],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 167,
+      "srd": false
+    },
+    "brief": "专长 · 前置 魅力 13+"
+  },
+  {
+    "id": "phb:feat:keen-mind",
+    "type": "feat",
+    "name": "敏锐心灵",
+    "name_en": "Keen Mind",
+    "prerequisite": [],
+    "ability": "+1 智力",
+    "grants": {
+      "ability": [
+        {
+          "int": 1
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 167,
+      "srd": false
+    },
+    "brief": "专长 · 无前置 · 属性 +1 智力"
+  },
+  {
+    "id": "phb:feat:magic-initiate",
+    "type": "feat",
+    "name": "魔法学徒",
+    "name_en": "Magic Initiate",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {
+      "additionalSpells": [
+        {
+          "ENG_name": "Bard Spells",
+          "name": "吟游诗人法术",
+          "ability": "cha",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=吟游诗人"
+                  }
+                ]
+              }
+            }
+          },
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=吟游诗人",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "ENG_name": "Cleric Spells",
+          "name": "牧师法术",
+          "ability": "wis",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=牧师"
+                  }
+                ]
+              }
+            }
+          },
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=牧师",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "ENG_name": "Druid Spells",
+          "name": "德鲁伊法术",
+          "ability": "wis",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=德鲁伊"
+                  }
+                ]
+              }
+            }
+          },
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=德鲁伊",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "ENG_name": "Sorcerer Spells",
+          "name": "术士法术",
+          "ability": "cha",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=术士"
+                  }
+                ]
+              }
+            }
+          },
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=术士",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "ENG_name": "Warlock Spells",
+          "name": "魔契师法术",
+          "ability": "cha",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=魔契师"
+                  }
+                ]
+              }
+            }
+          },
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=魔契师",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "ENG_name": "Wizard Spells",
+          "name": "法师法术",
+          "ability": "int",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=法师"
+                  }
+                ]
+              }
+            }
+          },
+          "known": {
+            "_": [
+              {
+                "choose": "level=0|class=法师",
+                "count": 2
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 168,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:durable",
+    "type": "feat",
+    "name": "耐性",
+    "name_en": "Durable",
+    "prerequisite": [],
+    "ability": "+1 体质",
+    "grants": {
+      "ability": [
+        {
+          "con": 1
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 166,
+      "srd": false
+    },
+    "brief": "专长 · 无前置 · 属性 +1 体质"
+  },
+  {
+    "id": "phb:feat:mounted-combatant",
+    "type": "feat",
+    "name": "骑乘战斗",
+    "name_en": "Mounted Combatant",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 168,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:resilient",
+    "type": "feat",
+    "name": "强健身心",
+    "name_en": "Resilient",
+    "prerequisite": [],
+    "ability": "1 项自选（力量/敏捷/体质/智力/感知/魅力）",
+    "grants": {
+      "ability": [
+        {
+          "choose": {
+            "from": [
+              "力量",
+              "敏捷",
+              "体质",
+              "智力",
+              "感知",
+              "魅力"
+            ],
+            "amount": 1
+          }
+        }
+      ],
+      "savingThrowProficiencies": [
+        {
+          "choose": {
+            "from": [
+              "力量",
+              "敏捷",
+              "体质",
+              "智力",
+              "感知",
+              "魅力"
+            ]
+          }
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 168,
+      "srd": false
+    },
+    "brief": "专长 · 无前置 · 属性 1 项自选（力量/敏捷/体质/智力/感知/魅力）"
+  },
+  {
+    "id": "phb:feat:crossbow-expert",
+    "type": "feat",
+    "name": "强弩专家",
+    "name_en": "Crossbow Expert",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 165,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:grappler",
+    "type": "feat",
+    "name": "擒抱者",
+    "name_en": "Grappler",
+    "prerequisite": [
+      "力量 13+"
+    ],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 167,
+      "srd": true
+    },
+    "brief": "专长 · 前置 力量 13+"
+  },
+  {
+    "id": "phb:feat:lightly-armored",
+    "type": "feat",
+    "name": "轻甲运用",
+    "name_en": "Lightly Armored",
+    "prerequisite": [],
+    "ability": "1 项自选（力量/敏捷）",
+    "grants": {
+      "ability": [
+        {
+          "choose": {
+            "from": [
+              "力量",
+              "敏捷"
+            ],
+            "amount": 1
+          }
+        }
+      ],
+      "armorProficiencies": [
+        {
+          "light": true
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 167,
+      "srd": false
+    },
+    "brief": "专长 · 无前置 · 属性 1 项自选（力量/敏捷）"
+  },
+  {
+    "id": "phb:feat:sentinel",
+    "type": "feat",
+    "name": "哨兵",
+    "name_en": "Sentinel",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 169,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:sharpshooter",
+    "type": "feat",
+    "name": "神射手",
+    "name_en": "Sharpshooter",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 170,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:skilled",
+    "type": "feat",
+    "name": "熟习",
+    "name_en": "Skilled",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {
+      "skillToolLanguageProficiencies": [
+        {
+          "choose": [
+            {
+              "from": [
+                "任意技能",
+                "任意工具"
+              ],
+              "count": 3
+            }
+          ]
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 170,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:dual-wielder",
+    "type": "feat",
+    "name": "双持客",
+    "name_en": "Dual Wielder",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 165,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:mage-slayer",
+    "type": "feat",
+    "name": "巫师杀手",
+    "name_en": "Mage Slayer",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 168,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:weapon-master",
+    "type": "feat",
+    "name": "武器大师",
+    "name_en": "Weapon Master",
+    "prerequisite": [],
+    "ability": "1 项自选（力量/敏捷）",
+    "grants": {
+      "ability": [
+        {
+          "choose": {
+            "from": [
+              "力量",
+              "敏捷"
+            ],
+            "amount": 1
+          }
+        }
+      ],
+      "weaponProficiencies": [
+        {
+          "choose": {
+            "fromFilter": "type=军用武器;寻常武器|miscellaneous=平凡的",
+            "count": 4
+          },
+          "label": "任意 4 项军用武器"
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 170,
+      "srd": false
+    },
+    "brief": "专长 · 无前置 · 属性 1 项自选（力量/敏捷）"
+  },
+  {
+    "id": "phb:feat:lucky",
+    "type": "feat",
+    "name": "幸运",
+    "name_en": "Lucky",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 167,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:savage-attacker",
+    "type": "feat",
+    "name": "凶蛮打手",
+    "name_en": "Savage Attacker",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 169,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:actor",
+    "type": "feat",
+    "name": "演员",
+    "name_en": "Actor",
+    "prerequisite": [],
+    "ability": "+1 魅力",
+    "grants": {
+      "ability": [
+        {
+          "cha": 1
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 165,
+      "srd": false
+    },
+    "brief": "专长 · 无前置 · 属性 +1 魅力"
+  },
+  {
+    "id": "phb:feat:healer",
+    "type": "feat",
+    "name": "医疗师",
+    "name_en": "Healer",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 167,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:ritual-caster",
+    "type": "feat",
+    "name": "仪式施法者",
+    "name_en": "Ritual Caster",
+    "prerequisite": [
+      "智力 13+ 或 感知 13+"
+    ],
+    "ability": null,
+    "grants": {
+      "additionalSpells": [
+        {
+          "ENG_name": "Bard Spells",
+          "name": "吟游诗人法术",
+          "ability": "cha",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=吟游诗人|components & miscellaneous=仪式",
+                    "count": 2
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "ENG_name": "Cleric Spells",
+          "name": "牧师法术",
+          "ability": "wis",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=牧师|components & miscellaneous=仪式",
+                    "count": 2
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "ENG_name": "Druid Spells",
+          "name": "德鲁伊法术",
+          "ability": "wis",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=德鲁伊|components & miscellaneous=仪式",
+                    "count": 2
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "ENG_name": "Sorcerer Spells",
+          "name": "术士法术",
+          "ability": "cha",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=术士|components & miscellaneous=仪式",
+                    "count": 2
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "ENG_name": "Warlock Spells",
+          "name": "魔契师法术",
+          "ability": "cha",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=魔契师|components & miscellaneous=仪式",
+                    "count": 2
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "ENG_name": "Wizard Spells",
+          "name": "法师法术",
+          "ability": "int",
+          "innate": {
+            "_": {
+              "daily": {
+                "1": [
+                  {
+                    "choose": "level=1|class=法师|components & miscellaneous=仪式",
+                    "count": 2
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 169,
+      "srd": false
+    },
+    "brief": "专长 · 前置 智力 13+ 或 感知 13+"
+  },
+  {
+    "id": "phb:feat:skulker",
+    "type": "feat",
+    "name": "隐伏者",
+    "name_en": "Skulker",
+    "prerequisite": [
+      "敏捷 13+"
+    ],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 170,
+      "srd": false
+    },
+    "brief": "专长 · 前置 敏捷 13+"
+  },
+  {
+    "id": "phb:feat:linguist",
+    "type": "feat",
+    "name": "语言学家",
+    "name_en": "Linguist",
+    "prerequisite": [],
+    "ability": "+1 智力",
+    "grants": {
+      "ability": [
+        {
+          "int": 1
+        }
+      ],
+      "languageProficiencies": [
+        {
+          "any": 3
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 167,
+      "srd": false
+    },
+    "brief": "专长 · 无前置 · 属性 +1 智力"
+  },
+  {
+    "id": "phb:feat:elemental-adept",
+    "type": "feat",
+    "name": "元素掌控",
+    "name_en": "Elemental Adept",
+    "prerequisite": [
+      "施法能力"
+    ],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 166,
+      "srd": false
+    },
+    "brief": "专长 · 前置 施法能力"
+  },
+  {
+    "id": "phb:feat:athlete",
+    "type": "feat",
+    "name": "运动员",
+    "name_en": "Athlete",
+    "prerequisite": [],
+    "ability": "1 项自选（力量/敏捷）",
+    "grants": {
+      "ability": [
+        {
+          "choose": {
+            "from": [
+              "力量",
+              "敏捷"
+            ],
+            "amount": 1
+          }
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 165,
+      "srd": false
+    },
+    "brief": "专长 · 无前置 · 属性 1 项自选（力量/敏捷）"
+  },
+  {
+    "id": "phb:feat:war-caster",
+    "type": "feat",
+    "name": "战地施法者",
+    "name_en": "War Caster",
+    "prerequisite": [
+      "施法能力"
+    ],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 170,
+      "srd": false
+    },
+    "brief": "专长 · 前置 施法能力"
+  },
+  {
+    "id": "phb:feat:martial-adept",
+    "type": "feat",
+    "name": "战技专家",
+    "name_en": "Martial Adept",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {
+      "optionalfeatureProgression": [
+        {
+          "ENG_name": "Maneuvers",
+          "name": "战技",
+          "featureType": [
+            "MV:B"
+          ],
+          "progression": {
+            "*": 2
+          }
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 168,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:polearm-master",
+    "type": "feat",
+    "name": "长柄武器大师",
+    "name_en": "Polearm Master",
+    "prerequisite": [],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 168,
+      "srd": false
+    },
+    "brief": "专长 · 无前置"
+  },
+  {
+    "id": "phb:feat:medium-armor-master",
+    "type": "feat",
+    "name": "中甲大师",
+    "name_en": "Medium Armor Master",
+    "prerequisite": [
+      "中甲熟练"
+    ],
+    "ability": null,
+    "grants": {},
+    "source": {
+      "book": "PHB",
+      "page": 168,
+      "srd": false
+    },
+    "brief": "专长 · 前置 中甲熟练"
+  },
+  {
+    "id": "phb:feat:moderately-armored",
+    "type": "feat",
+    "name": "中甲运用",
+    "name_en": "Moderately Armored",
+    "prerequisite": [
+      "轻甲熟练"
+    ],
+    "ability": "1 项自选（力量/敏捷）",
+    "grants": {
+      "ability": [
+        {
+          "choose": {
+            "from": [
+              "力量",
+              "敏捷"
+            ],
+            "amount": 1
+          }
+        }
+      ],
+      "armorProficiencies": [
+        {
+          "medium": true,
+          "shield": true
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 168,
+      "srd": false
+    },
+    "brief": "专长 · 前置 轻甲熟练 · 属性 1 项自选（力量/敏捷）"
+  },
+  {
+    "id": "phb:feat:heavy-armor-master",
+    "type": "feat",
+    "name": "重甲大师",
+    "name_en": "Heavy Armor Master",
+    "prerequisite": [
+      "重甲熟练"
+    ],
+    "ability": "+1 力量",
+    "grants": {
+      "ability": [
+        {
+          "str": 1
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 167,
+      "srd": false
+    },
+    "brief": "专长 · 前置 重甲熟练 · 属性 +1 力量"
+  },
+  {
+    "id": "phb:feat:heavily-armored",
+    "type": "feat",
+    "name": "重甲运用",
+    "name_en": "Heavily Armored",
+    "prerequisite": [
+      "中甲熟练"
+    ],
+    "ability": "+1 力量",
+    "grants": {
+      "ability": [
+        {
+          "str": 1
+        }
+      ],
+      "armorProficiencies": [
+        {
+          "heavy": true
+        }
+      ]
+    },
+    "source": {
+      "book": "PHB",
+      "page": 167,
+      "srd": false
+    },
+    "brief": "专长 · 前置 中甲熟练 · 属性 +1 力量"
+  }
+]

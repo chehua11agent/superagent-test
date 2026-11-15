@@ -7,7 +7,7 @@ dsh-superagent test repository.
 | 分类 | 目录 | 说明 |
 | --- | --- | --- |
 | 文档 | [`docs/`](docs/README.md) | 总体设计、玩法设计、规则/内容/画面调研、词汇与知识库说明 |
-| 数据 | [`data/`](data/) | 150 个 DnD × CET-4 映射词、4530 个四级大纲词头、两本素材的录入清单 |
+| 数据 | [`data/`](data/) | 150 个 DnD × CET-4 映射词、4530 个四级大纲词头、两本素材的录入清单、5e PHB 结构化库 |
 | 可玩原型 | [`game/`](game/) | 《拾词者 · 雾港》第一章：12 幕、48 个 CET-4 词 |
 
 文档导航与分类见 [`docs/README.md`](docs/README.md)。核心入口：
@@ -16,6 +16,7 @@ dsh-superagent test repository.
 - 玩法设计：[双鉴定](docs/design/dual-check-design.md)、[剧情→词卡战斗](docs/design/story-card-combat-design.md)、[内容样本《闭馆通知》](docs/design/sample-closing-notice.md)
 - 调研：[跑团规则书](docs/research/trpg-rules-survey.md)、[5e 玩家手册盘点](docs/research/phb-story-dm-review.md)、[画面/引擎](docs/research/game-visual-solutions-survey.md)
 - 词汇与知识库：[机制词汇表](docs/content/cet4-dnd-mechanics-vocab.md)、[四级大纲知识库](docs/content/cet4-syllabus-kb.md)、[素材录入核对](docs/content/cet4-materials-ingest.md)
+- 5e 数据：[PHB 结构化库](docs/content/phb-library.md)（`data/phb/`，1,558 条记录；`npm run validate:phb` 校验）
 
 ## 可玩原型
 

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "phb:condition:prone",
+    "type": "condition",
+    "name": "倒地",
+    "name_en": "Prone",
+    "source": {
+      "book": "PHB",
+      "page": 292,
+      "srd": true
+    },
+    "brief": "倒地 · PHB p.292"
+  },
+  {
+    "id": "phb:condition:deafened",
+    "type": "condition",
+    "name": "耳聋",
+    "name_en": "Deafened",
+    "source": {
+      "book": "PHB",
+      "page": 290,
+      "srd": true
+    },
+    "brief": "耳聋 · PHB p.290"
+  },
+  {
+    "id": "phb:condition:unconscious",
+    "type": "condition",
+    "name": "昏迷",
+    "name_en": "Unconscious",
+    "source": {
+      "book": "PHB",
+      "page": 292,
+      "srd": true
+    },
+    "brief": "昏迷 · PHB p.292"
+  },
+  {
+    "id": "phb:condition:frightened",
+    "type": "condition",
+    "name": "恐慌",
+    "name_en": "Frightened",
+    "source": {
+      "book": "PHB",
+      "page": 290,
+      "srd": true
+    },
+    "brief": "恐慌 · PHB p.290"
+  },
+  {
+    "id": "phb:condition:exhaustion",
+    "type": "condition",
+    "name": "力竭",
+    "name_en": "Exhaustion",
+    "source": {
+      "book": "PHB",
+      "page": 291,
+      "srd": true
+    },
+    "brief": "力竭 · PHB p.291"
+  },
+  {
+    "id": "phb:condition:paralyzed",
+    "type": "condition",
+    "name": "麻痹",
+    "name_en": "Paralyzed",
+    "source": {
+      "book": "PHB",
+      "page": 291,
+      "srd": true
+    },
+    "brief": "麻痹 · PHB p.291"
+  },
+  {
+    "id": "phb:condition:charmed",
+    "type": "condition",
+    "name": "魅惑",
+    "name_en": "Charmed",
+    "source": {
+      "book": "PHB",
+      "page": 290,
+      "srd": true
+    },
+    "brief": "魅惑 · PHB p.290"
+  },
+  {
+    "id": "phb:condition:blinded",
+    "type": "condition",
+    "name": "目盲",
+    "name_en": "Blinded",
+    "source": {
+      "book": "PHB",
+      "page": 290,
+      "srd": true
+    },
+    "brief": "目盲 · PHB p.290"
+  },
+  {
+    "id": "phb:condition:incapacitated",
+    "type": "condition",
+    "name": "失能",
+    "name_en": "Incapacitated",
+    "source": {
+      "book": "PHB",
+      "page": 290,
+      "srd": true
+    },
+    "brief": "失能 · PHB p.290"
+  },
+  {
+    "id": "phb:condition:petrified",
+    "type": "condition",
+    "name": "石化",
+    "name_en": "Petrified",
+    "source": {
+      "book": "PHB",
+      "page": 291,
+      "srd": true
+    },
+    "brief": "石化 · PHB p.291"
+  },
+  {
+    "id": "phb:condition:grappled",
+    "type": "condition",
+    "name": "受擒",
+    "name_en": "Grappled",
+    "source": {
+      "book": "PHB",
+      "page": 290,
+      "srd": true
+    },
+    "brief": "受擒 · PHB p.290"
+  },
+  {
+    "id": "phb:condition:restrained",
+    "type": "condition",
+    "name": "束缚",
+    "name_en": "Restrained",
+    "source": {
+      "book": "PHB",
+      "page": 292,
+      "srd": true
+    },
+    "brief": "束缚 · PHB p.292"
+  },
+  {
+    "id": "phb:condition:invisible",
+    "type": "condition",
+    "name": "隐形",
+    "name_en": "Invisible",
+    "source": {
+      "book": "PHB",
+      "page": 291,
+      "srd": true
+    },
+    "brief": "隐形 · PHB p.291"
+  },
+  {
+    "id": "phb:condition:stunned",
+    "type": "condition",
+    "name": "震慑",
+    "name_en": "Stunned",
+    "source": {
+      "book": "PHB",
+      "page": 292,
+      "srd": true
+    },
+    "brief": "震慑 · PHB p.292"
+  },
+  {
+    "id": "phb:condition:poisoned",
+    "type": "condition",
+    "name": "中毒",
+    "name_en": "Poisoned",
+    "source": {
+      "book": "PHB",
+      "page": 292,
+      "srd": true
+    },
+    "brief": "中毒 · PHB p.292"
+  }
+]

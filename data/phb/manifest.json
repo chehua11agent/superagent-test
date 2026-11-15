@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-15T13:27:27.575Z",
+  "book": {
+    "title": "Player's Handbook",
+    "edition": "2014",
+    "abbr": "PHB",
+    "publisher": "Wizards of the Coast"
+  },
+  "source": {
+    "dataset": "5etools 中文镜像（5e.kiwee.top）",
+    "url": "https://5e.kiwee.top/data/",
+    "snapshot": "2026-11-15",
+    "translator": "不全书",
+    "translation_license": "CC BY-NC-SA 4.0（译文；本库不复制正文）",
+    "page_basis": "英文原版 PHB 页码（与 288 页民间汉化 PDF 的书页不同）"
+  },
+  "policy": {
+    "prose": "omitted",
+    "reason": "公开仓库不收录 PHB 译文正文；只保留结构化字段、页码与生成式机械摘要。",
+    "private_text_pack": "data/phb-private/text.json（不提交，可用 scripts/phb-query.mjs --with-text 合并）"
+  },
+  "counts": {
+    "race": 9,
+    "subrace": 10,
+    "class": 12,
+    "subclass": 40,
+    "class-feature": 487,
+    "background": 20,
+    "feat": 42,
+    "ability": 6,
+    "skill": 18,
+    "action": 20,
+    "condition": 15,
+    "language": 18,
+    "spell": 361,
+    "item": 259,
+    "deity": 195,
+    "plane": 31,
+    "monster": 15
+  },
+  "files": [
+    {
+      "path": "data/phb/races.json",
+      "records": 19,
+      "bytes": 28684,
+      "sha256": "31e8b8d8b1c73a4648eba15657f61d9727e0edc7264cdc45df537260c2f22f89"
+    },
+    {
+      "path": "data/phb/classes.json",
+      "records": 12,
+      "bytes": 78063,
+      "sha256": "269eeed17ebf79c1576ddfd560513b4276d0c8675cfec2bfc70d5ce0da51705b"
+    },
+    {
+      "path": "data/phb/subclasses.json",
+      "records": 40,
+      "bytes": 30762,
+      "sha256": "5dbe416118e6a13d91175a8d7f180f539896f07ea7b1f7cdafea0cf219c559db"
+    },
+    {
+      "path": "data/phb/class-features.json",
+      "records": 487,
+      "bytes": 236838,
+      "sha256": "d1ed9a613066631692a94413bd79b40c9256f3f63ecd947f990d8c0142cdf4d5"
+    },
+    {
+      "path": "data/phb/backgrounds.json",
+      "records": 20,
+      "bytes": 19432,
+      "sha256": "a9d81d35d2740e0b35fbd2e86de80389d269734ae2b3918062428cc33336980e"
+    },
+    {
+      "path": "data/phb/feats.json",
+      "records": 42,
+      "bytes": 25035,
+      "sha256": "c2c566428f6da8a4591d2c65444e82f0fb75706bfdf53f1916b5176fd38af3af"
+    },
+    {
+      "path": "data/phb/spells.json",
+      "records": 361,
+      "bytes": 432903,
+      "sha256": "c6402584164189f6c33755e3a9ff4539ac1c37a3282b2c6828f13e3afed9ba75"
+    },
+    {
+      "path": "data/phb/equipment.json",
+      "records": 259,
+      "bytes": 154329,
+      "sha256": "dc71cd2905c9420e34418fec214f8c8b5e3b662f244aea353069e2d9c72cd79a"
+    },
+    {
+      "path": "data/phb/conditions.json",
+      "records": 15,
+      "bytes": 3550,
+      "sha256": "81d25c6577c6be5769bc18117c6f8354d72368ea7224d2bf46ce00ea004a17e8"
+    },
+    {
+      "path": "data/phb/rules.json",
+      "records": 62,
+      "bytes": 20002,
+      "sha256": "5446692fe2dced1950f649d8228dd9208ca7dab5ac67c12c0ad0095b85384ca1"
+    },
+    {
+      "path": "data/phb/deities.json",
+      "records": 195,
+      "bytes": 90941,
+      "sha256": "762f6aa9768cd570f7eb4749ef9afce43cfeda4e3eb1f8d225bebfcc97b65a81"
+    },
+    {
+      "path": "data/phb/planes.json",
+      "records": 31,
+      "bytes": 12433,
+      "sha256": "51fb7f6a5d5e8434467981d01c3f807ffed5a219c9f80c779501cd01be8198bb"
+    },
+    {
+      "path": "data/phb/monsters.json",
+      "records": 15,
+      "bytes": 21019,
+      "sha256": "ec4c53d53e3514dd03ba2dce22a3fe6da433a4d6842d9cbd3f9e18a81e9e9b99"
+    }
+  ],
+  "notes": [
+    "中文名来自 5etools 中文镜像（不全书），与项目既有词表的译名可能不同；以 name_en 作为稳定标识。",
+    "正文描述未入库；brief 由结构化字段生成，不是原文摘录。",
+    "第 5 章装备为 PHB  mundane equipment；魔法物品属于 DMG，不在本库范围。",
+    "PHB 附录 D 的 15 种生物按同名 MM 数据入库，单独页码未记录。"
+  ]
+}

@@ -1,0 +1,893 @@
+[
+  {
+    "id": "phb:background:acolyte",
+    "type": "background",
+    "name": "侍僧",
+    "name_en": "Acolyte",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "洞见",
+      "宗教"
+    ],
+    "tool_proficiencies": [],
+    "language_proficiencies": "任意标准语言 ×2",
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "圣徽（出任神职时的礼物）",
+            "熏香 ×5",
+            "祭袍",
+            "普通服装",
+            "小包（含 15 gp）"
+          ]
+        }
+      ],
+      [
+        {
+          "option": "a",
+          "items": [
+            "祷告经书"
+          ]
+        },
+        {
+          "option": "b",
+          "items": [
+            "经轮"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "信仰庇护",
+      "name_en": "Shelter of the Faithful"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 127,
+      "srd": true
+    },
+    "brief": "技能 洞见/宗教 · 语言 任意标准语言 ×2 · 特性 信仰庇护"
+  },
+  {
+    "id": "phb:background:charlatan",
+    "type": "background",
+    "name": "骗子",
+    "name_en": "Charlatan",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "欺瞒",
+      "巧手"
+    ],
+    "tool_proficiencies": [
+      {
+        "易容工具": true,
+        "文书伪造工具": true
+      }
+    ],
+    "language_proficiencies": null,
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "高档服装",
+            "易容工具",
+            "小包（含 15 gp）"
+          ]
+        }
+      ],
+      [
+        {
+          "option": "a",
+          "items": [
+            "装满彩色液体的塞子瓶 ×10"
+          ]
+        },
+        {
+          "option": "b",
+          "items": [
+            "一组作弊骰子"
+          ]
+        },
+        {
+          "option": "c",
+          "items": [
+            "一副标记过的扑克牌"
+          ]
+        },
+        {
+          "option": "d",
+          "items": [
+            "虚构公爵的印章戒指"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "虚假身份",
+      "name_en": "False Identity"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 128,
+      "srd": false
+    },
+    "brief": "技能 欺瞒/巧手 · 特性 虚假身份"
+  },
+  {
+    "id": "phb:background:criminal",
+    "type": "background",
+    "name": "罪犯",
+    "name_en": "Criminal",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "欺瞒",
+      "隐匿"
+    ],
+    "tool_proficiencies": [
+      {
+        "任意游戏套组": 1,
+        "盗贼工具": true
+      }
+    ],
+    "language_proficiencies": null,
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "撬棍",
+            "带兜帽的深色普通服装",
+            "小包（含 15 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "罪犯接头人",
+      "name_en": "Criminal Contact"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 129,
+      "srd": false
+    },
+    "brief": "技能 欺瞒/隐匿 · 特性 罪犯接头人"
+  },
+  {
+    "id": "phb:background:custom-background",
+    "type": "background",
+    "name": "自定义背景",
+    "name_en": "Custom Background",
+    "is_variant": false,
+    "is_custom": true,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "任意两项"
+    ],
+    "tool_proficiencies": [],
+    "language_proficiencies": "任意标准语言 ×2",
+    "equipment": [],
+    "feature": {
+      "name": "选择一个特性",
+      "name_en": "Choose a Feature"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 126,
+      "srd": false
+    },
+    "brief": "技能 任意两项 · 语言 任意标准语言 ×2 · 特性 选择一个特性"
+  },
+  {
+    "id": "phb:background:entertainer",
+    "type": "background",
+    "name": "艺人",
+    "name_en": "Entertainer",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "特技",
+      "表演"
+    ],
+    "tool_proficiencies": [
+      {
+        "易容工具": true,
+        "任意乐器": 1
+      }
+    ],
+    "language_proficiencies": null,
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "乐器（任选）",
+            "倾慕者的信物（情书、一缕头发或者饰品）",
+            "表演服装",
+            "小包（含 15 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "人见人爱",
+      "name_en": "By Popular Demand"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 130,
+      "srd": false
+    },
+    "brief": "技能 特技/表演 · 特性 人见人爱"
+  },
+  {
+    "id": "phb:background:folk-hero",
+    "type": "background",
+    "name": "平民英雄",
+    "name_en": "Folk Hero",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "驯兽",
+      "生存"
+    ],
+    "tool_proficiencies": [
+      {
+        "任意工匠工具": 1,
+        "陆运载具": true
+      }
+    ],
+    "language_proficiencies": null,
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "toolArtisan",
+            "铲子",
+            "铁壶",
+            "普通服装",
+            "小包（含 10 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "好客乡民",
+      "name_en": "Rustic Hospitality"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 131,
+      "srd": false
+    },
+    "brief": "技能 驯兽/生存 · 特性 好客乡民"
+  },
+  {
+    "id": "phb:background:guild-artisan",
+    "type": "background",
+    "name": "公会工匠",
+    "name_en": "Guild Artisan",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "洞见",
+      "游说"
+    ],
+    "tool_proficiencies": [
+      {
+        "任意工匠工具": 1
+      }
+    ],
+    "language_proficiencies": "任意标准语言 ×1",
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "toolArtisan",
+            "来自你公会的介绍信",
+            "旅行服装",
+            "小包（含 15 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "公会成员",
+      "name_en": "Guild Membership"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 132,
+      "srd": false
+    },
+    "brief": "技能 洞见/游说 · 语言 任意标准语言 ×1 · 特性 公会成员"
+  },
+  {
+    "id": "phb:background:hermit",
+    "type": "background",
+    "name": "隐士",
+    "name_en": "Hermit",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "医药",
+      "宗教"
+    ],
+    "tool_proficiencies": [
+      {
+        "草药工具": true
+      }
+    ],
+    "language_proficiencies": "任意标准语言 ×1",
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "一个卷轴匣，用来装纳研究成果和祈祷词的笔记",
+            "冬季毯子",
+            "普通服装",
+            "草药工具",
+            "{\"value\":500}"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "研究发现",
+      "name_en": "Discovery"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 134,
+      "srd": false
+    },
+    "brief": "技能 医药/宗教 · 语言 任意标准语言 ×1 · 特性 研究发现"
+  },
+  {
+    "id": "phb:background:noble",
+    "type": "background",
+    "name": "贵族",
+    "name_en": "Noble",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "历史",
+      "游说"
+    ],
+    "tool_proficiencies": [
+      {
+        "任意游戏套组": 1
+      }
+    ],
+    "language_proficiencies": "任意标准语言 ×1",
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "高档服装",
+            "玺戒",
+            "家系族谱",
+            "钱包"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "特权地位",
+      "name_en": "Position of Privilege"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 135,
+      "srd": false
+    },
+    "brief": "技能 历史/游说 · 语言 任意标准语言 ×1 · 特性 特权地位"
+  },
+  {
+    "id": "phb:background:outlander",
+    "type": "background",
+    "name": "化外之民",
+    "name_en": "Outlander",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "运动",
+      "生存"
+    ],
+    "tool_proficiencies": [
+      {
+        "任意乐器": 1
+      }
+    ],
+    "language_proficiencies": "任意标准语言 ×1",
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "法杖",
+            "捕猎陷阱",
+            "来自你手刃的动物身上的战利品",
+            "旅行服装",
+            "小包（含 10 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "漂泊者",
+      "name_en": "Wanderer"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 136,
+      "srd": false
+    },
+    "brief": "技能 运动/生存 · 语言 任意标准语言 ×1 · 特性 漂泊者"
+  },
+  {
+    "id": "phb:background:sage",
+    "type": "background",
+    "name": "智者",
+    "name_en": "Sage",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "奥秘",
+      "历史"
+    ],
+    "tool_proficiencies": [],
+    "language_proficiencies": "任意标准语言 ×2",
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "墨水(1盎司/瓶)",
+            "羽毛笔",
+            "小刀",
+            "一封去世同事信件其内载有你尚不能解答的问题",
+            "普通服装",
+            "小包（含 10 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "研究员",
+      "name_en": "Researcher"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 137,
+      "srd": false
+    },
+    "brief": "技能 奥秘/历史 · 语言 任意标准语言 ×2 · 特性 研究员"
+  },
+  {
+    "id": "phb:background:sailor",
+    "type": "background",
+    "name": "水手",
+    "name_en": "Sailor",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "运动",
+      "察觉"
+    ],
+    "tool_proficiencies": [
+      {
+        "领航工具": true,
+        "水运载具": true
+      }
+    ],
+    "language_proficiencies": null,
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "缠索栓（短棒）",
+            "丝绳(50尺)",
+            "幸运符",
+            "普通服装",
+            "小包（含 10 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "船家路子",
+      "name_en": "Ship's Passage"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 139,
+      "srd": false
+    },
+    "brief": "技能 运动/察觉 · 特性 船家路子"
+  },
+  {
+    "id": "phb:background:soldier",
+    "type": "background",
+    "name": "士兵",
+    "name_en": "Soldier",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "运动",
+      "威吓"
+    ],
+    "tool_proficiencies": [
+      {
+        "任意游戏套组": 1,
+        "陆运载具": true
+      }
+    ],
+    "language_proficiencies": null,
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "军阶徽记",
+            "一件从某个倒下的敌人身上得到的战利品（一把匕首，毁坏的武器或是军旗碎片）",
+            "普通服装",
+            "小包（含 10 gp）"
+          ]
+        }
+      ],
+      [
+        {
+          "option": "a",
+          "items": [
+            "骨质骰子套装"
+          ]
+        },
+        {
+          "option": "b",
+          "items": [
+            "整副纸牌"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "军衔",
+      "name_en": "Military Rank"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 140,
+      "srd": false
+    },
+    "brief": "技能 运动/威吓 · 特性 军衔"
+  },
+  {
+    "id": "phb:background:urchin",
+    "type": "background",
+    "name": "流浪儿",
+    "name_en": "Urchin",
+    "is_variant": false,
+    "is_custom": false,
+    "variant_of": null,
+    "skill_proficiencies": [
+      "巧手",
+      "隐匿"
+    ],
+    "tool_proficiencies": [
+      {
+        "易容工具": true,
+        "盗贼工具": true
+      }
+    ],
+    "language_proficiencies": null,
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "小刀",
+            "你成长的城市的地图",
+            "宠物老鼠",
+            "用来纪念你父母的信物",
+            "普通服装",
+            "小包（含 10 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "城中秘密",
+      "name_en": "City Secrets"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 141,
+      "srd": false
+    },
+    "brief": "技能 巧手/隐匿 · 特性 城中秘密"
+  },
+  {
+    "id": "phb:background:variant-criminal-spy",
+    "type": "background",
+    "name": "变体罪犯：密探",
+    "name_en": "Variant Criminal (Spy)",
+    "is_variant": true,
+    "is_custom": false,
+    "variant_of": "phb:background:criminal",
+    "skill_proficiencies": [
+      "欺瞒",
+      "隐匿"
+    ],
+    "tool_proficiencies": [
+      {
+        "任意游戏套组": 1,
+        "盗贼工具": true
+      }
+    ],
+    "language_proficiencies": null,
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "撬棍",
+            "带兜帽的深色普通服装",
+            "小包（含 15 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "罪犯接头人",
+      "name_en": "Spy Contact"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 130,
+      "srd": false
+    },
+    "brief": "技能 欺瞒/隐匿 · 特性 罪犯接头人"
+  },
+  {
+    "id": "phb:background:variant-entertainer-gladiator",
+    "type": "background",
+    "name": "变体艺人：角斗士",
+    "name_en": "Variant Entertainer (Gladiator)",
+    "is_variant": true,
+    "is_custom": false,
+    "variant_of": "phb:background:entertainer",
+    "skill_proficiencies": [
+      "特技",
+      "表演"
+    ],
+    "tool_proficiencies": [
+      {
+        "易容工具": true,
+        "任意乐器": 1
+      }
+    ],
+    "language_proficiencies": null,
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "乐器（任选）",
+            "倾慕者的信物（情书、一缕头发或者饰品）",
+            "表演服装",
+            "小包（含 15 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "人见人爱",
+      "name_en": "By Popular Demand"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 131,
+      "srd": false
+    },
+    "brief": "技能 特技/表演 · 特性 人见人爱"
+  },
+  {
+    "id": "phb:background:variant-guild-artisan-guild-merchant",
+    "type": "background",
+    "name": "变体公会工匠：公会商人",
+    "name_en": "Variant Guild Artisan (Guild Merchant)",
+    "is_variant": true,
+    "is_custom": false,
+    "variant_of": "phb:background:guild-artisan",
+    "skill_proficiencies": [
+      "洞见",
+      "游说"
+    ],
+    "tool_proficiencies": [
+      {
+        "choose": {
+          "from": [
+            "任意工匠工具",
+            "领航工具"
+          ]
+        }
+      }
+    ],
+    "language_proficiencies": "任意标准语言 ×1",
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "toolArtisan",
+            "来自你公会的介绍信",
+            "旅行服装",
+            "小包（含 15 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "公会成员",
+      "name_en": "Guild Membership"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 133,
+      "srd": false
+    },
+    "brief": "技能 洞见/游说 · 语言 任意标准语言 ×1 · 特性 公会成员"
+  },
+  {
+    "id": "phb:background:variant-noble-knight",
+    "type": "background",
+    "name": "变体贵族：骑士",
+    "name_en": "Variant Noble (Knight)",
+    "is_variant": true,
+    "is_custom": false,
+    "variant_of": "phb:background:noble",
+    "skill_proficiencies": [
+      "历史",
+      "游说"
+    ],
+    "tool_proficiencies": [
+      {
+        "任意游戏套组": 1
+      }
+    ],
+    "language_proficiencies": "任意标准语言 ×1",
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "高档服装",
+            "玺戒",
+            "家系族谱",
+            "钱包"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "家仆",
+      "name_en": "Retainers"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 136,
+      "srd": false
+    },
+    "brief": "技能 历史/游说 · 语言 任意标准语言 ×1 · 特性 家仆"
+  },
+  {
+    "id": "phb:background:variant-noble-retainers",
+    "type": "background",
+    "name": "变体特性：家仆",
+    "name_en": "Variant Noble (Retainers)",
+    "is_variant": true,
+    "is_custom": false,
+    "variant_of": "phb:background:noble",
+    "skill_proficiencies": [
+      "历史",
+      "游说"
+    ],
+    "tool_proficiencies": [
+      {
+        "任意游戏套组": 1
+      }
+    ],
+    "language_proficiencies": "任意标准语言 ×1",
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "高档服装",
+            "玺戒",
+            "家系族谱",
+            "钱包"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "家仆",
+      "name_en": "Retainers"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 136,
+      "srd": false
+    },
+    "brief": "技能 历史/游说 · 语言 任意标准语言 ×1 · 特性 家仆"
+  },
+  {
+    "id": "phb:background:variant-sailor-pirate",
+    "type": "background",
+    "name": "变体水手：海盗",
+    "name_en": "Variant Sailor (Pirate)",
+    "is_variant": true,
+    "is_custom": false,
+    "variant_of": "phb:background:sailor",
+    "skill_proficiencies": [
+      "运动",
+      "察觉"
+    ],
+    "tool_proficiencies": [
+      {
+        "领航工具": true,
+        "水运载具": true
+      }
+    ],
+    "language_proficiencies": null,
+    "equipment": [
+      [
+        {
+          "option": "_",
+          "items": [
+            "缠索栓（短棒）",
+            "丝绳(50尺)",
+            "幸运符",
+            "普通服装",
+            "小包（含 10 gp）"
+          ]
+        }
+      ]
+    ],
+    "feature": {
+      "name": "恶名",
+      "name_en": "Bad Reputation"
+    },
+    "source": {
+      "book": "PHB",
+      "page": 139,
+      "srd": false
+    },
+    "brief": "技能 运动/察觉 · 特性 恶名"
+  }
+]
