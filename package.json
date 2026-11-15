@@ -9,6 +9,9 @@
     "test": "node --test tests/*.test.mjs",
     "validate": "node scripts/validate.mjs",
     "validate:sample": "node scripts/validate-sample.mjs",
+    "validate:phb": "node scripts/phb-validate.mjs",
+    "ingest:phb": "node scripts/phb-ingest.mjs",
+    "query:phb": "node scripts/phb-query.mjs",
     "test:e2e": "playwright test"
   },
   "engines": {

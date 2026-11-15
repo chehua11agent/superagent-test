@@ -1,0 +1,498 @@
+[
+  {
+    "id": "phb:plane:demiplanes",
+    "type": "plane",
+    "name": "半位面",
+    "name_en": "Demiplanes",
+    "category": "demiplane",
+    "category_label": "半位面",
+    "alignment": null,
+    "note": "由魔法创造的小型位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "半位面 · 由魔法创造的小型位面"
+  },
+  {
+    "id": "phb:plane:negative-energy-plane",
+    "type": "plane",
+    "name": "负能量位面",
+    "name_en": "Negative Energy Plane",
+    "category": "inner",
+    "category_label": "内层位面",
+    "alignment": null,
+    "note": "死亡与腐朽的源头",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "负能量位面 · 死亡与腐朽的源头"
+  },
+  {
+    "id": "phb:plane:elemental-plane-of-fire",
+    "type": "plane",
+    "name": "火元素位面",
+    "name_en": "Elemental Plane of Fire",
+    "category": "inner",
+    "category_label": "内层位面",
+    "alignment": null,
+    "note": "四大元素位面之一",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "火元素位面 · 四大元素位面之一"
+  },
+  {
+    "id": "phb:plane:elemental-plane-of-air",
+    "type": "plane",
+    "name": "气元素位面",
+    "name_en": "Elemental Plane of Air",
+    "category": "inner",
+    "category_label": "内层位面",
+    "alignment": null,
+    "note": "四大元素位面之一",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "气元素位面 · 四大元素位面之一"
+  },
+  {
+    "id": "phb:plane:elemental-plane-of-water",
+    "type": "plane",
+    "name": "水元素位面",
+    "name_en": "Elemental Plane of Water",
+    "category": "inner",
+    "category_label": "内层位面",
+    "alignment": null,
+    "note": "四大元素位面之一",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "水元素位面 · 四大元素位面之一"
+  },
+  {
+    "id": "phb:plane:elemental-plane-of-earth",
+    "type": "plane",
+    "name": "土元素位面",
+    "name_en": "Elemental Plane of Earth",
+    "category": "inner",
+    "category_label": "内层位面",
+    "alignment": null,
+    "note": "四大元素位面之一",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "土元素位面 · 四大元素位面之一"
+  },
+  {
+    "id": "phb:plane:elemental-chaos",
+    "type": "plane",
+    "name": "元素混沌",
+    "name_en": "Elemental Chaos",
+    "category": "inner",
+    "category_label": "内层位面",
+    "alignment": null,
+    "note": "元素位面交汇的混沌",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "元素混沌 · 元素位面交汇的混沌"
+  },
+  {
+    "id": "phb:plane:positive-energy-plane",
+    "type": "plane",
+    "name": "正能量位面",
+    "name_en": "Positive Energy Plane",
+    "category": "inner",
+    "category_label": "内层位面",
+    "alignment": null,
+    "note": "生命能量的源头",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "正能量位面 · 生命能量的源头"
+  },
+  {
+    "id": "phb:plane:material-plane",
+    "type": "plane",
+    "name": "物质位面",
+    "name_en": "Material Plane",
+    "category": "material",
+    "category_label": "主位面",
+    "alignment": null,
+    "note": "凡俗世界所在的主位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "物质位面 · 凡俗世界所在的主位面"
+  },
+  {
+    "id": "phb:plane:arcadia",
+    "type": "plane",
+    "name": "阿卡狄亚",
+    "name_en": "Arcadia",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "LN/LG",
+    "note": "秩序与善良的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "阿卡狄亚 · LN/LG · 秩序与善良的外层位面"
+  },
+  {
+    "id": "phb:plane:acheron",
+    "type": "plane",
+    "name": "阿刻戎",
+    "name_en": "Acheron",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "LE/LN",
+    "note": "战争与秩序的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "阿刻戎 · LE/LN · 战争与秩序的外层位面"
+  },
+  {
+    "id": "phb:plane:hades",
+    "type": "plane",
+    "name": "哈迪斯",
+    "name_en": "Hades",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "NE",
+    "note": "灰暗与邪恶的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "哈迪斯 · NE · 灰暗与邪恶的外层位面"
+  },
+  {
+    "id": "phb:plane:limbo",
+    "type": "plane",
+    "name": "混沌海",
+    "name_en": "Limbo",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "CN",
+    "note": "纯粹混沌的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "混沌海 · CN · 纯粹混沌的外层位面"
+  },
+  {
+    "id": "phb:plane:mechanus",
+    "type": "plane",
+    "name": "机械境",
+    "name_en": "Mechanus",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "LN",
+    "note": "绝对秩序的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "机械境 · LN · 绝对秩序的外层位面"
+  },
+  {
+    "id": "phb:plane:elysium",
+    "type": "plane",
+    "name": "极乐境",
+    "name_en": "Elysium",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "NG",
+    "note": "善良与自由的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "极乐境 · NG · 善良与自由的外层位面"
+  },
+  {
+    "id": "phb:plane:gehenna",
+    "type": "plane",
+    "name": "焦炎地狱",
+    "name_en": "Gehenna",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "NE/LE",
+    "note": "贪婪与邪恶的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "焦炎地狱 · NE/LE · 贪婪与邪恶的外层位面"
+  },
+  {
+    "id": "phb:plane:the-nine-hells",
+    "type": "plane",
+    "name": "九层地狱",
+    "name_en": "The Nine Hells",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "LE",
+    "note": "魔鬼统治的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "九层地狱 · LE · 魔鬼统治的外层位面"
+  },
+  {
+    "id": "phb:plane:carceri",
+    "type": "plane",
+    "name": "卡瑟利",
+    "name_en": "Carceri",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "CE/NE",
+    "note": "囚禁与背叛的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "卡瑟利 · CE/NE · 囚禁与背叛的外层位面"
+  },
+  {
+    "id": "phb:plane:mount-celestia",
+    "type": "plane",
+    "name": "七丘天堂",
+    "name_en": "Mount Celestia",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "LG",
+    "note": "善良与律法的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "七丘天堂 · LG · 善良与律法的外层位面"
+  },
+  {
+    "id": "phb:plane:arborea",
+    "type": "plane",
+    "name": "乔木仙境",
+    "name_en": "Arborea",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "CG",
+    "note": "自由与善良的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "乔木仙境 · CG · 自由与善良的外层位面"
+  },
+  {
+    "id": "phb:plane:the-abyss",
+    "type": "plane",
+    "name": "深渊",
+    "name_en": "The Abyss",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "CE",
+    "note": "恶魔盘踞的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "深渊 · CE · 恶魔盘踞的外层位面"
+  },
+  {
+    "id": "phb:plane:the-beastlands",
+    "type": "plane",
+    "name": "兽乡",
+    "name_en": "The Beastlands",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "NG/CG",
+    "note": "野性与善良的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "兽乡 · NG/CG · 野性与善良的外层位面"
+  },
+  {
+    "id": "phb:plane:bytopia",
+    "type": "plane",
+    "name": "双生天堂",
+    "name_en": "Bytopia",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "LG/NG",
+    "note": "勤劳与善良的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "双生天堂 · LG/NG · 勤劳与善良的外层位面"
+  },
+  {
+    "id": "phb:plane:the-outlands",
+    "type": "plane",
+    "name": "外域",
+    "name_en": "The Outlands",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "N",
+    "note": "环绕印记城的中立外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "外域 · N · 环绕印记城的中立外层位面"
+  },
+  {
+    "id": "phb:plane:pandemonium",
+    "type": "plane",
+    "name": "喧嚣空隧",
+    "name_en": "Pandemonium",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "CN/CE",
+    "note": "疯狂与混沌的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "喧嚣空隧 · CN/CE · 疯狂与混沌的外层位面"
+  },
+  {
+    "id": "phb:plane:sigil",
+    "type": "plane",
+    "name": "印记城",
+    "name_en": "Sigil",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "N",
+    "note": "万门之城",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "印记城 · N · 万门之城"
+  },
+  {
+    "id": "phb:plane:ysgard",
+    "type": "plane",
+    "name": "约顿海姆",
+    "name_en": "Ysgard",
+    "category": "outer",
+    "category_label": "外层位面",
+    "alignment": "CG/CN",
+    "note": "英雄与混沌的外层位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "约顿海姆 · CG/CN · 英雄与混沌的外层位面"
+  },
+  {
+    "id": "phb:plane:shadowfell",
+    "type": "plane",
+    "name": "堕影冥界",
+    "name_en": "Shadowfell",
+    "category": "transitive",
+    "category_label": "过渡位面",
+    "alignment": null,
+    "note": "与物质位面重叠的灰暗镜像",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "堕影冥界 · 与物质位面重叠的灰暗镜像"
+  },
+  {
+    "id": "phb:plane:astral-plane",
+    "type": "plane",
+    "name": "星界",
+    "name_en": "Astral Plane",
+    "category": "transitive",
+    "category_label": "过渡位面",
+    "alignment": null,
+    "note": "连接诸界的银色虚空",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "星界 · 连接诸界的银色虚空"
+  },
+  {
+    "id": "phb:plane:feywild",
+    "type": "plane",
+    "name": "妖精荒野",
+    "name_en": "Feywild",
+    "category": "transitive",
+    "category_label": "过渡位面",
+    "alignment": null,
+    "note": "与物质位面重叠的妖精镜像",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "妖精荒野 · 与物质位面重叠的妖精镜像"
+  },
+  {
+    "id": "phb:plane:ethereal-plane",
+    "type": "plane",
+    "name": "以太位面",
+    "name_en": "Ethereal Plane",
+    "category": "transitive",
+    "category_label": "过渡位面",
+    "alignment": null,
+    "note": "包裹物质位面的雾状位面",
+    "source": {
+      "book": "PHB",
+      "page": 300,
+      "srd": false
+    },
+    "brief": "以太位面 · 包裹物质位面的雾状位面"
+  }
+]

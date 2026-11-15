@@ -1,0 +1,1281 @@
+[
+  {
+    "id": "phb:race:dragonborn",
+    "type": "race",
+    "name": "龙裔",
+    "name_en": "Dragonborn",
+    "size": [
+      "中型"
+    ],
+    "speed": "30 尺",
+    "darkvision_ft": null,
+    "ability": "+2 力量 / +1 魅力",
+    "ability_bonuses": {
+      "fixed": {
+        "str": 2,
+        "cha": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": "通用语、龙语",
+    "resistances": "自选：强酸/寒冷/火焰/闪电/毒素",
+    "immunities": null,
+    "traits": [
+      {
+        "name": "年龄",
+        "name_en": "Age"
+      },
+      {
+        "name": "体型",
+        "name_en": "Size"
+      },
+      {
+        "name": "龙族血统",
+        "name_en": "Draconic Ancestry"
+      },
+      {
+        "name": "吐息武器",
+        "name_en": "Breath Weapon"
+      },
+      {
+        "name": "伤害抗性",
+        "name_en": "Damage Resistance"
+      },
+      {
+        "name": "语言",
+        "name_en": "Languages"
+      }
+    ],
+    "tags": [
+      "罕见种族"
+    ],
+    "subraces": [],
+    "source": {
+      "book": "PHB",
+      "page": 32,
+      "srd": true
+    },
+    "brief": "中型 · 30 尺 · +2 力量 / +1 魅力 · 抗性 自选：强酸/寒冷/火焰/闪电/毒素"
+  },
+  {
+    "id": "phb:race:dwarf",
+    "type": "race",
+    "name": "矮人",
+    "name_en": "Dwarf",
+    "size": [
+      "中型"
+    ],
+    "speed": "25 尺",
+    "darkvision_ft": 60,
+    "ability": "+2 体质",
+    "ability_bonuses": {
+      "fixed": {
+        "con": 2
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [
+      {
+        "choose": {
+          "from": [
+            "铁匠工具",
+            "酿酒工具",
+            "石匠工具"
+          ],
+          "count": 1
+        }
+      }
+    ],
+    "weapon_proficiencies": [
+      "战斧",
+      "手斧",
+      "轻锤",
+      "战锤"
+    ],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": "通用语、矮人语",
+    "resistances": "毒素",
+    "immunities": null,
+    "traits": [
+      {
+        "name": "年龄",
+        "name_en": "Age"
+      },
+      {
+        "name": "体型",
+        "name_en": "Size"
+      },
+      {
+        "name": "速度",
+        "name_en": "Speed"
+      },
+      {
+        "name": "黑暗视觉",
+        "name_en": "Darkvision"
+      },
+      {
+        "name": "矮人体魄",
+        "name_en": "Dwarven Resilience"
+      },
+      {
+        "name": "矮人战斗训练",
+        "name_en": "Dwarven Combat Training"
+      },
+      {
+        "name": "工具熟练",
+        "name_en": "Tool Proficiency"
+      },
+      {
+        "name": "石中精妙",
+        "name_en": "Stonecunning"
+      },
+      {
+        "name": "语言",
+        "name_en": "Languages"
+      }
+    ],
+    "tags": [],
+    "subraces": [
+      "phb:subrace:dwarf-hill",
+      "phb:subrace:dwarf-mountain"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 18,
+      "srd": true
+    },
+    "brief": "中型 · 25 尺 · +2 体质 · 黑暗视觉 60 尺 · 抗性 毒素 · 武器 战斧/手斧/轻锤/战锤 · 工具 自选 1（铁匠工具/酿酒工具/石匠工具）"
+  },
+  {
+    "id": "phb:race:elf",
+    "type": "race",
+    "name": "精灵",
+    "name_en": "Elf",
+    "size": [
+      "中型"
+    ],
+    "speed": "30 尺",
+    "darkvision_ft": 60,
+    "ability": "+2 敏捷",
+    "ability_bonuses": {
+      "fixed": {
+        "dex": 2
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [
+      "察觉"
+    ],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": "通用语、精灵语",
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "年龄",
+        "name_en": "Age"
+      },
+      {
+        "name": "体型",
+        "name_en": "Size"
+      },
+      {
+        "name": "黑暗视觉",
+        "name_en": "Darkvision"
+      },
+      {
+        "name": "敏锐感官",
+        "name_en": "Keen Senses"
+      },
+      {
+        "name": "妖精血统",
+        "name_en": "Fey Ancestry"
+      },
+      {
+        "name": "出神",
+        "name_en": "Trance"
+      },
+      {
+        "name": "语言",
+        "name_en": "Languages"
+      }
+    ],
+    "tags": [
+      "特殊休息"
+    ],
+    "subraces": [
+      "phb:subrace:elf-drow",
+      "phb:subrace:elf-high",
+      "phb:subrace:elf-wood"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 21,
+      "srd": true
+    },
+    "brief": "中型 · 30 尺 · +2 敏捷 · 黑暗视觉 60 尺 · 技能 察觉"
+  },
+  {
+    "id": "phb:race:gnome",
+    "type": "race",
+    "name": "侏儒",
+    "name_en": "Gnome",
+    "size": [
+      "小型"
+    ],
+    "speed": "25 尺",
+    "darkvision_ft": 60,
+    "ability": "+2 智力",
+    "ability_bonuses": {
+      "fixed": {
+        "int": 2
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": "通用语、侏儒语",
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "年龄",
+        "name_en": "Age"
+      },
+      {
+        "name": "体型",
+        "name_en": "Size"
+      },
+      {
+        "name": "黑暗视觉",
+        "name_en": "Darkvision"
+      },
+      {
+        "name": "侏儒狡黠",
+        "name_en": "Gnome Cunning"
+      },
+      {
+        "name": "语言",
+        "name_en": "Languages"
+      }
+    ],
+    "tags": [
+      "罕见种族"
+    ],
+    "subraces": [
+      "phb:subrace:gnome-forest",
+      "phb:subrace:gnome-rock"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 35,
+      "srd": true
+    },
+    "brief": "小型 · 25 尺 · +2 智力 · 黑暗视觉 60 尺"
+  },
+  {
+    "id": "phb:race:half-elf",
+    "type": "race",
+    "name": "半精灵",
+    "name_en": "Half-Elf",
+    "size": [
+      "中型"
+    ],
+    "speed": "30 尺",
+    "darkvision_ft": 60,
+    "ability": "+2 魅力 · 2 项自选（力量/敏捷/体质/智力/感知）",
+    "ability_bonuses": {
+      "fixed": {
+        "cha": 2
+      },
+      "choose": {
+        "from": [
+          "力量",
+          "敏捷",
+          "体质",
+          "智力",
+          "感知"
+        ],
+        "count": 2
+      }
+    },
+    "skill_proficiencies": [
+      "任意技能 ×2"
+    ],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": "通用语、精灵语 · 任意标准语言 ×1",
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "年龄",
+        "name_en": "Age"
+      },
+      {
+        "name": "体型",
+        "name_en": "Size"
+      },
+      {
+        "name": "黑暗视觉",
+        "name_en": "Darkvision"
+      },
+      {
+        "name": "妖精血统",
+        "name_en": "Fey Ancestry"
+      },
+      {
+        "name": "多才多艺",
+        "name_en": "Skill Versatility"
+      },
+      {
+        "name": "语言",
+        "name_en": "Languages"
+      }
+    ],
+    "tags": [
+      "罕见种族"
+    ],
+    "subraces": [],
+    "source": {
+      "book": "PHB",
+      "page": 38,
+      "srd": true
+    },
+    "brief": "中型 · 30 尺 · +2 魅力 · 2 项自选（力量/敏捷/体质/智力/感知） · 黑暗视觉 60 尺 · 技能 任意技能 ×2"
+  },
+  {
+    "id": "phb:race:half-orc",
+    "type": "race",
+    "name": "半兽人",
+    "name_en": "Half-Orc",
+    "size": [
+      "中型"
+    ],
+    "speed": "30 尺",
+    "darkvision_ft": 60,
+    "ability": "+2 力量 / +1 体质",
+    "ability_bonuses": {
+      "fixed": {
+        "str": 2,
+        "con": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [
+      "威吓"
+    ],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": "通用语、兽人语",
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "年龄",
+        "name_en": "Age"
+      },
+      {
+        "name": "体型",
+        "name_en": "Size"
+      },
+      {
+        "name": "黑暗视觉",
+        "name_en": "Darkvision"
+      },
+      {
+        "name": "凶恶",
+        "name_en": "Menacing"
+      },
+      {
+        "name": "坚韧不屈",
+        "name_en": "Relentless Endurance"
+      },
+      {
+        "name": "凶蛮攻击",
+        "name_en": "Savage Attacks"
+      },
+      {
+        "name": "语言",
+        "name_en": "Languages"
+      }
+    ],
+    "tags": [
+      "罕见种族"
+    ],
+    "subraces": [],
+    "source": {
+      "book": "PHB",
+      "page": 40,
+      "srd": true
+    },
+    "brief": "中型 · 30 尺 · +2 力量 / +1 体质 · 黑暗视觉 60 尺 · 技能 威吓"
+  },
+  {
+    "id": "phb:race:halfling",
+    "type": "race",
+    "name": "半身人",
+    "name_en": "Halfling",
+    "size": [
+      "小型"
+    ],
+    "speed": "25 尺",
+    "darkvision_ft": null,
+    "ability": "+2 敏捷",
+    "ability_bonuses": {
+      "fixed": {
+        "dex": 2
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": "通用语、半身人语",
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "年龄",
+        "name_en": "Age"
+      },
+      {
+        "name": "体型",
+        "name_en": "Size"
+      },
+      {
+        "name": "幸运",
+        "name_en": "Lucky"
+      },
+      {
+        "name": "勇气",
+        "name_en": "Brave"
+      },
+      {
+        "name": "半身人灵巧",
+        "name_en": "Halfling Nimbleness"
+      },
+      {
+        "name": "语言",
+        "name_en": "Languages"
+      }
+    ],
+    "tags": [],
+    "subraces": [
+      "phb:subrace:halfling-lightfoot",
+      "phb:subrace:halfling-stout"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 26,
+      "srd": true
+    },
+    "brief": "小型 · 25 尺 · +2 敏捷"
+  },
+  {
+    "id": "phb:race:human",
+    "type": "race",
+    "name": "人类",
+    "name_en": "Human",
+    "size": [
+      "中型"
+    ],
+    "speed": "30 尺",
+    "darkvision_ft": null,
+    "ability": "+1 力量 / +1 敏捷 / +1 体质 / +1 智力 / +1 感知 / +1 魅力",
+    "ability_bonuses": {
+      "fixed": {
+        "str": 1,
+        "dex": 1,
+        "con": 1,
+        "int": 1,
+        "wis": 1,
+        "cha": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": "通用语 · 任意标准语言 ×1",
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "年龄",
+        "name_en": "Age"
+      },
+      {
+        "name": "体型",
+        "name_en": "Size"
+      },
+      {
+        "name": "语言",
+        "name_en": "Languages"
+      }
+    ],
+    "tags": [],
+    "subraces": [
+      "phb:subrace:human-variant"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 29,
+      "srd": true
+    },
+    "brief": "中型 · 30 尺 · +1 力量 / +1 敏捷 / +1 体质 / +1 智力 / +1 感知 / +1 魅力"
+  },
+  {
+    "id": "phb:race:tiefling",
+    "type": "race",
+    "name": "提夫林",
+    "name_en": "Tiefling",
+    "size": [
+      "中型"
+    ],
+    "speed": "30 尺",
+    "darkvision_ft": 60,
+    "ability": "+1 智力 / +2 魅力",
+    "ability_bonuses": {
+      "fixed": {
+        "int": 1,
+        "cha": 2
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": "通用语、炼狱语",
+    "resistances": "火焰",
+    "immunities": null,
+    "traits": [
+      {
+        "name": "年龄",
+        "name_en": "Age"
+      },
+      {
+        "name": "体型",
+        "name_en": "Size"
+      },
+      {
+        "name": "黑暗视觉",
+        "name_en": "Darkvision"
+      },
+      {
+        "name": "炼狱抗性",
+        "name_en": "Hellish Resistance"
+      },
+      {
+        "name": "地狱遗赠",
+        "name_en": "Infernal Legacy"
+      },
+      {
+        "name": "语言",
+        "name_en": "Languages"
+      }
+    ],
+    "tags": [
+      "罕见种族"
+    ],
+    "subraces": [],
+    "source": {
+      "book": "PHB",
+      "page": 42,
+      "srd": true
+    },
+    "brief": "中型 · 30 尺 · +1 智力 / +2 魅力 · 黑暗视觉 60 尺 · 抗性 火焰"
+  },
+  {
+    "id": "phb:subrace:dwarf-hill",
+    "type": "subrace",
+    "name": "丘陵",
+    "display_name": "丘陵矮人",
+    "name_en": "Hill",
+    "parent_race": "phb:race:dwarf",
+    "parent_race_name": "矮人",
+    "parent_values": {
+      "ability": "+2 体质",
+      "size": [
+        "中型"
+      ],
+      "speed": "25 尺",
+      "darkvision_ft": 60,
+      "resistances": "毒素",
+      "languages": "通用语、矮人语",
+      "skill_proficiencies": [],
+      "tool_proficiencies": [
+        {
+          "choose": {
+            "from": [
+              "铁匠工具",
+              "酿酒工具",
+              "石匠工具"
+            ],
+            "count": 1
+          }
+        }
+      ],
+      "weapon_proficiencies": [
+        "战斧",
+        "手斧",
+        "轻锤",
+        "战锤"
+      ],
+      "armor_proficiencies": [],
+      "feat_choices": []
+    },
+    "is_variant": false,
+    "ability_replaces_parent": false,
+    "size": [],
+    "speed": null,
+    "darkvision_ft": null,
+    "ability": "+1 感知",
+    "ability_bonuses": {
+      "fixed": {
+        "wis": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": null,
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "矮人刚毅",
+        "name_en": "Dwarven Toughness"
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 20,
+      "srd": true
+    },
+    "brief": "丘陵矮人 · +2 体质（种族） · +1 感知（亚种）"
+  },
+  {
+    "id": "phb:subrace:dwarf-mountain",
+    "type": "subrace",
+    "name": "山地",
+    "display_name": "山地矮人",
+    "name_en": "Mountain",
+    "parent_race": "phb:race:dwarf",
+    "parent_race_name": "矮人",
+    "parent_values": {
+      "ability": "+2 体质",
+      "size": [
+        "中型"
+      ],
+      "speed": "25 尺",
+      "darkvision_ft": 60,
+      "resistances": "毒素",
+      "languages": "通用语、矮人语",
+      "skill_proficiencies": [],
+      "tool_proficiencies": [
+        {
+          "choose": {
+            "from": [
+              "铁匠工具",
+              "酿酒工具",
+              "石匠工具"
+            ],
+            "count": 1
+          }
+        }
+      ],
+      "weapon_proficiencies": [
+        "战斧",
+        "手斧",
+        "轻锤",
+        "战锤"
+      ],
+      "armor_proficiencies": [],
+      "feat_choices": []
+    },
+    "is_variant": false,
+    "ability_replaces_parent": false,
+    "size": [],
+    "speed": null,
+    "darkvision_ft": null,
+    "ability": "+2 力量",
+    "ability_bonuses": {
+      "fixed": {
+        "str": 2
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [
+      "轻甲",
+      "中甲"
+    ],
+    "feat_choices": [],
+    "languages": null,
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "矮人护甲训练",
+        "name_en": "Dwarven Armor Training"
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 20,
+      "srd": false
+    },
+    "brief": "山地矮人 · +2 体质（种族） · +2 力量（亚种） · 护甲 轻甲/中甲"
+  },
+  {
+    "id": "phb:subrace:elf-drow",
+    "type": "subrace",
+    "name": "卓尔",
+    "display_name": "卓尔精灵",
+    "name_en": "Drow",
+    "parent_race": "phb:race:elf",
+    "parent_race_name": "精灵",
+    "parent_values": {
+      "ability": "+2 敏捷",
+      "size": [
+        "中型"
+      ],
+      "speed": "30 尺",
+      "darkvision_ft": 60,
+      "resistances": null,
+      "languages": "通用语、精灵语",
+      "skill_proficiencies": [
+        "察觉"
+      ],
+      "tool_proficiencies": [],
+      "weapon_proficiencies": [],
+      "armor_proficiencies": [],
+      "feat_choices": []
+    },
+    "is_variant": false,
+    "ability_replaces_parent": false,
+    "size": [],
+    "speed": null,
+    "darkvision_ft": 120,
+    "ability": "+1 魅力",
+    "ability_bonuses": {
+      "fixed": {
+        "cha": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [
+      "刺剑",
+      "短剑",
+      "手弩"
+    ],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": null,
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "增强黑暗视觉",
+        "name_en": "Superior Darkvision"
+      },
+      {
+        "name": "日照敏感",
+        "name_en": "Sunlight Sensitivity"
+      },
+      {
+        "name": "卓尔魔法",
+        "name_en": "Drow Magic"
+      },
+      {
+        "name": "卓尔武器训练",
+        "name_en": "Drow Weapon Training"
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 24,
+      "srd": false
+    },
+    "brief": "卓尔精灵 · +2 敏捷（种族） · +1 魅力（亚种） · 黑暗视觉 120 尺 · 武器 刺剑/短剑/手弩"
+  },
+  {
+    "id": "phb:subrace:elf-high",
+    "type": "subrace",
+    "name": "高等",
+    "display_name": "高等精灵",
+    "name_en": "High",
+    "parent_race": "phb:race:elf",
+    "parent_race_name": "精灵",
+    "parent_values": {
+      "ability": "+2 敏捷",
+      "size": [
+        "中型"
+      ],
+      "speed": "30 尺",
+      "darkvision_ft": 60,
+      "resistances": null,
+      "languages": "通用语、精灵语",
+      "skill_proficiencies": [
+        "察觉"
+      ],
+      "tool_proficiencies": [],
+      "weapon_proficiencies": [],
+      "armor_proficiencies": [],
+      "feat_choices": []
+    },
+    "is_variant": false,
+    "ability_replaces_parent": false,
+    "size": [],
+    "speed": "30 尺",
+    "darkvision_ft": null,
+    "ability": "+1 智力",
+    "ability_bonuses": {
+      "fixed": {
+        "int": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [
+      "长剑",
+      "短剑",
+      "短弓",
+      "长弓"
+    ],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": "通用语、精灵语 · 任意标准语言 ×1",
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "精灵武器训练",
+        "name_en": "Elf Weapon Training"
+      },
+      {
+        "name": "戏法",
+        "name_en": "Cantrip"
+      },
+      {
+        "name": "额外语言",
+        "name_en": "Extra Language"
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 23,
+      "srd": true
+    },
+    "brief": "高等精灵 · +2 敏捷（种族） · +1 智力（亚种） · 速度 30 尺 · 武器 长剑/短剑/短弓/长弓"
+  },
+  {
+    "id": "phb:subrace:elf-wood",
+    "type": "subrace",
+    "name": "木",
+    "display_name": "木精灵",
+    "name_en": "Wood",
+    "parent_race": "phb:race:elf",
+    "parent_race_name": "精灵",
+    "parent_values": {
+      "ability": "+2 敏捷",
+      "size": [
+        "中型"
+      ],
+      "speed": "30 尺",
+      "darkvision_ft": 60,
+      "resistances": null,
+      "languages": "通用语、精灵语",
+      "skill_proficiencies": [
+        "察觉"
+      ],
+      "tool_proficiencies": [],
+      "weapon_proficiencies": [],
+      "armor_proficiencies": [],
+      "feat_choices": []
+    },
+    "is_variant": false,
+    "ability_replaces_parent": false,
+    "size": [],
+    "speed": "35 尺",
+    "darkvision_ft": null,
+    "ability": "+1 感知",
+    "ability_bonuses": {
+      "fixed": {
+        "wis": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [
+      "长剑",
+      "短剑",
+      "短弓",
+      "长弓"
+    ],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": null,
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "精灵武器训练",
+        "name_en": "Elf Weapon Training"
+      },
+      {
+        "name": "轻捷步伐",
+        "name_en": "Fleet of Foot"
+      },
+      {
+        "name": "荒野隐蔽",
+        "name_en": "Mask of the Wild"
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 24,
+      "srd": false
+    },
+    "brief": "木精灵 · +2 敏捷（种族） · +1 感知（亚种） · 速度 35 尺 · 武器 长剑/短剑/短弓/长弓"
+  },
+  {
+    "id": "phb:subrace:gnome-forest",
+    "type": "subrace",
+    "name": "森林",
+    "display_name": "森林侏儒",
+    "name_en": "Forest",
+    "parent_race": "phb:race:gnome",
+    "parent_race_name": "侏儒",
+    "parent_values": {
+      "ability": "+2 智力",
+      "size": [
+        "小型"
+      ],
+      "speed": "25 尺",
+      "darkvision_ft": 60,
+      "resistances": null,
+      "languages": "通用语、侏儒语",
+      "skill_proficiencies": [],
+      "tool_proficiencies": [],
+      "weapon_proficiencies": [],
+      "armor_proficiencies": [],
+      "feat_choices": []
+    },
+    "is_variant": false,
+    "ability_replaces_parent": false,
+    "size": [],
+    "speed": null,
+    "darkvision_ft": null,
+    "ability": "+1 敏捷",
+    "ability_bonuses": {
+      "fixed": {
+        "dex": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": null,
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "天生幻术师",
+        "name_en": "Natural Illusionist"
+      },
+      {
+        "name": "小型野兽交谈",
+        "name_en": "Speak with Small Beasts"
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 37,
+      "srd": false
+    },
+    "brief": "森林侏儒 · +2 智力（种族） · +1 敏捷（亚种）"
+  },
+  {
+    "id": "phb:subrace:gnome-rock",
+    "type": "subrace",
+    "name": "岩石",
+    "display_name": "岩石侏儒",
+    "name_en": "Rock",
+    "parent_race": "phb:race:gnome",
+    "parent_race_name": "侏儒",
+    "parent_values": {
+      "ability": "+2 智力",
+      "size": [
+        "小型"
+      ],
+      "speed": "25 尺",
+      "darkvision_ft": 60,
+      "resistances": null,
+      "languages": "通用语、侏儒语",
+      "skill_proficiencies": [],
+      "tool_proficiencies": [],
+      "weapon_proficiencies": [],
+      "armor_proficiencies": [],
+      "feat_choices": []
+    },
+    "is_variant": false,
+    "ability_replaces_parent": false,
+    "size": [],
+    "speed": null,
+    "darkvision_ft": null,
+    "ability": "+1 体质",
+    "ability_bonuses": {
+      "fixed": {
+        "con": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [
+      "修补工具"
+    ],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": null,
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "巧匠学识",
+        "name_en": "Artificer's Lore"
+      },
+      {
+        "name": "修补匠",
+        "name_en": "Tinker"
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 37,
+      "srd": true
+    },
+    "brief": "岩石侏儒 · +2 智力（种族） · +1 体质（亚种） · 工具 修补工具"
+  },
+  {
+    "id": "phb:subrace:halfling-lightfoot",
+    "type": "subrace",
+    "name": "轻足",
+    "display_name": "轻足半身人",
+    "name_en": "Lightfoot",
+    "parent_race": "phb:race:halfling",
+    "parent_race_name": "半身人",
+    "parent_values": {
+      "ability": "+2 敏捷",
+      "size": [
+        "小型"
+      ],
+      "speed": "25 尺",
+      "darkvision_ft": null,
+      "resistances": null,
+      "languages": "通用语、半身人语",
+      "skill_proficiencies": [],
+      "tool_proficiencies": [],
+      "weapon_proficiencies": [],
+      "armor_proficiencies": [],
+      "feat_choices": []
+    },
+    "is_variant": false,
+    "ability_replaces_parent": false,
+    "size": [],
+    "speed": null,
+    "darkvision_ft": null,
+    "ability": "+1 魅力",
+    "ability_bonuses": {
+      "fixed": {
+        "cha": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": null,
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "天生善匿",
+        "name_en": "Naturally Stealthy"
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 28,
+      "srd": true
+    },
+    "brief": "轻足半身人 · +2 敏捷（种族） · +1 魅力（亚种）"
+  },
+  {
+    "id": "phb:subrace:halfling-stout",
+    "type": "subrace",
+    "name": "敦实",
+    "display_name": "敦实半身人",
+    "name_en": "Stout",
+    "parent_race": "phb:race:halfling",
+    "parent_race_name": "半身人",
+    "parent_values": {
+      "ability": "+2 敏捷",
+      "size": [
+        "小型"
+      ],
+      "speed": "25 尺",
+      "darkvision_ft": null,
+      "resistances": null,
+      "languages": "通用语、半身人语",
+      "skill_proficiencies": [],
+      "tool_proficiencies": [],
+      "weapon_proficiencies": [],
+      "armor_proficiencies": [],
+      "feat_choices": []
+    },
+    "is_variant": false,
+    "ability_replaces_parent": false,
+    "size": [],
+    "speed": null,
+    "darkvision_ft": null,
+    "ability": "+1 体质",
+    "ability_bonuses": {
+      "fixed": {
+        "con": 1
+      },
+      "choose": null
+    },
+    "skill_proficiencies": [],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [],
+    "languages": null,
+    "resistances": "毒素",
+    "immunities": null,
+    "traits": [
+      {
+        "name": "敦实体魄",
+        "name_en": "Stout Resilience"
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 28,
+      "srd": false
+    },
+    "brief": "敦实半身人 · +2 敏捷（种族） · +1 体质（亚种）"
+  },
+  {
+    "id": "phb:subrace:human-variant",
+    "type": "subrace",
+    "name": "变体",
+    "display_name": "变体人类",
+    "name_en": "Variant",
+    "parent_race": "phb:race:human",
+    "parent_race_name": "人类",
+    "parent_values": {
+      "ability": "+1 力量 / +1 敏捷 / +1 体质 / +1 智力 / +1 感知 / +1 魅力",
+      "size": [
+        "中型"
+      ],
+      "speed": "30 尺",
+      "darkvision_ft": null,
+      "resistances": null,
+      "languages": "通用语 · 任意标准语言 ×1",
+      "skill_proficiencies": [],
+      "tool_proficiencies": [],
+      "weapon_proficiencies": [],
+      "armor_proficiencies": [],
+      "feat_choices": []
+    },
+    "is_variant": true,
+    "ability_replaces_parent": true,
+    "size": [],
+    "speed": null,
+    "darkvision_ft": null,
+    "ability": "2 项自选（力量/敏捷/体质/智力/感知/魅力）",
+    "ability_bonuses": {
+      "fixed": {},
+      "choose": {
+        "from": [
+          "力量",
+          "敏捷",
+          "体质",
+          "智力",
+          "感知",
+          "魅力"
+        ],
+        "count": 2
+      }
+    },
+    "skill_proficiencies": [
+      "任意技能 ×1"
+    ],
+    "tool_proficiencies": [],
+    "weapon_proficiencies": [],
+    "armor_proficiencies": [],
+    "feat_choices": [
+      "任意专长 ×1"
+    ],
+    "languages": null,
+    "resistances": null,
+    "immunities": null,
+    "traits": [
+      {
+        "name": "技能",
+        "name_en": "Skills"
+      },
+      {
+        "name": "专长",
+        "name_en": "Feat"
+      }
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 31,
+      "srd": false
+    },
+    "brief": "变体人类 · 2 项自选（力量/敏捷/体质/智力/感知/魅力）（替换种族属性） · 技能 任意技能 ×1 · 专长 任意专长 ×1"
+  }
+]

@@ -1,0 +1,3958 @@
+[
+  {
+    "id": "phb:class:barbarian",
+    "type": "class",
+    "name": "野蛮人",
+    "name_en": "Barbarian",
+    "hit_die": "d12",
+    "saving_throws": [
+      "力量",
+      "体质"
+    ],
+    "proficiencies": {
+      "armor": [
+        "轻甲",
+        "中甲",
+        "盾牌"
+      ],
+      "weapons": [
+        "简易",
+        "军用"
+      ],
+      "tools": [],
+      "skills": {
+        "from": [
+          "驯兽",
+          "运动",
+          "威吓",
+          "自然",
+          "察觉",
+          "生存"
+        ],
+        "count": 2,
+        "any": false
+      },
+      "saving_throws": [
+        "力量",
+        "体质"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 一把巨斧 或 (b) 任意军用近战武器",
+        "(a) 两把手斧或 (b) 任意一把 简易武器",
+        "一个 探索套组和四支 标枪"
+      ],
+      "gold_alternative": "2d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "str": 13
+      },
+      "proficienciesGained": {
+        "weapons": [
+          "简易",
+          "军用"
+        ],
+        "armor": [
+          "盾牌"
+        ],
+        "armorProficiencies": [
+          {
+            "shield": true
+          }
+        ],
+        "skills": []
+      },
+      "requirements_label": "力量 13"
+    },
+    "spellcasting": null,
+    "subclass_title": "原初道途",
+    "tables": [
+      {
+        "title": null,
+        "columns": [
+          "狂暴次数",
+          "狂暴伤害"
+        ],
+        "rows": [
+          [
+            "2",
+            2
+          ],
+          [
+            "2",
+            2
+          ],
+          [
+            "3",
+            2
+          ],
+          [
+            "3",
+            2
+          ],
+          [
+            "3",
+            2
+          ],
+          [
+            "4",
+            2
+          ],
+          [
+            "4",
+            2
+          ],
+          [
+            "4",
+            2
+          ],
+          [
+            "4",
+            3
+          ],
+          [
+            "4",
+            3
+          ],
+          [
+            "4",
+            3
+          ],
+          [
+            "5",
+            3
+          ],
+          [
+            "5",
+            3
+          ],
+          [
+            "5",
+            3
+          ],
+          [
+            "5",
+            3
+          ],
+          [
+            "5",
+            4
+          ],
+          [
+            "6",
+            4
+          ],
+          [
+            "6",
+            4
+          ],
+          [
+            "6",
+            4
+          ],
+          [
+            "无限制",
+            4
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:barbarian-1-rage",
+      "phb:feature:barbarian-1-unarmored-defense",
+      "phb:feature:barbarian-2-danger-sense",
+      "phb:feature:barbarian-2-reckless-attack",
+      "phb:feature:barbarian-3-primal-path",
+      "phb:feature:barbarian-4-ability-score-improvement",
+      "phb:feature:barbarian-5-extra-attack",
+      "phb:feature:barbarian-5-fast-movement",
+      "phb:feature:barbarian-6-path-feature",
+      "phb:feature:barbarian-7-feral-instinct",
+      "phb:feature:barbarian-8-ability-score-improvement",
+      "phb:feature:barbarian-9-brutal-critical-1-die",
+      "phb:feature:barbarian-10-path-feature",
+      "phb:feature:barbarian-11-relentless-rage",
+      "phb:feature:barbarian-12-ability-score-improvement",
+      "phb:feature:barbarian-13-brutal-critical-2-dice",
+      "phb:feature:barbarian-14-path-feature",
+      "phb:feature:barbarian-15-persistent-rage",
+      "phb:feature:barbarian-16-ability-score-improvement",
+      "phb:feature:barbarian-17-brutal-critical-3-dice",
+      "phb:feature:barbarian-18-indomitable-might",
+      "phb:feature:barbarian-19-ability-score-improvement",
+      "phb:feature:barbarian-20-primal-champion"
+    ],
+    "subclasses": [
+      "phb:subclass:barbarian-path-of-the-berserker",
+      "phb:subclass:barbarian-path-of-the-totem-warrior"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 46,
+      "srd": true
+    },
+    "brief": "生命骰 d12 · 豁免 力量/体质 · 护甲 轻甲/中甲/盾牌 · 武器 简易/军用 · 技能 6 选 2"
+  },
+  {
+    "id": "phb:class:bard",
+    "type": "class",
+    "name": "吟游诗人",
+    "name_en": "Bard",
+    "hit_die": "d8",
+    "saving_throws": [
+      "敏捷",
+      "魅力"
+    ],
+    "proficiencies": {
+      "armor": [
+        "轻甲"
+      ],
+      "weapons": [
+        "简易",
+        "手弩",
+        "长剑",
+        "刺剑",
+        "短剑"
+      ],
+      "tools": [
+        "自选三种乐器"
+      ],
+      "skills": {
+        "from": [],
+        "count": 3,
+        "any": true
+      },
+      "saving_throws": [
+        "敏捷",
+        "魅力"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 一把刺剑，(b) 一把长剑，或 (c) 任一把 简易武器",
+        "(a) 一个外交套组 或者 (b) 一个艺人套组",
+        "(a) 一把鲁特琴或(b)其他乐器",
+        "皮甲和一把 匕首"
+      ],
+      "gold_alternative": "5d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "cha": 13
+      },
+      "proficienciesGained": {
+        "skills": [
+          {
+            "choose": {
+              "from": [
+                "运动",
+                "特技",
+                "巧手",
+                "隐匿",
+                "奥秘",
+                "历史",
+                "调查",
+                "自然",
+                "宗教",
+                "驯兽",
+                "洞见",
+                "医药",
+                "察觉",
+                "生存",
+                "欺瞒",
+                "威吓",
+                "表演",
+                "游说"
+              ],
+              "count": 1
+            }
+          }
+        ],
+        "tools": [
+          "一件你自己选择的乐器"
+        ],
+        "toolProficiencies": [
+          {
+            "anyMusicalInstrument": 1
+          }
+        ],
+        "armor": [
+          "轻甲"
+        ],
+        "armorProficiencies": [
+          {
+            "light": true
+          }
+        ]
+      },
+      "requirements_label": "魅力 13"
+    },
+    "spellcasting": {
+      "ability": "魅力",
+      "progression": "full",
+      "prepared": null,
+      "cantrips_known": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "subclass_title": "吟游诗人学院",
+    "tables": [
+      {
+        "title": null,
+        "columns": [
+          "已知戏法",
+          "已知法术"
+        ],
+        "rows": [
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            3,
+            12
+          ],
+          [
+            4,
+            14
+          ],
+          [
+            4,
+            15
+          ],
+          [
+            4,
+            15
+          ],
+          [
+            4,
+            16
+          ],
+          [
+            4,
+            18
+          ],
+          [
+            4,
+            19
+          ],
+          [
+            4,
+            19
+          ],
+          [
+            4,
+            20
+          ],
+          [
+            4,
+            22
+          ],
+          [
+            4,
+            22
+          ],
+          [
+            4,
+            22
+          ]
+        ]
+      },
+      {
+        "title": "每环法术位",
+        "columns": [
+          "1环",
+          "2环",
+          "3环",
+          "4环",
+          "5环",
+          "6环",
+          "7环",
+          "8环",
+          "9环"
+        ],
+        "rows": [
+          [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            2,
+            2,
+            1,
+            1
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:bard-1-bardic-inspiration",
+      "phb:feature:bard-1-spellcasting",
+      "phb:feature:bard-2-jack-of-all-trades",
+      "phb:feature:bard-2-song-of-rest-d6",
+      "phb:feature:bard-3-bard-college",
+      "phb:feature:bard-3-expertise",
+      "phb:feature:bard-4-ability-score-improvement",
+      "phb:feature:bard-5-bardic-inspiration-d8",
+      "phb:feature:bard-5-font-of-inspiration",
+      "phb:feature:bard-6-bard-college-feature",
+      "phb:feature:bard-6-countercharm",
+      "phb:feature:bard-8-ability-score-improvement",
+      "phb:feature:bard-9-song-of-rest-d8",
+      "phb:feature:bard-10-bardic-inspiration-d10",
+      "phb:feature:bard-10-expertise",
+      "phb:feature:bard-10-magical-secrets",
+      "phb:feature:bard-12-ability-score-improvement",
+      "phb:feature:bard-13-song-of-rest-d10",
+      "phb:feature:bard-14-bard-college-feature",
+      "phb:feature:bard-14-magical-secrets",
+      "phb:feature:bard-15-bardic-inspiration-d12",
+      "phb:feature:bard-16-ability-score-improvement",
+      "phb:feature:bard-17-song-of-rest-d12",
+      "phb:feature:bard-18-magical-secrets",
+      "phb:feature:bard-19-ability-score-improvement",
+      "phb:feature:bard-20-superior-inspiration"
+    ],
+    "subclasses": [
+      "phb:subclass:bard-college-of-lore",
+      "phb:subclass:bard-college-of-valor"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 51,
+      "srd": true
+    },
+    "brief": "生命骰 d8 · 豁免 敏捷/魅力 · 护甲 轻甲 · 武器 简易/手弩/长剑/刺剑/短剑 · 技能 任意 3 项 · 施法属性 魅力"
+  },
+  {
+    "id": "phb:class:cleric",
+    "type": "class",
+    "name": "牧师",
+    "name_en": "Cleric",
+    "hit_die": "d8",
+    "saving_throws": [
+      "感知",
+      "魅力"
+    ],
+    "proficiencies": {
+      "armor": [
+        "轻甲",
+        "中甲",
+        "盾牌"
+      ],
+      "weapons": [
+        "简易"
+      ],
+      "tools": [],
+      "skills": {
+        "from": [
+          "历史",
+          "洞见",
+          "医药",
+          "游说",
+          "宗教"
+        ],
+        "count": 2,
+        "any": false
+      },
+      "saving_throws": [
+        "感知",
+        "魅力"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 一把硬头锤或 (b) 一把战锤（拥有熟练项时可选）",
+        "(a) 鳞甲，(b) 皮甲或 (c) 链甲 （拥有熟练项时可选）",
+        "(a) 一把轻弩和弩矢(20)或 (b) 任何简易武器",
+        "(a) 一个祭司套组或 (b) 一个探索套组",
+        "一个盾牌和一个圣徽"
+      ],
+      "gold_alternative": "5d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "wis": 13
+      },
+      "proficienciesGained": {
+        "armor": [
+          "轻甲",
+          "中甲",
+          "盾牌"
+        ],
+        "armorProficiencies": [
+          {
+            "light": true,
+            "medium": true,
+            "shield": true
+          }
+        ],
+        "skills": []
+      },
+      "requirements_label": "感知 13"
+    },
+    "spellcasting": {
+      "ability": "感知",
+      "progression": "full",
+      "prepared": "<$level$> + <$wis_mod$>",
+      "cantrips_known": [
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    "subclass_title": "神圣领域",
+    "tables": [
+      {
+        "title": null,
+        "columns": [
+          "已知戏法"
+        ],
+        "rows": [
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ]
+        ]
+      },
+      {
+        "title": "每环法术位",
+        "columns": [
+          "1环",
+          "2环",
+          "3环",
+          "4环",
+          "5环",
+          "6环",
+          "7环",
+          "8环",
+          "9环"
+        ],
+        "rows": [
+          [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            2,
+            2,
+            1,
+            1
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:cleric-1-divine-domain",
+      "phb:feature:cleric-1-spellcasting",
+      "phb:feature:cleric-2-channel-divinity",
+      "phb:feature:cleric-2-channel-divinity-turn-undead",
+      "phb:feature:cleric-2-divine-domain-feature",
+      "phb:feature:cleric-4-ability-score-improvement",
+      "phb:feature:cleric-5-destroy-undead-cr-1-2",
+      "phb:feature:cleric-6-channel-divinity",
+      "phb:feature:cleric-6-divine-domain-feature",
+      "phb:feature:cleric-8-ability-score-improvement",
+      "phb:feature:cleric-8-destroy-undead-cr-1",
+      "phb:feature:cleric-8-divine-domain-feature",
+      "phb:feature:cleric-10-divine-intervention",
+      "phb:feature:cleric-11-destroy-undead-cr-2",
+      "phb:feature:cleric-12-ability-score-improvement",
+      "phb:feature:cleric-14-destroy-undead-cr-3",
+      "phb:feature:cleric-16-ability-score-improvement",
+      "phb:feature:cleric-17-destroy-undead-cr-4",
+      "phb:feature:cleric-17-divine-domain-feature",
+      "phb:feature:cleric-18-channel-divinity",
+      "phb:feature:cleric-19-ability-score-improvement",
+      "phb:feature:cleric-20-divine-intervention-improvement"
+    ],
+    "subclasses": [
+      "phb:subclass:cleric-knowledge-domain",
+      "phb:subclass:cleric-life-domain",
+      "phb:subclass:cleric-light-domain",
+      "phb:subclass:cleric-nature-domain",
+      "phb:subclass:cleric-tempest-domain",
+      "phb:subclass:cleric-trickery-domain",
+      "phb:subclass:cleric-war-domain"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 56,
+      "srd": true
+    },
+    "brief": "生命骰 d8 · 豁免 感知/魅力 · 护甲 轻甲/中甲/盾牌 · 武器 简易 · 技能 5 选 2 · 施法属性 感知"
+  },
+  {
+    "id": "phb:class:druid",
+    "type": "class",
+    "name": "德鲁伊",
+    "name_en": "Druid",
+    "hit_die": "d8",
+    "saving_throws": [
+      "智力",
+      "感知"
+    ],
+    "proficiencies": {
+      "armor": [
+        "轻甲",
+        "中甲",
+        "盾牌（德鲁伊不使用金属制）"
+      ],
+      "weapons": [
+        "短棒",
+        "匕首",
+        "飞镖",
+        "标枪",
+        "硬头锤",
+        "长棍",
+        "弯刀",
+        "镰刀",
+        "投石索",
+        "矛"
+      ],
+      "tools": [
+        "草药工具"
+      ],
+      "skills": {
+        "from": [
+          "奥秘",
+          "驯兽",
+          "洞见",
+          "医药",
+          "自然",
+          "察觉",
+          "宗教",
+          "生存"
+        ],
+        "count": 2,
+        "any": false
+      },
+      "saving_throws": [
+        "智力",
+        "感知"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 一个木制盾牌或(b)任意简易武器",
+        "(a) 一把 弯刀 或 (b) 任意简易近战武器",
+        "皮甲, 一个 探索套组, 和一个 德鲁伊法器"
+      ],
+      "gold_alternative": "2d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "wis": 13
+      },
+      "proficienciesGained": {
+        "armor": [
+          "轻甲",
+          "中甲",
+          {
+            "proficiency": "shield",
+            "full": "shields (druids will not wear armor or use shields made of metal)"
+          }
+        ],
+        "armorProficiencies": [
+          {
+            "light": true,
+            "medium": true,
+            "shield": true
+          }
+        ],
+        "skills": []
+      },
+      "requirements_label": "感知 13"
+    },
+    "spellcasting": {
+      "ability": "感知",
+      "progression": "full",
+      "prepared": "<$level$> + <$wis_mod$>",
+      "cantrips_known": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "subclass_title": "德鲁伊结社",
+    "tables": [
+      {
+        "title": null,
+        "columns": [
+          "已知戏法"
+        ],
+        "rows": [
+          [
+            2
+          ],
+          [
+            2
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      {
+        "title": "每环法术位",
+        "columns": [
+          "1环",
+          "2环",
+          "3环",
+          "4环",
+          "5环",
+          "6环",
+          "7环",
+          "8环",
+          "9环"
+        ],
+        "rows": [
+          [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            2,
+            2,
+            1,
+            1
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:druid-1-druidic",
+      "phb:feature:druid-1-spellcasting",
+      "phb:feature:druid-2-druid-circle",
+      "phb:feature:druid-2-wild-shape",
+      "phb:feature:druid-4-ability-score-improvement",
+      "phb:feature:druid-4-wild-shape-improvement",
+      "phb:feature:druid-6-druid-circle-feature",
+      "phb:feature:druid-8-ability-score-improvement",
+      "phb:feature:druid-8-wild-shape-improvement",
+      "phb:feature:druid-10-druid-circle-feature",
+      "phb:feature:druid-12-ability-score-improvement",
+      "phb:feature:druid-14-druid-circle-feature",
+      "phb:feature:druid-16-ability-score-improvement",
+      "phb:feature:druid-18-beast-spells",
+      "phb:feature:druid-18-timeless-body",
+      "phb:feature:druid-19-ability-score-improvement",
+      "phb:feature:druid-20-archdruid"
+    ],
+    "subclasses": [
+      "phb:subclass:druid-circle-of-the-land",
+      "phb:subclass:druid-circle-of-the-moon"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 64,
+      "srd": true
+    },
+    "brief": "生命骰 d8 · 豁免 智力/感知 · 护甲 轻甲/中甲/盾牌（德鲁伊不使用金属制） · 武器 短棒/匕首/飞镖/标枪/硬头锤/长棍/弯刀/镰刀/投石索/矛 · 技能 8 选 2 · 施法属性 感知"
+  },
+  {
+    "id": "phb:class:fighter",
+    "type": "class",
+    "name": "战士",
+    "name_en": "Fighter",
+    "hit_die": "d10",
+    "saving_throws": [
+      "力量",
+      "体质"
+    ],
+    "proficiencies": {
+      "armor": [
+        "轻甲",
+        "中甲",
+        "重甲",
+        "盾牌"
+      ],
+      "weapons": [
+        "简易",
+        "军用"
+      ],
+      "tools": [],
+      "skills": {
+        "from": [
+          "特技",
+          "驯兽",
+          "运动",
+          "历史",
+          "洞见",
+          "威吓",
+          "察觉",
+          "生存"
+        ],
+        "count": 2,
+        "any": false
+      },
+      "saving_throws": [
+        "力量",
+        "体质"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 链甲 或 (b) 皮甲、长弓 和 箭矢 (20)",
+        "(a) 一把军用武器和一面盾牌 ，或 (b) 两把军用武器",
+        "(a) 一把轻弩和弩矢(20)或者 (b) 两把手斧",
+        "(a) 一个地城套组或(b) 一个探索套组"
+      ],
+      "gold_alternative": "5d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "or": [
+          {
+            "str": 13,
+            "dex": 13
+          }
+        ]
+      },
+      "proficienciesGained": {
+        "weapons": [
+          "简易",
+          "军用"
+        ],
+        "armor": [
+          "轻甲",
+          "中甲",
+          "盾牌"
+        ],
+        "armorProficiencies": [
+          {
+            "light": true,
+            "medium": true,
+            "shield": true
+          }
+        ],
+        "skills": []
+      },
+      "requirements_label": "力量 13 或 敏捷 13"
+    },
+    "spellcasting": null,
+    "subclass_title": "武术范型",
+    "tables": [],
+    "features": [
+      "phb:feature:fighter-1-fighting-style",
+      "phb:feature:fighter-1-second-wind",
+      "phb:feature:fighter-2-action-surge",
+      "phb:feature:fighter-3-martial-archetype",
+      "phb:feature:fighter-4-ability-score-improvement",
+      "phb:feature:fighter-5-extra-attack",
+      "phb:feature:fighter-6-ability-score-improvement",
+      "phb:feature:fighter-7-martial-archetype-feature",
+      "phb:feature:fighter-8-ability-score-improvement",
+      "phb:feature:fighter-9-indomitable",
+      "phb:feature:fighter-10-martial-archetype-feature",
+      "phb:feature:fighter-11-extra-attack-2",
+      "phb:feature:fighter-12-ability-score-improvement",
+      "phb:feature:fighter-13-indomitable-two-uses",
+      "phb:feature:fighter-14-ability-score-improvement",
+      "phb:feature:fighter-15-martial-archetype-feature",
+      "phb:feature:fighter-16-ability-score-improvement",
+      "phb:feature:fighter-17-action-surge-two-uses",
+      "phb:feature:fighter-17-indomitable-three-uses",
+      "phb:feature:fighter-18-martial-archetype-feature",
+      "phb:feature:fighter-19-ability-score-improvement",
+      "phb:feature:fighter-20-extra-attack-3"
+    ],
+    "subclasses": [
+      "phb:subclass:fighter-battle-master",
+      "phb:subclass:fighter-champion",
+      "phb:subclass:fighter-eldritch-knight"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 70,
+      "srd": true
+    },
+    "brief": "生命骰 d10 · 豁免 力量/体质 · 护甲 轻甲/中甲/重甲/盾牌 · 武器 简易/军用 · 技能 8 选 2"
+  },
+  {
+    "id": "phb:class:monk",
+    "type": "class",
+    "name": "武僧",
+    "name_en": "Monk",
+    "hit_die": "d8",
+    "saving_throws": [
+      "力量",
+      "敏捷"
+    ],
+    "proficiencies": {
+      "armor": [],
+      "weapons": [
+        "简易",
+        "短剑"
+      ],
+      "tools": [
+        "选择一种工匠工具或一种乐器"
+      ],
+      "skills": {
+        "from": [
+          "特技",
+          "运动",
+          "历史",
+          "洞见",
+          "宗教",
+          "隐匿"
+        ],
+        "count": 2,
+        "any": false
+      },
+      "saving_throws": [
+        "力量",
+        "敏捷"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 一把 短剑 或者 (b) 任意一把简易武器",
+        "(a) 一个地城套组或(b) 一个探索套组",
+        "10 飞镖"
+      ],
+      "gold_alternative": "5d4",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "dex": 13,
+        "wis": 13
+      },
+      "proficienciesGained": {
+        "weapons": [
+          "简易",
+          "短剑"
+        ],
+        "armor": [],
+        "skills": []
+      },
+      "requirements_label": "敏捷 13；感知 13"
+    },
+    "spellcasting": null,
+    "subclass_title": "修行宗派",
+    "tables": [
+      {
+        "title": null,
+        "columns": [
+          "武艺",
+          "气点",
+          "无甲移动"
+        ],
+        "rows": [
+          [
+            "1d4",
+            0,
+            0
+          ],
+          [
+            "1d4",
+            2,
+            10
+          ],
+          [
+            "1d4",
+            3,
+            10
+          ],
+          [
+            "1d4",
+            4,
+            10
+          ],
+          [
+            "1d6",
+            5,
+            10
+          ],
+          [
+            "1d6",
+            6,
+            15
+          ],
+          [
+            "1d6",
+            7,
+            15
+          ],
+          [
+            "1d6",
+            8,
+            15
+          ],
+          [
+            "1d6",
+            9,
+            15
+          ],
+          [
+            "1d6",
+            10,
+            20
+          ],
+          [
+            "1d8",
+            11,
+            20
+          ],
+          [
+            "1d8",
+            12,
+            20
+          ],
+          [
+            "1d8",
+            13,
+            20
+          ],
+          [
+            "1d8",
+            14,
+            25
+          ],
+          [
+            "1d8",
+            15,
+            25
+          ],
+          [
+            "1d8",
+            16,
+            25
+          ],
+          [
+            "1d10",
+            17,
+            25
+          ],
+          [
+            "1d10",
+            18,
+            30
+          ],
+          [
+            "1d10",
+            19,
+            30
+          ],
+          [
+            "1d10",
+            20,
+            30
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:monk-1-martial-arts",
+      "phb:feature:monk-1-unarmored-defense",
+      "phb:feature:monk-2-flurry-of-blows",
+      "phb:feature:monk-2-ki",
+      "phb:feature:monk-2-patient-defense",
+      "phb:feature:monk-2-step-of-the-wind",
+      "phb:feature:monk-2-unarmored-movement",
+      "phb:feature:monk-3-deflect-missiles",
+      "phb:feature:monk-3-monastic-tradition",
+      "phb:feature:monk-4-ability-score-improvement",
+      "phb:feature:monk-4-slow-fall",
+      "phb:feature:monk-5-extra-attack",
+      "phb:feature:monk-5-stunning-strike",
+      "phb:feature:monk-6-ki-empowered-strikes",
+      "phb:feature:monk-6-monastic-tradition-feature",
+      "phb:feature:monk-7-evasion",
+      "phb:feature:monk-7-stillness-of-mind",
+      "phb:feature:monk-8-ability-score-improvement",
+      "phb:feature:monk-9-unarmored-movement-improvement",
+      "phb:feature:monk-10-purity-of-body",
+      "phb:feature:monk-11-monastic-tradition-feature",
+      "phb:feature:monk-12-ability-score-improvement",
+      "phb:feature:monk-13-tongue-of-the-sun-and-moon",
+      "phb:feature:monk-14-diamond-soul",
+      "phb:feature:monk-15-timeless-body",
+      "phb:feature:monk-16-ability-score-improvement",
+      "phb:feature:monk-17-monastic-tradition-feature",
+      "phb:feature:monk-18-empty-body",
+      "phb:feature:monk-19-ability-score-improvement",
+      "phb:feature:monk-20-perfect-self"
+    ],
+    "subclasses": [
+      "phb:subclass:monk-way-of-shadow",
+      "phb:subclass:monk-way-of-the-four-elements",
+      "phb:subclass:monk-way-of-the-open-hand"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 76,
+      "srd": true
+    },
+    "brief": "生命骰 d8 · 豁免 力量/敏捷 · 武器 简易/短剑 · 技能 6 选 2"
+  },
+  {
+    "id": "phb:class:paladin",
+    "type": "class",
+    "name": "圣武士",
+    "name_en": "Paladin",
+    "hit_die": "d10",
+    "saving_throws": [
+      "感知",
+      "魅力"
+    ],
+    "proficiencies": {
+      "armor": [
+        "轻甲",
+        "中甲",
+        "重甲",
+        "盾牌"
+      ],
+      "weapons": [
+        "简易",
+        "军用"
+      ],
+      "tools": [],
+      "skills": {
+        "from": [
+          "运动",
+          "洞见",
+          "威吓",
+          "医药",
+          "游说",
+          "宗教"
+        ],
+        "count": 2,
+        "any": false
+      },
+      "saving_throws": [
+        "感知",
+        "魅力"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 一把军用武器和一面盾牌 ，或 (b) 两把军用武器",
+        "(a) 五把标枪或 (b) 任意简易近战武器",
+        "(a) 一个祭司套组或 (b) 一个探索套组",
+        "链甲 和一个 圣徽"
+      ],
+      "gold_alternative": "5d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "str": 13,
+        "cha": 13
+      },
+      "proficienciesGained": {
+        "weapons": [
+          "简易",
+          "军用"
+        ],
+        "armor": [
+          "轻甲",
+          "中甲",
+          "盾牌"
+        ],
+        "armorProficiencies": [
+          {
+            "light": true,
+            "medium": true,
+            "shield": true
+          }
+        ],
+        "skills": []
+      },
+      "requirements_label": "力量 13；魅力 13"
+    },
+    "spellcasting": {
+      "ability": "魅力",
+      "progression": "1/2",
+      "prepared": "<$level$> / 2 + <$cha_mod$>",
+      "cantrips_known": null
+    },
+    "subclass_title": "神圣誓言",
+    "tables": [
+      {
+        "title": "每环法术位",
+        "columns": [
+          "1环",
+          "2环",
+          "3环",
+          "4环",
+          "5环"
+        ],
+        "rows": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            2,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            2,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            2,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            2,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:paladin-1-divine-sense",
+      "phb:feature:paladin-1-lay-on-hands",
+      "phb:feature:paladin-2-divine-smite",
+      "phb:feature:paladin-2-fighting-style",
+      "phb:feature:paladin-2-spellcasting",
+      "phb:feature:paladin-3-channel-divinity",
+      "phb:feature:paladin-3-divine-health",
+      "phb:feature:paladin-3-sacred-oath",
+      "phb:feature:paladin-4-ability-score-improvement",
+      "phb:feature:paladin-5-extra-attack",
+      "phb:feature:paladin-6-aura-of-protection",
+      "phb:feature:paladin-7-sacred-oath-feature",
+      "phb:feature:paladin-8-ability-score-improvement",
+      "phb:feature:paladin-10-aura-of-courage",
+      "phb:feature:paladin-11-improved-divine-smite",
+      "phb:feature:paladin-12-ability-score-improvement",
+      "phb:feature:paladin-14-cleansing-touch",
+      "phb:feature:paladin-15-sacred-oath-feature",
+      "phb:feature:paladin-16-ability-score-improvement",
+      "phb:feature:paladin-18-aura-improvements",
+      "phb:feature:paladin-19-ability-score-improvement",
+      "phb:feature:paladin-20-sacred-oath-feature"
+    ],
+    "subclasses": [
+      "phb:subclass:paladin-oath-of-devotion",
+      "phb:subclass:paladin-oath-of-the-ancients",
+      "phb:subclass:paladin-oath-of-vengeance"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 82,
+      "srd": true
+    },
+    "brief": "生命骰 d10 · 豁免 感知/魅力 · 护甲 轻甲/中甲/重甲/盾牌 · 武器 简易/军用 · 技能 6 选 2 · 施法属性 魅力"
+  },
+  {
+    "id": "phb:class:ranger",
+    "type": "class",
+    "name": "游侠",
+    "name_en": "Ranger",
+    "hit_die": "d10",
+    "saving_throws": [
+      "力量",
+      "敏捷"
+    ],
+    "proficiencies": {
+      "armor": [
+        "轻甲",
+        "中甲",
+        "盾牌"
+      ],
+      "weapons": [
+        "简易",
+        "军用"
+      ],
+      "tools": [],
+      "skills": {
+        "from": [
+          "驯兽",
+          "运动",
+          "洞见",
+          "调查",
+          "自然",
+          "察觉",
+          "隐匿",
+          "生存"
+        ],
+        "count": 3,
+        "any": false
+      },
+      "saving_throws": [
+        "力量",
+        "敏捷"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 鳞甲 或 (b) 皮甲",
+        "(a) 二把短剑或 (b) 二把简易近战武器",
+        "(a) 一个地城套组或(b) 一个探索套组",
+        "一把长弓和一个箭袋（内含箭矢 (20)）"
+      ],
+      "gold_alternative": "5d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "dex": 13,
+        "wis": 13
+      },
+      "proficienciesGained": {
+        "skills": [
+          {
+            "choose": {
+              "from": [
+                "驯兽",
+                "运动",
+                "洞见",
+                "调查",
+                "自然",
+                "察觉",
+                "隐匿",
+                "生存"
+              ],
+              "count": 1
+            }
+          }
+        ],
+        "weapons": [
+          "简易",
+          "军用"
+        ],
+        "armor": [
+          "轻甲",
+          "中甲",
+          "盾牌"
+        ],
+        "armorProficiencies": [
+          {
+            "light": true,
+            "medium": true,
+            "shield": true
+          }
+        ]
+      },
+      "requirements_label": "敏捷 13；感知 13"
+    },
+    "spellcasting": {
+      "ability": "感知",
+      "progression": "1/2",
+      "prepared": null,
+      "cantrips_known": null
+    },
+    "subclass_title": "游侠范型",
+    "tables": [
+      {
+        "title": null,
+        "columns": [
+          "已知法术"
+        ],
+        "rows": [
+          [
+            0
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ],
+          [
+            8
+          ],
+          [
+            9
+          ],
+          [
+            9
+          ],
+          [
+            10
+          ],
+          [
+            10
+          ],
+          [
+            11
+          ],
+          [
+            11
+          ]
+        ]
+      },
+      {
+        "title": "每环法术位",
+        "columns": [
+          "1环",
+          "2环",
+          "3环",
+          "4环",
+          "5环"
+        ],
+        "rows": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            2,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            2,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            2,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            2,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:ranger-1-favored-enemy",
+      "phb:feature:ranger-1-natural-explorer",
+      "phb:feature:ranger-2-fighting-style",
+      "phb:feature:ranger-2-spellcasting",
+      "phb:feature:ranger-3-primeval-awareness",
+      "phb:feature:ranger-3-ranger-archetype",
+      "phb:feature:ranger-4-ability-score-improvement",
+      "phb:feature:ranger-5-extra-attack",
+      "phb:feature:ranger-6-favored-enemy-and-natural-explorer-improvements",
+      "phb:feature:ranger-7-ranger-archetype-feature",
+      "phb:feature:ranger-8-ability-score-improvement",
+      "phb:feature:ranger-8-lands-stride",
+      "phb:feature:ranger-10-hide-in-plain-sight",
+      "phb:feature:ranger-10-natural-explorer-improvement",
+      "phb:feature:ranger-11-ranger-archetype-feature",
+      "phb:feature:ranger-12-ability-score-improvement",
+      "phb:feature:ranger-14-favored-enemy-improvement",
+      "phb:feature:ranger-14-vanish",
+      "phb:feature:ranger-15-ranger-archetype-feature",
+      "phb:feature:ranger-16-ability-score-improvement",
+      "phb:feature:ranger-18-feral-senses",
+      "phb:feature:ranger-19-ability-score-improvement",
+      "phb:feature:ranger-20-foe-slayer"
+    ],
+    "subclasses": [
+      "phb:subclass:ranger-beast-master",
+      "phb:subclass:ranger-hunter"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 89,
+      "srd": true
+    },
+    "brief": "生命骰 d10 · 豁免 力量/敏捷 · 护甲 轻甲/中甲/盾牌 · 武器 简易/军用 · 技能 8 选 3 · 施法属性 感知"
+  },
+  {
+    "id": "phb:class:rogue",
+    "type": "class",
+    "name": "游荡者",
+    "name_en": "Rogue",
+    "hit_die": "d8",
+    "saving_throws": [
+      "敏捷",
+      "智力"
+    ],
+    "proficiencies": {
+      "armor": [
+        "轻甲"
+      ],
+      "weapons": [
+        "简易",
+        "手弩",
+        "长剑",
+        "刺剑",
+        "短剑"
+      ],
+      "tools": [
+        "盗贼工具"
+      ],
+      "skills": {
+        "from": [
+          "特技",
+          "运动",
+          "欺瞒",
+          "洞见",
+          "威吓",
+          "调查",
+          "察觉",
+          "表演",
+          "游说",
+          "巧手",
+          "隐匿"
+        ],
+        "count": 4,
+        "any": false
+      },
+      "saving_throws": [
+        "敏捷",
+        "智力"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 一把刺剑或 (b) 一把短剑",
+        "（a）一把短弓和一个箭袋（含箭矢 (20)）或（b）一把短剑",
+        "（a）一个窃贼套组，（b）一个地城套组或（c）一个探索套组",
+        "皮甲, 两把匕首，以及盗贼工具"
+      ],
+      "gold_alternative": "4d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "dex": 13
+      },
+      "proficienciesGained": {
+        "skills": [
+          {
+            "choose": {
+              "from": [
+                "特技",
+                "运动",
+                "欺瞒",
+                "洞见",
+                "威吓",
+                "调查",
+                "察觉",
+                "表演",
+                "游说",
+                "巧手",
+                "隐匿"
+              ],
+              "count": 1
+            }
+          }
+        ],
+        "tools": [
+          "盗贼工具"
+        ],
+        "toolProficiencies": [
+          {
+            "thieves' tools": true
+          }
+        ],
+        "armor": [
+          "轻甲"
+        ],
+        "armorProficiencies": [
+          {
+            "light": true
+          }
+        ]
+      },
+      "requirements_label": "敏捷 13"
+    },
+    "spellcasting": null,
+    "subclass_title": "游荡者范型",
+    "tables": [
+      {
+        "title": null,
+        "columns": [
+          "偷袭"
+        ],
+        "rows": [
+          [
+            "1d6"
+          ],
+          [
+            "1d6"
+          ],
+          [
+            "2d6"
+          ],
+          [
+            "2d6"
+          ],
+          [
+            "3d6"
+          ],
+          [
+            "3d6"
+          ],
+          [
+            "4d6"
+          ],
+          [
+            "4d6"
+          ],
+          [
+            "5d6"
+          ],
+          [
+            "5d6"
+          ],
+          [
+            "6d6"
+          ],
+          [
+            "6d6"
+          ],
+          [
+            "7d6"
+          ],
+          [
+            "7d6"
+          ],
+          [
+            "8d6"
+          ],
+          [
+            "8d6"
+          ],
+          [
+            "9d6"
+          ],
+          [
+            "9d6"
+          ],
+          [
+            "10d6"
+          ],
+          [
+            "10d6"
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:rogue-1-expertise",
+      "phb:feature:rogue-1-sneak-attack",
+      "phb:feature:rogue-1-thieves-cant",
+      "phb:feature:rogue-2-cunning-action",
+      "phb:feature:rogue-3-roguish-archetype",
+      "phb:feature:rogue-4-ability-score-improvement",
+      "phb:feature:rogue-5-uncanny-dodge",
+      "phb:feature:rogue-6-expertise",
+      "phb:feature:rogue-7-evasion",
+      "phb:feature:rogue-8-ability-score-improvement",
+      "phb:feature:rogue-9-roguish-archetype-feature",
+      "phb:feature:rogue-10-ability-score-improvement",
+      "phb:feature:rogue-11-reliable-talent",
+      "phb:feature:rogue-12-ability-score-improvement",
+      "phb:feature:rogue-13-roguish-archetype-feature",
+      "phb:feature:rogue-14-blindsense",
+      "phb:feature:rogue-15-slippery-mind",
+      "phb:feature:rogue-16-ability-score-improvement",
+      "phb:feature:rogue-17-roguish-archetype-feature",
+      "phb:feature:rogue-18-elusive",
+      "phb:feature:rogue-19-ability-score-improvement",
+      "phb:feature:rogue-20-stroke-of-luck"
+    ],
+    "subclasses": [
+      "phb:subclass:rogue-arcane-trickster",
+      "phb:subclass:rogue-assassin",
+      "phb:subclass:rogue-thief"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 94,
+      "srd": true
+    },
+    "brief": "生命骰 d8 · 豁免 敏捷/智力 · 护甲 轻甲 · 武器 简易/手弩/长剑/刺剑/短剑 · 技能 11 选 4"
+  },
+  {
+    "id": "phb:class:sorcerer",
+    "type": "class",
+    "name": "术士",
+    "name_en": "Sorcerer",
+    "hit_die": "d6",
+    "saving_throws": [
+      "体质",
+      "魅力"
+    ],
+    "proficiencies": {
+      "armor": [],
+      "weapons": [
+        "匕首",
+        "飞镖",
+        "投石索",
+        "长棍",
+        "轻弩"
+      ],
+      "tools": [],
+      "skills": {
+        "from": [
+          "奥秘",
+          "欺瞒",
+          "洞见",
+          "威吓",
+          "游说",
+          "宗教"
+        ],
+        "count": 2,
+        "any": false
+      },
+      "saving_throws": [
+        "体质",
+        "魅力"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 一把轻弩和弩矢(20)或 (b) 任何简易武器",
+        "(a) 一个 材料包或 (b) 一件奥术法器",
+        "(a) 一个地城套组或(b) 一个探索套组",
+        "两把匕首"
+      ],
+      "gold_alternative": "3d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "cha": 13
+      },
+      "requirements_label": "魅力 13",
+      "proficienciesGained": null
+    },
+    "spellcasting": {
+      "ability": "魅力",
+      "progression": "full",
+      "prepared": null,
+      "cantrips_known": [
+        4,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    "subclass_title": "术法起源",
+    "tables": [
+      {
+        "title": null,
+        "columns": [
+          "术法点"
+        ],
+        "rows": [
+          [
+            0
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ],
+          [
+            9
+          ],
+          [
+            10
+          ],
+          [
+            11
+          ],
+          [
+            12
+          ],
+          [
+            13
+          ],
+          [
+            14
+          ],
+          [
+            15
+          ],
+          [
+            16
+          ],
+          [
+            17
+          ],
+          [
+            18
+          ],
+          [
+            19
+          ],
+          [
+            20
+          ]
+        ]
+      },
+      {
+        "title": null,
+        "columns": [
+          "已知戏法",
+          "已知法术"
+        ],
+        "rows": [
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            6,
+            12
+          ],
+          [
+            6,
+            12
+          ],
+          [
+            6,
+            13
+          ],
+          [
+            6,
+            13
+          ],
+          [
+            6,
+            14
+          ],
+          [
+            6,
+            14
+          ],
+          [
+            6,
+            15
+          ],
+          [
+            6,
+            15
+          ],
+          [
+            6,
+            15
+          ],
+          [
+            6,
+            15
+          ]
+        ]
+      },
+      {
+        "title": "每环法术位",
+        "columns": [
+          "1环",
+          "2环",
+          "3环",
+          "4环",
+          "5环",
+          "6环",
+          "7环",
+          "8环",
+          "9环"
+        ],
+        "rows": [
+          [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            2,
+            2,
+            1,
+            1
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:sorcerer-1-sorcerous-origin",
+      "phb:feature:sorcerer-1-spellcasting",
+      "phb:feature:sorcerer-2-flexible-casting",
+      "phb:feature:sorcerer-2-font-of-magic",
+      "phb:feature:sorcerer-2-sorcery-points",
+      "phb:feature:sorcerer-3-metamagic",
+      "phb:feature:sorcerer-4-ability-score-improvement",
+      "phb:feature:sorcerer-6-sorcerous-origin-feature",
+      "phb:feature:sorcerer-8-ability-score-improvement",
+      "phb:feature:sorcerer-10-metamagic",
+      "phb:feature:sorcerer-12-ability-score-improvement",
+      "phb:feature:sorcerer-14-sorcerous-origin-feature",
+      "phb:feature:sorcerer-16-ability-score-improvement",
+      "phb:feature:sorcerer-17-metamagic",
+      "phb:feature:sorcerer-18-sorcerous-origin-feature",
+      "phb:feature:sorcerer-19-ability-score-improvement",
+      "phb:feature:sorcerer-20-sorcerous-restoration"
+    ],
+    "subclasses": [
+      "phb:subclass:sorcerer-draconic-bloodline",
+      "phb:subclass:sorcerer-wild-magic"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 99,
+      "srd": true
+    },
+    "brief": "生命骰 d6 · 豁免 体质/魅力 · 武器 匕首/飞镖/投石索/长棍/轻弩 · 技能 6 选 2 · 施法属性 魅力"
+  },
+  {
+    "id": "phb:class:warlock",
+    "type": "class",
+    "name": "魔契师",
+    "name_en": "Warlock",
+    "hit_die": "d8",
+    "saving_throws": [
+      "感知",
+      "魅力"
+    ],
+    "proficiencies": {
+      "armor": [
+        "轻甲"
+      ],
+      "weapons": [
+        "简易"
+      ],
+      "tools": [],
+      "skills": {
+        "from": [
+          "奥秘",
+          "欺瞒",
+          "历史",
+          "威吓",
+          "调查",
+          "自然",
+          "宗教"
+        ],
+        "count": 2,
+        "any": false
+      },
+      "saving_throws": [
+        "感知",
+        "魅力"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 一把轻弩和弩矢(20)或 (b) 任何简易武器",
+        "(a) 一个 材料包或 (b) 一件奥术法器",
+        "(a) 一个学者套组或(b) 一个地城套组",
+        "皮甲，任意 简易武器，以及两把 匕首"
+      ],
+      "gold_alternative": "4d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "cha": 13
+      },
+      "proficienciesGained": {
+        "weapons": [
+          "简易"
+        ],
+        "armor": [
+          "轻甲"
+        ],
+        "armorProficiencies": [
+          {
+            "light": true
+          }
+        ],
+        "skills": []
+      },
+      "requirements_label": "魅力 13"
+    },
+    "spellcasting": {
+      "ability": "魅力",
+      "progression": "pact",
+      "prepared": null,
+      "cantrips_known": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "subclass_title": "异界宗主",
+    "tables": [
+      {
+        "title": null,
+        "columns": [
+          "已知戏法",
+          "已知法术",
+          "法术位",
+          "法术位环阶",
+          "已知祈唤"
+        ],
+        "rows": [
+          [
+            2,
+            2,
+            1,
+            "1环",
+            0
+          ],
+          [
+            2,
+            3,
+            2,
+            "1环",
+            2
+          ],
+          [
+            2,
+            4,
+            2,
+            "2环",
+            2
+          ],
+          [
+            3,
+            5,
+            2,
+            "2环",
+            2
+          ],
+          [
+            3,
+            6,
+            2,
+            "3环",
+            3
+          ],
+          [
+            3,
+            7,
+            2,
+            "3环",
+            3
+          ],
+          [
+            3,
+            8,
+            2,
+            "4环",
+            4
+          ],
+          [
+            3,
+            9,
+            2,
+            "4环",
+            4
+          ],
+          [
+            3,
+            10,
+            2,
+            "5环",
+            5
+          ],
+          [
+            4,
+            10,
+            2,
+            "5环",
+            5
+          ],
+          [
+            4,
+            11,
+            3,
+            "5环",
+            5
+          ],
+          [
+            4,
+            11,
+            3,
+            "5环",
+            6
+          ],
+          [
+            4,
+            12,
+            3,
+            "5环",
+            6
+          ],
+          [
+            4,
+            12,
+            3,
+            "5环",
+            6
+          ],
+          [
+            4,
+            13,
+            3,
+            "5环",
+            7
+          ],
+          [
+            4,
+            13,
+            3,
+            "5环",
+            7
+          ],
+          [
+            4,
+            14,
+            4,
+            "5环",
+            7
+          ],
+          [
+            4,
+            14,
+            4,
+            "5环",
+            8
+          ],
+          [
+            4,
+            15,
+            4,
+            "5环",
+            8
+          ],
+          [
+            4,
+            15,
+            4,
+            "5环",
+            8
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:warlock-1-otherworldly-patron",
+      "phb:feature:warlock-1-pact-magic",
+      "phb:feature:warlock-2-eldritch-invocations",
+      "phb:feature:warlock-3-pact-boon",
+      "phb:feature:warlock-4-ability-score-improvement",
+      "phb:feature:warlock-6-otherworldly-patron-feature",
+      "phb:feature:warlock-8-ability-score-improvement",
+      "phb:feature:warlock-10-otherworldly-patron-feature",
+      "phb:feature:warlock-11-mystic-arcanum-6th-level",
+      "phb:feature:warlock-12-ability-score-improvement",
+      "phb:feature:warlock-13-mystic-arcanum-7th-level",
+      "phb:feature:warlock-14-otherworldly-patron-feature",
+      "phb:feature:warlock-15-mystic-arcanum-8th-level",
+      "phb:feature:warlock-16-ability-score-improvement",
+      "phb:feature:warlock-17-mystic-arcanum-9th-level",
+      "phb:feature:warlock-19-ability-score-improvement",
+      "phb:feature:warlock-20-eldritch-master"
+    ],
+    "subclasses": [
+      "phb:subclass:warlock-the-archfey",
+      "phb:subclass:warlock-the-fiend",
+      "phb:subclass:warlock-the-great-old-one"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 105,
+      "srd": true
+    },
+    "brief": "生命骰 d8 · 豁免 感知/魅力 · 护甲 轻甲 · 武器 简易 · 技能 7 选 2 · 施法属性 魅力"
+  },
+  {
+    "id": "phb:class:wizard",
+    "type": "class",
+    "name": "法师",
+    "name_en": "Wizard",
+    "hit_die": "d6",
+    "saving_throws": [
+      "智力",
+      "感知"
+    ],
+    "proficiencies": {
+      "armor": [],
+      "weapons": [
+        "匕首",
+        "飞镖",
+        "投石索",
+        "长棍",
+        "轻弩"
+      ],
+      "tools": [],
+      "skills": {
+        "from": [
+          "奥秘",
+          "历史",
+          "洞见",
+          "调查",
+          "医药",
+          "宗教"
+        ],
+        "count": 2,
+        "any": false
+      },
+      "saving_throws": [
+        "智力",
+        "感知"
+      ]
+    },
+    "starting_equipment": {
+      "default": [
+        "(a) 一根长棍或 (b) 一把匕首",
+        "(a) 一个 材料包或 (b) 一件奥术法器",
+        "(a) 一个学者套组或(b)一个探索套组",
+        "一本法术书"
+      ],
+      "gold_alternative": "4d4 × 10",
+      "from_background": true
+    },
+    "multiclassing": {
+      "requirements": {
+        "int": 13
+      },
+      "requirements_label": "智力 13",
+      "proficienciesGained": null
+    },
+    "spellcasting": {
+      "ability": "智力",
+      "progression": "full",
+      "prepared": "<$level$> + <$int_mod$>",
+      "cantrips_known": [
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    "subclass_title": "奥术传承",
+    "tables": [
+      {
+        "title": null,
+        "columns": [
+          "已知戏法"
+        ],
+        "rows": [
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ],
+          [
+            5
+          ]
+        ]
+      },
+      {
+        "title": "每环法术位",
+        "columns": [
+          "1环",
+          "2环",
+          "3环",
+          "4环",
+          "5环",
+          "6环",
+          "7环",
+          "8环",
+          "9环"
+        ],
+        "rows": [
+          [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            2,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            3,
+            3,
+            3,
+            3,
+            2,
+            2,
+            1,
+            1
+          ]
+        ]
+      }
+    ],
+    "features": [
+      "phb:feature:wizard-1-arcane-recovery",
+      "phb:feature:wizard-1-spellcasting",
+      "phb:feature:wizard-2-arcane-tradition",
+      "phb:feature:wizard-4-ability-score-improvement",
+      "phb:feature:wizard-6-arcane-tradition-feature",
+      "phb:feature:wizard-8-ability-score-improvement",
+      "phb:feature:wizard-10-arcane-tradition-feature",
+      "phb:feature:wizard-12-ability-score-improvement",
+      "phb:feature:wizard-14-arcane-tradition-feature",
+      "phb:feature:wizard-16-ability-score-improvement",
+      "phb:feature:wizard-18-spell-mastery",
+      "phb:feature:wizard-19-ability-score-improvement",
+      "phb:feature:wizard-20-signature-spells"
+    ],
+    "subclasses": [
+      "phb:subclass:wizard-school-of-abjuration",
+      "phb:subclass:wizard-school-of-conjuration",
+      "phb:subclass:wizard-school-of-divination",
+      "phb:subclass:wizard-school-of-enchantment",
+      "phb:subclass:wizard-school-of-evocation",
+      "phb:subclass:wizard-school-of-illusion",
+      "phb:subclass:wizard-school-of-necromancy",
+      "phb:subclass:wizard-school-of-transmutation"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 112,
+      "srd": true
+    },
+    "brief": "生命骰 d6 · 豁免 智力/感知 · 武器 匕首/飞镖/投石索/长棍/轻弩 · 技能 6 选 2 · 施法属性 智力"
+  }
+]

@@ -3,3 +3,8 @@ node_modules/
 *.log
 playwright-report/
 test-results/
+
+# 5e source snapshot (contains full translated prose; not committed)
+/source/
+# optional private PHB text pack (descriptions only; not committed)
+/data/phb-private/

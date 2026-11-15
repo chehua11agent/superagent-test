@@ -1,0 +1,3811 @@
+[
+  {
+    "id": "phb:deity:anubis-egyptian",
+    "type": "deity",
+    "name": "阿努比斯",
+    "name_en": "Anubis",
+    "pantheon": "埃及",
+    "alignment": "LN",
+    "domains": [
+      "死亡",
+      "坟墓",
+      "秩序"
+    ],
+    "province": "公正和死亡之神",
+    "symbol": "黑豺狼",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 LN · 领域 死亡/坟墓/秩序 · 圣徽 黑豺狼"
+  },
+  {
+    "id": "phb:deity:apep-egyptian",
+    "type": "deity",
+    "name": "阿匹卜",
+    "name_en": "Apep",
+    "pantheon": "埃及",
+    "alignment": "NE",
+    "domains": [
+      "诡术"
+    ],
+    "province": "邪恶、火焰之蛇神",
+    "symbol": "火焰蛇",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 NE · 领域 诡术 · 圣徽 火焰蛇"
+  },
+  {
+    "id": "phb:deity:osiris-egyptian",
+    "type": "deity",
+    "name": "奥西里斯",
+    "name_en": "Osiris",
+    "pantheon": "埃及",
+    "alignment": "LG",
+    "domains": [
+      "坟墓",
+      "生命",
+      "自然"
+    ],
+    "province": "自然和冥界之神",
+    "symbol": "钩子和链枷",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 LG · 领域 坟墓/生命/自然 · 圣徽 钩子和链枷"
+  },
+  {
+    "id": "phb:deity:bes-egyptian",
+    "type": "deity",
+    "name": "贝斯",
+    "name_en": "Bes",
+    "pantheon": "埃及",
+    "alignment": "CN",
+    "domains": [
+      "诡术"
+    ],
+    "province": "幸运和音乐之神",
+    "symbol": "奇形怪状",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 CN · 领域 诡术 · 圣徽 奇形怪状"
+  },
+  {
+    "id": "phb:deity:bast-egyptian",
+    "type": "deity",
+    "name": "贝斯蒂",
+    "name_en": "Bast",
+    "pantheon": "埃及",
+    "alignment": "CG",
+    "domains": [
+      "战争"
+    ],
+    "province": "复仇之猫神",
+    "symbol": "猫",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 CG · 领域 战争 · 圣徽 猫"
+  },
+  {
+    "id": "phb:deity:ptah-egyptian",
+    "type": "deity",
+    "name": "布塔",
+    "name_en": "Ptah",
+    "pantheon": "埃及",
+    "alignment": "LN",
+    "domains": [
+      "知识"
+    ],
+    "province": "手艺、知识和秘密之神",
+    "symbol": "公牛",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 LN · 领域 知识 · 圣徽 公牛"
+  },
+  {
+    "id": "phb:deity:hathor-egyptian",
+    "type": "deity",
+    "name": "哈托尔",
+    "name_en": "Hathor",
+    "pantheon": "埃及",
+    "alignment": "NG",
+    "domains": [
+      "生命",
+      "光明"
+    ],
+    "province": "爱情、音乐和母亲神",
+    "symbol": "月盘上长角母牛的头",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 NG · 领域 生命/光明 · 圣徽 月盘上长角母牛的头"
+  },
+  {
+    "id": "phb:deity:re-horakhty-egyptian",
+    "type": "deity",
+    "name": "拉·赫拉克提-",
+    "name_en": "Re-Horakhty",
+    "pantheon": "埃及",
+    "alignment": "LG",
+    "domains": [
+      "生命",
+      "光明"
+    ],
+    "province": "太阳神、众神的统治者",
+    "symbol": "被蛇围绕的太阳盘",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 LG · 领域 生命/光明 · 圣徽 被蛇围绕的太阳盘"
+  },
+  {
+    "id": "phb:deity:nephthys-egyptian",
+    "type": "deity",
+    "name": "奈芙蒂斯",
+    "name_en": "Nephthys",
+    "pantheon": "埃及",
+    "alignment": "CG",
+    "domains": [
+      "死亡"
+    ],
+    "province": "死亡和悲伤女神",
+    "symbol": "被角围绕的月盘",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 CG · 领域 死亡 · 圣徽 被角围绕的月盘"
+  },
+  {
+    "id": "phb:deity:set-egyptian",
+    "type": "deity",
+    "name": "赛特",
+    "name_en": "Set",
+    "pantheon": "埃及",
+    "alignment": "CE",
+    "domains": [
+      "死亡",
+      "风暴",
+      "诡术"
+    ],
+    "province": "黑暗和沙暴之神",
+    "symbol": "盘绕的眼镜蛇",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 CE · 领域 死亡/风暴/诡术 · 圣徽 盘绕的眼镜蛇"
+  },
+  {
+    "id": "phb:deity:sobek-egyptian",
+    "type": "deity",
+    "name": "索贝克",
+    "name_en": "Sobek",
+    "pantheon": "埃及",
+    "alignment": "LE",
+    "domains": [
+      "自然",
+      "风暴"
+    ],
+    "province": "水域之鳄鱼神",
+    "symbol": "带角和羽毛的鳄鱼头",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 LE · 领域 自然/风暴 · 圣徽 带角和羽毛的鳄鱼头"
+  },
+  {
+    "id": "phb:deity:thoth-egyptian",
+    "type": "deity",
+    "name": "透特",
+    "name_en": "Thoth",
+    "pantheon": "埃及",
+    "alignment": "N",
+    "domains": [
+      "知识"
+    ],
+    "province": "知识和智慧之神",
+    "symbol": "朱鹭",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 N · 领域 知识 · 圣徽 朱鹭"
+  },
+  {
+    "id": "phb:deity:imhotep-egyptian",
+    "type": "deity",
+    "name": "伊蒙霍特普",
+    "name_en": "Imhotep",
+    "pantheon": "埃及",
+    "alignment": "NG",
+    "domains": [
+      "知识"
+    ],
+    "province": "手艺和医学之神",
+    "symbol": "阶梯金字塔",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 NG · 领域 知识 · 圣徽 阶梯金字塔"
+  },
+  {
+    "id": "phb:deity:isis-egyptian",
+    "type": "deity",
+    "name": "伊西斯",
+    "name_en": "Isis",
+    "pantheon": "埃及",
+    "alignment": "NG",
+    "domains": [
+      "知识",
+      "生命",
+      "奥秘"
+    ],
+    "province": "生育和魔法女神",
+    "symbol": "安卡和星星",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": true
+    },
+    "brief": "埃及 · 阵营 NG · 领域 知识/生命/奥秘 · 圣徽 安卡和星星"
+  },
+  {
+    "id": "phb:deity:arawai-eberron",
+    "type": "deity",
+    "name": "阿拉瓦依",
+    "name_en": "Arawai",
+    "pantheon": "艾伯伦",
+    "alignment": "NG",
+    "domains": [
+      "生命",
+      "自然"
+    ],
+    "province": "生育女神",
+    "symbol": "一捆绿丝带捆好的谷物",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 NG · 领域 生命/自然 · 圣徽 一捆绿丝带捆好的谷物"
+  },
+  {
+    "id": "phb:deity:onatar-eberron",
+    "type": "deity",
+    "name": "昂纳塔",
+    "name_en": "Onatar",
+    "pantheon": "艾伯伦",
+    "alignment": "NG",
+    "domains": [
+      "锻造",
+      "知识"
+    ],
+    "province": "工艺之神",
+    "symbol": "交叉的锤子和钳子",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 NG · 领域 锻造/知识 · 圣徽 交叉的锤子和钳子"
+  },
+  {
+    "id": "phb:deity:aureon-eberron",
+    "type": "deity",
+    "name": "奥林",
+    "name_en": "Aureon",
+    "pantheon": "艾伯伦",
+    "alignment": "LN",
+    "domains": [
+      "知识",
+      "秩序"
+    ],
+    "province": "法律和知识之神",
+    "symbol": "打开的典籍",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 LN · 领域 知识/秩序 · 圣徽 打开的典籍"
+  },
+  {
+    "id": "phb:deity:balinor-eberron",
+    "type": "deity",
+    "name": "巴力诺",
+    "name_en": "Balinor",
+    "pantheon": "艾伯伦",
+    "alignment": "N",
+    "domains": [
+      "生命",
+      "自然"
+    ],
+    "province": "野兽和捕猎之神",
+    "symbol": "一对鹿角",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 N · 领域 生命/自然 · 圣徽 一对鹿角"
+  },
+  {
+    "id": "phb:deity:boldrei-eberron",
+    "type": "deity",
+    "name": "博得雷",
+    "name_en": "Boldrei",
+    "pantheon": "艾伯伦",
+    "alignment": "LG",
+    "domains": [
+      "生命",
+      "和平",
+      "暮光"
+    ],
+    "province": "聚落和家庭之神",
+    "symbol": "石炉的火焰",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 LG · 领域 生命/和平/暮光 · 圣徽 石炉的火焰"
+  },
+  {
+    "id": "phb:deity:the-undying-court-eberron",
+    "type": "deity",
+    "name": "不朽王庭",
+    "name_en": "The Undying Court",
+    "pantheon": "艾伯伦",
+    "alignment": "NG",
+    "domains": [
+      "坟墓",
+      "知识",
+      "生命"
+    ],
+    "province": "精灵祖先",
+    "symbol": "多类",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 NG · 领域 坟墓/知识/生命 · 圣徽 多类"
+  },
+  {
+    "id": "phb:deity:the-mockery-eberron",
+    "type": "deity",
+    "name": "嘲弄",
+    "name_en": "The Mockery",
+    "pantheon": "艾伯伦",
+    "alignment": "NE",
+    "domains": [
+      "战争"
+    ],
+    "province": "暴力和欺诈之神",
+    "symbol": "五把溅血的工具",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 NE · 领域 战争 · 圣徽 五把溅血的工具"
+  },
+  {
+    "id": "phb:deity:dol-dorn-eberron",
+    "type": "deity",
+    "name": "杜·顿恩",
+    "name_en": "Dol Dorn",
+    "pantheon": "艾伯伦",
+    "alignment": "CG",
+    "domains": [
+      "战争"
+    ],
+    "province": "力量和军事之神",
+    "symbol": "盾牌上的一把长剑",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 CG · 领域 战争 · 圣徽 盾牌上的一把长剑"
+  },
+  {
+    "id": "phb:deity:dol-arrah-eberron",
+    "type": "deity",
+    "name": "杜·哈拉",
+    "name_en": "Dol Arrah",
+    "pantheon": "艾伯伦",
+    "alignment": "LG",
+    "domains": [
+      "光明",
+      "战争",
+      "暮光"
+    ],
+    "province": "阳光和荣耀女神",
+    "symbol": "旭日",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 LG · 领域 光明/战争/暮光 · 圣徽 旭日"
+  },
+  {
+    "id": "phb:deity:the-fury-eberron",
+    "type": "deity",
+    "name": "愤恨",
+    "name_en": "The Fury",
+    "pantheon": "艾伯伦",
+    "alignment": "NE",
+    "domains": [
+      "战争"
+    ],
+    "province": "愤怒和疯狂女神",
+    "symbol": "有着女人的脸面与上半身的双足飞龙",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 NE · 领域 战争 · 圣徽 有着女人的脸面与上半身的双足飞龙"
+  },
+  {
+    "id": "phb:deity:the-path-of-light-eberron",
+    "type": "deity",
+    "name": "光明之道",
+    "name_en": "The Path of Light",
+    "pantheon": "艾伯伦",
+    "alignment": "LN",
+    "domains": [
+      "生命",
+      "光明"
+    ],
+    "province": "光明和自我完善的哲学",
+    "symbol": "璀璨水晶",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 LN · 领域 生命/光明 · 圣徽 璀璨水晶"
+  },
+  {
+    "id": "phb:deity:cults-of-the-dragon-below-eberron",
+    "type": "deity",
+    "name": "黄泉巨龙会",
+    "name_en": "Cults of the Dragon Below",
+    "pantheon": "艾伯伦",
+    "alignment": "NE",
+    "domains": [
+      "诡术"
+    ],
+    "province": "疯狂的神灵",
+    "symbol": "多类",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 NE · 领域 诡术 · 圣徽 多类"
+  },
+  {
+    "id": "phb:deity:the-keeper-eberron",
+    "type": "deity",
+    "name": "监守",
+    "name_en": "The Keeper",
+    "pantheon": "艾伯伦",
+    "alignment": "NE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "贪婪和死亡之神",
+    "symbol": "打造成尖牙状的龙晶",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 NE · 领域 死亡 · 圣徽 打造成尖牙状的龙晶"
+  },
+  {
+    "id": "phb:deity:kol-korran-eberron",
+    "type": "deity",
+    "name": "寇·柯兰",
+    "name_en": "Kol Korran",
+    "pantheon": "艾伯伦",
+    "alignment": "N",
+    "domains": [
+      "诡术"
+    ],
+    "province": "贸易和财富之神",
+    "symbol": "九面金币",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 N · 领域 诡术 · 圣徽 九面金币"
+  },
+  {
+    "id": "phb:deity:the-traveler-eberron",
+    "type": "deity",
+    "name": "旅者",
+    "name_en": "The Traveler",
+    "pantheon": "艾伯伦",
+    "alignment": "CN",
+    "domains": [
+      "知识",
+      "诡术"
+    ],
+    "province": "混沌和变化之神",
+    "symbol": "四根交叉着刻有符文的骨头",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 CN · 领域 知识/诡术 · 圣徽 四根交叉着刻有符文的骨头"
+  },
+  {
+    "id": "phb:deity:olladra-eberron",
+    "type": "deity",
+    "name": "欧拉卓",
+    "name_en": "Olladra",
+    "pantheon": "艾伯伦",
+    "alignment": "NG",
+    "domains": [
+      "生命",
+      "诡术"
+    ],
+    "province": "幸运女神",
+    "symbol": "多米诺骨牌",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 NG · 领域 生命/诡术 · 圣徽 多米诺骨牌"
+  },
+  {
+    "id": "phb:deity:the-devourer-eberron",
+    "type": "deity",
+    "name": "吞噬",
+    "name_en": "The Devourer",
+    "pantheon": "艾伯伦",
+    "alignment": "NE",
+    "domains": [
+      "风暴"
+    ],
+    "province": "自然愤怒之神",
+    "symbol": "捆着的五根锋利骨头",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 NE · 领域 风暴 · 圣徽 捆着的五根锋利骨头"
+  },
+  {
+    "id": "phb:deity:the-blood-of-vol-eberron",
+    "type": "deity",
+    "name": "沃尔之血",
+    "name_en": "The Blood of Vol",
+    "pantheon": "艾伯伦",
+    "alignment": "LN",
+    "domains": [
+      "死亡",
+      "生命"
+    ],
+    "province": "永生和不死生物的哲学",
+    "symbol": "红色泪滴宝石上的龙骨",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 LN · 领域 死亡/生命 · 圣徽 红色泪滴宝石上的龙骨"
+  },
+  {
+    "id": "phb:deity:the-spirits-of-the-past-eberron",
+    "type": "deity",
+    "name": "先祖英灵",
+    "name_en": "The Spirits of the Past",
+    "pantheon": "艾伯伦",
+    "alignment": "CG",
+    "domains": [
+      "战争"
+    ],
+    "province": "精灵祖先",
+    "symbol": "多类",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 CG · 领域 战争 · 圣徽 多类"
+  },
+  {
+    "id": "phb:deity:the-shadow-eberron",
+    "type": "deity",
+    "name": "阴影",
+    "name_en": "The Shadow",
+    "pantheon": "艾伯伦",
+    "alignment": "CE",
+    "domains": [
+      "知识"
+    ],
+    "province": "黑暗魔法之神",
+    "symbol": "黑曜石塔",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 CE · 领域 知识 · 圣徽 黑曜石塔"
+  },
+  {
+    "id": "phb:deity:the-silver-flame-eberron",
+    "type": "deity",
+    "name": "银焰",
+    "name_en": "The Silver Flame",
+    "pantheon": "艾伯伦",
+    "alignment": "LG",
+    "domains": [
+      "生命",
+      "光明",
+      "战争"
+    ],
+    "province": "保护和善良之神",
+    "symbol": "画在银器上或银制的火焰",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "艾伯伦 · 阵营 LG · 领域 生命/光明/战争 · 圣徽 画在银器上或银制的火焰"
+  },
+  {
+    "id": "phb:deity:aegir-norse",
+    "type": "deity",
+    "name": "埃吉尔",
+    "name_en": "Aegir",
+    "pantheon": "北欧",
+    "alignment": "NE",
+    "domains": [
+      "风暴"
+    ],
+    "province": "海洋和风暴之神",
+    "symbol": "汹涌的海浪",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 NE · 领域 风暴 · 圣徽 汹涌的海浪"
+  },
+  {
+    "id": "phb:deity:odin-norse",
+    "type": "deity",
+    "name": "奥丁",
+    "name_en": "Odin",
+    "pantheon": "北欧",
+    "alignment": "NG",
+    "domains": [
+      "知识",
+      "战争"
+    ],
+    "province": "知识和战争之神",
+    "symbol": "注视的蓝眼",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 NG · 领域 知识/战争 · 圣徽 注视的蓝眼"
+  },
+  {
+    "id": "phb:deity:odur-norse",
+    "type": "deity",
+    "name": "奥都尔",
+    "name_en": "Odur",
+    "pantheon": "北欧",
+    "alignment": "CG",
+    "domains": [
+      "光明"
+    ],
+    "province": "光明和太阳之神",
+    "symbol": "太阳盘",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 CG · 领域 光明 · 圣徽 太阳盘"
+  },
+  {
+    "id": "phb:deity:balder-norse",
+    "type": "deity",
+    "name": "巴尔德尔",
+    "name_en": "Balder",
+    "pantheon": "北欧",
+    "alignment": "NG",
+    "domains": [
+      "生命",
+      "光明"
+    ],
+    "province": "美丽和诗赋之神",
+    "symbol": "宝石镶嵌的银酒杯",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 NG · 领域 生命/光明 · 圣徽 宝石镶嵌的银酒杯"
+  },
+  {
+    "id": "phb:deity:forseti-norse",
+    "type": "deity",
+    "name": "凡赛堤",
+    "name_en": "Forseti",
+    "pantheon": "北欧",
+    "alignment": "N",
+    "domains": [
+      "光明",
+      "秩序"
+    ],
+    "province": "正义和法律之神",
+    "symbol": "有胡子的男人的头",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 N · 领域 光明/秩序 · 圣徽 有胡子的男人的头"
+  },
+  {
+    "id": "phb:deity:frey-norse",
+    "type": "deity",
+    "name": "弗雷",
+    "name_en": "Frey",
+    "pantheon": "北欧",
+    "alignment": "NG",
+    "domains": [
+      "生命",
+      "光明"
+    ],
+    "province": "生育和太阳之神",
+    "symbol": "冰蓝巨剑",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 NG · 领域 生命/光明 · 圣徽 冰蓝巨剑"
+  },
+  {
+    "id": "phb:deity:freya-norse",
+    "type": "deity",
+    "name": "弗蕾亚",
+    "name_en": "Freya",
+    "pantheon": "北欧",
+    "alignment": "NG",
+    "domains": [
+      "生命"
+    ],
+    "province": "生育和爱的女神",
+    "symbol": "隼",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 NG · 领域 生命 · 圣徽 隼"
+  },
+  {
+    "id": "phb:deity:frigga-norse",
+    "type": "deity",
+    "name": "弗丽嘉",
+    "name_en": "Frigga",
+    "pantheon": "北欧",
+    "alignment": "N",
+    "domains": [
+      "生命",
+      "光明"
+    ],
+    "province": "出生和生育女神",
+    "symbol": "猫",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 N · 领域 生命/光明 · 圣徽 猫"
+  },
+  {
+    "id": "phb:deity:heimdall-norse",
+    "type": "deity",
+    "name": "海姆达尔",
+    "name_en": "Heimdall",
+    "pantheon": "北欧",
+    "alignment": "LG",
+    "domains": [
+      "光明",
+      "战争"
+    ],
+    "province": "警惕和忠诚之神",
+    "symbol": "圆号角",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 LG · 领域 光明/战争 · 圣徽 圆号角"
+  },
+  {
+    "id": "phb:deity:hel-norse",
+    "type": "deity",
+    "name": "赫尔",
+    "name_en": "Hel",
+    "pantheon": "北欧",
+    "alignment": "NE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "冥界女神",
+    "symbol": "一半腐烂的女人脸",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 NE · 领域 死亡 · 圣徽 一半腐烂的女人脸"
+  },
+  {
+    "id": "phb:deity:hermod-norse",
+    "type": "deity",
+    "name": "赫尔莫德",
+    "name_en": "Hermod",
+    "pantheon": "北欧",
+    "alignment": "CN",
+    "domains": [
+      "诡术"
+    ],
+    "province": "幸运之神",
+    "symbol": "带翼卷轴",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 CN · 领域 诡术 · 圣徽 带翼卷轴"
+  },
+  {
+    "id": "phb:deity:loki-norse",
+    "type": "deity",
+    "name": "洛基",
+    "name_en": "Loki",
+    "pantheon": "北欧",
+    "alignment": "CE",
+    "domains": [
+      "诡术"
+    ],
+    "province": "盗贼和诡计之神",
+    "symbol": "火焰",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 CE · 领域 诡术 · 圣徽 火焰"
+  },
+  {
+    "id": "phb:deity:njord-norse",
+    "type": "deity",
+    "name": "尼约德",
+    "name_en": "Njord",
+    "pantheon": "北欧",
+    "alignment": "NG",
+    "domains": [
+      "自然",
+      "风暴"
+    ],
+    "province": "海与风之神",
+    "symbol": "金币",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 NG · 领域 自然/风暴 · 圣徽 金币"
+  },
+  {
+    "id": "phb:deity:skadi-norse",
+    "type": "deity",
+    "name": "斯卡蒂",
+    "name_en": "Skadi",
+    "pantheon": "北欧",
+    "alignment": "N",
+    "domains": [
+      "自然"
+    ],
+    "province": "大地和山脉之神",
+    "symbol": "山峰",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 N · 领域 自然 · 圣徽 山峰"
+  },
+  {
+    "id": "phb:deity:surtur-norse",
+    "type": "deity",
+    "name": "苏尔特",
+    "name_en": "Surtur",
+    "pantheon": "北欧",
+    "alignment": "LE",
+    "domains": [
+      "战争"
+    ],
+    "province": "火巨人与战争之神",
+    "symbol": "火焰剑",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 LE · 领域 战争 · 圣徽 火焰剑"
+  },
+  {
+    "id": "phb:deity:thor-norse",
+    "type": "deity",
+    "name": "索尔",
+    "name_en": "Thor",
+    "pantheon": "北欧",
+    "alignment": "CG",
+    "domains": [
+      "风暴",
+      "战争"
+    ],
+    "province": "风暴和雷霆之神",
+    "symbol": "锤子",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 CG · 领域 风暴/战争 · 圣徽 锤子"
+  },
+  {
+    "id": "phb:deity:thrym-norse",
+    "type": "deity",
+    "name": "索列姆",
+    "name_en": "Thrym",
+    "pantheon": "北欧",
+    "alignment": "CE",
+    "domains": [
+      "战争"
+    ],
+    "province": "霜巨人与寒冷之神",
+    "symbol": "白色双刃斧",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 CE · 领域 战争 · 圣徽 白色双刃斧"
+  },
+  {
+    "id": "phb:deity:tyr-norse",
+    "type": "deity",
+    "name": "提尔",
+    "name_en": "Tyr",
+    "pantheon": "北欧",
+    "alignment": "LN",
+    "domains": [
+      "知识",
+      "战争",
+      "秩序"
+    ],
+    "province": "勇气和策略之神",
+    "symbol": "剑",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 LN · 领域 知识/战争/秩序 · 圣徽 剑"
+  },
+  {
+    "id": "phb:deity:uller-norse",
+    "type": "deity",
+    "name": "乌勒尔",
+    "name_en": "Uller",
+    "pantheon": "北欧",
+    "alignment": "CN",
+    "domains": [
+      "自然"
+    ],
+    "province": "狩猎和寒冬之神",
+    "symbol": "长弓",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 CN · 领域 自然 · 圣徽 长弓"
+  },
+  {
+    "id": "phb:deity:sif-norse",
+    "type": "deity",
+    "name": "西芙",
+    "name_en": "Sif",
+    "pantheon": "北欧",
+    "alignment": "CG",
+    "domains": [
+      "战争"
+    ],
+    "province": "战争女神",
+    "symbol": "举起的剑",
+    "source": {
+      "book": "PHB",
+      "page": 299,
+      "srd": false
+    },
+    "brief": "北欧 · 阵营 CG · 领域 战争 · 圣徽 举起的剑"
+  },
+  {
+    "id": "phb:deity:azuth-forgotten-realms",
+    "type": "deity",
+    "name": "阿祖斯",
+    "name_en": "Azuth",
+    "pantheon": "被遗忘的国度",
+    "alignment": "LN",
+    "domains": [
+      "知识",
+      "奥秘"
+    ],
+    "province": "法师之神",
+    "symbol": "带着火焰轮廓并指向上方的左手",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 LN · 领域 知识/奥秘 · 圣徽 带着火焰轮廓并指向上方的左手"
+  },
+  {
+    "id": "phb:deity:eldath-forgotten-realms",
+    "type": "deity",
+    "name": "埃达丝",
+    "name_en": "Eldath",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NG",
+    "domains": [
+      "生命",
+      "自然",
+      "和平"
+    ],
+    "province": "和平女神",
+    "symbol": "注入水池的瀑布",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NG · 领域 生命/自然/和平 · 圣徽 注入水池的瀑布"
+  },
+  {
+    "id": "phb:deity:umberlee-forgotten-realms",
+    "type": "deity",
+    "name": "安博里",
+    "name_en": "Umberlee",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CE",
+    "domains": [
+      "风暴"
+    ],
+    "province": "海洋女神",
+    "symbol": "左右卷曲的波浪",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CE · 领域 风暴 · 圣徽 左右卷曲的波浪"
+  },
+  {
+    "id": "phb:deity:bhaal-forgotten-realms",
+    "type": "deity",
+    "name": "巴尔",
+    "name_en": "Bhaal",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "谋杀之神",
+    "symbol": "血滴环绕的颅骨",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NE · 领域 死亡 · 圣徽 血滴环绕的颅骨"
+  },
+  {
+    "id": "phb:deity:bane-forgotten-realms",
+    "type": "deity",
+    "name": "班恩",
+    "name_en": "Bane",
+    "pantheon": "被遗忘的国度",
+    "alignment": "LE",
+    "domains": [
+      "战争",
+      "秩序"
+    ],
+    "province": "暴政之神",
+    "symbol": "竖立的黑色右拳",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 LE · 领域 战争/秩序 · 圣徽 竖立的黑色右拳"
+  },
+  {
+    "id": "phb:deity:beshaba-forgotten-realms",
+    "type": "deity",
+    "name": "本莎芭",
+    "name_en": "Beshaba",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CE",
+    "domains": [
+      "诡术"
+    ],
+    "province": "厄运女神",
+    "symbol": "黑色鹿角",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CE · 领域 诡术 · 圣徽 黑色鹿角"
+  },
+  {
+    "id": "phb:deity:deneir-forgotten-realms",
+    "type": "deity",
+    "name": "迪尼尔",
+    "name_en": "Deneir",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NG",
+    "domains": [
+      "知识"
+    ],
+    "province": "写作之神",
+    "symbol": "一只睁开的眼睛，上面有一截蜡烛",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NG · 领域 知识 · 圣徽 一只睁开的眼睛，上面有一截蜡烛"
+  },
+  {
+    "id": "phb:deity:gond-forgotten-realms",
+    "type": "deity",
+    "name": "贡德",
+    "name_en": "Gond",
+    "pantheon": "被遗忘的国度",
+    "alignment": "N",
+    "domains": [
+      "锻造",
+      "知识"
+    ],
+    "province": "工艺之神",
+    "symbol": "四道轮辐的齿轮",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 N · 领域 锻造/知识 · 圣徽 四道轮辐的齿轮"
+  },
+  {
+    "id": "phb:deity:helm-forgotten-realms",
+    "type": "deity",
+    "name": "海姆",
+    "name_en": "Helm",
+    "pantheon": "被遗忘的国度",
+    "alignment": "LN",
+    "domains": [
+      "生命",
+      "光明",
+      "暮光"
+    ],
+    "province": "保护之神",
+    "symbol": "竖立的左手铁手套，其上有一只凝视的眼睛",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 LN · 领域 生命/光明/暮光 · 圣徽 竖立的左手铁手套，其上有一只凝视的眼睛"
+  },
+  {
+    "id": "phb:deity:kelemvor-forgotten-realms",
+    "type": "deity",
+    "name": "凯兰沃",
+    "name_en": "Kelemvor",
+    "pantheon": "被遗忘的国度",
+    "alignment": "LN",
+    "domains": [
+      "死亡",
+      "坟墓"
+    ],
+    "province": "死亡之神",
+    "symbol": "竖立的臂骨支撑的天平",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 LN · 领域 死亡/坟墓 · 圣徽 竖立的臂骨支撑的天平"
+  },
+  {
+    "id": "phb:deity:loviatar-forgotten-realms",
+    "type": "deity",
+    "name": "劳薇塔",
+    "name_en": "Loviatar",
+    "pantheon": "被遗忘的国度",
+    "alignment": "LE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "痛苦女神",
+    "symbol": "九尾刺鞭",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 LE · 领域 死亡 · 圣徽 九尾刺鞭"
+  },
+  {
+    "id": "phb:deity:leira-forgotten-realms",
+    "type": "deity",
+    "name": "蕾拉",
+    "name_en": "Leira",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CN",
+    "domains": [
+      "诡术"
+    ],
+    "province": "幻象女神",
+    "symbol": "含有旋雾的向下三角",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CN · 领域 诡术 · 圣徽 含有旋雾的向下三角"
+  },
+  {
+    "id": "phb:deity:lliira-forgotten-realms",
+    "type": "deity",
+    "name": "黎尔拉",
+    "name_en": "Lliira",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CG",
+    "domains": [
+      "生命"
+    ],
+    "province": "欢乐女神",
+    "symbol": "三个六角星组成的三角形",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CG · 领域 生命 · 圣徽 三个六角星组成的三角形"
+  },
+  {
+    "id": "phb:deity:lathander-forgotten-realms",
+    "type": "deity",
+    "name": "洛山达",
+    "name_en": "Lathander",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NG",
+    "domains": [
+      "生命",
+      "光明"
+    ],
+    "province": "新生与复苏之神",
+    "symbol": "通往日出的道路",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NG · 领域 生命/光明 · 圣徽 通往日出的道路"
+  },
+  {
+    "id": "phb:deity:mask-forgotten-realms",
+    "type": "deity",
+    "name": "马斯克",
+    "name_en": "Mask",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CN",
+    "domains": [
+      "诡术"
+    ],
+    "province": "盗贼之神",
+    "symbol": "黑色面具",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CN · 领域 诡术 · 圣徽 黑色面具"
+  },
+  {
+    "id": "phb:deity:malar-forgotten-realms",
+    "type": "deity",
+    "name": "犸拉",
+    "name_en": "Malar",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CE",
+    "domains": [
+      "自然"
+    ],
+    "province": "猎杀之神",
+    "symbol": "利爪",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CE · 领域 自然 · 圣徽 利爪"
+  },
+  {
+    "id": "phb:deity:mielikki-forgotten-realms",
+    "type": "deity",
+    "name": "梅丽凯",
+    "name_en": "Mielikki",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NG",
+    "domains": [
+      "自然"
+    ],
+    "province": "森林女神",
+    "symbol": "独角兽头",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NG · 领域 自然 · 圣徽 独角兽头"
+  },
+  {
+    "id": "phb:deity:myrkul-forgotten-realms",
+    "type": "deity",
+    "name": "米尔寇",
+    "name_en": "Myrkul",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "死亡之神",
+    "symbol": "白色人类颅骨",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NE · 领域 死亡 · 圣徽 白色人类颅骨"
+  },
+  {
+    "id": "phb:deity:milil-forgotten-realms",
+    "type": "deity",
+    "name": "密里耳",
+    "name_en": "Milil",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NG",
+    "domains": [
+      "光明"
+    ],
+    "province": "诗歌之神",
+    "symbol": "树叶制作的五弦竖琴",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NG · 领域 光明 · 圣徽 树叶制作的五弦竖琴"
+  },
+  {
+    "id": "phb:deity:mystra-forgotten-realms",
+    "type": "deity",
+    "name": "密斯特拉",
+    "name_en": "Mystra",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NG",
+    "domains": [
+      "知识",
+      "奥秘"
+    ],
+    "province": "魔法女神",
+    "symbol": "七星圆环，九星环绕流泻的红雾或一个星型",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NG · 领域 知识/奥秘 · 圣徽 七星圆环，九星环绕流泻的红雾或一个星型"
+  },
+  {
+    "id": "phb:deity:oghma-forgotten-realms",
+    "type": "deity",
+    "name": "欧格玛",
+    "name_en": "Oghma",
+    "pantheon": "被遗忘的国度",
+    "alignment": "N",
+    "domains": [
+      "知识"
+    ],
+    "province": "知识之神",
+    "symbol": "空卷轴",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": true
+    },
+    "brief": "被遗忘的国度 · 阵营 N · 领域 知识 · 圣徽 空卷轴"
+  },
+  {
+    "id": "phb:deity:auril-forgotten-realms",
+    "type": "deity",
+    "name": "欧吕尔",
+    "name_en": "Auril",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NE",
+    "domains": [
+      "自然",
+      "风暴"
+    ],
+    "province": "寒冬女神",
+    "symbol": "六角雪花",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NE · 领域 自然/风暴 · 圣徽 六角雪花"
+  },
+  {
+    "id": "phb:deity:savras-forgotten-realms",
+    "type": "deity",
+    "name": "萨弗拉斯",
+    "name_en": "Savras",
+    "pantheon": "被遗忘的国度",
+    "alignment": "LN",
+    "domains": [
+      "知识"
+    ],
+    "province": "占卜和命运之神",
+    "symbol": "包含各种眼睛的水晶球",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 LN · 领域 知识 · 圣徽 包含各种眼睛的水晶球"
+  },
+  {
+    "id": "phb:deity:selu-ne-forgotten-realms",
+    "type": "deity",
+    "name": "塞伦涅",
+    "name_en": "Selûne",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CG",
+    "domains": [
+      "知识",
+      "生命",
+      "暮光"
+    ],
+    "province": "月亮女神",
+    "symbol": "一双眼睛周围七颗星",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CG · 领域 知识/生命/暮光 · 圣徽 一双眼睛周围七颗星"
+  },
+  {
+    "id": "phb:deity:shar-forgotten-realms",
+    "type": "deity",
+    "name": "莎尔",
+    "name_en": "Shar",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NE",
+    "domains": [
+      "死亡",
+      "诡术"
+    ],
+    "province": "黑暗和遗失女神",
+    "symbol": "有边框的黑色盘",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NE · 领域 死亡/诡术 · 圣徽 有边框的黑色盘"
+  },
+  {
+    "id": "phb:deity:chauntea-forgotten-realms",
+    "type": "deity",
+    "name": "裳缇亚",
+    "name_en": "Chauntea",
+    "pantheon": "被遗忘的国度",
+    "alignment": "NG",
+    "domains": [
+      "生命"
+    ],
+    "province": "农业女神",
+    "symbol": "一捆谷物或谷物上盛开的玫瑰",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 NG · 领域 生命 · 圣徽 一捆谷物或谷物上盛开的玫瑰"
+  },
+  {
+    "id": "phb:deity:sune-forgotten-realms",
+    "type": "deity",
+    "name": "淑妮",
+    "name_en": "Sune",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CG",
+    "domains": [
+      "生命",
+      "光明"
+    ],
+    "province": "爱与美的女神",
+    "symbol": "美貌的红发女子的脸庞",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CG · 领域 生命/光明 · 圣徽 美貌的红发女子的脸庞"
+  },
+  {
+    "id": "phb:deity:talona-forgotten-realms",
+    "type": "deity",
+    "name": "塔洛娜",
+    "name_en": "Talona",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "疾病和剧毒女神",
+    "symbol": "三角上的三颗泪滴",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CE · 领域 死亡 · 圣徽 三角上的三颗泪滴"
+  },
+  {
+    "id": "phb:deity:talos-forgotten-realms",
+    "type": "deity",
+    "name": "塔洛斯",
+    "name_en": "Talos",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CE",
+    "domains": [
+      "风暴"
+    ],
+    "province": "风暴之神",
+    "symbol": "三束闪电从中间散开来",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CE · 领域 风暴 · 圣徽 三束闪电从中间散开来"
+  },
+  {
+    "id": "phb:deity:tymora-forgotten-realms",
+    "type": "deity",
+    "name": "泰摩拉",
+    "name_en": "Tymora",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CG",
+    "domains": [
+      "诡术"
+    ],
+    "province": "幸运女神",
+    "symbol": "正面朝上的硬币",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CG · 领域 诡术 · 圣徽 正面朝上的硬币"
+  },
+  {
+    "id": "phb:deity:tempus-forgotten-realms",
+    "type": "deity",
+    "name": "坦帕斯",
+    "name_en": "Tempus",
+    "pantheon": "被遗忘的国度",
+    "alignment": "N",
+    "domains": [
+      "战争"
+    ],
+    "province": "战争之神",
+    "symbol": "竖立的火焰剑",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 N · 领域 战争 · 圣徽 竖立的火焰剑"
+  },
+  {
+    "id": "phb:deity:tyr-forgotten-realms",
+    "type": "deity",
+    "name": "提尔",
+    "name_en": "Tyr",
+    "pantheon": "被遗忘的国度",
+    "alignment": "LG",
+    "domains": [
+      "战争",
+      "秩序"
+    ],
+    "province": "正义之神",
+    "symbol": "战锤上的天平",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 LG · 领域 战争/秩序 · 圣徽 战锤上的天平"
+  },
+  {
+    "id": "phb:deity:torm-forgotten-realms",
+    "type": "deity",
+    "name": "托姆",
+    "name_en": "Torm",
+    "pantheon": "被遗忘的国度",
+    "alignment": "LG",
+    "domains": [
+      "战争"
+    ],
+    "province": "勇气与牺牲之神",
+    "symbol": "白色右护手",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 LG · 领域 战争 · 圣徽 白色右护手"
+  },
+  {
+    "id": "phb:deity:waukeen-forgotten-realms",
+    "type": "deity",
+    "name": "渥金",
+    "name_en": "Waukeen",
+    "pantheon": "被遗忘的国度",
+    "alignment": "N",
+    "domains": [
+      "知识",
+      "诡术"
+    ],
+    "province": "贸易女神",
+    "symbol": "刻有渥金左脸的竖立硬币",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 N · 领域 知识/诡术 · 圣徽 刻有渥金左脸的竖立硬币"
+  },
+  {
+    "id": "phb:deity:silvanus-forgotten-realms",
+    "type": "deity",
+    "name": "西凡那斯",
+    "name_en": "Silvanus",
+    "pantheon": "被遗忘的国度",
+    "alignment": "N",
+    "domains": [
+      "自然"
+    ],
+    "province": "荒野自然之神",
+    "symbol": "橡树叶",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": true
+    },
+    "brief": "被遗忘的国度 · 阵营 N · 领域 自然 · 圣徽 橡树叶"
+  },
+  {
+    "id": "phb:deity:cyric-forgotten-realms",
+    "type": "deity",
+    "name": "希瑞克",
+    "name_en": "Cyric",
+    "pantheon": "被遗忘的国度",
+    "alignment": "CE",
+    "domains": [
+      "诡术"
+    ],
+    "province": "谎言之神",
+    "symbol": "黑色或紫色光芒中的白色无颌颅骨",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 CE · 领域 诡术 · 圣徽 黑色或紫色光芒中的白色无颌颅骨"
+  },
+  {
+    "id": "phb:deity:ilmater-forgotten-realms",
+    "type": "deity",
+    "name": "伊尔马特",
+    "name_en": "Ilmater",
+    "pantheon": "被遗忘的国度",
+    "alignment": "LG",
+    "domains": [
+      "生命",
+      "暮光"
+    ],
+    "province": "忍耐之神",
+    "symbol": "被红绳绑住手腕的双手",
+    "source": {
+      "book": "PHB",
+      "page": 294,
+      "srd": false
+    },
+    "brief": "被遗忘的国度 · 阵营 LG · 领域 生命/暮光 · 圣徽 被红绳绑住手腕的双手"
+  },
+  {
+    "id": "phb:deity:bahamut-nonhuman",
+    "type": "deity",
+    "name": "巴哈姆特",
+    "name_en": "Bahamut",
+    "pantheon": "非人类",
+    "alignment": "LG",
+    "domains": [
+      "生命",
+      "战争"
+    ],
+    "province": "善良之龙神",
+    "symbol": "简化龙头",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 LG · 领域 生命/战争 · 圣徽 简化龙头"
+  },
+  {
+    "id": "phb:deity:blibdoolpoolp-nonhuman",
+    "type": "deity",
+    "name": "布里博杜普",
+    "name_en": "Blibdoolpoolp",
+    "pantheon": "非人类",
+    "alignment": "NE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "寇涛鱼人女神",
+    "symbol": "龙虾头或黑珍珠",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 NE · 领域 死亡 · 圣徽 龙虾头或黑珍珠"
+  },
+  {
+    "id": "phb:deity:grolantor-nonhuman",
+    "type": "deity",
+    "name": "格洛兰托",
+    "name_en": "Grolantor",
+    "pantheon": "非人类",
+    "alignment": "CE",
+    "domains": [
+      "战争"
+    ],
+    "province": "战争之山丘巨人神",
+    "symbol": "木棒",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 CE · 领域 战争 · 圣徽 木棒"
+  },
+  {
+    "id": "phb:deity:gruumsh-nonhuman",
+    "type": "deity",
+    "name": "格乌什",
+    "name_en": "Gruumsh",
+    "pantheon": "非人类",
+    "alignment": "CE",
+    "domains": [
+      "风暴",
+      "战争"
+    ],
+    "province": "风暴与战争之兽人神",
+    "symbol": "不眨的眼睛",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 CE · 领域 风暴/战争 · 圣徽 不眨的眼睛"
+  },
+  {
+    "id": "phb:deity:hruggek-nonhuman",
+    "type": "deity",
+    "name": "赫鲁格克",
+    "name_en": "Hruggek",
+    "pantheon": "非人类",
+    "alignment": "CE",
+    "domains": [
+      "战争"
+    ],
+    "province": "暴力之熊地精神",
+    "symbol": "钉头锤",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 CE · 领域 战争 · 圣徽 钉头锤"
+  },
+  {
+    "id": "phb:deity:garl-glittergold-nonhuman",
+    "type": "deity",
+    "name": "加尔·闪金",
+    "name_en": "Garl Glittergold",
+    "pantheon": "非人类",
+    "alignment": "LG",
+    "domains": [
+      "诡术"
+    ],
+    "province": "诡计与机智之侏儒神",
+    "symbol": "金块",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 LG · 领域 诡术 · 圣徽 金块"
+  },
+  {
+    "id": "phb:deity:corellon-larethian-nonhuman",
+    "type": "deity",
+    "name": "科瑞隆·拉瑞斯安",
+    "name_en": "Corellon Larethian",
+    "pantheon": "非人类",
+    "alignment": "CG",
+    "domains": [
+      "光明",
+      "奥秘"
+    ],
+    "province": "艺术与魔法之精灵神",
+    "symbol": "上弦月或星爆图",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 CG · 领域 光明/奥秘 · 圣徽 上弦月或星爆图"
+  },
+  {
+    "id": "phb:deity:kurtulmak-nonhuman",
+    "type": "deity",
+    "name": "库尔图马克",
+    "name_en": "Kurtulmak",
+    "pantheon": "非人类",
+    "alignment": "LE",
+    "domains": [
+      "战争"
+    ],
+    "province": "战争与挖掘之狗头人神",
+    "symbol": "侏儒颅骨",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 LE · 领域 战争 · 圣徽 侏儒颅骨"
+  },
+  {
+    "id": "phb:deity:laogzed-nonhuman",
+    "type": "deity",
+    "name": "劳格兹德",
+    "name_en": "Laogzed",
+    "pantheon": "非人类",
+    "alignment": "CE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "饥饿之穴蜥人神",
+    "symbol": "蜥蜴、蛤蟆神像",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 CE · 领域 死亡 · 圣徽 蜥蜴、蛤蟆神像"
+  },
+  {
+    "id": "phb:deity:lolth-nonhuman",
+    "type": "deity",
+    "name": "罗丝",
+    "name_en": "Lolth",
+    "pantheon": "非人类",
+    "alignment": "CE",
+    "domains": [
+      "诡术"
+    ],
+    "province": "蜘蛛之卓尔女神",
+    "symbol": "蜘蛛",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 CE · 领域 诡术 · 圣徽 蜘蛛"
+  },
+  {
+    "id": "phb:deity:maglubiyet-nonhuman",
+    "type": "deity",
+    "name": "马格鲁比耶",
+    "name_en": "Maglubiyet",
+    "pantheon": "非人类",
+    "alignment": "LE",
+    "domains": [
+      "战争",
+      "秩序"
+    ],
+    "province": "战争之类地精神",
+    "symbol": "血斧",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 LE · 领域 战争/秩序 · 圣徽 血斧"
+  },
+  {
+    "id": "phb:deity:moradin-nonhuman",
+    "type": "deity",
+    "name": "摩拉丁",
+    "name_en": "Moradin",
+    "pantheon": "非人类",
+    "alignment": "LG",
+    "domains": [
+      "锻造",
+      "知识"
+    ],
+    "province": "创造之矮人神",
+    "symbol": "锤砧",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 LG · 领域 锻造/知识 · 圣徽 锤砧"
+  },
+  {
+    "id": "phb:deity:rillifane-rallathil-nonhuman",
+    "type": "deity",
+    "name": "瑞里芬·莱勒菲",
+    "name_en": "Rillifane Rallathil",
+    "pantheon": "非人类",
+    "alignment": "CG",
+    "domains": [
+      "自然"
+    ],
+    "province": "自然之木精灵神",
+    "symbol": "橡树",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 CG · 领域 自然 · 圣徽 橡树"
+  },
+  {
+    "id": "phb:deity:semuanya-nonhuman",
+    "type": "deity",
+    "name": "赛莫利亚",
+    "name_en": "Semuanya",
+    "pantheon": "非人类",
+    "alignment": "N",
+    "domains": [
+      "生命"
+    ],
+    "province": "生存之蜥蜴人神",
+    "symbol": "蛋",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 N · 领域 生命 · 圣徽 蛋"
+  },
+  {
+    "id": "phb:deity:sekolah-nonhuman",
+    "type": "deity",
+    "name": "瑟寇拉",
+    "name_en": "Sekolah",
+    "pantheon": "非人类",
+    "alignment": "LE",
+    "domains": [
+      "自然",
+      "风暴"
+    ],
+    "province": "狩猎之鲨华鱼人神",
+    "symbol": "鲨鱼",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 LE · 领域 自然/风暴 · 圣徽 鲨鱼"
+  },
+  {
+    "id": "phb:deity:sehanine-moonbow-nonhuman",
+    "type": "deity",
+    "name": "莎罕妮·月弓",
+    "name_en": "Sehanine Moonbow",
+    "pantheon": "非人类",
+    "alignment": "CG",
+    "domains": [
+      "知识"
+    ],
+    "province": "月亮之精灵女神",
+    "symbol": "新月",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 CG · 领域 知识 · 圣徽 新月"
+  },
+  {
+    "id": "phb:deity:deep-sashelas-nonhuman",
+    "type": "deity",
+    "name": "深海·赛悉拉",
+    "name_en": "Deep Sashelas",
+    "pantheon": "非人类",
+    "alignment": "CG",
+    "domains": [
+      "自然",
+      "风暴"
+    ],
+    "province": "大海之精灵神",
+    "symbol": "海豚",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 CG · 领域 自然/风暴 · 圣徽 海豚"
+  },
+  {
+    "id": "phb:deity:skoraeus-stonebones-nonhuman",
+    "type": "deity",
+    "name": "司寇雷乌斯·岩骨",
+    "name_en": "Skoraeus Stonebones",
+    "pantheon": "非人类",
+    "alignment": "N",
+    "domains": [
+      "知识"
+    ],
+    "province": "石巨人与艺术之神",
+    "symbol": "钟乳石",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 N · 领域 知识 · 圣徽 钟乳石"
+  },
+  {
+    "id": "phb:deity:skerrit-nonhuman",
+    "type": "deity",
+    "name": "斯凯里特",
+    "name_en": "Skerrit",
+    "pantheon": "非人类",
+    "alignment": "N",
+    "domains": [
+      "自然"
+    ],
+    "province": "自然之人马与半羊人神",
+    "symbol": "橡子中长出的橡树",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 N · 领域 自然 · 圣徽 橡子中长出的橡树"
+  },
+  {
+    "id": "phb:deity:surtur-nonhuman",
+    "type": "deity",
+    "name": "苏尔特",
+    "name_en": "Surtur",
+    "pantheon": "非人类",
+    "alignment": "LE",
+    "domains": [
+      "知识",
+      "战争"
+    ],
+    "province": "火巨人与工匠之神",
+    "symbol": "火焰剑",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 LE · 领域 知识/战争 · 圣徽 火焰剑"
+  },
+  {
+    "id": "phb:deity:thrym-nonhuman",
+    "type": "deity",
+    "name": "索列姆",
+    "name_en": "Thrym",
+    "pantheon": "非人类",
+    "alignment": "CE",
+    "domains": [
+      "战争"
+    ],
+    "province": "霜巨人与力量之神",
+    "symbol": "白色双刃斧",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 CE · 领域 战争 · 圣徽 白色双刃斧"
+  },
+  {
+    "id": "phb:deity:tiamat-nonhuman",
+    "type": "deity",
+    "name": "提亚马特",
+    "name_en": "Tiamat",
+    "pantheon": "非人类",
+    "alignment": "LE",
+    "domains": [
+      "诡术"
+    ],
+    "province": "邪恶之女龙神",
+    "symbol": "带有五个爪印的龙头",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 LE · 领域 诡术 · 圣徽 带有五个爪印的龙头"
+  },
+  {
+    "id": "phb:deity:eadro-nonhuman",
+    "type": "deity",
+    "name": "依卓洛",
+    "name_en": "Eadro",
+    "pantheon": "非人类",
+    "alignment": "N",
+    "domains": [
+      "自然",
+      "风暴"
+    ],
+    "province": "大海之人鱼神",
+    "symbol": "螺旋",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 N · 领域 自然/风暴 · 圣徽 螺旋"
+  },
+  {
+    "id": "phb:deity:yondalla-nonhuman",
+    "type": "deity",
+    "name": "悠妲拉",
+    "name_en": "Yondalla",
+    "pantheon": "非人类",
+    "alignment": "LG",
+    "domains": [
+      "生命",
+      "暮光"
+    ],
+    "province": "生育与保护之半身人女神",
+    "symbol": "盾牌",
+    "source": {
+      "book": "PHB",
+      "page": 296,
+      "srd": false
+    },
+    "brief": "非人类 · 阵营 LG · 领域 生命/暮光 · 圣徽 盾牌"
+  },
+  {
+    "id": "phb:deity:iuz-greyhawk",
+    "type": "deity",
+    "name": "埃乌兹",
+    "name_en": "Iuz",
+    "pantheon": "灰鹰",
+    "alignment": "CE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "痛苦和压迫之神",
+    "symbol": "咧嘴的人类头骨",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 CE · 领域 死亡 · 圣徽 咧嘴的人类头骨"
+  },
+  {
+    "id": "phb:deity:ehlonna-greyhawk",
+    "type": "deity",
+    "name": "艾罗娜",
+    "name_en": "Ehlonna",
+    "pantheon": "灰鹰",
+    "alignment": "NG",
+    "domains": [
+      "生命",
+      "自然"
+    ],
+    "province": "林地女神",
+    "symbol": "独角兽角",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 NG · 领域 生命/自然 · 圣徽 独角兽角"
+  },
+  {
+    "id": "phb:deity:beory-greyhawk",
+    "type": "deity",
+    "name": "贝欧瑞",
+    "name_en": "Beory",
+    "pantheon": "灰鹰",
+    "alignment": "N",
+    "domains": [
+      "自然"
+    ],
+    "province": "自然女神",
+    "symbol": "绿色圆盘",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 N · 领域 自然 · 圣徽 绿色圆盘"
+  },
+  {
+    "id": "phb:deity:boccob-greyhawk",
+    "type": "deity",
+    "name": "博卡布",
+    "name_en": "Boccob",
+    "pantheon": "灰鹰",
+    "alignment": "N",
+    "domains": [
+      "知识",
+      "奥秘"
+    ],
+    "province": "魔法之神",
+    "symbol": "五角星内的眼睛",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 N · 领域 知识/奥秘 · 圣徽 五角星内的眼睛"
+  },
+  {
+    "id": "phb:deity:erythnul-greyhawk",
+    "type": "deity",
+    "name": "厄瑞斯努",
+    "name_en": "Erythnul",
+    "pantheon": "灰鹰",
+    "alignment": "CE",
+    "domains": [
+      "战争"
+    ],
+    "province": "嫉妒和屠杀之神",
+    "symbol": "滴落的血",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 CE · 领域 战争 · 圣徽 滴落的血"
+  },
+  {
+    "id": "phb:deity:fharlanghn-greyhawk",
+    "type": "deity",
+    "name": "法兰恩",
+    "name_en": "Fharlanghn",
+    "pantheon": "灰鹰",
+    "alignment": "NG",
+    "domains": [
+      "知识",
+      "诡术"
+    ],
+    "province": "视野和旅行之神",
+    "symbol": "和雕刻出的地平线交错的圆环",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 NG · 领域 知识/诡术 · 圣徽 和雕刻出的地平线交错的圆环"
+  },
+  {
+    "id": "phb:deity:pholtus-greyhawk",
+    "type": "deity",
+    "name": "佛塔斯",
+    "name_en": "Pholtus",
+    "pantheon": "灰鹰",
+    "alignment": "LG",
+    "domains": [
+      "光明",
+      "秩序"
+    ],
+    "province": "光明和律法之神",
+    "symbol": "银色太阳或者一个偏食一点的满月",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 LG · 领域 光明/秩序 · 圣徽 银色太阳或者一个偏食一点的满月"
+  },
+  {
+    "id": "phb:deity:hextor-greyhawk",
+    "type": "deity",
+    "name": "海克斯托",
+    "name_en": "Hextor",
+    "pantheon": "灰鹰",
+    "alignment": "LE",
+    "domains": [
+      "战争"
+    ],
+    "province": "战争与不和之神",
+    "symbol": "六支向下的箭矢形成扇形",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 LE · 领域 战争 · 圣徽 六支向下的箭矢形成扇形"
+  },
+  {
+    "id": "phb:deity:heironeous-greyhawk",
+    "type": "deity",
+    "name": "海若尼斯",
+    "name_en": "Heironeous",
+    "pantheon": "灰鹰",
+    "alignment": "LG",
+    "domains": [
+      "战争"
+    ],
+    "province": "骑士和勇气之神",
+    "symbol": "一束闪电",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 LG · 领域 战争 · 圣徽 一束闪电"
+  },
+  {
+    "id": "phb:deity:kord-greyhawk",
+    "type": "deity",
+    "name": "寇德",
+    "name_en": "Kord",
+    "pantheon": "灰鹰",
+    "alignment": "CG",
+    "domains": [
+      "风暴",
+      "战争"
+    ],
+    "province": "运动和体育之神",
+    "symbol": "从中间散开的四支矛或四把硬头锤",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 CG · 领域 风暴/战争 · 圣徽 从中间散开的四支矛或四把硬头锤"
+  },
+  {
+    "id": "phb:deity:rao-greyhawk",
+    "type": "deity",
+    "name": "拉奥",
+    "name_en": "Rao",
+    "pantheon": "灰鹰",
+    "alignment": "LG",
+    "domains": [
+      "知识",
+      "和平"
+    ],
+    "province": "和平和理智之神",
+    "symbol": "白色的心",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 LG · 领域 知识/和平 · 圣徽 白色的心"
+  },
+  {
+    "id": "phb:deity:ralishaz-greyhawk",
+    "type": "deity",
+    "name": "罗尔刹",
+    "name_en": "Ralishaz",
+    "pantheon": "灰鹰",
+    "alignment": "CN",
+    "domains": [
+      "诡术"
+    ],
+    "province": "厄运和疯狂之神",
+    "symbol": "三根算命用的骨棒",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 CN · 领域 诡术 · 圣徽 三根算命用的骨棒"
+  },
+  {
+    "id": "phb:deity:nerull-greyhawk",
+    "type": "deity",
+    "name": "奈落",
+    "name_en": "Nerull",
+    "pantheon": "灰鹰",
+    "alignment": "NE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "死亡之神",
+    "symbol": "拿着镰刀或巨镰的骷髅",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 NE · 领域 死亡 · 圣徽 拿着镰刀或巨镰的骷髅"
+  },
+  {
+    "id": "phb:deity:obad-hai-greyhawk",
+    "type": "deity",
+    "name": "欧拜·亥-",
+    "name_en": "Obad-Hai",
+    "pantheon": "灰鹰",
+    "alignment": "N",
+    "domains": [
+      "自然"
+    ],
+    "province": "自然之神",
+    "symbol": "橡叶和橡子",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 N · 领域 自然 · 圣徽 橡叶和橡子"
+  },
+  {
+    "id": "phb:deity:pelor-greyhawk",
+    "type": "deity",
+    "name": "培罗",
+    "name_en": "Pelor",
+    "pantheon": "灰鹰",
+    "alignment": "NG",
+    "domains": [
+      "生命",
+      "光明"
+    ],
+    "province": "太阳和医疗之神",
+    "symbol": "太阳",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 NG · 领域 生命/光明 · 圣徽 太阳"
+  },
+  {
+    "id": "phb:deity:tharizdun-greyhawk",
+    "type": "deity",
+    "name": "萨瑞兹顿",
+    "name_en": "Tharizdun",
+    "pantheon": "灰鹰",
+    "alignment": "CE",
+    "domains": [
+      "诡术"
+    ],
+    "province": "永恒黑暗之神",
+    "symbol": "黑暗螺旋或倒金字塔",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 CE · 领域 诡术 · 圣徽 黑暗螺旋或倒金字塔"
+  },
+  {
+    "id": "phb:deity:celestian-greyhawk",
+    "type": "deity",
+    "name": "塞莱斯汀",
+    "name_en": "Celestian",
+    "pantheon": "灰鹰",
+    "alignment": "N",
+    "domains": [
+      "知识",
+      "暮光"
+    ],
+    "province": "繁星和流浪之神",
+    "symbol": "拱形的七星，位于一个圆环内部",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 N · 领域 知识/暮光 · 圣徽 拱形的七星，位于一个圆环内部"
+  },
+  {
+    "id": "phb:deity:st-cuthbert-greyhawk",
+    "type": "deity",
+    "name": "圣库斯伯特.",
+    "name_en": "St. Cuthbert",
+    "pantheon": "灰鹰",
+    "alignment": "LN",
+    "domains": [
+      "知识"
+    ],
+    "province": "常识和热情之神",
+    "symbol": "星耀中的圆环",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 LN · 领域 知识 · 圣徽 星耀中的圆环"
+  },
+  {
+    "id": "phb:deity:trithereon-greyhawk",
+    "type": "deity",
+    "name": "泰德里昂",
+    "name_en": "Trithereon",
+    "pantheon": "灰鹰",
+    "alignment": "CG",
+    "domains": [
+      "战争"
+    ],
+    "province": "自由和报应之神",
+    "symbol": "三曲腿符文",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 CG · 领域 战争 · 圣徽 三曲腿符文"
+  },
+  {
+    "id": "phb:deity:wee-jas-greyhawk",
+    "type": "deity",
+    "name": "维婕丝",
+    "name_en": "Wee Jas",
+    "pantheon": "灰鹰",
+    "alignment": "LN",
+    "domains": [
+      "死亡",
+      "坟墓",
+      "知识",
+      "秩序",
+      "奥秘"
+    ],
+    "province": "魔法和死亡女神",
+    "symbol": "火球前的红色头骨",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 LN · 领域 死亡/坟墓/知识/秩序/奥秘 · 圣徽 火球前的红色头骨"
+  },
+  {
+    "id": "phb:deity:vecna-greyhawk",
+    "type": "deity",
+    "name": "维克那",
+    "name_en": "Vecna",
+    "pantheon": "灰鹰",
+    "alignment": "NE",
+    "domains": [
+      "知识",
+      "奥秘"
+    ],
+    "province": "邪恶秘密之神",
+    "symbol": "掌心有眼的手",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 NE · 领域 知识/奥秘 · 圣徽 掌心有眼的手"
+  },
+  {
+    "id": "phb:deity:olidammara-greyhawk",
+    "type": "deity",
+    "name": "渥利达马拉",
+    "name_en": "Olidammara",
+    "pantheon": "灰鹰",
+    "alignment": "CN",
+    "domains": [
+      "诡术"
+    ],
+    "province": "狂欢之神",
+    "symbol": "欢笑的面具",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 CN · 领域 诡术 · 圣徽 欢笑的面具"
+  },
+  {
+    "id": "phb:deity:ulaa-greyhawk",
+    "type": "deity",
+    "name": "舞拉",
+    "name_en": "Ulaa",
+    "pantheon": "灰鹰",
+    "alignment": "LG",
+    "domains": [
+      "生命",
+      "战争"
+    ],
+    "province": "山丘女神",
+    "symbol": "山中心有一个圆圈",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 LG · 领域 生命/战争 · 圣徽 山中心有一个圆圈"
+  },
+  {
+    "id": "phb:deity:istus-greyhawk",
+    "type": "deity",
+    "name": "伊斯图丝",
+    "name_en": "Istus",
+    "pantheon": "灰鹰",
+    "alignment": "N",
+    "domains": [
+      "知识"
+    ],
+    "province": "命运女神",
+    "symbol": "有三股线的织工纺锤",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 N · 领域 知识 · 圣徽 有三股线的织工纺锤"
+  },
+  {
+    "id": "phb:deity:incabulos-greyhawk",
+    "type": "deity",
+    "name": "英凯布居罗斯",
+    "name_en": "Incabulos",
+    "pantheon": "灰鹰",
+    "alignment": "NE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "瘟疫和饥荒之神",
+    "symbol": "水平菱形的爬行动物眼睛",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "灰鹰 · 阵营 NE · 领域 死亡 · 圣徽 水平菱形的爬行动物眼睛"
+  },
+  {
+    "id": "phb:deity:arawn-celtic",
+    "type": "deity",
+    "name": "安雯",
+    "name_en": "Arawn",
+    "pantheon": "凯尔特",
+    "alignment": "NE",
+    "domains": [
+      "生命",
+      "死亡"
+    ],
+    "province": "生命和死亡之神",
+    "symbol": "灰色背景的黑星",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 NE · 领域 生命/死亡 · 圣徽 灰色背景的黑星"
+  },
+  {
+    "id": "phb:deity:belenus-celtic",
+    "type": "deity",
+    "name": "巴莱纳斯",
+    "name_en": "Belenus",
+    "pantheon": "凯尔特",
+    "alignment": "NG",
+    "domains": [
+      "光明"
+    ],
+    "province": "太阳、光明和温暖之神",
+    "symbol": "太阳盘与立石",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 NG · 领域 光明 · 圣徽 太阳盘与立石"
+  },
+  {
+    "id": "phb:deity:brigantia-celtic",
+    "type": "deity",
+    "name": "布雷根提亚",
+    "name_en": "Brigantia",
+    "pantheon": "凯尔特",
+    "alignment": "NG",
+    "domains": [
+      "生命"
+    ],
+    "province": "河流和畜牧女神",
+    "symbol": "天桥",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 NG · 领域 生命 · 圣徽 天桥"
+  },
+  {
+    "id": "phb:deity:the-daghdha-celtic",
+    "type": "deity",
+    "name": "达格达",
+    "name_en": "The Daghdha",
+    "pantheon": "凯尔特",
+    "alignment": "CG",
+    "domains": [
+      "自然",
+      "诡术"
+    ],
+    "province": "天气和作物之神",
+    "symbol": "冒泡的大锅或盾牌",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 CG · 领域 自然/诡术 · 圣徽 冒泡的大锅或盾牌"
+  },
+  {
+    "id": "phb:deity:diancecht-celtic",
+    "type": "deity",
+    "name": "迪安斯彻特",
+    "name_en": "Diancecht",
+    "pantheon": "凯尔特",
+    "alignment": "LG",
+    "domains": [
+      "生命"
+    ],
+    "province": "医药和医疗之神",
+    "symbol": "交叉的橡树枝和槲寄生",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 LG · 领域 生命 · 圣徽 交叉的橡树枝和槲寄生"
+  },
+  {
+    "id": "phb:deity:dunatis-celtic",
+    "type": "deity",
+    "name": "杜纳提斯",
+    "name_en": "Dunatis",
+    "pantheon": "凯尔特",
+    "alignment": "N",
+    "domains": [
+      "自然"
+    ],
+    "province": "山峦和山峰之神",
+    "symbol": "红日照耀的山峰",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 N · 领域 自然 · 圣徽 红日照耀的山峰"
+  },
+  {
+    "id": "phb:deity:goibhniu-celtic",
+    "type": "deity",
+    "name": "戈伊布尼乌",
+    "name_en": "Goibhniu",
+    "pantheon": "凯尔特",
+    "alignment": "NG",
+    "domains": [
+      "锻造",
+      "知识",
+      "生命"
+    ],
+    "province": "工匠和医疗之神",
+    "symbol": "剑上的巨锤",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 NG · 领域 锻造/知识/生命 · 圣徽 剑上的巨锤"
+  },
+  {
+    "id": "phb:deity:lugh-celtic",
+    "type": "deity",
+    "name": "鲁格",
+    "name_en": "Lugh",
+    "pantheon": "凯尔特",
+    "alignment": "CN",
+    "domains": [
+      "知识",
+      "生命"
+    ],
+    "province": "艺术、旅行和商贸之神",
+    "symbol": "一双长手",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 CN · 领域 知识/生命 · 圣徽 一双长手"
+  },
+  {
+    "id": "phb:deity:manannan-mac-lir-celtic",
+    "type": "deity",
+    "name": "马纳南马克利尔",
+    "name_en": "Manannan mac Lir",
+    "pantheon": "凯尔特",
+    "alignment": "LN",
+    "domains": [
+      "自然",
+      "风暴"
+    ],
+    "province": "海和海洋生物之神",
+    "symbol": "绿色背景的白浪",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 LN · 领域 自然/风暴 · 圣徽 绿色背景的白浪"
+  },
+  {
+    "id": "phb:deity:math-mathonwy-celtic",
+    "type": "deity",
+    "name": "麦斯·麦斯维恩",
+    "name_en": "Math Mathonwy",
+    "pantheon": "凯尔特",
+    "alignment": "NE",
+    "domains": [
+      "知识",
+      "奥秘"
+    ],
+    "province": "魔法之神",
+    "symbol": "法杖",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 NE · 领域 知识/奥秘 · 圣徽 法杖"
+  },
+  {
+    "id": "phb:deity:morrigan-celtic",
+    "type": "deity",
+    "name": "莫瑞甘",
+    "name_en": "Morrigan",
+    "pantheon": "凯尔特",
+    "alignment": "CE",
+    "domains": [
+      "战争"
+    ],
+    "province": "战斗女神",
+    "symbol": "两把交叉的矛",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 CE · 领域 战争 · 圣徽 两把交叉的矛"
+  },
+  {
+    "id": "phb:deity:nuada-celtic",
+    "type": "deity",
+    "name": "努阿达",
+    "name_en": "Nuada",
+    "pantheon": "凯尔特",
+    "alignment": "N",
+    "domains": [
+      "战争",
+      "秩序"
+    ],
+    "province": "战争和勇士之神",
+    "symbol": "黑色背景的银手",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 N · 领域 战争/秩序 · 圣徽 黑色背景的银手"
+  },
+  {
+    "id": "phb:deity:oghma-celtic",
+    "type": "deity",
+    "name": "欧格玛",
+    "name_en": "Oghma",
+    "pantheon": "凯尔特",
+    "alignment": "NG",
+    "domains": [
+      "知识"
+    ],
+    "province": "演讲和写作之神",
+    "symbol": "展开的卷轴",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 NG · 领域 知识 · 圣徽 展开的卷轴"
+  },
+  {
+    "id": "phb:deity:silvanus-celtic",
+    "type": "deity",
+    "name": "西凡那斯",
+    "name_en": "Silvanus",
+    "pantheon": "凯尔特",
+    "alignment": "N",
+    "domains": [
+      "自然"
+    ],
+    "province": "自然和森林之神",
+    "symbol": "夏日橡树",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "凯尔特 · 阵营 N · 领域 自然 · 圣徽 夏日橡树"
+  },
+  {
+    "id": "phb:deity:branchala-dragonlance",
+    "type": "deity",
+    "name": "布兰查拉",
+    "name_en": "Branchala",
+    "pantheon": "龙枪",
+    "alignment": "NG",
+    "domains": [
+      "光明"
+    ],
+    "province": "音乐之神",
+    "symbol": "吟游诗人的竖琴",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 NG · 领域 光明 · 圣徽 吟游诗人的竖琴"
+  },
+  {
+    "id": "phb:deity:habbakuk-dragonlance",
+    "type": "deity",
+    "name": "哈巴库克",
+    "name_en": "Habbakuk",
+    "pantheon": "龙枪",
+    "alignment": "NG",
+    "domains": [
+      "自然",
+      "风暴"
+    ],
+    "province": "动物和海洋之神",
+    "symbol": "蓝色小鸟",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 NG · 领域 自然/风暴 · 圣徽 蓝色小鸟"
+  },
+  {
+    "id": "phb:deity:gilean-dragonlance",
+    "type": "deity",
+    "name": "吉立安",
+    "name_en": "Gilean",
+    "pantheon": "龙枪",
+    "alignment": "N",
+    "domains": [
+      "知识"
+    ],
+    "province": "知识之神",
+    "symbol": "打开的书",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 N · 领域 知识 · 圣徽 打开的书"
+  },
+  {
+    "id": "phb:deity:chemosh-dragonlance",
+    "type": "deity",
+    "name": "凯魔须",
+    "name_en": "Chemosh",
+    "pantheon": "龙枪",
+    "alignment": "LE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "不死生物之神",
+    "symbol": "黄色颅骨",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 LE · 领域 死亡 · 圣徽 黄色颅骨"
+  },
+  {
+    "id": "phb:deity:reorx-dragonlance",
+    "type": "deity",
+    "name": "李奥克斯",
+    "name_en": "Reorx",
+    "pantheon": "龙枪",
+    "alignment": "N",
+    "domains": [
+      "锻造",
+      "知识"
+    ],
+    "province": "工艺之神",
+    "symbol": "锻锤",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 N · 领域 锻造/知识 · 圣徽 锻锤"
+  },
+  {
+    "id": "phb:deity:majere-dragonlance",
+    "type": "deity",
+    "name": "马哲里",
+    "name_en": "Majere",
+    "pantheon": "龙枪",
+    "alignment": "LG",
+    "domains": [
+      "知识",
+      "秩序"
+    ],
+    "province": "冥想和秩序之神",
+    "symbol": "铜蜘蛛",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 LG · 领域 知识/秩序 · 圣徽 铜蜘蛛"
+  },
+  {
+    "id": "phb:deity:mishakal-dragonlance",
+    "type": "deity",
+    "name": "米莎凯",
+    "name_en": "Mishakal",
+    "pantheon": "龙枪",
+    "alignment": "LG",
+    "domains": [
+      "知识",
+      "生命",
+      "暮光"
+    ],
+    "province": "医疗女神",
+    "symbol": "蓝色无限符号",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 LG · 领域 知识/生命/暮光 · 圣徽 蓝色无限符号"
+  },
+  {
+    "id": "phb:deity:morgion-dragonlance",
+    "type": "deity",
+    "name": "魔吉安",
+    "name_en": "Morgion",
+    "pantheon": "龙枪",
+    "alignment": "NE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "疾病和秘密之神",
+    "symbol": "兜帽下红色的双眼",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 NE · 领域 死亡 · 圣徽 兜帽下红色的双眼"
+  },
+  {
+    "id": "phb:deity:lunitari-dragonlance",
+    "type": "deity",
+    "name": "努林塔瑞",
+    "name_en": "Lunitari",
+    "pantheon": "龙枪",
+    "alignment": "N",
+    "domains": [
+      "奥秘"
+    ],
+    "province": "中立魔法女神",
+    "symbol": "红色圆形或球形",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 N · 领域 奥秘 · 圣徽 红色圆形或球形"
+  },
+  {
+    "id": "phb:deity:nuitari-dragonlance",
+    "type": "deity",
+    "name": "努塔瑞",
+    "name_en": "Nuitari",
+    "pantheon": "龙枪",
+    "alignment": "LE",
+    "domains": [
+      "奥秘"
+    ],
+    "province": "邪恶魔法之神",
+    "symbol": "黑色圆形或球形",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 LE · 领域 奥秘 · 圣徽 黑色圆形或球形"
+  },
+  {
+    "id": "phb:deity:paladine-dragonlance",
+    "type": "deity",
+    "name": "帕拉丁",
+    "name_en": "Paladine",
+    "pantheon": "龙枪",
+    "alignment": "LG",
+    "domains": [
+      "战争",
+      "和平"
+    ],
+    "province": "统治者和守护者之神",
+    "symbol": "银色三角",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 LG · 领域 战争/和平 · 圣徽 银色三角"
+  },
+  {
+    "id": "phb:deity:kiri-jolith-dragonlance",
+    "type": "deity",
+    "name": "奇力·裘理斯",
+    "name_en": "Kiri-Jolith",
+    "pantheon": "龙枪",
+    "alignment": "LG",
+    "domains": [
+      "战争"
+    ],
+    "province": "荣誉和战争之神",
+    "symbol": "野牛角",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 LG · 领域 战争 · 圣徽 野牛角"
+  },
+  {
+    "id": "phb:deity:chislev-dragonlance",
+    "type": "deity",
+    "name": "奇思洛夫",
+    "name_en": "Chislev",
+    "pantheon": "龙枪",
+    "alignment": "N",
+    "domains": [
+      "自然"
+    ],
+    "province": "自然女神",
+    "symbol": "羽毛",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 N · 领域 自然 · 圣徽 羽毛"
+  },
+  {
+    "id": "phb:deity:zeboim-dragonlance",
+    "type": "deity",
+    "name": "赛波音",
+    "name_en": "Zeboim",
+    "pantheon": "龙枪",
+    "alignment": "CE",
+    "domains": [
+      "风暴"
+    ],
+    "province": "海洋和风暴女神",
+    "symbol": "龟壳",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 CE · 领域 风暴 · 圣徽 龟壳"
+  },
+  {
+    "id": "phb:deity:sargonnas-dragonlance",
+    "type": "deity",
+    "name": "沙苟纳",
+    "name_en": "Sargonnas",
+    "pantheon": "龙枪",
+    "alignment": "LE",
+    "domains": [
+      "战争"
+    ],
+    "province": "复仇和火焰之神",
+    "symbol": "风格化的红色秃鹰",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 LE · 领域 战争 · 圣徽 风格化的红色秃鹰"
+  },
+  {
+    "id": "phb:deity:solinari-dragonlance",
+    "type": "deity",
+    "name": "索林那瑞",
+    "name_en": "Solinari",
+    "pantheon": "龙枪",
+    "alignment": "LG",
+    "domains": [
+      "奥秘"
+    ],
+    "province": "善良魔法之神",
+    "symbol": "白色圆形或球形",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 LG · 领域 奥秘 · 圣徽 白色圆形或球形"
+  },
+  {
+    "id": "phb:deity:takhisis-dragonlance",
+    "type": "deity",
+    "name": "塔克西丝",
+    "name_en": "Takhisis",
+    "pantheon": "龙枪",
+    "alignment": "LE",
+    "domains": [
+      "死亡"
+    ],
+    "province": "暗夜和憎恨女神",
+    "symbol": "黑色新月",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 LE · 领域 死亡 · 圣徽 黑色新月"
+  },
+  {
+    "id": "phb:deity:hiddukel-dragonlance",
+    "type": "deity",
+    "name": "西都凯",
+    "name_en": "Hiddukel",
+    "pantheon": "龙枪",
+    "alignment": "CE",
+    "domains": [
+      "诡术"
+    ],
+    "province": "谎言和贪婪之神",
+    "symbol": "破碎的天平",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 CE · 领域 诡术 · 圣徽 破碎的天平"
+  },
+  {
+    "id": "phb:deity:sirrion-dragonlance",
+    "type": "deity",
+    "name": "西历安",
+    "name_en": "Sirrion",
+    "pantheon": "龙枪",
+    "alignment": "N",
+    "domains": [
+      "自然"
+    ],
+    "province": "火焰和改变之神",
+    "symbol": "多彩火焰",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 N · 领域 自然 · 圣徽 多彩火焰"
+  },
+  {
+    "id": "phb:deity:shinare-dragonlance",
+    "type": "deity",
+    "name": "西那瑞",
+    "name_en": "Shinare",
+    "pantheon": "龙枪",
+    "alignment": "N",
+    "domains": [
+      "知识",
+      "诡术"
+    ],
+    "province": "财富和贸易女神",
+    "symbol": "狮鹫之翼",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 N · 领域 知识/诡术 · 圣徽 狮鹫之翼"
+  },
+  {
+    "id": "phb:deity:zivilyn-dragonlance",
+    "type": "deity",
+    "name": "亦为林",
+    "name_en": "Zivilyn",
+    "pantheon": "龙枪",
+    "alignment": "N",
+    "domains": [
+      "知识"
+    ],
+    "province": "智慧之神",
+    "symbol": "绿或金色的大树",
+    "source": {
+      "book": "PHB",
+      "page": 295,
+      "srd": false
+    },
+    "brief": "龙枪 · 阵营 N · 领域 知识 · 圣徽 绿或金色的大树"
+  },
+  {
+    "id": "phb:deity:apollo-greek",
+    "type": "deity",
+    "name": "阿波罗",
+    "name_en": "Apollo",
+    "pantheon": "希腊",
+    "alignment": "CG",
+    "domains": [
+      "知识",
+      "生命",
+      "光明"
+    ],
+    "province": "光明、音乐和医疗之神",
+    "symbol": "里拉琴",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 CG · 领域 知识/生命/光明 · 圣徽 里拉琴"
+  },
+  {
+    "id": "phb:deity:artemis-greek",
+    "type": "deity",
+    "name": "阿耳忒弥斯",
+    "name_en": "Artemis",
+    "pantheon": "希腊",
+    "alignment": "NG",
+    "domains": [
+      "生命",
+      "自然"
+    ],
+    "province": "狩猎和新生女神",
+    "symbol": "月盘上的弓和箭",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 NG · 领域 生命/自然 · 圣徽 月盘上的弓和箭"
+  },
+  {
+    "id": "phb:deity:aphrodite-greek",
+    "type": "deity",
+    "name": "阿芙洛狄忒",
+    "name_en": "Aphrodite",
+    "pantheon": "希腊",
+    "alignment": "CG",
+    "domains": [
+      "光明"
+    ],
+    "province": "爱与美的女神",
+    "symbol": "海贝",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 CG · 领域 光明 · 圣徽 海贝"
+  },
+  {
+    "id": "phb:deity:ares-greek",
+    "type": "deity",
+    "name": "阿瑞斯",
+    "name_en": "Ares",
+    "pantheon": "希腊",
+    "alignment": "CE",
+    "domains": [
+      "战争"
+    ],
+    "province": "战争和冲突之神",
+    "symbol": "矛",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 CE · 领域 战争 · 圣徽 矛"
+  },
+  {
+    "id": "phb:deity:poseidon-greek",
+    "type": "deity",
+    "name": "波塞冬",
+    "name_en": "Poseidon",
+    "pantheon": "希腊",
+    "alignment": "CN",
+    "domains": [
+      "风暴"
+    ],
+    "province": "海洋和地震之神",
+    "symbol": "三叉戟",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 CN · 领域 风暴 · 圣徽 三叉戟"
+  },
+  {
+    "id": "phb:deity:demeter-greek",
+    "type": "deity",
+    "name": "德墨忒尔",
+    "name_en": "Demeter",
+    "pantheon": "希腊",
+    "alignment": "NG",
+    "domains": [
+      "生命"
+    ],
+    "province": "农业女神",
+    "symbol": "母马头",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 NG · 领域 生命 · 圣徽 母马头"
+  },
+  {
+    "id": "phb:deity:dionysus-greek",
+    "type": "deity",
+    "name": "狄俄尼索斯",
+    "name_en": "Dionysus",
+    "pantheon": "希腊",
+    "alignment": "CN",
+    "domains": [
+      "生命"
+    ],
+    "province": "欢乐和美酒之神",
+    "symbol": "酒神手杖（带松果的手杖）",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 CN · 领域 生命 · 圣徽 酒神手杖（带松果的手杖）"
+  },
+  {
+    "id": "phb:deity:hades-greek",
+    "type": "deity",
+    "name": "哈迪斯",
+    "name_en": "Hades",
+    "pantheon": "希腊",
+    "alignment": "LE",
+    "domains": [
+      "死亡",
+      "坟墓"
+    ],
+    "province": "冥界之神",
+    "symbol": "黑公羊",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 LE · 领域 死亡/坟墓 · 圣徽 黑公羊"
+  },
+  {
+    "id": "phb:deity:hermes-greek",
+    "type": "deity",
+    "name": "赫尔墨斯",
+    "name_en": "Hermes",
+    "pantheon": "希腊",
+    "alignment": "CG",
+    "domains": [
+      "诡术"
+    ],
+    "province": "旅行和商贸之神",
+    "symbol": "神使节杖（带有翅膀和蛇）",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 CG · 领域 诡术 · 圣徽 神使节杖（带有翅膀和蛇）"
+  },
+  {
+    "id": "phb:deity:hephaestus-greek",
+    "type": "deity",
+    "name": "赫斐斯托斯",
+    "name_en": "Hephaestus",
+    "pantheon": "希腊",
+    "alignment": "NG",
+    "domains": [
+      "锻造",
+      "知识"
+    ],
+    "province": "工匠和手艺之神",
+    "symbol": "锤砧",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 NG · 领域 锻造/知识 · 圣徽 锤砧"
+  },
+  {
+    "id": "phb:deity:hecate-greek",
+    "type": "deity",
+    "name": "赫卡忒",
+    "name_en": "Hecate",
+    "pantheon": "希腊",
+    "alignment": "CE",
+    "domains": [
+      "知识",
+      "诡术",
+      "奥秘"
+    ],
+    "province": "魔法和月亮女神",
+    "symbol": "落月",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 CE · 领域 知识/诡术/奥秘 · 圣徽 落月"
+  },
+  {
+    "id": "phb:deity:hera-greek",
+    "type": "deity",
+    "name": "赫拉",
+    "name_en": "Hera",
+    "pantheon": "希腊",
+    "alignment": "CN",
+    "domains": [
+      "诡术"
+    ],
+    "province": "婚姻和阴谋女神",
+    "symbol": "孔雀羽毛扇",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 CN · 领域 诡术 · 圣徽 孔雀羽毛扇"
+  },
+  {
+    "id": "phb:deity:hercules-greek",
+    "type": "deity",
+    "name": "赫拉克利斯",
+    "name_en": "Hercules",
+    "pantheon": "希腊",
+    "alignment": "CG",
+    "domains": [
+      "风暴",
+      "战争"
+    ],
+    "province": "力量和冒险之神",
+    "symbol": "狮头",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 CG · 领域 风暴/战争 · 圣徽 狮头"
+  },
+  {
+    "id": "phb:deity:hestia-greek",
+    "type": "deity",
+    "name": "赫斯提亚",
+    "name_en": "Hestia",
+    "pantheon": "希腊",
+    "alignment": "NG",
+    "domains": [
+      "生命"
+    ],
+    "province": "家庭女神",
+    "symbol": "壁炉",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 NG · 领域 生命 · 圣徽 壁炉"
+  },
+  {
+    "id": "phb:deity:nike-greek",
+    "type": "deity",
+    "name": "尼刻",
+    "name_en": "Nike",
+    "pantheon": "希腊",
+    "alignment": "LN",
+    "domains": [
+      "战争"
+    ],
+    "province": "胜利女神",
+    "symbol": "有翼女子",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 LN · 领域 战争 · 圣徽 有翼女子"
+  },
+  {
+    "id": "phb:deity:pan-greek",
+    "type": "deity",
+    "name": "潘",
+    "name_en": "Pan",
+    "pantheon": "希腊",
+    "alignment": "CN",
+    "domains": [
+      "自然"
+    ],
+    "province": "自然之神",
+    "symbol": "潘神排箫",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 CN · 领域 自然 · 圣徽 潘神排箫"
+  },
+  {
+    "id": "phb:deity:tyche-greek",
+    "type": "deity",
+    "name": "提喀",
+    "name_en": "Tyche",
+    "pantheon": "希腊",
+    "alignment": "N",
+    "domains": [
+      "诡术"
+    ],
+    "province": "幸运女神",
+    "symbol": "红五芒星",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 N · 领域 诡术 · 圣徽 红五芒星"
+  },
+  {
+    "id": "phb:deity:athena-greek",
+    "type": "deity",
+    "name": "雅典娜",
+    "name_en": "Athena",
+    "pantheon": "希腊",
+    "alignment": "LG",
+    "domains": [
+      "知识",
+      "战争",
+      "秩序"
+    ],
+    "province": "智慧和文明女神",
+    "symbol": "猫头鹰",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 LG · 领域 知识/战争/秩序 · 圣徽 猫头鹰"
+  },
+  {
+    "id": "phb:deity:zeus-greek",
+    "type": "deity",
+    "name": "宙斯",
+    "name_en": "Zeus",
+    "pantheon": "希腊",
+    "alignment": "N",
+    "domains": [
+      "风暴"
+    ],
+    "province": "天空之神、众神的统治者",
+    "symbol": "握紧闪电的拳头",
+    "source": {
+      "book": "PHB",
+      "page": 298,
+      "srd": true
+    },
+    "brief": "希腊 · 阵营 N · 领域 风暴 · 圣徽 握紧闪电的拳头"
+  }
+]

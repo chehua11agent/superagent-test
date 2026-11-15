@@ -1,0 +1,915 @@
+[
+  {
+    "id": "phb:subclass:druid-circle-of-the-land",
+    "type": "subclass",
+    "name": "大地结社",
+    "name_en": "Circle of the Land",
+    "short_name": "大地",
+    "class": "phb:class:druid",
+    "class_name": "德鲁伊",
+    "features": [
+      "phb:feature:druid-circle-of-the-land-2-bonus-cantrip",
+      "phb:feature:druid-circle-of-the-land-2-circle-spells",
+      "phb:feature:druid-circle-of-the-land-2-natural-recovery",
+      "phb:feature:druid-circle-of-the-land-6-lands-stride",
+      "phb:feature:druid-circle-of-the-land-10-natures-ward",
+      "phb:feature:druid-circle-of-the-land-14-natures-sanctuary"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 68,
+      "srd": true
+    },
+    "brief": "德鲁伊 · 大地结社 · 6 项特性"
+  },
+  {
+    "id": "phb:subclass:druid-circle-of-the-moon",
+    "type": "subclass",
+    "name": "月亮结社",
+    "name_en": "Circle of the Moon",
+    "short_name": "月亮",
+    "class": "phb:class:druid",
+    "class_name": "德鲁伊",
+    "features": [
+      "phb:feature:druid-circle-of-the-moon-2-circle-forms",
+      "phb:feature:druid-circle-of-the-moon-2-combat-wild-shape",
+      "phb:feature:druid-circle-of-the-moon-6-primal-strike",
+      "phb:feature:druid-circle-of-the-moon-10-elemental-wild-shape",
+      "phb:feature:druid-circle-of-the-moon-14-thousand-forms"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 69,
+      "srd": false
+    },
+    "brief": "德鲁伊 · 月亮结社 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:wizard-school-of-abjuration",
+    "type": "subclass",
+    "name": "防护学派",
+    "name_en": "School of Abjuration",
+    "short_name": "防护",
+    "class": "phb:class:wizard",
+    "class_name": "法师",
+    "features": [
+      "phb:feature:wizard-school-of-abjuration-2-abjuration-savant",
+      "phb:feature:wizard-school-of-abjuration-2-arcane-ward",
+      "phb:feature:wizard-school-of-abjuration-6-projected-ward",
+      "phb:feature:wizard-school-of-abjuration-10-improved-abjuration",
+      "phb:feature:wizard-school-of-abjuration-14-spell-resistance"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 115,
+      "srd": false
+    },
+    "brief": "法师 · 防护学派 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:wizard-school-of-conjuration",
+    "type": "subclass",
+    "name": "咒法学派",
+    "name_en": "School of Conjuration",
+    "short_name": "咒法",
+    "class": "phb:class:wizard",
+    "class_name": "法师",
+    "features": [
+      "phb:feature:wizard-school-of-conjuration-2-conjuration-savant",
+      "phb:feature:wizard-school-of-conjuration-2-minor-conjuration",
+      "phb:feature:wizard-school-of-conjuration-6-benign-transposition",
+      "phb:feature:wizard-school-of-conjuration-10-focused-conjuration",
+      "phb:feature:wizard-school-of-conjuration-14-durable-summons"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 116,
+      "srd": false
+    },
+    "brief": "法师 · 咒法学派 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:wizard-school-of-divination",
+    "type": "subclass",
+    "name": "预言学派",
+    "name_en": "School of Divination",
+    "short_name": "预言",
+    "class": "phb:class:wizard",
+    "class_name": "法师",
+    "features": [
+      "phb:feature:wizard-school-of-divination-2-divination-savant",
+      "phb:feature:wizard-school-of-divination-2-portent",
+      "phb:feature:wizard-school-of-divination-6-expert-divination",
+      "phb:feature:wizard-school-of-divination-10-the-third-eye",
+      "phb:feature:wizard-school-of-divination-14-greater-portent"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 116,
+      "srd": false
+    },
+    "brief": "法师 · 预言学派 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:wizard-school-of-enchantment",
+    "type": "subclass",
+    "name": "惑控学派",
+    "name_en": "School of Enchantment",
+    "short_name": "惑控",
+    "class": "phb:class:wizard",
+    "class_name": "法师",
+    "features": [
+      "phb:feature:wizard-school-of-enchantment-2-enchantment-savant",
+      "phb:feature:wizard-school-of-enchantment-2-hypnotic-gaze",
+      "phb:feature:wizard-school-of-enchantment-6-instinctive-charm",
+      "phb:feature:wizard-school-of-enchantment-10-split-enchantment",
+      "phb:feature:wizard-school-of-enchantment-14-alter-memories"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 117,
+      "srd": false
+    },
+    "brief": "法师 · 惑控学派 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:wizard-school-of-evocation",
+    "type": "subclass",
+    "name": "塑能学派",
+    "name_en": "School of Evocation",
+    "short_name": "塑能",
+    "class": "phb:class:wizard",
+    "class_name": "法师",
+    "features": [
+      "phb:feature:wizard-school-of-evocation-2-evocation-savant",
+      "phb:feature:wizard-school-of-evocation-2-sculpt-spells",
+      "phb:feature:wizard-school-of-evocation-6-potent-cantrip",
+      "phb:feature:wizard-school-of-evocation-10-empowered-evocation",
+      "phb:feature:wizard-school-of-evocation-14-overchannel"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 117,
+      "srd": true
+    },
+    "brief": "法师 · 塑能学派 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:wizard-school-of-illusion",
+    "type": "subclass",
+    "name": "幻术学派",
+    "name_en": "School of Illusion",
+    "short_name": "幻术",
+    "class": "phb:class:wizard",
+    "class_name": "法师",
+    "features": [
+      "phb:feature:wizard-school-of-illusion-2-illusion-savant",
+      "phb:feature:wizard-school-of-illusion-2-improved-minor-illusion",
+      "phb:feature:wizard-school-of-illusion-6-malleable-illusions",
+      "phb:feature:wizard-school-of-illusion-10-illusory-self",
+      "phb:feature:wizard-school-of-illusion-14-illusory-reality"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 118,
+      "srd": false
+    },
+    "brief": "法师 · 幻术学派 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:wizard-school-of-necromancy",
+    "type": "subclass",
+    "name": "死灵学派",
+    "name_en": "School of Necromancy",
+    "short_name": "死灵",
+    "class": "phb:class:wizard",
+    "class_name": "法师",
+    "features": [
+      "phb:feature:wizard-school-of-necromancy-2-grim-harvest",
+      "phb:feature:wizard-school-of-necromancy-2-necromancy-savant",
+      "phb:feature:wizard-school-of-necromancy-6-undead-thralls",
+      "phb:feature:wizard-school-of-necromancy-10-inured-to-undeath",
+      "phb:feature:wizard-school-of-necromancy-14-command-undead"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 118,
+      "srd": false
+    },
+    "brief": "法师 · 死灵学派 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:wizard-school-of-transmutation",
+    "type": "subclass",
+    "name": "变化学派",
+    "name_en": "School of Transmutation",
+    "short_name": "变化",
+    "class": "phb:class:wizard",
+    "class_name": "法师",
+    "features": [
+      "phb:feature:wizard-school-of-transmutation-2-minor-alchemy",
+      "phb:feature:wizard-school-of-transmutation-2-transmutation-savant",
+      "phb:feature:wizard-school-of-transmutation-6-transmuters-stone",
+      "phb:feature:wizard-school-of-transmutation-10-shapechanger",
+      "phb:feature:wizard-school-of-transmutation-14-master-transmuter"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 119,
+      "srd": false
+    },
+    "brief": "法师 · 变化学派 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:warlock-the-archfey",
+    "type": "subclass",
+    "name": "至高妖精",
+    "name_en": "The Archfey",
+    "short_name": "至高妖精",
+    "class": "phb:class:warlock",
+    "class_name": "魔契师",
+    "features": [
+      "phb:feature:warlock-the-archfey-1-fey-presence",
+      "phb:feature:warlock-the-archfey-6-misty-escape",
+      "phb:feature:warlock-the-archfey-10-beguiling-defenses",
+      "phb:feature:warlock-the-archfey-14-dark-delirium"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 108,
+      "srd": false
+    },
+    "brief": "魔契师 · 至高妖精 · 4 项特性"
+  },
+  {
+    "id": "phb:subclass:warlock-the-fiend",
+    "type": "subclass",
+    "name": "邪魔宗主",
+    "name_en": "The Fiend",
+    "short_name": "邪魔",
+    "class": "phb:class:warlock",
+    "class_name": "魔契师",
+    "features": [
+      "phb:feature:warlock-the-fiend-1-dark-ones-blessing",
+      "phb:feature:warlock-the-fiend-6-dark-ones-own-luck",
+      "phb:feature:warlock-the-fiend-10-fiendish-resilience",
+      "phb:feature:warlock-the-fiend-14-hurl-through-hell"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 109,
+      "srd": true
+    },
+    "brief": "魔契师 · 邪魔宗主 · 4 项特性"
+  },
+  {
+    "id": "phb:subclass:warlock-the-great-old-one",
+    "type": "subclass",
+    "name": "旧日支配者宗主",
+    "name_en": "The Great Old One",
+    "short_name": "旧日支配者",
+    "class": "phb:class:warlock",
+    "class_name": "魔契师",
+    "features": [
+      "phb:feature:warlock-the-great-old-one-1-awakened-mind",
+      "phb:feature:warlock-the-great-old-one-6-entropic-ward",
+      "phb:feature:warlock-the-great-old-one-10-thought-shield",
+      "phb:feature:warlock-the-great-old-one-14-create-thrall"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 109,
+      "srd": false
+    },
+    "brief": "魔契师 · 旧日支配者宗主 · 4 项特性"
+  },
+  {
+    "id": "phb:subclass:cleric-knowledge-domain",
+    "type": "subclass",
+    "name": "知识领域",
+    "name_en": "Knowledge Domain",
+    "short_name": "知识",
+    "class": "phb:class:cleric",
+    "class_name": "牧师",
+    "features": [
+      "phb:feature:cleric-knowledge-domain-1-blessings-of-knowledge",
+      "phb:feature:cleric-knowledge-domain-2-channel-divinity-knowledge-of-the-ages",
+      "phb:feature:cleric-knowledge-domain-6-channel-divinity-read-thoughts",
+      "phb:feature:cleric-knowledge-domain-8-potent-spellcasting",
+      "phb:feature:cleric-knowledge-domain-17-visions-of-the-past"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 59,
+      "srd": false
+    },
+    "brief": "牧师 · 知识领域 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:cleric-life-domain",
+    "type": "subclass",
+    "name": "生命领域",
+    "name_en": "Life Domain",
+    "short_name": "生命",
+    "class": "phb:class:cleric",
+    "class_name": "牧师",
+    "features": [
+      "phb:feature:cleric-life-domain-1-bonus-proficiency",
+      "phb:feature:cleric-life-domain-1-disciple-of-life",
+      "phb:feature:cleric-life-domain-2-channel-divinity-preserve-life",
+      "phb:feature:cleric-life-domain-6-blessed-healer",
+      "phb:feature:cleric-life-domain-8-divine-strike",
+      "phb:feature:cleric-life-domain-17-supreme-healing"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 60,
+      "srd": true
+    },
+    "brief": "牧师 · 生命领域 · 6 项特性"
+  },
+  {
+    "id": "phb:subclass:cleric-light-domain",
+    "type": "subclass",
+    "name": "光明领域",
+    "name_en": "Light Domain",
+    "short_name": "光明",
+    "class": "phb:class:cleric",
+    "class_name": "牧师",
+    "features": [
+      "phb:feature:cleric-light-domain-1-bonus-cantrip",
+      "phb:feature:cleric-light-domain-1-warding-flare",
+      "phb:feature:cleric-light-domain-2-channel-divinity-radiance-of-the-dawn",
+      "phb:feature:cleric-light-domain-6-improved-flare",
+      "phb:feature:cleric-light-domain-8-potent-spellcasting",
+      "phb:feature:cleric-light-domain-17-corona-of-light"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 60,
+      "srd": false
+    },
+    "brief": "牧师 · 光明领域 · 6 项特性"
+  },
+  {
+    "id": "phb:subclass:cleric-nature-domain",
+    "type": "subclass",
+    "name": "自然领域",
+    "name_en": "Nature Domain",
+    "short_name": "自然",
+    "class": "phb:class:cleric",
+    "class_name": "牧师",
+    "features": [
+      "phb:feature:cleric-nature-domain-1-acolyte-of-nature",
+      "phb:feature:cleric-nature-domain-1-bonus-proficiency",
+      "phb:feature:cleric-nature-domain-2-channel-divinity-charm-animals-and-plants",
+      "phb:feature:cleric-nature-domain-6-dampen-elements",
+      "phb:feature:cleric-nature-domain-8-divine-strike",
+      "phb:feature:cleric-nature-domain-17-master-of-nature"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 61,
+      "srd": false
+    },
+    "brief": "牧师 · 自然领域 · 6 项特性"
+  },
+  {
+    "id": "phb:subclass:cleric-tempest-domain",
+    "type": "subclass",
+    "name": "风暴领域",
+    "name_en": "Tempest Domain",
+    "short_name": "风暴",
+    "class": "phb:class:cleric",
+    "class_name": "牧师",
+    "features": [
+      "phb:feature:cleric-tempest-domain-1-bonus-proficiencies",
+      "phb:feature:cleric-tempest-domain-1-wrath-of-the-storm",
+      "phb:feature:cleric-tempest-domain-2-channel-divinity-destructive-wrath",
+      "phb:feature:cleric-tempest-domain-6-thunderbolt-strike",
+      "phb:feature:cleric-tempest-domain-8-divine-strike",
+      "phb:feature:cleric-tempest-domain-17-stormborn"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 62,
+      "srd": false
+    },
+    "brief": "牧师 · 风暴领域 · 6 项特性"
+  },
+  {
+    "id": "phb:subclass:cleric-trickery-domain",
+    "type": "subclass",
+    "name": "诡术领域",
+    "name_en": "Trickery Domain",
+    "short_name": "诡术",
+    "class": "phb:class:cleric",
+    "class_name": "牧师",
+    "features": [
+      "phb:feature:cleric-trickery-domain-1-blessing-of-the-trickster",
+      "phb:feature:cleric-trickery-domain-2-channel-divinity-invoke-duplicity",
+      "phb:feature:cleric-trickery-domain-6-channel-divinity-cloak-of-shadows",
+      "phb:feature:cleric-trickery-domain-8-divine-strike",
+      "phb:feature:cleric-trickery-domain-17-improved-duplicity"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 62,
+      "srd": false
+    },
+    "brief": "牧师 · 诡术领域 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:cleric-war-domain",
+    "type": "subclass",
+    "name": "战争领域",
+    "name_en": "War Domain",
+    "short_name": "战争",
+    "class": "phb:class:cleric",
+    "class_name": "牧师",
+    "features": [
+      "phb:feature:cleric-war-domain-1-bonus-proficiencies",
+      "phb:feature:cleric-war-domain-1-war-priest",
+      "phb:feature:cleric-war-domain-2-channel-divinity-guided-strike",
+      "phb:feature:cleric-war-domain-6-channel-divinity-war-gods-blessing",
+      "phb:feature:cleric-war-domain-8-divine-strike",
+      "phb:feature:cleric-war-domain-17-avatar-of-battle"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 63,
+      "srd": false
+    },
+    "brief": "牧师 · 战争领域 · 6 项特性"
+  },
+  {
+    "id": "phb:subclass:paladin-oath-of-devotion",
+    "type": "subclass",
+    "name": "奉献之誓",
+    "name_en": "Oath of Devotion",
+    "short_name": "奉献",
+    "class": "phb:class:paladin",
+    "class_name": "圣武士",
+    "features": [
+      "phb:feature:paladin-oath-of-devotion-3-channel-divinity",
+      "phb:feature:paladin-oath-of-devotion-3-oath-spells",
+      "phb:feature:paladin-oath-of-devotion-3-sacred-weapon",
+      "phb:feature:paladin-oath-of-devotion-3-tenets-of-devotion",
+      "phb:feature:paladin-oath-of-devotion-3-turn-the-unholy",
+      "phb:feature:paladin-oath-of-devotion-7-aura-of-devotion",
+      "phb:feature:paladin-oath-of-devotion-15-purity-of-spirit",
+      "phb:feature:paladin-oath-of-devotion-20-holy-nimbus"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 85,
+      "srd": true
+    },
+    "brief": "圣武士 · 奉献之誓 · 8 项特性"
+  },
+  {
+    "id": "phb:subclass:paladin-oath-of-the-ancients",
+    "type": "subclass",
+    "name": "古贤之誓",
+    "name_en": "Oath of the Ancients",
+    "short_name": "古贤",
+    "class": "phb:class:paladin",
+    "class_name": "圣武士",
+    "features": [
+      "phb:feature:paladin-oath-of-the-ancients-3-channel-divinity",
+      "phb:feature:paladin-oath-of-the-ancients-3-natures-wrath",
+      "phb:feature:paladin-oath-of-the-ancients-3-oath-spells",
+      "phb:feature:paladin-oath-of-the-ancients-3-tenets-of-the-ancients",
+      "phb:feature:paladin-oath-of-the-ancients-3-turn-the-faithless",
+      "phb:feature:paladin-oath-of-the-ancients-7-aura-of-warding",
+      "phb:feature:paladin-oath-of-the-ancients-15-undying-sentinel",
+      "phb:feature:paladin-oath-of-the-ancients-20-elder-champion"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 86,
+      "srd": false
+    },
+    "brief": "圣武士 · 古贤之誓 · 8 项特性"
+  },
+  {
+    "id": "phb:subclass:paladin-oath-of-vengeance",
+    "type": "subclass",
+    "name": "复仇之誓",
+    "name_en": "Oath of Vengeance",
+    "short_name": "复仇",
+    "class": "phb:class:paladin",
+    "class_name": "圣武士",
+    "features": [
+      "phb:feature:paladin-oath-of-vengeance-3-abjure-enemy",
+      "phb:feature:paladin-oath-of-vengeance-3-channel-divinity",
+      "phb:feature:paladin-oath-of-vengeance-3-oath-spells",
+      "phb:feature:paladin-oath-of-vengeance-3-tenets-of-vengeance",
+      "phb:feature:paladin-oath-of-vengeance-3-vow-of-enmity",
+      "phb:feature:paladin-oath-of-vengeance-7-relentless-avenger",
+      "phb:feature:paladin-oath-of-vengeance-15-soul-of-vengeance",
+      "phb:feature:paladin-oath-of-vengeance-20-avenging-angel"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 87,
+      "srd": false
+    },
+    "brief": "圣武士 · 复仇之誓 · 8 项特性"
+  },
+  {
+    "id": "phb:subclass:sorcerer-draconic-bloodline",
+    "type": "subclass",
+    "name": "龙族血脉",
+    "name_en": "Draconic Bloodline",
+    "short_name": "龙族血脉",
+    "class": "phb:class:sorcerer",
+    "class_name": "术士",
+    "features": [
+      "phb:feature:sorcerer-draconic-bloodline-1-draconic-resilience",
+      "phb:feature:sorcerer-draconic-bloodline-1-dragon-ancestor",
+      "phb:feature:sorcerer-draconic-bloodline-6-elemental-affinity",
+      "phb:feature:sorcerer-draconic-bloodline-14-dragon-wings",
+      "phb:feature:sorcerer-draconic-bloodline-18-draconic-presence"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 102,
+      "srd": true
+    },
+    "brief": "术士 · 龙族血脉 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:sorcerer-wild-magic",
+    "type": "subclass",
+    "name": "狂野魔法",
+    "name_en": "Wild Magic",
+    "short_name": "狂野魔法",
+    "class": "phb:class:sorcerer",
+    "class_name": "术士",
+    "features": [
+      "phb:feature:sorcerer-wild-magic-1-tides-of-chaos",
+      "phb:feature:sorcerer-wild-magic-1-wild-magic-surge",
+      "phb:feature:sorcerer-wild-magic-6-bend-luck",
+      "phb:feature:sorcerer-wild-magic-14-controlled-chaos",
+      "phb:feature:sorcerer-wild-magic-18-spell-bombardment"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 103,
+      "srd": false
+    },
+    "brief": "术士 · 狂野魔法 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:monk-way-of-shadow",
+    "type": "subclass",
+    "name": "暗影宗",
+    "name_en": "Way of Shadow",
+    "short_name": "幽影",
+    "class": "phb:class:monk",
+    "class_name": "武僧",
+    "features": [
+      "phb:feature:monk-way-of-shadow-3-shadow-arts",
+      "phb:feature:monk-way-of-shadow-6-shadow-step",
+      "phb:feature:monk-way-of-shadow-11-cloak-of-shadows",
+      "phb:feature:monk-way-of-shadow-17-opportunist"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 80,
+      "srd": false
+    },
+    "brief": "武僧 · 暗影宗 · 4 项特性"
+  },
+  {
+    "id": "phb:subclass:monk-way-of-the-four-elements",
+    "type": "subclass",
+    "name": "四象宗",
+    "name_en": "Way of the Four Elements",
+    "short_name": "四象",
+    "class": "phb:class:monk",
+    "class_name": "武僧",
+    "features": [
+      "phb:feature:monk-way-of-the-four-elements-3-disciple-of-the-elements",
+      "phb:feature:monk-way-of-the-four-elements-3-elemental-disciplines",
+      "phb:feature:monk-way-of-the-four-elements-6-extra-elemental-discipline",
+      "phb:feature:monk-way-of-the-four-elements-11-extra-elemental-discipline",
+      "phb:feature:monk-way-of-the-four-elements-17-extra-elemental-discipline"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 80,
+      "srd": false
+    },
+    "brief": "武僧 · 四象宗 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:monk-way-of-the-open-hand",
+    "type": "subclass",
+    "name": "散打宗",
+    "name_en": "Way of the Open Hand",
+    "short_name": "散打",
+    "class": "phb:class:monk",
+    "class_name": "武僧",
+    "features": [
+      "phb:feature:monk-way-of-the-open-hand-3-open-hand-technique",
+      "phb:feature:monk-way-of-the-open-hand-6-wholeness-of-body",
+      "phb:feature:monk-way-of-the-open-hand-11-tranquility",
+      "phb:feature:monk-way-of-the-open-hand-17-quivering-palm"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 79,
+      "srd": true
+    },
+    "brief": "武僧 · 散打宗 · 4 项特性"
+  },
+  {
+    "id": "phb:subclass:barbarian-path-of-the-berserker",
+    "type": "subclass",
+    "name": "狂战士道途",
+    "name_en": "Path of the Berserker",
+    "short_name": "狂战士",
+    "class": "phb:class:barbarian",
+    "class_name": "野蛮人",
+    "features": [
+      "phb:feature:barbarian-path-of-the-berserker-3-frenzy",
+      "phb:feature:barbarian-path-of-the-berserker-6-mindless-rage",
+      "phb:feature:barbarian-path-of-the-berserker-10-intimidating-presence",
+      "phb:feature:barbarian-path-of-the-berserker-14-retaliation"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 49,
+      "srd": true
+    },
+    "brief": "野蛮人 · 狂战士道途 · 4 项特性"
+  },
+  {
+    "id": "phb:subclass:barbarian-path-of-the-totem-warrior",
+    "type": "subclass",
+    "name": "图腾武者道途",
+    "name_en": "Path of the Totem Warrior",
+    "short_name": "图腾武者",
+    "class": "phb:class:barbarian",
+    "class_name": "野蛮人",
+    "features": [
+      "phb:feature:barbarian-path-of-the-totem-warrior-3-bear",
+      "phb:feature:barbarian-path-of-the-totem-warrior-3-eagle",
+      "phb:feature:barbarian-path-of-the-totem-warrior-3-wolf",
+      "phb:feature:barbarian-path-of-the-totem-warrior-3-spirit-seeker",
+      "phb:feature:barbarian-path-of-the-totem-warrior-3-totem-spirit",
+      "phb:feature:barbarian-path-of-the-totem-warrior-6-bear",
+      "phb:feature:barbarian-path-of-the-totem-warrior-6-eagle",
+      "phb:feature:barbarian-path-of-the-totem-warrior-6-wolf",
+      "phb:feature:barbarian-path-of-the-totem-warrior-6-aspect-of-the-beast",
+      "phb:feature:barbarian-path-of-the-totem-warrior-10-spirit-walker",
+      "phb:feature:barbarian-path-of-the-totem-warrior-14-bear",
+      "phb:feature:barbarian-path-of-the-totem-warrior-14-eagle",
+      "phb:feature:barbarian-path-of-the-totem-warrior-14-wolf",
+      "phb:feature:barbarian-path-of-the-totem-warrior-14-totemic-attunement"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 50,
+      "srd": false
+    },
+    "brief": "野蛮人 · 图腾武者道途 · 14 项特性"
+  },
+  {
+    "id": "phb:subclass:bard-college-of-lore",
+    "type": "subclass",
+    "name": "逸闻学院",
+    "name_en": "College of Lore",
+    "short_name": "逸闻",
+    "class": "phb:class:bard",
+    "class_name": "吟游诗人",
+    "features": [
+      "phb:feature:bard-college-of-lore-3-bonus-proficiencies",
+      "phb:feature:bard-college-of-lore-3-cutting-words",
+      "phb:feature:bard-college-of-lore-6-additional-magical-secrets",
+      "phb:feature:bard-college-of-lore-14-peerless-skill"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 54,
+      "srd": true
+    },
+    "brief": "吟游诗人 · 逸闻学院 · 4 项特性"
+  },
+  {
+    "id": "phb:subclass:bard-college-of-valor",
+    "type": "subclass",
+    "name": "勇气学院",
+    "name_en": "College of Valor",
+    "short_name": "勇气",
+    "class": "phb:class:bard",
+    "class_name": "吟游诗人",
+    "features": [
+      "phb:feature:bard-college-of-valor-3-bonus-proficiencies",
+      "phb:feature:bard-college-of-valor-3-combat-inspiration",
+      "phb:feature:bard-college-of-valor-6-extra-attack",
+      "phb:feature:bard-college-of-valor-14-battle-magic"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 55,
+      "srd": false
+    },
+    "brief": "吟游诗人 · 勇气学院 · 4 项特性"
+  },
+  {
+    "id": "phb:subclass:rogue-arcane-trickster",
+    "type": "subclass",
+    "name": "诡术师",
+    "name_en": "Arcane Trickster",
+    "short_name": "诡术师",
+    "class": "phb:class:rogue",
+    "class_name": "游荡者",
+    "features": [
+      "phb:feature:rogue-arcane-trickster-3-mage-hand-legerdemain",
+      "phb:feature:rogue-arcane-trickster-3-spellcasting",
+      "phb:feature:rogue-arcane-trickster-9-magical-ambush",
+      "phb:feature:rogue-arcane-trickster-13-versatile-trickster",
+      "phb:feature:rogue-arcane-trickster-17-spell-thief"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 97,
+      "srd": false
+    },
+    "brief": "游荡者 · 诡术师 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:rogue-assassin",
+    "type": "subclass",
+    "name": "刺客",
+    "name_en": "Assassin",
+    "short_name": "刺客",
+    "class": "phb:class:rogue",
+    "class_name": "游荡者",
+    "features": [
+      "phb:feature:rogue-assassin-3-assassinate",
+      "phb:feature:rogue-assassin-3-bonus-proficiencies",
+      "phb:feature:rogue-assassin-9-infiltration-expertise",
+      "phb:feature:rogue-assassin-13-impostor",
+      "phb:feature:rogue-assassin-17-death-strike"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 97,
+      "srd": false
+    },
+    "brief": "游荡者 · 刺客 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:rogue-thief",
+    "type": "subclass",
+    "name": "盗贼",
+    "name_en": "Thief",
+    "short_name": "盗贼",
+    "class": "phb:class:rogue",
+    "class_name": "游荡者",
+    "features": [
+      "phb:feature:rogue-thief-3-fast-hands",
+      "phb:feature:rogue-thief-3-second-story-work",
+      "phb:feature:rogue-thief-9-supreme-sneak",
+      "phb:feature:rogue-thief-13-use-magic-device",
+      "phb:feature:rogue-thief-17-thiefs-reflexes"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 97,
+      "srd": true
+    },
+    "brief": "游荡者 · 盗贼 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:ranger-beast-master",
+    "type": "subclass",
+    "name": "驯兽师",
+    "name_en": "Beast Master",
+    "short_name": "驯兽师",
+    "class": "phb:class:ranger",
+    "class_name": "游侠",
+    "features": [
+      "phb:feature:ranger-beast-master-3-rangers-companion",
+      "phb:feature:ranger-beast-master-7-exceptional-training",
+      "phb:feature:ranger-beast-master-11-bestial-fury",
+      "phb:feature:ranger-beast-master-15-share-spells"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 93,
+      "srd": false
+    },
+    "brief": "游侠 · 驯兽师 · 4 项特性"
+  },
+  {
+    "id": "phb:subclass:ranger-hunter",
+    "type": "subclass",
+    "name": "猎人",
+    "name_en": "Hunter",
+    "short_name": "猎人",
+    "class": "phb:class:ranger",
+    "class_name": "游侠",
+    "features": [
+      "phb:feature:ranger-hunter-3-horde-breaker",
+      "phb:feature:ranger-hunter-3-hunters-prey",
+      "phb:feature:ranger-hunter-3-colossus-slayer",
+      "phb:feature:ranger-hunter-3-giant-killer",
+      "phb:feature:ranger-hunter-7-defensive-tactics",
+      "phb:feature:ranger-hunter-7-escape-the-horde",
+      "phb:feature:ranger-hunter-7-multiattack-defense",
+      "phb:feature:ranger-hunter-7-steel-will",
+      "phb:feature:ranger-hunter-11-multiattack",
+      "phb:feature:ranger-hunter-11-volley",
+      "phb:feature:ranger-hunter-11-whirlwind-attack",
+      "phb:feature:ranger-hunter-15-evasion",
+      "phb:feature:ranger-hunter-15-stand-against-the-tide",
+      "phb:feature:ranger-hunter-15-superior-hunters-defense",
+      "phb:feature:ranger-hunter-15-uncanny-dodge"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 93,
+      "srd": true
+    },
+    "brief": "游侠 · 猎人 · 15 项特性"
+  },
+  {
+    "id": "phb:subclass:fighter-battle-master",
+    "type": "subclass",
+    "name": "战斗大师",
+    "name_en": "Battle Master",
+    "short_name": "战斗大师",
+    "class": "phb:class:fighter",
+    "class_name": "战士",
+    "features": [
+      "phb:feature:fighter-battle-master-3-combat-superiority",
+      "phb:feature:fighter-battle-master-3-maneuvers",
+      "phb:feature:fighter-battle-master-3-student-of-war",
+      "phb:feature:fighter-battle-master-7-additional-maneuvers",
+      "phb:feature:fighter-battle-master-7-additional-superiority-die",
+      "phb:feature:fighter-battle-master-7-know-your-enemy",
+      "phb:feature:fighter-battle-master-10-additional-maneuvers",
+      "phb:feature:fighter-battle-master-10-improved-combat-superiority-d10",
+      "phb:feature:fighter-battle-master-15-additional-maneuvers",
+      "phb:feature:fighter-battle-master-15-additional-superiority-die",
+      "phb:feature:fighter-battle-master-15-relentless",
+      "phb:feature:fighter-battle-master-18-improved-combat-superiority-d12"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 73,
+      "srd": false
+    },
+    "brief": "战士 · 战斗大师 · 12 项特性"
+  },
+  {
+    "id": "phb:subclass:fighter-champion",
+    "type": "subclass",
+    "name": "勇士",
+    "name_en": "Champion",
+    "short_name": "勇士",
+    "class": "phb:class:fighter",
+    "class_name": "战士",
+    "features": [
+      "phb:feature:fighter-champion-3-improved-critical",
+      "phb:feature:fighter-champion-7-remarkable-athlete",
+      "phb:feature:fighter-champion-10-additional-fighting-style",
+      "phb:feature:fighter-champion-15-superior-critical",
+      "phb:feature:fighter-champion-18-survivor"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 72,
+      "srd": true
+    },
+    "brief": "战士 · 勇士 · 5 项特性"
+  },
+  {
+    "id": "phb:subclass:fighter-eldritch-knight",
+    "type": "subclass",
+    "name": "奥法骑士",
+    "name_en": "Eldritch Knight",
+    "short_name": "奥法骑士",
+    "class": "phb:class:fighter",
+    "class_name": "战士",
+    "features": [
+      "phb:feature:fighter-eldritch-knight-3-spellcasting",
+      "phb:feature:fighter-eldritch-knight-3-weapon-bond",
+      "phb:feature:fighter-eldritch-knight-7-war-magic",
+      "phb:feature:fighter-eldritch-knight-10-eldritch-strike",
+      "phb:feature:fighter-eldritch-knight-15-arcane-charge",
+      "phb:feature:fighter-eldritch-knight-18-improved-war-magic"
+    ],
+    "source": {
+      "book": "PHB",
+      "page": 74,
+      "srd": false
+    },
+    "brief": "战士 · 奥法骑士 · 6 项特性"
+  }
+]
