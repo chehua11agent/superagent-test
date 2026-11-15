@@ -148,3 +148,23 @@ test('no PHB prose or 5etools markup leaks into the library', () => {
   assert.ok(!serialized.includes('|phb'));
   assert.ok(!serialized.includes('[object Object]'));
 });
+
+test('spell ranges keep the mile unit from the source snapshot', () => {
+  const cases = [
+    ['Clairvoyance', '1 英里'],
+    ['Control Weather', '半径 5 英里'],
+    ['Meteor Swarm', '1 英里'],
+    ['Project Image', '500 英里'],
+  ];
+  for (const [name, range] of cases) {
+    assert.equal(lib.spells.find((s) => s.name_en === name).range, range, name);
+  }
+});
+
+test('ranged weapon ranges split into normal and long distances', () => {
+  const heavyCrossbow = lib.equipment.find((e) => e.name_en === 'Heavy Crossbow');
+  assert.deepEqual(heavyCrossbow.range, { normal: 100, long: 400 });
+  const longbow = lib.equipment.find((e) => e.name_en === 'Longbow');
+  assert.deepEqual(longbow.range, { normal: 150, long: 600 });
+  assert.equal(lib.equipment.find((e) => e.name_en === 'Longsword').range, null);
+});

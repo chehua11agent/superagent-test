@@ -10491,7 +10491,7 @@
       "法师"
     ],
     "casting_time": "10 分钟",
-    "range": "1 尺",
+    "range": "1 英里",
     "components": {
       "verbal": true,
       "somatic": true,
@@ -10521,7 +10521,7 @@
       "page": 222,
       "srd": true
     },
-    "brief": "3 环 · 预言 · 10 分钟 · 1 尺 · V · S · M · 专注，10分钟"
+    "brief": "3 环 · 预言 · 10 分钟 · 1 英里 · V · S · M · 专注，10分钟"
   },
   {
     "id": "phb:spell:elemental-weapon",
@@ -17722,7 +17722,7 @@
       "法师"
     ],
     "casting_time": "1 动作",
-    "range": "500 尺",
+    "range": "500 英里",
     "components": {
       "verbal": true,
       "somatic": true,
@@ -17752,7 +17752,7 @@
       "page": 270,
       "srd": true
     },
-    "brief": "7 环 · 幻术 · 1 动作 · 500 尺 · V · S · M · 专注，1天"
+    "brief": "7 环 · 幻术 · 1 动作 · 500 英里 · V · S · M · 专注，1天"
   },
   {
     "id": "phb:spell:plane-shift",
@@ -18110,7 +18110,7 @@
       "法师"
     ],
     "casting_time": "10 分钟",
-    "range": "半径 5 尺",
+    "range": "半径 5 英里",
     "components": {
       "verbal": true,
       "somatic": true,
@@ -18140,7 +18140,7 @@
       "page": 228,
       "srd": true
     },
-    "brief": "8 环 · 变化 · 10 分钟 · 半径 5 尺 · V · S · M · 专注，8小时"
+    "brief": "8 环 · 变化 · 10 分钟 · 半径 5 英里 · V · S · M · 专注，8小时"
   },
   {
     "id": "phb:spell:earthquake",
@@ -19268,7 +19268,7 @@
       "法师"
     ],
     "casting_time": "1 动作",
-    "range": "1 尺",
+    "range": "1 英里",
     "components": {
       "verbal": true,
       "somatic": true,
@@ -19307,7 +19307,7 @@
       "page": 259,
       "srd": true
     },
-    "brief": "9 环 · 塑能 · 1 动作 · 1 尺 · V · S · 瞬时 · 敏捷豁免 · 20d6 钝击/火焰 · 球状"
+    "brief": "9 环 · 塑能 · 1 动作 · 1 英里 · V · S · 瞬时 · 敏捷豁免 · 20d6 钝击/火焰 · 球状"
   },
   {
     "id": "phb:spell:power-word-kill",

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-15T13:30:37.672Z",
+  "generated_at": "2026-11-15T15:37:05.316Z",
   "book": {
     "title": "Player's Handbook",
     "edition": "2014",
@@ -79,14 +79,14 @@
     {
       "path": "data/phb/spells.json",
       "records": 361,
-      "bytes": 432903,
-      "sha256": "c6402584164189f6c33755e3a9ff4539ac1c37a3282b2c6828f13e3afed9ba75"
+      "bytes": 432927,
+      "sha256": "b3e2fa8ad3a83caa480532c1fab67c88a33eeffd8f183a2a341942f743d3174e"
     },
     {
       "path": "data/phb/equipment.json",
       "records": 259,
-      "bytes": 154329,
-      "sha256": "dc71cd2905c9420e34418fec214f8c8b5e3b662f244aea353069e2d9c72cd79a"
+      "bytes": 154224,
+      "sha256": "800f2c2707e91836cebcc39890c7ba9a92a6d3c95946414d1b08f0f02f4a54ba"
     },
     {
       "path": "data/phb/conditions.json",

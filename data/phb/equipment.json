@@ -5881,8 +5881,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "20/60",
-      "long": null
+      "normal": 20,
+      "long": 60
     },
     "armor_class": null,
     "strength": null,
@@ -5949,8 +5949,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "30/120",
-      "long": null
+      "normal": 30,
+      "long": 120
     },
     "armor_class": null,
     "strength": null,
@@ -5979,8 +5979,8 @@
     "weapon_category": "martial",
     "damage": null,
     "range": {
-      "normal": "5/15",
-      "long": null
+      "normal": 5,
+      "long": 15
     },
     "armor_class": null,
     "strength": null,
@@ -6014,8 +6014,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "25/100",
-      "long": null
+      "normal": 25,
+      "long": 100
     },
     "armor_class": null,
     "strength": null,
@@ -6140,8 +6140,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "80/320",
-      "long": null
+      "normal": 80,
+      "long": 320
     },
     "armor_class": null,
     "strength": null,
@@ -6207,8 +6207,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "20/60",
-      "long": null
+      "normal": 20,
+      "long": 60
     },
     "armor_class": null,
     "strength": null,
@@ -6429,8 +6429,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "20/60",
-      "long": null
+      "normal": 20,
+      "long": 60
     },
     "armor_class": null,
     "strength": null,
@@ -6496,8 +6496,8 @@
       "type": "钝击"
     },
     "range": {
-      "normal": "20/60",
-      "long": null
+      "normal": 20,
+      "long": 60
     },
     "armor_class": null,
     "strength": null,
@@ -6531,8 +6531,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "80/320",
-      "long": null
+      "normal": 80,
+      "long": 320
     },
     "armor_class": null,
     "strength": null,
@@ -6567,8 +6567,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "20/60",
-      "long": null
+      "normal": 20,
+      "long": 60
     },
     "armor_class": null,
     "strength": null,
@@ -6602,8 +6602,8 @@
       "type": "挥砍"
     },
     "range": {
-      "normal": "20/60",
-      "long": null
+      "normal": 20,
+      "long": 60
     },
     "armor_class": null,
     "strength": null,
@@ -6637,8 +6637,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "30/120",
-      "long": null
+      "normal": 30,
+      "long": 120
     },
     "armor_class": null,
     "strength": null,
@@ -6673,8 +6673,8 @@
       "type": "钝击"
     },
     "range": {
-      "normal": "30/120",
-      "long": null
+      "normal": 30,
+      "long": 120
     },
     "armor_class": null,
     "strength": null,
@@ -6892,8 +6892,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "150/600",
-      "long": null
+      "normal": 150,
+      "long": 600
     },
     "armor_class": null,
     "strength": null,
@@ -7056,8 +7056,8 @@
       "type": "穿刺"
     },
     "range": {
-      "normal": "100/400",
-      "long": null
+      "normal": 100,
+      "long": 400
     },
     "armor_class": null,
     "strength": null,

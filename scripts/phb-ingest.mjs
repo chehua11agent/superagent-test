@@ -510,7 +510,7 @@ const rangeLabel = (range) => {
     if (dist.type === 'sight') return '视线';
     if (dist.type === 'unlimited') return '无限';
     if (typeof dist.amount === 'number') {
-      const unit = dist.type === 'mile' ? '英里' : '尺';
+      const unit = dist.type === 'mile' || dist.type === 'miles' ? '英里' : '尺';
       return range.type === 'radius' ? `半径 ${dist.amount} ${unit}` : `${dist.amount} ${unit}`;
     }
   }
@@ -1312,7 +1312,12 @@ const buildEquipment = async () => {
               type: DAMAGE_CODE[i.dmgType] ?? DAMAGE_TYPE[i.dmgType] ?? cleanText(i.dmgType ?? ''),
             }
           : null,
-        range: i.range ? { normal: i.range, long: i.rangeLong ?? null } : null,
+        range: i.range
+          ? (() => {
+              const [normal, long] = String(i.range).split('/');
+              return { normal: Number(normal), long: long ? Number(long) : null };
+            })()
+          : null,
         armor_class: i.ac ?? null,
         strength: i.strength ?? null,
         stealth_disadvantage: Boolean(i.stealth),
