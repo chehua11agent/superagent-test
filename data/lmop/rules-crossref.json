@@ -180,7 +180,7 @@
    "part1_per_pc": 350,
    "part2_total": 2900,
    "part3_drive_off_total": 9600,
-   "part3_kill_total": 13500,
+   "part3_kill_total": 11500,
    "part4_listed_total": 200,
    "part4_monster_total": 11550,
    "part4_monster_note": "含附录B遭遇的9300 XP；赭色果冻怪450与缚灵1800按《怪物图鉴》估算，因模组附录未给数据卡。"
@@ -201,9 +201,9 @@
     "part3_path": "kill",
     "part1_per_pc": 350,
     "part2_per_pc": 725,
-    "part3_per_pc": 3375,
+    "part3_per_pc": 2875,
     "part4_per_pc": 2937.5,
-    "cumulative_per_pc": 7387.5,
+    "cumulative_per_pc": 6887.5,
     "level_by_xp": 5
    },
    {
@@ -221,9 +221,9 @@
     "part3_path": "kill",
     "part1_per_pc": 350,
     "part2_per_pc": 580,
-    "part3_per_pc": 2700,
+    "part3_per_pc": 2300,
     "part4_per_pc": 2350,
-    "cumulative_per_pc": 5980,
+    "cumulative_per_pc": 5580,
     "level_by_xp": 4
    }
   ],

@@ -87,3 +87,13 @@ test('数据文件只保留摘要，不包含成段正文', () => {
   }
   assert.deepEqual(longTexts, [], `发现疑似成段正文：${longTexts.join('; ')}`);
 });
+
+test('第三部分 XP 汇总保持毒牙两条奖励互斥', () => {
+  const part = library.parts.get('lmop:part:3').data;
+  const listed = part.rewards.filter((r) => r.type === 'xp' && Number(r.amount) > 0);
+  const sum = listed.reduce((total, r) => total + Number(r.amount), 0);
+  assert.equal(sum, 13500);
+  assert.equal(part.xp_summary.sum_all_listed, sum);
+  assert.equal(part.xp_summary.drive_off_venomfang, sum - 3900);
+  assert.equal(part.xp_summary.kill_venomfang, sum - 2000);
+});
