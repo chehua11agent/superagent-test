@@ -1,0 +1,2143 @@
+{
+  "meta": {
+    "module": "凡戴尔的失落矿坑（Lost Mine of Phandelver）",
+    "part": "PART 2 凡度林之役",
+    "chapter": "第二章 凡度林之役",
+    "page_range": "16-33",
+    "pdf_page_range": "17-34",
+    "page_range_note": "页码采用书内印刷页码；对应 PDF 物理页 17–34（PDF 第 16 页为整页插图）。",
+    "language": "zh-CN",
+    "schema_version": "lmop-v1",
+    "schema_fields": [
+      "chapters",
+      "scenes",
+      "npcs",
+      "monsters",
+      "checks",
+      "rewards"
+    ],
+    "schema_fields_zh": {
+      "chapters": "章节",
+      "scenes": "场景",
+      "npcs": "NPC",
+      "monsters": "怪物",
+      "checks": "检定 DC",
+      "rewards": "奖励"
+    },
+    "generated_at": "2026-11-15",
+    "summary": "凡度林镇、关键 NPC 与任务、红烙印恶霸遭遇，以及红烙印大本营（特雷山大庄园地窖）12 个区域的结构化录入。",
+    "source_policy": "只保留结构化字段与摘要，不收录原文段落；数值以本书第 16–33 页为准。",
+    "scope_note": "第 3 章及后续章节的内容只作为任务指向记录，不在本文件展开。"
+  },
+  "validation": {
+    "method": "python3 -m json.tool + 自定义交叉引用检查 + 关键页图像复核",
+    "checks": [
+      "JSON 可解析",
+      "章节/场景/NPC/怪物/检定/奖励之间的 ID 引用全部存在",
+      "所有页码落在书内第 16–33 页（PDF 第 17–34 页）范围内",
+      "XP、DC、金币/宝石数量与原文核对",
+      "未收录模组原文段落"
+    ],
+    "result": "passed",
+    "checked_date": "2026-11-15",
+    "known_gaps": [
+      "本文件只覆盖 PART 2（书内第 16–33 页 / PDF 第 17–34 页）；第 3 章及以后只保留任务指向。",
+      "怪物条目只记录原文明确给出的数量、XP 与特殊信息，不补写原文未出现的 AC/HP 数据。",
+      "中文译文/OCR 存在名称差异：水晶之杖（OCR 有“水水晶之杖”重字）、伊阿诺-阿布雷克/阿博瑞克、大眼怪/独眼怪、回浪洞穴/潮音洞穴、雷树镇/雷霆树废墟；本文件以正文常用译名为主，并在 aliases 中保留别名。",
+      "PDF 第 16 页为整页插图；书内第 16 页对应 PDF 第 17 页。",
+      "不含模组原文段落，只保留结构化摘要。"
+    ]
+  },
+  "chapters": [
+    {
+      "id": "ch02-phandalin",
+      "number": 2,
+      "title": "第二章 凡度林之役",
+      "title_en": "PART 2: Phandalin",
+      "pages": "16-33",
+      "summary": "角色进入被红烙印帮暗中控制的凡度林镇，在镇民与各派系之间接取任务，最终突袭特雷山大庄园地下的红烙印大本营，击败或俘获首领水晶之杖（伊阿诺-阿布雷克）。",
+      "level_note": "模组说明：角色可能在第二章期间升到 3 级，应持续记录 XP。",
+      "sections": [
+        {
+          "id": "sec-town-encounters",
+          "title": "凡度林的遭遇",
+          "pages": "16-18",
+          "scene_ids": [
+            "scene-phandalin",
+            "scene-redbrand-ruffians"
+          ],
+          "summary": "抵达小镇、安排住宿，并决定何时触发红烙印恶霸的街头/酒馆遭遇。"
+        },
+        {
+          "id": "sec-key-npcs",
+          "title": "重要的NPC",
+          "pages": "17-18",
+          "npc_ids": [
+            "npc-toblen-stonehill",
+            "npc-elmar-barthen",
+            "npc-daran-edermath",
+            "npc-linene-graywind",
+            "npc-halia-thornton",
+            "npc-qelline-alderleaf",
+            "npc-harbin-wester",
+            "npc-sildar-hallwinter"
+          ],
+          "summary": "八名关键 NPC 各自掌握一条任务线或一项城镇资源。"
+        },
+        {
+          "id": "sec-town",
+          "title": "凡度林介绍",
+          "pages": "18-23",
+          "scene_ids": [
+            "scene-stonehill-inn",
+            "scene-barthens-provisions",
+            "scene-edermath-orchard",
+            "scene-lionshield-coster",
+            "scene-miners-exchange",
+            "scene-alderleaf-farm",
+            "scene-shrine-of-luck",
+            "scene-sleeping-giant",
+            "scene-townmasters-hall",
+            "scene-tresendar-manor"
+          ],
+          "summary": "小镇地点、店主、传闻与可接任务。"
+        },
+        {
+          "id": "sec-redbrand-ruffians",
+          "title": "红烙印恶棍",
+          "pages": "23-24",
+          "scene_ids": [
+            "scene-redbrand-ruffians"
+          ],
+          "summary": "4 名红烙印恶霸的遭遇、战术与可审问出的情报。"
+        },
+        {
+          "id": "sec-hideout",
+          "title": "红烙印据点",
+          "pages": "24-33",
+          "scene_ids": [
+            "scene-redbrand-hideout",
+            "scene-hideout-area-1",
+            "scene-hideout-area-2",
+            "scene-hideout-area-3",
+            "scene-hideout-area-4",
+            "scene-hideout-area-5",
+            "scene-hideout-area-6",
+            "scene-hideout-area-7",
+            "scene-hideout-area-8",
+            "scene-hideout-area-9",
+            "scene-hideout-area-10",
+            "scene-hideout-area-11",
+            "scene-hideout-area-12"
+          ],
+          "summary": "地城通用规则、三条进入路线，以及区域 1–12 的守卫、陷阱、宝藏与经验奖励。"
+        },
+        {
+          "id": "sec-what-ruffians-know",
+          "title": "红烙印帮匪知道的事",
+          "pages": "23-25",
+          "scene_ids": [
+            "scene-redbrand-ruffians"
+          ],
+          "summary": "帮匪供出的首领身份、黑蜘蛛、熊地精、大眼怪与俘虏位置。"
+        },
+        {
+          "id": "sec-next",
+          "title": "奖励经验值与下一步",
+          "pages": "33",
+          "scene_ids": [
+            "scene-hideout-area-12"
+          ],
+          "summary": "结算伊阿诺的 XP，并指向第三章“蜘蛛网”。"
+        }
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "scene-phandalin",
+      "name": "凡度林镇（总览）",
+      "name_en": "Phandalin",
+      "kind": "town",
+      "pages": "16-18",
+      "summary": "在古凡度林废墟上重建起来的新镇，约四五十座木屋，没有领主与常备护卫；近两个月被红烙印帮控制。",
+      "features": [
+        "小镇很小，几分钟就能从一头走到另一头。",
+        "角色抵达时天色已晚，通常只能走访一到两处地点就需要找地方过夜。",
+        "镇东山坡上是废弃的特雷山大庄园，红烙印大本营就在其地窖中。",
+        "镇民对红烙印敢怒不敢言；玩家分队行动会让红烙印恶霸遭遇更危险。"
+      ],
+      "dm_guidance": [
+        "开场先问玩家想去镇上的什么地方：旅馆、镇中心大厅、神殿、商店、贸易点或民房。",
+        "普通镇民没有理由与玩家战斗；需要时用普通平民数据。",
+        "埃琳-阿黛尔利芙、西达尔-荷温特、哈利娅-桑顿三人知道去哪里找克拉格莫城堡的知情者；大部分镇民因红烙印而忧心，不知道城堡位置。",
+        "每访问一个地点，先演 NPC 想要什么、能提供什么信息，再让玩家决定下一个地点；这些场景可能消耗游戏内几天。"
+      ],
+      "factions": [
+        "红烙印帮（实际控制者）",
+        "镇民/镇长大厅（名义治理）"
+      ],
+      "npc_ids": [],
+      "monster_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "location_scene_ids": [
+        "scene-stonehill-inn",
+        "scene-barthens-provisions",
+        "scene-edermath-orchard",
+        "scene-lionshield-coster",
+        "scene-miners-exchange",
+        "scene-alderleaf-farm",
+        "scene-shrine-of-luck",
+        "scene-sleeping-giant",
+        "scene-townmasters-hall",
+        "scene-tresendar-manor"
+      ]
+    },
+    {
+      "id": "scene-stonehill-inn",
+      "name": "石丘旅舍",
+      "name_en": "Stonehill Inn",
+      "kind": "town_location",
+      "pages": "18",
+      "summary": "镇中心最新、最好的旅馆，有 6 间客房；老板托布雷-石丘。西达尔-荷温特也租了一间房。",
+      "features": [
+        "6 间客房对外出租；玩家也可以露宿，或说服达朗/埃琳提供干草棚。",
+        "大厅是收集传闻的最佳地点；任意 NPC 都会提到红烙印常去沉睡巨人。"
+      ],
+      "npc_ids": [
+        "npc-toblen-stonehill",
+        "npc-sildar-hallwinter"
+      ],
+      "monster_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "rumors": [
+        {
+          "speaker": "南斯（老农民）",
+          "summary": "幸运神殿的加拉尔修女外出几天，回来时筋疲力尽还带着伤。",
+          "points_to": "scene-shrine-of-luck"
+        },
+        {
+          "speaker": "爱莎（酒吧女招待）",
+          "summary": "果园主达朗-埃德玛以前也是冒险者。",
+          "points_to": "scene-edermath-orchard"
+        },
+        {
+          "speaker": "莱纳（矿工）",
+          "summary": "三猪小径最东边出现兽人强盗，镇长正在找人赶走它们。",
+          "points_to": "scene-townmasters-hall"
+        },
+        {
+          "speaker": "崔琳娜（旅馆老板娘）",
+          "summary": "红烙印一周前在木匠泰尔-丹度的店里调戏他妻子，泰尔反抗被杀，尸体被带走，妻儿随后失踪。",
+          "points_to": "scene-redbrand-hideout"
+        },
+        {
+          "speaker": "芙蕾达（织布工）",
+          "summary": "红烙印骚扰全镇商铺，唯独不碰凡度林淘金公会，不想招惹哈利娅-桑顿。",
+          "points_to": "scene-miners-exchange"
+        }
+      ]
+    },
+    {
+      "id": "scene-barthens-provisions",
+      "name": "巴森小栈",
+      "name_en": "Barthen's Provisions",
+      "kind": "town_location",
+      "pages": "19",
+      "summary": "凡度林最大的贸易点，出售常见冒险补给，但不卖武器和盔甲；老板艾尔玛-巴森。",
+      "features": [
+        "营业时间从日出到日落。",
+        "出售 25 金币以下的普通冒险装备；武器盔甲需去狮盾商会。"
+      ],
+      "npc_ids": [
+        "npc-elmar-barthen"
+      ],
+      "monster_ids": [],
+      "check_ids": [
+        "check-barthen-history"
+      ],
+      "reward_ids": [
+        "reward-barthen-delivery"
+      ],
+      "quests": [
+        {
+          "id": "quest-rescue-gundren",
+          "title": "救回刚铎-寻石者",
+          "summary": "巴森视刚铎为友；得知刚铎被抓后请求小队救回他。",
+          "reward": "无额外赏金；此前谈好的运送补给报酬照付。",
+          "pages": "19",
+          "next": "指向第 3 章/克拉格莫城堡与第 4 章/回浪洞穴。"
+        }
+      ]
+    },
+    {
+      "id": "scene-edermath-orchard",
+      "name": "埃德玛的果园",
+      "name_en": "Edermath Orchard",
+      "kind": "town_location",
+      "pages": "19",
+      "summary": "退休半精灵战士达朗-埃德玛的果园与农舍；他是臂铠社成员，痛恨红烙印。",
+      "features": [
+        "达朗愿意与冒险者交换情报，尤其信任有臂铠美德的人。",
+        "他知道红烙印大本营在特雷山大庄园废墟下，但不在沉睡巨人。"
+      ],
+      "npc_ids": [
+        "npc-daran-edermath"
+      ],
+      "monster_ids": [],
+      "check_ids": [],
+      "reward_ids": [
+        "reward-title-knight"
+      ],
+      "quests": [
+        {
+          "id": "quest-old-owl-well",
+          "title": "古枭井",
+          "summary": "凡度林东北几天路程的奈瑟瑞尔瞭望塔遗迹；近期有人挖掘，淘金者被不死生物追赶。达朗请小队查明是谁、想做什么，并警告可能有未激活的危险魔法。",
+          "reward": "任务本身无现金奖励；完成后可加入臂铠社。",
+          "pages": "19",
+          "next": "指向第 3 章“古枭井”。"
+        },
+        {
+          "id": "quest-join-gauntlet",
+          "title": "加入臂铠社",
+          "summary": "解决红烙印与古枭井后，达朗会私下邀请体现荣誉与警觉的人加入臂铠社。",
+          "reward": "骑士头衔（title）。",
+          "pages": "19"
+        }
+      ]
+    },
+    {
+      "id": "scene-lionshield-coster",
+      "name": "狮盾商会",
+      "name_en": "Lionshield Coster",
+      "kind": "town_location",
+      "pages": "20",
+      "summary": "雅塔狮盾商会的凡度林分部，卖武器与盔甲；负责人利涅涅-灰风。最近一批货物被克拉格莫哥布林劫走。",
+      "features": [
+        "后屋存有盔甲和武器，价格按规则书“冒险装备”。",
+        "利涅涅不会把武器卖给可能威胁小镇的人（如红烙印）。",
+        "她会警告玩家别招惹红烙印，并建议避开沉睡巨人。"
+      ],
+      "npc_ids": [
+        "npc-linene-graywind"
+      ],
+      "monster_ids": [],
+      "check_ids": [],
+      "reward_ids": [
+        "reward-linene-goods"
+      ],
+      "quests": [
+        {
+          "id": "quest-return-goods",
+          "title": "失而复得的货物",
+          "summary": "把在克拉格莫窝点区域 8 找到的货物还给她，或告知货物所在地。",
+          "reward": "50 金币，并承诺尽力帮助冒险者。",
+          "pages": "20",
+          "next": "指向 PART 1 克拉格莫巢穴区域 8。"
+        }
+      ]
+    },
+    {
+      "id": "scene-miners-exchange",
+      "name": "凡度林淘金公会",
+      "name_en": "Phandalin Miner's Exchange",
+      "kind": "town_location",
+      "pages": "20-21",
+      "summary": "矿工称量、售卖矿石并登记挖掘点所有权的公会；会长哈利娅-桑顿是散塔林会成员，野心是让公会成为镇子的统治机构。",
+      "features": [
+        "公会的人熟悉凡度林周边地形。",
+        "哈利娅听说红烙印帮里有一个哥布林奴仆，可能知道克拉格莫城堡的位置。",
+        "红烙印唯独不骚扰这里，因为不想招惹哈利娅。"
+      ],
+      "npc_ids": [
+        "npc-halia-thornton"
+      ],
+      "monster_ids": [],
+      "check_ids": [
+        "check-halia-insight"
+      ],
+      "reward_ids": [
+        "reward-halia-quest",
+        "reward-title-fang"
+      ],
+      "quests": [
+        {
+          "id": "quest-halia-glasstaff",
+          "title": "哈利娅的委托",
+          "summary": "除掉红烙印首领水晶之杖，并带回在其住处找到的信件；她并不暴露自己想取而代之的野心。",
+          "reward": "100 金币；完成后可加入散塔林会。",
+          "pages": "21"
+        },
+        {
+          "id": "quest-join-zhentarim",
+          "title": "加入散塔林会",
+          "summary": "解决水晶之杖后，哈利娅会私下邀请有共同追求（财富与权力）的人加入。",
+          "reward": "白牙头衔（title）。",
+          "pages": "21"
+        }
+      ]
+    },
+    {
+      "id": "scene-alderleaf-farm",
+      "name": "阿黛尔利芙的农场",
+      "name_en": "Alderleaf Farm",
+      "kind": "town_location",
+      "pages": "21",
+      "summary": "半身人农妇埃琳-阿黛尔利芙的农场；她热情好客，是小镇万事通，可提供干草棚借宿。",
+      "features": [
+        "埃琳 10 岁的儿子卡普知道一条通往红烙印大本营区域 8 的秘道。",
+        "卡普曾看见几个“大个儿丑八怪”（熊地精）从秘道出来与红烙印会合。"
+      ],
+      "npc_ids": [
+        "npc-qelline-alderleaf",
+        "npc-carp-alderleaf"
+      ],
+      "monster_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "quests": [
+        {
+          "id": "quest-reidoth",
+          "title": "德鲁伊莱多斯",
+          "summary": "埃琳建议玩家去凡度林西北约 50 里的雷霆树废墟找老德鲁伊莱多斯，他知道克拉格莫城堡与回浪洞穴的位置。",
+          "reward": "情报；无现金奖励。",
+          "pages": "21",
+          "next": "指向第 3 章“雷霆树废墟”。"
+        },
+        {
+          "id": "quest-carp-tunnel",
+          "title": "卡普的秘道",
+          "summary": "卡普可以指路或直接带玩家到特雷山大庄园附近的秘道入口，通往大本营区域 8。",
+          "reward": "绕过区域 1–7、直接进入区域 8 的路线。",
+          "pages": "21"
+        }
+      ]
+    },
+    {
+      "id": "scene-shrine-of-luck",
+      "name": "幸运神殿",
+      "name_en": "Shrine of Luck",
+      "kind": "town_location",
+      "pages": "21-22",
+      "summary": "凡度林唯一的神庙，供奉幸运女神泰摩拉；负责人是年轻精灵教士加拉尔修女，竖琴手同盟成员。",
+      "features": [
+        "加拉尔对凡度林摆脱红烙印不抱希望，但仍定期向上级报告。",
+        "她需要有人替她与女妖爱嘉莎做交易。"
+      ],
+      "npc_ids": [
+        "npc-sister-garaele"
+      ],
+      "monster_ids": [],
+      "check_ids": [],
+      "reward_ids": [
+        "reward-garaele-potions",
+        "reward-title-watcher"
+      ],
+      "quests": [
+        {
+          "id": "quest-agatha",
+          "title": "与女妖的交易",
+          "summary": "带一柄镶宝石的银梳子去找女妖爱嘉莎，换取传奇法师博哲托尔法术书位置的信息；多多奉承她更容易成功。",
+          "reward": "3 瓶治疗药水；完成后可加入竖琴手同盟。",
+          "pages": "21-22",
+          "next": "指向第 3 章“浆果小镇与阿嘉莎之巢”。"
+        },
+        {
+          "id": "quest-join-harpers",
+          "title": "加入竖琴手同盟",
+          "summary": "帮加拉尔得到博哲托尔法术书的消息后，她会私下邀请具有同盟美德的人加入。",
+          "reward": "守望者头衔（title）。",
+          "pages": "22"
+        }
+      ]
+    },
+    {
+      "id": "scene-sleeping-giant",
+      "name": "沉睡巨人",
+      "name_en": "Sleeping Giant",
+      "kind": "town_location",
+      "pages": "22",
+      "summary": "大道尽头破旧、潮湿、肮脏的小酒馆，只有红烙印匪众出没；老板是个阴沉的女矮人。",
+      "features": [
+        "玩家若来此拜访，即触发“红烙印恶霸”遭遇。"
+      ],
+      "npc_ids": [],
+      "monster_ids": [
+        "monster-redbrand-ruffian"
+      ],
+      "check_ids": [],
+      "reward_ids": [
+        "reward-xp-redbrand-ruffians"
+      ]
+    },
+    {
+      "id": "scene-townmasters-hall",
+      "name": "镇长大厅",
+      "name_en": "Townmaster's Hall",
+      "kind": "town_location",
+      "pages": "22",
+      "summary": "石墙木顶、带钟塔的镇公所；门口公告板悬赏飞龙崖兽人。镇长哈宾-威斯特是个自命不凡的银行家。",
+      "features": [
+        "凡度林没有正式政府，镇民每年推选一位镇长，主要负责写地方志、调解纠纷。",
+        "哈宾在红烙印威胁下粉饰太平，不愿关押红烙印俘虏；玩家可以劝说或威胁他锁几天。"
+      ],
+      "npc_ids": [
+        "npc-harbin-wester",
+        "npc-sildar-hallwinter"
+      ],
+      "monster_ids": [],
+      "check_ids": [],
+      "reward_ids": [
+        "reward-harbin-orcs",
+        "reward-sildar-castle",
+        "reward-sildar-iarno",
+        "reward-title-cloak"
+      ],
+      "quests": [
+        {
+          "id": "quest-wyvern-tor",
+          "title": "兽人袭来",
+          "summary": "三猪小径东边、飞龙崖附近出现一队兽人；哈宾悬赏驱赶它们。",
+          "reward": "100 金币。",
+          "pages": "22",
+          "next": "指向第 3 章“飞龙崖”。"
+        },
+        {
+          "id": "quest-cragmaw-castle",
+          "title": "寻访克拉格莫城堡",
+          "summary": "西达尔-荷温特支持玩家追踪克拉格莫城堡；锁定位置并打倒或赶走部落首领即可领赏。",
+          "reward": "500 金币。",
+          "pages": "22"
+        },
+        {
+          "id": "quest-iarno",
+          "title": "失踪的伊阿诺",
+          "summary": "调查特雷山大庄园及周边，找回两个月前失踪的领主联盟法师伊阿诺-阿布雷克，或他的遗物。西达尔不知道伊阿诺就是水晶之杖。",
+          "reward": "200 金币（消除红烙印威胁后支付）。",
+          "pages": "22"
+        },
+        {
+          "id": "quest-join-lords-alliance",
+          "title": "加入领主联盟",
+          "summary": "解除克拉格莫城堡威胁或揭发伊阿诺的变节后，西达尔会私下邀请想切实保障民众安全的人加入。",
+          "reward": "白袍头衔（title）。",
+          "pages": "22"
+        }
+      ]
+    },
+    {
+      "id": "scene-tresendar-manor",
+      "name": "特雷山大庄园",
+      "name_en": "Tresendar Manor",
+      "kind": "town_location",
+      "pages": "22-23",
+      "summary": "镇东小山坡上的废弃庄园，地表建筑已成残垣，地窖被红烙印改造成地下堡垒。",
+      "features": [
+        "地表明显的痕迹会把玩家引到原厨房位置向下的石楼梯，通往大本营区域 1。",
+        "卡普发现的秘道可直接到达区域 8。",
+        "南边树林中另有一条约百尺长的粗糙走私通道，也可进入区域 8。"
+      ],
+      "npc_ids": [],
+      "monster_ids": [],
+      "check_ids": [],
+      "reward_ids": [],
+      "connects_to": [
+        "scene-hideout-area-1",
+        "scene-hideout-area-8"
+      ]
+    },
+    {
+      "id": "scene-redbrand-ruffians",
+      "name": "红烙印恶霸（遭遇）",
+      "name_en": "Redbrand Ruffians",
+      "kind": "encounter",
+      "pages": "23-24",
+      "summary": "4 名人类恶霸在沉睡巨人酒馆或街上堵住玩家，勒索并动手；打败 3 人后最后一人会逃往特雷山大庄园。",
+      "features": [
+        "触发时机：玩家去沉睡巨人；或调查庄园时跳过；或玩家对红烙印不感兴趣、准备离开某地点时。",
+        "双方都不会被突袭。",
+        "被打败 3 人后，剩下的恶霸转身逃向特雷山大庄园。",
+        "被俘或受控的恶霸会供出大本营位置与首领情报。"
+      ],
+      "npc_ids": [
+        "npc-harbin-wester"
+      ],
+      "monster_ids": [
+        "monster-redbrand-ruffian"
+      ],
+      "check_ids": [],
+      "reward_ids": [
+        "reward-xp-redbrand-ruffians"
+      ],
+      "dm_guidance": [
+        "遭遇后应让玩家觉得该去解决剩下的帮匪；若他们还不清楚，让一名已见过的镇上 NPC 指路去特雷山大庄园。",
+        "玩家也可以先去第 3 章的其他短期冒险；再回凡度林时红烙印会更猖狂，届时必须解决他们。"
+      ],
+      "intel": [
+        "首领叫水晶之杖，是人类法师，使用一把水晶法杖；真名只有伊阿诺-阿布雷克与黑蜘蛛知道。",
+        "水晶之杖的房间在大本营最西边（区域 11 和 12）。",
+        "一个叫黑蜘蛛的神秘人雇佣红烙印吓跑冒险者、恐吓镇民；红烙印也不知道他为什么这么做。",
+        "黑蜘蛛派来一些熊地精打手增强红烙印实力（区域 9）。",
+        "大本营下层地区有一只可怕的大眼怪（区域 8）。",
+        "红烙印在靠近原地下墓室的地方囚禁了俘虏，由骷髅看守（区域 4 和 5）。"
+      ]
+    },
+    {
+      "id": "scene-redbrand-hideout",
+      "name": "红烙印大本营（总览）",
+      "name_en": "Redbrand Hideout",
+      "kind": "dungeon",
+      "pages": "24-33",
+      "summary": "特雷山大庄园地窖扩建而成的地下基地，包含储藏室、奴隶圈栏、工作间、营房与首领居所，共 12 个区域。",
+      "features": [
+        "石室地面铺平整石板，墙壁由加工石块砌成；地势自东向西降低，探索时会遇到台阶。",
+        "天花板：除非特别说明，通道和石室都是 10 尺高。",
+        "门：木门，有铁把手、折叶与内置锁；除非特别说明都不上锁。",
+        "撬锁：使用盗贼工具并通过 DC10 敏捷检定；直接破门：DC20 力量检定。",
+        "钥匙：伊阿诺-阿布雷克（区域 12）与莫斯克（区域 9）各有一把能开/锁所有门锁的铁钥匙。",
+        "密门：石头门混在石墙中；10 尺内被动感知（侦察）15 或以上可发现；主动搜索墙壁需 DC10 感知（侦察）检定；密门均未上锁，通过看不见的铁铰链旋转开启。",
+        "光线：墙上油灯点亮大部分区域，每隔几小时需要添灯油。"
+      ],
+      "access_routes": [
+        {
+          "from": "scene-tresendar-manor",
+          "to": "scene-hideout-area-1",
+          "note": "庄园原厨房位置的石楼梯向下。"
+        },
+        {
+          "from": "scene-alderleaf-farm",
+          "to": "scene-hideout-area-8",
+          "note": "卡普发现的荆棘丛秘道。"
+        },
+        {
+          "from": "external-south-tunnel",
+          "to": "scene-hideout-area-8",
+          "note": "庄园南边树林中约百尺长的粗糙走私通道。"
+        }
+      ],
+      "npc_ids": [
+        "npc-iarno-albrek",
+        "npc-mosk",
+        "npc-droop",
+        "npc-mirna-dendrar"
+      ],
+      "monster_ids": [
+        "monster-redbrand-ruffian",
+        "monster-skeleton",
+        "monster-nothic",
+        "monster-bugbear",
+        "monster-goblin-droop",
+        "monster-rat-familiar",
+        "monster-iarno-albrek"
+      ],
+      "check_ids": [
+        "check-secret-door-passive",
+        "check-secret-door-search",
+        "check-door-lock",
+        "check-door-break"
+      ],
+      "reward_ids": [],
+      "area_scene_ids": [
+        "scene-hideout-area-1",
+        "scene-hideout-area-2",
+        "scene-hideout-area-3",
+        "scene-hideout-area-4",
+        "scene-hideout-area-5",
+        "scene-hideout-area-6",
+        "scene-hideout-area-7",
+        "scene-hideout-area-8",
+        "scene-hideout-area-9",
+        "scene-hideout-area-10",
+        "scene-hideout-area-11",
+        "scene-hideout-area-12"
+      ]
+    },
+    {
+      "id": "scene-hideout-area-1",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 1,
+      "name": "地窖",
+      "name_en": "Cellar",
+      "kind": "dungeon_area",
+      "pages": "24-25",
+      "summary": "原庄园的大型储藏室，西墙的大水池占去近半空间；红烙印用满桶食物维持“无人使用”的假象。",
+      "features": [
+        "石楼梯下到 15 尺高的平台，两侧各有 U 型楼梯通往地面；北侧楼梯下有一扇门。",
+        "水池 10 尺深，围边比地面高 2 尺（池底在地面下 8 尺），屋顶滴水管注入冷水。",
+        "桶里装腌猪肉、咸牛肉、面粉、粮、苹果和麦芽酒；彻底检查或挪动桶会发出噪音，引起区域 2 注意。",
+        "水池南围墙水下 2 尺钉着一根绳子，系着防水小包；从水面看不见。",
+        "房间西南角有一扇密门。",
+        "区域 1 有隧道通往区域 8。"
+      ],
+      "npc_ids": [],
+      "monster_ids": [],
+      "check_ids": [
+        "check-cistern-rope"
+      ],
+      "reward_ids": [
+        "reward-area1-pouch"
+      ],
+      "connections": [
+        "scene-hideout-area-2",
+        "scene-hideout-area-8"
+      ],
+      "secret_door": "西南角；作为区域 1 通往区域 8 的隧道入口。"
+    },
+    {
+      "id": "scene-hideout-area-2",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 2,
+      "name": "营房",
+      "name_en": "Barracks",
+      "kind": "dungeon_area",
+      "pages": "25",
+      "summary": "储藏室兼临时住所；3 名红烙印恶霸在此休息，听到区域 1 的声响会武装并试图突袭。",
+      "features": [
+        "门边北墙有两张上下铺，床对面有木桶与板条箱。",
+        "3 名恶霸各系腰包；床铺边挂着 3 件脏兮兮的猩红披风。",
+        "战斗后若被玩家打倒两人，第 3 人会从密门逃走，从而暴露密门。"
+      ],
+      "npc_ids": [],
+      "monster_ids": [
+        "monster-redbrand-ruffian"
+      ],
+      "check_ids": [],
+      "reward_ids": [
+        "reward-xp-area-2",
+        "reward-area2-treasure"
+      ],
+      "connections": [
+        "scene-hideout-area-1"
+      ]
+    },
+    {
+      "id": "scene-hideout-area-3",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 3,
+      "name": "陷阱走廊",
+      "name_en": "Trapped Corridor",
+      "kind": "dungeon_area",
+      "pages": "25-26",
+      "summary": "原庄园地窖的走廊，红烙印挖空石头地板做成隐蔽陷坑；走廊尽头是一扇雕有哀伤天使的双开大门。",
+      "features": [
+        "两侧墙上每隔 10 尺有装饰性人造圆柱，青石地面覆盖厚灰。",
+        "陷坑上方的假地板由松石砖盖在脆弱木板上，只能承重 100 磅以下。",
+        "陷坑两边（南北）各有很窄的小边可以绕过；陷坑 20 尺深，坠落后受到 2d6 钝击伤害并倒地。"
+      ],
+      "npc_ids": [],
+      "monster_ids": [],
+      "check_ids": [
+        "check-pit-find",
+        "check-pit-edge",
+        "check-pit-save"
+      ],
+      "reward_ids": [
+        "reward-xp-area-3"
+      ],
+      "connections": [
+        "scene-hideout-area-2",
+        "scene-hideout-area-4"
+      ]
+    },
+    {
+      "id": "scene-hideout-area-4",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 4,
+      "name": "特雷山大墓室",
+      "name_en": "Tresendar Crypts",
+      "kind": "dungeon_area",
+      "pages": "26-27",
+      "summary": "特雷山大家族先人的陵墓，三具石棺各倚靠一具穿锈甲的骷髅；有生物靠近通往区域 5/6 的木门 10 尺内时，骷髅会苏醒攻击。",
+      "features": [
+        "三具雕刻精美的石棺，棺盖刻着两名男性与一名女性贵族；墙上圆柱浮雕橡树图案。",
+        "东南角有双开大门，圆形铜门闩暗淡无光。",
+        "除非生物穿着红烙印的猩红披风或说出暗号“伊尔法兰”，否则 3 只骷髅会活过来。",
+        "在房间中战斗会被区域 5 的红烙印帮匪听到。",
+        "打开棺盖主要只剩骨头与衣物残片，但能在每口石棺中找到一枚铂金图章戒指。"
+      ],
+      "npc_ids": [],
+      "monster_ids": [
+        "monster-skeleton"
+      ],
+      "check_ids": [],
+      "reward_ids": [
+        "reward-xp-area-4",
+        "reward-area4-treasure"
+      ],
+      "connections": [
+        "scene-hideout-area-3",
+        "scene-hideout-area-5",
+        "scene-hideout-area-6"
+      ]
+    },
+    {
+      "id": "scene-hideout-area-5",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 5,
+      "name": "奴隶圈栏",
+      "name_en": "Slave Pens",
+      "kind": "dungeon_area",
+      "pages": "27-28",
+      "summary": "长方形房间用两道铁栅栏墙分成三个隔间，关着米尔娜-丹度与她的两个孩子；2 名红烙印恶霸看守。",
+      "features": [
+        "三个隔间地面都堆着脏乱稻草；两个铁栅栏墙各有一扇小门，被铁链缠牢并用锁头锁紧。",
+        "南栏关着两个蓬头垢面的女人，北栏关着一个人类男孩；都穿灰色袍子、戴铁项圈。",
+        "中间正对门墙下有一堆衣服，属于两个月来被抓的至少一打俘虏。",
+        "看守大部分时间在嘲弄囚犯；听到区域 4 战斗会靠墙站在门边准备突袭。",
+        "囚犯不敢出声警告或呼救。"
+      ],
+      "npc_ids": [
+        "npc-mirna-dendrar",
+        "npc-nars",
+        "npc-nilsa"
+      ],
+      "monster_ids": [
+        "monster-redbrand-ruffian"
+      ],
+      "check_ids": [
+        "check-cell-gate-tools",
+        "check-cell-gate-force"
+      ],
+      "reward_ids": [
+        "reward-xp-area-5",
+        "reward-xp-area-5-family"
+      ],
+      "connections": [
+        "scene-hideout-area-4",
+        "scene-hideout-area-6"
+      ],
+      "quests": [
+        {
+          "id": "quest-mirna-heirloom",
+          "title": "米尔娜的传家宝",
+          "summary": "米尔娜小时候住在雷霆树镇，家里开药草与炼金物品商店；商店货架下埋着装有翡翠项链的盒子，位于雷霆树镇东南部。",
+          "reward": "无现金报酬；情感/剧情回报。",
+          "pages": "28",
+          "next": "指向第 3 章“雷霆树废墟”。"
+        }
+      ]
+    },
+    {
+      "id": "scene-hideout-area-6",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 6,
+      "name": "武器库",
+      "name_en": "Armory",
+      "kind": "dungeon_area",
+      "pages": "27-28",
+      "summary": "从外面锁上的武器库，存放红烙印为扩张准备的武器；正对锁门的墙上是通往区域 7 的密门。",
+      "features": [
+        "沿墙武器架：12 支矛、6 把短剑、4 把长剑、6 架轻型十字弓、8 筒 20 支装弩矢。",
+        "门边一排钩子上挂着 12 件肮脏的红披风。",
+        "门从外面锁上；区域 7 的密门在正对锁门的墙上。"
+      ],
+      "npc_ids": [],
+      "monster_ids": [],
+      "check_ids": [
+        "check-door-lock"
+      ],
+      "reward_ids": [
+        "reward-area6-weapons"
+      ],
+      "connections": [
+        "scene-hideout-area-4",
+        "scene-hideout-area-7"
+      ]
+    },
+    {
+      "id": "scene-hideout-area-7",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 7,
+      "name": "储藏室与工作间",
+      "name_en": "Storage Room and Workshop",
+      "kind": "dungeon_area",
+      "pages": "28",
+      "summary": "红烙印抢来物资的储藏室，位于大型天然洞穴最北端；南边是通往区域 8 的裂缝洞穴。",
+      "features": [
+        "石砖墙、青石板地面；靠墙堆着木桶、空板条箱、填充稻草、锤子、撬棍和钉子。",
+        "两扇密门：一扇通往区域 6，一扇通往区域 12。",
+        "大部分补给不值钱；几天前从三猪小径抢来的一批货中有 30 张硝制好的海狸皮。"
+      ],
+      "npc_ids": [],
+      "monster_ids": [],
+      "check_ids": [
+        "check-secret-door-search"
+      ],
+      "reward_ids": [
+        "reward-area7-pelts"
+      ],
+      "connections": [
+        "scene-hideout-area-6",
+        "scene-hideout-area-8",
+        "scene-hideout-area-12"
+      ]
+    },
+    {
+      "id": "scene-hideout-area-8",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 8,
+      "name": "裂缝",
+      "name_en": "Crevasse",
+      "kind": "dungeon_area",
+      "pages": "28-29",
+      "summary": "天然大洞穴，一道 5–10 尺宽、20 尺深的裂隙把洞穴分成两边，两座无护栏木桥横跨其上；守卫是一只大眼怪。",
+      "features": [
+        "冷风带着腐肉气息；两根 20 尺高的粗糙石柱支撑洞穴。",
+        "南边木桥是粗制建筑，50 磅以上的生物经过时会崩塌；靠近桥的角色可用 DC15 智力（调查）看出桥体粗糙。",
+        "任何生物都可以用一个动作破坏桥的任一边，使桥落入裂隙。",
+        "裂隙岩壁容易攀爬，无需能力检定；坠落受 2d6 钝击伤害，落地后视同困难地形。",
+        "裂隙底部有非自然的寒意；侦测魔法可见微弱死灵灵光，有机物质在此的熟成/腐烂速度减半。",
+        "底部有泰尔-丹度被吃了一半的尸体。",
+        "大眼怪潜伏在两座桥西边尽头，躲在大石柱后观察，并用 Weird Insight 探知角色秘密；可用心灵感应谈判（例如用食物换取不背叛红烙印）。"
+      ],
+      "npc_ids": [
+        "npc-thel-dendrar"
+      ],
+      "monster_ids": [
+        "monster-nothic"
+      ],
+      "check_ids": [
+        "check-bridge-notice",
+        "check-talon-history"
+      ],
+      "reward_ids": [
+        "reward-xp-area-8",
+        "reward-area8-treasure"
+      ],
+      "connections": [
+        "scene-hideout-area-1",
+        "scene-hideout-area-7",
+        "scene-hideout-area-9",
+        "external-south-tunnel"
+      ]
+    },
+    {
+      "id": "scene-hideout-area-9",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 9,
+      "name": "守卫营房",
+      "name_en": "Guard Barracks",
+      "kind": "dungeon_area",
+      "pages": "29-30",
+      "summary": "3 只熊地精与 1 只哥布林 Droop 在此；熊地精为黑蜘蛛工作、被派来帮助伊阿诺，为首者叫莫斯克。",
+      "features": [
+        "门外可听到粗哑的哥布林腔调命令，如“舔地板”“像狗一样打滚”。",
+        "四张粗木床、堆满的毯子与散乱盘子；空气中有强烈尸臭与腐肉味。",
+        "Droop 在队伍出现时晕倒；其他生物可用一个动作叫醒他，否则昏迷 1d10 分钟。",
+        "熊地精会忽视红烙印人类成员；穿猩红斗篷的角色会被当成伊阿诺的手下。",
+        "熊地精知道前往潮音洞穴与克拉格莫城堡的路线，但更怕黑蜘蛛，不会轻易说出。",
+        "Droop 知道大本营布局、密门与陷阱；被稍微威胁就会尽量回忆。他知道克拉格莫城堡在北方森林中，但不记得具体路线，建议抓一个巡逻哥布林问路。"
+      ],
+      "npc_ids": [
+        "npc-mosk",
+        "npc-droop"
+      ],
+      "monster_ids": [
+        "monster-bugbear",
+        "monster-goblin-droop"
+      ],
+      "check_ids": [
+        "check-bugbear-listen",
+        "check-bugbear-intimidate",
+        "check-bugbear-deceive"
+      ],
+      "reward_ids": [
+        "reward-xp-area-9",
+        "reward-area9-treasure"
+      ],
+      "connections": [
+        "scene-hideout-area-8",
+        "scene-hideout-area-10"
+      ]
+    },
+    {
+      "id": "scene-hideout-area-10",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 10,
+      "name": "一般房间",
+      "name_en": "Common Room",
+      "kind": "dungeon_area",
+      "pages": "30-31",
+      "summary": "红烙印的总部/接待室，也是守卫闲暇时的休息室；4 名喝醉的红烙印恶霸正在赌博。",
+      "features": [
+        "门外可听到赌博的嘎嘎声、尖叫、呻吟与咒骂；突然闯进房间可自动突袭这些恶霸。",
+        "破损桌椅散落，墙边有棕色/红色布料装饰，角落堆着麦芽酒桶。",
+        "4 名恶霸都喝得很醉，视同中毒状态；骰子灌了铅，持有者一直赢。",
+        "他们能认出玩家不是红烙印成员，即使穿猩红斗篷；擅长说服的角色可以“新雇员”身份加入赌局。"
+      ],
+      "npc_ids": [],
+      "monster_ids": [
+        "monster-redbrand-ruffian"
+      ],
+      "check_ids": [
+        "check-commonroom-listen",
+        "check-commonroom-deceive"
+      ],
+      "reward_ids": [
+        "reward-xp-area-10",
+        "reward-area10-treasure"
+      ],
+      "connections": [
+        "scene-hideout-area-9",
+        "scene-hideout-area-11"
+      ]
+    },
+    {
+      "id": "scene-hideout-area-11",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 11,
+      "name": "法师的工作间",
+      "name_en": "Wizard's Workshop",
+      "kind": "dungeon_area",
+      "pages": "31-32",
+      "summary": "伊阿诺的炼金工作间；他的老鼠魔宠在此看守，一旦发现入侵者会向主人发出简短警告。",
+      "features": [
+        "门边可听到细微冒泡与水滴声。",
+        "大桌上摆着蒸馏器、曲颈瓶、环状蒸馏器等炼金设备；书架塞满羊皮纸卷与奇怪书册。",
+        "老鼠魔宠：20 尺速度、AC10、1 HP、无攻击能力；被杀即消失。若不伤害它，它会在角色周围打转、假装好奇或饥饿，但绝对忠诚于伊阿诺。",
+        "书籍笔记多为基础炼金学；熟练秘法的角色能看出伊阿诺在做隐形药水且快完成了。",
+        "书中有一本矮人语写成的书，记载冒险者 Urmon 的旅程、凡戴尔失落矿坑与法术工厂历史，以及曾被黄昏之神 Lathander 的牧师持有的魔法钉锤 Lightbringer。"
+      ],
+      "npc_ids": [
+        "npc-iarno-albrek"
+      ],
+      "monster_ids": [
+        "monster-rat-familiar"
+      ],
+      "check_ids": [
+        "check-workshop-listen"
+      ],
+      "reward_ids": [
+        "reward-area11-ingredients"
+      ],
+      "connections": [
+        "scene-hideout-area-10",
+        "scene-hideout-area-12"
+      ]
+    },
+    {
+      "id": "scene-hideout-area-12",
+      "parent_scene_id": "scene-redbrand-hideout",
+      "area_no": 12,
+      "name": "水晶之杖的居所",
+      "name_en": "Glasstaff's Quarters",
+      "kind": "dungeon_area",
+      "pages": "31-33",
+      "summary": "伊阿诺“水晶之杖”的卧室；从区域 7 密道进入可突袭他，否则老鼠魔宠会提前警告，让他带着法杖与卷轴从东北密门逃走。",
+      "features": [
+        "墙上挂满猩红布幔；家具包括小写字台与木椅、舒适的床、床脚木箱。",
+        "突袭时：矮小、深色胡子、穿长袍的人类男性坐在桌前读书，穿高贵的貂皮斗篷，水晶法杖靠在椅边。",
+        "若被警告：伊阿诺会拿起防御法杖与箱中卷轴，从东北密门逃走；匆忙间留下黑蜘蛛的信件，并忘了关密门。",
+        "玩家寻找微开密门的能力检定有优势。",
+        "逃跑路线：区域 7 → 区域 8 → 区域 1，并抓起藏在蓄水池中的小包；若区域 8 的大眼怪还活着，他会指示其伏击追兵。",
+        "被追上时，伊阿诺会喝下小包中的隐形药水逃出藏身处，可在后续冒险中再度出现。",
+        "战斗：先以防御法杖对自己施放法师护甲，再攻击可见敌人；用杖中护盾术增强防护；HP 降到 8 以下且无路可逃时投降。",
+        "伊阿诺被捕后知道四条真实情报（黑蜘蛛是卓尔；三个熊地精是黑蜘蛛派来的；黑蜘蛛在找潮音洞穴中的法术工厂；没有领主联盟成员知道他叛变）。"
+      ],
+      "npc_ids": [
+        "npc-iarno-albrek",
+        "npc-black-spider"
+      ],
+      "monster_ids": [
+        "monster-iarno-albrek"
+      ],
+      "check_ids": [
+        "check-glasstaff-secretdoor"
+      ],
+      "reward_ids": [
+        "reward-xp-area-12",
+        "reward-area12-treasure"
+      ],
+      "connections": [
+        "scene-hideout-area-11",
+        "scene-hideout-area-7",
+        "scene-hideout-area-8",
+        "scene-hideout-area-1"
+      ],
+      "letter": {
+        "from": "黑蜘蛛",
+        "to": "伊阿诺-阿布雷克",
+        "summary": "绝冬城的探子报告一群陌生人要来凡度林，可能为矮人工作；能抓就抓，必要就杀，别让他们打乱计划；若看到矮人语地图，尽快送来。"
+      },
+      "capture_outcome": "伊阿诺被俘后会被西达尔监禁在镇长大厅，等待押送绝冬城；黑蜘蛛不会介入。"
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc-toblen-stonehill",
+      "name": "托布雷-石丘",
+      "name_en": "Toblen Stonehill",
+      "role": "石丘旅舍老板",
+      "location_scene_id": "scene-stonehill-inn",
+      "faction": null,
+      "importance": "major",
+      "pages": "18",
+      "summary": "短小友好的年轻男人，原是三猪小径东边的居民，来凡度林挖矿后改开旅馆；对红烙印不满但不想惹麻烦。",
+      "wants": "安稳经营旅馆，避免红烙印报复妻儿。",
+      "quest_ids": []
+    },
+    {
+      "id": "npc-elmar-barthen",
+      "name": "艾尔玛-巴森",
+      "name_en": "Elmar Barthen",
+      "role": "巴森小栈老板",
+      "location_scene_id": "scene-barthens-provisions",
+      "faction": null,
+      "importance": "major",
+      "pages": "19",
+      "summary": "五十多岁、干瘪秃顶但非常友善的商人；雇了两个年轻人安德与西斯尔帮忙。",
+      "wants": "救回好友刚铎-寻石者，并了解凡戴尔协定中的古矿。",
+      "quest_ids": [
+        "quest-rescue-gundren"
+      ],
+      "knows": "红烙印帮众经常出入沉睡巨人酒馆；寻石者兄弟中的塔登与南镀在镇外露营已一周未归，他不知道塔登已死、南镀被关在古矿。"
+    },
+    {
+      "id": "npc-daran-edermath",
+      "name": "达朗-埃德玛",
+      "name_en": "Daran Edermath",
+      "role": "退休冒险者/果园主",
+      "location_scene_id": "scene-edermath-orchard",
+      "faction": "臂铠社",
+      "importance": "major",
+      "pages": "19",
+      "summary": "银发半精灵，一百多岁，曾是巨龙海岸的战士与领导者；退休后回乡，仍关注凡度林局势。",
+      "wants": "有人教训红烙印；查明古枭井的挖掘者与不死生物。",
+      "quest_ids": [
+        "quest-old-owl-well",
+        "quest-join-gauntlet"
+      ],
+      "knows": "红烙印大本营在特雷山大庄园废墟下。"
+    },
+    {
+      "id": "npc-linene-graywind",
+      "name": "利涅涅-灰风",
+      "name_en": "Linene Graywind",
+      "role": "狮盾商会负责人",
+      "location_scene_id": "scene-lionshield-coster",
+      "faction": "狮盾商会",
+      "importance": "major",
+      "pages": "20",
+      "summary": "35 岁、说话尖酸刻薄的女人；知道货物被劫但不知道是谁干的。",
+      "wants": "追回被克拉格莫哥布林劫走的物资。",
+      "quest_ids": [
+        "quest-return-goods"
+      ],
+      "knows": "红烙印经常出没沉睡巨人，建议避开。"
+    },
+    {
+      "id": "npc-halia-thornton",
+      "name": "哈利娅-桑顿",
+      "name_en": "Halia Thornton",
+      "role": "凡度林淘金公会会长",
+      "location_scene_id": "scene-miners-exchange",
+      "faction": "散塔林会",
+      "importance": "major",
+      "pages": "20-21",
+      "summary": "善于理财、野心勃勃的人类女性；想把公会建成镇子的统治机构，目前控制凡度林的进展不大。",
+      "wants": "除掉水晶之杖并夺取红烙印帮，取得其住处信件。",
+      "quest_ids": [
+        "quest-halia-glasstaff",
+        "quest-join-zhentarim"
+      ],
+      "knows": "红烙印帮里有一个哥布林奴仆，可能知道克拉格莫城堡的位置。"
+    },
+    {
+      "id": "npc-qelline-alderleaf",
+      "name": "埃琳-阿黛尔利芙",
+      "name_en": "Qelline Alderleaf",
+      "role": "半身人农妇",
+      "location_scene_id": "scene-alderleaf-farm",
+      "faction": null,
+      "importance": "major",
+      "pages": "21",
+      "summary": "45 岁、务实且热情好客的半身人农妇，小镇万事通；愿意提供干草棚借宿。",
+      "wants": "帮助冒险者找到克拉格莫城堡与回浪洞穴。",
+      "quest_ids": [
+        "quest-reidoth",
+        "quest-carp-tunnel"
+      ],
+      "knows": "老德鲁伊莱多斯在雷霆树废墟，知道很多地方。"
+    },
+    {
+      "id": "npc-carp-alderleaf",
+      "name": "卡普-阿黛尔利芙",
+      "name_en": "Carp Alderleaf",
+      "role": "埃琳的儿子",
+      "location_scene_id": "scene-alderleaf-farm",
+      "faction": null,
+      "importance": "minor",
+      "pages": "21",
+      "summary": "10 岁、英勇早熟的半身人男孩，梦想成为冒险者。",
+      "wants": "像冒险者一样行动。",
+      "quest_ids": [
+        "quest-carp-tunnel"
+      ],
+      "knows": "特雷山大庄园附近荆棘丛中的秘道，通往红烙印大本营区域 8；曾看见熊地精从秘道出来与红烙印会合。"
+    },
+    {
+      "id": "npc-sister-garaele",
+      "name": "加拉尔修女",
+      "name_en": "Sister Garaele",
+      "role": "幸运神殿负责人",
+      "location_scene_id": "scene-shrine-of-luck",
+      "faction": "竖琴手同盟",
+      "importance": "major",
+      "pages": "21-22",
+      "summary": "年轻精灵教士，侍奉泰摩拉；对凡度林摆脱红烙印不抱希望，但仍定期向上级报告。",
+      "wants": "与女妖爱嘉莎交易，取得博哲托尔法术书的位置。",
+      "quest_ids": [
+        "quest-agatha",
+        "quest-join-harpers"
+      ],
+      "knows": "爱嘉莎的巢穴位置；女妖不愿回应她。"
+    },
+    {
+      "id": "npc-harbin-wester",
+      "name": "哈宾-威斯特",
+      "name_en": "Harbin Wester",
+      "role": "凡度林镇长/银行家",
+      "location_scene_id": "scene-townmasters-hall",
+      "faction": null,
+      "importance": "major",
+      "pages": "22",
+      "summary": "又胖又蠢、自命不凡的老男人；在红烙印威胁下声称“他们只是贪财，没什么大不了”。",
+      "wants": "维持表面太平，不愿得罪红烙印。",
+      "quest_ids": [
+        "quest-wyvern-tor"
+      ],
+      "knows": "飞龙崖附近有兽人；不会主动关押红烙印俘虏。"
+    },
+    {
+      "id": "npc-sildar-hallwinter",
+      "name": "西达尔-荷温特",
+      "name_en": "Sildar Hallwinter",
+      "role": "领主联盟密探",
+      "location_scene_id": "scene-townmasters-hall",
+      "faction": "领主联盟",
+      "importance": "major",
+      "pages": "17, 22",
+      "summary": "领主联盟成员，来凡度林建立法治与秩序；在石丘旅舍休息后前往镇长大厅表明身份。若寻找伊阿诺没有进展，他会去拜访镇长哈宾-威斯特。",
+      "wants": "找到回浪洞穴、帮助寻石者兄弟重开矿洞；找回失踪的伊阿诺。",
+      "quest_ids": [
+        "quest-cragmaw-castle",
+        "quest-iarno",
+        "quest-join-lords-alliance"
+      ],
+      "knows": "伊阿诺约两个月前在特雷山大庄园失踪；不知道伊阿诺就是水晶之杖。"
+    },
+    {
+      "id": "npc-iarno-albrek",
+      "name": "伊阿诺-阿布雷克",
+      "aliases": [
+        "水晶之杖",
+        "阿博瑞克",
+        "Glasstaff"
+      ],
+      "name_en": "Iarno Albrek / Glasstaff",
+      "role": "红烙印帮首领/前领主联盟法师",
+      "location_scene_id": "scene-hideout-area-12",
+      "faction": "红烙印帮（名义上为领主联盟叛徒）",
+      "importance": "major",
+      "pages": "31-33",
+      "summary": "矮小、深色胡子的人类法师，穿貂皮斗篷；以“水晶之杖”的名号控制红烙印，实际与卓尔黑蜘蛛勾结，觊觎法术工厂。",
+      "wants": "借红烙印巩固地位，并与黑蜘蛛分享潮音洞穴法术工厂的财富与秘密。",
+      "quest_ids": [],
+      "knows": "黑蜘蛛是卓尔；三个熊地精是黑蜘蛛派来的；黑蜘蛛在找潮音洞穴中的法术工厂；没有领主联盟成员知道他叛变。",
+      "personality": "以绅士而有礼的举止谈吐；称红烙印恶霸为“我的好绅士”，把绑架、纵火等称为“不愉快的小生意”或“不幸的事件”；称角色为“访客”，并假意遗憾不能提供合适的娱乐。表面优雅，实则与其他红烙印恶霸一样凶残傲慢。",
+      "capture_outcome": "若被俘，西达尔-荷温特会把他监禁在镇长大厅，直到能安全送回绝冬城；黑蜘蛛不会介入他的命运。"
+    },
+    {
+      "id": "npc-mirna-dendrar",
+      "name": "米尔娜-丹度",
+      "name_en": "Mirna Dendrar",
+      "role": "被囚的人类平民",
+      "location_scene_id": "scene-hideout-area-5",
+      "faction": null,
+      "importance": "minor",
+      "pages": "27-28",
+      "summary": "木匠泰尔-丹度的妻子；丈夫因反抗红烙印被杀，她与两个孩子被绑架准备卖为奴隶。",
+      "wants": "带孩子活着回到镇上；取回雷霆树镇商店下的翡翠项链。",
+      "quest_ids": [
+        "quest-mirna-heirloom"
+      ]
+    },
+    {
+      "id": "npc-nars",
+      "name": "纳尔斯",
+      "name_en": "Nars",
+      "role": "米尔娜的儿子",
+      "location_scene_id": "scene-hideout-area-5",
+      "faction": null,
+      "importance": "minor",
+      "pages": "27-28",
+      "summary": "13 岁的男孩，与母亲和姐姐一起被囚。",
+      "wants": "获救。",
+      "quest_ids": []
+    },
+    {
+      "id": "npc-nilsa",
+      "name": "纳尔莎",
+      "name_en": "Nilsa",
+      "role": "米尔娜的女儿",
+      "location_scene_id": "scene-hideout-area-5",
+      "faction": null,
+      "importance": "minor",
+      "pages": "27-28",
+      "summary": "18 岁的女孩，与母亲和弟弟一起被囚。",
+      "wants": "获救。",
+      "quest_ids": []
+    },
+    {
+      "id": "npc-thel-dendrar",
+      "name": "泰尔-丹度",
+      "name_en": "Thel Dendrar",
+      "role": "木雕师（已故）",
+      "location_scene_id": "scene-hideout-area-8",
+      "faction": null,
+      "importance": "minor",
+      "pages": "29",
+      "summary": "在凡度林被红烙印杀害的木雕师；尸体被丢在裂隙底部喂大眼怪，已被吃了一半。",
+      "wants": null,
+      "quest_ids": []
+    },
+    {
+      "id": "npc-mosk",
+      "name": "莫斯克",
+      "name_en": "Mosk",
+      "role": "熊地精首领",
+      "location_scene_id": "scene-hideout-area-9",
+      "faction": "黑蜘蛛",
+      "importance": "minor",
+      "pages": "29-30",
+      "summary": "三只熊地精的首领，戴着一只珠光宝气的眼罩（他两眼都没瞎，只是觉得有格调）。",
+      "wants": "替黑蜘蛛看住红烙印据点，欺负哥布林奴隶。",
+      "quest_ids": [],
+      "knows": "潮音洞穴与克拉格莫城堡的位置，但不会轻易说出。"
+    },
+    {
+      "id": "npc-droop",
+      "name": "Droop",
+      "name_en": "Droop",
+      "role": "哥布林奴隶",
+      "location_scene_id": "scene-hideout-area-9",
+      "faction": null,
+      "importance": "minor",
+      "pages": "29-30",
+      "summary": "被熊地精奴役的胆小哥布林；队伍出现时吓晕，被叫醒后只在战斗中躲藏。",
+      "wants": "不再被欺负；讨好更强的队伍。",
+      "quest_ids": [],
+      "knows": "红烙印藏身处布局、密门与陷阱；克拉格莫城堡在北方森林中，但不记得路线；建议抓一个巡逻哥布林问路。"
+    },
+    {
+      "id": "npc-black-spider",
+      "name": "黑蜘蛛",
+      "name_en": "The Black Spider",
+      "role": "幕后卓尔（本段未现身）",
+      "location_scene_id": null,
+      "faction": null,
+      "importance": "mentioned",
+      "pages": "23-24, 32-33",
+      "summary": "神秘卓尔，雇佣红烙印吓跑冒险者、恐吓镇民，并派熊地精帮助伊阿诺；正在寻找潮音洞穴中的法术工厂。",
+      "wants": "找到并控制潮音洞穴的法术工厂。",
+      "quest_ids": []
+    },
+    {
+      "id": "npc-agatha",
+      "name": "爱嘉莎",
+      "name_en": "Agatha",
+      "role": "女妖（任务目标，本段未现身）",
+      "location_scene_id": null,
+      "faction": null,
+      "importance": "mentioned",
+      "pages": "21-22",
+      "summary": "住在巢穴中的女妖；加拉尔修女需要有人带镶宝石的银梳子去换取博哲托尔法术书的位置。",
+      "wants": "奉承与合适的礼物。",
+      "quest_ids": [
+        "quest-agatha"
+      ]
+    },
+    {
+      "id": "npc-reidoth",
+      "name": "莱多斯",
+      "name_en": "Reidoth",
+      "role": "德鲁伊（任务目标，本段未现身）",
+      "location_scene_id": null,
+      "faction": null,
+      "importance": "mentioned",
+      "pages": "21",
+      "summary": "埃琳的老德鲁伊朋友，最近去了凡度林西北约 50 里的雷霆树废墟；据说没有他不知道的地方。",
+      "wants": null,
+      "quest_ids": [
+        "quest-reidoth"
+      ]
+    },
+    {
+      "id": "npc-narth",
+      "name": "南斯",
+      "name_en": "Narth",
+      "role": "石丘旅舍传闻来源（老农民）",
+      "location_scene_id": "scene-stonehill-inn",
+      "faction": null,
+      "importance": "minor",
+      "pages": "18",
+      "summary": "在石丘旅舍喝酒的老农民，谈起加拉尔修女受伤归来。",
+      "wants": null,
+      "quest_ids": []
+    },
+    {
+      "id": "npc-elsa",
+      "name": "爱莎",
+      "name_en": "Elsa",
+      "role": "石丘旅舍传闻来源（酒吧女招待）",
+      "location_scene_id": "scene-stonehill-inn",
+      "faction": null,
+      "importance": "minor",
+      "pages": "18",
+      "summary": "爱八卦的酒吧女招待，知道达朗-埃德玛以前是冒险者。",
+      "wants": null,
+      "quest_ids": []
+    },
+    {
+      "id": "npc-lanar",
+      "name": "莱纳",
+      "name_en": "Lanar",
+      "role": "石丘旅舍传闻来源（矿工）",
+      "location_scene_id": "scene-stonehill-inn",
+      "faction": null,
+      "importance": "minor",
+      "pages": "18",
+      "summary": "矿工，听说三猪小径最东边出现兽人强盗。",
+      "wants": null,
+      "quest_ids": []
+    },
+    {
+      "id": "npc-trilena",
+      "name": "崔琳娜",
+      "name_en": "Trilena",
+      "role": "石丘旅舍传闻来源（旅馆老板娘）",
+      "location_scene_id": "scene-stonehill-inn",
+      "faction": null,
+      "importance": "minor",
+      "pages": "18",
+      "summary": "旅馆老板娘，讲述了泰尔-丹度被杀、妻儿失踪的经过。",
+      "wants": null,
+      "quest_ids": []
+    },
+    {
+      "id": "npc-freda",
+      "name": "芙蕾达",
+      "name_en": "Freda",
+      "role": "石丘旅舍传闻来源（织布工）",
+      "location_scene_id": "scene-stonehill-inn",
+      "faction": null,
+      "importance": "minor",
+      "pages": "18",
+      "summary": "织布工，指出红烙印唯独不骚扰淘金公会。",
+      "wants": null,
+      "quest_ids": []
+    }
+  ],
+  "monsters": [
+    {
+      "id": "monster-redbrand-ruffian",
+      "name": "红烙印恶霸",
+      "name_en": "Redbrand Ruffian",
+      "type": "humanoid (human)",
+      "role": "帮派打手",
+      "pages": "23, 25, 27, 30",
+      "summary": "穿猩红披风、带武器的红烙印帮众；在遭遇、营房、奴隶圈栏与一般房间出现。",
+      "appearances": [
+        {
+          "scene_id": "scene-redbrand-ruffians",
+          "count": 4,
+          "xp": 400,
+          "note": "街头/酒馆遭遇；打倒 3 人后最后 1 人逃跑。"
+        },
+        {
+          "scene_id": "scene-hideout-area-2",
+          "count": 3,
+          "xp": 300,
+          "note": "休息中；听到区域 1 噪音会突袭。"
+        },
+        {
+          "scene_id": "scene-hideout-area-5",
+          "count": 2,
+          "xp": 200,
+          "note": "奴隶圈栏看守。"
+        },
+        {
+          "scene_id": "scene-hideout-area-10",
+          "count": 4,
+          "xp": 400,
+          "note": "醉酒（中毒状态）赌博。"
+        }
+      ],
+      "treasure": [
+        {
+          "scene_id": "scene-hideout-area-2",
+          "items": [
+            "7 gp 16 sp",
+            "5 gp 12 sp",
+            "15 pp + 2 颗石榴石（每颗 10 gp）",
+            "3 件猩红披风"
+          ]
+        }
+      ],
+      "intel": "被俘/受控后可供出：首领是水晶之杖（人类法师）；房间在区域 11-12；黑蜘蛛雇佣他们并派来熊地精；区域 8 有大眼怪；区域 4-5 有骷髅看守的俘虏。"
+    },
+    {
+      "id": "monster-skeleton",
+      "name": "骷髅",
+      "name_en": "Skeleton",
+      "type": "undead",
+      "role": "墓室守卫",
+      "pages": "26-27",
+      "summary": "三具穿锈甲的人类骷髅，倚靠在特雷山大墓室的石棺边。",
+      "appearances": [
+        {
+          "scene_id": "scene-hideout-area-4",
+          "count": 3,
+          "xp": 150,
+          "note": "有生物进入通往区域 5/6 的木门 10 尺内时苏醒；穿红披风或说暗号“伊尔法兰”可免战。"
+        }
+      ],
+      "treasure": [],
+      "intel": null
+    },
+    {
+      "id": "monster-nothic",
+      "name": "大眼怪",
+      "aliases": [
+        "独眼怪"
+      ],
+      "name_en": "Nothic",
+      "type": "aberration",
+      "role": "裂隙守卫",
+      "pages": "28-30",
+      "summary": "被裂隙微弱魔法吸引来的疯狂地底怪物；与伊阿诺达成交易，守卫据点以换取财宝与鲜肉，但并不可靠。",
+      "appearances": [
+        {
+          "scene_id": "scene-hideout-area-8",
+          "count": 1,
+          "xp": 450,
+          "note": "潜伏在桥梁西边石柱后；用 Weird Insight 探知秘密；可用心灵感应谈判（如食物）。击败或达成停战均给 XP。"
+        }
+      ],
+      "treasure": [
+        {
+          "scene_id": "scene-hideout-area-8",
+          "items": [
+            "160 sp",
+            "120 gp",
+            "5 颗孔雀石（每颗 15 gp）",
+            "2 瓶治疗药水",
+            "1 个占卜卷轴",
+            "+1 长剑 Talon（镀银剑鞘）"
+          ]
+        }
+      ],
+      "intel": "知道所有红烙印恶霸知道的事。"
+    },
+    {
+      "id": "monster-bugbear",
+      "name": "熊地精",
+      "name_en": "Bugbear",
+      "type": "humanoid (goblinoid)",
+      "role": "黑蜘蛛派来的打手",
+      "pages": "29-30",
+      "summary": "三只高大毛茸茸的熊地精，为首者叫莫斯克；为黑蜘蛛工作，被派来帮助伊阿诺。",
+      "appearances": [
+        {
+          "scene_id": "scene-hideout-area-9",
+          "count": 3,
+          "xp": 600,
+          "note": "与 Droop 同房；会忽视红烙印人类，穿猩红斗篷可被当成伊阿诺手下。"
+        }
+      ],
+      "treasure": [
+        {
+          "scene_id": "scene-hideout-area-9",
+          "items": [
+            "33 sp",
+            "镶宝石眼罩（50 gp）",
+            "能开/锁所有门锁的铁钥匙"
+          ]
+        }
+      ],
+      "intel": "知道潮音洞穴与克拉格莫城堡的位置，但更怕黑蜘蛛；DC15 魅力（胁迫）可打探。"
+    },
+    {
+      "id": "monster-goblin-droop",
+      "name": "Droop",
+      "name_en": "Droop",
+      "type": "humanoid (goblinoid)",
+      "role": "被奴役的哥布林",
+      "pages": "29-30",
+      "summary": "胆小的哥布林奴隶；被熊地精使唤，队伍出现时吓晕。",
+      "appearances": [
+        {
+          "scene_id": "scene-hideout-area-9",
+          "count": 1,
+          "xp": 0,
+          "note": "非战斗；可叫醒（1d10 分钟昏迷）；战斗中躲藏，被命令战斗则有劣势。"
+        }
+      ],
+      "treasure": [],
+      "intel": "知道藏身处布局、密门与陷阱；知道克拉格莫城堡在北方森林，但不记得路线。"
+    },
+    {
+      "id": "monster-rat-familiar",
+      "name": "老鼠魔宠",
+      "name_en": "Rat Familiar",
+      "type": "beast (familiar)",
+      "role": "伊阿诺的哨兵",
+      "pages": "31-32",
+      "summary": "伊阿诺留在工作间的老鼠魔宠；与主人有心电感应，发现入侵者会发出简短警告。",
+      "appearances": [
+        {
+          "scene_id": "scene-hideout-area-11",
+          "count": 1,
+          "xp": 0,
+          "note": "20 尺速度、AC10、1 HP、无攻击能力；被杀即消失。"
+        }
+      ],
+      "treasure": [],
+      "intel": "会把入侵者消息传给伊阿诺，使其有时间准备或逃跑。"
+    },
+    {
+      "id": "monster-iarno-albrek",
+      "name": "伊阿诺-阿布雷克（水晶之杖）",
+      "name_en": "Iarno Albrek (Glasstaff)",
+      "type": "humanoid (human, mage)",
+      "role": "红烙印帮首领",
+      "pages": "31-33",
+      "summary": "人类法师，红烙印帮的实际首领；使用防御法杖，可施放法师护甲与护盾术。",
+      "appearances": [
+        {
+          "scene_id": "scene-hideout-area-12",
+          "count": 1,
+          "xp": 200,
+          "note": "杀死 200 XP；俘虏并送交西达尔-荷温特则 XP 加倍（400）。HP 降到 8 以下且无路可逃时投降。"
+        }
+      ],
+      "treasure": [
+        {
+          "scene_id": "scene-hideout-area-12",
+          "items": [
+            "180 sp",
+            "130 gp",
+            "5 颗红玉髓（每颗 10 gp）",
+            "2 颗橄榄石（每颗 15 gp）",
+            "1 颗珍珠（100 gp）",
+            "魅惑人类卷轴",
+            "火球术卷轴",
+            "防御法杖"
+          ]
+        }
+      ],
+      "intel": "黑蜘蛛是卓尔；三个熊地精是黑蜘蛛派来的；黑蜘蛛在找潮音洞穴中的法术工厂；没有领主联盟成员知道他叛变。"
+    }
+  ],
+  "checks": [
+    {
+      "id": "check-barthen-history",
+      "scene_id": "scene-barthens-provisions",
+      "check": "智力（历史）",
+      "dc": 15,
+      "purpose": "从巴森处了解凡戴尔协定与古矿的背景。",
+      "pages": "19"
+    },
+    {
+      "id": "check-halia-insight",
+      "scene_id": "scene-miners-exchange",
+      "check": "感知（洞察）",
+      "dc": 15,
+      "purpose": "察觉哈利娅想取水晶之杖而代之的动机不纯。",
+      "pages": "21"
+    },
+    {
+      "id": "check-secret-door-passive",
+      "scene_id": "scene-redbrand-hideout",
+      "check": "被动感知（侦察）",
+      "dc": 15,
+      "purpose": "在密门 10 尺范围内发现石制密门。",
+      "pages": "24"
+    },
+    {
+      "id": "check-secret-door-search",
+      "scene_id": "scene-redbrand-hideout",
+      "check": "感知（侦察）",
+      "dc": 10,
+      "purpose": "主动搜索墙壁时发现密门。",
+      "pages": "24"
+    },
+    {
+      "id": "check-door-lock",
+      "scene_id": "scene-redbrand-hideout",
+      "check": "敏捷（盗贼工具）",
+      "dc": 10,
+      "purpose": "撬开木门锁。",
+      "pages": "24"
+    },
+    {
+      "id": "check-door-break",
+      "scene_id": "scene-redbrand-hideout",
+      "check": "力量",
+      "dc": 20,
+      "purpose": "直接破坏木门。",
+      "pages": "24"
+    },
+    {
+      "id": "check-cistern-rope",
+      "scene_id": "scene-hideout-area-1",
+      "check": "感知（侦察）",
+      "dc": 15,
+      "purpose": "发现水池南围墙水下 2 尺的绳子与小包；也可用长杆划拉或跳入池中。",
+      "pages": "25"
+    },
+    {
+      "id": "check-pit-find",
+      "scene_id": "scene-hideout-area-3",
+      "check": "感知（侦察）",
+      "dc": 15,
+      "purpose": "发现走廊中间的隐藏陷坑。",
+      "pages": "26"
+    },
+    {
+      "id": "check-pit-edge",
+      "scene_id": "scene-hideout-area-3",
+      "check": "敏捷（杂技）",
+      "dc": 10,
+      "purpose": "从陷坑南北两侧的窄边绕过去。",
+      "pages": "26"
+    },
+    {
+      "id": "check-pit-save",
+      "scene_id": "scene-hideout-area-3",
+      "check": "敏捷豁免",
+      "dc": 15,
+      "purpose": "触发陷阱或绕路失败时抓住坑缘；再次失败则坠落 20 尺，受 2d6 钝击伤害并倒地。",
+      "pages": "26"
+    },
+    {
+      "id": "check-cell-gate-tools",
+      "scene_id": "scene-hideout-area-5",
+      "check": "敏捷（盗贼工具）",
+      "dc": 10,
+      "purpose": "打开奴隶圈栏的铁栅栏门锁。",
+      "pages": "27"
+    },
+    {
+      "id": "check-cell-gate-force",
+      "scene_id": "scene-hideout-area-5",
+      "check": "力量",
+      "dc": 22,
+      "purpose": "暴力撬开奴隶圈栏铁门。",
+      "pages": "27"
+    },
+    {
+      "id": "check-bridge-notice",
+      "scene_id": "scene-hideout-area-8",
+      "check": "智力（调查）",
+      "dc": 15,
+      "purpose": "靠近桥时看出南边木桥的粗糙建筑，判断其易塌。",
+      "pages": "29"
+    },
+    {
+      "id": "check-talon-history",
+      "scene_id": "scene-hideout-area-8",
+      "check": "智力（历史）",
+      "dc": 15,
+      "purpose": "认出 +1 长剑 Talon 与骑士 Aldith Tresendar（黑鹰）的历史。",
+      "pages": "29"
+    },
+    {
+      "id": "check-bugbear-listen",
+      "scene_id": "scene-hideout-area-9",
+      "check": "感知（侦察）",
+      "dc": 10,
+      "purpose": "在门外听见熊地精用哥布林腔调发号施令。",
+      "pages": "29"
+    },
+    {
+      "id": "check-bugbear-intimidate",
+      "scene_id": "scene-hideout-area-9",
+      "check": "魅力（威吓）",
+      "dc": 15,
+      "purpose": "审问被俘熊地精，打探潮音洞穴/克拉格莫城堡的路线。",
+      "pages": "30"
+    },
+    {
+      "id": "check-bugbear-deceive",
+      "scene_id": "scene-hideout-area-9",
+      "check": "魅力（欺瞒）",
+      "dc": 15,
+      "purpose": "说服熊地精把队伍当成伊阿诺手下，去处理“背叛者/冒充者”。",
+      "pages": "30"
+    },
+    {
+      "id": "check-commonroom-listen",
+      "scene_id": "scene-hideout-area-10",
+      "check": "感知（侦察）",
+      "dc": 10,
+      "purpose": "在门外听见恶霸赌博的声音。",
+      "pages": "30"
+    },
+    {
+      "id": "check-commonroom-deceive",
+      "scene_id": "scene-hideout-area-10",
+      "check": "魅力（欺瞒）",
+      "dc": 10,
+      "purpose": "冒充新雇员加入赌局，避免立即开战。",
+      "pages": "31"
+    },
+    {
+      "id": "check-workshop-listen",
+      "scene_id": "scene-hideout-area-11",
+      "check": "感知（侦察）",
+      "dc": 15,
+      "purpose": "在门边听见细微的冒泡与水滴声。",
+      "pages": "31"
+    },
+    {
+      "id": "check-glasstaff-secretdoor",
+      "scene_id": "scene-hideout-area-12",
+      "check": "能力检定（寻找微开的密门）",
+      "dc": null,
+      "purpose": "伊阿诺逃跑时忘了关密门，玩家寻找它的检定有优势。",
+      "pages": "32"
+    }
+  ],
+  "rewards": [
+    {
+      "id": "reward-barthen-delivery",
+      "type": "gold",
+      "scene_id": "scene-barthens-provisions",
+      "amount": "每人 10 gp",
+      "details": "把补给送到巴森小栈后按事先谈好的价钱支付。",
+      "pages": "19"
+    },
+    {
+      "id": "reward-linene-goods",
+      "type": "gold",
+      "scene_id": "scene-lionshield-coster",
+      "amount": 50,
+      "unit": "gp",
+      "details": "归还克拉格莫窝点区域 8 的货物，或告知货物所在地。",
+      "pages": "20"
+    },
+    {
+      "id": "reward-halia-quest",
+      "type": "gold",
+      "scene_id": "scene-miners-exchange",
+      "amount": 100,
+      "unit": "gp",
+      "details": "除掉水晶之杖并带回其住处找到的信件。",
+      "pages": "21"
+    },
+    {
+      "id": "reward-harbin-orcs",
+      "type": "gold",
+      "scene_id": "scene-townmasters-hall",
+      "amount": 100,
+      "unit": "gp",
+      "details": "解决飞龙崖附近的兽人威胁。",
+      "pages": "22"
+    },
+    {
+      "id": "reward-sildar-castle",
+      "type": "gold",
+      "scene_id": "scene-townmasters-hall",
+      "amount": 500,
+      "unit": "gp",
+      "details": "锁定克拉格莫城堡位置并打倒或赶走部落首领。",
+      "pages": "22"
+    },
+    {
+      "id": "reward-sildar-iarno",
+      "type": "gold",
+      "scene_id": "scene-townmasters-hall",
+      "amount": 200,
+      "unit": "gp",
+      "details": "消除红烙印威胁（与伊阿诺的命运无关）。",
+      "pages": "22"
+    },
+    {
+      "id": "reward-garaele-potions",
+      "type": "item",
+      "scene_id": "scene-shrine-of-luck",
+      "items": [
+        "3 瓶治疗药水"
+      ],
+      "details": "完成与爱嘉莎的交易后，加拉尔修女致谢。",
+      "pages": "21-22"
+    },
+    {
+      "id": "reward-title-knight",
+      "type": "title",
+      "scene_id": "scene-edermath-orchard",
+      "items": [
+        "骑士"
+      ],
+      "details": "解决红烙印与古枭井后加入臂铠社。",
+      "pages": "19"
+    },
+    {
+      "id": "reward-title-fang",
+      "type": "title",
+      "scene_id": "scene-miners-exchange",
+      "items": [
+        "白牙"
+      ],
+      "details": "解决水晶之杖后加入散塔林会。",
+      "pages": "21"
+    },
+    {
+      "id": "reward-title-watcher",
+      "type": "title",
+      "scene_id": "scene-shrine-of-luck",
+      "items": [
+        "守望者"
+      ],
+      "details": "帮加拉尔取得博哲托尔法术书的消息后加入竖琴手同盟。",
+      "pages": "22"
+    },
+    {
+      "id": "reward-title-cloak",
+      "type": "title",
+      "scene_id": "scene-townmasters-hall",
+      "items": [
+        "白袍"
+      ],
+      "details": "解除克拉格莫城堡威胁或揭发伊阿诺后加入领主联盟。",
+      "pages": "22"
+    },
+    {
+      "id": "reward-xp-redbrand-ruffians",
+      "type": "xp",
+      "scene_id": "scene-redbrand-ruffians",
+      "amount": 400,
+      "split": "小队平分",
+      "details": "打败 4 名红烙印恶霸。",
+      "pages": "23"
+    },
+    {
+      "id": "reward-xp-area-2",
+      "type": "xp",
+      "scene_id": "scene-hideout-area-2",
+      "amount": 300,
+      "split": "小队平分",
+      "details": "打败营房里的 3 名恶霸。",
+      "pages": "25"
+    },
+    {
+      "id": "reward-xp-area-3",
+      "type": "xp",
+      "scene_id": "scene-hideout-area-3",
+      "amount": 100,
+      "split": "小队平分",
+      "details": "避开陷坑或活着从陷坑爬出。",
+      "pages": "26"
+    },
+    {
+      "id": "reward-xp-area-4",
+      "type": "xp",
+      "scene_id": "scene-hideout-area-4",
+      "amount": 150,
+      "split": "小队平分",
+      "details": "打败 3 只骷髅。",
+      "pages": "27"
+    },
+    {
+      "id": "reward-xp-area-5",
+      "type": "xp",
+      "scene_id": "scene-hideout-area-5",
+      "amount": 200,
+      "split": "小队平分",
+      "details": "打败奴隶圈栏的 2 名恶霸。",
+      "pages": "28"
+    },
+    {
+      "id": "reward-xp-area-5-family",
+      "type": "xp",
+      "scene_id": "scene-hideout-area-5",
+      "amount": 100,
+      "split": "小队平分",
+      "details": "丹度一家活着回到镇上。",
+      "pages": "28"
+    },
+    {
+      "id": "reward-xp-area-8",
+      "type": "xp",
+      "scene_id": "scene-hideout-area-8",
+      "amount": 450,
+      "split": "小队平分",
+      "details": "击败大眼怪或与其达成停战。",
+      "pages": "29"
+    },
+    {
+      "id": "reward-xp-area-9",
+      "type": "xp",
+      "scene_id": "scene-hideout-area-9",
+      "amount": 600,
+      "split": "小队平分",
+      "details": "击败 3 只熊地精。",
+      "pages": "30"
+    },
+    {
+      "id": "reward-xp-area-10",
+      "type": "xp",
+      "scene_id": "scene-hideout-area-10",
+      "amount": 400,
+      "split": "小队平分",
+      "details": "击败一般房间里的 4 名恶霸。",
+      "pages": "31"
+    },
+    {
+      "id": "reward-xp-area-12",
+      "type": "xp",
+      "scene_id": "scene-hideout-area-12",
+      "amount": 200,
+      "split": "小队平分",
+      "bonus": "俘虏伊阿诺并送交西达尔-荷温特则 XP 加倍（400）",
+      "details": "杀死伊阿诺。",
+      "pages": "33"
+    },
+    {
+      "id": "reward-area1-pouch",
+      "type": "treasure",
+      "scene_id": "scene-hideout-area-1",
+      "items": [
+        "治疗药水 ×1",
+        "隐形药水 ×1",
+        "50 gp",
+        "干净的普通旅行者衣物 ×1"
+      ],
+      "details": "水池南围墙水下 2 尺的防水小包，伊阿诺的紧急逃离装备。",
+      "pages": "25"
+    },
+    {
+      "id": "reward-area2-treasure",
+      "type": "treasure",
+      "scene_id": "scene-hideout-area-2",
+      "items": [
+        "7 gp 16 sp",
+        "5 gp 12 sp",
+        "15 pp",
+        "石榴石 ×2（每颗 10 gp）",
+        "猩红披风 ×3"
+      ],
+      "details": "3 名恶霸的腰包与床铺边。",
+      "pages": "25"
+    },
+    {
+      "id": "reward-area4-treasure",
+      "type": "treasure",
+      "scene_id": "scene-hideout-area-4",
+      "items": [
+        "铂金图章戒指 ×3（每枚 50 gp）"
+      ],
+      "details": "每口石棺的骨头中间各一枚。",
+      "pages": "27"
+    },
+    {
+      "id": "reward-area6-weapons",
+      "type": "treasure",
+      "scene_id": "scene-hideout-area-6",
+      "items": [
+        "矛 ×12",
+        "短剑 ×6",
+        "长剑 ×4",
+        "轻型十字弓 ×6",
+        "20 支装弩矢 ×8 筒",
+        "红披风 ×12"
+      ],
+      "details": "红烙印为扩张储备的武器装备。",
+      "pages": "28"
+    },
+    {
+      "id": "reward-area7-pelts",
+      "type": "treasure",
+      "scene_id": "scene-hideout-area-7",
+      "items": [
+        "硝制海狸皮 ×30（每张 2 gp）"
+      ],
+      "details": "几天前从三猪小径抢来的货物。",
+      "pages": "28"
+    },
+    {
+      "id": "reward-area8-treasure",
+      "type": "treasure",
+      "scene_id": "scene-hideout-area-8",
+      "items": [
+        "160 sp",
+        "120 gp",
+        "孔雀石 ×5（每颗 15 gp）",
+        "治疗药水 ×2",
+        "占卜卷轴 ×1",
+        "+1 长剑 Talon（镀银剑鞘）"
+      ],
+      "details": "裂隙底部北桥下的破损木箱，从裂隙边缘看不见；Talon 可用 DC15 智力（历史）认出。",
+      "pages": "29"
+    },
+    {
+      "id": "reward-area9-treasure",
+      "type": "treasure",
+      "scene_id": "scene-hideout-area-9",
+      "items": [
+        "33 sp",
+        "镶宝石眼罩（50 gp）",
+        "铁钥匙（开/锁所有门锁）"
+      ],
+      "details": "莫斯克身上。",
+      "pages": "30"
+    },
+    {
+      "id": "reward-area10-treasure",
+      "type": "treasure",
+      "scene_id": "scene-hideout-area-10",
+      "items": [
+        "75 cp",
+        "55 sp",
+        "22 ep",
+        "15 gp",
+        "镶红宝石金耳环（30 gp）"
+      ],
+      "details": "桌上的赌注。",
+      "pages": "30"
+    },
+    {
+      "id": "reward-area11-ingredients",
+      "type": "treasure",
+      "scene_id": "scene-hideout-area-11",
+      "items": [
+        "水银（25 gp）",
+        "龙胆汁（25 gp）",
+        "山葵粉（25 gp）"
+      ],
+      "details": "三个小瓶装的稀有炼金材料。",
+      "pages": "31"
+    },
+    {
+      "id": "reward-area12-treasure",
+      "type": "treasure",
+      "scene_id": "scene-hideout-area-12",
+      "items": [
+        "180 sp",
+        "130 gp",
+        "红玉髓 ×5（每颗 10 gp）",
+        "橄榄石 ×2（每颗 15 gp）",
+        "珍珠 ×1（100 gp）",
+        "魅惑人类卷轴 ×1",
+        "火球术卷轴 ×1",
+        "防御法杖（详见附录 A）"
+      ],
+      "details": "床脚未上锁的木箱；防御法杖在伊阿诺手上。",
+      "pages": "33"
+    }
+  ]
+}
