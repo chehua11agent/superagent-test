@@ -1,0 +1,6828 @@
+{
+ "schema_version": "lmop-crossref-v1",
+ "generated_at": "2026-11-15",
+ "source": "data/lmop/p001-015.json, p016-033.json, p034-061.json, p062-090.json, maps.json, rules.json",
+ "note": "本文件由 scripts/build-lmop-crossref.mjs 生成；不要手改。",
+ "coverage": {
+  "records_total": 93,
+  "records_with_mechanics": 82,
+  "records_without_checks_monsters_rewards": [
+   "scene-travel-to-phandalin",
+   "scene-area-1-entrance",
+   "scene-phandalin",
+   "scene-stonehill-inn",
+   "scene-alderleaf-farm",
+   "scene-tresendar-manor",
+   "lmop:area:thundertree-4",
+   "lmop:scene:area-7",
+   "lmop:scene:area-13",
+   "lmop:scene:area-16",
+   "lmop:scene:area-17"
+  ],
+  "records_with_rules_only": [
+   "scene-travel-to-phandalin",
+   "scene-area-1-entrance",
+   "scene-phandalin",
+   "scene-stonehill-inn",
+   "scene-alderleaf-farm",
+   "scene-tresendar-manor",
+   "lmop:area:thundertree-4",
+   "lmop:scene:area-7",
+   "lmop:scene:area-13",
+   "lmop:scene:area-16",
+   "lmop:scene:area-17"
+  ],
+  "checks_total": 95,
+  "checks_mapped": 95,
+  "unresolved_checks": [],
+  "checks_by_kind": {
+   "contest": 10,
+   "ability_check": 67,
+   "passive": 6,
+   "saving_throw": 11,
+   "procedure": 1
+  },
+  "dc_distribution": {
+   "10": 30,
+   "11": 1,
+   "12": 5,
+   "15": 36,
+   "20": 6,
+   "22": 1,
+   "25": 1
+  },
+  "hazards_total": 8,
+  "rewards_total": 103,
+  "rewards_mapped": 103,
+  "unassigned_rewards": [
+   {
+    "reward_id": "reward-hook-payment",
+    "type": "currency",
+    "scene_id": null,
+    "area_id": null,
+    "rule_ids": [
+     "rule-treasure"
+    ]
+   }
+  ],
+  "unresolved_rewards": [],
+  "monsters_total": 73,
+  "missing_stat_blocks": [
+   "lmop:monster:ochre-jelly",
+   "lmop:monster:wraith"
+  ],
+  "missing_stat_block_note": "赭色果冻怪与缚灵在正文出现但附录B未给数据卡；XP按《怪物图鉴》估算。",
+  "rules_total": 49,
+  "rules_used": [
+   "rule-ability-check",
+   "rule-action",
+   "rule-advantage",
+   "rule-animal-handling",
+   "rule-attunement",
+   "rule-break-object",
+   "rule-climb",
+   "rule-condition",
+   "rule-contest",
+   "rule-cover",
+   "rule-darkvision",
+   "rule-dc",
+   "rule-death",
+   "rule-difficult-terrain",
+   "rule-falling",
+   "rule-fire",
+   "rule-flood",
+   "rule-flying",
+   "rule-frightened",
+   "rule-group-check",
+   "rule-healing",
+   "rule-initiative",
+   "rule-light",
+   "rule-lock",
+   "rule-magic-item",
+   "rule-monster-stat",
+   "rule-npc-party",
+   "rule-passive-check",
+   "rule-poisoned",
+   "rule-prone",
+   "rule-quest",
+   "rule-random-encounter",
+   "rule-rest",
+   "rule-restrained",
+   "rule-saving-throw",
+   "rule-secret-door",
+   "rule-skill",
+   "rule-social",
+   "rule-spell-scroll",
+   "rule-spellcasting",
+   "rule-stealth",
+   "rule-surprise",
+   "rule-tool",
+   "rule-trap",
+   "rule-travel",
+   "rule-treasure",
+   "rule-water",
+   "rule-weapon",
+   "rule-xp"
+  ],
+  "rules_unused": []
+ },
+ "level_audit": {
+  "thresholds": [
+   {
+    "level": 1,
+    "xp": 0
+   },
+   {
+    "level": 2,
+    "xp": 300
+   },
+   {
+    "level": 3,
+    "xp": 900
+   },
+   {
+    "level": 4,
+    "xp": 2700
+   },
+   {
+    "level": 5,
+    "xp": 6500
+   },
+   {
+    "level": 6,
+    "xp": 14000
+   }
+  ],
+  "milestones": [
+   {
+    "after": "part1",
+    "target_level": 2,
+    "note": "模组明示：275 XP 应足够升到 2 级（另有 75 XP 里程碑，合计 350/PC）。"
+   },
+   {
+    "after": "part2",
+    "target_level": 3,
+    "note": "模组设想角色在第二章结束时达到 3 级。"
+   },
+   {
+    "after": "part3",
+    "target_level": 4,
+    "note": "模组明示：第三章开始时角色可能已达 3 级，第四章为 4 级设计。"
+   },
+   {
+    "after": "part4",
+    "target_level": 5,
+    "note": "入门套装预设终局 5 级；XP 是否足够取决于队伍人数与是否杀死毒牙。"
+   }
+  ],
+  "inputs": {
+   "part1_per_pc": 350,
+   "part2_total": 2900,
+   "part3_drive_off_total": 9600,
+   "part3_kill_total": 13500,
+   "part4_listed_total": 200,
+   "part4_monster_total": 11550,
+   "part4_monster_note": "含附录B遭遇的9300 XP；赭色果冻怪450与缚灵1800按《怪物图鉴》估算，因模组附录未给数据卡。"
+  },
+  "scenarios": [
+   {
+    "party_size": 4,
+    "part3_path": "drive_off",
+    "part1_per_pc": 350,
+    "part2_per_pc": 725,
+    "part3_per_pc": 2400,
+    "part4_per_pc": 2937.5,
+    "cumulative_per_pc": 6412.5,
+    "level_by_xp": 4
+   },
+   {
+    "party_size": 4,
+    "part3_path": "kill",
+    "part1_per_pc": 350,
+    "part2_per_pc": 725,
+    "part3_per_pc": 3375,
+    "part4_per_pc": 2937.5,
+    "cumulative_per_pc": 7387.5,
+    "level_by_xp": 5
+   },
+   {
+    "party_size": 5,
+    "part3_path": "drive_off",
+    "part1_per_pc": 350,
+    "part2_per_pc": 580,
+    "part3_per_pc": 1920,
+    "part4_per_pc": 2350,
+    "cumulative_per_pc": 5200,
+    "level_by_xp": 4
+   },
+   {
+    "party_size": 5,
+    "part3_path": "kill",
+    "part1_per_pc": 350,
+    "part2_per_pc": 580,
+    "part3_per_pc": 2700,
+    "part4_per_pc": 2350,
+    "cumulative_per_pc": 5980,
+    "level_by_xp": 4
+   }
+  ],
+  "finding": "按标准“队伍平分 XP”计算：第二部分结束时稳定到 3 级；第三部分结束稳定到 4 级；终局 5 级只在 4 人队且杀死毒牙时由 XP 自然达到。若队伍 5 人或只赶走毒牙，建议在战役结束时使用里程碑升到 5 级，以符合入门套装的预设终局。"
+ },
+ "records": [
+  {
+   "record_id": "module:lmop",
+   "record_type": "module",
+   "part": "all",
+   "part_no": 0,
+   "name": "全局规则与游荡怪物",
+   "name_en": "Module-wide rules",
+   "kind": "module",
+   "page": null,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": null,
+   "rule_ids": [
+    "rule-random-encounter",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:wandering-monsters",
+     "kind": "procedure",
+     "ability": null,
+     "skill": null,
+     "dc": null,
+     "label": "游荡怪物判定",
+     "success": "掷 d20，17–20 触发一次遭遇；DM 也可直接决定触发。",
+     "failure": "无遭遇。",
+     "notes": "触发后掷 d12 对照游荡怪物表。",
+     "rule_ids": [
+      "rule-random-encounter"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-hook-payment",
+     "type": "currency",
+     "amount": 10,
+     "currency": "gp",
+     "condition": "将补给平安送到凡度林交易站",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-travel-to-phandalin",
+   "record_type": "scene",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "前往凡度林",
+   "name_en": null,
+   "kind": "setup",
+   "page": "5",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "PC 驾驶满载补给的马车，从无冬城出发，沿南部大道走几天后向东转入三猪小道；距凡度林还有半天路程时，遭遇克拉格莫哥布林。",
+   "rule_ids": [
+    "rule-travel"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-goblin-ambush",
+   "record_type": "scene",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "哥布林突袭",
+   "name_en": null,
+   "kind": "combat",
+   "page": "5-6-7",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-road-to-phandalin",
+   "map_area_no": 0,
+   "map_area_name": "小径伏击点",
+   "summary": "4 只哥布林藏在道路两侧灌木中，等 PC 接近马尸时发动伏击；击败 3 只后最后 1 只逃跑。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-contest",
+    "rule-cover",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-stealth",
+    "rule-surprise",
+    "rule-travel"
+   ],
+   "mechanics_summary": "1 项检定/豁免；4 只怪物",
+   "checks": [
+    {
+     "check_id": "check-goblin-ambush-surprise",
+     "kind": "contest",
+     "ability": "敏捷",
+     "skill": "隐匿",
+     "dc": null,
+     "label": null,
+     "success": "哥布林隐匿结果高于 PC 被动感知时，该 PC 被突袭，战斗第一轮无法行动。",
+     "failure": "PC 未被突袭。",
+     "notes": "原文称“被动感知（洞察）”；本文件按 5e 标准技能名写作“察觉/感知”。",
+     "rule_ids": [
+      "rule-contest",
+      "rule-skill",
+      "rule-surprise"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-goblin",
+     "count": 4,
+     "notes": "道路两侧各 2 只；2 只近战、2 只远程。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-goblin-trail",
+   "record_type": "scene",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "哥布林小径",
+   "name_en": null,
+   "kind": "exploration",
+   "page": "7",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "PC 在灌木后发现一条向西北的小径；沿途有套圈陷阱和陷坑，尽头是 5 英里外的克拉格莫窝点。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-condition",
+    "rule-dc",
+    "rule-falling",
+    "rule-passive-check",
+    "rule-restrained",
+    "rule-saving-throw",
+    "rule-skill",
+    "rule-trap",
+    "rule-xp"
+   ],
+   "mechanics_summary": "7 项检定/豁免；2 项危险；1 项奖励",
+   "checks": [
+    {
+     "check_id": "check-pit-dex-save",
+     "kind": "saving_throw",
+     "ability": "敏捷",
+     "skill": null,
+     "dc": 10,
+     "label": null,
+     "success": "避开陷坑。",
+     "failure": "掉下 10 尺深陷坑，受 1d6 钝击伤害；四边不陡，可轻松爬出。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-trap",
+      "rule-falling"
+     ]
+    },
+    {
+     "check_id": "check-pit-passive",
+     "kind": "passive",
+     "ability": "感知",
+     "skill": "察觉",
+     "dc": 15,
+     "label": null,
+     "success": "自动发现陷坑。",
+     "failure": "需要做 DC15 感知（察觉）检定。",
+     "notes": null,
+     "rule_ids": [
+      "rule-passive-check",
+      "rule-dc",
+      "rule-skill",
+      "rule-trap"
+     ]
+    },
+    {
+     "check_id": "check-pit-perception",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "察觉",
+     "dc": 15,
+     "label": null,
+     "success": "发现被哥布林伪装过的陷坑。",
+     "failure": "未发现；需要进行 DC10 敏捷豁免避开。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-skill",
+      "rule-trap"
+     ]
+    },
+    {
+     "check_id": "check-snare-dex-save",
+     "kind": "saving_throw",
+     "ability": "敏捷",
+     "skill": null,
+     "dc": 10,
+     "label": null,
+     "success": "避开套索。",
+     "failure": "PC 被套索套住并倒吊在 10 尺高的树上，陷入束缚状态直到套索被割断；割断后坠落受 1d6 钝击伤害，除非被同伴小心放下。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-restrained",
+      "rule-falling"
+     ]
+    },
+    {
+     "check_id": "check-snare-passive",
+     "kind": "passive",
+     "ability": "感知",
+     "skill": "察觉",
+     "dc": 12,
+     "label": null,
+     "success": "自动发现套圈陷阱。",
+     "failure": "需要做 DC12 感知（察觉）检定。",
+     "notes": null,
+     "rule_ids": [
+      "rule-passive-check",
+      "rule-dc",
+      "rule-skill",
+      "rule-trap"
+     ]
+    },
+    {
+     "check_id": "check-snare-perception",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "察觉",
+     "dc": 12,
+     "label": null,
+     "success": "发现隐藏的套圈陷阱。",
+     "failure": "未发现；需要进行 DC10 敏捷豁免避免被套住。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-skill",
+      "rule-trap"
+     ]
+    },
+    {
+     "check_id": "check-trail-survival",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "野外生存",
+     "dc": 10,
+     "label": null,
+     "success": "发现小径最近约有十二只哥布林来去，并从伏击点拖走两个人形生物。",
+     "failure": "未发现这些痕迹，由 DM 决定后果。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [
+    {
+     "hazard_id": "hazard-pit",
+     "name": "陷坑",
+     "damage": "1d6 钝击",
+     "condition": null,
+     "rule_ids": [
+      "rule-trap",
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-falling"
+     ]
+    },
+    {
+     "hazard_id": "hazard-snare",
+     "name": "套圈陷阱",
+     "damage": "1d6 钝击",
+     "condition": "束缚",
+     "rule_ids": [
+      "rule-trap",
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-condition",
+      "rule-restrained",
+      "rule-falling"
+     ]
+    }
+   ],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-ambush-milestone",
+     "type": "xp",
+     "amount": 75,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-cragmaw-hideout",
+   "record_type": "scene",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "克拉格莫窝点",
+   "name_en": null,
+   "kind": "location",
+   "page": "6-7-8-9",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "克拉格莫部落的哥布林在洞中设伏、养狼、蓄水，由熊地精克拉格统领。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-dc",
+    "rule-skill"
+   ],
+   "mechanics_summary": "1 项检定/豁免",
+   "checks": [
+    {
+     "check_id": "check-cave-listen",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "察觉",
+     "dc": 15,
+     "label": null,
+     "success": "听到附近的活动。",
+     "failure": "未听到，由 DM 决定后果。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": [
+    "scene-area-1-entrance",
+    "scene-area-2-guardpost",
+    "scene-area-3-wolf-den",
+    "scene-area-4-steep-passage",
+    "scene-area-5-bridge",
+    "scene-area-6-goblin-den",
+    "scene-area-7-twin-pools",
+    "scene-area-8-klargs-cave"
+   ]
+  },
+  {
+   "record_id": "scene-area-1-entrance",
+   "record_type": "area",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "区域1 洞口",
+   "name_en": null,
+   "kind": "location",
+   "page": "9",
+   "parent_scene_id": "scene-cragmaw-hideout",
+   "area_no": 1,
+   "map_id": "map-cragmaw-hideout",
+   "map_area_no": 1,
+   "map_area_name": "洞口",
+   "summary": "小径尽头是山腹中的大型洞穴；灌木遮掩下流出浅溪，溪右有一条狭窄干燥的小道通往洞内。",
+   "rule_ids": [
+    "rule-difficult-terrain",
+    "rule-light",
+    "rule-stealth",
+    "rule-water"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-area-2-guardpost",
+   "record_type": "area",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "区域2 哥布林暗哨",
+   "name_en": null,
+   "kind": "location",
+   "page": "9",
+   "parent_scene_id": "scene-cragmaw-hideout",
+   "area_no": 2,
+   "map_id": "map-cragmaw-hideout",
+   "map_area_no": 2,
+   "map_area_name": "哥布林暗哨",
+   "summary": "溪东岸的荆棘丛后有一处哨岗，2 只哥布林藏在木板下守望。",
+   "rule_ids": [
+    "rule-action",
+    "rule-contest",
+    "rule-cover",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-stealth",
+    "rule-surprise"
+   ],
+   "mechanics_summary": "1 项检定/豁免；2 只怪物",
+   "checks": [
+    {
+     "check_id": "check-area2-stealth",
+     "kind": "contest",
+     "ability": "敏捷",
+     "skill": "潜行",
+     "dc": null,
+     "label": null,
+     "success": "避免被哥布林突袭；若 PC 小心移动或有人在前探路，还可能突袭哥布林。",
+     "failure": "被哥布林注意到，双方都不会被突袭（若在区域 1 已被发现则哥布林用弓箭突袭）。",
+     "notes": null,
+     "rule_ids": [
+      "rule-contest",
+      "rule-stealth",
+      "rule-skill",
+      "rule-surprise"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-goblin",
+     "count": 2,
+     "notes": "荆棘丛后的暗哨。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-area-3-wolf-den",
+   "record_type": "area",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "区域3 狼舍",
+   "name_en": null,
+   "kind": "location",
+   "page": "9-10",
+   "parent_scene_id": "scene-cragmaw-hideout",
+   "area_no": 3,
+   "map_id": "map-cragmaw-hideout",
+   "map_area_no": 3,
+   "map_area_name": "狼舍",
+   "summary": "洞口通道东侧的斗室关着 3 只狼；其中 2 只被锁链拴在入口石笋下的铁棍上。狼会攻击任何非哥布林的生物。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-animal-handling",
+    "rule-climb",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-falling",
+    "rule-initiative",
+    "rule-light",
+    "rule-lock",
+    "rule-monster-stat",
+    "rule-restrained",
+    "rule-saving-throw",
+    "rule-skill",
+    "rule-trap"
+   ],
+   "mechanics_summary": "3 项检定/豁免；1 项危险；3 只怪物",
+   "checks": [
+    {
+     "check_id": "check-chimney-climb",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": "运动",
+     "dc": 10,
+     "label": null,
+     "success": "以半速沿烟道上下。",
+     "failure": "检定结果 6–9：原地不动；5 及以下：坠落，每 10 尺受 1d6 钝击伤害，直到掉到烟道底部。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-climb",
+      "rule-skill",
+      "rule-falling"
+     ]
+    },
+    {
+     "check_id": "check-wolf-animal-handling",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "驯养动物",
+     "dc": 15,
+     "label": null,
+     "success": "三只狼放 PC 穿过斗室。",
+     "failure": "狼仍敌对，由 DM 决定后果。",
+     "notes": "若给狼喂食，DC 降为 10。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-animal-handling",
+      "rule-skill"
+     ]
+    },
+    {
+     "check_id": "check-wolf-break-chain",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 15,
+     "label": null,
+     "success": "把铁棍拽弯，锁链从铁棍上脱开。",
+     "failure": "锁链未脱开。",
+     "notes": "每轮只要有生物在狼的视线内，狼就能尝试一次。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-lock",
+      "rule-restrained"
+     ]
+    }
+   ],
+   "hazards": [
+    {
+     "hazard_id": "hazard-chimney-fall",
+     "name": "烟道坠落",
+     "damage": "每 10 尺 1d6 钝击",
+     "condition": null,
+     "rule_ids": [
+      "rule-trap",
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-falling"
+     ]
+    }
+   ],
+   "monsters": [
+    {
+     "monster_id": "monster-wolf",
+     "count": 3,
+     "notes": "其中 2 只被锁链拴住；够不到站在石阶上的目标。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-area-4-steep-passage",
+   "record_type": "area",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "区域4 陡峭的通道",
+   "name_en": null,
+   "kind": "location",
+   "page": "10",
+   "parent_scene_id": "scene-cragmaw-hideout",
+   "area_no": 4,
+   "map_id": "map-cragmaw-hideout",
+   "map_area_no": 4,
+   "map_area_name": "陡峭的通道",
+   "summary": "从洞口后主通道陡峭向上，溪流冲击西岸；阴影中，穿过溪流，西岸有一条支路。",
+   "rule_ids": [
+    "rule-condition",
+    "rule-contest",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-falling",
+    "rule-light",
+    "rule-prone",
+    "rule-saving-throw",
+    "rule-skill",
+    "rule-trap"
+   ],
+   "mechanics_summary": "2 项检定/豁免；1 项危险",
+   "checks": [
+    {
+     "check_id": "check-bridge-spot-guard",
+     "kind": "contest",
+     "ability": "感知",
+     "skill": "察觉",
+     "dc": null,
+     "label": null,
+     "success": "发现守卫桥的哥布林。",
+     "failure": "未发现守卫。",
+     "notes": "区域 5 重复同样的察觉对抗。若哥布林没有潜行或举着火把靠近桥，它们会注意到 PC；若其敏捷（潜行）高于 PC 被动感知，则行动不被发觉。",
+     "rule_ids": [
+      "rule-contest",
+      "rule-skill"
+     ]
+    },
+    {
+     "check_id": "check-platform-collapse",
+     "kind": "saving_throw",
+     "ability": "敏捷",
+     "skill": null,
+     "dc": 10,
+     "label": "平台负重超过 100 磅，整块松脱并一路向东滚落",
+     "success": "伤害减半。",
+     "failure": "受 2d6 钝击伤害并倒地。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-prone"
+     ]
+    }
+   ],
+   "hazards": [
+    {
+     "hazard_id": "hazard-collapsing-platform",
+     "name": "脆弱平台",
+     "damage": "2d6 钝击",
+     "condition": "倒地",
+     "rule_ids": [
+      "rule-trap",
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-condition",
+      "rule-prone",
+      "rule-falling"
+     ]
+    }
+   ],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-area-5-bridge",
+   "record_type": "area",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "区域5 天桥",
+   "name_en": null,
+   "kind": "location",
+   "page": "10-11",
+   "parent_scene_id": "scene-cragmaw-hideout",
+   "area_no": 5,
+   "map_id": "map-cragmaw-hideout",
+   "map_area_no": 5,
+   "map_area_name": "天桥",
+   "summary": "主通道上方的横贯隧道处有哥布林哨岗；一座摇摇晃晃的木桥横跨溪流 20 尺上方，连接东西两条隧道。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-break-object",
+    "rule-climb",
+    "rule-condition",
+    "rule-contest",
+    "rule-cover",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-falling",
+    "rule-flood",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-prone",
+    "rule-saving-throw",
+    "rule-skill",
+    "rule-stealth",
+    "rule-trap",
+    "rule-water"
+   ],
+   "mechanics_summary": "5 项检定/豁免；2 项危险；1 只怪物",
+   "checks": [
+    {
+     "check_id": "check-area5-stealth",
+     "kind": "contest",
+     "ability": "敏捷",
+     "skill": "潜行",
+     "dc": null,
+     "label": null,
+     "success": "未被守卫发现。",
+     "failure": "被守卫发现，守卫发信号放水并投掷标枪。",
+     "notes": null,
+     "rule_ids": [
+      "rule-contest",
+      "rule-stealth",
+      "rule-skill"
+     ]
+    },
+    {
+     "check_id": "check-bridge-collapse-save",
+     "kind": "saving_throw",
+     "ability": "敏捷",
+     "skill": null,
+     "dc": 10,
+     "label": "木桥 HP 降到 0 时倒塌",
+     "success": "抓住桥，但必须爬上去才能安全。",
+     "failure": "坠落并受 2d6 钝击伤害，倒地。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-prone",
+      "rule-falling"
+     ]
+    },
+    {
+     "check_id": "check-bridge-wall-climb",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": "运动",
+     "dc": 15,
+     "label": null,
+     "success": "沿洞窟石壁爬上桥。",
+     "failure": "未能爬上，由 DM 决定后果。",
+     "notes": "20 尺高石壁凹凸不平，但被水流冲刷得很光滑。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-climb",
+      "rule-skill",
+      "rule-water"
+     ]
+    },
+    {
+     "check_id": "check-flood-dex-save",
+     "kind": "saving_throw",
+     "ability": "敏捷",
+     "skill": null,
+     "dc": 10,
+     "label": "洪水从区域 7 冲下时，位于区域 4 废弃通道或通往区域 3 石阶上的生物",
+     "success": "跳出洪水奔泻路线。",
+     "failure": "可再做一次 DC15 力量豁免尝试抓住身边物体；再次失败则被冲倒并冲到区域 1，沿途受 1d6 钝击伤害。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-flood"
+     ]
+    },
+    {
+     "check_id": "check-flood-str-save",
+     "kind": "saving_throw",
+     "ability": "力量",
+     "skill": null,
+     "dc": 15,
+     "label": "第一次 DC10 敏捷豁免失败后",
+     "success": "抓住身边任何东西，避免被洪水冲走。",
+     "failure": "被冲倒并冲到区域 1，沿途受 1d6 钝击伤害。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-flood"
+     ]
+    }
+   ],
+   "hazards": [
+    {
+     "hazard_id": "hazard-bridge-collapse",
+     "name": "木桥倒塌",
+     "damage": "2d6 钝击",
+     "condition": "倒地",
+     "rule_ids": [
+      "rule-trap",
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-condition",
+      "rule-prone",
+      "rule-falling"
+     ]
+    },
+    {
+     "hazard_id": "hazard-flood",
+     "name": "洪水",
+     "damage": "1d6 钝击",
+     "condition": null,
+     "rule_ids": [
+      "rule-trap",
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-flood",
+      "rule-water",
+      "rule-falling"
+     ]
+    }
+   ],
+   "monsters": [
+    {
+     "monster_id": "monster-goblin",
+     "count": 1,
+     "notes": "天桥守卫。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-area-6-goblin-den",
+   "record_type": "area",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "区域6 哥布林生活间",
+   "name_en": null,
+   "kind": "location",
+   "page": "11-12",
+   "parent_scene_id": "scene-cragmaw-hideout",
+   "area_no": 6,
+   "map_id": "map-cragmaw-hideout",
+   "map_area_no": 6,
+   "map_area_name": "哥布林生活间",
+   "summary": "窝点哥布林的休息处，10 尺高石壁把洞窟分成高低两部分，由陡峭石梯相连；6 只哥布林在此，包括 12 HP 的头目一米克；西达尔被捆在南部，仅剩 1 HP。",
+   "rule_ids": [
+    "rule-action",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-death",
+    "rule-difficult-terrain",
+    "rule-falling",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-npc-party",
+    "rule-prone",
+    "rule-rest",
+    "rule-saving-throw",
+    "rule-trap",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项危险；6 只怪物；2 项奖励",
+   "checks": [],
+   "hazards": [
+    {
+     "hazard_id": "hazard-yeemik-push",
+     "name": "一米克推落西达尔",
+     "damage": "1d6 钝击",
+     "condition": null,
+     "rule_ids": [
+      "rule-trap",
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-falling"
+     ]
+    }
+   ],
+   "monsters": [
+    {
+     "monster_id": "monster-goblin",
+     "count": 5,
+     "notes": "普通哥布林；另有 1 只 12 HP 的头目。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "monster-goblin-boss",
+     "count": 1,
+     "notes": "一米克，窝点二首领；地位高于普通哥布林。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-sildar-escort",
+     "type": "currency",
+     "amount": 50,
+     "currency": "gp",
+     "condition": "护送西达尔到凡度林",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "reward-yeemik-pouch",
+     "type": "loot",
+     "amount": null,
+     "currency": [
+      {
+       "amount": 15,
+       "unit": "sp"
+      }
+     ],
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-area-7-twin-pools",
+   "record_type": "area",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "区域7 双子池",
+   "name_en": null,
+   "kind": "location",
+   "page": "12-13",
+   "parent_scene_id": "scene-cragmaw-hideout",
+   "area_no": 7,
+   "map_id": "map-cragmaw-hideout",
+   "map_area_no": 7,
+   "map_area_name": "双子池",
+   "summary": "半个洞窟被两个大型蓄水池占据；瀑布从东壁高处冲入，溪流从西侧流出；3 只哥布林守卫，石坝可放水淹没主通道。",
+   "rule_ids": [
+    "rule-action",
+    "rule-cover",
+    "rule-darkvision",
+    "rule-flood",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-stealth",
+    "rule-water"
+   ],
+   "mechanics_summary": "3 只怪物",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-goblin",
+     "count": 3,
+     "notes": "蓄水池守卫。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-area-8-klargs-cave",
+   "record_type": "area",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "区域8 克拉格的洞窟",
+   "name_en": null,
+   "kind": "location",
+   "page": "13-14",
+   "parent_scene_id": "scene-cragmaw-hideout",
+   "area_no": 8,
+   "map_id": "map-cragmaw-hideout",
+   "map_area_no": 8,
+   "map_area_name": "克拉格的洞窟",
+   "summary": "克拉格亲自看守抢来的货物；洞窟南角堆满补给与货品，西侧地面斜向下通入黑暗窄口，北侧宽入口有天然石阶，中央火坑烧得正旺；克拉格、宠物狼裂皮和 2 只哥布林在此。",
+   "rule_ids": [
+    "rule-action",
+    "rule-cover",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-falling",
+    "rule-fire",
+    "rule-healing",
+    "rule-initiative",
+    "rule-light",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-saving-throw",
+    "rule-trap",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项危险；4 只怪物；2 项奖励",
+   "checks": [],
+   "hazards": [
+    {
+     "hazard_id": "hazard-fire-pit",
+     "name": "火坑",
+     "damage": "1 点火焰 / 1d6 火焰",
+     "condition": null,
+     "rule_ids": [
+      "rule-trap",
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-fire"
+     ]
+    }
+   ],
+   "monsters": [
+    {
+     "monster_id": "monster-bugbear",
+     "count": 1,
+     "notes": "克拉格，窝点头目。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "monster-goblin",
+     "count": 2,
+     "notes": "克拉格的部下。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "monster-wolf-ripper",
+     "count": 1,
+     "notes": "克拉格的宠物狼。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-klarg-chest",
+     "type": "loot",
+     "amount": null,
+     "currency": [
+      {
+       "amount": 600,
+       "unit": "cp"
+      },
+      {
+       "amount": 110,
+       "unit": "sp"
+      }
+     ],
+     "condition": "搜索补给堆找到小金库",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-healing"
+     ]
+    },
+    {
+     "reward_id": "reward-lionshield-supplies",
+     "type": "currency-and-reputation",
+     "amount": 50,
+     "currency": "gp",
+     "condition": "用货车把补给运回凡度林并交还狮盾商会",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-aftermath",
+   "record_type": "scene",
+   "part": "p001-015",
+   "part_no": 1,
+   "name": "后续与升级",
+   "name_en": null,
+   "kind": "conclusion",
+   "page": "14",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "下一阶段冒险发生在凡度林；PC 可送货、护送西达尔、追寻背景目标，或前往克拉格莫城堡（PART 3）。探索窝点并击败克拉格及其走狗完成里程碑，每名 PC 获得 275 XP，足够升到 2 级。",
+   "rule_ids": [
+    "rule-xp"
+   ],
+   "mechanics_summary": "2 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-hideout-milestone",
+     "type": "xp",
+     "amount": 275,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    },
+    {
+     "reward_id": "reward-level-up",
+     "type": "level-up",
+     "amount": null,
+     "currency": null,
+     "condition": "获得 275 XP 里程碑",
+     "xp": null,
+     "rule_ids": []
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-phandalin",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "凡度林镇（总览）",
+   "name_en": "Phandalin",
+   "kind": "town",
+   "page": "16-18",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "在古凡度林废墟上重建起来的新镇，约四五十座木屋，没有领主与常备护卫；近两个月被红烙印帮控制。",
+   "rule_ids": [
+    "rule-social"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-stonehill-inn",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "石丘旅舍",
+   "name_en": "Stonehill Inn",
+   "kind": "town_location",
+   "page": "18",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-phandalin",
+   "map_area_no": 1,
+   "map_area_name": "石丘旅舍",
+   "summary": "镇中心最新、最好的旅馆，有 6 间客房；老板托布雷-石丘。西达尔-荷温特也租了一间房。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-npc-party",
+    "rule-rest",
+    "rule-social"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-barthens-provisions",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "巴森小栈",
+   "name_en": "Barthen's Provisions",
+   "kind": "town_location",
+   "page": "19",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-phandalin",
+   "map_area_no": 2,
+   "map_area_name": "巴森小栈",
+   "summary": "凡度林最大的贸易点，出售常见冒险补给，但不卖武器和盔甲；老板艾尔玛-巴森。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-dc",
+    "rule-quest",
+    "rule-social",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 项奖励",
+   "checks": [
+    {
+     "check_id": "check-barthen-history",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "智力（历史）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-barthen-delivery",
+     "type": "gold",
+     "amount": "每人 10 gp",
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-edermath-orchard",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "埃德玛的果园",
+   "name_en": "Edermath Orchard",
+   "kind": "town_location",
+   "page": "19",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-phandalin",
+   "map_area_no": 3,
+   "map_area_name": "埃德玛的果园",
+   "summary": "退休半精灵战士达朗-埃德玛的果园与农舍；他是臂铠社成员，痛恨红烙印。",
+   "rule_ids": [
+    "rule-difficult-terrain",
+    "rule-quest",
+    "rule-social"
+   ],
+   "mechanics_summary": "1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-title-knight",
+     "type": "title",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": []
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-lionshield-coster",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "狮盾商会",
+   "name_en": "Lionshield Coster",
+   "kind": "town_location",
+   "page": "20",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-phandalin",
+   "map_area_no": 4,
+   "map_area_name": "狮盾商会",
+   "summary": "雅塔狮盾商会的凡度林分部，卖武器与盔甲；负责人利涅涅-灰风。最近一批货物被克拉格莫哥布林劫走。",
+   "rule_ids": [
+    "rule-quest",
+    "rule-social",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-linene-goods",
+     "type": "gold",
+     "amount": 50,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-miners-exchange",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "凡度林淘金公会",
+   "name_en": "Phandalin Miner's Exchange",
+   "kind": "town_location",
+   "page": "20-21",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-phandalin",
+   "map_area_no": 5,
+   "map_area_name": "凡度林淘金公会",
+   "summary": "矿工称量、售卖矿石并登记挖掘点所有权的公会；会长哈利娅-桑顿是散塔林会成员，野心是让公会成为镇子的统治机构。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-dc",
+    "rule-quest",
+    "rule-social",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项检定/豁免；2 项奖励",
+   "checks": [
+    {
+     "check_id": "check-halia-insight",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "感知（洞察）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-halia-quest",
+     "type": "gold",
+     "amount": 100,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "reward-title-fang",
+     "type": "title",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": []
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-alderleaf-farm",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "阿黛尔利芙的农场",
+   "name_en": "Alderleaf Farm",
+   "kind": "town_location",
+   "page": "21",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-phandalin",
+   "map_area_no": 6,
+   "map_area_name": "阿黛尔利芙的农场",
+   "summary": "半身人农妇埃琳-阿黛尔利芙的农场；她热情好客，是小镇万事通，可提供干草棚借宿。",
+   "rule_ids": [
+    "rule-difficult-terrain",
+    "rule-quest",
+    "rule-rest",
+    "rule-social"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-shrine-of-luck",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "幸运神殿",
+   "name_en": "Shrine of Luck",
+   "kind": "town_location",
+   "page": "21-22",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-phandalin",
+   "map_area_no": 7,
+   "map_area_name": "幸运神殿",
+   "summary": "凡度林唯一的神庙，供奉幸运女神泰摩拉；负责人是年轻精灵教士加拉尔修女，竖琴手同盟成员。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-healing",
+    "rule-magic-item",
+    "rule-quest",
+    "rule-rest",
+    "rule-social"
+   ],
+   "mechanics_summary": "2 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-garaele-potions",
+     "type": "item",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-magic-item",
+      "rule-healing"
+     ]
+    },
+    {
+     "reward_id": "reward-title-watcher",
+     "type": "title",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": []
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-sleeping-giant",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "沉睡巨人",
+   "name_en": "Sleeping Giant",
+   "kind": "town_location",
+   "page": "22",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-phandalin",
+   "map_area_no": 8,
+   "map_area_name": "沉睡巨人",
+   "summary": "大道尽头破旧、潮湿、肮脏的小酒馆，只有红烙印匪众出没；老板是个阴沉的女矮人。",
+   "rule_ids": [
+    "rule-action",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-rest",
+    "rule-social"
+   ],
+   "mechanics_summary": "1 只怪物",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-redbrand-ruffian",
+     "count": 1,
+     "notes": null,
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-townmasters-hall",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "镇长大厅",
+   "name_en": "Townmaster's Hall",
+   "kind": "town_location",
+   "page": "22",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-phandalin",
+   "map_area_no": 9,
+   "map_area_name": "镇长大厅",
+   "summary": "石墙木顶、带钟塔的镇公所；门口公告板悬赏飞龙崖兽人。镇长哈宾-威斯特是个自命不凡的银行家。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-quest",
+    "rule-social",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "4 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-harbin-orcs",
+     "type": "gold",
+     "amount": 100,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "reward-sildar-castle",
+     "type": "gold",
+     "amount": 500,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "reward-sildar-iarno",
+     "type": "gold",
+     "amount": 200,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "reward-title-cloak",
+     "type": "title",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": []
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-tresendar-manor",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "特雷山大庄园",
+   "name_en": "Tresendar Manor",
+   "kind": "town_location",
+   "page": "22-23",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-phandalin",
+   "map_area_no": 10,
+   "map_area_name": "特雷山大庄园",
+   "summary": "镇东小山坡上的废弃庄园，地表建筑已成残垣，地窖被红烙印改造成地下堡垒。",
+   "rule_ids": [
+    "rule-difficult-terrain",
+    "rule-monster-stat",
+    "rule-secret-door",
+    "rule-social"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-redbrand-ruffians",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "红烙印恶霸（遭遇）",
+   "name_en": "Redbrand Ruffians",
+   "kind": "encounter",
+   "page": "23-24",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "4 名人类恶霸在沉睡巨人酒馆或街上堵住玩家，勒索并动手；打败 3 人后最后一人会逃往特雷山大庄园。",
+   "rule_ids": [
+    "rule-action",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-random-encounter",
+    "rule-xp"
+   ],
+   "mechanics_summary": "4 只怪物；1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-redbrand-ruffian",
+     "count": 4,
+     "notes": "街头/酒馆遭遇；打倒 3 人后最后 1 人逃跑。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-xp-redbrand-ruffians",
+     "type": "xp",
+     "amount": 400,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-redbrand-hideout",
+   "record_type": "scene",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "红烙印大本营（总览）",
+   "name_en": "Redbrand Hideout",
+   "kind": "dungeon",
+   "page": "24-33",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "特雷山大庄园地窖扩建而成的地下基地，包含储藏室、奴隶圈栏、工作间、营房与首领居所，共 12 个区域。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-break-object",
+    "rule-dc",
+    "rule-lock",
+    "rule-secret-door",
+    "rule-tool"
+   ],
+   "mechanics_summary": "4 项检定/豁免",
+   "checks": [
+    {
+     "check_id": "check-door-break",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 20,
+     "label": "力量",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-break-object"
+     ]
+    },
+    {
+     "check_id": "check-door-lock",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 10,
+     "label": "敏捷（盗贼工具）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-tool",
+      "rule-lock",
+      "rule-break-object"
+     ]
+    },
+    {
+     "check_id": "check-secret-door-passive",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "被动感知（侦察）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-secret-door"
+     ]
+    },
+    {
+     "check_id": "check-secret-door-search",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 10,
+     "label": "感知（侦察）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-secret-door"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": [
+    "scene-hideout-area-1",
+    "scene-hideout-area-2",
+    "scene-hideout-area-3",
+    "scene-hideout-area-4",
+    "scene-hideout-area-5",
+    "scene-hideout-area-6",
+    "scene-hideout-area-7",
+    "scene-hideout-area-8",
+    "scene-hideout-area-9",
+    "scene-hideout-area-10",
+    "scene-hideout-area-11",
+    "scene-hideout-area-12"
+   ]
+  },
+  {
+   "record_id": "scene-hideout-area-1",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "地窖",
+   "name_en": "Cellar",
+   "kind": "dungeon_area",
+   "page": "24-25",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 1,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 1,
+   "map_area_name": "地窖",
+   "summary": "原庄园的大型储藏室，西墙的大水池占去近半空间；红烙印用满桶食物维持“无人使用”的假象。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-dc",
+    "rule-healing",
+    "rule-light",
+    "rule-magic-item",
+    "rule-secret-door",
+    "rule-stealth",
+    "rule-treasure",
+    "rule-water"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 项奖励",
+   "checks": [
+    {
+     "check_id": "check-cistern-rope",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "感知（侦察）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-water"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-area1-pouch",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-healing"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-2",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "营房",
+   "name_en": "Barracks",
+   "kind": "dungeon_area",
+   "page": "25",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 2,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 2,
+   "map_area_name": "营房",
+   "summary": "储藏室兼临时住所；3 名红烙印恶霸在此休息，听到区域 1 的声响会武装并试图突袭。",
+   "rule_ids": [
+    "rule-action",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-rest",
+    "rule-surprise",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "3 只怪物；2 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-redbrand-ruffian",
+     "count": 3,
+     "notes": "休息中；听到区域 1 噪音会突袭。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-area2-treasure",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "reward-xp-area-2",
+     "type": "xp",
+     "amount": 300,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-3",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "陷阱走廊",
+   "name_en": "Trapped Corridor",
+   "kind": "dungeon_area",
+   "page": "25-26",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 3,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 3,
+   "map_area_name": "陷阱走廊",
+   "summary": "原庄园地窖的走廊，红烙印挖空石头地板做成隐蔽陷坑；走廊尽头是一扇雕有哀伤天使的双开大门。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-dc",
+    "rule-falling",
+    "rule-light",
+    "rule-prone",
+    "rule-saving-throw",
+    "rule-secret-door",
+    "rule-trap",
+    "rule-xp"
+   ],
+   "mechanics_summary": "3 项检定/豁免；1 项奖励",
+   "checks": [
+    {
+     "check_id": "check-pit-edge",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 10,
+     "label": "敏捷（杂技）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-trap"
+     ]
+    },
+    {
+     "check_id": "check-pit-find",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "感知（侦察）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-trap"
+     ]
+    },
+    {
+     "check_id": "check-pit-save",
+     "kind": "saving_throw",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "敏捷豁免",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-trap",
+      "rule-prone",
+      "rule-falling"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-xp-area-3",
+     "type": "xp",
+     "amount": 100,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-4",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "特雷山大墓室",
+   "name_en": "Tresendar Crypts",
+   "kind": "dungeon_area",
+   "page": "26-27",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 4,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 4,
+   "map_area_name": "特雷山大墓室",
+   "summary": "特雷山大家族先人的陵墓，三具石棺各倚靠一具穿锈甲的骷髅；有生物靠近通往区域 5/6 的木门 10 尺内时，骷髅会苏醒攻击。",
+   "rule_ids": [
+    "rule-action",
+    "rule-condition",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-surprise",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "3 只怪物；2 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-skeleton",
+     "count": 3,
+     "notes": "有生物进入通往区域 5/6 的木门 10 尺内时苏醒；穿红披风或说暗号“伊尔法兰”可免战。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-area4-treasure",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "reward-xp-area-4",
+     "type": "xp",
+     "amount": 150,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-5",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "奴隶圈栏",
+   "name_en": "Slave Pens",
+   "kind": "dungeon_area",
+   "page": "27-28",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 5,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 5,
+   "map_area_name": "奴隶圈栏",
+   "summary": "长方形房间用两道铁栅栏墙分成三个隔间，关着米尔娜-丹度与她的两个孩子；2 名红烙印恶霸看守。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-break-object",
+    "rule-dc",
+    "rule-initiative",
+    "rule-light",
+    "rule-lock",
+    "rule-monster-stat",
+    "rule-npc-party",
+    "rule-quest",
+    "rule-social",
+    "rule-tool",
+    "rule-xp"
+   ],
+   "mechanics_summary": "2 项检定/豁免；2 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "check-cell-gate-force",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 22,
+     "label": "力量",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-break-object"
+     ]
+    },
+    {
+     "check_id": "check-cell-gate-tools",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 10,
+     "label": "敏捷（盗贼工具）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-tool",
+      "rule-lock"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-redbrand-ruffian",
+     "count": 2,
+     "notes": "奴隶圈栏看守。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-xp-area-5",
+     "type": "xp",
+     "amount": 200,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    },
+    {
+     "reward_id": "reward-xp-area-5-family",
+     "type": "xp",
+     "amount": 100,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-6",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "武器库",
+   "name_en": "Armory",
+   "kind": "dungeon_area",
+   "page": "27-28",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 6,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 6,
+   "map_area_name": "武器库",
+   "summary": "从外面锁上的武器库，存放红烙印为扩张准备的武器；正对锁门的墙上是通往区域 7 的密门。",
+   "rule_ids": [
+    "rule-light",
+    "rule-lock",
+    "rule-secret-door",
+    "rule-treasure",
+    "rule-weapon"
+   ],
+   "mechanics_summary": "1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-area6-weapons",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-7",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "储藏室与工作间",
+   "name_en": "Storage Room and Workshop",
+   "kind": "dungeon_area",
+   "page": "28",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 7,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 7,
+   "map_area_name": "储藏室与工作间",
+   "summary": "红烙印抢来物资的储藏室，位于大型天然洞穴最北端；南边是通往区域 8 的裂缝洞穴。",
+   "rule_ids": [
+    "rule-difficult-terrain",
+    "rule-light",
+    "rule-secret-door",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "reward-area7-pelts",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-8",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "裂缝",
+   "name_en": "Crevasse",
+   "kind": "dungeon_area",
+   "page": "28-29",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 8,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 8,
+   "map_area_name": "裂缝",
+   "summary": "天然大洞穴，一道 5–10 尺宽、20 尺深的裂隙把洞穴分成两边，两座无护栏木桥横跨其上；守卫是一只大眼怪。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-break-object",
+    "rule-cover",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-falling",
+    "rule-healing",
+    "rule-initiative",
+    "rule-light",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-prone",
+    "rule-spell-scroll",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "2 项检定/豁免；1 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "check-bridge-notice",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "智力（调查）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc"
+     ]
+    },
+    {
+     "check_id": "check-talon-history",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "智力（历史）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-nothic",
+     "count": 1,
+     "notes": "潜伏在桥梁西边石柱后；用 Weird Insight 探知秘密；可用心灵感应谈判（如食物）。击败或达成停战均给 XP。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-area8-treasure",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-spell-scroll",
+      "rule-healing"
+     ]
+    },
+    {
+     "reward_id": "reward-xp-area-8",
+     "type": "xp",
+     "amount": 450,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-9",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "守卫营房",
+   "name_en": "Guard Barracks",
+   "kind": "dungeon_area",
+   "page": "29-30",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 9,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 9,
+   "map_area_name": "守卫营房",
+   "summary": "3 只熊地精与 1 只哥布林 Droop 在此；熊地精为黑蜘蛛工作、被派来帮助伊阿诺，为首者叫莫斯克。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-dc",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-npc-party",
+    "rule-social",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "3 项检定/豁免；4 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "check-bugbear-deceive",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "魅力（欺瞒）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-social"
+     ]
+    },
+    {
+     "check_id": "check-bugbear-intimidate",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "魅力（威吓）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-social"
+     ]
+    },
+    {
+     "check_id": "check-bugbear-listen",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 10,
+     "label": "感知（侦察）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-bugbear",
+     "count": 3,
+     "notes": "与 Droop 同房；会忽视红烙印人类，穿猩红斗篷可被当成伊阿诺手下。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "monster-goblin-droop",
+     "count": 1,
+     "notes": "非战斗；可叫醒（1d10 分钟昏迷）；战斗中躲藏，被命令战斗则有劣势。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-area9-treasure",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "reward-xp-area-9",
+     "type": "xp",
+     "amount": 600,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-10",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "一般房间",
+   "name_en": "Common Room",
+   "kind": "dungeon_area",
+   "page": "30-31",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 10,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 10,
+   "map_area_name": "一般房间",
+   "summary": "红烙印的总部/接待室，也是守卫闲暇时的休息室；4 名喝醉的红烙印恶霸正在赌博。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-dc",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-poisoned",
+    "rule-rest",
+    "rule-social",
+    "rule-surprise",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "2 项检定/豁免；4 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "check-commonroom-deceive",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 10,
+     "label": "魅力（欺瞒）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-social"
+     ]
+    },
+    {
+     "check_id": "check-commonroom-listen",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 10,
+     "label": "感知（侦察）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-redbrand-ruffian",
+     "count": 4,
+     "notes": "醉酒（中毒状态）赌博。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-area10-treasure",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "reward-xp-area-10",
+     "type": "xp",
+     "amount": 400,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-11",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "法师的工作间",
+   "name_en": "Wizard's Workshop",
+   "kind": "dungeon_area",
+   "page": "31-32",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 11,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 11,
+   "map_area_name": "法师的工作间",
+   "summary": "伊阿诺的炼金工作间；他的老鼠魔宠在此看守，一旦发现入侵者会向主人发出简短警告。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-dc",
+    "rule-initiative",
+    "rule-light",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 只怪物；1 项奖励",
+   "checks": [
+    {
+     "check_id": "check-workshop-listen",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": 15,
+     "label": "感知（侦察）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-rat-familiar",
+     "count": 1,
+     "notes": "20 尺速度、AC10、1 HP、无攻击能力；被杀即消失。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-area11-ingredients",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "scene-hideout-area-12",
+   "record_type": "area",
+   "part": "p016-033",
+   "part_no": 2,
+   "name": "水晶之杖的居所",
+   "name_en": "Glasstaff's Quarters",
+   "kind": "dungeon_area",
+   "page": "31-33",
+   "parent_scene_id": "scene-redbrand-hideout",
+   "area_no": 12,
+   "map_id": "map-redbrand-hideout",
+   "map_area_no": 12,
+   "map_area_name": "水晶之杖的居所",
+   "summary": "伊阿诺“水晶之杖”的卧室；从区域 7 密道进入可突袭他，否则老鼠魔宠会提前警告，让他带着法杖与卷轴从东北密门逃走。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-advantage",
+    "rule-initiative",
+    "rule-light",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-secret-door",
+    "rule-spell-scroll",
+    "rule-spellcasting",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "check-glasstaff-secretdoor",
+     "kind": "ability_check",
+     "ability": null,
+     "skill": null,
+     "dc": null,
+     "label": "能力检定（寻找微开的密门）",
+     "success": null,
+     "failure": null,
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-advantage",
+      "rule-secret-door"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "monster-iarno-albrek",
+     "count": 1,
+     "notes": "杀死 200 XP；俘虏并送交西达尔-荷温特则 XP 加倍（400）。HP 降到 8 以下且无路可逃时投降。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "reward-area12-treasure",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-spell-scroll"
+     ]
+    },
+    {
+     "reward_id": "reward-xp-area-12",
+     "type": "xp",
+     "amount": 200,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:triboar-trail",
+   "record_type": "scene",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "三猪小径",
+   "name_en": "Triboar Trail",
+   "kind": "wilderness",
+   "page": "34-35",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "连接凡度林与东部三猪镇的荒野道路，也是本章往返各任务地点的交通框架；DM 用昼夜遭遇判定填充旅途。",
+   "rule_ids": [
+    "rule-action",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-quest",
+    "rule-travel",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "8 只怪物；1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:ghoul",
+     "count": 1,
+     "notes": "野外随机遭遇表：仅夜晚 4。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:goblin",
+     "count": 1,
+     "notes": "野外随机遭遇表：白天 5–6 / 夜晚 5。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:hobgoblin",
+     "count": 1,
+     "notes": "野外随机遭遇表：白天 7–8 / 夜晚 6。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:ogre",
+     "count": 1,
+     "notes": "野外随机遭遇表：仅白天 3–4。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:orc",
+     "count": 1,
+     "notes": "野外随机遭遇表：白天 9–10 / 夜晚 7–8。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:owlbear",
+     "count": 1,
+     "notes": "野外随机遭遇表：白天 12 / 夜晚 11–12。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:stirge",
+     "count": 1,
+     "notes": "野外随机遭遇表：白天 1–2 / 夜晚 1–3。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:wolf",
+     "count": 1,
+     "notes": "野外随机遭遇表：白天 11 / 夜晚 9–10。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:triboar-trail:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "击败或俘获野外遭遇中的哥布林",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:conyberry-agatha",
+   "record_type": "scene",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "兔子浆果镇与阿嘉莎的巢穴",
+   "name_en": "Conyberry and Agatha's Lair",
+   "kind": "social",
+   "page": "35-36",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "三猪小径穿过的废弃小镇，西北小径通往绝冬森林中女妖阿嘉莎的圆顶巢穴；阿嘉莎只回答一个问题。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-advantage",
+    "rule-dc",
+    "rule-healing",
+    "rule-initiative",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-social",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 只怪物；3 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:conyberry-agatha:1",
+     "kind": "ability_check",
+     "ability": "魅力",
+     "skill": "说服",
+     "dc": 15,
+     "label": "以敬意与礼貌请求阿嘉莎回答一个问题。",
+     "success": "阿嘉莎回答一个问题，并完成加拉尔修女的委托。",
+     "failure": "阿嘉莎不回答问题。",
+     "notes": "若角色在交涉中扮演得好，可给予优势；把加拉尔修女的镶宝石银梳作为礼物送出时，此检定自动成功。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-social",
+      "rule-skill",
+      "rule-advantage"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:banshee",
+     "count": 1,
+     "notes": "阿嘉莎；社交遭遇，不主动攻击。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:quest:agatha",
+     "type": "quest",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-healing"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:treasure:conyberry-agatha:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "前往阿嘉莎巢穴前由加拉尔修女交给队伍",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:conyberry-agatha:1",
+     "type": "xp",
+     "amount": 200,
+     "currency": null,
+     "condition": "成功说服阿嘉莎并让她回答一个问题",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:old-owl-well",
+   "record_type": "scene",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "古枭井",
+   "name_en": "Old Owl Well",
+   "kind": "ruins",
+   "page": "36-37",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "三猪小径南侧崎岖山丘中的古老瞭望塔废墟；红袍巫师 Hamun Kost 在此扎营，并以十二只僵尸守卫。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-dc",
+    "rule-healing",
+    "rule-initiative",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-passive-check",
+    "rule-skill",
+    "rule-spell-scroll",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "3 项检定/豁免；13 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:old-owl-well:1",
+     "kind": "passive",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": 10,
+     "label": "接近塔楼或帐篷时，以被动感知（侦查）10 闻到死尸气味。",
+     "success": "角色闻到从塔的方向传来的死尸味，可据此警觉。",
+     "failure": "未察觉气味。",
+     "notes": null,
+     "rule_ids": [
+      "rule-passive-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    },
+    {
+     "check_id": "lmop:check:old-owl-well:2",
+     "kind": "ability_check",
+     "ability": "智力",
+     "skill": "奥秘",
+     "dc": 10,
+     "label": "辨认 Hamun Kost 前额上的黑色刺青。",
+     "success": "认出刺青是死灵的标记，Kost 是死灵学派法师。",
+     "failure": "无法辨认刺青含义。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    },
+    {
+     "check_id": "lmop:check:old-owl-well:3",
+     "kind": "ability_check",
+     "ability": "智力",
+     "skill": "历史",
+     "dc": 10,
+     "label": "辨认 Kost 的打扮与刺青风格。",
+     "success": "认出这是 Thay 地区常见的打扮，当地巫师会在身体上纹刺青。",
+     "failure": "无法辨认其来历。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:red-wizard",
+     "count": 1,
+     "notes": "Hamun Kost；见 NPC 条目。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:zombie",
+     "count": 12,
+     "notes": "在塔楼遗迹中游荡的不死守卫；战斗发生时从塔中出来。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:quest:old-owl-well",
+     "type": "quest",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": []
+    },
+    {
+     "reward_id": "lmop:reward:treasure:old-owl-well:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "搜索 Hamun Kost 帐篷中的箱子",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-spell-scroll",
+      "rule-healing"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:thundertree",
+   "record_type": "scene",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "雷霆树镇",
+   "name_en": "Thundertree",
+   "kind": "ruins",
+   "page": "37-44",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "绝冬河与绝冬森林交界处的废弃小镇；约三十年前 Hotenow 火山爆发摧毁了它，如今灰烬僵尸、突变植物、绿龙毒牙与龙之信徒各自盘踞。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-break-object",
+    "rule-dc"
+   ],
+   "mechanics_summary": "1 项检定/豁免；3 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:thundertree:1",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 10,
+     "label": "强行打开完好建筑卡死的木门。",
+     "success": "门被打开。",
+     "failure": "门纹丝不动。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-break-object"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:quest:mirna-heirloom",
+     "type": "quest",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": []
+    },
+    {
+     "reward_id": "lmop:reward:quest:thundertree",
+     "type": "quest",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": []
+    },
+    {
+     "reward_id": "lmop:reward:quest:thundertree-reidoth",
+     "type": "quest",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": []
+    }
+   ],
+   "child_records": [
+    "lmop:area:thundertree-1",
+    "lmop:area:thundertree-2",
+    "lmop:area:thundertree-3",
+    "lmop:area:thundertree-4",
+    "lmop:area:thundertree-5",
+    "lmop:area:thundertree-6",
+    "lmop:area:thundertree-7",
+    "lmop:area:thundertree-8",
+    "lmop:area:thundertree-9",
+    "lmop:area:thundertree-10",
+    "lmop:area:thundertree-11",
+    "lmop:area:thundertree-12",
+    "lmop:area:thundertree-13"
+   ]
+  },
+  {
+   "record_id": "lmop:area:thundertree-1",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域1 最西边的小屋",
+   "name_en": null,
+   "kind": "area",
+   "page": "38",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 1,
+   "map_id": "map-thundertree",
+   "map_area_no": 1,
+   "map_area_name": "最西边的小屋",
+   "summary": "老树阴影下没有屋顶的石制小屋；两只枯枝怪藏在两侧杂草中。",
+   "rule_ids": [
+    "rule-action",
+    "rule-contest",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-stealth",
+    "rule-surprise",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 项检定/豁免；2 只怪物；1 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:thundertree:thundertree-1:1",
+     "kind": "contest",
+     "ability": "敏捷",
+     "skill": "潜行",
+     "dc": null,
+     "label": "DM 为枯枝怪掷敏捷（潜行），对抗角色的被动感知（侦查）。",
+     "success": null,
+     "failure": null,
+     "notes": "用于判断枯枝怪是否能隐藏到发起攻击。",
+     "rule_ids": [
+      "rule-contest",
+      "rule-stealth",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:twig-blight",
+     "count": 2,
+     "notes": "区域1的枯枝怪；区域2开战后加入。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-1:1",
+     "type": "xp",
+     "amount": 50,
+     "currency": null,
+     "condition": "击败区域1的枯枝怪",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-2",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域2 荒废的小屋",
+   "name_en": null,
+   "kind": "area",
+   "page": "38",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 2,
+   "map_id": "map-thundertree",
+   "map_area_no": 2,
+   "map_area_name": "荒废的小屋",
+   "summary": "曾是商户或富农居所的废墟；六只枯枝怪藏在中央小树周围的茂密植物中。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-contest",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-stealth",
+    "rule-surprise",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "2 项检定/豁免；6 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:thundertree:thundertree-2:1",
+     "kind": "contest",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": null,
+     "label": "发现枯枝怪：角色感知（侦查）对抗枯枝怪的敏捷（潜行）。",
+     "success": null,
+     "failure": null,
+     "notes": "用于判断角色是否在枯枝怪突袭前发现它们。",
+     "rule_ids": [
+      "rule-contest",
+      "rule-skill",
+      "rule-surprise"
+     ]
+    },
+    {
+     "check_id": "lmop:check:thundertree:thundertree-2:2",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": 10,
+     "label": "彻底搜寻东部小屋，寻找商人藏在石地板下的钱箱。",
+     "success": "发现树根下的旧木箱。",
+     "failure": "未找到。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:twig-blight",
+     "count": 6,
+     "notes": "藏在植物中；攻击后区域1的 2 只加入。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:thundertree:thundertree-2:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "彻底搜寻东部小屋，并以 DC10 感知（侦查）发现树根下的旧木箱",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-2:1",
+     "type": "xp",
+     "amount": 150,
+     "currency": null,
+     "condition": "击败区域2的枯枝怪",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-3",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域3 棕马马酒馆",
+   "name_en": null,
+   "kind": "area",
+   "page": "39",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 3,
+   "map_id": "map-thundertree",
+   "map_area_no": 3,
+   "map_area_name": "棕马马酒馆",
+   "summary": "曾以麦酒闻名的酒馆；四只灰烬僵尸在阴影中游荡，靠在墙上或吧台下。",
+   "rule_ids": [
+    "rule-action",
+    "rule-advantage",
+    "rule-cover",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-fire",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-saving-throw",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 项检定/豁免；4 只怪物；1 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:thundertree:thundertree-3:1",
+     "kind": "saving_throw",
+     "ability": "体质",
+     "skill": null,
+     "dc": 10,
+     "label": "灰烬僵尸第一次遭受攻击时，其 5 尺内的活物进行体质豁免。",
+     "success": "不受影响。",
+     "failure": "在攻击掷骰、豁免掷骰、能力检定上遭受劣势，持续 1 分钟；可在自己回合结束时重复豁免。",
+     "notes": "灰烬喷发；每个僵尸第一次被攻击时触发。",
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-advantage"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:ash-zombie",
+     "count": 4,
+     "notes": "灰烬僵尸；使用僵尸属性并附加灰烬喷发。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-3:1",
+     "type": "xp",
+     "amount": 200,
+     "currency": null,
+     "condition": "击败区域3的灰烬僵尸",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-4",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域4 德鲁伊的守望",
+   "name_en": null,
+   "kind": "area",
+   "page": "40",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 4,
+   "map_id": "map-thundertree",
+   "map_area_no": 4,
+   "map_area_name": "德鲁伊的守望",
+   "summary": "莱多斯在雷霆树废墟扎营的小屋；门被铁条强化，窗户有厚木板保护。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-npc-party",
+    "rule-rest",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-5",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域5 荒废的农舍",
+   "name_en": null,
+   "kind": "area",
+   "page": "40",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 5,
+   "map_id": "map-thundertree",
+   "map_area_no": 5,
+   "map_area_name": "荒废的农舍",
+   "summary": "南边紧邻金雀花与荆棘的农舍废墟；八只枯枝怪潜伏在东边树丛中。",
+   "rule_ids": [
+    "rule-action",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-stealth",
+    "rule-surprise",
+    "rule-xp"
+   ],
+   "mechanics_summary": "8 只怪物；1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:twig-blight",
+     "count": 8,
+     "notes": "总计最多 16 只（初始 8 只 + 增援 8 只）；按实际轮次结算。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-5:1",
+     "type": "xp",
+     "amount": 200,
+     "currency": null,
+     "condition": "击败区域5的枯枝怪",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-6",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域6 荒废的杂货店",
+   "name_en": null,
+   "kind": "area",
+   "page": "41",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 6,
+   "map_id": "map-thundertree",
+   "map_area_no": 6,
+   "map_area_name": "荒废的杂货店",
+   "summary": "部分屋顶仍完好的杂货店；两只巨蛛躲在废弃建筑内墙中，蛛网从建筑延伸到北面路边的树上。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-cover",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-healing",
+    "rule-initiative",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-passive-check",
+    "rule-restrained",
+    "rule-skill",
+    "rule-surprise",
+    "rule-travel",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "3 项检定/豁免；2 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:thundertree:thundertree-6:1",
+     "kind": "passive",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": null,
+     "label": "避免被巨蛛突袭：被动感知（侦查）达到 17 或以上。",
+     "success": null,
+     "failure": null,
+     "notes": "机敏的巨蛛会突袭任何被动感知（侦查）小于 17 的角色。",
+     "rule_ids": [
+      "rule-passive-check",
+      "rule-skill",
+      "rule-surprise"
+     ]
+    },
+    {
+     "check_id": "lmop:check:thundertree:thundertree-6:2",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": "运动",
+     "dc": 10,
+     "label": "在蛛网覆盖的区域移动。",
+     "success": "正常移动。",
+     "failure": "被蛛网束缚。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill",
+      "rule-restrained"
+     ]
+    },
+    {
+     "check_id": "lmop:check:thundertree:thundertree-6:3",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 12,
+     "label": "被蛛网束缚后，花一个动作挣脱。",
+     "success": "挣脱束缚。",
+     "failure": "仍被束缚。",
+     "notes": "也可用轻型武器造成挥砍伤害割断蛛网（蛛网 AC10、5 HP）。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-restrained"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:giant-spider",
+     "count": 2,
+     "notes": "躲在建筑内墙；通过蛛网感应猎物。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:thundertree:thundertree-6:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "小心搜查被蛛丝捆在西边的男性精灵尸体",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-healing"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-6:1",
+     "type": "xp",
+     "amount": 400,
+     "currency": null,
+     "condition": "击败区域6的巨蛛",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-7",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域7 龙之塔",
+   "name_en": null,
+   "kind": "area",
+   "page": "41",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 7,
+   "map_id": "map-thundertree",
+   "map_area_no": 7,
+   "map_area_name": "龙之塔",
+   "summary": "山丘顶端的圆形塔楼与小屋；年轻绿龙毒牙（Venomfang）最近占据了这里，塔外有两具巨蛛尸体。",
+   "rule_ids": [
+    "rule-action",
+    "rule-difficult-terrain",
+    "rule-flying",
+    "rule-frightened",
+    "rule-initiative",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-spell-scroll",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 只怪物；3 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:young-green-dragon",
+     "count": 1,
+     "notes": "毒牙（Venomfang）；生命值降到一半以下时飞走。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:thundertree:thundertree-7:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "搜查塔楼地板上破损的木箱（龙的战利品）",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-spell-scroll"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-7:1",
+     "type": "xp",
+     "amount": 2000,
+     "currency": null,
+     "condition": "将毒牙赶走（Venomfang）",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-7:2",
+     "type": "xp",
+     "amount": 3900,
+     "currency": null,
+     "condition": "杀死毒牙（替代赶走的奖励，不叠加）",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-8",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域8 老旧的铁匠铺",
+   "name_en": null,
+   "kind": "area",
+   "page": "42",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 8,
+   "map_id": "map-thundertree",
+   "map_area_no": 8,
+   "map_area_name": "老旧的铁匠铺",
+   "summary": "荒废很久的铁匠铺；两只灰烬僵尸瘫坐在地上，进入时会爬向角色脚边并攻击。",
+   "rule_ids": [
+    "rule-action",
+    "rule-difficult-terrain",
+    "rule-fire",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-xp"
+   ],
+   "mechanics_summary": "2 只怪物；1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:ash-zombie",
+     "count": 2,
+     "notes": "灰烬僵尸。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-8:1",
+     "type": "xp",
+     "amount": 100,
+     "currency": null,
+     "condition": "击败区域8的灰烬僵尸",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-9",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域9 药草店",
+   "name_en": null,
+   "kind": "area",
+   "page": "42",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 9,
+   "map_id": "map-thundertree",
+   "map_area_no": 9,
+   "map_area_name": "药草店",
+   "summary": "曾是药草和炼金术商店，属于 Mirna Dendrar 的家族；商店堆满残破货架与破损家具。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-poisoned",
+    "rule-skill",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 项检定/豁免；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:thundertree:thundertree-9:1",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": 15,
+     "label": "在货架下寻找 Mirna 的传家宝木盒。",
+     "success": "找到小木盒，内有金项链和上好的翡翠挂饰（200gp）。",
+     "failure": "未找到。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:thundertree:thundertree-9:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "在区域9货架下找到小木盒",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-9:1",
+     "type": "xp",
+     "amount": 200,
+     "currency": null,
+     "condition": "将项链还给 Mirna，而不是自行保有它",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-10",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域10 城镇广场",
+   "name_en": null,
+   "kind": "area",
+   "page": "42",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 10,
+   "map_id": "map-thundertree",
+   "map_area_no": 10,
+   "map_area_name": "城镇广场",
+   "summary": "城镇东边的方形空间；中央有一座轻微倾斜的风化木雕像，是战士拿着长矛和盾牌。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-skill"
+   ],
+   "mechanics_summary": "2 项检定/豁免",
+   "checks": [
+    {
+     "check_id": "lmop:check:thundertree:thundertree-10:1",
+     "kind": "ability_check",
+     "ability": "智力",
+     "skill": "历史",
+     "dc": 15,
+     "label": "研究 Palien 的雕像。",
+     "success": "得知 Palien 的事迹。",
+     "failure": "无法辨认雕像人物。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    },
+    {
+     "check_id": "lmop:check:thundertree:thundertree-10:2",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 20,
+     "label": "推倒倾斜的雕像。",
+     "success": "雕像倒下。",
+     "failure": "雕像纹丝不动。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-11",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域11 老旧的警卫岗哨",
+   "name_en": null,
+   "kind": "area",
+   "page": "43",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 11,
+   "map_id": "map-thundertree",
+   "map_area_no": 11,
+   "map_area_name": "老旧的警卫岗哨",
+   "summary": "比镇上大多数建筑更耐久的营房，屋顶有简单城垛，窗户有射箭孔；五只灰烬僵尸在里面游荡。",
+   "rule_ids": [
+    "rule-action",
+    "rule-cover",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-rest",
+    "rule-xp"
+   ],
+   "mechanics_summary": "5 只怪物；1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:ash-zombie",
+     "count": 5,
+     "notes": "灰烬僵尸；前警备队成员。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-11:1",
+     "type": "xp",
+     "amount": 250,
+     "currency": null,
+     "condition": "击败区域11的灰烬僵尸",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-12",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域12 织布者小屋",
+   "name_en": null,
+   "kind": "area",
+   "page": "43",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 12,
+   "map_id": "map-thundertree",
+   "map_area_no": 12,
+   "map_area_name": "织布者小屋",
+   "summary": "倒塌的小屋；许多废弃残骸堆在内部，角落有一个破碎的织布机。",
+   "rule_ids": [
+    "rule-action",
+    "rule-contest",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-stealth",
+    "rule-surprise",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 项检定/豁免；6 只怪物；1 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:thundertree:thundertree-12:1",
+     "kind": "contest",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": null,
+     "label": "避免被区域12的枯枝怪突袭。",
+     "success": null,
+     "failure": null,
+     "notes": "对抗枯枝怪的敏捷（潜行）。",
+     "rule_ids": [
+      "rule-contest",
+      "rule-skill",
+      "rule-surprise"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:twig-blight",
+     "count": 6,
+     "notes": "南部树丛中。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-12:1",
+     "type": "xp",
+     "amount": 150,
+     "currency": null,
+     "condition": "击败区域12的枯枝怪",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:thundertree-13",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域13 龙之信徒",
+   "name_en": null,
+   "kind": "area",
+   "page": "43",
+   "parent_scene_id": "lmop:scene:thundertree",
+   "area_no": 13,
+   "map_id": "map-thundertree",
+   "map_area_no": 13,
+   "map_area_name": "龙之信徒",
+   "summary": "门窗紧闭的小农舍；六个人类信徒躲在里面，四人在守卫（每间房两人），其余在较大的房间休息。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-break-object",
+    "rule-dc",
+    "rule-initiative",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-npc-party",
+    "rule-rest",
+    "rule-surprise",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "2 项检定/豁免；6 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:thundertree:thundertree-13:1",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 20,
+     "label": "强行打开被从里面挡住的主门。",
+     "success": "门被打开。",
+     "failure": "门纹丝不动。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-break-object"
+     ]
+    },
+    {
+     "check_id": "lmop:check:thundertree:thundertree-13:2",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 15,
+     "label": "强行打开被从内部堵上的窗户挡板。",
+     "success": "挡板被打开。",
+     "failure": "挡板纹丝不动。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-break-object"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:cultist",
+     "count": 6,
+     "notes": "人类信徒；Favric 为领袖。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:thundertree:thundertree-13:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "击败或赶走信徒后搜查主房间",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:thundertree:thundertree-13:1",
+     "type": "xp",
+     "amount": 150,
+     "currency": null,
+     "condition": "击败或赶走区域13的信徒",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:wyvern-tor",
+   "record_type": "scene",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "飞龙崖",
+   "name_en": "Wyvern Tor",
+   "kind": "wilderness",
+   "page": "44-45",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "剑山东北边的显眼悬崖，曾是飞龙巢穴；现在被多箭部族的兽人及其食人魔盟友占据。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-dc",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-travel",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "2 项检定/豁免；8 只怪物；4 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:wyvern-tor:1",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": 15,
+     "label": "在飞龙崖寻找隐藏的兽人营地；每小时掷一次，由领路角色掷。",
+     "success": "找到营地。",
+     "failure": "继续寻找，下一小时再掷。",
+     "notes": "与 DC10 感知（求生）二选一。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    },
+    {
+     "check_id": "lmop:check:wyvern-tor:2",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "求生",
+     "dc": 10,
+     "label": "在飞龙崖寻找隐藏的兽人营地（替代 DC15 侦查）。",
+     "success": "找到营地。",
+     "failure": "继续寻找，下一小时再掷。",
+     "notes": "与 DC15 感知（侦查）二选一。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:ogre",
+     "count": 1,
+     "notes": "Gog；战斗到死亡。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:orc",
+     "count": 7,
+     "notes": "Brughor Axe-Biter 为 HP30 的兽人；其余六只兽人在 Brughor 死后逃跑。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:quest:old-owl-well-kost",
+     "type": "quest",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": []
+    },
+    {
+     "reward_id": "lmop:reward:quest:wyvern-tor",
+     "type": "quest",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:treasure:wyvern-tor:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "搜查山洞中没有上锁的箱子",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:wyvern-tor:1",
+     "type": "xp",
+     "amount": 1250,
+     "currency": null,
+     "condition": "击败飞龙崖的兽人与食人魔",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:cragmaw-castle",
+   "record_type": "scene",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "克拉葛摩城堡",
+   "name_en": "Cragmaw Castle",
+   "kind": "dungeon",
+   "page": "45-52",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "三猪小径与绝冬森林一带哥布林部族的总部，由一座古老王国的七塔城堡废墟构成；葛罗尔王统治，刚铎·寻石者被囚禁于此。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-dc",
+    "rule-spellcasting",
+    "rule-travel",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项检定/豁免；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:cragmaw-castle:1",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 15,
+     "label": "打破城堡内部阻碍道路的木门。",
+     "success": "门被打破。",
+     "failure": "门纹丝不动。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:quest:cragmaw-castle",
+     "type": "quest",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:quest:gundren-escort",
+     "type": "quest",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": [
+    "lmop:area:cragmaw-1",
+    "lmop:area:cragmaw-2",
+    "lmop:area:cragmaw-3",
+    "lmop:area:cragmaw-4",
+    "lmop:area:cragmaw-5",
+    "lmop:area:cragmaw-6",
+    "lmop:area:cragmaw-7",
+    "lmop:area:cragmaw-8",
+    "lmop:area:cragmaw-9",
+    "lmop:area:cragmaw-10",
+    "lmop:area:cragmaw-11",
+    "lmop:area:cragmaw-12",
+    "lmop:area:cragmaw-13",
+    "lmop:area:cragmaw-14"
+   ]
+  },
+  {
+   "record_id": "lmop:area:cragmaw-1",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域1 城堡入口",
+   "name_en": null,
+   "kind": "area",
+   "page": "45",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 1,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 1,
+   "map_area_name": "城堡入口",
+   "summary": "区域1与区域2之间的主要大门由青铜覆盖的木头制成，但已锈蚀倒塌；入口前有低矮阶梯通往平台。",
+   "rule_ids": [
+    "rule-contest",
+    "rule-cover",
+    "rule-difficult-terrain",
+    "rule-group-check",
+    "rule-light",
+    "rule-skill",
+    "rule-social",
+    "rule-stealth"
+   ],
+   "mechanics_summary": "2 项检定/豁免",
+   "checks": [
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-1:1",
+     "kind": "contest",
+     "ability": "敏捷",
+     "skill": "潜行",
+     "dc": null,
+     "label": "在区域3哥布林哨兵的注视下悄悄通过入口。",
+     "success": null,
+     "failure": null,
+     "notes": "对抗哥布林的感知检定；移动够快可能不被发现。",
+     "rule_ids": [
+      "rule-contest",
+      "rule-stealth",
+      "rule-skill"
+     ]
+    },
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-1:2",
+     "kind": "contest",
+     "ability": "魅力",
+     "skill": "唬弄",
+     "dc": null,
+     "label": "伪装成红烙印使者，集体唬弄城堡守卫。",
+     "success": null,
+     "failure": null,
+     "notes": "每位角色各掷一次，对抗怪物感知（洞察）；至少一位成功即整体成功。",
+     "rule_ids": [
+      "rule-contest",
+      "rule-social",
+      "rule-skill",
+      "rule-group-check"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-2",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域2 陷阱大厅",
+   "name_en": null,
+   "kind": "area",
+   "page": "46",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 2,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 2,
+   "map_area_name": "陷阱大厅",
+   "summary": "曾经的城堡门厅，现在成为危险场所；瓦砾土堆阻碍南部大厅，走廊散落尘土、瓦砾和崩塌天花板的泥灰。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-cover",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-falling",
+    "rule-passive-check",
+    "rule-prone",
+    "rule-saving-throw",
+    "rule-skill",
+    "rule-trap",
+    "rule-xp"
+   ],
+   "mechanics_summary": "3 项检定/豁免；1 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-2:1",
+     "kind": "passive",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": null,
+     "label": "被动察觉通往区域8走廊上的铜线陷阱。",
+     "success": null,
+     "failure": null,
+     "notes": "被动感知（侦查）至少 20 才能察觉。",
+     "rule_ids": [
+      "rule-passive-check",
+      "rule-skill",
+      "rule-trap"
+     ]
+    },
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-2:2",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": 10,
+     "label": "主动寻找通往区域8走廊上的铜线陷阱。",
+     "success": "发现陷阱；触发铜线很容易避开和解除（无须能力检定）。",
+     "failure": "未发现陷阱。",
+     "notes": "替代被动 20 的察觉方式。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill",
+      "rule-trap"
+     ]
+    },
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-2:3",
+     "kind": "saving_throw",
+     "ability": "敏捷",
+     "skill": null,
+     "dc": 10,
+     "label": "陷阱触发时通过敏捷豁免，避免落石伤害。",
+     "success": "伤害减半。",
+     "failure": "受到 3d6 钝击伤害。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-trap"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-2:1",
+     "type": "xp",
+     "amount": 100,
+     "currency": null,
+     "condition": "察觉陷阱或从陷阱中生存",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-3",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域3 弓箭手岗哨",
+   "name_en": null,
+   "kind": "area",
+   "page": "46",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 3,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 3,
+   "map_area_name": "弓箭手岗哨",
+   "summary": "散落碎石的小房间；正对门的射箭孔提供优良的对城堡大门射击场所。",
+   "rule_ids": [
+    "rule-action",
+    "rule-cover",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-stealth",
+    "rule-xp"
+   ],
+   "mechanics_summary": "2 只怪物；1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:goblin",
+     "count": 2,
+     "notes": "弓箭手岗哨。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-3:1",
+     "type": "xp",
+     "amount": 100,
+     "currency": null,
+     "condition": "每击败一对哥布林弓箭手",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-4",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域4 废弃营房",
+   "name_en": null,
+   "kind": "area",
+   "page": "46",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 4,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 4,
+   "map_area_name": "废弃营房",
+   "summary": "城堡西南方的塔楼，只比一堆瓦砾好一些；几个残破铺盖散落在剩下的地板上，有一个细小通路通往东方。",
+   "rule_ids": [
+    "rule-action",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-rest",
+    "rule-xp"
+   ],
+   "mechanics_summary": "3 只怪物；1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:goblin",
+     "count": 3,
+     "notes": "在废弃营房休息。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-4:1",
+     "type": "xp",
+     "amount": 150,
+     "currency": null,
+     "condition": "击败区域4的哥布林",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-5",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域5 储藏室",
+   "name_en": null,
+   "kind": "area",
+   "page": "47",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 5,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 5,
+   "map_area_name": "储藏室",
+   "summary": "被克拉葛摩部族在 High Road 和三猪小径袭击的商队提供了城堡所需补给；旧木桶装着腌肉，一袋袋腐烂谷粒放满储藏区。",
+   "rule_ids": [
+    "rule-difficult-terrain",
+    "rule-poisoned",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:cragmaw-castle:cragmaw-5:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "搜查区域5的补给",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-6",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域6 大地精营房",
+   "name_en": null,
+   "kind": "area",
+   "page": "47",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 6,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 6,
+   "map_area_name": "大地精营房",
+   "summary": "四个稻草铺成的床铺在营房内地板上一字排开；墙上托架放着长矛、长剑、流星锤等武器。",
+   "rule_ids": [
+    "rule-action",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "4 只怪物；2 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:hobgoblin",
+     "count": 4,
+     "notes": "大地精营房。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:cragmaw-castle:cragmaw-6:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "清点区域6墙上的武器",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-6:1",
+     "type": "xp",
+     "amount": 400,
+     "currency": null,
+     "condition": "击败区域6的大地精",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-7",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域7 宴会厅",
+   "name_en": null,
+   "kind": "area",
+   "page": "47",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 7,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 7,
+   "map_area_name": "宴会厅",
+   "summary": "城堡主人曾在此举办宴会和舞会，现在只是哥布林的食堂；大厅西部大多只剩一墙碎石，剩余部分仍完好。",
+   "rule_ids": [
+    "rule-action",
+    "rule-cover",
+    "rule-difficult-terrain",
+    "rule-fire",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-xp"
+   ],
+   "mechanics_summary": "8 只怪物；1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:goblin",
+     "count": 8,
+     "notes": "Yegg 为 12 HP 的哥布林厨师。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-7:1",
+     "type": "xp",
+     "amount": 400,
+     "currency": null,
+     "condition": "击败区域7的哥布林",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-8",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域8 黑暗大厅",
+   "name_en": null,
+   "kind": "area",
+   "page": "48",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 8,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 8,
+   "map_area_name": "黑暗大厅",
+   "summary": "高而窄的大厅，曾是教堂或神殿的一部分；天使图像雕刻在房间上方，北边厚重帘幕挡住一对拱门，拱门之间有破损但装饰华丽的石制火盆。",
+   "rule_ids": [
+    "rule-action",
+    "rule-contest",
+    "rule-cover",
+    "rule-darkvision",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-surprise",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-8:1",
+     "kind": "contest",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": null,
+     "label": "察觉藏在房间上方阴影中的掘地兽，避免被突袭。",
+     "success": null,
+     "failure": null,
+     "notes": "对抗掘地兽的敏捷（潜行）；也可用被动侦查。",
+     "rule_ids": [
+      "rule-contest",
+      "rule-skill",
+      "rule-surprise"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:grick",
+     "count": 1,
+     "notes": "Lhupo 的宠物；从上方扑击。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:cragmaw-castle:cragmaw-8:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "搜查石制火盆的煤炭堆",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-8:1",
+     "type": "xp",
+     "amount": 450,
+     "currency": null,
+     "condition": "击败区域8的掘地兽",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-9",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域9 哥布林神殿",
+   "name_en": null,
+   "kind": "area",
+   "page": "49",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 9,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 9,
+   "map_area_name": "哥布林神殿",
+   "summary": "人类的神对哥布林没有意义，克拉葛摩部族将这个区域改为 Maglubiyet（哥布林与大哥布林之神）的神殿；房间使用城堡北部的塔楼。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-cover",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "3 只怪物；2 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:goblin",
+     "count": 3,
+     "notes": "Lhupo 为 12 HP。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:cragmaw-castle:cragmaw-9:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "取走祭坛上的仪式法器",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-9:1",
+     "type": "xp",
+     "amount": 150,
+     "currency": null,
+     "condition": "击败区域9的哥布林",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-10",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域10 后门",
+   "name_en": null,
+   "kind": "area",
+   "page": "50",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 10,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 10,
+   "map_area_name": "后门",
+   "summary": "老旧城堡南面，一条杂草重生的小路通往可以爬上城墙的通路；一个大铁门在这里阻挡外来进攻，射箭孔在离地十尺高的地方俯瞰道路。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-break-object",
+    "rule-climb",
+    "rule-dc",
+    "rule-falling",
+    "rule-lock",
+    "rule-tool",
+    "rule-travel"
+   ],
+   "mechanics_summary": "2 项检定/豁免",
+   "checks": [
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-10:1",
+     "kind": "ability_check",
+     "ability": "敏捷",
+     "skill": null,
+     "dc": 15,
+     "label": "用盗贼工具打开后门的锁。",
+     "success": "锁被打开。",
+     "failure": "锁未打开。",
+     "notes": "也可用 DC25 力量检定击破铁门。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-tool",
+      "rule-lock"
+     ]
+    },
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-10:2",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 25,
+     "label": "强行击破上锁的铁门。",
+     "success": "门被击破。",
+     "failure": "门纹丝不动。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-lock"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-11",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域11 废弃塔楼",
+   "name_en": null,
+   "kind": "area",
+   "page": "50",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 11,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 11,
+   "map_area_name": "废弃塔楼",
+   "summary": "几乎完全崩塌的塔楼，地板还有一些空地；腐烂的箱子和老旧木桶证明这里曾是储藏室。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-secret-door",
+    "rule-skill",
+    "rule-stealth"
+   ],
+   "mechanics_summary": "2 项检定/豁免",
+   "checks": [
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-11:1",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": 15,
+     "label": "找到通往隐藏入口的小径。",
+     "success": "找到小径。",
+     "failure": "未找到。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    },
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-11:2",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": 10,
+     "label": "主动寻找城堡外的隐藏入口，找出帆布入口。",
+     "success": "找到帆布入口。",
+     "failure": "未找到。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-12",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域12 守卫营房",
+   "name_en": null,
+   "kind": "area",
+   "page": "50",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 12,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 12,
+   "map_area_name": "守卫营房",
+   "summary": "这里的生物一直从射箭孔往外看，任何试图经过城堡东方的生物都会被发现且被攻击；一个装满煤炭的石制火盆在小营房中燃烧。",
+   "rule_ids": [
+    "rule-action",
+    "rule-cover",
+    "rule-difficult-terrain",
+    "rule-fire",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-xp"
+   ],
+   "mechanics_summary": "2 只怪物；1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:hobgoblin",
+     "count": 2,
+     "notes": "守卫营房；一人去区域14报信。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-12:1",
+     "type": "xp",
+     "amount": 200,
+     "currency": null,
+     "condition": "击败区域12的大地精",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-13",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域13 枭熊塔楼",
+   "name_en": null,
+   "kind": "area",
+   "page": "50",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 13,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 13,
+   "map_area_name": "枭熊塔楼",
+   "summary": "通往这间房间的门被沉重木栓阻挡，伴随一个警告内有危险的标志；木栓抬起时，房间内的生物会醒来并发出可怕的咆哮。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-break-object",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-healing",
+    "rule-initiative",
+    "rule-light",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-spell-scroll",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:cragmaw-castle:cragmaw-13:1",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "侦查",
+     "dc": 15,
+     "label": "注意到塔楼二楼锯齿边缘上的破旧木箱。",
+     "success": "注意到木箱。",
+     "failure": "未注意到。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:owlbear",
+     "count": 1,
+     "notes": "被关在塔楼中的枭熊。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:cragmaw-castle:cragmaw-13:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "打开塔楼二楼不上锁的破旧木箱",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-spell-scroll",
+      "rule-healing"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-13:1",
+     "type": "xp",
+     "amount": 700,
+     "currency": null,
+     "condition": "击败或释放区域13的枭熊",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:area:cragmaw-14",
+   "record_type": "area",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "区域14 王之居所",
+   "name_en": null,
+   "kind": "area",
+   "page": "51",
+   "parent_scene_id": "lmop:scene:cragmaw-castle",
+   "area_no": 14,
+   "map_id": "map-cragmaw-castle",
+   "map_area_no": 14,
+   "map_area_name": "王之居所",
+   "summary": "粗糙的住所，厚毛皮摆在地板上作地毯，老旧奖章挂在墙上；北边一张大床，旁边石制火盆烧得明亮，南边靠门放着圆桌和几张椅子。",
+   "rule_ids": [
+    "rule-action",
+    "rule-cover",
+    "rule-death",
+    "rule-fire",
+    "rule-healing",
+    "rule-initiative",
+    "rule-light",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-npc-party",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "3 只怪物；3 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:bugbear",
+     "count": 1,
+     "notes": "葛罗尔王；45 HP。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:doppelganger",
+     "count": 1,
+     "notes": "Vyerith；伪装成人类女卓尔。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:wolf",
+     "count": 1,
+     "notes": "Snar；18 HP。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:cragmaw-castle:cragmaw-14:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "搜查葛罗尔床垫下的皮革麻袋",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-healing"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-14:1",
+     "type": "xp",
+     "amount": 950,
+     "currency": null,
+     "condition": "击败葛罗尔王、狼与变形怪",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:cragmaw-castle:cragmaw-14:2",
+     "type": "xp",
+     "amount": 200,
+     "currency": null,
+     "condition": "解救刚铎·寻石者并成功护送他回凡度林（额外奖励）",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:return-encounter",
+   "record_type": "scene",
+   "part": "p034-061",
+   "part_no": 3,
+   "name": "回程遭遇：军事团伙",
+   "name_en": "Return Encounter: Hobgoblin War Band",
+   "kind": "encounter",
+   "page": "52",
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": null,
+   "map_area_no": null,
+   "summary": "角色准备离开城堡时的可选回程遭遇；一支大地精军团正在回家，由 Targor Bloodsword 领导。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-dc",
+    "rule-initiative",
+    "rule-monster-stat",
+    "rule-random-encounter",
+    "rule-skill",
+    "rule-social",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 项检定/豁免；6 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:return-encounter:1",
+     "kind": "ability_check",
+     "ability": "魅力",
+     "skill": "说服",
+     "dc": 15,
+     "label": "说服 Targor 接受成为葛罗尔王接班人的建议，而不是为葛罗尔复仇。",
+     "success": "Targor 接受建议，队伍可避免战斗。",
+     "failure": "Targor 拒绝，战斗爆发。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-social",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:hobgoblin",
+     "count": 4,
+     "notes": "Targor Bloodsword 为 20 HP 的大地精领袖。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:wolf",
+     "count": 2,
+     "notes": "Targor 的宠物。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:treasure:return-encounter:1",
+     "type": "treasure",
+     "amount": null,
+     "currency": null,
+     "condition": "击败大地精后检查",
+     "xp": null,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:xp:return-encounter:1",
+     "type": "xp",
+     "amount": 500,
+     "currency": null,
+     "condition": "击败 Targor 的军团，或与他交涉成功",
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-1",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "洞窟入口",
+   "name_en": "Cave Entrance",
+   "kind": "scene",
+   "page": 56,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 1,
+   "map_area_name": "洞窟入口",
+   "summary": "寻石者兄弟的营地；死去的矮人矿工塔登躺在补给旁，东北部有坍塌深坑。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-attunement",
+    "rule-climb",
+    "rule-cover",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-falling",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-prone",
+    "rule-skill",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-1-pit-climb",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": "运动",
+     "dc": 15,
+     "label": "攀爬入口深坑",
+     "success": "正常上下。",
+     "failure": "检定结果低于10会坠落，每10尺受1d6钝击伤害并在坑底倒地。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-climb",
+      "rule-skill",
+      "rule-prone",
+      "rule-falling"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:area-1-boots",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-attunement"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-2",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "矿道",
+   "name_en": "Mine Tunnels",
+   "kind": "scene",
+   "page": 56,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 2,
+   "map_area_name": "矿道",
+   "summary": "迷宫般的原始矿道，天花板只有6尺高，尽头多是开挖到一半的死路。",
+   "rule_ids": [
+    "rule-action",
+    "rule-darkvision",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-stealth"
+   ],
+   "mechanics_summary": "1 只怪物",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:ochre-jelly",
+     "count": 1,
+     "notes": "附录B未收录数据卡；使用《怪物图鉴》。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-3",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "旧入口",
+   "name_en": "Old Entrance",
+   "kind": "scene",
+   "page": 57,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 3,
+   "map_area_name": "旧入口",
+   "summary": "数百年前被崩塌埋葬的旧入口；矮人与兽人的骸骨散落，天花板攀着十只蚊蝠。",
+   "rule_ids": [
+    "rule-action",
+    "rule-darkvision",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-passive-check",
+    "rule-skill",
+    "rule-surprise"
+   ],
+   "mechanics_summary": "1 项检定/豁免；10 只怪物",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-3-stirge-ambush",
+     "kind": "passive",
+     "ability": "感知",
+     "skill": "察觉",
+     "dc": null,
+     "label": "蚊蝠突袭",
+     "success": "被动察觉高于蚊蝠的敏捷（潜行）检定则不被突袭。",
+     "failure": "被动察觉较低的角色被突袭。",
+     "notes": "DM只掷一次蚊蝠的潜行。",
+     "rule_ids": [
+      "rule-passive-check",
+      "rule-skill",
+      "rule-surprise"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:stirge",
+     "count": 10,
+     "notes": "若角色观察地板骷髅而未观察天花板，会被突袭；被动察觉高于蚊蝠的敏捷（潜行）检定则不被突袭。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-4",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "老旧的守卫间",
+   "name_en": "Old Guardroom",
+   "kind": "scene",
+   "page": 57,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 4,
+   "map_area_name": "老旧的守卫间",
+   "summary": "兽人进攻时被迅速攻占的守卫室；碎石与骸骨间有九具骷髅会重新组合。",
+   "rule_ids": [
+    "rule-action",
+    "rule-darkvision",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat"
+   ],
+   "mechanics_summary": "9 只怪物",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:skeleton",
+     "count": 9,
+     "notes": "活物进入房间时组合并攻击，战斗到被摧毁。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-5",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "试金者的办公室",
+   "name_en": "Assayer's Office",
+   "kind": "scene",
+   "page": 57,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 5,
+   "map_area_name": "试金者的办公室",
+   "summary": "矿坑试金师称量与估价的办公室；柜台后有一个上锁的铁制保险箱。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-light",
+    "rule-lock",
+    "rule-skill",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-5-strongbox-lock",
+     "kind": "ability_check",
+     "ability": "敏捷",
+     "skill": "盗贼工具",
+     "dc": 20,
+     "label": "打开铁制保险箱",
+     "success": "打开保险箱，取得600cp、180sp、90ep、60gp。",
+     "failure": "无法打开。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill",
+      "rule-lock"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:area-5-strongbox",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-6",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "南部营房",
+   "name_en": "Southern Barracks",
+   "kind": "scene",
+   "page": 57,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 6,
+   "map_area_name": "南部营房",
+   "summary": "矿工轮班休息的营房；三只食尸鬼正在骸骨堆中咀嚼。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-rest",
+    "rule-skill",
+    "rule-surprise"
+   ],
+   "mechanics_summary": "1 项检定/豁免；3 只怪物",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-6-hear-ghouls",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "察觉",
+     "dc": 10,
+     "label": "听见食尸鬼咀嚼",
+     "success": "听见细微的嘎吱声和碎裂声，察觉房内有三只食尸鬼。",
+     "failure": "没有察觉。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:ghoul",
+     "count": 3,
+     "notes": "在骸骨堆中进食；会攻击活物。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-7",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "废弃的储藏间",
+   "name_en": "Abandoned Storeroom",
+   "kind": "scene",
+   "page": 58,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 7,
+   "map_area_name": "废弃的储藏间",
+   "summary": "保存完好的储藏间，是矿坑中安全的休息点；门可以从内部挡住。",
+   "rule_ids": [
+    "rule-darkvision",
+    "rule-difficult-terrain",
+    "rule-light",
+    "rule-rest"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-8",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "真菌洞窟",
+   "name_en": "Fungi Cavern",
+   "kind": "scene",
+   "page": 58,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 8,
+   "map_area_name": "真菌洞窟",
+   "summary": "覆盖着发光真菌的洞窟；穿越时会释放毒气。",
+   "rule_ids": [
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-light",
+    "rule-poisoned",
+    "rule-saving-throw"
+   ],
+   "mechanics_summary": "1 项检定/豁免",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-8-toxic-gas",
+     "kind": "saving_throw",
+     "ability": "体质",
+     "skill": null,
+     "dc": 11,
+     "label": "真菌毒气",
+     "success": "不受影响。",
+     "failure": "受3d6毒素伤害并中毒10分钟。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-poisoned"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-9",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "大洞穴",
+   "name_en": "Great Cavern",
+   "kind": "scene",
+   "page": 58,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 9,
+   "map_area_name": "大洞穴",
+   "summary": "曾是宴会厅、会议区与矿工食堂的三层大洞穴；七只食尸鬼潜伏在西边高地。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-climb",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-falling",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-prone",
+    "rule-skill"
+   ],
+   "mechanics_summary": "1 项检定/豁免；7 只怪物",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-9-cliff-climb",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": "运动",
+     "dc": 12,
+     "label": "攀爬大洞穴悬崖",
+     "success": "正常攀爬。",
+     "failure": "失败或被击落者受1d6钝击伤害并倒地。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-climb",
+      "rule-skill",
+      "rule-prone"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:ghoul",
+     "count": 7,
+     "notes": "潜伏在西边高地，饥饿且战斗到被摧毁。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-10",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "黑水池",
+   "name_en": "Dark Pool",
+   "kind": "scene",
+   "page": 58,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 10,
+   "map_area_name": "黑水池",
+   "summary": "深黑色的地下水池；池底有一具古代人类巫师骸骨，带着两枚白金戒指与魔法飞弹魔杖。",
+   "rule_ids": [
+    "rule-attunement",
+    "rule-darkvision",
+    "rule-difficult-terrain",
+    "rule-light",
+    "rule-magic-item",
+    "rule-treasure",
+    "rule-water"
+   ],
+   "mechanics_summary": "1 项奖励",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:area-10-skeleton",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-attunement"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-11",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "北部营房",
+   "name_en": "Northern Barracks",
+   "kind": "scene",
+   "page": 59,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 11,
+   "map_area_name": "北部营房",
+   "summary": "奈兹纳尔的前线营房；五只熊地精在此阻挡不死生物，东门被木桌路障挡住。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-break-object",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-initiative",
+    "rule-light",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "2 项检定/豁免；5 只怪物；1 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-11-force-door",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 20,
+     "label": "强行打开东门",
+     "success": "强行打开门。",
+     "failure": "门保持关闭。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-break-object"
+     ]
+    },
+    {
+     "check_id": "lmop:check:area-11-hear-bugbears",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "察觉",
+     "dc": 10,
+     "label": "听见熊地精抱怨",
+     "success": "听见粗哑声音用哥布林腔调抱怨饥饿。",
+     "failure": "没有察觉。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:bugbear",
+     "count": 5,
+     "notes": "最大一只带着腰包（15cp、13ep、一瓶活力药水）。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:area-11-bugbear-pouch",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-12",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "冶炼洞窟",
+   "name_en": "Smelting Cavern",
+   "kind": "scene",
+   "page": 59,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 12,
+   "map_area_name": "冶炼洞窟",
+   "summary": "矿坑冶炼核心；高炉、风箱与水车渠道已干涸，八具僵尸与一个燃烧之颅守卫。",
+   "rule_ids": [
+    "rule-action",
+    "rule-darkvision",
+    "rule-difficult-terrain",
+    "rule-fire",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat"
+   ],
+   "mechanics_summary": "9 只怪物",
+   "checks": [],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:flameskull",
+     "count": 1,
+     "notes": "更智慧的守卫，执行古老命令阻止入侵者通过。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:zombie",
+     "count": 8,
+     "notes": "会追逐踏入房间的活物，但不会追出区域超过1轮。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-13",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "明亮的洞穴",
+   "name_en": "Bright Cavern",
+   "kind": "scene",
+   "page": 59,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 13,
+   "map_area_name": "明亮的洞穴",
+   "summary": "天花板矿物吸收并放出光线，如同夜空；两座人类比例的石制建筑已部分坍塌。",
+   "rule_ids": [
+    "rule-difficult-terrain",
+    "rule-light",
+    "rule-magic-item"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-14",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "法师的居所",
+   "name_en": "Wizard's Quarters",
+   "kind": "scene",
+   "page": 60,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 14,
+   "map_area_name": "法师的居所",
+   "summary": "被爆炸破坏的法师客房；缚灵莫尔梅斯克从地板下飘出，守着焦黑铁箱与法术书。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-break-object",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-initiative",
+    "rule-light",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-social",
+    "rule-spell-scroll",
+    "rule-spellcasting",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "3 项检定/豁免；1 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-14-force-door",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 15,
+     "label": "搬开法师居所的门",
+     "success": "搬开或撬开门。",
+     "failure": "门无法打开。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-break-object"
+     ]
+    },
+    {
+     "check_id": "lmop:check:area-14-map-investigation",
+     "kind": "ability_check",
+     "ability": "智力",
+     "skill": "调查",
+     "dc": 12,
+     "label": "鉴定法术书中的地图",
+     "success": "鉴定地图，上面显示一个可自行创造的地城地点，可作为下一次冒险的引子。",
+     "failure": "无法辨认地图。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    },
+    {
+     "check_id": "lmop:check:area-14-mormesk-persuasion",
+     "kind": "ability_check",
+     "ability": "魅力",
+     "skill": "说服",
+     "dc": 10,
+     "label": "说服莫尔梅斯克",
+     "success": "缚灵相信物品价值，允许角色阅读书籍并保留秘密地图。",
+     "failure": "缚灵不接受礼物。",
+     "notes": "无论礼物如何，缚灵不会放弃焦黑铁箱中的木管；若角色愿杀观察者眼魔，他可能给部分钱币或宝石。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-social",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:wraith",
+     "count": 1,
+     "notes": "附录B未收录缚灵数据卡；使用《怪物图鉴》。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:area-14-chest",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:area-14-spellbook-map",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-magic-item"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-15",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "法术工场",
+   "name_en": "The Forge of Spells",
+   "kind": "scene",
+   "page": 61,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 15,
+   "map_area_name": "法术工场",
+   "summary": "凡戴尔条约中矮人、侏儒与巫师同盟强化装备的地方；观察者眼魔守着绿色火焰火盆与两件魔法物品。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-break-object",
+    "rule-dc",
+    "rule-fire",
+    "rule-initiative",
+    "rule-light",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-skill",
+    "rule-social",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "3 项检定/豁免；1 只怪物；2 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-15-brazier-arcana",
+     "kind": "ability_check",
+     "ability": "智力",
+     "skill": "奥秘",
+     "dc": 15,
+     "label": "鉴别绿色火焰火盆",
+     "success": "鉴别出火盆是整个洞穴魔法力量的源头；魔法已衰退，无法永久强化物品，但仍可临时赋予+1。",
+     "failure": "无法鉴别。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill",
+      "rule-fire"
+     ]
+    },
+    {
+     "check_id": "lmop:check:area-15-force-door",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 15,
+     "label": "强行打开法术工场北门",
+     "success": "强行打开门。",
+     "failure": "门保持关闭。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-break-object"
+     ]
+    },
+    {
+     "check_id": "lmop:check:area-15-spectator-deception",
+     "kind": "ability_check",
+     "ability": "魅力",
+     "skill": "唬弄",
+     "dc": 15,
+     "label": "欺骗观察者眼魔",
+     "success": "观察者眼魔相信契约解除，消失并回到原本位面。",
+     "failure": "观察者眼魔不相信。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-social",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:spectator",
+     "count": 1,
+     "notes": "原文数据卡译作“独眼怪”；一旦队伍试图带走区域中任何物品就会攻击。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:area-15-forge-buff",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-magic-item"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:area-15-forge-treasure",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-magic-item"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-16",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "轰鸣声的洞穴",
+   "name_en": "Booming Cavern",
+   "kind": "scene",
+   "page": 62,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 16,
+   "map_area_name": "轰鸣声的洞穴",
+   "summary": "潮音洞之声得名的水声洞穴；每两分钟有一次水浪涌入，水位短暂上升10尺。",
+   "rule_ids": [
+    "rule-climb",
+    "rule-darkvision",
+    "rule-falling",
+    "rule-light",
+    "rule-saving-throw",
+    "rule-water"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-17",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "古老的河床",
+   "name_en": "Old Riverbed",
+   "kind": "scene",
+   "page": 62,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 17,
+   "map_area_name": "古老的河床",
+   "summary": "从区域10流向区域18的旧水道；如今干涸，可绕过区域12的不死生物。",
+   "rule_ids": [
+    "rule-darkvision",
+    "rule-difficult-terrain",
+    "rule-light",
+    "rule-stealth",
+    "rule-travel"
+   ],
+   "mechanics_summary": "无检定/战斗；按场景描述与探索规则运行",
+   "checks": [],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-18",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "崩塌的洞穴",
+   "name_en": "Collapsed Cavern",
+   "kind": "scene",
+   "page": 62,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 18,
+   "map_area_name": "崩塌的洞穴",
+   "summary": "奈兹纳尔的仆从占据的崩塌洞穴；三只熊地精与变形怪瓦拉克在20尺深裂谷中搜寻宝藏。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-attunement",
+    "rule-climb",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-falling",
+    "rule-initiative",
+    "rule-light",
+    "rule-monster-stat",
+    "rule-prone",
+    "rule-skill",
+    "rule-treasure"
+   ],
+   "mechanics_summary": "2 项检定/豁免；4 只怪物；1 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-18-chasm-climb",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": "运动",
+     "dc": 10,
+     "label": "攀爬崩塌裂谷",
+     "success": "正常上下。",
+     "failure": "结果小于5会坠落，每10尺受1d6钝击伤害并在底部倒地。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-climb",
+      "rule-skill",
+      "rule-prone",
+      "rule-falling"
+     ]
+    },
+    {
+     "check_id": "lmop:check:area-18-find-gauntlets",
+     "kind": "ability_check",
+     "ability": "感知",
+     "skill": "察觉",
+     "dc": 20,
+     "label": "寻找巨石下的手套",
+     "success": "找到食人魔力量手套。",
+     "failure": "没有找到。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:bugbear",
+     "count": 3,
+     "notes": "战斗中若主要洞穴发生战斗，谷底熊地精会爬绳加入。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:doppelganger",
+     "count": 1,
+     "notes": "以卓尔男性样貌出现；若两只熊地精死亡，会撤退到区域19报信。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:area-18-gauntlets",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-attunement"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-19",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "杜马松的神殿",
+   "name_en": "Temple of Dumathoin",
+   "kind": "scene",
+   "page": 63,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 19,
+   "map_area_name": "杜马松神殿",
+   "summary": "奈兹纳尔的总部；六根破损大理石柱、九尺高矮人神像与营地。黑蜘蛛、四只巨蛛与两只熊地精在此。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-action",
+    "rule-attunement",
+    "rule-cover",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-difficult-terrain",
+    "rule-healing",
+    "rule-initiative",
+    "rule-light",
+    "rule-magic-item",
+    "rule-monster-stat",
+    "rule-prone",
+    "rule-saving-throw",
+    "rule-skill",
+    "rule-trap",
+    "rule-treasure",
+    "rule-xp"
+   ],
+   "mechanics_summary": "3 项检定/豁免；8 只怪物；3 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-19-ceiling-collapse",
+     "kind": "saving_throw",
+     "ability": "敏捷",
+     "skill": null,
+     "dc": 15,
+     "label": "躲避天花板崩塌",
+     "success": "伤害减半。",
+     "failure": "受4d10钝击伤害并倒地。",
+     "notes": null,
+     "rule_ids": [
+      "rule-saving-throw",
+      "rule-dc",
+      "rule-prone"
+     ]
+    },
+    {
+     "check_id": "lmop:check:area-19-pry-eye",
+     "kind": "ability_check",
+     "ability": "力量",
+     "skill": null,
+     "dc": 10,
+     "label": "撬下雕像宝石眼睛",
+     "success": "弄下一颗眼睛，但触发天花板崩塌。",
+     "failure": "无法弄下。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc"
+     ]
+    },
+    {
+     "check_id": "lmop:check:area-19-statue-eyes",
+     "kind": "ability_check",
+     "ability": "智力",
+     "skill": "调查",
+     "dc": 15,
+     "label": "识破雕像宝石是赝品",
+     "success": "发现珠宝是不值钱的玻璃赝品。",
+     "failure": "以为宝石价值连城。",
+     "notes": "有强大咒语保护，侦测魔法显示防护系灵光。",
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [
+    {
+     "monster_id": "lmop:monster:bugbear",
+     "count": 2,
+     "notes": "站在桌前护卫奈兹纳尔。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:doppelganger",
+     "count": 1,
+     "notes": "若区域18的瓦拉克撤退到此，会变成南镀的模样，作为奈兹纳尔的筹码。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:giant-spider",
+     "count": 4,
+     "notes": "躲在柱子后，尝试用蛛网束缚入侵者。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "monster_id": "lmop:monster:nezznar",
+     "count": 1,
+     "notes": "带蜘蛛法杖与区域20钥匙；会对角色好奇，可能询问身份、效忠组织、兴趣与目标。",
+     "rule_ids": [
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:area-19-nezznar",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-attunement",
+      "rule-healing"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:area-19-nezznar-capture",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": null,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    },
+    {
+     "reward_id": "lmop:reward:area-19-statue-eyes",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 0,
+     "rule_ids": [
+      "rule-treasure"
+     ]
+    }
+   ],
+   "child_records": []
+  },
+  {
+   "record_id": "lmop:scene:area-20",
+   "record_type": "scene",
+   "part": "p062-090",
+   "part_no": 4,
+   "name": "祭司的居所",
+   "name_en": "Priest's Quarters",
+   "kind": "scene",
+   "page": 64,
+   "parent_scene_id": null,
+   "area_no": null,
+   "map_id": "map-wave-echo-cave",
+   "map_area_no": 20,
+   "map_area_name": "祭司的居所",
+   "summary": "奈兹纳尔用作牢房的祭司居所；南镀·寻石者被绑着昏迷在石地板上。",
+   "rule_ids": [
+    "rule-ability-check",
+    "rule-darkvision",
+    "rule-dc",
+    "rule-death",
+    "rule-light",
+    "rule-lock",
+    "rule-npc-party",
+    "rule-rest",
+    "rule-skill",
+    "rule-tool",
+    "rule-xp"
+   ],
+   "mechanics_summary": "1 项检定/豁免；1 项奖励",
+   "checks": [
+    {
+     "check_id": "lmop:check:area-20-door-lock",
+     "kind": "ability_check",
+     "ability": "敏捷",
+     "skill": "盗贼工具",
+     "dc": 15,
+     "label": "打开祭司居所门锁",
+     "success": "开锁；也可使用奈兹纳尔的铁钥匙。",
+     "failure": "无法打开。",
+     "notes": null,
+     "rule_ids": [
+      "rule-ability-check",
+      "rule-dc",
+      "rule-skill",
+      "rule-tool",
+      "rule-lock"
+     ]
+    }
+   ],
+   "hazards": [],
+   "monsters": [],
+   "rewards": [
+    {
+     "reward_id": "lmop:reward:area-20-nundro",
+     "type": "reward",
+     "amount": null,
+     "currency": null,
+     "condition": null,
+     "xp": 200,
+     "rule_ids": [
+      "rule-xp"
+     ]
+    }
+   ],
+   "child_records": []
+  }
+ ]
+}
