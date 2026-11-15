@@ -3,3 +3,7 @@ node_modules/
 *.log
 playwright-report/
 test-results/
+
+# Local 5etools snapshots and private prose packs (never committed)
+source/
+data/mm-private/
