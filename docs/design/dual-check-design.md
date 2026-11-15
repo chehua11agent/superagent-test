@@ -155,16 +155,18 @@ userWord = {
 
 ## 6. 和当前代码的落点
 
+> 2026-11 清理原型后，仅保留 `lib/srs.js` 中的 SRS 实现；下表其余 UI / 内容落点随 `game/` 移除，仅作历史设计记录。
+
 | 文件 | 需要改什么 |
 | --- | --- |
-| `game/src/srs.js` | 把 `review()` 拆成认义/拼写两个函数；`masteryStats` 双证判断 |
+| `lib/srs.js` | 把 `review()` 拆成认义/拼写两个函数；`masteryStats` 双证判断 |
 | `game/src/game.js` | 剧情行动按 `check_mode` 结算；BOSS 混检；`known` 验证拼写 |
 | `game/src/main.js` | 复习加试、词书双徽章、行动卡“认出/拼出”标签 |
 | `game/content/*.json` | 给行动加 `check_mode: recognize/spell`；BOSS 检定类型 |
 | `game/styles.css` | 徽章、加试输入、双路径卡 |
 | `tests/` + `e2e/` | 双轨独立、认义失败不重置拼写、拼写失败不重置认义、双证才算掌握 |
 
-当前 PR 已接入 A/E/C；B/D 和更细的鉴定类型（听写、语境、近义辨析、词形变化）还没有接。
+原型中曾接入 A/E/C；现只保留算法侧实现，B/D 和更细的鉴定类型（听写、语境、近义辨析、词形变化）尚未接入。
 
 ## 7. 建议先做哪一块
 

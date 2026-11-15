@@ -19,7 +19,7 @@ import {
   review,
   reviewSpelling,
   toISO
-} from '../game/src/srs.js';
+} from '../lib/srs.js';
 
 const TODAY = '2026-11-08';
 

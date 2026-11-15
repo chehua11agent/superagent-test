@@ -1,7 +1,7 @@
 # 《拾词者 · 雾港》画面 / UI 现成方案调研
 
 - 调研日期：2026-11-08
-- 对象：`game/` 原型，线上 https://chehua11agent.github.io/superagent-test/game/
+- 对象：`game/` 原型，线上 https://chehua11agent.github.io/superagent-test/game/（原型与线上页面已于 2026-11 清理，本文保留为历史调研记录）
 - 范围：GitHub 上可直接自托管 / 商用的开源引擎、UI 套件、图标与素材；不评估付费素材站、闭源引擎和美术外包。
 - 本文只回答“有哪些现成方案、各自代价”，不替代设计决策。
 

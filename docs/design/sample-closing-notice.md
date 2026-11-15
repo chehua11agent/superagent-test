@@ -10,8 +10,8 @@
 
 **玩家在什么时候、用什么动作、承担什么后果地用到这个词？**
 
-样本的机器可读版本在 [`game/content/samples/closing-notice.json`](../../game/content/samples/closing-notice.json)，
-结构校验在 `npm run validate:sample`。
+样本的机器可读版本保留在 [`samples/closing-notice.json`](samples/closing-notice.json)，
+随原型一起下线的结构校验脚本不再提供。
 
 ## 1. 10 个词与它们的位置
 

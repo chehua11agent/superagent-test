@@ -2,13 +2,13 @@
 
 dsh-superagent test repository.
 
-本仓库是《四级单词跑团》项目的资料与原型合集，按「文档 / 数据 / 原型」分类：
+本仓库是《四级单词跑团》项目的资料与算法库。旧的可玩原型已清理，只保留词库录入资料与单词算法：
 
 | 分类 | 目录 | 说明 |
 | --- | --- | --- |
 | 文档 | [`docs/`](docs/README.md) | 总体设计、玩法设计、规则/内容/画面调研、词汇与知识库说明 |
 | 数据 | [`data/`](data/) | 150 个 DnD × CET-4 映射词、4530 个四级大纲词头、两本素材的录入清单 |
-| 可玩原型 | [`game/`](game/) | 《拾词者 · 雾港》第一章：12 幕、48 个 CET-4 词 |
+| 单词算法 | [`lib/srs.js`](lib/srs.js) | 认义 1/3/7/16 天 + 拼写 1/3/7 天的双轨 SRS、每日计划、选项生成等纯函数 |
 
 文档导航与分类见 [`docs/README.md`](docs/README.md)。核心入口：
 
@@ -17,14 +17,14 @@ dsh-superagent test repository.
 - 调研：[跑团规则书](docs/research/trpg-rules-survey.md)、[5e 玩家手册盘点](docs/research/phb-story-dm-review.md)、[画面/引擎](docs/research/game-visual-solutions-survey.md)
 - 词汇与知识库：[机制词汇表](docs/content/cet4-dnd-mechanics-vocab.md)、[四级大纲知识库](docs/content/cet4-syllabus-kb.md)、[素材录入核对](docs/content/cet4-materials-ingest.md)
 
-## 可玩原型
+## 单词算法
 
-用英语玩的文字跑团《拾词者》第一章：12 幕、48 个 CET-4 词、1/3/7/16 天复习、词行动与章节 BOSS。
+`lib/srs.js` 是不依赖界面的纯函数模块：认义轨 1/3/7/16 天、拼写轨 1/3/7 天、到期计划、答对/答错推进、选项生成与掌握度统计。测试见 [`tests/srs.test.mjs`](tests/srs.test.mjs)。
 
 ```bash
-npm run serve    # http://127.0.0.1:4173/
-npm test         # SRS / 内容 / 通关集成测试
-npm run test:e2e # Playwright 端到端测试
+npm test
 ```
 
-详细说明、操作方式、已知边界与文件结构见 [`game/README.md`](game/README.md)。
+设计说明见 [`docs/design/cet4-vocab-rpg.md`](docs/design/cet4-vocab-rpg.md) 与 [`docs/design/dual-check-design.md`](docs/design/dual-check-design.md)。
+
+旧的可玩原型《拾词者 · 雾港》及其线上预览已移除，相关设计、调研与内容样本文档保留在 `docs/` 作历史记录。
