@@ -89,6 +89,7 @@
         <button type="button" class="story-toggle" id="story-toggle" aria-label="收起剧情">收起</button>
       </div>
       <div class="story-body" id="story-body"></div>
+      <div class="term-bar" id="term-bar" aria-label="术语说明"></div>
       <div class="story-actions" id="story-actions"></div>
       <div class="story-log" id="story-log" aria-label="掷骰与战斗记录"></div>
     </section>
@@ -151,7 +152,7 @@
       <div class="word-timer"><i id="word-timer-bar"></i></div>
       <div class="word-options" id="word-options"></div>
       <div class="word-result" id="word-result" hidden></div>
-      <p class="word-tail">词卡面值 = 本次 d20 · 词义掌握只加修正，不保证成功</p>
+      <p class="word-tail"><button type="button" class="term" data-term="词卡面值">词卡面值</button> = 本次 d20 · <button type="button" class="term" data-term="词义修正">词义修正</button> 只加修正，不保证成功</p>
     </div>
   </div>
 
@@ -177,6 +178,7 @@
       <span class="map-legend"><i class="lg-combat"></i>战斗</span>
       <span class="map-legend"><i class="lg-treasure"></i>补给</span>
       <span class="map-legend"><i class="lg-end"></i>终点</span>
+      <span class="map-legend"><button type="button" class="term" data-term="节点">节点</button> / <button type="button" class="term" data-term="事件">事件</button></span>
       <p>分支树只决定探索事件与顺序；战斗、距离、掩体仍按 5e theater of mind，不引入棋盘格移动。</p>
     </footer>
   </section>

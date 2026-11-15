@@ -1,5 +1,5 @@
 import { createWorld } from './world.js';
-import { INTRO, HEROES, HERO_ORDER, GOBLINS, STORY, RULES, RULES_WORD, WORDS, MAP_NODES, MAP_EDGES, ENV_LABELS } from './data.js';
+import { INTRO, HEROES, HERO_ORDER, GOBLINS, STORY, RULES, RULES_WORD, WORDS, MAP_NODES, MAP_EDGES, GLOSSARY, TERM_BAR, ENV_LABELS } from './data.js';
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
@@ -82,6 +82,28 @@ function openModal({ kicker = '', title = '', sub = '', body = '', actions = [] 
 }
 function closeModal() { $('#modal').hidden = true; }
 
+
+function showTerm(key) {
+  const g = GLOSSARY[key];
+  if (!g) { toast(`还没有「${key}」的说明。`); return; }
+  openModal({
+    kicker: '术语 · 5e', title: g.label, sub: g.sub || '',
+    body: g.body,
+    actions: [
+      { label: '知道了', onClick: closeModal },
+      { label: '查看术语表', ghost: true, onClick: () => { closeModal(); if (!$('#map').hidden) closeMap(); openRules('glossary'); } },
+    ],
+  });
+}
+function renderTermBar() {
+  const bar = $('#term-bar');
+  if (!bar) return;
+  bar.innerHTML = '<span class="term-label">术语</span>' + TERM_BAR.map((k) => {
+    const g = GLOSSARY[k];
+    const short = (g?.label || k).split(' · ')[0];
+    return `<button type="button" class="term-chip" data-term="${esc(k)}">${esc(short)}</button>`;
+  }).join('') + '<button type="button" class="term-chip" data-term="AC">AC ?</button>';
+}
 function renderParty() {
   const box = $('#party');
   box.innerHTML = '';
@@ -94,7 +116,7 @@ function renderParty() {
     const pct = Math.max(0, Math.min(100, (h.hp / h.maxHp) * 100));
     card.innerHTML = `<span class="pc-glyph">${h.glyph}</span>
       <span class="pc-main"><span class="pc-name">${h.name} <em>${h.cls}</em></span><span class="pc-meta">${h.tag}</span><span class="hpbar"><i style="width:${pct}%"></i></span></span>
-      <span class="pc-right"><span class="pc-hp">${h.hp}<small>/${h.maxHp}</small></span><span class="pc-tag">AC ${h.ac}</span></span>`;
+      <span class="pc-right"><span class="pc-hp" data-term="HP">${h.hp}<small>/${h.maxHp}</small></span><span class="pc-tag ac-chip" data-term="AC">AC ${h.ac} <b>?</b></span></span>`;
     card.addEventListener('click', () => openHeroInfo(h));
     box.appendChild(card);
   }
@@ -127,13 +149,14 @@ function renderHand() {
   }
   const h = state.party[cur];
   $('#hand-owner').textContent = `${h.name} · ${h.cls}`;
-  $('#hand-hint').textContent = `目标：${state.goblins[state.targetId]?.name || '—'} · AC ${state.goblins[state.targetId]?.ac || '—'}`;
+  const tgt = state.goblins[state.targetId];
+  $('#hand-hint').innerHTML = tgt ? `目标：${tgt.name} · <button type="button" class="ac-link" data-term="AC">AC ${tgt.ac} <b>?</b></button>` : '先选择一个目标';
   for (const card of h.cards) {
     const usable = canUseCard(h, card);
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = `card ${usable ? '' : 'is-disabled'}`;
-    btn.innerHTML = `<span class="card-cost">${card.cost}</span><span class="card-name">${card.name}</span><span class="card-hint">${card.hint}</span><span class="card-foot">${cardFoot(h, card)}</span><span class="card-info" role="button" tabindex="0" aria-label="查看 ${card.name} 说明">i</span>`;
+    btn.innerHTML = `<span class="card-cost"><span data-term="${card.cost === 'A' ? '动作' : '附赠动作'}">${card.cost}</span></span><span class="card-name">${card.name}</span><span class="card-hint">${card.hint}</span><span class="card-foot">${cardFoot(h, card)}</span><span class="card-info" role="button" tabindex="0" aria-label="查看 ${card.name} 说明">i</span>`;
     btn.addEventListener('click', (e) => {
       if (e.target.closest('.card-info')) return;
       useCard(h, card);
@@ -143,9 +166,9 @@ function renderHand() {
   }
 }
 function cardFoot(h, card) {
-  if (card.slot) return `法术位 ${h.slots}`;
-  if (card.uses) return `次数 ${h.cardUses[card.id] ?? 0}`;
-  if (card.kind === 'item') return `药水 ${state.items.potions}`;
+  if (card.slot) return `<span data-term="法术位">法术位 ${h.slots}</span>`;
+  if (card.uses) return `<span data-term="附赠动作">次数 ${h.cardUses[card.id] ?? 0}</span>`;
+  if (card.kind === 'item') return `<span data-term="治疗药水">药水 ${state.items.potions}</span>`;
   if (card.kind === 'attack') return '可用';
   return '可用';
 }
@@ -172,7 +195,7 @@ function openHeroInfo(h) {
   openModal({
     kicker: h.side === 'enemy' ? '敌人' : `${h.race} · ${h.cls}`, title: h.name,
     sub: h.side === 'enemy' ? `HP ${h.hp}/${h.maxHp} · AC ${h.ac}` : `HP ${h.hp}/${h.maxHp} · AC ${h.ac}`,
-    body: `<p>${h.desc || h.tag || ''}</p>${h.quote ? `<p class="quote">${h.quote}</p>` : ''}${h.feature ? `<p class="quiet">${h.feature}</p>` : ''}`,
+    body: `<p>${h.desc || h.tag || ''}</p>${h.quote ? `<p class="quote">${h.quote}</p>` : ''}${h.feature ? `<p class="quiet">${h.feature}</p>` : ''}<div class="term-chips"><span class="term" data-term="AC">AC ${h.ac}</span><span class="term" data-term="HP">HP ${h.hp}/${h.maxHp}</span><span class="term" data-term="攻击加值">攻击 +${h.atk?.mod ?? h.atk}</span><span class="term" data-term="豁免">豁免</span><span class="term" data-term="先攻">先攻</span></div>`,
     actions: [{ label: '关闭', ghost: true, onClick: closeModal }],
   });
 }
@@ -1114,23 +1137,31 @@ function updateCheckMode() {
   b.textContent = state.checkMode === 'word' ? '检定 · 单词' : '检定 · d20';
   $('#dice-status').textContent = state.checkMode === 'word' ? '词卡已洗好 · 20 张' : 'd20 已在桌上';
 }
-function renderRules() {
-  const allRules = [...RULES, RULES_WORD];
+function glossaryBody() {
+  return `<p class="quiet">点任意术语打开说明；带下划线的词在游戏里也能点。</p><div class="glossary-grid">` + Object.keys(GLOSSARY).map((k) => {
+    const g = GLOSSARY[k];
+    return `<button type="button" class="glossary-item" data-term="${esc(k)}"><b>${esc(g.label)}</b><span>${esc(g.sub || '')}</span></button>`;
+  }).join('') + '</div>';
+}
+function renderRules(activeId = 'checks') {
+  const glossaryRule = { id: 'glossary', label: '术语表', body: glossaryBody() };
+  const allRules = [...RULES, glossaryRule, RULES_WORD];
   const tabs = $('#rules-tabs');
   tabs.innerHTML = '';
-  allRules.forEach((r, i) => {
+  let active = allRules.find((r) => r.id === activeId) || allRules[0];
+  for (const r of allRules) {
     const b = document.createElement('button');
-    b.type = 'button'; b.className = `rules-tab ${i === 0 ? 'is-on' : ''}`; b.textContent = r.label;
+    b.type = 'button'; b.className = `rules-tab ${r.id === active.id ? 'is-on' : ''}`; b.textContent = r.label;
     b.addEventListener('click', () => {
       $$('.rules-tab').forEach((x) => x.classList.remove('is-on')); b.classList.add('is-on');
       $('#rules-body').innerHTML = r.body;
     });
     tabs.appendChild(b);
-  });
-  $('#rules-body').innerHTML = allRules[0].body;
+  }
+  $('#rules-body').innerHTML = active.body;
 }
-function openRules() {
-  renderRules();
+function openRules(activeId = 'checks') {
+  renderRules(activeId);
   $('#rules').hidden = false;
 }
 function closeRules() { $('#rules').hidden = true; }
@@ -1170,12 +1201,25 @@ $('#story-toggle').addEventListener('click', () => {
 });
 $('#story-toggle').addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('#story-toggle').click(); } });
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); closeRules(); } });
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-term]');
+  if (!el) return;
+  e.preventDefault(); e.stopPropagation();
+  showTerm(el.dataset.term);
+}, true);
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const el = e.target.closest('[data-term]');
+  if (!el) return;
+  e.preventDefault(); e.stopPropagation(); showTerm(el.dataset.term);
+}, true);
 
 /* ---------------- init ---------------- */
 
 state.items = { potions: 2 };
 renderRules();
 updateCheckMode();
+renderTermBar();
 openIntro(0);
 updateEnvButton();
 setTimeout(() => { if (document.getElementById('loader')?.classList.contains('is-done')) { /* noop */ } }, 600);
