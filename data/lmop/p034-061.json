@@ -1,0 +1,5353 @@
+{
+  "schema_version": "lmop-v1",
+  "meta": {
+    "module": "凡戴尔的失落矿坑（Lost Mine of Phandelver）",
+    "part": "PART 3 黑蜘蛛之网",
+    "chapter": "第三章 黑蜘蛛之网",
+    "page_range": "34-61",
+    "pdf_page_range": "35-53",
+    "page_range_note": "任务页码范围取自 PDF 目录（TOC，PART 3 标为 34-61）；本 PDF 页脚在 PART 3 结束于 52，PART 4 从 53 开始，目录页码与页脚存在偏移。本文件按 PART 3 章节内容完整录入（PDF 35-53 / 页脚 34-52）。",
+    "language": "zh-CN",
+    "schema_version": "lmop-v1",
+    "schema_fields": [
+      "chapters",
+      "scenes",
+      "npcs",
+      "monsters",
+      "checks",
+      "rewards"
+    ],
+    "schema_fields_zh": {
+      "chapters": "章节",
+      "scenes": "场景",
+      "npcs": "NPC",
+      "monsters": "怪物",
+      "checks": "检定 DC",
+      "rewards": "奖励"
+    },
+    "generated_at": "2026-11-15T13:52:07+00:00",
+    "summary": "黑蜘蛛之网（PART 3）：三猪小径、兔子浆果镇与阿嘉莎巢穴、古枭井、雷霆树镇、飞龙崖、克拉葛摩城堡，以及回程遭遇的结构化录入。",
+    "source_policy": "只保留结构化字段、页码与生成式摘要，不收录原文段落；数值以本书 PART 3 页码为准。",
+    "scope_note": "本文件只覆盖 PART 3（TOC 第 34–61 页，页脚 34–52 / PDF 35–53）；PART 4 与附录由其他分卷处理。"
+  },
+  "generated_at": "2026-11-15T13:52:07+00:00",
+  "book": {
+    "title": "Lost Mine of Phandelver",
+    "title_zh": "凡戴尔的失落矿坑",
+    "edition": "D&D 5e Starter Set (2014)",
+    "abbr": "LMoP",
+    "part": 3,
+    "part_title": "The Spider Web",
+    "part_title_zh": "黑蜘蛛之网"
+  },
+  "source": {
+    "pdf_file": "凡度尔的失落矿坑（Lost Mine of Phandelver）.pdf",
+    "pdf_pages_processed": "35-53",
+    "printed_pages_processed": "34-52",
+    "requested_range": "34-61",
+    "toc_pages_processed": "34-61",
+    "page_basis": "任务页码范围取自 PDF 目录（TOC）；正文页脚页码在 PART 3 结束于 52。PDF 页码 = 页脚页码 + 1。",
+    "page_note": "PDF 目录把 PART 3 标为 34-61、PART 4 标为 62，但本 PDF 共 80 页；页脚在 PART 3 结束于 52、PART 4 从 53 开始，目录页码与页脚存在偏移。本文件按 PART 3 章节内容完整录入（PDF 35-53 / 页脚 34-52）。"
+  },
+  "policy": {
+    "prose": "omitted",
+    "reason": "公开仓库不收录译文正文；只保留结构化字段、页码与生成式机械摘要。",
+    "verbatim_text": false
+  },
+  "counts": {
+    "chapter": 1,
+    "scene": 7,
+    "area": 27,
+    "npc": 26,
+    "monster": 19,
+    "check": 33,
+    "reward": 51,
+    "xp_award": 26,
+    "treasure_cache": 16,
+    "quest": 9
+  },
+  "xp_summary": {
+    "listed_awards": 26,
+    "sum_all_listed": 13500,
+    "drive_off_venomfang": 9600,
+    "kill_venomfang": 13500,
+    "note": "毒牙的 2000 XP（赶走）与 3900 XP（杀死）为二选一，不叠加；总额按实际结果计算。"
+  },
+  "validation": {
+    "method": "python3 -m json.tool + 自定义交叉引用检查",
+    "checks": [
+      "JSON 可解析",
+      "所有 scene/area/npc/monster/check/reward 交叉引用存在",
+      "所有页面编号在 PART 3 页脚范围 34-52 内",
+      "DC 值与原文核对",
+      "货币、XP、HP 数值与原文核对",
+      "未收录模组原文全文"
+    ],
+    "result": "passed",
+    "knownGaps": [
+      "PDF 目录把 PART 3 标为 34-61，但本 PDF 页脚在 52 结束、PART 4 从 53 开始；目录页码与页脚存在偏移。本文件按 PART 3 章节内容完整录入（PDF 35-53 / 页脚 34-52）。",
+      "本 PDF 只把 PART 3 正文印到页脚 52；本文件不包含 PART 4 与附录。",
+      "部分怪物只记录名称、数量、HP（若原文给出）与图鉴/附录B引用；未复制完整属性块。",
+      "中文翻译存在译名不一致（红烙印/红烙铁印、克拉葛摩/克格莫、潮音洞穴/潮音洞之声）；本文件以 PART 3 正文用法为准。"
+    ]
+  },
+  "chapters": [
+    {
+      "id": "lmop:chapter:part-3",
+      "type": "chapter",
+      "number": 3,
+      "title": "黑蜘蛛之网",
+      "title_en": "The Spider Web",
+      "page_start": 34,
+      "page_end": 52,
+      "pdf_page_start": 35,
+      "pdf_page_end": 53,
+      "summary": "开放沙盒章节：角色根据凡度林 NPC 的线索，前往兔子浆果镇/阿嘉莎巢穴、古枭井、雷霆树镇、飞龙崖与克拉葛摩城堡，逐步揭露黑蜘蛛的阴谋并救出刚铎·寻石者。",
+      "structure": "本章不要求拜访所有地点；角色可根据已接任务选择调查顺序。",
+      "quests": [
+        {
+          "id": "lmop:quest:agatha",
+          "giver": "加拉尔修女",
+          "giver_npc_id": "lmop:npc:sister-garaele",
+          "target_scene_id": "lmop:scene:conyberry-agatha",
+          "page": 34,
+          "objective": "带镶宝石的银梳去兔子浆果镇废墟，说服女妖阿嘉莎回答一个关于 Bowgentle 法术书的问题。",
+          "reward_xp": 200,
+          "reward_xp_ref": "lmop:reward:xp:conyberry-agatha:1",
+          "reward_items": [
+            "完成任务后加拉尔赠送 3 瓶治疗药水"
+          ],
+          "faction": "竖琴手同盟",
+          "title": "守望者",
+          "notes": "把银梳作为礼物送出可使说服检定自动成功；完成任务并加入竖琴手可获得“守望者”头衔。"
+        },
+        {
+          "id": "lmop:quest:old-owl-well",
+          "giver": "达朗·埃德玛",
+          "giver_npc_id": "lmop:npc:daran-edermath",
+          "target_scene_id": "lmop:scene:old-owl-well",
+          "page": 34,
+          "objective": "前往古枭井，查明在废墟附近游荡的人是谁。",
+          "reward_xp": null,
+          "reward_gold": null,
+          "notes": "发现红袍巫师 Hamun Kost 即可完成；加入臂铠社可获得骑士头衔。"
+        },
+        {
+          "id": "lmop:quest:thundertree",
+          "giver": "埃琳·阿黛尔利芙",
+          "giver_npc_id": "lmop:npc:qelline-alderleaf",
+          "target_scene_id": "lmop:scene:thundertree",
+          "page": 34,
+          "objective": "去雷霆树镇废墟找德鲁伊莱多斯，询问克拉葛摩城堡或潮音洞穴的位置。",
+          "reward_xp": null,
+          "reward_gold": null,
+          "notes": "莱多斯提供城堡方向；赶走毒牙后他才透露潮音洞穴并邀请加入 Emerald Enclave。"
+        },
+        {
+          "id": "lmop:quest:wyvern-tor",
+          "giver": "哈宾·威斯特",
+          "giver_npc_id": "lmop:npc:harbin-wester",
+          "target_scene_id": "lmop:scene:wyvern-tor",
+          "page": 34,
+          "objective": "找到飞龙崖附近的兽人营地，并将兽人赶出该区域。",
+          "reward_xp": 1250,
+          "reward_xp_ref": "lmop:reward:xp:wyvern-tor:1",
+          "reward_gold": 100,
+          "notes": "100gp 悬赏详见 PART 2 镇长大厅；同时完成 Hamun Kost 的委托。"
+        },
+        {
+          "id": "lmop:quest:cragmaw-castle",
+          "giver": "西达尔·荷温特",
+          "giver_npc_id": "lmop:npc:sildar-hallwinter",
+          "target_scene_id": "lmop:scene:cragmaw-castle",
+          "page": 34,
+          "objective": "找到克拉葛摩城堡，救出刚铎·寻石者并夺回前往潮音洞穴的地图。",
+          "reward_xp": 950,
+          "reward_xp_ref": "lmop:reward:xp:cragmaw-castle:cragmaw-14:1",
+          "reward_gold": 500,
+          "notes": "500gp 详见 PART 2；救出并护送刚铎回凡度林另有 200 XP；刚铎另给每人 25gp 与矿坑收益十分之一。"
+        },
+        {
+          "id": "lmop:quest:old-owl-well-kost",
+          "giver": "Hamun Kost",
+          "giver_npc_id": "lmop:npc:hamun-kost",
+          "target_scene_id": "lmop:scene:wyvern-tor",
+          "page": 37,
+          "objective": "替 Kost 清除飞龙崖的兽人，或替他去问阿嘉莎“建造古枭井这座塔的法师叫什么名字”。",
+          "reward_xp": null,
+          "reward_gold": null,
+          "notes": "答案是 Arthindol；Kost 以信息作为交换，不直接支付金钱。"
+        },
+        {
+          "id": "lmop:quest:thundertree-reidoth",
+          "giver": "莱多斯",
+          "giver_npc_id": "lmop:npc:reidoth",
+          "target_scene_id": "lmop:scene:thundertree",
+          "page": 40,
+          "objective": "赶走盘踞在雷霆树镇区域7塔楼的绿龙毒牙。",
+          "reward_xp": 2000,
+          "reward_xp_ref": "lmop:reward:xp:thundertree:thundertree-7:1",
+          "reward_gold": null,
+          "faction": "Emerald Enclave",
+          "title": "春之守望",
+          "notes": "成功后莱多斯提供潮音洞穴位置，并邀请有意保护自然的角色加入 Emerald Enclave。"
+        },
+        {
+          "id": "lmop:quest:mirna-heirloom",
+          "giver": "Mirna Dendrar",
+          "giver_npc_id": "lmop:npc:mirna-dendrar",
+          "target_scene_id": "lmop:scene:thundertree",
+          "page": 42,
+          "objective": "在雷霆树镇区域9的药草店货架下找到金项链与翡翠挂饰，并归还给 Mirna。",
+          "reward_xp": 200,
+          "reward_xp_ref": "lmop:reward:xp:thundertree:thundertree-9:1",
+          "reward_gold": null,
+          "notes": "若自行保有项链则不给 200 XP。"
+        },
+        {
+          "id": "lmop:quest:gundren-escort",
+          "giver": "刚铎·寻石者",
+          "giver_npc_id": "lmop:npc:gundren-rockseeker",
+          "target_scene_id": "lmop:scene:cragmaw-castle",
+          "page": 51,
+          "objective": "救出刚铎，并护送他返回凡度林，然后再前往潮音洞穴。",
+          "reward_xp": 200,
+          "reward_xp_ref": "lmop:reward:xp:cragmaw-castle:cragmaw-14:2",
+          "reward_gold": 25,
+          "notes": "每位角色 25gp；刚铎还许诺矿坑开始运作后收益的十分之一。"
+        }
+      ],
+      "travel": {
+        "daily_distance_miles": 24,
+        "travel_hours_per_day": 10,
+        "rest_hours_per_day": 8,
+        "camp_hours_per_day": 6,
+        "notes": "角色一天花十小时行走约 24 里，休息 8 小时，其余 6 小时用于扎营、准备食物、狩猎和觅食。"
+      },
+      "sections": [
+        {
+          "id": "lmop:section:part-3-overview",
+          "title": "章节概览",
+          "page": 34,
+          "summary": "本章围绕凡度林周边五个地点展开；角色不必访问全部地点。",
+          "scene_ids": [
+            "lmop:scene:conyberry-agatha",
+            "lmop:scene:cragmaw-castle",
+            "lmop:scene:old-owl-well",
+            "lmop:scene:return-encounter",
+            "lmop:scene:thundertree",
+            "lmop:scene:triboar-trail",
+            "lmop:scene:wyvern-tor"
+          ]
+        },
+        {
+          "id": "lmop:section:part-3-quests",
+          "title": "任务线索",
+          "page": 34,
+          "summary": "五位凡度林 NPC 各提供一个任务线索，分别指向阿嘉莎、古枭井、雷霆树镇、飞龙崖与克拉葛摩城堡。",
+          "scene_ids": [
+            "lmop:scene:conyberry-agatha",
+            "lmop:scene:cragmaw-castle",
+            "lmop:scene:old-owl-well",
+            "lmop:scene:thundertree",
+            "lmop:scene:wyvern-tor"
+          ]
+        },
+        {
+          "id": "lmop:section:part-3-travel",
+          "title": "旅行与野外遭遇",
+          "page": 34,
+          "summary": "使用大地图与昼夜遭遇表处理地点之间的旅程。",
+          "scene_ids": [
+            "lmop:scene:triboar-trail"
+          ]
+        },
+        {
+          "id": "lmop:section:part-3-locations",
+          "title": "地点",
+          "page": 35,
+          "summary": "兔子浆果镇/阿嘉莎巢穴、古枭井、雷霆树镇、飞龙崖、克拉葛摩城堡，以及可选的野外遭遇。",
+          "scene_ids": [
+            "lmop:scene:conyberry-agatha",
+            "lmop:scene:cragmaw-castle",
+            "lmop:scene:old-owl-well",
+            "lmop:scene:return-encounter",
+            "lmop:scene:thundertree",
+            "lmop:scene:triboar-trail",
+            "lmop:scene:wyvern-tor"
+          ]
+        },
+        {
+          "id": "lmop:section:part-3-conclusion",
+          "title": "接下来呢？",
+          "page": 52,
+          "summary": "刚铎获救后请求队伍护送他回凡度林，然后前往潮音洞穴；剧情指向 PART 4。",
+          "scene_ids": [
+            "lmop:scene:cragmaw-castle",
+            "lmop:scene:return-encounter"
+          ]
+        }
+      ],
+      "next_part": {
+        "part": 4,
+        "title": "潮音洞之声",
+        "title_en": "Wave Echo Cave",
+        "scene_hint": "刚铎兄弟南镀与塔登的下落、黑蜘蛛的阴谋"
+      }
+    }
+  ],
+  "scenes": [
+    {
+      "id": "lmop:scene:triboar-trail",
+      "type": "scene",
+      "name": "三猪小径",
+      "name_en": "Triboar Trail",
+      "kind": "wilderness",
+      "page_start": 34,
+      "page_end": 35,
+      "pdf_page_start": 35,
+      "pdf_page_end": 36,
+      "summary": "连接凡度林与东部三猪镇的荒野道路，也是本章往返各任务地点的交通框架；DM 用昼夜遭遇判定填充旅途。",
+      "features": [
+        "要求玩家确定行进次序，并指定扎营时的放哨者。",
+        "白天与夜晚各掷一次 d20；掷出 17–20 触发一次野外遭遇。",
+        "触发后掷 d12，按野外遭遇表决定敌人。",
+        "击败怪物后按单体 XP × 数量平分给全队。"
+      ],
+      "random_encounters": {
+        "roll": "d20（白天/夜晚各一次），17–20 触发",
+        "table_die": "d12",
+        "entries": [
+          {
+            "roll": 1,
+            "day": "1–2",
+            "night": "1–3",
+            "monster_id": "lmop:monster:stirge",
+            "count": "1d8+2"
+          },
+          {
+            "roll": 2,
+            "day": null,
+            "night": "4",
+            "monster_id": "lmop:monster:ghoul",
+            "count": "1d4+1"
+          },
+          {
+            "roll": 3,
+            "day": "3–4",
+            "night": null,
+            "monster_id": "lmop:monster:ogre",
+            "count": "1"
+          },
+          {
+            "roll": 4,
+            "day": "5–6",
+            "night": "5",
+            "monster_id": "lmop:monster:goblin",
+            "count": "1d6+3"
+          },
+          {
+            "roll": 5,
+            "day": "7–8",
+            "night": "6",
+            "monster_id": "lmop:monster:hobgoblin",
+            "count": "1d4+2"
+          },
+          {
+            "roll": 6,
+            "day": "9–10",
+            "night": "7–8",
+            "monster_id": "lmop:monster:orc",
+            "count": "1d4+2"
+          },
+          {
+            "roll": 7,
+            "day": "11",
+            "night": "9–10",
+            "monster_id": "lmop:monster:wolf",
+            "count": "1d4+2"
+          },
+          {
+            "roll": 8,
+            "day": "12",
+            "night": "11–12",
+            "monster_id": "lmop:monster:owlbear",
+            "count": "1"
+          }
+        ]
+      },
+      "encounter_notes": [
+        {
+          "monster_id": "lmop:monster:stirge",
+          "text": "飞行猎食者，吸血；夜间会被营火吸引。"
+        },
+        {
+          "monster_id": "lmop:monster:ghoul",
+          "text": "不死人类，渴求鲜活血肉。"
+        },
+        {
+          "monster_id": "lmop:monster:ogre",
+          "text": "寻找容易得手的猎物；战斗开始后因愚笨而不会逃跑。"
+        },
+        {
+          "monster_id": "lmop:monster:goblin",
+          "text": "知道克拉葛摩城堡的位置；被俘或受威胁时可提供方向，每个带着装有 1d10 cp 的小包。"
+        },
+        {
+          "monster_id": "lmop:monster:hobgoblin",
+          "text": "主动搜寻冒险者以领取赏金；知道城堡位置，但除非被魅惑否则不指引；一人带着画有冒险者草图与“悬赏此人 25gp”及黑蜘蛛印记的纸条。"
+        },
+        {
+          "monster_id": "lmop:monster:orc",
+          "text": "飞龙崖兽人营地的斥候，巡逻并袭击冒险者，或焚烧农场与田地。"
+        },
+        {
+          "monster_id": "lmop:monster:owlbear",
+          "text": "饥饿的猎食者，闻到角色气味后会持续追踪。"
+        }
+      ],
+      "monsters": [
+        {
+          "monster_id": "lmop:monster:stirge",
+          "count": "1d8+2",
+          "notes": "野外随机遭遇表：白天 1–2 / 夜晚 1–3。"
+        },
+        {
+          "monster_id": "lmop:monster:ghoul",
+          "count": "1d4+1",
+          "notes": "野外随机遭遇表：仅夜晚 4。"
+        },
+        {
+          "monster_id": "lmop:monster:ogre",
+          "count": "1",
+          "notes": "野外随机遭遇表：仅白天 3–4。"
+        },
+        {
+          "monster_id": "lmop:monster:goblin",
+          "count": "1d6+3",
+          "notes": "野外随机遭遇表：白天 5–6 / 夜晚 5。"
+        },
+        {
+          "monster_id": "lmop:monster:hobgoblin",
+          "count": "1d4+2",
+          "notes": "野外随机遭遇表：白天 7–8 / 夜晚 6。"
+        },
+        {
+          "monster_id": "lmop:monster:orc",
+          "count": "1d4+2",
+          "notes": "野外随机遭遇表：白天 9–10 / 夜晚 7–8。"
+        },
+        {
+          "monster_id": "lmop:monster:wolf",
+          "count": "1d4+2",
+          "notes": "野外随机遭遇表：白天 11 / 夜晚 9–10。"
+        },
+        {
+          "monster_id": "lmop:monster:owlbear",
+          "count": "1",
+          "notes": "野外随机遭遇表：白天 12 / 夜晚 11–12。"
+        }
+      ],
+      "checks": [],
+      "treasure": [
+        {
+          "items": [
+            {
+              "name": "哥布林小包",
+              "quantity": 1,
+              "notes": "每个哥布林携带 1d10 cp；按遭遇中的哥布林数量结算"
+            }
+          ],
+          "condition": "击败或俘获野外遭遇中的哥布林",
+          "page": 35,
+          "pdf_page": 36
+        }
+      ],
+      "xp": [],
+      "xp_note": "按怪物单体 XP × 数量计算，然后平分给全队；本表不列固定总额。",
+      "outcomes": [
+        "野外遭遇是填充三猪小径旅途的随机事件；不替代各地点写明的固定遭遇。"
+      ],
+      "pages": "34-35",
+      "npc_ids": [],
+      "monster_ids": [
+        "lmop:monster:ghoul",
+        "lmop:monster:goblin",
+        "lmop:monster:hobgoblin",
+        "lmop:monster:ogre",
+        "lmop:monster:orc",
+        "lmop:monster:owlbear",
+        "lmop:monster:stirge",
+        "lmop:monster:wolf"
+      ],
+      "check_ids": [],
+      "reward_ids": [
+        "lmop:reward:treasure:triboar-trail:1"
+      ]
+    },
+    {
+      "id": "lmop:scene:conyberry-agatha",
+      "type": "scene",
+      "name": "兔子浆果镇与阿嘉莎的巢穴",
+      "name_en": "Conyberry and Agatha's Lair",
+      "kind": "social",
+      "page_start": 35,
+      "page_end": 36,
+      "pdf_page_start": 36,
+      "pdf_page_end": 37,
+      "summary": "三猪小径穿过的废弃小镇，西北小径通往绝冬森林中女妖阿嘉莎的圆顶巢穴；阿嘉莎只回答一个问题。",
+      "features": [
+        "兔子浆果镇多年前被野蛮人洗劫，只剩废墟；三猪小径正好穿过小镇。",
+        "从废墟有一条陈旧小径向西北进入绝冬森林，通往阿嘉莎的巢穴。",
+        "巢穴由弯曲枝条编织成阴影中的圆顶，低矮入口可进入。",
+        "阿嘉莎察觉入侵后显现；她不会主动攻击，但粗鲁、无礼或威胁会让她消失且不再回来。"
+      ],
+      "monsters": [
+        {
+          "monster_id": "lmop:monster:banshee",
+          "count": 1,
+          "notes": "阿嘉莎；社交遭遇，不主动攻击。"
+        }
+      ],
+      "checks": [
+        {
+          "dc": 15,
+          "ability": "魅力",
+          "kind": "ability_check",
+          "context": "以敬意与礼貌请求阿嘉莎回答一个问题。",
+          "skill": "说服",
+          "success": "阿嘉莎回答一个问题，并完成加拉尔修女的委托。",
+          "failure": "阿嘉莎不回答问题。",
+          "notes": "若角色在交涉中扮演得好，可给予优势；把加拉尔修女的镶宝石银梳作为礼物送出时，此检定自动成功。",
+          "page": 36,
+          "pdf_page": 37
+        }
+      ],
+      "treasure": [
+        {
+          "items": [
+            {
+              "name": "镶宝石的银梳",
+              "quantity": 1,
+              "notes": "加拉尔修女提供的礼物；送出后消耗，用于让说服检定自动成功。"
+            }
+          ],
+          "condition": "前往阿嘉莎巢穴前由加拉尔修女交给队伍"
+        }
+      ],
+      "xp": [
+        {
+          "amount": 200,
+          "condition": "成功说服阿嘉莎并让她回答一个问题",
+          "split": true,
+          "page": 36,
+          "pdf_page": 37
+        }
+      ],
+      "outcomes": [
+        "询问 Bowgentle 的法术书：阿嘉莎说她在 100 多年前把书卖给来自 Iriaebor 城、名叫 Tsernoth 的死灵法师；她不知道书后来怎样。这足以让加拉尔修女继续搜寻。",
+        "可改问其他问题：克拉葛摩城堡的位置、潮音洞穴的位置、黑蜘蛛的真实身份，或古枭井的 Hamun Kost。她几乎能回答冒险中的任何问题，但只回答一个。",
+        "兔子浆果镇、古枭井、飞龙崖三地没有提供地图；这些地点可能只用上一两处，DM 可自行准备引导地图。",
+        "若队伍粗鲁、无礼或威胁，阿嘉莎消失，不攻击也不回来；本场景的 200 XP 无法获得。"
+      ],
+      "pages": "35-36",
+      "npc_ids": [
+        "lmop:npc:agatha",
+        "lmop:npc:bowgentle",
+        "lmop:npc:sister-garaele",
+        "lmop:npc:tsernoth"
+      ],
+      "monster_ids": [
+        "lmop:monster:banshee"
+      ],
+      "check_ids": [
+        "lmop:check:conyberry-agatha:1"
+      ],
+      "reward_ids": [
+        "lmop:reward:xp:conyberry-agatha:1",
+        "lmop:reward:treasure:conyberry-agatha:1"
+      ]
+    },
+    {
+      "id": "lmop:scene:old-owl-well",
+      "type": "scene",
+      "name": "古枭井",
+      "name_en": "Old Owl Well",
+      "kind": "ruins",
+      "page_start": 36,
+      "page_end": 37,
+      "pdf_page_start": 37,
+      "pdf_page_end": 38,
+      "summary": "三猪小径南侧崎岖山丘中的古老瞭望塔废墟；红袍巫师 Hamun Kost 在此扎营，并以十二只僵尸守卫。",
+      "features": [
+        "古枭井是千年前一个消失帝国建立的瞭望塔，如今只剩断垣残壁与塔基；塔中央有古老水井，水源干净新鲜。",
+        "位于三猪小径南方的崎岖山丘，很容易找到；凡度林的任何 NPC 都能提供前往废墟的指引。",
+        "近期有探勘者注意到有人在此扎营，并有不死族守卫阻止入侵者。",
+        "Hamun Kost 的彩色帐篷搭在塔楼中；他并不特别好战，愿意与队伍做交易。"
+      ],
+      "monsters": [
+        {
+          "monster_id": "lmop:monster:zombie",
+          "count": 12,
+          "notes": "在塔楼遗迹中游荡的不死守卫；战斗发生时从塔中出来。"
+        },
+        {
+          "monster_id": "lmop:monster:red-wizard",
+          "count": 1,
+          "notes": "Hamun Kost；见 NPC 条目。"
+        }
+      ],
+      "checks": [
+        {
+          "dc": 10,
+          "ability": "感知",
+          "kind": "passive",
+          "context": "接近塔楼或帐篷时，以被动感知（侦查）10 闻到死尸气味。",
+          "skill": "侦查",
+          "success": "角色闻到从塔的方向传来的死尸味，可据此警觉。",
+          "failure": "未察觉气味。"
+        },
+        {
+          "dc": 10,
+          "ability": "智力",
+          "kind": "ability_check",
+          "context": "辨认 Hamun Kost 前额上的黑色刺青。",
+          "skill": "奥秘",
+          "success": "认出刺青是死灵的标记，Kost 是死灵学派法师。",
+          "failure": "无法辨认刺青含义。"
+        },
+        {
+          "dc": 10,
+          "ability": "智力",
+          "kind": "ability_check",
+          "context": "辨认 Kost 的打扮与刺青风格。",
+          "skill": "历史",
+          "success": "认出这是 Thay 地区常见的打扮，当地巫师会在身体上纹刺青。",
+          "failure": "无法辨认其来历。"
+        }
+      ],
+      "treasure": [
+        {
+          "items": [
+            {
+              "name": "钱币",
+              "quantity": 1,
+              "notes": "35sp、20ep、20gp、5pp",
+              "coins": {
+                "sp": 35,
+                "ep": 20,
+                "gp": 20,
+                "pp": 5
+              }
+            },
+            {
+              "name": "珍珠",
+              "quantity": 1,
+              "value_gp": 100
+            },
+            {
+              "name": "治疗药水",
+              "quantity": 1
+            },
+            {
+              "name": "黑暗术卷轴",
+              "quantity": 1,
+              "notes": "放在骨管中"
+            },
+            {
+              "name": "小珠宝盒",
+              "quantity": 1,
+              "value_gp": 25
+            },
+            {
+              "name": "防护戒指",
+              "quantity": 1,
+              "notes": "来自古代 Netheril；红袍巫师最感兴趣的发现"
+            }
+          ],
+          "condition": "搜索 Hamun Kost 帐篷中的箱子",
+          "page": 37,
+          "pdf_page": 38
+        }
+      ],
+      "xp": [],
+      "xp_note": "本场景未列出固定 XP；完成达朗·埃德玛的调查任务即可。",
+      "outcomes": [
+        "Kost 会从帐篷中走出并询问队伍的来意；他愿意在队伍能帮助他的前提下提供信息。",
+        "Kost 的交易条件（任选其一或两项）：1. 清除飞龙崖的兽人，因为他们经常在营地附近侦查；2. 替他去问阿嘉莎“建造古枭井这座塔的法师叫什么名字”。阿嘉莎知道答案是 Arthindol。",
+        "了解到红袍巫师出现在古枭井，即可完成达朗·埃德玛在凡度林交给队伍的任务。",
+        "若队伍攻击 Kost，十二只僵尸会从塔中出来，Kost 也会参战；若队伍与他对话，他会暂时把僵尸叫回去。"
+      ],
+      "pages": "36-37",
+      "npc_ids": [
+        "lmop:npc:arthindol",
+        "lmop:npc:daran-edermath",
+        "lmop:npc:hamun-kost"
+      ],
+      "monster_ids": [
+        "lmop:monster:red-wizard",
+        "lmop:monster:zombie"
+      ],
+      "check_ids": [
+        "lmop:check:old-owl-well:1",
+        "lmop:check:old-owl-well:2",
+        "lmop:check:old-owl-well:3"
+      ],
+      "reward_ids": [
+        "lmop:reward:treasure:old-owl-well:1"
+      ]
+    },
+    {
+      "id": "lmop:scene:thundertree",
+      "type": "scene",
+      "name": "雷霆树镇",
+      "name_en": "Thundertree",
+      "kind": "ruins",
+      "page_start": 37,
+      "page_end": 44,
+      "pdf_page_start": 38,
+      "pdf_page_end": 45,
+      "summary": "绝冬河与绝冬森林交界处的废弃小镇；约三十年前 Hotenow 火山爆发摧毁了它，如今灰烬僵尸、突变植物、绿龙毒牙与龙之信徒各自盘踞。",
+      "features": [
+        "大多数建筑在小镇废弃后逐渐崩塌；废弃建筑是只有 5–8 尺石墙的空壳，屋顶消失，墙内碎石视为困难地形。",
+        "完好的建筑是少数摇晃的石制小屋，木门卡死，需要 DC10 力量检定强行打开。",
+        "完好建筑的窗户有 2 尺宽并被木板钉上，只留下 6 英寸宽的射箭孔；射箭孔一端的生物对另一端攻击时拥有四分之三掩蔽。",
+        "树木与灌木丛：树木平均 30–40 尺高并提供掩护；灌木丛包含大量灌木并视为困难地形。",
+        "莱多斯在区域4，德鲁伊的守望；区域13的信徒最近来和区域7的绿龙打交道。"
+      ],
+      "areas": [
+        {
+          "id": "lmop:area:thundertree-1",
+          "type": "area",
+          "name": "区域1 最西边的小屋",
+          "page": 38,
+          "pdf_page": 39,
+          "summary": "老树阴影下没有屋顶的石制小屋；两只枯枝怪藏在两侧杂草中。",
+          "features": [
+            "两只枯枝怪藏在屋子两侧的杂草里。",
+            "它们除自卫外不会主动攻击；一旦区域2的枯枝怪与队伍开战，它们会迅速过去帮忙。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:twig-blight",
+              "count": 2,
+              "notes": "区域1的枯枝怪；区域2开战后加入。"
+            }
+          ],
+          "checks": [
+            {
+              "dc": null,
+              "ability": "敏捷",
+              "kind": "contest",
+              "context": "DM 为枯枝怪掷敏捷（潜行），对抗角色的被动感知（侦查）。",
+              "skill": "潜行",
+              "notes": "用于判断枯枝怪是否能隐藏到发起攻击。",
+              "opposed_by": "角色被动感知（侦查）"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 50,
+              "condition": "击败区域1的枯枝怪",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 1,
+          "pages": "38",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:twig-blight"
+          ],
+          "check_ids": [
+            "lmop:check:thundertree:thundertree-1:1"
+          ],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-1:1"
+          ]
+        },
+        {
+          "id": "lmop:area:thundertree-2",
+          "type": "area",
+          "name": "区域2 荒废的小屋",
+          "page": 38,
+          "pdf_page": 39,
+          "summary": "曾是商户或富农居所的废墟；六只枯枝怪藏在中央小树周围的茂密植物中。",
+          "features": [
+            "六只枯枝怪潜藏在树叶中，饥饿并战斗到毁灭。",
+            "它们攻击后一轮，区域1的两只枯枝怪会来加入战局。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:twig-blight",
+              "count": 6,
+              "notes": "藏在植物中；攻击后区域1的 2 只加入。"
+            }
+          ],
+          "checks": [
+            {
+              "dc": null,
+              "ability": "感知",
+              "kind": "contest",
+              "context": "发现枯枝怪：角色感知（侦查）对抗枯枝怪的敏捷（潜行）。",
+              "skill": "侦查",
+              "notes": "用于判断角色是否在枯枝怪突袭前发现它们。",
+              "opposed_by": "枯枝怪敏捷（潜行）"
+            },
+            {
+              "dc": 10,
+              "ability": "感知",
+              "kind": "ability_check",
+              "context": "彻底搜寻东部小屋，寻找商人藏在石地板下的钱箱。",
+              "skill": "侦查",
+              "success": "发现树根下的旧木箱。",
+              "failure": "未找到。"
+            }
+          ],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "钱币",
+                  "quantity": 1,
+                  "notes": "700cp、160sp、90gp",
+                  "coins": {
+                    "cp": 700,
+                    "sp": 160,
+                    "gp": 90
+                  }
+                }
+              ],
+              "condition": "彻底搜寻东部小屋，并以 DC10 感知（侦查）发现树根下的旧木箱"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 150,
+              "condition": "击败区域2的枯枝怪",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 2,
+          "pages": "38",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:twig-blight"
+          ],
+          "check_ids": [
+            "lmop:check:thundertree:thundertree-2:1",
+            "lmop:check:thundertree:thundertree-2:2"
+          ],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-2:1",
+            "lmop:reward:treasure:thundertree:thundertree-2:1"
+          ]
+        },
+        {
+          "id": "lmop:area:thundertree-3",
+          "type": "area",
+          "name": "区域3 棕马马酒馆",
+          "page": 39,
+          "pdf_page": 40,
+          "summary": "曾以麦酒闻名的酒馆；四只灰烬僵尸在阴影中游荡，靠在墙上或吧台下。",
+          "features": [
+            "四只灰烬僵尸在活物进入时呻吟、活动并缓慢爬行。",
+            "它们会追逐任何看见的角色，战斗到被毁灭。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:ash-zombie",
+              "count": 4,
+              "notes": "灰烬僵尸；使用僵尸属性并附加灰烬喷发。"
+            }
+          ],
+          "checks": [
+            {
+              "dc": 10,
+              "ability": "体质",
+              "kind": "saving_throw",
+              "context": "灰烬僵尸第一次遭受攻击时，其 5 尺内的活物进行体质豁免。",
+              "success": "不受影响。",
+              "failure": "在攻击掷骰、豁免掷骰、能力检定上遭受劣势，持续 1 分钟；可在自己回合结束时重复豁免。",
+              "notes": "灰烬喷发；每个僵尸第一次被攻击时触发。"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 200,
+              "condition": "击败区域3的灰烬僵尸",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 3,
+          "pages": "39",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:ash-zombie"
+          ],
+          "check_ids": [
+            "lmop:check:thundertree:thundertree-3:1"
+          ],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-3:1"
+          ]
+        },
+        {
+          "id": "lmop:area:thundertree-4",
+          "type": "area",
+          "name": "区域4 德鲁伊的守望",
+          "page": 40,
+          "pdf_page": 41,
+          "summary": "莱多斯在雷霆树废墟扎营的小屋；门被铁条强化，窗户有厚木板保护。",
+          "features": [
+            "莱多斯是憔悴、白胡子的人类德鲁伊，沉默寡言但好客。",
+            "他善于避开灰烬僵尸与突变植物；知道附近有危险蜘蛛，也看见过戴黑面具、穿黑斗篷的信徒。",
+            "他更关心区域7塔楼里的绿龙；会警告队伍这些危险，并建议在被杀前离开。",
+            "若被攻击，他会变成灰色松鼠从墙缝逃走，之后等待敌意角色离开；他的居所没有有价值的东西。"
+          ],
+          "monsters": [],
+          "checks": [],
+          "treasure": [],
+          "xp": [],
+          "outcomes": [
+            "询问克拉葛摩城堡的位置：莱多斯乐意提供方向。",
+            "询问潮音洞穴：他除非队伍愿意帮忙赶走区域7的龙，否则不会泄露地点；成功后他会兑现承诺，但不会陪队伍前往矿坑。",
+            "若队伍帮助莱多斯赶走毒牙（Venomfang），他会私下邀请有意保护自然的角色加入 Emerald Enclave，并授予“春之守望”称号。"
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 4,
+          "pages": "40",
+          "npc_ids": [],
+          "monster_ids": [],
+          "check_ids": [],
+          "reward_ids": []
+        },
+        {
+          "id": "lmop:area:thundertree-5",
+          "type": "area",
+          "name": "区域5 荒废的农舍",
+          "page": 40,
+          "pdf_page": 41,
+          "summary": "南边紧邻金雀花与荆棘的农舍废墟；八只枯枝怪潜伏在东边树丛中。",
+          "features": [
+            "任何打扰废弃农舍的行为（例如在碎石堆中翻找）都会引起枯枝怪愤怒。",
+            "每轮开始有两只枯枝怪从南门进入，持续三轮；第一轮北门也会有两只进入。",
+            "这些枯枝怪战斗到被毁灭。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:twig-blight",
+              "count": "8 + 2/轮 × 3 轮 + 首轮北门 2",
+              "notes": "总计最多 16 只（初始 8 只 + 增援 8 只）；按实际轮次结算。"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 200,
+              "condition": "击败区域5的枯枝怪",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 5,
+          "pages": "40",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:twig-blight"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-5:1"
+          ]
+        },
+        {
+          "id": "lmop:area:thundertree-6",
+          "type": "area",
+          "name": "区域6 荒废的杂货店",
+          "page": 41,
+          "pdf_page": 42,
+          "summary": "部分屋顶仍完好的杂货店；两只巨蛛躲在废弃建筑内墙中，蛛网从建筑延伸到北面路边的树上。",
+          "features": [
+            "巨蛛不能从外面被看见；延伸到道路上的蛛网让它们感应到猎物移动，然后翻越墙壁袭击。",
+            "机敏的巨蛛会突袭任何被动感知（侦查）小于 17 的角色。",
+            "蛛网覆盖门口北面两格范围，视为困难地形；在上方移动的角色必须通过 DC10 力量（运动）检定，失败则被束缚。",
+            "被束缚的生物可花一个动作进行 DC12 力量检定挣脱，或借轻型武器造成的挥砍伤害割断蛛网；蛛网 AC10、5 HP、火焰易伤，免疫钝击、毒素、心灵伤害。",
+            "因北面树丛厚重，绕过蛛网很困难；若试图从建筑南面绕过，会吸引区域5的枯枝怪。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:giant-spider",
+              "count": 2,
+              "notes": "躲在建筑内墙；通过蛛网感应猎物。"
+            }
+          ],
+          "checks": [
+            {
+              "dc": null,
+              "ability": "感知",
+              "kind": "passive",
+              "context": "避免被巨蛛突袭：被动感知（侦查）达到 17 或以上。",
+              "skill": "侦查",
+              "notes": "机敏的巨蛛会突袭任何被动感知（侦查）小于 17 的角色。",
+              "passive": 17
+            },
+            {
+              "dc": 10,
+              "ability": "力量",
+              "kind": "ability_check",
+              "context": "在蛛网覆盖的区域移动。",
+              "skill": "运动",
+              "success": "正常移动。",
+              "failure": "被蛛网束缚。"
+            },
+            {
+              "dc": 12,
+              "ability": "力量",
+              "kind": "ability_check",
+              "context": "被蛛网束缚后，花一个动作挣脱。",
+              "success": "挣脱束缚。",
+              "failure": "仍被束缚。",
+              "notes": "也可用轻型武器造成挥砍伤害割断蛛网（蛛网 AC10、5 HP）。"
+            }
+          ],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "镶钉皮甲",
+                  "quantity": 1,
+                  "notes": "尸体穿着"
+                },
+                {
+                  "name": "短剑",
+                  "quantity": 1,
+                  "notes": "尸体腰后"
+                },
+                {
+                  "name": "治疗药水",
+                  "quantity": 1,
+                  "notes": "腰包中"
+                },
+                {
+                  "name": "钱币",
+                  "quantity": 1,
+                  "notes": "23gp、35sp",
+                  "coins": {
+                    "sp": 35,
+                    "gp": 23
+                  }
+                }
+              ],
+              "condition": "小心搜查被蛛丝捆在西边的男性精灵尸体"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 400,
+              "condition": "击败区域6的巨蛛",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 6,
+          "pages": "41",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:giant-spider"
+          ],
+          "check_ids": [
+            "lmop:check:thundertree:thundertree-6:1",
+            "lmop:check:thundertree:thundertree-6:2",
+            "lmop:check:thundertree:thundertree-6:3"
+          ],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-6:1",
+            "lmop:reward:treasure:thundertree:thundertree-6:1"
+          ]
+        },
+        {
+          "id": "lmop:area:thundertree-7",
+          "type": "area",
+          "name": "区域7 龙之塔",
+          "page": 41,
+          "pdf_page": 42,
+          "summary": "山丘顶端的圆形塔楼与小屋；年轻绿龙毒牙（Venomfang）最近占据了这里，塔外有两具巨蛛尸体。",
+          "features": [
+            "塔楼有 40 尺高的天花板和 5 尺宽的环形楼梯通往已经露天的屋顶，龙可以轻易进出。",
+            "小屋内有杂乱而缠着蛛网的家具，没有有价值的东西；若角色在小屋内制造太大噪音，龙会听见并准备战斗。",
+            "毒牙不想放弃这个好巢穴；若生命值降到一半以下，它会爬到塔顶并飞出去暂避风头。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:young-green-dragon",
+              "count": 1,
+              "notes": "毒牙（Venomfang）；生命值降到一半以下时飞走。"
+            }
+          ],
+          "checks": [],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "钱币",
+                  "quantity": 1,
+                  "notes": "800sp、150gp",
+                  "coins": {
+                    "sp": 800,
+                    "gp": 150
+                  }
+                },
+                {
+                  "name": "银质高脚杯",
+                  "quantity": 4,
+                  "value_gp": 60,
+                  "notes": "装饰着月光石；每个 60gp"
+                },
+                {
+                  "name": "迷雾步卷轴",
+                  "quantity": 1,
+                  "notes": "misty step"
+                },
+                {
+                  "name": "闪电箭卷轴",
+                  "quantity": 1,
+                  "notes": "lightning bolt"
+                },
+                {
+                  "name": "+1 战斧“Hew”",
+                  "quantity": 1,
+                  "notes": "生锈的矮人工艺战斧；攻击植物生物或木制物品时伤害直接取满；龙没有注意到它的价值"
+                }
+              ],
+              "condition": "搜查塔楼地板上破损的木箱（龙的战利品）"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 2000,
+              "condition": "将毒牙赶走（Venomfang）",
+              "split": true,
+              "exclusive_group": "venomfang"
+            },
+            {
+              "amount": 3900,
+              "condition": "杀死毒牙（替代赶走的奖励，不叠加）",
+              "split": true,
+              "exclusive_group": "venomfang"
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 7,
+          "pages": "41",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:young-green-dragon"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-7:1",
+            "lmop:reward:xp:thundertree:thundertree-7:2",
+            "lmop:reward:treasure:thundertree:thundertree-7:1"
+          ]
+        },
+        {
+          "id": "lmop:area:thundertree-8",
+          "type": "area",
+          "name": "区域8 老旧的铁匠铺",
+          "page": 42,
+          "pdf_page": 43,
+          "summary": "荒废很久的铁匠铺；两只灰烬僵尸瘫坐在地上，进入时会爬向角色脚边并攻击。",
+          "features": [
+            "腐朽的柴火堆在宽烟囱的残破建筑外堆积。",
+            "僵尸看见角色后会追逐，不论角色往哪里去。",
+            "各种旧工具、钳子、铁锤、一双铁砧散落在建筑内部。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:ash-zombie",
+              "count": 2,
+              "notes": "灰烬僵尸。"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 100,
+              "condition": "击败区域8的灰烬僵尸",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 8,
+          "pages": "42",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:ash-zombie"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-8:1"
+          ]
+        },
+        {
+          "id": "lmop:area:thundertree-9",
+          "type": "area",
+          "name": "区域9 药草店",
+          "page": 42,
+          "pdf_page": 43,
+          "summary": "曾是药草和炼金术商店，属于 Mirna Dendrar 的家族；商店堆满残破货架与破损家具。",
+          "features": [
+            "所有试剂和混合物在毁灭时已消失，书本无法阅读并大量腐烂。",
+            "一个小木盒藏在一个货架下的空间；搜寻残骸的角色可进行 DC15 感知（侦查）检定找出 Mirna 让队伍寻找的传家宝。"
+          ],
+          "monsters": [],
+          "checks": [
+            {
+              "dc": 15,
+              "ability": "感知",
+              "kind": "ability_check",
+              "context": "在货架下寻找 Mirna 的传家宝木盒。",
+              "skill": "侦查",
+              "success": "找到小木盒，内有金项链和上好的翡翠挂饰（200gp）。",
+              "failure": "未找到。"
+            }
+          ],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "金项链与翡翠挂饰",
+                  "quantity": 1,
+                  "value_gp": 200,
+                  "notes": "Mirna 的传家宝"
+                }
+              ],
+              "condition": "在区域9货架下找到小木盒"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 200,
+              "condition": "将项链还给 Mirna，而不是自行保有它",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 9,
+          "pages": "42",
+          "npc_ids": [],
+          "monster_ids": [],
+          "check_ids": [
+            "lmop:check:thundertree:thundertree-9:1"
+          ],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-9:1",
+            "lmop:reward:treasure:thundertree:thundertree-9:1"
+          ]
+        },
+        {
+          "id": "lmop:area:thundertree-10",
+          "type": "area",
+          "name": "区域10 城镇广场",
+          "page": 42,
+          "pdf_page": 43,
+          "summary": "城镇东边的方形空间；中央有一座轻微倾斜的风化木雕像，是战士拿着长矛和盾牌。",
+          "features": [
+            "雕像高 10 尺（含基座），描绘绝冬城古代英雄 Palien；据说他在雷霆树镇建立时击败了许多绝冬森林的怪物。",
+            "研究雕像的角色可进行 DC15 智力（历史）检定得知这段叙述。",
+            "雕像可以被 DC20 力量检定推倒。"
+          ],
+          "monsters": [],
+          "checks": [
+            {
+              "dc": 15,
+              "ability": "智力",
+              "kind": "ability_check",
+              "context": "研究 Palien 的雕像。",
+              "skill": "历史",
+              "success": "得知 Palien 的事迹。",
+              "failure": "无法辨认雕像人物。"
+            },
+            {
+              "dc": 20,
+              "ability": "力量",
+              "kind": "ability_check",
+              "context": "推倒倾斜的雕像。",
+              "success": "雕像倒下。",
+              "failure": "雕像纹丝不动。"
+            }
+          ],
+          "xp": [],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 10,
+          "pages": "42",
+          "npc_ids": [],
+          "monster_ids": [],
+          "check_ids": [
+            "lmop:check:thundertree:thundertree-10:1",
+            "lmop:check:thundertree:thundertree-10:2"
+          ],
+          "reward_ids": []
+        },
+        {
+          "id": "lmop:area:thundertree-11",
+          "type": "area",
+          "name": "区域11 老旧的警卫岗哨",
+          "page": 43,
+          "pdf_page": 44,
+          "summary": "比镇上大多数建筑更耐久的营房，屋顶有简单城垛，窗户有射箭孔；五只灰烬僵尸在里面游荡。",
+          "features": [
+            "僵尸是先前的警备队成员，仍穿着生前的士兵衣服和铠甲；残破铠甲不会增加 AC。",
+            "建筑内部仍有家具，主要房间有梯子经活板门通往屋顶；北边房间两个床铺、南边三个床铺，可供十名士兵居住。",
+            "西北方曾是厨房和食品储藏处，现在只有腐烂的麻袋和曾装腌肉的木桶。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:ash-zombie",
+              "count": 5,
+              "notes": "灰烬僵尸；前警备队成员。"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 250,
+              "condition": "击败区域11的灰烬僵尸",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 11,
+          "pages": "43",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:ash-zombie"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-11:1"
+          ]
+        },
+        {
+          "id": "lmop:area:thundertree-12",
+          "type": "area",
+          "name": "区域12 织布者小屋",
+          "page": 43,
+          "pdf_page": 44,
+          "summary": "倒塌的小屋；许多废弃残骸堆在内部，角落有一个破碎的织布机。",
+          "features": [
+            "六只枯枝怪在废墟南部的树丛中游荡。",
+            "每位角色进行感知（侦查）检定对抗枯枝怪的敏捷（潜行），以避免被突袭。",
+            "任何在这里发出的大声响会惊动区域13的信徒，他们会悄悄小心侦查情况。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:twig-blight",
+              "count": 6,
+              "notes": "南部树丛中。"
+            }
+          ],
+          "checks": [
+            {
+              "dc": null,
+              "ability": "感知",
+              "kind": "contest",
+              "context": "避免被区域12的枯枝怪突袭。",
+              "skill": "侦查",
+              "notes": "对抗枯枝怪的敏捷（潜行）。",
+              "opposed_by": "枯枝怪敏捷（潜行）"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 150,
+              "condition": "击败区域12的枯枝怪",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 12,
+          "pages": "43",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:twig-blight"
+          ],
+          "check_ids": [
+            "lmop:check:thundertree:thundertree-12:1"
+          ],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-12:1"
+          ]
+        },
+        {
+          "id": "lmop:area:thundertree-13",
+          "type": "area",
+          "name": "区域13 龙之信徒",
+          "page": 43,
+          "pdf_page": 44,
+          "summary": "门窗紧闭的小农舍；六个人类信徒躲在里面，四人在守卫（每间房两人），其余在较大的房间休息。",
+          "features": [
+            "信徒穿黑色斗篷（剪裁如龙翼）和黑色皮革面具，面具带象征性的龙角形状；除通用语外会说龙语。",
+            "通往小屋的门从里面挡住，需要 DC20 力量检定强行打开；窗户挡板也从内部堵上，需要 DC15 力量检定强行打开。",
+            "房内充满灰尘与蛛网，家具只有一个壁炉、一张桌子、两张椅子和一张床。",
+            "信徒对与其他人的战斗不感兴趣，倾向好好待着；领袖 Favric 是邪恶而有野心的年轻男性，希望借与区域7的绿龙联盟迅速提高地位。",
+            "Favric 解释他们前来和绿龙打交道（他不知道龙的名字）；若角色表现出类似想法，Favric 会提议联盟，计划把角色作为给龙的奉献之一，一旦战斗发生信徒会与龙站在同一阵线。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:cultist",
+              "count": 6,
+              "notes": "人类信徒；Favric 为领袖。"
+            }
+          ],
+          "checks": [
+            {
+              "dc": 20,
+              "ability": "力量",
+              "kind": "ability_check",
+              "context": "强行打开被从里面挡住的主门。",
+              "success": "门被打开。",
+              "failure": "门纹丝不动。"
+            },
+            {
+              "dc": 15,
+              "ability": "力量",
+              "kind": "ability_check",
+              "context": "强行打开被从内部堵上的窗户挡板。",
+              "success": "挡板被打开。",
+              "failure": "挡板纹丝不动。"
+            }
+          ],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "钻石",
+                  "quantity": 3,
+                  "value_gp": 100,
+                  "notes": "Favric 准备给绿龙的奉献；每颗 100gp"
+                },
+                {
+                  "name": "飞行药水",
+                  "quantity": 1,
+                  "notes": "Favric 脖子上密封的药水"
+                }
+              ],
+              "condition": "击败或赶走信徒后搜查主房间"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 150,
+              "condition": "击败或赶走区域13的信徒",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:thundertree",
+          "area_no": 13,
+          "pages": "43",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:cultist"
+          ],
+          "check_ids": [
+            "lmop:check:thundertree:thundertree-13:1",
+            "lmop:check:thundertree:thundertree-13:2"
+          ],
+          "reward_ids": [
+            "lmop:reward:xp:thundertree:thundertree-13:1",
+            "lmop:reward:treasure:thundertree:thundertree-13:1"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "dc": 10,
+          "ability": "力量",
+          "kind": "ability_check",
+          "context": "强行打开完好建筑卡死的木门。",
+          "success": "门被打开。",
+          "failure": "门纹丝不动。",
+          "page": 38,
+          "pdf_page": 39
+        }
+      ],
+      "outcomes": [
+        "队伍可自由选择探索顺序；区域之间的声音会互相惊动（如区域12的大响动会惊动区域13的信徒）。",
+        "德鲁伊莱多斯可能提供克拉葛摩城堡的方向；若队伍赶走毒牙，他可提供潮音洞穴的位置并邀请加入 Emerald Enclave。",
+        "区域7的毒牙被赶走或杀死后，区域13的信徒失去与龙结盟的目标；DM 可据此裁定剩余信徒的反应。"
+      ],
+      "pages": "37-44",
+      "location_scene_ids": [
+        "lmop:area:thundertree-1",
+        "lmop:area:thundertree-2",
+        "lmop:area:thundertree-3",
+        "lmop:area:thundertree-4",
+        "lmop:area:thundertree-5",
+        "lmop:area:thundertree-6",
+        "lmop:area:thundertree-7",
+        "lmop:area:thundertree-8",
+        "lmop:area:thundertree-9",
+        "lmop:area:thundertree-10",
+        "lmop:area:thundertree-11",
+        "lmop:area:thundertree-12",
+        "lmop:area:thundertree-13"
+      ],
+      "npc_ids": [
+        "lmop:npc:favric",
+        "lmop:npc:mirna-dendrar",
+        "lmop:npc:palien",
+        "lmop:npc:qelline-alderleaf",
+        "lmop:npc:reidoth",
+        "lmop:npc:venomfang"
+      ],
+      "monster_ids": [
+        "lmop:monster:ash-zombie",
+        "lmop:monster:cultist",
+        "lmop:monster:giant-spider",
+        "lmop:monster:twig-blight",
+        "lmop:monster:young-green-dragon"
+      ],
+      "check_ids": [
+        "lmop:check:thundertree:1",
+        "lmop:check:thundertree:thundertree-1:1",
+        "lmop:check:thundertree:thundertree-2:1",
+        "lmop:check:thundertree:thundertree-2:2",
+        "lmop:check:thundertree:thundertree-3:1",
+        "lmop:check:thundertree:thundertree-6:1",
+        "lmop:check:thundertree:thundertree-6:2",
+        "lmop:check:thundertree:thundertree-6:3",
+        "lmop:check:thundertree:thundertree-9:1",
+        "lmop:check:thundertree:thundertree-10:1",
+        "lmop:check:thundertree:thundertree-10:2",
+        "lmop:check:thundertree:thundertree-12:1",
+        "lmop:check:thundertree:thundertree-13:1",
+        "lmop:check:thundertree:thundertree-13:2"
+      ],
+      "reward_ids": [
+        "lmop:reward:xp:thundertree:thundertree-1:1",
+        "lmop:reward:xp:thundertree:thundertree-2:1",
+        "lmop:reward:treasure:thundertree:thundertree-2:1",
+        "lmop:reward:xp:thundertree:thundertree-3:1",
+        "lmop:reward:xp:thundertree:thundertree-5:1",
+        "lmop:reward:xp:thundertree:thundertree-6:1",
+        "lmop:reward:treasure:thundertree:thundertree-6:1",
+        "lmop:reward:xp:thundertree:thundertree-7:1",
+        "lmop:reward:xp:thundertree:thundertree-7:2",
+        "lmop:reward:treasure:thundertree:thundertree-7:1",
+        "lmop:reward:xp:thundertree:thundertree-8:1",
+        "lmop:reward:xp:thundertree:thundertree-9:1",
+        "lmop:reward:treasure:thundertree:thundertree-9:1",
+        "lmop:reward:xp:thundertree:thundertree-11:1",
+        "lmop:reward:xp:thundertree:thundertree-12:1",
+        "lmop:reward:xp:thundertree:thundertree-13:1",
+        "lmop:reward:treasure:thundertree:thundertree-13:1"
+      ]
+    },
+    {
+      "id": "lmop:scene:wyvern-tor",
+      "type": "scene",
+      "name": "飞龙崖",
+      "name_en": "Wyvern Tor",
+      "kind": "wilderness",
+      "page_start": 44,
+      "page_end": 45,
+      "pdf_page_start": 45,
+      "pdf_page_end": 46,
+      "summary": "剑山东北边的显眼悬崖，曾是飞龙巢穴；现在被多箭部族的兽人及其食人魔盟友占据。",
+      "features": [
+        "飞龙崖是相当大的一座山丘，侧面和斜坡有数里险峻地形；从二十里外就能轻易看见，走三猪小径经过兔子浆果镇附近时会在南边瞥见。",
+        "原本是大型而危险的飞龙巢穴，冒险者长年努力后飞龙不再回来，其他生物开始迁入。",
+        "兽人是多箭部族的斥候，经常在北边较文明的地区游荡、侦查人类生活领域、伏击旅行者并寻找掠夺机会。",
+        "领导者是 Brughor Axe-Biter，一个比起侦查更喜欢杀戮与劫掠的残忍兽人。",
+        "营地藏在山洞中；洞口二十码外有一个兽人蹲在巨石旁放哨。若角色安静迅速地解决落单兽人，有机会突袭山洞中的兽人；若被发现或突袭轮中未保持安静，兽人会退回山洞警告其他人。"
+      ],
+      "monsters": [
+        {
+          "monster_id": "lmop:monster:orc",
+          "count": "6 + Brughor",
+          "notes": "Brughor Axe-Biter 为 HP30 的兽人；其余六只兽人在 Brughor 死后逃跑。"
+        },
+        {
+          "monster_id": "lmop:monster:ogre",
+          "count": 1,
+          "notes": "Gog；战斗到死亡。"
+        }
+      ],
+      "checks": [
+        {
+          "dc": 15,
+          "ability": "感知",
+          "kind": "ability_check",
+          "context": "在飞龙崖寻找隐藏的兽人营地；每小时掷一次，由领路角色掷。",
+          "skill": "侦查",
+          "success": "找到营地。",
+          "failure": "继续寻找，下一小时再掷。",
+          "notes": "与 DC10 感知（求生）二选一。",
+          "page": 44,
+          "pdf_page": 45
+        },
+        {
+          "dc": 10,
+          "ability": "感知",
+          "kind": "ability_check",
+          "context": "在飞龙崖寻找隐藏的兽人营地（替代 DC15 侦查）。",
+          "skill": "求生",
+          "success": "找到营地。",
+          "failure": "继续寻找，下一小时再掷。",
+          "notes": "与 DC15 感知（侦查）二选一。",
+          "page": 44,
+          "pdf_page": 45
+        }
+      ],
+      "treasure": [
+        {
+          "items": [
+            {
+              "name": "钱币",
+              "quantity": 1,
+              "notes": "750cp、180sp、62ep、30gp",
+              "coins": {
+                "cp": 750,
+                "sp": 180,
+                "ep": 62,
+                "gp": 30
+              }
+            },
+            {
+              "name": "香水",
+              "quantity": 3,
+              "value_gp": 10,
+              "notes": "每瓶 10gp"
+            }
+          ],
+          "condition": "搜查山洞中没有上锁的箱子",
+          "page": 44,
+          "pdf_page": 45
+        }
+      ],
+      "xp": [
+        {
+          "amount": 1250,
+          "condition": "击败飞龙崖的兽人与食人魔",
+          "split": true,
+          "page": 44,
+          "pdf_page": 45
+        }
+      ],
+      "outcomes": [
+        "击败飞龙崖的怪物会完成哈宾·威斯特在凡度林的委托，以及 Hamun Kost 在古枭井的委托。",
+        "Brughor 死亡后其余兽人逃跑；Gog 战斗到死亡。"
+      ],
+      "pages": "44-45",
+      "npc_ids": [
+        "lmop:npc:brughor-axe-biter",
+        "lmop:npc:gog",
+        "lmop:npc:harbin-wester"
+      ],
+      "monster_ids": [
+        "lmop:monster:ogre",
+        "lmop:monster:orc"
+      ],
+      "check_ids": [
+        "lmop:check:wyvern-tor:1",
+        "lmop:check:wyvern-tor:2"
+      ],
+      "reward_ids": [
+        "lmop:reward:xp:wyvern-tor:1",
+        "lmop:reward:treasure:wyvern-tor:1"
+      ]
+    },
+    {
+      "id": "lmop:scene:cragmaw-castle",
+      "type": "scene",
+      "name": "克拉葛摩城堡",
+      "name_en": "Cragmaw Castle",
+      "kind": "dungeon",
+      "page_start": 45,
+      "page_end": 52,
+      "pdf_page_start": 46,
+      "pdf_page_end": 53,
+      "summary": "三猪小径与绝冬森林一带哥布林部族的总部，由一座古老王国的七塔城堡废墟构成；葛罗尔王统治，刚铎·寻石者被囚禁于此。",
+      "features": [
+        "克拉葛摩部族包含一群掠夺者和分散在三猪小径与绝冬森林的哥布林族群；众人勉强承认的头目是克拉葛摩城堡的葛罗尔王。",
+        "城堡不是哥布林建造的，也不是一开始的名字；它由来自古老王国 Phalorm 的有天份贵族法师建造，由七个交错重叠的塔楼构成，塔楼高层大多已坍崩成碎石堆，只剩一楼地板看起来还适合居住。",
+        "天花板（除非特别说明）有 15 尺高。",
+        "内部的门是木头与加固铁条构成，既没有上锁也没有钥匙孔；可进行 DC15 力量检定打破阻碍道路的门。",
+        "地板是破裂而不平整的石板铺在泥土上。",
+        "光源：少量天然光源从城堡的射箭孔透进来；白天在大部分区域提供微弱光源，夜晚所有区域都是黑暗的。",
+        "城堡墙壁上的射箭孔离外面地板有 10 尺高，对内部的人来说只有 4 尺高，8 英寸宽、4 尺长；射箭孔一端的生物对另一端攻击获得四分之三掩蔽。"
+      ],
+      "checks": [
+        {
+          "dc": 15,
+          "ability": "力量",
+          "kind": "ability_check",
+          "context": "打破城堡内部阻碍道路的木门。",
+          "success": "门被打破。",
+          "failure": "门纹丝不动。"
+        }
+      ],
+      "areas": [
+        {
+          "id": "lmop:area:cragmaw-1",
+          "type": "area",
+          "name": "区域1 城堡入口",
+          "page": 45,
+          "pdf_page": 46,
+          "summary": "区域1与区域2之间的主要大门由青铜覆盖的木头制成，但已锈蚀倒塌；入口前有低矮阶梯通往平台。",
+          "features": [
+            "城堡由七个不同大小和高度的破败塔楼构成，上层塔楼各有不同坍塌状态；只剩一楼地板看起来还适合居住。",
+            "这个区域没有怪物，但区域3的哥布林哨兵应该正在看守；他们只会偶尔从射箭孔里瞥一眼，移动够快的角色可能悄悄通过。",
+            "让每一位角色进行敏捷（潜行）检定，难度为哥布林的感知检定以察觉队伍。",
+            "一旦哥布林发现角色（或角色大方前进），他们会从射箭孔射击，但无法击中已经通过破损大门的敌人；他们也会大声叫喊，警示区域4和区域6的同伴城堡正遭受入侵。",
+            "伪装：角色可穿红烙印恶霸的猩红披风，宣称是由伊阿诺“水晶之杖”艾伯瑞克派出的使者，要求会见葛罗尔王；集体唬弄时每位角色进行魅力（唬弄）检定对抗怪物感知（洞察），至少一位成功即视为成功，计划或扮演完善时给优势。"
+          ],
+          "monsters": [],
+          "checks": [
+            {
+              "dc": null,
+              "ability": "敏捷",
+              "kind": "contest",
+              "context": "在区域3哥布林哨兵的注视下悄悄通过入口。",
+              "skill": "潜行",
+              "notes": "对抗哥布林的感知检定；移动够快可能不被发现。",
+              "opposed_by": "哥布林感知"
+            },
+            {
+              "dc": null,
+              "ability": "魅力",
+              "kind": "contest",
+              "context": "伪装成红烙印使者，集体唬弄城堡守卫。",
+              "skill": "唬弄",
+              "notes": "每位角色各掷一次，对抗怪物感知（洞察）；至少一位成功即整体成功。",
+              "opposed_by": "怪物感知（洞察）"
+            }
+          ],
+          "xp": [],
+          "outcomes": [
+            "若唬弄成功，哥布林不会攻击宣称是为黑蜘蛛工作的队伍；DM 可奖励被唬弄怪物的经验值。"
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 1,
+          "pages": "45",
+          "npc_ids": [],
+          "monster_ids": [],
+          "check_ids": [
+            "lmop:check:cragmaw-castle:cragmaw-1:1",
+            "lmop:check:cragmaw-castle:cragmaw-1:2"
+          ],
+          "reward_ids": []
+        },
+        {
+          "id": "lmop:area:cragmaw-2",
+          "type": "area",
+          "name": "区域2 陷阱大厅",
+          "page": 46,
+          "pdf_page": 47,
+          "summary": "曾经的城堡门厅，现在成为危险场所；瓦砾土堆阻碍南部大厅，走廊散落尘土、瓦砾和崩塌天花板的泥灰。",
+          "features": [
+            "北边到南边有许多位置相近的门；东边一条走廊有两扇分别通往东边和南边的门。",
+            "若区域3的哥布林哨兵发出警报，区域4和区域6的哥布林与大地精会同时从北边和南边的门跑出来，从两个方向攻击，试图击败冒险者并将他们赶出城堡。",
+            "陷阱：通往区域8的、由尘土和瓦砾覆盖的走廊上有一个由铜线连结的机关藏在废弃天花板中；察觉需要一个被动至少 20 的感知（侦查）分数，或主动寻找时以 DC10 感知（侦查）发现。",
+            "一旦察觉，触发铜线很容易避开和解除（无须能力检定）；未察觉陷阱而经过瓦砾堆的生物会触发坍塌的木梁和巨石陷阱。",
+            "陷阱触发时，区域内生物必须通过 DC10 敏捷豁免，否则受到 3d6 钝击伤害（成功减半）；崩塌声响会惊动区域3、7、8、9的怪物。"
+          ],
+          "monsters": [],
+          "checks": [
+            {
+              "dc": null,
+              "ability": "感知",
+              "kind": "passive",
+              "context": "被动察觉通往区域8走廊上的铜线陷阱。",
+              "skill": "侦查",
+              "notes": "被动感知（侦查）至少 20 才能察觉。",
+              "passive": 20
+            },
+            {
+              "dc": 10,
+              "ability": "感知",
+              "kind": "ability_check",
+              "context": "主动寻找通往区域8走廊上的铜线陷阱。",
+              "skill": "侦查",
+              "success": "发现陷阱；触发铜线很容易避开和解除（无须能力检定）。",
+              "failure": "未发现陷阱。",
+              "notes": "替代被动 20 的察觉方式。"
+            },
+            {
+              "dc": 10,
+              "ability": "敏捷",
+              "kind": "saving_throw",
+              "context": "陷阱触发时通过敏捷豁免，避免落石伤害。",
+              "success": "伤害减半。",
+              "failure": "受到 3d6 钝击伤害。"
+            }
+          ],
+          "treasure": [],
+          "xp": [
+            {
+              "amount": 100,
+              "condition": "察觉陷阱或从陷阱中生存",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 2,
+          "pages": "46",
+          "npc_ids": [],
+          "monster_ids": [],
+          "check_ids": [
+            "lmop:check:cragmaw-castle:cragmaw-2:1",
+            "lmop:check:cragmaw-castle:cragmaw-2:2",
+            "lmop:check:cragmaw-castle:cragmaw-2:3"
+          ],
+          "reward_ids": [
+            "lmop:reward:xp:cragmaw-castle:cragmaw-2:1"
+          ]
+        },
+        {
+          "id": "lmop:area:cragmaw-3",
+          "type": "area",
+          "name": "区域3 弓箭手岗哨",
+          "page": 46,
+          "pdf_page": 47,
+          "summary": "散落碎石的小房间；正对门的射箭孔提供优良的对城堡大门射击场所。",
+          "features": [
+            "主要防御措施是秘密地点和看似废弃的外观；葛罗尔王派哨兵赶走接近城堡的入侵者。",
+            "每一个哨站有两只哥布林，借轮流射箭并回避，两只弓箭手可以在一轮同时射击外面的目标。",
+            "当角色进入房间时，哥布林会丢下短弓并抽出近战武器。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:goblin",
+              "count": 2,
+              "notes": "弓箭手岗哨。"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 100,
+              "condition": "每击败一对哥布林弓箭手",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 3,
+          "pages": "46",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:goblin"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:cragmaw-castle:cragmaw-3:1"
+          ]
+        },
+        {
+          "id": "lmop:area:cragmaw-4",
+          "type": "area",
+          "name": "区域4 废弃营房",
+          "page": 46,
+          "pdf_page": 47,
+          "summary": "城堡西南方的塔楼，只比一堆瓦砾好一些；几个残破铺盖散落在剩下的地板上，有一个细小通路通往东方。",
+          "features": [
+            "三个哥布林在这里休息；瓦砾看起来很危险，但塔楼是坚固的，通往东方的通路也是安全的。",
+            "在这里发出任何大声响都会引起区域7哥布林的注意，一个哥布林会来调查骚乱；如果他没有回去，或发现问题并发出警报，其他哥布林都会前来调查。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:goblin",
+              "count": 3,
+              "notes": "在废弃营房休息。"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 150,
+              "condition": "击败区域4的哥布林",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 4,
+          "pages": "46",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:goblin"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:cragmaw-castle:cragmaw-4:1"
+          ]
+        },
+        {
+          "id": "lmop:area:cragmaw-5",
+          "type": "area",
+          "name": "区域5 储藏室",
+          "page": 47,
+          "pdf_page": 48,
+          "summary": "被克拉葛摩部族在 High Road 和三猪小径袭击的商队提供了城堡所需补给；旧木桶装着腌肉，一袋袋腐烂谷粒放满储藏区。",
+          "features": [
+            "补给中可见一件染血的锁子甲、一个大型十字弓，以及一个没有剑鞘、剑柄有绝冬城徽记的长剑。",
+            "这些补给不是以人类可食用标准来说的，但无法取得更新鲜食物时，哥布林可以容忍。",
+            "一个小酒桶装满特别的矮人白兰地，因为大小而被哥布林忽略；大约二十杯分量。",
+            "喝了一杯白兰地的角色回复 1 点 HP；一小时内喝超过一杯的角色视为中毒一小时。"
+          ],
+          "monsters": [],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "锁子甲",
+                  "quantity": 1,
+                  "notes": "染血；属于西达尔·荷温特"
+                },
+                {
+                  "name": "大型十字弓",
+                  "quantity": 1,
+                  "notes": "补给中"
+                },
+                {
+                  "name": "长剑",
+                  "quantity": 1,
+                  "notes": "无剑鞘，剑柄有绝冬城徽记；属于西达尔·荷温特"
+                },
+                {
+                  "name": "矮人白兰地",
+                  "quantity": 1,
+                  "notes": "小酒桶，约 20 杯；1 杯回复 1 HP，1 小时内超过 1 杯则中毒 1 小时"
+                }
+              ],
+              "condition": "搜查区域5的补给"
+            }
+          ],
+          "xp": [],
+          "outcomes": [
+            "若队伍至少将长剑还给西达尔·荷温特，他会非常感激。"
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 5,
+          "pages": "47",
+          "npc_ids": [],
+          "monster_ids": [],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:treasure:cragmaw-castle:cragmaw-5:1"
+          ]
+        },
+        {
+          "id": "lmop:area:cragmaw-6",
+          "type": "area",
+          "name": "区域6 大地精营房",
+          "page": 47,
+          "pdf_page": 48,
+          "summary": "四个稻草铺成的床铺在营房内地板上一字排开；墙上托架放着长矛、长剑、流星锤等武器。",
+          "features": [
+            "克拉葛摩是哥布林混合部族，由少数熊地精统治大量哥布林以及几个大地精；大地精计划未来推翻熊地精并接管部族，但现在熊地精太强大。",
+            "四个大地精住在这里；哥布林邻居经常打斗，他们不会注意区域2和区域3的噪音。",
+            "一旦入侵者出现，他们会迅速防御塔楼，或回应哥布林哨兵的警报。",
+            "北面墙看起来有毁损迹象，但地板上的瓦砾似乎被清扫得很干净。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:hobgoblin",
+              "count": 4,
+              "notes": "大地精营房。"
+            }
+          ],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "长矛",
+                  "quantity": 5,
+                  "notes": "靠在墙上"
+                },
+                {
+                  "name": "长剑",
+                  "quantity": 4,
+                  "notes": "靠在墙上"
+                },
+                {
+                  "name": "流星锤",
+                  "quantity": 3,
+                  "notes": "靠在墙上"
+                },
+                {
+                  "name": "巨剑",
+                  "quantity": 2,
+                  "notes": "靠在墙上"
+                },
+                {
+                  "name": "长棍",
+                  "quantity": 1,
+                  "value_gp": 10,
+                  "notes": "雕刻羽毛纹样，出乎意料地轻（1 磅），价值 10gp"
+                }
+              ],
+              "condition": "清点区域6墙上的武器"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 400,
+              "condition": "击败区域6的大地精",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 6,
+          "pages": "47",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:hobgoblin"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:cragmaw-castle:cragmaw-6:1",
+            "lmop:reward:treasure:cragmaw-castle:cragmaw-6:1"
+          ]
+        },
+        {
+          "id": "lmop:area:cragmaw-7",
+          "type": "area",
+          "name": "区域7 宴会厅",
+          "page": 47,
+          "pdf_page": 48,
+          "summary": "城堡主人曾在此举办宴会和舞会，现在只是哥布林的食堂；大厅西部大多只剩一墙碎石，剩余部分仍完好。",
+          "features": [
+            "大厅有 25 尺高的天花板；两个大木桌和长板凳放在房间中央，角落有一个铜火盆充满炽热煤炭。",
+            "肮脏的盘子、半满的炖锅、发霉的面包角和啃过的骨头摆满桌子。",
+            "大厅有七个悲惨的哥布林和他们的领导者——一个肥胖而脾气古怪、拥有 12 点 HP 的哥布林 Yegg；Yegg 是部族厨师，会在伙伴不愿帮忙把食物放到餐桌上时狠狠欺负他们。",
+            "一旦 Yegg 被杀，剩下的哥布林会往东方或西方逃跑，避开北方的门，因为那里在区域2有个陷阱。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:goblin",
+              "count": "7 + Yegg",
+              "notes": "Yegg 为 12 HP 的哥布林厨师。"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 400,
+              "condition": "击败区域7的哥布林",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 7,
+          "pages": "47",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:goblin"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:cragmaw-castle:cragmaw-7:1"
+          ]
+        },
+        {
+          "id": "lmop:area:cragmaw-8",
+          "type": "area",
+          "name": "区域8 黑暗大厅",
+          "page": 48,
+          "pdf_page": 49,
+          "summary": "高而窄的大厅，曾是教堂或神殿的一部分；天使图像雕刻在房间上方，北边厚重帘幕挡住一对拱门，拱门之间有破损但装饰华丽的石制火盆。",
+          "features": [
+            "就算在白天，这个区域也没有任何外部光源；角色需要黑暗视觉或光源才能行动。",
+            "这个房间有一只由区域9哥布林 Lhupo 所养的掘地兽宠物；它喜欢攀爬在房间内雕刻的上方，隐藏在阴影中，很快会察觉入侵者并从上方扑下袭击。",
+            "将掘地兽的敏捷（潜行）与角色的感知（侦查）检定或被动侦查进行比对，以判断有无突袭；掘地兽知道哥布林不可以吃，除非 Lhupo 说可以。",
+            "其他克拉葛摩城堡的人都很害怕 Lhupo 的宠物，会快速穿过这个房间，甚至结伴而行。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:grick",
+              "count": 1,
+              "notes": "Lhupo 的宠物；从上方扑击。"
+            }
+          ],
+          "checks": [
+            {
+              "dc": null,
+              "ability": "感知",
+              "kind": "contest",
+              "context": "察觉藏在房间上方阴影中的掘地兽，避免被突袭。",
+              "skill": "侦查",
+              "notes": "对抗掘地兽的敏捷（潜行）；也可用被动侦查。",
+              "opposed_by": "掘地兽敏捷（潜行）"
+            }
+          ],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "太阳精灵黄金雕像",
+                  "quantity": 1,
+                  "value_gp": 100,
+                  "notes": "藏在石制火盆煤炭下，用深红色布包裹；一个哥布林偷偷藏在这里"
+                }
+              ],
+              "condition": "搜查石制火盆的煤炭堆"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 450,
+              "condition": "击败区域8的掘地兽",
+              "split": true
+            }
+          ],
+          "outcomes": [
+            "一个侦测魔法咒语可以发现雕像充满预言系魔法；任何非邪恶生物握着雕像都可以问它一个问题，并收到心灵传动的回应，视同施放了占卜术（Augury）；一旦一个生物询问问题并收到回应，雕像就无法再次使用。"
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 8,
+          "pages": "48",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:grick"
+          ],
+          "check_ids": [
+            "lmop:check:cragmaw-castle:cragmaw-8:1"
+          ],
+          "reward_ids": [
+            "lmop:reward:xp:cragmaw-castle:cragmaw-8:1",
+            "lmop:reward:treasure:cragmaw-castle:cragmaw-8:1"
+          ]
+        },
+        {
+          "id": "lmop:area:cragmaw-9",
+          "type": "area",
+          "name": "区域9 哥布林神殿",
+          "page": 49,
+          "pdf_page": 50,
+          "summary": "人类的神对哥布林没有意义，克拉葛摩部族将这个区域改为 Maglubiyet（哥布林与大哥布林之神）的神殿；房间使用城堡北部的塔楼。",
+          "features": [
+            "石制祭坛在房间中央，铺上沾满血迹的黑布；纯金仪式法器——一个酒杯、一把刀和一个香炉——被小心地放在祭坛上。",
+            "两个南边拱门负载着厚重帘幕；这个神殿是 Lhupo（一个 12 HP 的哥布林）的住所，以及两个被当作“侍僧”的哥布林。",
+            "他们都在铠甲外穿着肮脏的长袍，但都没有神术力量（虽然 Lhupo 宣称他听到 Maglubiyet 对他说话）。",
+            "一旦哥布林听见角色在区域8和掘地兽战斗，他们会躲在祭坛后面并试图袭击角色；否则，三个哥布林都会跪在祭坛前，向他们邪恶的神祈祷。",
+            "一旦这里爆发战斗，区域9的哥布林将不会被突袭。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:goblin",
+              "count": "3（Lhupo + 2 侍僧）",
+              "notes": "Lhupo 为 12 HP。"
+            }
+          ],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "黄金酒杯",
+                  "quantity": 1,
+                  "value_gp": 150,
+                  "notes": "人类工艺"
+                },
+                {
+                  "name": "仪式刀",
+                  "quantity": 1,
+                  "value_gp": 60,
+                  "notes": "人类工艺"
+                },
+                {
+                  "name": "香炉",
+                  "quantity": 1,
+                  "value_gp": 120,
+                  "notes": "人类工艺"
+                }
+              ],
+              "condition": "取走祭坛上的仪式法器"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 150,
+              "condition": "击败区域9的哥布林",
+              "split": true
+            }
+          ],
+          "outcomes": [
+            "任何检查礼拜堂装饰的牧师可进行 DC10 智力（宗教）检定，鉴定这里曾祭拜的神祇：欧格玛（知识之神）、密斯特拉（魔法女神）、洛山达（晨光之神）、泰摩拉（幸运女神）；这是城堡建造者是人类的一个明显迹象。"
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 9,
+          "pages": "49",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:goblin"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:cragmaw-castle:cragmaw-9:1",
+            "lmop:reward:treasure:cragmaw-castle:cragmaw-9:1"
+          ]
+        },
+        {
+          "id": "lmop:area:cragmaw-10",
+          "type": "area",
+          "name": "区域10 后门",
+          "page": 50,
+          "pdf_page": 51,
+          "summary": "老旧城堡南面，一条杂草重生的小路通往可以爬上城墙的通路；一个大铁门在这里阻挡外来进攻，射箭孔在离地十尺高的地方俯瞰道路。",
+          "features": [
+            "这一边的门上了锁，但没有看守。",
+            "铁门是上锁的，可以被盗贼工具以 DC15 敏捷检定打开，或被 DC25 力量检定击破。",
+            "任何角色靠在射箭孔附近聆听，可以听见来自区域7偶尔有哥布林愤怒地抱怨哪里的盘子需要清洗；哥布林不会一直盯着射箭孔外。",
+            "一旦角色制造大量噪音或骚动（例如击破门），哥布林就会前来查看；一旦他们发现外来入侵者，便会发出警报。"
+          ],
+          "monsters": [],
+          "checks": [
+            {
+              "dc": 15,
+              "ability": "敏捷",
+              "kind": "ability_check",
+              "context": "用盗贼工具打开后门的锁。",
+              "success": "锁被打开。",
+              "failure": "锁未打开。",
+              "tools": "盗贼工具",
+              "notes": "也可用 DC25 力量检定击破铁门。"
+            },
+            {
+              "dc": 25,
+              "ability": "力量",
+              "kind": "ability_check",
+              "context": "强行击破上锁的铁门。",
+              "success": "门被击破。",
+              "failure": "门纹丝不动。"
+            }
+          ],
+          "xp": [],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 10,
+          "pages": "50",
+          "npc_ids": [],
+          "monster_ids": [],
+          "check_ids": [
+            "lmop:check:cragmaw-castle:cragmaw-10:1",
+            "lmop:check:cragmaw-castle:cragmaw-10:2"
+          ],
+          "reward_ids": []
+        },
+        {
+          "id": "lmop:area:cragmaw-11",
+          "type": "area",
+          "name": "区域11 废弃塔楼",
+          "page": 50,
+          "pdf_page": 51,
+          "summary": "几乎完全崩塌的塔楼，地板还有一些空地；腐烂的箱子和老旧木桶证明这里曾是储藏室。",
+          "features": [
+            "沾满尘土的帆布（地图上标记为 C）藏着城堡北面通往此处的入口，与周遭石体和碎石融为一体。",
+            "一个角色通过 DC15 感知（侦查）检定可以找到一条通往隐藏入口的小径；一旦角色主动寻找城堡外的隐藏入口，可以通过 DC10 感知（侦查）检定找出这个帆布入口。",
+            "一个厚重帆布挡住通往南部的区域，还有一个完好的门通往东方；北方一个短通道伴随碎石停在一幅帆布面前。"
+          ],
+          "monsters": [],
+          "checks": [
+            {
+              "dc": 15,
+              "ability": "感知",
+              "kind": "ability_check",
+              "context": "找到通往隐藏入口的小径。",
+              "skill": "侦查",
+              "success": "找到小径。",
+              "failure": "未找到。"
+            },
+            {
+              "dc": 10,
+              "ability": "感知",
+              "kind": "ability_check",
+              "context": "主动寻找城堡外的隐藏入口，找出帆布入口。",
+              "skill": "侦查",
+              "success": "找到帆布入口。",
+              "failure": "未找到。"
+            }
+          ],
+          "xp": [],
+          "outcomes": [
+            "隐藏入口可作为绕过城堡正面防御的通道。"
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 11,
+          "pages": "50",
+          "npc_ids": [],
+          "monster_ids": [],
+          "check_ids": [
+            "lmop:check:cragmaw-castle:cragmaw-11:1",
+            "lmop:check:cragmaw-castle:cragmaw-11:2"
+          ],
+          "reward_ids": []
+        },
+        {
+          "id": "lmop:area:cragmaw-12",
+          "type": "area",
+          "name": "区域12 守卫营房",
+          "page": 50,
+          "pdf_page": 51,
+          "summary": "这里的生物一直从射箭孔往外看，任何试图经过城堡东方的生物都会被发现且被攻击；一个装满煤炭的石制火盆在小营房中燃烧。",
+          "features": [
+            "四个稻草铺盖沿东墙一字排开，南面墙已经崩塌，但这里有一扇木门仍然完好；一个帘幕悬挂在通往北面的拱门上。",
+            "两个大地精在这间房间守卫；他们聪明、强悍，并且忠诚于葛罗尔王。",
+            "战斗开始时，一个大地精跑去区域14警示葛罗尔王，并在两轮后回来加入战局。",
+            "这个区域曾是城堡客房，腐烂家具都被克拉葛摩部族打烂充当木柴。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:hobgoblin",
+              "count": 2,
+              "notes": "守卫营房；一人去区域14报信。"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 200,
+              "condition": "击败区域12的大地精",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 12,
+          "pages": "50",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:hobgoblin"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:cragmaw-castle:cragmaw-12:1"
+          ]
+        },
+        {
+          "id": "lmop:area:cragmaw-13",
+          "type": "area",
+          "name": "区域13 枭熊塔楼",
+          "page": 50,
+          "pdf_page": 51,
+          "summary": "通往这间房间的门被沉重木栓阻挡，伴随一个警告内有危险的标志；木栓抬起时，房间内的生物会醒来并发出可怕的咆哮。",
+          "features": [
+            "这里的射箭孔被封起来，保持房间黑暗；角色需要黑暗视觉或光源才能行动。",
+            "塔楼上层已经崩塌，创造出中空三十尺高的筒状空间，房间更上方是一片阴影；尘土、碎石和破碎玻璃覆盖地板，老旧工作台和书架散倒在南方。",
+            "房间中间有一只笨重的野兽，看起来像长着枭脸的熊；它直立起来，看见角色时发出咆哮。",
+            "克拉葛摩部族抓到一只枭熊并关在塔楼；房间一直保持黑暗以维持野兽平静，但葛罗尔王不知道该怎麽处理它。",
+            "一旦角色朝它丢出新鲜肉，枭熊会吃下食物；否则，它会攻击第一个从门口看见的生物。",
+            "一旦角色打开门并远离枭熊的路径，它将会逃离城堡（最可能经过区域11），并攻击路上遇到的生物。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:owlbear",
+              "count": 1,
+              "notes": "被关在塔楼中的枭熊。"
+            }
+          ],
+          "checks": [
+            {
+              "dc": 15,
+              "ability": "感知",
+              "kind": "ability_check",
+              "context": "注意到塔楼二楼锯齿边缘上的破旧木箱。",
+              "skill": "侦查",
+              "success": "注意到木箱。",
+              "failure": "未注意到。"
+            }
+          ],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "钱币",
+                  "quantity": 1,
+                  "notes": "90ep、120gp",
+                  "coins": {
+                    "ep": 90,
+                    "gp": 120
+                  }
+                },
+                {
+                  "name": "治疗药水",
+                  "quantity": 1
+                },
+                {
+                  "name": "沉默术卷轴",
+                  "quantity": 1,
+                  "notes": "silence"
+                },
+                {
+                  "name": "回生术卷轴",
+                  "quantity": 1,
+                  "notes": "revivify"
+                }
+              ],
+              "condition": "打开塔楼二楼不上锁的破旧木箱"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 700,
+              "condition": "击败或释放区域13的枭熊",
+              "split": true
+            }
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 13,
+          "pages": "50",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:owlbear"
+          ],
+          "check_ids": [
+            "lmop:check:cragmaw-castle:cragmaw-13:1"
+          ],
+          "reward_ids": [
+            "lmop:reward:xp:cragmaw-castle:cragmaw-13:1",
+            "lmop:reward:treasure:cragmaw-castle:cragmaw-13:1"
+          ]
+        },
+        {
+          "id": "lmop:area:cragmaw-14",
+          "type": "area",
+          "name": "区域14 王之居所",
+          "page": 51,
+          "pdf_page": 52,
+          "summary": "粗糙的住所，厚毛皮摆在地板上作地毯，老旧奖章挂在墙上；北边一张大床，旁边石制火盆烧得明亮，南边靠门放着圆桌和几张椅子。",
+          "features": [
+            "任何角色从门边聆听都可以听见两个声音在热烈讨论：一个响亮而咆哮的嗓音要求为谁的父亲报仇，另一个回复如丝绸般柔滑。",
+            "桌子旁的地板上有一个失去意识的矮人，看起来被狠狠拷打过——刚铎·寻石者，普通矮人，失去意识但伤势稳定，保持在 0 HP。",
+            "葛罗尔王是一个残忍的熊地精，有 45 HP；它借纯粹恐吓统治克拉葛摩部族，年龄使肩膀下垂并驼背，但仍保持惊人敏捷和强壮。",
+            "葛罗尔旁伴随 Snar（一只 18 HP 的狼），以及一只变形怪伪装成的人类女卓尔 Vyerith；Vyerith 是来自黑蜘蛛的信使，前来从葛罗尔手上带走刚铎·寻石者以及前往潮音洞穴的地图。",
+            "葛罗尔想卖掉地图而不是白白交出去，正在和卓尔协商价格；Vyerith 想先质问刚铎以确认是否有其他人得知矿坑地点，然后变形怪倾向杀掉矮人并摧毁地图。",
+            "一旦葛罗尔王被警告城堡受到入侵，Vyerith 会躲在门后，保持门开一条缝，并希望从后方攻击入侵者；葛罗尔会抓住刚铎作为人质，一旦角色不肯离去便准备杀掉这个矮人。"
+          ],
+          "monsters": [
+            {
+              "monster_id": "lmop:monster:bugbear",
+              "count": 1,
+              "notes": "葛罗尔王；45 HP。"
+            },
+            {
+              "monster_id": "lmop:monster:wolf",
+              "count": 1,
+              "notes": "Snar；18 HP。"
+            },
+            {
+              "monster_id": "lmop:monster:doppelganger",
+              "count": 1,
+              "notes": "Vyerith；伪装成人类女卓尔。"
+            }
+          ],
+          "checks": [],
+          "treasure": [
+            {
+              "items": [
+                {
+                  "name": "钱币",
+                  "quantity": 1,
+                  "notes": "220sp、160ep",
+                  "coins": {
+                    "sp": 220,
+                    "ep": 160
+                  }
+                },
+                {
+                  "name": "治疗药水",
+                  "quantity": 3
+                },
+                {
+                  "name": "刚铎的潮音洞穴地图",
+                  "quantity": 1,
+                  "notes": "藏在葛罗尔床垫下缝制的皮革麻袋中"
+                }
+              ],
+              "condition": "搜查葛罗尔床垫下的皮革麻袋"
+            }
+          ],
+          "xp": [
+            {
+              "amount": 950,
+              "condition": "击败葛罗尔王、狼与变形怪",
+              "split": true
+            },
+            {
+              "amount": 200,
+              "condition": "解救刚铎·寻石者并成功护送他回凡度林（额外奖励）",
+              "split": true
+            }
+          ],
+          "outcomes": [
+            "一旦葛罗尔被杀，Vyerith 会试着杀掉刚铎，并带着地图逃跑，经由区域11的隐密帆布门逃脱；如果走投无路，这个变形怪会战斗直到死亡，而不是让自己被俘虏。",
+            "一旦刚铎被救出，他会感谢队伍前来救援，但不会离开克拉葛摩城堡直到找到他的地图；他不知道葛罗尔王把地图藏在哪里（见宝藏）。",
+            "一旦刚铎从克拉葛摩城堡存活下来，他会要求队伍护送他返回凡度林，然后再前往潮音洞穴打听兄弟南镀和塔登的下落；他知道一个叫黑蜘蛛的人策划了绑架，并希望队伍阻止这个恶人。",
+            "回到凡度林后，刚铎会提供每一位角色 25gp 的报酬，并许诺给队伍矿坑开始运作后收益的十分之一。"
+          ],
+          "parent_scene_id": "lmop:scene:cragmaw-castle",
+          "area_no": 14,
+          "pages": "51",
+          "npc_ids": [],
+          "monster_ids": [
+            "lmop:monster:bugbear",
+            "lmop:monster:doppelganger",
+            "lmop:monster:wolf"
+          ],
+          "check_ids": [],
+          "reward_ids": [
+            "lmop:reward:xp:cragmaw-castle:cragmaw-14:1",
+            "lmop:reward:xp:cragmaw-castle:cragmaw-14:2",
+            "lmop:reward:treasure:cragmaw-castle:cragmaw-14:1"
+          ]
+        }
+      ],
+      "outcomes": [
+        "队伍可通过正面、后门、隐藏入口或伪装等多种方式进入城堡；DM 根据哥布林哨兵、陷阱和各区域增援裁定警报传播。",
+        "救出刚铎并拿到地图后，剧情指向 PART 4 潮音洞穴。"
+      ],
+      "pages": "45-52",
+      "location_scene_ids": [
+        "lmop:area:cragmaw-1",
+        "lmop:area:cragmaw-2",
+        "lmop:area:cragmaw-3",
+        "lmop:area:cragmaw-4",
+        "lmop:area:cragmaw-5",
+        "lmop:area:cragmaw-6",
+        "lmop:area:cragmaw-7",
+        "lmop:area:cragmaw-8",
+        "lmop:area:cragmaw-9",
+        "lmop:area:cragmaw-10",
+        "lmop:area:cragmaw-11",
+        "lmop:area:cragmaw-12",
+        "lmop:area:cragmaw-13",
+        "lmop:area:cragmaw-14"
+      ],
+      "npc_ids": [
+        "lmop:npc:gundren-rockseeker",
+        "lmop:npc:king-grol",
+        "lmop:npc:lhupo",
+        "lmop:npc:sildar-hallwinter",
+        "lmop:npc:snar",
+        "lmop:npc:vyerith",
+        "lmop:npc:yegg"
+      ],
+      "monster_ids": [
+        "lmop:monster:bugbear",
+        "lmop:monster:doppelganger",
+        "lmop:monster:goblin",
+        "lmop:monster:grick",
+        "lmop:monster:hobgoblin",
+        "lmop:monster:owlbear",
+        "lmop:monster:wolf"
+      ],
+      "check_ids": [
+        "lmop:check:cragmaw-castle:1",
+        "lmop:check:cragmaw-castle:cragmaw-1:1",
+        "lmop:check:cragmaw-castle:cragmaw-1:2",
+        "lmop:check:cragmaw-castle:cragmaw-2:1",
+        "lmop:check:cragmaw-castle:cragmaw-2:2",
+        "lmop:check:cragmaw-castle:cragmaw-2:3",
+        "lmop:check:cragmaw-castle:cragmaw-8:1",
+        "lmop:check:cragmaw-castle:cragmaw-10:1",
+        "lmop:check:cragmaw-castle:cragmaw-10:2",
+        "lmop:check:cragmaw-castle:cragmaw-11:1",
+        "lmop:check:cragmaw-castle:cragmaw-11:2",
+        "lmop:check:cragmaw-castle:cragmaw-13:1"
+      ],
+      "reward_ids": [
+        "lmop:reward:xp:cragmaw-castle:cragmaw-2:1",
+        "lmop:reward:xp:cragmaw-castle:cragmaw-3:1",
+        "lmop:reward:xp:cragmaw-castle:cragmaw-4:1",
+        "lmop:reward:treasure:cragmaw-castle:cragmaw-5:1",
+        "lmop:reward:xp:cragmaw-castle:cragmaw-6:1",
+        "lmop:reward:treasure:cragmaw-castle:cragmaw-6:1",
+        "lmop:reward:xp:cragmaw-castle:cragmaw-7:1",
+        "lmop:reward:xp:cragmaw-castle:cragmaw-8:1",
+        "lmop:reward:treasure:cragmaw-castle:cragmaw-8:1",
+        "lmop:reward:xp:cragmaw-castle:cragmaw-9:1",
+        "lmop:reward:treasure:cragmaw-castle:cragmaw-9:1",
+        "lmop:reward:xp:cragmaw-castle:cragmaw-12:1",
+        "lmop:reward:xp:cragmaw-castle:cragmaw-13:1",
+        "lmop:reward:treasure:cragmaw-castle:cragmaw-13:1",
+        "lmop:reward:xp:cragmaw-castle:cragmaw-14:1",
+        "lmop:reward:xp:cragmaw-castle:cragmaw-14:2",
+        "lmop:reward:treasure:cragmaw-castle:cragmaw-14:1"
+      ]
+    },
+    {
+      "id": "lmop:scene:return-encounter",
+      "type": "scene",
+      "name": "回程遭遇：军事团伙",
+      "name_en": "Return Encounter: Hobgoblin War Band",
+      "kind": "encounter",
+      "page_start": 52,
+      "page_end": 52,
+      "pdf_page_start": 53,
+      "pdf_page_end": 53,
+      "summary": "角色准备离开城堡时的可选回程遭遇；一支大地精军团正在回家，由 Targor Bloodsword 领导。",
+      "features": [
+        "可以以各种形式描述正在回家的大地精军团；军团包含三个大地精，以及一个领导他们、有着 20 HP 的大地精 Targor Bloodsword，他还有两只狼作为宠物。",
+        "大地精们并没有宝物，但其中有 1d4 只带着血腥的麻袋，每一个里面都有着被切断的精灵头颅；这些头颅是大地精最近一次精灵狩猎派对的战利品。",
+        "聪明的角色可能试着和 Targor 沟通，借促使他作为葛罗尔王的接班人而不是复仇者；Targor 一直渴望着领导克拉葛摩部族，所以他或许会接受冒险者的建议而不是杀掉他们。"
+      ],
+      "monsters": [
+        {
+          "monster_id": "lmop:monster:hobgoblin",
+          "count": "3 + Targor",
+          "notes": "Targor Bloodsword 为 20 HP 的大地精领袖。"
+        },
+        {
+          "monster_id": "lmop:monster:wolf",
+          "count": 2,
+          "notes": "Targor 的宠物。"
+        }
+      ],
+      "checks": [
+        {
+          "dc": 15,
+          "ability": "魅力",
+          "kind": "ability_check",
+          "context": "说服 Targor 接受成为葛罗尔王接班人的建议，而不是为葛罗尔复仇。",
+          "skill": "说服",
+          "success": "Targor 接受建议，队伍可避免战斗。",
+          "failure": "Targor 拒绝，战斗爆发。"
+        }
+      ],
+      "treasure": [
+        {
+          "items": [
+            {
+              "name": "血腥麻袋",
+              "quantity": "1d4",
+              "notes": "每个装着一颗被切断的精灵头颅；无金钱价值"
+            }
+          ],
+          "condition": "击败大地精后检查"
+        }
+      ],
+      "xp": [
+        {
+          "amount": 500,
+          "condition": "击败 Targor 的军团，或与他交涉成功",
+          "split": true
+        }
+      ],
+      "outcomes": [
+        "本遭遇是可选的回程插曲，不影响主线奖励；DM 可自行决定是否使用。"
+      ],
+      "pages": "52",
+      "npc_ids": [
+        "lmop:npc:targor-bloodsword"
+      ],
+      "monster_ids": [
+        "lmop:monster:hobgoblin",
+        "lmop:monster:wolf"
+      ],
+      "check_ids": [
+        "lmop:check:return-encounter:1"
+      ],
+      "reward_ids": [
+        "lmop:reward:xp:return-encounter:1",
+        "lmop:reward:treasure:return-encounter:1"
+      ]
+    }
+  ],
+  "npcs": [
+    {
+      "id": "lmop:npc:sister-garaele",
+      "type": "npc",
+      "name": "加拉尔修女",
+      "name_en": "Sister Garaele",
+      "role": "任务发布者 / 竖琴手同盟成员",
+      "location": "凡度林·幸运神殿",
+      "scene_id": "lmop:scene:conyberry-agatha",
+      "page": 34,
+      "description": "凡度林幸运神殿的年轻精灵教士，博学且热心；对凡度林摆脱红烙印控制不抱希望。",
+      "motivation": "寻找女妖阿嘉莎，并说服她回答一个关于传奇法师 Bowgentle 法术书的问题。",
+      "knowledge": [
+        "知道阿嘉莎的巢穴位置，但女妖不愿回应她。",
+        "提示多多奉承阿嘉莎、满足她的虚荣心会更容易成功。"
+      ],
+      "stats": null,
+      "quest_id": "lmop:quest:agatha",
+      "quest_note": "带镶宝石的银梳去找阿嘉莎，换取 Bowgentle 法术书的位置信息；奖励：3 瓶治疗药水；若帮助她得到消息，可受邀加入竖琴手同盟并获得“守望者”头衔。"
+    },
+    {
+      "id": "lmop:npc:daran-edermath",
+      "type": "npc",
+      "name": "达朗·埃德玛",
+      "name_en": "Daran Edermath",
+      "role": "任务发布者 / 臂铠社成员",
+      "location": "凡度林·埃德玛果园",
+      "scene_id": "lmop:scene:old-owl-well",
+      "page": 34,
+      "description": "年长精灵，曾是冒险者与战士；现在经营果园，仍十分关注凡度林状况。",
+      "motivation": "查明在古枭井废墟附近游荡的人是谁。",
+      "knowledge": [
+        "知道古枭井的方向。",
+        "若角色体现出符合臂铠社的美德，会私下邀请其加入臂铠社。"
+      ],
+      "stats": null,
+      "quest_id": "lmop:quest:old-owl-well",
+      "quest_note": "前往古枭井调查游荡者；奖励：完成调查即交付；加入臂铠社可获得骑士头衔。"
+    },
+    {
+      "id": "lmop:npc:qelline-alderleaf",
+      "type": "npc",
+      "name": "埃琳·阿黛尔利芙",
+      "name_en": "Qelline Alderleaf",
+      "role": "任务发布者 / 半身人农夫",
+      "location": "凡度林·阿黛尔利芙农场",
+      "scene_id": "lmop:scene:thundertree",
+      "page": 34,
+      "description": "45 岁的务实半身人农夫，小镇万事通，热情好客；若玩家不打算住旅舍，会提供自家干草棚。",
+      "motivation": "建议角色去雷霆树镇废墟找德鲁伊莱多斯，询问克拉葛摩城堡或潮音洞穴的位置。",
+      "knowledge": [
+        "“没有莱多斯不知道的地方。”",
+        "知道莱多斯最近去了凡度林西北大约 50 里外的雷霆树镇遗迹。"
+      ],
+      "stats": null,
+      "quest_id": "lmop:quest:thundertree",
+      "quest_note": "去雷霆树镇找莱多斯；奖励：莱多斯提供方向；驱逐毒牙后可加入 Emerald Enclave。"
+    },
+    {
+      "id": "lmop:npc:harbin-wester",
+      "type": "npc",
+      "name": "哈宾·威斯特",
+      "name_en": "Harbin Wester",
+      "role": "任务发布者 / 凡度林镇长",
+      "location": "凡度林·镇长大厅",
+      "scene_id": "lmop:scene:wyvern-tor",
+      "page": 34,
+      "description": "又胖又蠢、自命不凡的老年银行家；在红烙印威胁下声称“他们只是有点贪财而已”。",
+      "motivation": "悬赏清除飞龙崖附近的兽人。",
+      "knowledge": [
+        "旅客看到一队兽人在飞龙崖附近活动。"
+      ],
+      "stats": null,
+      "quest_id": "lmop:quest:wyvern-tor",
+      "quest_note": "找到飞龙崖附近的兽人营地并将兽人赶出该区域；奖励：100gp 悬赏（详见 PART 2 镇长大厅）。"
+    },
+    {
+      "id": "lmop:npc:sildar-hallwinter",
+      "type": "npc",
+      "name": "西达尔·荷温特",
+      "name_en": "Sildar Hallwinter",
+      "role": "任务发布者 / 领主联盟密探",
+      "location": "凡度林·石丘旅舍",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "page": 34,
+      "description": "人类战士，领主联盟密探；希望为凡度林建立法度与秩序，并找回刚铎·寻石者。",
+      "motivation": "追踪克拉葛摩城堡，救出刚铎并夺回地图；也想追查失踪的伊阿诺。",
+      "knowledge": [
+        "建议沿三猪小径清剿哥布林强盗以寻找城堡线索。",
+        "不知道伊阿诺就是红烙印的首领“水晶之杖”。"
+      ],
+      "stats": null,
+      "quest_id": "lmop:quest:cragmaw-castle",
+      "quest_note": "锁定克拉葛摩城堡位置，打倒或赶走部族首领，救出刚铎；奖励：500gp（详见 PART 2）；若揭发伊阿诺的变节，可受邀加入领主联盟并获得“白袍”头衔。"
+    },
+    {
+      "id": "lmop:npc:agatha",
+      "type": "npc",
+      "name": "阿嘉莎",
+      "name_en": "Agatha",
+      "role": "女妖 / 占卜者",
+      "location": "兔子浆果镇西北·绝冬森林巢穴",
+      "scene_id": "lmop:scene:conyberry-agatha",
+      "page": 36,
+      "description": "曾经美丽的女精灵，如今是充满憎恨的女妖；巢穴由树木枝条编织成圆顶。",
+      "motivation": "要求来访者保持敬意；粗鲁、无礼或威胁会让她消失。",
+      "knowledge": [
+        "几乎可以回答冒险旅程中角色想到的任何问题，但只回答一个。",
+        "知道 Bowgentle 的法术书在 100 多年前被卖给来自 Iriaebor 的死灵法师 Tsernoth；不知道书后来怎样。",
+        "知道克拉葛摩城堡、潮音洞穴、黑蜘蛛的真实身份、古枭井的 Hamun Kost 等情报。"
+      ],
+      "stats": {
+        "ref": "女妖（Banshee）",
+        "hp": null,
+        "note": "社交遭遇，不主动攻击。"
+      }
+    },
+    {
+      "id": "lmop:npc:hamun-kost",
+      "type": "npc",
+      "name": "Hamun Kost",
+      "name_zh": "哈蒙·科斯特",
+      "role": "红袍巫师 / 死灵学派法师",
+      "location": "古枭井",
+      "scene_id": "lmop:scene:old-owl-well",
+      "page": 37,
+      "description": "粗壮、穿红袍、蜡黄皮肤的人类法师，剃头前额有黑色刺青；来自 Thay 的红袍巫师。",
+      "motivation": "探索古枭井的秘法知识；希望队伍替他清除飞龙崖的兽人，或替他去问阿嘉莎一个名字。",
+      "knowledge": [
+        "对出现在这里的原因保密。",
+        "想让队伍问阿嘉莎“建造古枭井这座塔的法师叫什么名字”；答案：Arthindol。",
+        "帐篷里有来自古代 Netheril 的防护戒指，是他最感兴趣的发现。"
+      ],
+      "stats": {
+        "ref": "法师（Mage）/死灵师",
+        "hp": null,
+        "note": "十二只僵尸守卫；不特别好战。"
+      },
+      "quest_id": "lmop:quest:old-owl-well-kost",
+      "quest_note": "清除飞龙崖的兽人，或替他去问阿嘉莎一个问题；奖励：提供信息；不直接支付金钱。"
+    },
+    {
+      "id": "lmop:npc:reidoth",
+      "type": "npc",
+      "name": "莱多斯",
+      "name_en": "Reidoth",
+      "role": "德鲁伊 / Emerald Enclave 成员",
+      "location": "雷霆树镇·区域4 德鲁伊的守望",
+      "scene_id": "lmop:scene:thundertree",
+      "page": 40,
+      "description": "憔悴、白胡子的人类德鲁伊，沉默寡言但十分好客；善于避开灰烬僵尸与突变植物。",
+      "motivation": "更关心盘踞区域7塔楼的绿龙毒牙；希望有人赶走它。",
+      "knowledge": [
+        "知道克拉葛摩城堡的位置，乐意提供方向。",
+        "知道潮音洞穴的位置，但除非队伍赶走毒牙，否则不泄露。",
+        "看见过戴黑面具、穿黑斗篷的信徒在附近潜伏。"
+      ],
+      "stats": {
+        "ref": "德鲁伊（Druid）",
+        "hp": null,
+        "note": "被攻击时变成灰色松鼠逃走。"
+      },
+      "quest_id": "lmop:quest:thundertree-reidoth",
+      "quest_note": "赶走区域7的绿龙毒牙；奖励：潮音洞穴的位置；可加入 Emerald Enclave 并获得“春之守望”称号。"
+    },
+    {
+      "id": "lmop:npc:venomfang",
+      "type": "npc",
+      "name": "毒牙",
+      "name_en": "Venomfang",
+      "role": "青年绿龙 / 区域7 塔楼主人",
+      "location": "雷霆树镇·区域7 龙之塔",
+      "scene_id": "lmop:scene:thundertree",
+      "page": 41,
+      "description": "最近占据雷霆树镇塔楼的青年绿龙；在绝冬森林寻找合适巢穴时发现了这里。",
+      "motivation": "不想放弃这个好巢穴；生命值降到一半以下会爬到塔顶飞走。",
+      "knowledge": [
+        "不知道自己的收藏里有矮人战斧 Hew。",
+        "不关心区域13的信徒。"
+      ],
+      "stats": {
+        "ref": "青年绿龙（Young Green Dragon）",
+        "hp": null,
+        "note": "生命值降到一半以下时飞走。"
+      }
+    },
+    {
+      "id": "lmop:npc:favric",
+      "type": "npc",
+      "name": "Favric",
+      "name_zh": "法夫里克",
+      "role": "龙之信徒领袖",
+      "location": "雷霆树镇·区域13 龙之信徒",
+      "scene_id": "lmop:scene:thundertree",
+      "page": 44,
+      "description": "邪恶而有野心的年轻男性，希望借与区域7的绿龙联盟迅速提高地位；他的信徒同伴缺少他的野心。",
+      "motivation": "与绿龙结盟；计划把角色作为给龙的奉献之一。",
+      "knowledge": [
+        "不知道绿龙的名字。",
+        "一旦战斗发生，信徒会与龙站在同一阵线。"
+      ],
+      "stats": {
+        "ref": "邪教徒（Cultist）",
+        "hp": null,
+        "note": "领袖；同伴在他被抓获杀掉后会逃跑。"
+      }
+    },
+    {
+      "id": "lmop:npc:brughor-axe-biter",
+      "type": "npc",
+      "name": "Brughor Axe-Biter",
+      "name_zh": "布鲁格·斧咬",
+      "role": "多箭部族兽人首领",
+      "location": "飞龙崖·山洞营地",
+      "scene_id": "lmop:scene:wyvern-tor",
+      "page": 44,
+      "description": "比起侦查更喜欢杀戮与劫掠的残忍兽人；领导飞龙崖的兽人营地。",
+      "motivation": "劫掠北边据点；不惧战斗。",
+      "knowledge": [
+        "知道营地和飞龙崖的地形。"
+      ],
+      "stats": {
+        "ref": "兽人（Orc）",
+        "hp": 30,
+        "note": "他死后其余兽人逃跑。"
+      }
+    },
+    {
+      "id": "lmop:npc:gog",
+      "type": "npc",
+      "name": "Gog",
+      "role": "食人魔 / 飞龙崖营地盟友",
+      "location": "飞龙崖·山洞营地",
+      "scene_id": "lmop:scene:wyvern-tor",
+      "page": 44,
+      "description": "与飞龙崖兽人结盟的食人魔。",
+      "motivation": "战斗到死亡。",
+      "knowledge": [],
+      "stats": {
+        "ref": "食人魔（Ogre）",
+        "hp": null,
+        "note": "战斗到死亡。"
+      }
+    },
+    {
+      "id": "lmop:npc:king-grol",
+      "type": "npc",
+      "name": "葛罗尔王",
+      "name_en": "King Grol",
+      "role": "克拉葛摩部族首领 / 熊地精",
+      "location": "克拉葛摩城堡·区域14 王之居所",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "page": 51,
+      "description": "残忍的熊地精，借纯粹恐吓统治克拉葛摩部族；年龄使肩膀下垂并驼背，但仍保持惊人敏捷和强壮。",
+      "motivation": "想卖掉前往潮音洞穴的地图，而不是白白交给黑蜘蛛的信使；正在和卓尔协商价格。",
+      "knowledge": [
+        "知道地图藏在自己床垫下。",
+        "把刚铎·寻石者扣为人质。"
+      ],
+      "stats": {
+        "ref": "熊地精（Bugbear）",
+        "hp": 45,
+        "note": "区域14；被警告后会抓住刚铎当人质。"
+      }
+    },
+    {
+      "id": "lmop:npc:snar",
+      "type": "npc",
+      "name": "Snar",
+      "role": "葛罗尔王的狼",
+      "location": "克拉葛摩城堡·区域14 王之居所",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "page": 51,
+      "description": "葛罗尔王身边的狼。",
+      "motivation": "跟随葛罗尔王。",
+      "knowledge": [],
+      "stats": {
+        "ref": "狼（Wolf）",
+        "hp": 18,
+        "note": "区域14。"
+      }
+    },
+    {
+      "id": "lmop:npc:vyerith",
+      "type": "npc",
+      "name": "Vyerith",
+      "role": "黑蜘蛛的信使 / 变形怪",
+      "location": "克拉葛摩城堡·区域14 王之居所",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "page": 51,
+      "description": "变形怪，伪装成人类女卓尔；来自黑蜘蛛，前来从葛罗尔手上带走刚铎·寻石者以及前往潮音洞穴的地图。",
+      "motivation": "先质问刚铎以确认是否有其他人得知矿坑地点，然后倾向杀掉矮人并摧毁地图。",
+      "knowledge": [
+        "为黑蜘蛛工作。",
+        "知道前往潮音洞穴的地图在葛罗尔手上。"
+      ],
+      "stats": {
+        "ref": "变形怪（Doppelganger）",
+        "hp": null,
+        "note": "葛罗尔被杀后试图杀刚铎并带地图从区域11逃跑；走投无路时战斗到死亡。"
+      }
+    },
+    {
+      "id": "lmop:npc:gundren-rockseeker",
+      "type": "npc",
+      "name": "刚铎·寻石者",
+      "name_en": "Gundren Rockseeker",
+      "role": "被囚禁的矮人 / 寻石者兄弟",
+      "location": "克拉葛摩城堡·区域14 王之居所",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "page": 51,
+      "description": "普通矮人，失去意识但伤势稳定，保持在 0 HP；被葛罗尔王拷打并扣为人质。",
+      "motivation": "找到前往潮音洞穴的地图；请求队伍护送他回凡度林，然后前往潮音洞穴寻找兄弟南镀和塔登。",
+      "knowledge": [
+        "知道黑蜘蛛策划了他的绑架。",
+        "不知道葛罗尔王把地图藏在哪里。"
+      ],
+      "stats": {
+        "hp": 0,
+        "condition": "昏迷但伤势稳定",
+        "note": "区域14；被救出后不会离开城堡直到找到地图。"
+      },
+      "quest_id": "lmop:quest:gundren-escort",
+      "quest_note": "救出刚铎并护送他返回凡度林；奖励：额外 200 XP；每位角色 25gp；矿坑开始运作后收益的十分之一。"
+    },
+    {
+      "id": "lmop:npc:yegg",
+      "type": "npc",
+      "name": "Yegg",
+      "role": "克拉葛摩部族厨师 / 哥布林",
+      "location": "克拉葛摩城堡·区域7 宴会厅",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "page": 48,
+      "description": "肥胖而脾气古怪的哥布林，拥有 12 点 HP；会在伙伴不愿帮忙把食物放到餐桌上时狠狠欺负他们。",
+      "motivation": "维持宴会厅的伙食；依靠欺负其他哥布林确立地位。",
+      "knowledge": [],
+      "stats": {
+        "ref": "哥布林（Goblin）",
+        "hp": 12,
+        "note": "他死后其余哥布林往东或西逃跑，避开北方区域2的陷阱。"
+      }
+    },
+    {
+      "id": "lmop:npc:lhupo",
+      "type": "npc",
+      "name": "Lhupo",
+      "role": "哥布林神殿萨满 / 哥布林",
+      "location": "克拉葛摩城堡·区域9 哥布林神殿",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "page": 49,
+      "description": "拥有 12 HP 的哥布林，住在区域9神殿；养着一只掘地兽宠物，宣称听到 Maglubiyet 对他说话，但没有神术力量。",
+      "motivation": "侍奉 Maglubiyet；依靠宠物掘地兽威慑其他部族成员。",
+      "knowledge": [],
+      "stats": {
+        "ref": "哥布林（Goblin）",
+        "hp": 12,
+        "note": "区域9；与两个侍僧哥布林同住。"
+      }
+    },
+    {
+      "id": "lmop:npc:targor-bloodsword",
+      "type": "npc",
+      "name": "Targor Bloodsword",
+      "name_zh": "塔格·血剑",
+      "role": "回程大地精军团领袖",
+      "location": "克拉葛摩城堡外·回程",
+      "scene_id": "lmop:scene:return-encounter",
+      "page": 52,
+      "description": "领导三个大地精与两只狼的 20 HP 大地精；一直渴望领导克拉葛摩部族。",
+      "motivation": "为葛罗尔王复仇，或接受角色建议成为部族接班人。",
+      "knowledge": [
+        "知道葛罗尔王已死或城堡被入侵（由 DM 裁定）。"
+      ],
+      "stats": {
+        "ref": "大地精（Hobgoblin）",
+        "hp": 20,
+        "note": "可通过 DC15 魅力（说服）说服其接受接班建议。"
+      }
+    },
+    {
+      "id": "lmop:npc:mirna-dendrar",
+      "type": "npc",
+      "name": "Mirna Dendrar",
+      "name_zh": "米娜·登德拉",
+      "role": "凡度林居民 / 药草店旧主",
+      "location": "凡度林",
+      "scene_id": "lmop:scene:thundertree",
+      "page": 42,
+      "description": "现在居住在凡度林的女性；其家族曾在雷霆树镇经营药草和炼金术商店。",
+      "motivation": "希望有人找回藏在旧店货架下的传家宝。",
+      "knowledge": [
+        "知道家族旧店在雷霆树镇的位置。"
+      ],
+      "stats": null,
+      "quest_id": "lmop:quest:mirna-heirloom",
+      "quest_note": "在雷霆树镇区域9找到金项链与翡翠挂饰并归还；奖励：200 XP（归还而非自行保有）。"
+    },
+    {
+      "id": "lmop:npc:arthindol",
+      "type": "npc",
+      "name": "Arthindol",
+      "role": "历史人物 / 古枭井塔的建造者",
+      "location": "历史记载",
+      "scene_id": "lmop:scene:old-owl-well",
+      "page": 37,
+      "description": "建造古枭井那座塔的法师；阿嘉莎知道这个名字，Hamun Kost 想知道。",
+      "motivation": null,
+      "knowledge": [],
+      "stats": null
+    },
+    {
+      "id": "lmop:npc:tsernoth",
+      "type": "npc",
+      "name": "Tsernoth",
+      "role": "历史人物 / 死灵法师",
+      "location": "Iriaebor 城",
+      "scene_id": "lmop:scene:conyberry-agatha",
+      "page": 36,
+      "description": "来自 Iriaebor 城的死灵法师；100 多年前从阿嘉莎手中买下 Bowgentle 的法术书。",
+      "motivation": null,
+      "knowledge": [],
+      "stats": null
+    },
+    {
+      "id": "lmop:npc:palien",
+      "type": "npc",
+      "name": "Palien",
+      "role": "历史人物 / 绝冬城古代英雄",
+      "location": "雷霆树镇·区域10 城镇广场雕像",
+      "scene_id": "lmop:scene:thundertree",
+      "page": 42,
+      "description": "绝冬城的古代英雄；据说在雷霆树镇刚建立时击败了许多绝冬森林的怪物。",
+      "motivation": null,
+      "knowledge": [],
+      "stats": null
+    },
+    {
+      "id": "lmop:npc:black-spider",
+      "type": "npc",
+      "name": "黑蜘蛛",
+      "name_en": "The Black Spider",
+      "role": "幕后主使 / 卓尔",
+      "location": "未知",
+      "scene_id": null,
+      "page": 36,
+      "description": "策划刚铎·寻石者绑架的卓尔；派 Vyerith 到克拉葛摩城堡取地图。Part 3 中不直接出场。",
+      "motivation": "取得前往潮音洞穴的地图与矿坑的秘密。",
+      "knowledge": [
+        "知道矿坑的位置与价值。",
+        "与克拉葛摩部族、红烙印都有联系。"
+      ],
+      "stats": null,
+      "present": false
+    },
+    {
+      "id": "lmop:npc:iarno-albrek",
+      "type": "npc",
+      "name": "伊阿诺“水晶之杖”艾伯瑞克",
+      "name_en": "Iarno \"Glasstaff\" Albrek",
+      "role": "红烙印首领 / 法师（PART 2）",
+      "location": "凡度林·特雷山庄园",
+      "scene_id": null,
+      "page": 45,
+      "description": "红烙印的首领，化名“水晶之杖”；仅在克拉葛摩城堡区域1的伪装台词中被提及。",
+      "motivation": "控制凡度林；与黑蜘蛛合作。",
+      "knowledge": [
+        "克拉葛摩部族与红烙印都为黑蜘蛛工作。"
+      ],
+      "stats": {
+        "ref": "法师（Mage）",
+        "hp": null
+      },
+      "present": false
+    },
+    {
+      "id": "lmop:npc:bowgentle",
+      "type": "npc",
+      "name": "Bowgentle",
+      "role": "传奇法师（历史）",
+      "location": "历史",
+      "scene_id": "lmop:scene:conyberry-agatha",
+      "page": 36,
+      "description": "加拉尔修女寻找其法术书下落的传奇法师；阿嘉莎在 100 多年前把书卖给 Tsernoth。",
+      "motivation": null,
+      "knowledge": [],
+      "stats": null,
+      "present": false
+    }
+  ],
+  "monsters": [
+    {
+      "id": "lmop:monster:stirge",
+      "name": "蚊蝠",
+      "name_en": "Stirge",
+      "size": "小型",
+      "creature_type": "野兽",
+      "alignment": "无阵营",
+      "armor_class": 14,
+      "hit_points": 2,
+      "hit_dice": "1d4",
+      "challenge_rating": "1/8",
+      "xp": 25,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "飞行猎食者，吸取受害者鲜血；夜间会被营火吸引。",
+      "appears_in": [
+        "lmop:scene:triboar-trail"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:triboar-trail",
+          "scene_name": "三猪小径",
+          "area_id": null,
+          "area_name": null,
+          "count": "1d8+2",
+          "notes": "野外随机遭遇表：白天 1–2 / 夜晚 1–3。",
+          "page": 34,
+          "pdf_page": 35
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:ghoul",
+      "name": "食尸鬼",
+      "name_en": "Ghoul",
+      "size": "中型",
+      "creature_type": "亡灵",
+      "alignment": "混乱邪恶",
+      "armor_class": 12,
+      "hit_points": 22,
+      "hit_dice": "5d8",
+      "challenge_rating": "1",
+      "xp": 200,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "不死人类，渴求鲜活血肉。",
+      "appears_in": [
+        "lmop:scene:triboar-trail"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:triboar-trail",
+          "scene_name": "三猪小径",
+          "area_id": null,
+          "area_name": null,
+          "count": "1d4+1",
+          "notes": "野外随机遭遇表：仅夜晚 4。",
+          "page": 34,
+          "pdf_page": 35
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:ogre",
+      "name": "食人魔",
+      "name_en": "Ogre",
+      "size": "大型",
+      "creature_type": "巨人",
+      "alignment": "混乱邪恶",
+      "armor_class": 11,
+      "hit_points": 59,
+      "hit_dice": "7d10+21",
+      "challenge_rating": "2",
+      "xp": 450,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "寻找容易得手的猎物；战斗开始后因愚笨而不会逃跑。",
+      "appears_in": [
+        "lmop:scene:triboar-trail",
+        "lmop:scene:wyvern-tor"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:triboar-trail",
+          "scene_name": "三猪小径",
+          "area_id": null,
+          "area_name": null,
+          "count": "1",
+          "notes": "野外随机遭遇表：仅白天 3–4。",
+          "page": 34,
+          "pdf_page": 35
+        },
+        {
+          "scene_id": "lmop:scene:wyvern-tor",
+          "scene_name": "飞龙崖",
+          "area_id": null,
+          "area_name": null,
+          "count": 1,
+          "notes": "Gog；战斗到死亡。",
+          "page": 44,
+          "pdf_page": 45
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:goblin",
+      "name": "哥布林",
+      "name_en": "Goblin",
+      "size": "小型",
+      "creature_type": "类人（哥布林类）",
+      "alignment": "中立邪恶",
+      "armor_class": 15,
+      "hit_points": 7,
+      "hit_dice": "2d6",
+      "challenge_rating": "1/4",
+      "xp": 50,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "用短弓与近战武器；克拉葛摩部族的哥布林知道城堡位置，受威胁时可能供出方向。",
+      "appears_in": [
+        "lmop:scene:cragmaw-castle",
+        "lmop:scene:triboar-trail"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:triboar-trail",
+          "scene_name": "三猪小径",
+          "area_id": null,
+          "area_name": null,
+          "count": "1d6+3",
+          "notes": "野外随机遭遇表：白天 5–6 / 夜晚 5。",
+          "page": 34,
+          "pdf_page": 35
+        },
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-3",
+          "area_name": "区域3 弓箭手岗哨",
+          "count": 2,
+          "notes": "弓箭手岗哨。",
+          "page": 46,
+          "pdf_page": 47
+        },
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-4",
+          "area_name": "区域4 废弃营房",
+          "count": 3,
+          "notes": "在废弃营房休息。",
+          "page": 46,
+          "pdf_page": 47
+        },
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-7",
+          "area_name": "区域7 宴会厅",
+          "count": "7 + Yegg",
+          "notes": "Yegg 为 12 HP 的哥布林厨师。",
+          "page": 47,
+          "pdf_page": 48
+        },
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-9",
+          "area_name": "区域9 哥布林神殿",
+          "count": "3（Lhupo + 2 侍僧）",
+          "notes": "Lhupo 为 12 HP。",
+          "page": 49,
+          "pdf_page": 50
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:hobgoblin",
+      "name": "大地精",
+      "name_en": "Hobgoblin",
+      "size": "中型",
+      "creature_type": "类人（哥布林类）",
+      "alignment": "守序邪恶",
+      "armor_class": 18,
+      "hit_points": 11,
+      "hit_dice": "2d8+2",
+      "challenge_rating": "1/2",
+      "xp": 100,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "有纪律的战士；飞龙崖一队正在搜寻冒险者领赏，克拉葛摩城堡的大地精守卫忠于葛罗尔王。",
+      "appears_in": [
+        "lmop:scene:cragmaw-castle",
+        "lmop:scene:return-encounter",
+        "lmop:scene:triboar-trail"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:triboar-trail",
+          "scene_name": "三猪小径",
+          "area_id": null,
+          "area_name": null,
+          "count": "1d4+2",
+          "notes": "野外随机遭遇表：白天 7–8 / 夜晚 6。",
+          "page": 34,
+          "pdf_page": 35
+        },
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-6",
+          "area_name": "区域6 大地精营房",
+          "count": 4,
+          "notes": "大地精营房。",
+          "page": 47,
+          "pdf_page": 48
+        },
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-12",
+          "area_name": "区域12 守卫营房",
+          "count": 2,
+          "notes": "守卫营房；一人去区域14报信。",
+          "page": 50,
+          "pdf_page": 51
+        },
+        {
+          "scene_id": "lmop:scene:return-encounter",
+          "scene_name": "回程遭遇：军事团伙",
+          "area_id": null,
+          "area_name": null,
+          "count": "3 + Targor",
+          "notes": "Targor Bloodsword 为 20 HP 的大地精领袖。",
+          "page": 52,
+          "pdf_page": 53
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:orc",
+      "name": "兽人",
+      "name_en": "Orc",
+      "size": "中型",
+      "creature_type": "类人（兽人）",
+      "alignment": "混乱邪恶",
+      "armor_class": 13,
+      "hit_points": 15,
+      "hit_dice": "2d8+6",
+      "challenge_rating": "1/2",
+      "xp": 100,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "多箭部族斥候；在飞龙崖扎营，巡逻并袭击旅行者。",
+      "appears_in": [
+        "lmop:scene:triboar-trail",
+        "lmop:scene:wyvern-tor"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:triboar-trail",
+          "scene_name": "三猪小径",
+          "area_id": null,
+          "area_name": null,
+          "count": "1d4+2",
+          "notes": "野外随机遭遇表：白天 9–10 / 夜晚 7–8。",
+          "page": 34,
+          "pdf_page": 35
+        },
+        {
+          "scene_id": "lmop:scene:wyvern-tor",
+          "scene_name": "飞龙崖",
+          "area_id": null,
+          "area_name": null,
+          "count": "6 + Brughor",
+          "notes": "Brughor Axe-Biter 为 HP30 的兽人；其余六只兽人在 Brughor 死后逃跑。",
+          "page": 44,
+          "pdf_page": 45
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:wolf",
+      "name": "狼",
+      "name_en": "Wolf",
+      "size": "中型",
+      "creature_type": "野兽",
+      "alignment": "无阵营",
+      "armor_class": 13,
+      "hit_points": 11,
+      "hit_dice": "2d8+2",
+      "challenge_rating": "1/4",
+      "xp": 50,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "群猎；可被用作坐骑或宠物（Snar、Targor 的狼）。",
+      "appears_in": [
+        "lmop:scene:cragmaw-castle",
+        "lmop:scene:return-encounter",
+        "lmop:scene:triboar-trail"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:triboar-trail",
+          "scene_name": "三猪小径",
+          "area_id": null,
+          "area_name": null,
+          "count": "1d4+2",
+          "notes": "野外随机遭遇表：白天 11 / 夜晚 9–10。",
+          "page": 34,
+          "pdf_page": 35
+        },
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-14",
+          "area_name": "区域14 王之居所",
+          "count": 1,
+          "notes": "Snar；18 HP。",
+          "page": 51,
+          "pdf_page": 52
+        },
+        {
+          "scene_id": "lmop:scene:return-encounter",
+          "scene_name": "回程遭遇：军事团伙",
+          "area_id": null,
+          "area_name": null,
+          "count": 2,
+          "notes": "Targor 的宠物。",
+          "page": 52,
+          "pdf_page": 53
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:owlbear",
+      "name": "枭熊",
+      "name_en": "Owlbear",
+      "size": "大型",
+      "creature_type": "怪兽",
+      "alignment": "无阵营",
+      "armor_class": 13,
+      "hit_points": 59,
+      "hit_dice": "7d10+14",
+      "challenge_rating": "3",
+      "xp": 700,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "饥饿的猎食者；闻到角色气味后会持续追踪。区域13被关在塔楼中，可用新鲜肉安抚。",
+      "appears_in": [
+        "lmop:scene:cragmaw-castle",
+        "lmop:scene:triboar-trail"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:triboar-trail",
+          "scene_name": "三猪小径",
+          "area_id": null,
+          "area_name": null,
+          "count": "1",
+          "notes": "野外随机遭遇表：白天 12 / 夜晚 11–12。",
+          "page": 34,
+          "pdf_page": 35
+        },
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-13",
+          "area_name": "区域13 枭熊塔楼",
+          "count": 1,
+          "notes": "被关在塔楼中的枭熊。",
+          "page": 50,
+          "pdf_page": 51
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:twig-blight",
+      "name": "枯枝怪",
+      "name_en": "Twig Blight",
+      "size": "小型",
+      "creature_type": "植物",
+      "alignment": "中立邪恶",
+      "armor_class": 13,
+      "hit_points": 4,
+      "hit_dice": "1d6+1",
+      "challenge_rating": "1/8",
+      "xp": 25,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "藏在杂草、树叶与树丛中；用敏捷（潜行）对抗角色被动感知（侦查）以突袭。",
+      "appears_in": [
+        "lmop:scene:thundertree"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:thundertree",
+          "scene_name": "雷霆树镇",
+          "area_id": "lmop:area:thundertree-1",
+          "area_name": "区域1 最西边的小屋",
+          "count": 2,
+          "notes": "区域1的枯枝怪；区域2开战后加入。",
+          "page": 38,
+          "pdf_page": 39
+        },
+        {
+          "scene_id": "lmop:scene:thundertree",
+          "scene_name": "雷霆树镇",
+          "area_id": "lmop:area:thundertree-2",
+          "area_name": "区域2 荒废的小屋",
+          "count": 6,
+          "notes": "藏在植物中；攻击后区域1的 2 只加入。",
+          "page": 38,
+          "pdf_page": 39
+        },
+        {
+          "scene_id": "lmop:scene:thundertree",
+          "scene_name": "雷霆树镇",
+          "area_id": "lmop:area:thundertree-5",
+          "area_name": "区域5 荒废的农舍",
+          "count": "8 + 2/轮 × 3 轮 + 首轮北门 2",
+          "notes": "总计最多 16 只（初始 8 只 + 增援 8 只）；按实际轮次结算。",
+          "page": 40,
+          "pdf_page": 41
+        },
+        {
+          "scene_id": "lmop:scene:thundertree",
+          "scene_name": "雷霆树镇",
+          "area_id": "lmop:area:thundertree-12",
+          "area_name": "区域12 织布者小屋",
+          "count": 6,
+          "notes": "南部树丛中。",
+          "page": 43,
+          "pdf_page": 44
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:ash-zombie",
+      "name": "灰烬僵尸",
+      "name_en": "Ash Zombie",
+      "size": "中型",
+      "creature_type": "亡灵",
+      "alignment": "中立邪恶",
+      "armor_class": 8,
+      "hit_points": 22,
+      "hit_dice": "3d8+9",
+      "challenge_rating": "1/4",
+      "xp": 50,
+      "stat_block": "《怪物图鉴》僵尸条目 + 灰烬僵尸边栏",
+      "variant_of": "lmop:monster:zombie",
+      "tactics": "使用僵尸属性，并附加“灰烬喷发”：僵尸第一次遭受攻击时，其 5 尺内活物必须通过 DC10 体质豁免，失败则在攻击掷骰、豁免掷骰、能力检定上遭受劣势，持续 1 分钟；生物可在其回合结束时重复豁免，成功则提前结束。",
+      "appears_in": [
+        "lmop:scene:thundertree"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:thundertree",
+          "scene_name": "雷霆树镇",
+          "area_id": "lmop:area:thundertree-3",
+          "area_name": "区域3 棕马马酒馆",
+          "count": 4,
+          "notes": "灰烬僵尸；使用僵尸属性并附加灰烬喷发。",
+          "page": 39,
+          "pdf_page": 40
+        },
+        {
+          "scene_id": "lmop:scene:thundertree",
+          "scene_name": "雷霆树镇",
+          "area_id": "lmop:area:thundertree-8",
+          "area_name": "区域8 老旧的铁匠铺",
+          "count": 2,
+          "notes": "灰烬僵尸。",
+          "page": 42,
+          "pdf_page": 43
+        },
+        {
+          "scene_id": "lmop:scene:thundertree",
+          "scene_name": "雷霆树镇",
+          "area_id": "lmop:area:thundertree-11",
+          "area_name": "区域11 老旧的警卫岗哨",
+          "count": 5,
+          "notes": "灰烬僵尸；前警备队成员。",
+          "page": 43,
+          "pdf_page": 44
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:zombie",
+      "name": "僵尸",
+      "name_en": "Zombie",
+      "size": "中型",
+      "creature_type": "亡灵",
+      "alignment": "中立邪恶",
+      "armor_class": 8,
+      "hit_points": 22,
+      "hit_dice": "3d8+9",
+      "challenge_rating": "1/4",
+      "xp": 50,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "古枭井的十二只僵尸守卫；Kost 可暂时叫回它们。",
+      "appears_in": [
+        "lmop:scene:old-owl-well"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:old-owl-well",
+          "scene_name": "古枭井",
+          "area_id": null,
+          "area_name": null,
+          "count": 12,
+          "notes": "在塔楼遗迹中游荡的不死守卫；战斗发生时从塔中出来。",
+          "page": 36,
+          "pdf_page": 37
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:giant-spider",
+      "name": "巨蛛",
+      "name_en": "Giant Spider",
+      "size": "大型",
+      "creature_type": "野兽",
+      "alignment": "无阵营",
+      "armor_class": 14,
+      "hit_points": 26,
+      "hit_dice": "4d10+4",
+      "challenge_rating": "1",
+      "xp": 200,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "通过蛛网感应猎物；会突袭被动感知（侦查）小于 17 的角色。",
+      "appears_in": [
+        "lmop:scene:thundertree"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:thundertree",
+          "scene_name": "雷霆树镇",
+          "area_id": "lmop:area:thundertree-6",
+          "area_name": "区域6 荒废的杂货店",
+          "count": 2,
+          "notes": "躲在建筑内墙；通过蛛网感应猎物。",
+          "page": 41,
+          "pdf_page": 42
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:young-green-dragon",
+      "name": "青年绿龙",
+      "name_en": "Young Green Dragon (Venomfang)",
+      "size": "大型",
+      "creature_type": "龙",
+      "alignment": "守序邪恶",
+      "armor_class": 18,
+      "hit_points": 136,
+      "hit_dice": "16d10+48",
+      "challenge_rating": "8",
+      "xp": 3900,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "毒牙（Venomfang）；生命值降到一半以下时爬到塔顶飞走。",
+      "appears_in": [
+        "lmop:scene:thundertree"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:thundertree",
+          "scene_name": "雷霆树镇",
+          "area_id": "lmop:area:thundertree-7",
+          "area_name": "区域7 龙之塔",
+          "count": 1,
+          "notes": "毒牙（Venomfang）；生命值降到一半以下时飞走。",
+          "page": 41,
+          "pdf_page": 42
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:grick",
+      "name": "掘地兽",
+      "name_en": "Grick",
+      "size": "中型",
+      "creature_type": "怪兽",
+      "alignment": "中立",
+      "armor_class": 14,
+      "hit_points": 27,
+      "hit_dice": "6d8",
+      "challenge_rating": "2",
+      "xp": 450,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "Lhupo 的宠物；躲在区域8上方阴影中，从上方扑击。",
+      "appears_in": [
+        "lmop:scene:cragmaw-castle"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-8",
+          "area_name": "区域8 黑暗大厅",
+          "count": 1,
+          "notes": "Lhupo 的宠物；从上方扑击。",
+          "page": 48,
+          "pdf_page": 49
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:doppelganger",
+      "name": "变形怪",
+      "name_en": "Doppelganger",
+      "size": "中型",
+      "creature_type": "怪兽（变形怪）",
+      "alignment": "中立",
+      "armor_class": 14,
+      "hit_points": 52,
+      "hit_dice": "8d8+16",
+      "challenge_rating": "3",
+      "xp": 700,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "Vyerith 伪装成人类女卓尔；走投无路时战斗到死亡，不会让自己被俘。",
+      "appears_in": [
+        "lmop:scene:cragmaw-castle"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-14",
+          "area_name": "区域14 王之居所",
+          "count": 1,
+          "notes": "Vyerith；伪装成人类女卓尔。",
+          "page": 51,
+          "pdf_page": 52
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:bugbear",
+      "name": "熊地精",
+      "name_en": "Bugbear",
+      "size": "中型",
+      "creature_type": "类人（哥布林类）",
+      "alignment": "混乱邪恶",
+      "armor_class": 16,
+      "hit_points": 27,
+      "hit_dice": "5d8+5",
+      "challenge_rating": "1",
+      "xp": 200,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "葛罗尔王为 45 HP 的熊地精；借恐吓统治部族。",
+      "appears_in": [
+        "lmop:scene:cragmaw-castle"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:cragmaw-castle",
+          "scene_name": "克拉葛摩城堡",
+          "area_id": "lmop:area:cragmaw-14",
+          "area_name": "区域14 王之居所",
+          "count": 1,
+          "notes": "葛罗尔王；45 HP。",
+          "page": 51,
+          "pdf_page": 52
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:banshee",
+      "name": "女妖",
+      "name_en": "Banshee",
+      "size": "中型",
+      "creature_type": "亡灵",
+      "alignment": "混乱邪恶",
+      "armor_class": 12,
+      "hit_points": 58,
+      "hit_dice": "13d8",
+      "challenge_rating": "4",
+      "xp": 1100,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "阿嘉莎；本场景为社交遭遇，不主动攻击。",
+      "appears_in": [
+        "lmop:scene:conyberry-agatha"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:conyberry-agatha",
+          "scene_name": "兔子浆果镇与阿嘉莎的巢穴",
+          "area_id": null,
+          "area_name": null,
+          "count": 1,
+          "notes": "阿嘉莎；社交遭遇，不主动攻击。",
+          "page": 35,
+          "pdf_page": 36
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:cultist",
+      "name": "邪教徒",
+      "name_en": "Cultist",
+      "size": "中型",
+      "creature_type": "类人（人类）",
+      "alignment": "中立邪恶",
+      "armor_class": 12,
+      "hit_points": 9,
+      "hit_dice": "2d8",
+      "challenge_rating": "1/8",
+      "xp": 25,
+      "stat_block": "《怪物图鉴》/ 附录B",
+      "tactics": "龙之信徒；穿黑袍与龙形皮面具，会说龙语，愿意与绿龙结盟。",
+      "appears_in": [
+        "lmop:scene:thundertree"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:thundertree",
+          "scene_name": "雷霆树镇",
+          "area_id": "lmop:area:thundertree-13",
+          "area_name": "区域13 龙之信徒",
+          "count": 6,
+          "notes": "人类信徒；Favric 为领袖。",
+          "page": 43,
+          "pdf_page": 44
+        }
+      ]
+    },
+    {
+      "id": "lmop:monster:red-wizard",
+      "name": "红袍巫师",
+      "name_en": "Red Wizard (Hamun Kost)",
+      "size": "中型",
+      "creature_type": "类人（人类）",
+      "alignment": "中立邪恶",
+      "armor_class": null,
+      "hit_points": null,
+      "challenge_rating": null,
+      "xp": null,
+      "stat_block": "法师（Mage）/死灵师；具体属性由 DM 使用《怪物图鉴》法师条目",
+      "tactics": "Hamun Kost；十二只僵尸守卫，不特别好战；被攻击时参战。",
+      "appears_in": [
+        "lmop:scene:old-owl-well"
+      ],
+      "appearances": [
+        {
+          "scene_id": "lmop:scene:old-owl-well",
+          "scene_name": "古枭井",
+          "area_id": null,
+          "area_name": null,
+          "count": 1,
+          "notes": "Hamun Kost；见 NPC 条目。",
+          "page": 36,
+          "pdf_page": 37
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "lmop:check:conyberry-agatha:1",
+      "type": "check",
+      "scene_id": "lmop:scene:conyberry-agatha",
+      "scene_name": "兔子浆果镇与阿嘉莎的巢穴",
+      "area_id": null,
+      "area_name": null,
+      "page": 36,
+      "pdf_page": 37,
+      "dc": 15,
+      "ability": "魅力",
+      "kind": "ability_check",
+      "context": "以敬意与礼貌请求阿嘉莎回答一个问题。",
+      "skill": "说服",
+      "success": "阿嘉莎回答一个问题，并完成加拉尔修女的委托。",
+      "failure": "阿嘉莎不回答问题。",
+      "notes": "若角色在交涉中扮演得好，可给予优势；把加拉尔修女的镶宝石银梳作为礼物送出时，此检定自动成功。"
+    },
+    {
+      "id": "lmop:check:old-owl-well:1",
+      "type": "check",
+      "scene_id": "lmop:scene:old-owl-well",
+      "scene_name": "古枭井",
+      "area_id": null,
+      "area_name": null,
+      "page": 36,
+      "pdf_page": 37,
+      "dc": 10,
+      "ability": "感知",
+      "kind": "passive",
+      "context": "接近塔楼或帐篷时，以被动感知（侦查）10 闻到死尸气味。",
+      "skill": "侦查",
+      "success": "角色闻到从塔的方向传来的死尸味，可据此警觉。",
+      "failure": "未察觉气味。"
+    },
+    {
+      "id": "lmop:check:old-owl-well:2",
+      "type": "check",
+      "scene_id": "lmop:scene:old-owl-well",
+      "scene_name": "古枭井",
+      "area_id": null,
+      "area_name": null,
+      "page": 36,
+      "pdf_page": 37,
+      "dc": 10,
+      "ability": "智力",
+      "kind": "ability_check",
+      "context": "辨认 Hamun Kost 前额上的黑色刺青。",
+      "skill": "奥秘",
+      "success": "认出刺青是死灵的标记，Kost 是死灵学派法师。",
+      "failure": "无法辨认刺青含义。"
+    },
+    {
+      "id": "lmop:check:old-owl-well:3",
+      "type": "check",
+      "scene_id": "lmop:scene:old-owl-well",
+      "scene_name": "古枭井",
+      "area_id": null,
+      "area_name": null,
+      "page": 36,
+      "pdf_page": 37,
+      "dc": 10,
+      "ability": "智力",
+      "kind": "ability_check",
+      "context": "辨认 Kost 的打扮与刺青风格。",
+      "skill": "历史",
+      "success": "认出这是 Thay 地区常见的打扮，当地巫师会在身体上纹刺青。",
+      "failure": "无法辨认其来历。"
+    },
+    {
+      "id": "lmop:check:thundertree:1",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": null,
+      "area_name": null,
+      "page": 38,
+      "pdf_page": 39,
+      "dc": 10,
+      "ability": "力量",
+      "kind": "ability_check",
+      "context": "强行打开完好建筑卡死的木门。",
+      "success": "门被打开。",
+      "failure": "门纹丝不动。"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-1:1",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-1",
+      "area_name": "区域1 最西边的小屋",
+      "page": 38,
+      "pdf_page": 39,
+      "dc": null,
+      "ability": "敏捷",
+      "kind": "contest",
+      "context": "DM 为枯枝怪掷敏捷（潜行），对抗角色的被动感知（侦查）。",
+      "skill": "潜行",
+      "notes": "用于判断枯枝怪是否能隐藏到发起攻击。",
+      "opposed_by": "角色被动感知（侦查）"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-2:1",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-2",
+      "area_name": "区域2 荒废的小屋",
+      "page": 38,
+      "pdf_page": 39,
+      "dc": null,
+      "ability": "感知",
+      "kind": "contest",
+      "context": "发现枯枝怪：角色感知（侦查）对抗枯枝怪的敏捷（潜行）。",
+      "skill": "侦查",
+      "notes": "用于判断角色是否在枯枝怪突袭前发现它们。",
+      "opposed_by": "枯枝怪敏捷（潜行）"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-2:2",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-2",
+      "area_name": "区域2 荒废的小屋",
+      "page": 38,
+      "pdf_page": 39,
+      "dc": 10,
+      "ability": "感知",
+      "kind": "ability_check",
+      "context": "彻底搜寻东部小屋，寻找商人藏在石地板下的钱箱。",
+      "skill": "侦查",
+      "success": "发现树根下的旧木箱。",
+      "failure": "未找到。"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-3:1",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-3",
+      "area_name": "区域3 棕马马酒馆",
+      "page": 39,
+      "pdf_page": 40,
+      "dc": 10,
+      "ability": "体质",
+      "kind": "saving_throw",
+      "context": "灰烬僵尸第一次遭受攻击时，其 5 尺内的活物进行体质豁免。",
+      "success": "不受影响。",
+      "failure": "在攻击掷骰、豁免掷骰、能力检定上遭受劣势，持续 1 分钟；可在自己回合结束时重复豁免。",
+      "notes": "灰烬喷发；每个僵尸第一次被攻击时触发。"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-6:1",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-6",
+      "area_name": "区域6 荒废的杂货店",
+      "page": 41,
+      "pdf_page": 42,
+      "dc": null,
+      "ability": "感知",
+      "kind": "passive",
+      "context": "避免被巨蛛突袭：被动感知（侦查）达到 17 或以上。",
+      "skill": "侦查",
+      "notes": "机敏的巨蛛会突袭任何被动感知（侦查）小于 17 的角色。",
+      "passive": 17
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-6:2",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-6",
+      "area_name": "区域6 荒废的杂货店",
+      "page": 41,
+      "pdf_page": 42,
+      "dc": 10,
+      "ability": "力量",
+      "kind": "ability_check",
+      "context": "在蛛网覆盖的区域移动。",
+      "skill": "运动",
+      "success": "正常移动。",
+      "failure": "被蛛网束缚。"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-6:3",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-6",
+      "area_name": "区域6 荒废的杂货店",
+      "page": 41,
+      "pdf_page": 42,
+      "dc": 12,
+      "ability": "力量",
+      "kind": "ability_check",
+      "context": "被蛛网束缚后，花一个动作挣脱。",
+      "success": "挣脱束缚。",
+      "failure": "仍被束缚。",
+      "notes": "也可用轻型武器造成挥砍伤害割断蛛网（蛛网 AC10、5 HP）。"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-9:1",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-9",
+      "area_name": "区域9 药草店",
+      "page": 42,
+      "pdf_page": 43,
+      "dc": 15,
+      "ability": "感知",
+      "kind": "ability_check",
+      "context": "在货架下寻找 Mirna 的传家宝木盒。",
+      "skill": "侦查",
+      "success": "找到小木盒，内有金项链和上好的翡翠挂饰（200gp）。",
+      "failure": "未找到。"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-10:1",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-10",
+      "area_name": "区域10 城镇广场",
+      "page": 42,
+      "pdf_page": 43,
+      "dc": 15,
+      "ability": "智力",
+      "kind": "ability_check",
+      "context": "研究 Palien 的雕像。",
+      "skill": "历史",
+      "success": "得知 Palien 的事迹。",
+      "failure": "无法辨认雕像人物。"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-10:2",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-10",
+      "area_name": "区域10 城镇广场",
+      "page": 42,
+      "pdf_page": 43,
+      "dc": 20,
+      "ability": "力量",
+      "kind": "ability_check",
+      "context": "推倒倾斜的雕像。",
+      "success": "雕像倒下。",
+      "failure": "雕像纹丝不动。"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-12:1",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-12",
+      "area_name": "区域12 织布者小屋",
+      "page": 43,
+      "pdf_page": 44,
+      "dc": null,
+      "ability": "感知",
+      "kind": "contest",
+      "context": "避免被区域12的枯枝怪突袭。",
+      "skill": "侦查",
+      "notes": "对抗枯枝怪的敏捷（潜行）。",
+      "opposed_by": "枯枝怪敏捷（潜行）"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-13:1",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-13",
+      "area_name": "区域13 龙之信徒",
+      "page": 43,
+      "pdf_page": 44,
+      "dc": 20,
+      "ability": "力量",
+      "kind": "ability_check",
+      "context": "强行打开被从里面挡住的主门。",
+      "success": "门被打开。",
+      "failure": "门纹丝不动。"
+    },
+    {
+      "id": "lmop:check:thundertree:thundertree-13:2",
+      "type": "check",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-13",
+      "area_name": "区域13 龙之信徒",
+      "page": 43,
+      "pdf_page": 44,
+      "dc": 15,
+      "ability": "力量",
+      "kind": "ability_check",
+      "context": "强行打开被从内部堵上的窗户挡板。",
+      "success": "挡板被打开。",
+      "failure": "挡板纹丝不动。"
+    },
+    {
+      "id": "lmop:check:wyvern-tor:1",
+      "type": "check",
+      "scene_id": "lmop:scene:wyvern-tor",
+      "scene_name": "飞龙崖",
+      "area_id": null,
+      "area_name": null,
+      "page": 44,
+      "pdf_page": 45,
+      "dc": 15,
+      "ability": "感知",
+      "kind": "ability_check",
+      "context": "在飞龙崖寻找隐藏的兽人营地；每小时掷一次，由领路角色掷。",
+      "skill": "侦查",
+      "success": "找到营地。",
+      "failure": "继续寻找，下一小时再掷。",
+      "notes": "与 DC10 感知（求生）二选一。"
+    },
+    {
+      "id": "lmop:check:wyvern-tor:2",
+      "type": "check",
+      "scene_id": "lmop:scene:wyvern-tor",
+      "scene_name": "飞龙崖",
+      "area_id": null,
+      "area_name": null,
+      "page": 44,
+      "pdf_page": 45,
+      "dc": 10,
+      "ability": "感知",
+      "kind": "ability_check",
+      "context": "在飞龙崖寻找隐藏的兽人营地（替代 DC15 侦查）。",
+      "skill": "求生",
+      "success": "找到营地。",
+      "failure": "继续寻找，下一小时再掷。",
+      "notes": "与 DC15 感知（侦查）二选一。"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:1",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": null,
+      "area_name": null,
+      "page": 45,
+      "pdf_page": 46,
+      "dc": 15,
+      "ability": "力量",
+      "kind": "ability_check",
+      "context": "打破城堡内部阻碍道路的木门。",
+      "success": "门被打破。",
+      "failure": "门纹丝不动。"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-1:1",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-1",
+      "area_name": "区域1 城堡入口",
+      "page": 45,
+      "pdf_page": 46,
+      "dc": null,
+      "ability": "敏捷",
+      "kind": "contest",
+      "context": "在区域3哥布林哨兵的注视下悄悄通过入口。",
+      "skill": "潜行",
+      "notes": "对抗哥布林的感知检定；移动够快可能不被发现。",
+      "opposed_by": "哥布林感知"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-1:2",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-1",
+      "area_name": "区域1 城堡入口",
+      "page": 45,
+      "pdf_page": 46,
+      "dc": null,
+      "ability": "魅力",
+      "kind": "contest",
+      "context": "伪装成红烙印使者，集体唬弄城堡守卫。",
+      "skill": "唬弄",
+      "notes": "每位角色各掷一次，对抗怪物感知（洞察）；至少一位成功即整体成功。",
+      "opposed_by": "怪物感知（洞察）"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-2:1",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-2",
+      "area_name": "区域2 陷阱大厅",
+      "page": 46,
+      "pdf_page": 47,
+      "dc": null,
+      "ability": "感知",
+      "kind": "passive",
+      "context": "被动察觉通往区域8走廊上的铜线陷阱。",
+      "skill": "侦查",
+      "notes": "被动感知（侦查）至少 20 才能察觉。",
+      "passive": 20
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-2:2",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-2",
+      "area_name": "区域2 陷阱大厅",
+      "page": 46,
+      "pdf_page": 47,
+      "dc": 10,
+      "ability": "感知",
+      "kind": "ability_check",
+      "context": "主动寻找通往区域8走廊上的铜线陷阱。",
+      "skill": "侦查",
+      "success": "发现陷阱；触发铜线很容易避开和解除（无须能力检定）。",
+      "failure": "未发现陷阱。",
+      "notes": "替代被动 20 的察觉方式。"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-2:3",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-2",
+      "area_name": "区域2 陷阱大厅",
+      "page": 46,
+      "pdf_page": 47,
+      "dc": 10,
+      "ability": "敏捷",
+      "kind": "saving_throw",
+      "context": "陷阱触发时通过敏捷豁免，避免落石伤害。",
+      "success": "伤害减半。",
+      "failure": "受到 3d6 钝击伤害。"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-8:1",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-8",
+      "area_name": "区域8 黑暗大厅",
+      "page": 48,
+      "pdf_page": 49,
+      "dc": null,
+      "ability": "感知",
+      "kind": "contest",
+      "context": "察觉藏在房间上方阴影中的掘地兽，避免被突袭。",
+      "skill": "侦查",
+      "notes": "对抗掘地兽的敏捷（潜行）；也可用被动侦查。",
+      "opposed_by": "掘地兽敏捷（潜行）"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-10:1",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-10",
+      "area_name": "区域10 后门",
+      "page": 50,
+      "pdf_page": 51,
+      "dc": 15,
+      "ability": "敏捷",
+      "kind": "ability_check",
+      "context": "用盗贼工具打开后门的锁。",
+      "success": "锁被打开。",
+      "failure": "锁未打开。",
+      "tools": "盗贼工具",
+      "notes": "也可用 DC25 力量检定击破铁门。"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-10:2",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-10",
+      "area_name": "区域10 后门",
+      "page": 50,
+      "pdf_page": 51,
+      "dc": 25,
+      "ability": "力量",
+      "kind": "ability_check",
+      "context": "强行击破上锁的铁门。",
+      "success": "门被击破。",
+      "failure": "门纹丝不动。"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-11:1",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-11",
+      "area_name": "区域11 废弃塔楼",
+      "page": 50,
+      "pdf_page": 51,
+      "dc": 15,
+      "ability": "感知",
+      "kind": "ability_check",
+      "context": "找到通往隐藏入口的小径。",
+      "skill": "侦查",
+      "success": "找到小径。",
+      "failure": "未找到。"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-11:2",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-11",
+      "area_name": "区域11 废弃塔楼",
+      "page": 50,
+      "pdf_page": 51,
+      "dc": 10,
+      "ability": "感知",
+      "kind": "ability_check",
+      "context": "主动寻找城堡外的隐藏入口，找出帆布入口。",
+      "skill": "侦查",
+      "success": "找到帆布入口。",
+      "failure": "未找到。"
+    },
+    {
+      "id": "lmop:check:cragmaw-castle:cragmaw-13:1",
+      "type": "check",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-13",
+      "area_name": "区域13 枭熊塔楼",
+      "page": 50,
+      "pdf_page": 51,
+      "dc": 15,
+      "ability": "感知",
+      "kind": "ability_check",
+      "context": "注意到塔楼二楼锯齿边缘上的破旧木箱。",
+      "skill": "侦查",
+      "success": "注意到木箱。",
+      "failure": "未注意到。"
+    },
+    {
+      "id": "lmop:check:return-encounter:1",
+      "type": "check",
+      "scene_id": "lmop:scene:return-encounter",
+      "scene_name": "回程遭遇：军事团伙",
+      "area_id": null,
+      "area_name": null,
+      "page": 52,
+      "pdf_page": 53,
+      "dc": 15,
+      "ability": "魅力",
+      "kind": "ability_check",
+      "context": "说服 Targor 接受成为葛罗尔王接班人的建议，而不是为葛罗尔复仇。",
+      "skill": "说服",
+      "success": "Targor 接受建议，队伍可避免战斗。",
+      "failure": "Targor 拒绝，战斗爆发。"
+    }
+  ],
+  "rewards": [
+    {
+      "id": "lmop:reward:treasure:triboar-trail:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:triboar-trail",
+      "scene_name": "三猪小径",
+      "area_id": null,
+      "area_name": null,
+      "page": 35,
+      "pdf_page": 36,
+      "items": [
+        {
+          "name": "哥布林小包",
+          "notes": "每个哥布林携带 1d10 cp；按遭遇中的哥布林数量结算"
+        }
+      ],
+      "condition": "击败或俘获野外遭遇中的哥布林"
+    },
+    {
+      "id": "lmop:reward:xp:conyberry-agatha:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:conyberry-agatha",
+      "scene_name": "兔子浆果镇与阿嘉莎的巢穴",
+      "area_id": null,
+      "area_name": null,
+      "page": 36,
+      "pdf_page": 37,
+      "amount": 200,
+      "condition": "成功说服阿嘉莎并让她回答一个问题",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:conyberry-agatha:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:conyberry-agatha",
+      "scene_name": "兔子浆果镇与阿嘉莎的巢穴",
+      "area_id": null,
+      "area_name": null,
+      "page": 35,
+      "pdf_page": 36,
+      "items": [
+        {
+          "name": "镶宝石的银梳",
+          "quantity": 1,
+          "notes": "加拉尔修女提供的礼物；送出后消耗，用于让说服检定自动成功。"
+        }
+      ],
+      "condition": "前往阿嘉莎巢穴前由加拉尔修女交给队伍"
+    },
+    {
+      "id": "lmop:reward:treasure:old-owl-well:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:old-owl-well",
+      "scene_name": "古枭井",
+      "area_id": null,
+      "area_name": null,
+      "page": 37,
+      "pdf_page": 38,
+      "items": [
+        {
+          "name": "钱币",
+          "notes": "35sp、20ep、20gp、5pp",
+          "coins": {
+            "sp": 35,
+            "ep": 20,
+            "gp": 20,
+            "pp": 5
+          }
+        },
+        {
+          "name": "珍珠",
+          "quantity": 1,
+          "value_gp": 100
+        },
+        {
+          "name": "治疗药水",
+          "quantity": 1
+        },
+        {
+          "name": "黑暗术卷轴",
+          "quantity": 1,
+          "notes": "放在骨管中"
+        },
+        {
+          "name": "小珠宝盒",
+          "quantity": 1,
+          "value_gp": 25
+        },
+        {
+          "name": "防护戒指",
+          "quantity": 1,
+          "notes": "来自古代 Netheril；红袍巫师最感兴趣的发现"
+        }
+      ],
+      "condition": "搜索 Hamun Kost 帐篷中的箱子"
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-1:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-1",
+      "area_name": "区域1 最西边的小屋",
+      "page": 38,
+      "pdf_page": 39,
+      "amount": 50,
+      "condition": "击败区域1的枯枝怪",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-2:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-2",
+      "area_name": "区域2 荒废的小屋",
+      "page": 38,
+      "pdf_page": 39,
+      "amount": 150,
+      "condition": "击败区域2的枯枝怪",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:thundertree:thundertree-2:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-2",
+      "area_name": "区域2 荒废的小屋",
+      "page": 38,
+      "pdf_page": 39,
+      "items": [
+        {
+          "name": "钱币",
+          "notes": "700cp、160sp、90gp",
+          "coins": {
+            "cp": 700,
+            "sp": 160,
+            "gp": 90
+          }
+        }
+      ],
+      "condition": "彻底搜寻东部小屋，并以 DC10 感知（侦查）发现树根下的旧木箱"
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-3:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-3",
+      "area_name": "区域3 棕马马酒馆",
+      "page": 39,
+      "pdf_page": 40,
+      "amount": 200,
+      "condition": "击败区域3的灰烬僵尸",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-5:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-5",
+      "area_name": "区域5 荒废的农舍",
+      "page": 40,
+      "pdf_page": 41,
+      "amount": 200,
+      "condition": "击败区域5的枯枝怪",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-6:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-6",
+      "area_name": "区域6 荒废的杂货店",
+      "page": 41,
+      "pdf_page": 42,
+      "amount": 400,
+      "condition": "击败区域6的巨蛛",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:thundertree:thundertree-6:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-6",
+      "area_name": "区域6 荒废的杂货店",
+      "page": 41,
+      "pdf_page": 42,
+      "items": [
+        {
+          "name": "镶钉皮甲",
+          "quantity": 1,
+          "notes": "尸体穿着"
+        },
+        {
+          "name": "短剑",
+          "quantity": 1,
+          "notes": "尸体腰后"
+        },
+        {
+          "name": "治疗药水",
+          "quantity": 1,
+          "notes": "腰包中"
+        },
+        {
+          "name": "钱币",
+          "notes": "23gp、35sp",
+          "coins": {
+            "sp": 35,
+            "gp": 23
+          }
+        }
+      ],
+      "condition": "小心搜查被蛛丝捆在西边的男性精灵尸体"
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-7:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-7",
+      "area_name": "区域7 龙之塔",
+      "page": 41,
+      "pdf_page": 42,
+      "amount": 2000,
+      "condition": "将毒牙赶走（Venomfang）",
+      "split": true,
+      "exclusive_group": "venomfang"
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-7:2",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-7",
+      "area_name": "区域7 龙之塔",
+      "page": 41,
+      "pdf_page": 42,
+      "amount": 3900,
+      "condition": "杀死毒牙（替代赶走的奖励，不叠加）",
+      "split": true,
+      "exclusive_group": "venomfang"
+    },
+    {
+      "id": "lmop:reward:treasure:thundertree:thundertree-7:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-7",
+      "area_name": "区域7 龙之塔",
+      "page": 41,
+      "pdf_page": 42,
+      "items": [
+        {
+          "name": "钱币",
+          "notes": "800sp、150gp",
+          "coins": {
+            "sp": 800,
+            "gp": 150
+          }
+        },
+        {
+          "name": "银质高脚杯",
+          "quantity": 4,
+          "value_gp": 60,
+          "notes": "装饰着月光石；每个 60gp"
+        },
+        {
+          "name": "迷雾步卷轴",
+          "quantity": 1,
+          "notes": "misty step"
+        },
+        {
+          "name": "闪电箭卷轴",
+          "quantity": 1,
+          "notes": "lightning bolt"
+        },
+        {
+          "name": "+1 战斧“Hew”",
+          "quantity": 1,
+          "notes": "生锈的矮人工艺战斧；攻击植物生物或木制物品时伤害直接取满；龙没有注意到它的价值"
+        }
+      ],
+      "condition": "搜查塔楼地板上破损的木箱（龙的战利品）"
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-8:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-8",
+      "area_name": "区域8 老旧的铁匠铺",
+      "page": 42,
+      "pdf_page": 43,
+      "amount": 100,
+      "condition": "击败区域8的灰烬僵尸",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-9:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-9",
+      "area_name": "区域9 药草店",
+      "page": 42,
+      "pdf_page": 43,
+      "amount": 200,
+      "condition": "将项链还给 Mirna，而不是自行保有它",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:thundertree:thundertree-9:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-9",
+      "area_name": "区域9 药草店",
+      "page": 42,
+      "pdf_page": 43,
+      "items": [
+        {
+          "name": "金项链与翡翠挂饰",
+          "quantity": 1,
+          "value_gp": 200,
+          "notes": "Mirna 的传家宝"
+        }
+      ],
+      "condition": "在区域9货架下找到小木盒"
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-11:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-11",
+      "area_name": "区域11 老旧的警卫岗哨",
+      "page": 43,
+      "pdf_page": 44,
+      "amount": 250,
+      "condition": "击败区域11的灰烬僵尸",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-12:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-12",
+      "area_name": "区域12 织布者小屋",
+      "page": 43,
+      "pdf_page": 44,
+      "amount": 150,
+      "condition": "击败区域12的枯枝怪",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:thundertree:thundertree-13:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-13",
+      "area_name": "区域13 龙之信徒",
+      "page": 43,
+      "pdf_page": 44,
+      "amount": 150,
+      "condition": "击败或赶走区域13的信徒",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:thundertree:thundertree-13:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:thundertree",
+      "scene_name": "雷霆树镇",
+      "area_id": "lmop:area:thundertree-13",
+      "area_name": "区域13 龙之信徒",
+      "page": 43,
+      "pdf_page": 44,
+      "items": [
+        {
+          "name": "钻石",
+          "quantity": 3,
+          "value_gp": 100,
+          "notes": "Favric 准备给绿龙的奉献；每颗 100gp"
+        },
+        {
+          "name": "飞行药水",
+          "quantity": 1,
+          "notes": "Favric 脖子上密封的药水"
+        }
+      ],
+      "condition": "击败或赶走信徒后搜查主房间"
+    },
+    {
+      "id": "lmop:reward:xp:wyvern-tor:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:wyvern-tor",
+      "scene_name": "飞龙崖",
+      "area_id": null,
+      "area_name": null,
+      "page": 44,
+      "pdf_page": 45,
+      "amount": 1250,
+      "condition": "击败飞龙崖的兽人与食人魔",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:wyvern-tor:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:wyvern-tor",
+      "scene_name": "飞龙崖",
+      "area_id": null,
+      "area_name": null,
+      "page": 44,
+      "pdf_page": 45,
+      "items": [
+        {
+          "name": "钱币",
+          "notes": "750cp、180sp、62ep、30gp",
+          "coins": {
+            "cp": 750,
+            "sp": 180,
+            "ep": 62,
+            "gp": 30
+          }
+        },
+        {
+          "name": "香水",
+          "quantity": 3,
+          "value_gp": 10,
+          "notes": "每瓶 10gp"
+        }
+      ],
+      "condition": "搜查山洞中没有上锁的箱子"
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-2:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-2",
+      "area_name": "区域2 陷阱大厅",
+      "page": 46,
+      "pdf_page": 47,
+      "amount": 100,
+      "condition": "察觉陷阱或从陷阱中生存",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-3:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-3",
+      "area_name": "区域3 弓箭手岗哨",
+      "page": 46,
+      "pdf_page": 47,
+      "amount": 100,
+      "condition": "每击败一对哥布林弓箭手",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-4:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-4",
+      "area_name": "区域4 废弃营房",
+      "page": 46,
+      "pdf_page": 47,
+      "amount": 150,
+      "condition": "击败区域4的哥布林",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:cragmaw-castle:cragmaw-5:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-5",
+      "area_name": "区域5 储藏室",
+      "page": 47,
+      "pdf_page": 48,
+      "items": [
+        {
+          "name": "锁子甲",
+          "quantity": 1,
+          "notes": "染血；属于西达尔·荷温特"
+        },
+        {
+          "name": "大型十字弓",
+          "quantity": 1,
+          "notes": "补给中"
+        },
+        {
+          "name": "长剑",
+          "quantity": 1,
+          "notes": "无剑鞘，剑柄有绝冬城徽记；属于西达尔·荷温特"
+        },
+        {
+          "name": "矮人白兰地",
+          "quantity": 1,
+          "notes": "小酒桶，约 20 杯；1 杯回复 1 HP，1 小时内超过 1 杯则中毒 1 小时"
+        }
+      ],
+      "condition": "搜查区域5的补给"
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-6:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-6",
+      "area_name": "区域6 大地精营房",
+      "page": 47,
+      "pdf_page": 48,
+      "amount": 400,
+      "condition": "击败区域6的大地精",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:cragmaw-castle:cragmaw-6:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-6",
+      "area_name": "区域6 大地精营房",
+      "page": 47,
+      "pdf_page": 48,
+      "items": [
+        {
+          "name": "长矛",
+          "quantity": 5,
+          "notes": "靠在墙上"
+        },
+        {
+          "name": "长剑",
+          "quantity": 4,
+          "notes": "靠在墙上"
+        },
+        {
+          "name": "流星锤",
+          "quantity": 3,
+          "notes": "靠在墙上"
+        },
+        {
+          "name": "巨剑",
+          "quantity": 2,
+          "notes": "靠在墙上"
+        },
+        {
+          "name": "长棍",
+          "quantity": 1,
+          "value_gp": 10,
+          "notes": "雕刻羽毛纹样，出乎意料地轻（1 磅），价值 10gp"
+        }
+      ],
+      "condition": "清点区域6墙上的武器"
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-7:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-7",
+      "area_name": "区域7 宴会厅",
+      "page": 47,
+      "pdf_page": 48,
+      "amount": 400,
+      "condition": "击败区域7的哥布林",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-8:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-8",
+      "area_name": "区域8 黑暗大厅",
+      "page": 48,
+      "pdf_page": 49,
+      "amount": 450,
+      "condition": "击败区域8的掘地兽",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:cragmaw-castle:cragmaw-8:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-8",
+      "area_name": "区域8 黑暗大厅",
+      "page": 48,
+      "pdf_page": 49,
+      "items": [
+        {
+          "name": "太阳精灵黄金雕像",
+          "quantity": 1,
+          "value_gp": 100,
+          "notes": "藏在石制火盆煤炭下，用深红色布包裹；一个哥布林偷偷藏在这里"
+        }
+      ],
+      "condition": "搜查石制火盆的煤炭堆"
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-9:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-9",
+      "area_name": "区域9 哥布林神殿",
+      "page": 49,
+      "pdf_page": 50,
+      "amount": 150,
+      "condition": "击败区域9的哥布林",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:cragmaw-castle:cragmaw-9:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-9",
+      "area_name": "区域9 哥布林神殿",
+      "page": 49,
+      "pdf_page": 50,
+      "items": [
+        {
+          "name": "黄金酒杯",
+          "quantity": 1,
+          "value_gp": 150,
+          "notes": "人类工艺"
+        },
+        {
+          "name": "仪式刀",
+          "quantity": 1,
+          "value_gp": 60,
+          "notes": "人类工艺"
+        },
+        {
+          "name": "香炉",
+          "quantity": 1,
+          "value_gp": 120,
+          "notes": "人类工艺"
+        }
+      ],
+      "condition": "取走祭坛上的仪式法器"
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-12:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-12",
+      "area_name": "区域12 守卫营房",
+      "page": 50,
+      "pdf_page": 51,
+      "amount": 200,
+      "condition": "击败区域12的大地精",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-13:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-13",
+      "area_name": "区域13 枭熊塔楼",
+      "page": 50,
+      "pdf_page": 51,
+      "amount": 700,
+      "condition": "击败或释放区域13的枭熊",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:cragmaw-castle:cragmaw-13:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-13",
+      "area_name": "区域13 枭熊塔楼",
+      "page": 50,
+      "pdf_page": 51,
+      "items": [
+        {
+          "name": "钱币",
+          "notes": "90ep、120gp",
+          "coins": {
+            "ep": 90,
+            "gp": 120
+          }
+        },
+        {
+          "name": "治疗药水",
+          "quantity": 1
+        },
+        {
+          "name": "沉默术卷轴",
+          "quantity": 1,
+          "notes": "silence"
+        },
+        {
+          "name": "回生术卷轴",
+          "quantity": 1,
+          "notes": "revivify"
+        }
+      ],
+      "condition": "打开塔楼二楼不上锁的破旧木箱"
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-14:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-14",
+      "area_name": "区域14 王之居所",
+      "page": 51,
+      "pdf_page": 52,
+      "amount": 950,
+      "condition": "击败葛罗尔王、狼与变形怪",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:xp:cragmaw-castle:cragmaw-14:2",
+      "type": "xp",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-14",
+      "area_name": "区域14 王之居所",
+      "page": 51,
+      "pdf_page": 52,
+      "amount": 200,
+      "condition": "解救刚铎·寻石者并成功护送他回凡度林（额外奖励）",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:cragmaw-castle:cragmaw-14:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:cragmaw-castle",
+      "scene_name": "克拉葛摩城堡",
+      "area_id": "lmop:area:cragmaw-14",
+      "area_name": "区域14 王之居所",
+      "page": 51,
+      "pdf_page": 52,
+      "items": [
+        {
+          "name": "钱币",
+          "notes": "220sp、160ep",
+          "coins": {
+            "sp": 220,
+            "ep": 160
+          }
+        },
+        {
+          "name": "治疗药水",
+          "quantity": 3
+        },
+        {
+          "name": "刚铎的潮音洞穴地图",
+          "quantity": 1,
+          "notes": "藏在葛罗尔床垫下缝制的皮革麻袋中"
+        }
+      ],
+      "condition": "搜查葛罗尔床垫下的皮革麻袋"
+    },
+    {
+      "id": "lmop:reward:xp:return-encounter:1",
+      "type": "xp",
+      "scene_id": "lmop:scene:return-encounter",
+      "scene_name": "回程遭遇：军事团伙",
+      "area_id": null,
+      "area_name": null,
+      "page": 52,
+      "pdf_page": 53,
+      "amount": 500,
+      "condition": "击败 Targor 的军团，或与他交涉成功",
+      "split": true
+    },
+    {
+      "id": "lmop:reward:treasure:return-encounter:1",
+      "type": "treasure",
+      "scene_id": "lmop:scene:return-encounter",
+      "scene_name": "回程遭遇：军事团伙",
+      "area_id": null,
+      "area_name": null,
+      "page": 52,
+      "pdf_page": 53,
+      "items": [
+        {
+          "name": "血腥麻袋",
+          "notes": "每个装着一颗被切断的精灵头颅；无金钱价值",
+          "count": "1d4"
+        }
+      ],
+      "condition": "击败大地精后检查"
+    },
+    {
+      "id": "lmop:reward:quest:agatha",
+      "type": "quest",
+      "quest_id": "lmop:quest:agatha",
+      "giver": "加拉尔修女",
+      "page": 34,
+      "objective": "带镶宝石的银梳去兔子浆果镇废墟，说服女妖阿嘉莎回答一个关于 Bowgentle 法术书的问题。",
+      "items": [
+        {
+          "name": "完成任务后加拉尔赠送 3 瓶治疗药水"
+        }
+      ],
+      "title": "守望者",
+      "faction": "竖琴手同盟",
+      "xp_ref": "lmop:reward:xp:conyberry-agatha:1",
+      "notes": "把银梳作为礼物送出可使说服检定自动成功；完成任务并加入竖琴手可获得“守望者”头衔。"
+    },
+    {
+      "id": "lmop:reward:quest:old-owl-well",
+      "type": "quest",
+      "quest_id": "lmop:quest:old-owl-well",
+      "giver": "达朗·埃德玛",
+      "page": 34,
+      "objective": "前往古枭井，查明在废墟附近游荡的人是谁。",
+      "notes": "发现红袍巫师 Hamun Kost 即可完成；加入臂铠社可获得骑士头衔。"
+    },
+    {
+      "id": "lmop:reward:quest:thundertree",
+      "type": "quest",
+      "quest_id": "lmop:quest:thundertree",
+      "giver": "埃琳·阿黛尔利芙",
+      "page": 34,
+      "objective": "去雷霆树镇废墟找德鲁伊莱多斯，询问克拉葛摩城堡或潮音洞穴的位置。",
+      "notes": "莱多斯提供城堡方向；赶走毒牙后他才透露潮音洞穴并邀请加入 Emerald Enclave。"
+    },
+    {
+      "id": "lmop:reward:quest:wyvern-tor",
+      "type": "quest",
+      "quest_id": "lmop:quest:wyvern-tor",
+      "giver": "哈宾·威斯特",
+      "page": 34,
+      "objective": "找到飞龙崖附近的兽人营地，并将兽人赶出该区域。",
+      "gold_gp": 100,
+      "gold_note": "任务悬赏。",
+      "xp_ref": "lmop:reward:xp:wyvern-tor:1",
+      "notes": "100gp 悬赏详见 PART 2 镇长大厅；同时完成 Hamun Kost 的委托。"
+    },
+    {
+      "id": "lmop:reward:quest:cragmaw-castle",
+      "type": "quest",
+      "quest_id": "lmop:quest:cragmaw-castle",
+      "giver": "西达尔·荷温特",
+      "page": 34,
+      "objective": "找到克拉葛摩城堡，救出刚铎·寻石者并夺回前往潮音洞穴的地图。",
+      "gold_gp": 500,
+      "gold_note": "任务悬赏。",
+      "xp_ref": "lmop:reward:xp:cragmaw-castle:cragmaw-14:1",
+      "notes": "500gp 详见 PART 2；救出并护送刚铎回凡度林另有 200 XP；刚铎另给每人 25gp 与矿坑收益十分之一。"
+    },
+    {
+      "id": "lmop:reward:quest:old-owl-well-kost",
+      "type": "quest",
+      "quest_id": "lmop:quest:old-owl-well-kost",
+      "giver": "Hamun Kost",
+      "page": 37,
+      "objective": "替 Kost 清除飞龙崖的兽人，或替他去问阿嘉莎“建造古枭井这座塔的法师叫什么名字”。",
+      "notes": "答案是 Arthindol；Kost 以信息作为交换，不直接支付金钱。"
+    },
+    {
+      "id": "lmop:reward:quest:thundertree-reidoth",
+      "type": "quest",
+      "quest_id": "lmop:quest:thundertree-reidoth",
+      "giver": "莱多斯",
+      "page": 40,
+      "objective": "赶走盘踞在雷霆树镇区域7塔楼的绿龙毒牙。",
+      "title": "春之守望",
+      "faction": "Emerald Enclave",
+      "xp_ref": "lmop:reward:xp:thundertree:thundertree-7:1",
+      "notes": "成功后莱多斯提供潮音洞穴位置，并邀请有意保护自然的角色加入 Emerald Enclave。"
+    },
+    {
+      "id": "lmop:reward:quest:mirna-heirloom",
+      "type": "quest",
+      "quest_id": "lmop:quest:mirna-heirloom",
+      "giver": "Mirna Dendrar",
+      "page": 42,
+      "objective": "在雷霆树镇区域9的药草店货架下找到金项链与翡翠挂饰，并归还给 Mirna。",
+      "xp_ref": "lmop:reward:xp:thundertree:thundertree-9:1",
+      "notes": "若自行保有项链则不给 200 XP。"
+    },
+    {
+      "id": "lmop:reward:quest:gundren-escort",
+      "type": "quest",
+      "quest_id": "lmop:quest:gundren-escort",
+      "giver": "刚铎·寻石者",
+      "page": 51,
+      "objective": "救出刚铎，并护送他返回凡度林，然后再前往潮音洞穴。",
+      "gold_gp": 25,
+      "gold_note": "每位角色 25gp；另加矿坑收益的十分之一。",
+      "xp_ref": "lmop:reward:xp:cragmaw-castle:cragmaw-14:2",
+      "notes": "每位角色 25gp；刚铎还许诺矿坑开始运作后收益的十分之一。"
+    }
+  ]
+}
