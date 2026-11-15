@@ -62,11 +62,26 @@ test('races keep subrace deltas and parent values separate', () => {
   assert.match(hill.brief, /丘陵矮人/);
 });
 
-test('feats keep multi-ability prerequisites', () => {
+test('feats keep multi-ability and restored PHB prerequisites', () => {
   const ritual = lib.feats.find((f) => f.name_en === 'Ritual Caster');
   assert.deepEqual(ritual.prerequisite, ['智力 13+ 或 感知 13+']);
   const resilient = lib.feats.find((f) => f.name_en === 'Resilient');
   assert.match(resilient.ability, /1 项自选/);
+  assert.deepEqual(lib.feats.find((f) => f.name_en === 'Crossbow Expert').prerequisite, ['敏捷 13+']);
+  assert.deepEqual(lib.feats.find((f) => f.name_en === 'Dual Wielder').prerequisite, ['力量 13+ 或 敏捷 13+']);
+  assert.deepEqual(lib.feats.find((f) => f.name_en === 'Great Weapon Master').prerequisite, ['力量 13+']);
+  assert.deepEqual(lib.feats.find((f) => f.name_en === 'Sharpshooter').prerequisite, ['敏捷 13+']);
+});
+
+test('background equipment and variant feature names are readable', () => {
+  const spy = lib.backgrounds.find((b) => b.name_en === 'Variant Criminal (Spy)');
+  assert.equal(spy.feature.name, '密探接头人');
+  const folk = lib.backgrounds.find((b) => b.name_en === 'Folk Hero');
+  assert.deepEqual(folk.equipment[0][0].items[0], '工匠工具（任选）');
+  const hermit = lib.backgrounds.find((b) => b.name_en === 'Hermit');
+  assert.ok(hermit.equipment[0][0].items.every((x) => !x.startsWith('{')));
+  const monk = lib.classes.find((c) => c.name_en === 'Monk');
+  assert.equal(monk.tables[0].rows[0][0], '1d4');
 });
 
 test('races carry proficiencies and variant human replacements', () => {

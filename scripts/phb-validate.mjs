@@ -157,6 +157,13 @@ export const validateLibrary = (lib) => {
     for (const id of cls.features ?? []) if (!refExists(ids, id)) errors.push(`${cls.id}: missing feature ${id}`);
     for (const id of cls.subclasses ?? []) if (!refExists(ids, id)) errors.push(`${cls.id}: missing subclass ${id}`);
     if (cls.hit_die && !/^d(6|8|10|12)$/.test(cls.hit_die)) errors.push(`${cls.id}: invalid hit die ${cls.hit_die}`);
+    for (const table of cls.tables ?? []) {
+      for (const row of table.rows ?? []) {
+        for (const cell of row) {
+          if (cell && typeof cell === 'object') errors.push(`${cls.id}: table cell is not normalized`);
+        }
+      }
+    }
   }
   for (const sub of lib.subclasses) {
     if (!refExists(ids, sub.class)) errors.push(`${sub.id}: missing class ${sub.class}`);
@@ -181,6 +188,13 @@ export const validateLibrary = (lib) => {
   }
   for (const bg of lib.backgrounds) {
     if (bg.variant_of && !refExists(ids, bg.variant_of)) errors.push(`${bg.id}: missing variant parent ${bg.variant_of}`);
+    for (const group of bg.equipment ?? []) {
+      for (const option of group) {
+        for (const item of option.items ?? []) {
+          if (typeof item === 'string' && /^\{.*\}$/.test(item)) errors.push(`${bg.id}: raw JSON equipment token ${item}`);
+        }
+      }
+    }
   }
   for (const spell of lib.spells) {
     if (spell.level < 0 || spell.level > 9) errors.push(`${spell.id}: invalid spell level ${spell.level}`);

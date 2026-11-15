@@ -248,7 +248,9 @@
     "type": "feat",
     "name": "巨武器大师",
     "name_en": "Great Weapon Master",
-    "prerequisite": [],
+    "prerequisite": [
+      "力量 13+"
+    ],
     "ability": null,
     "grants": {},
     "source": {
@@ -256,7 +258,7 @@
       "page": 167,
       "srd": false
     },
-    "brief": "专长 · 无前置"
+    "brief": "专长 · 前置 力量 13+"
   },
   {
     "id": "phb:feat:mobile",
@@ -563,7 +565,9 @@
     "type": "feat",
     "name": "强弩专家",
     "name_en": "Crossbow Expert",
-    "prerequisite": [],
+    "prerequisite": [
+      "敏捷 13+"
+    ],
     "ability": null,
     "grants": {},
     "source": {
@@ -571,7 +575,7 @@
       "page": 165,
       "srd": false
     },
-    "brief": "专长 · 无前置"
+    "brief": "专长 · 前置 敏捷 13+"
   },
   {
     "id": "phb:feat:grappler",
@@ -642,7 +646,9 @@
     "type": "feat",
     "name": "神射手",
     "name_en": "Sharpshooter",
-    "prerequisite": [],
+    "prerequisite": [
+      "敏捷 13+"
+    ],
     "ability": null,
     "grants": {},
     "source": {
@@ -650,7 +656,7 @@
       "page": 170,
       "srd": false
     },
-    "brief": "专长 · 无前置"
+    "brief": "专长 · 前置 敏捷 13+"
   },
   {
     "id": "phb:feat:skilled",
@@ -686,7 +692,9 @@
     "type": "feat",
     "name": "双持客",
     "name_en": "Dual Wielder",
-    "prerequisite": [],
+    "prerequisite": [
+      "力量 13+ 或 敏捷 13+"
+    ],
     "ability": null,
     "grants": {},
     "source": {
@@ -694,7 +702,7 @@
       "page": 165,
       "srd": false
     },
-    "brief": "专长 · 无前置"
+    "brief": "专长 · 前置 力量 13+ 或 敏捷 13+"
   },
   {
     "id": "phb:feat:mage-slayer",

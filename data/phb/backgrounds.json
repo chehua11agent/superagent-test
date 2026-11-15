@@ -254,7 +254,7 @@
         {
           "option": "_",
           "items": [
-            "toolArtisan",
+            "工匠工具（任选）",
             "铲子",
             "铁壶",
             "普通服装",
@@ -297,7 +297,7 @@
         {
           "option": "_",
           "items": [
-            "toolArtisan",
+            "工匠工具（任选）",
             "来自你公会的介绍信",
             "旅行服装",
             "小包（含 15 gp）"
@@ -343,7 +343,7 @@
             "冬季毯子",
             "普通服装",
             "草药工具",
-            "{\"value\":500}"
+            "价值 5 gp"
           ]
         }
       ]
@@ -662,7 +662,7 @@
       ]
     ],
     "feature": {
-      "name": "罪犯接头人",
+      "name": "密探接头人",
       "name_en": "Spy Contact"
     },
     "source": {
@@ -670,7 +670,7 @@
       "page": 130,
       "srd": false
     },
-    "brief": "技能 欺瞒/隐匿 · 特性 罪犯接头人"
+    "brief": "技能 欺瞒/隐匿 · 特性 密探接头人"
   },
   {
     "id": "phb:background:variant-entertainer-gladiator",
@@ -743,7 +743,7 @@
         {
           "option": "_",
           "items": [
-            "toolArtisan",
+            "工匠工具（任选）",
             "来自你公会的介绍信",
             "旅行服装",
             "小包（含 15 gp）"

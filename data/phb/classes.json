@@ -1766,102 +1766,102 @@
         ],
         "rows": [
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":4}],\"rollable\":true}",
+            "1d4",
             0,
             0
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":4}],\"rollable\":true}",
+            "1d4",
             2,
             10
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":4}],\"rollable\":true}",
+            "1d4",
             3,
             10
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":4}],\"rollable\":true}",
+            "1d4",
             4,
             10
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":6}],\"rollable\":true}",
+            "1d6",
             5,
             10
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":6}],\"rollable\":true}",
+            "1d6",
             6,
             15
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":6}],\"rollable\":true}",
+            "1d6",
             7,
             15
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":6}],\"rollable\":true}",
+            "1d6",
             8,
             15
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":6}],\"rollable\":true}",
+            "1d6",
             9,
             15
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":6}],\"rollable\":true}",
+            "1d6",
             10,
             20
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":8}],\"rollable\":true}",
+            "1d8",
             11,
             20
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":8}],\"rollable\":true}",
+            "1d8",
             12,
             20
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":8}],\"rollable\":true}",
+            "1d8",
             13,
             20
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":8}],\"rollable\":true}",
+            "1d8",
             14,
             25
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":8}],\"rollable\":true}",
+            "1d8",
             15,
             25
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":8}],\"rollable\":true}",
+            "1d8",
             16,
             25
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":10}],\"rollable\":true}",
+            "1d10",
             17,
             25
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":10}],\"rollable\":true}",
+            "1d10",
             18,
             30
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":10}],\"rollable\":true}",
+            "1d10",
             19,
             30
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":10}],\"rollable\":true}",
+            "1d10",
             20,
             30
           ]
@@ -2651,64 +2651,64 @@
         ],
         "rows": [
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":6}],\"rollable\":true}"
+            "1d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":1,\"faces\":6}],\"rollable\":true}"
+            "1d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":2,\"faces\":6}],\"rollable\":true}"
+            "2d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":2,\"faces\":6}],\"rollable\":true}"
+            "2d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":3,\"faces\":6}],\"rollable\":true}"
+            "3d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":3,\"faces\":6}],\"rollable\":true}"
+            "3d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":4,\"faces\":6}],\"rollable\":true}"
+            "4d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":4,\"faces\":6}],\"rollable\":true}"
+            "4d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":5,\"faces\":6}],\"rollable\":true}"
+            "5d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":5,\"faces\":6}],\"rollable\":true}"
+            "5d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":6,\"faces\":6}],\"rollable\":true}"
+            "6d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":6,\"faces\":6}],\"rollable\":true}"
+            "6d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":7,\"faces\":6}],\"rollable\":true}"
+            "7d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":7,\"faces\":6}],\"rollable\":true}"
+            "7d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":8,\"faces\":6}],\"rollable\":true}"
+            "8d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":8,\"faces\":6}],\"rollable\":true}"
+            "8d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":9,\"faces\":6}],\"rollable\":true}"
+            "9d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":9,\"faces\":6}],\"rollable\":true}"
+            "9d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":10,\"faces\":6}],\"rollable\":true}"
+            "10d6"
           ],
           [
-            "{\"type\":\"dice\",\"toRoll\":[{\"number\":10,\"faces\":6}],\"rollable\":true}"
+            "10d6"
           ]
         ]
       }

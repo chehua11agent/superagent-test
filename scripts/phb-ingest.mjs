@@ -207,6 +207,7 @@ const TOOL_LABEL = {
 
 const EQUIPMENT_TYPE_LABEL = {
   instrumentMusical: '乐器（任选）',
+  toolArtisan: '工匠工具（任选）',
   weaponMartialMelee: '军用近战武器（任选）',
   weaponMartial: '军用武器（任选）',
   weaponSimple: '简易武器（任选）',
@@ -561,6 +562,9 @@ const normalizeTables = (groups) => {
     const rows = (group.rows ?? group.rowsSpellProgression ?? []).map((row) =>
       (row ?? []).map((cell) => {
         if (cell && typeof cell === 'object') {
+          if (cell.type === 'dice' && Array.isArray(cell.toRoll)) {
+            return cell.toRoll.map((d) => `${d.number ?? 1}d${d.faces}`).join(' + ');
+          }
           if ('value' in cell) return cell.value;
           if ('type' in cell && cell.type === 'bonus') return cell.value;
           return cleanText(JSON.stringify(cell));
@@ -667,10 +671,11 @@ const deepClean = (value) => {
 };
 
 const formatEquipmentItem = (item) => {
-  if (typeof item === 'string') return cleanName(item);
+  if (typeof item === 'string') return EQUIPMENT_TYPE_LABEL[item] ?? cleanName(item);
   if (!item || typeof item !== 'object') return cleanText(String(item));
   if (item.displayName) return cleanText(item.displayName);
   if (item.equipmentType) return EQUIPMENT_TYPE_LABEL[item.equipmentType] ?? cleanText(item.equipmentType);
+  if (typeof item.value === 'number') return `价值 ${item.value / 100} gp`;
   if (item.item) {
     const name = cleanName(item.item);
     return item.containsValue ? `${name}（含 ${item.containsValue / 100} gp）` : name;
@@ -1072,6 +1077,10 @@ const buildClasses = async () => {
   };
 };
 
+const BACKGROUND_FEATURE_NAME_OVERRIDE = {
+  'Variant Criminal (Spy)': '密探接头人',
+};
+
 const buildBackgrounds = async () => {
   const data = await readJson('backgrounds.json');
   const pool = data.background;
@@ -1120,7 +1129,11 @@ const buildBackgrounds = async () => {
         ),
         feature: feature
           ? {
-              name: feature.name ? cleanText(feature.name).replace(/^(特性|Feature)[：:]\s*/i, '') : null,
+              name: BACKGROUND_FEATURE_NAME_OVERRIDE[b.ENG_name]
+                ? BACKGROUND_FEATURE_NAME_OVERRIDE[b.ENG_name]
+                : feature.name
+                  ? cleanText(feature.name).replace(/^(特性|Feature)[：:]\s*/i, '')
+                  : null,
               name_en: feature.name_en ?? null,
             }
           : null,
@@ -1153,12 +1166,19 @@ const sanitizeGrant = (value) => {
   return typeof value === 'string' ? cleanText(value) : value;
 };
 
+const FEAT_PREREQUISITE_OVERRIDE = {
+  'Crossbow Expert': ['敏捷 13+'],
+  'Dual Wielder': ['力量 13+ 或 敏捷 13+'],
+  'Great Weapon Master': ['力量 13+'],
+  Sharpshooter: ['敏捷 13+'],
+};
+
 const buildFeats = async () => {
   const data = await readJson('feats.json');
   return data.feat
     .filter((f) => f.source === 'PHB')
     .map((f) => {
-      const prereq = (f.prerequisite ?? []).map((p) => {
+      const computedPrereq = (f.prerequisite ?? []).map((p) => {
         if (p.ability) {
           return p.ability
             .map((a) =>
@@ -1178,6 +1198,7 @@ const buildFeats = async () => {
         if (p.race) return `${(p.race[0]?.name ?? []).join('/')} 种族`;
         return cleanText(JSON.stringify(p));
       });
+      const prereq = FEAT_PREREQUISITE_OVERRIDE[f.ENG_name] ?? computedPrereq;
       const grants = {};
       for (const key of [
         'ability',
