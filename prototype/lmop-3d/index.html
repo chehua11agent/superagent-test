@@ -28,12 +28,13 @@
         <div class="stat"><b>117</b><span>全图连接</span></div>
       </div>
       <ul class="intro-points">
-        <li><span>01</span>沿暗溪进洞，找到区域 8 的熊地精克拉格。</li>
+        <li><span>01</span>从三猪小径的哥布林伏击开始，按 7 章主线推进。</li>
         <li><span>02</span>WASD 移动 · 拖动鼠标看 · 滚轮远近 · F 火把。</li>
-        <li><span>03</span>走进区域会读取场景摘要、光照、出口与规则。</li>
+        <li><span>03</span>走进区域读取摘要/光照/出口/规则；到达目标推进章节。</li>
       </ul>
       <div class="intro-actions">
-        <button id="btn-start" class="btn primary">进入洞穴</button>
+        <button id="btn-start" class="btn primary">开始剧情</button>
+        <button id="btn-free" class="btn ghost">自由探索</button>
         <a class="btn ghost" href="../../data/lmop/map-schematics/map-cragmaw-hideout.svg" target="_blank" rel="noreferrer">先看 2D 地图</a>
       </div>
       <p class="fineprint">原型 · 不含完整战斗/存档 · 程序化低多边形模型 · 非官方同人演示</p>
@@ -49,6 +50,7 @@
       </div>
     </div>
     <div class="top-actions">
+      <button id="btn-story" class="chip" title="剧情模式">剧情</button>
       <button id="btn-scenes" class="chip" title="切换地图">地图 · 克拉格莫窝点</button>
       <button id="btn-view" class="chip" title="切换第一/第三人称">第三人称</button>
       <button id="btn-torch" class="chip" title="开关火把（F）">火把 开</button>
@@ -58,7 +60,7 @@
   </header>
 
   <aside id="objective" class="objective hidden">
-    <p class="eyebrow">当前目标</p>
+    <p class="eyebrow" id="objective-eyebrow">当前目标</p>
     <p id="objective-text">沿暗溪深入，找到区域 8 的克拉格。</p>
     <div class="progress"><span id="progress-fill"></span></div>
     <small><span id="progress-text">0 / 8</span> 区域已探索</small>
@@ -113,6 +115,13 @@
     <div id="joystick" class="joystick"><div id="joystick-knob" class="joystick-knob"></div></div>
     <div id="look-zone" class="look-zone"></div>
   </div>
+
+  <div id="chapter-card" class="chapter-card hidden">
+    <p class="eyebrow" id="chapter-eyebrow">剧情</p>
+    <h2 id="chapter-title">第一章</h2>
+    <p id="chapter-objective"></p>
+  </div>
+  <div id="fade" class="fade"></div>
 
   <div id="scene-picker" class="scene-picker hidden" role="dialog" aria-modal="true">
     <div class="picker-card">
