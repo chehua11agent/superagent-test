@@ -800,6 +800,22 @@
     "译名不统一，例如西达尔·荷温特/西达尔-荷温特、伊阿诺·阿布雷克/艾伯瑞克、雷霆树镇/雷树镇、潮音洞/回浪洞、爱嘉莎/阿嘉莎；name_en 可作稳定键。",
     "公开数据不含译文正文；只保留结构化字段、数值与生成式摘要。",
     "怪物附录并非覆盖全部遭遇：赭色果冻怪、缚灵莫尔梅斯克等在正文出现但附录无数据卡，分卷记录中已注明。",
-    "PART 2 的章节 id 为 ch02-phandalin，未使用其它分卷的 chapter-/lmop:chapter: 前缀；消费方应按记录类型而非 id 前缀识别章节。"
-  ]
+    "PART 2 的章节 id 为 ch02-phandalin，未使用其它分卷的 chapter-/lmop:chapter: 前缀；消费方应按记录类型而非 id 前缀识别章节。",
+    "地图与规则对照层见 atlas 字段：maps.json / rules.json / rules-crossref.json / map-schematics/，3D 切片见 prototype/lmop-3d/。"
+  ],
+  "atlas": {
+    "schema_version": "lmop-maps-v1",
+    "maps": 8,
+    "areas": 89,
+    "region_sites": 17,
+    "connections": 117,
+    "rules": 49,
+    "crossref_records": 93,
+    "maps_file": "maps.json",
+    "rules_file": "rules.json",
+    "crossref_file": "rules-crossref.json",
+    "schematics_dir": "map-schematics/",
+    "doc": "../../docs/content/lmop-atlas.md",
+    "prototype3d": "../../prototype/lmop-3d/"
+  }
 }
