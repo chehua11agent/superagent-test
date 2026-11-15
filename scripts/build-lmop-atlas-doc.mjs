@@ -29,6 +29,7 @@ md.push('');
 md.push('> 对象：D&D 5e（2014）入门模组《凡戴尔的失落矿坑》（Lost Mine of Phandelver）的**地图、场景与规则对照**。');
 md.push('> 数据：`data/lmop/maps.json`、`data/lmop/rules.json`、`data/lmop/rules-crossref.json`；示意图：`data/lmop/map-schematics/`。');
 md.push('> 本图集不收录原图扫描或模组译文正文；地图为按原图方格/比例尺重绘的**示意矢量图**，场景文字为生成式摘要。');
+md.push('> 3D 场景切片：见 [`prototype/lmop-3d/`](../../prototype/lmop-3d/)（把本图集的地图 JSON 生成成可走入的克拉格莫窝点）。');
 md.push('');
 md.push('## 1. 坐标、比例与精度');
 md.push('');

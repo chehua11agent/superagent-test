@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>克拉格莫窝点 · 3D 场景切片</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2317130f'/%3E%3Cpath d='M12 46 L24 20 L34 38 L42 26 L54 46 Z' fill='%23c99a4a'/%3E%3Ccircle cx='44' cy='18' r='4' fill='%236fb7b0'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <canvas id="scene" aria-label="克拉格莫窝点 3D 场景"></canvas>
+
+  <div id="loading" class="loading">
+    <div class="loading-mark">◈</div>
+    <p>正在从 <code>data/lmop/maps.json</code> 生成洞穴…</p>
+  </div>
+
+  <section id="intro" class="intro" aria-label="开场">
+    <div class="intro-bg"></div>
+    <div class="intro-inner">
+      <p class="kicker">LOST MINE OF PHANDELVER · 3D SLICE</p>
+      <h1>克拉格莫窝点</h1>
+      <p class="subtitle">由结构化地图数据生成的 3D 场景切片</p>
+      <div class="intro-card">
+        <div class="stat"><b>8</b><span>区域</span></div>
+        <div class="stat"><b>5 ft</b><span>原图方格</span></div>
+        <div class="stat"><b>117</b><span>全图连接</span></div>
+      </div>
+      <ul class="intro-points">
+        <li><span>01</span>沿暗溪进洞，找到区域 8 的熊地精克拉格。</li>
+        <li><span>02</span>WASD 移动 · 拖动鼠标看 · 滚轮远近 · F 火把。</li>
+        <li><span>03</span>走进区域会读取场景摘要、光照、出口与规则。</li>
+      </ul>
+      <div class="intro-actions">
+        <button id="btn-start" class="btn primary">进入洞穴</button>
+        <a class="btn ghost" href="../../data/lmop/map-schematics/map-cragmaw-hideout.svg" target="_blank" rel="noreferrer">先看 2D 地图</a>
+      </div>
+      <p class="fineprint">原型 · 不含完整战斗/存档 · 程序化低多边形模型 · 非官方同人演示</p>
+    </div>
+  </section>
+
+  <header id="topbar" class="topbar hidden">
+    <div class="brand">
+      <span class="brand-mark">◈</span>
+      <div>
+        <b>克拉格莫窝点</b>
+        <small>3D 场景切片 · Cragmaw Hideout</small>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="btn-view" class="chip" title="切换第一/第三人称">第三人称</button>
+      <button id="btn-torch" class="chip" title="开关火把（F）">火把 开</button>
+      <button id="btn-map" class="chip" title="打开 2D 地图">2D 地图</button>
+      <button id="btn-help" class="chip" title="操作说明">?</button>
+    </div>
+  </header>
+
+  <aside id="objective" class="objective hidden">
+    <p class="eyebrow">当前目标</p>
+    <p id="objective-text">沿暗溪深入，找到区域 8 的克拉格。</p>
+    <div class="progress"><span id="progress-fill"></span></div>
+    <small><span id="progress-text">0 / 8</span> 区域已探索</small>
+  </aside>
+
+  <aside id="area-panel" class="area-panel hidden" aria-live="polite">
+    <p class="eyebrow"><span id="area-light">黑暗</span> · 区域 <span id="area-no">1</span></p>
+    <h2 id="area-name">洞口</h2>
+    <p id="area-summary" class="summary"></p>
+    <div id="area-rules" class="tags"></div>
+    <div class="area-meta">
+      <div><span>出口</span><b id="area-exits">—</b></div>
+      <div><span>敌人</span><b id="area-monsters">—</b></div>
+    </div>
+  </aside>
+
+  <div id="minimap-wrap" class="minimap-wrap hidden">
+    <canvas id="minimap" width="240" height="170" aria-label="小地图"></canvas>
+    <div class="minimap-caption">Cragmaw Hideout · 5 ft / 格</div>
+  </div>
+
+  <div id="controls" class="controls hidden">
+    <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移动</span>
+    <span><kbd>Shift</kbd> 疾走</span>
+    <span>拖动 视角</span>
+    <span><kbd>F</kbd> 火把</span>
+    <span><kbd>R</kbd> 重置</span>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <p class="eyebrow" id="modal-eyebrow">遭遇</p>
+      <h2 id="modal-title">克拉格</h2>
+      <div id="modal-body" class="modal-body"></div>
+      <div class="modal-actions">
+        <button id="modal-close" class="btn primary">继续探索</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="touch-ui" class="touch-ui hidden">
+    <div id="joystick" class="joystick"><div id="joystick-knob" class="joystick-knob"></div></div>
+    <div id="look-zone" class="look-zone"></div>
+  </div>
+
+  <div id="error" class="error hidden">
+    <h2>场景数据加载失败</h2>
+    <p id="error-text"></p>
+    <p class="fineprint">请从仓库根目录启动静态服务器，例如 <code>python3 -m http.server 4174</code>，再打开 <code>/prototype/lmop-3d/</code>。</p>
+  </div>
+</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>

@@ -44,6 +44,12 @@
 | [`lmop/rules.json`](../data/lmop/rules.json) | 模组用到的 5e 规则索引（属性检定/豁免/掩护/光照/XP 等） |
 | [`lmop/rules-crossref.json`](../data/lmop/rules-crossref.json) | 场景/区域 → 规则/检定/怪物/奖励的逐条对照与覆盖审计 |
 
+## 3D 场景切片
+
+| 原型 | 内容 |
+| --- | --- |
+| [`../prototype/lmop-3d/`](../prototype/lmop-3d/) | 把 `data/lmop/maps.json` 的克拉格莫窝点生成成可走入的 3D 洞穴；含区域触发、HUD、小地图、移动端摇杆 |
+
 ## 来源
 
 本目录整合自以下旧 PR（均已关闭，由新 PR 取代）：
