@@ -1,5 +1,5 @@
 import { createWorld } from './world.js';
-import { INTRO, HEROES, HERO_ORDER, GOBLINS, STORY, RULES, ENV_LABELS } from './data.js';
+import { INTRO, HEROES, HERO_ORDER, GOBLINS, STORY, RULES, RULES_WORD, WORDS, MAP_NODES, MAP_EDGES, ENV_LABELS } from './data.js';
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
@@ -8,12 +8,19 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const sign = (n) => (n >= 0 ? `+${n}` : `${n}`);
 const esc = (s) => String(s).replace(/[<>&]/g, '');
 const sleep = wait;
+const shuffle = (arr) => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+let wordDeck = [];
+let wordActive = false;
+let wordTimerRaf = 0;
 
 const state = {
   screen: 'intro', introStep: 0,
   selected: [], party: {}, goblins: {},
   combat: null, busy: false, targetId: null,
   surprised: false, log: [], shortRest: false, ended: false,
+  checkMode: 'word',
+  route: { visited: ['trail'], current: 'trail' },
+  clues: { horses: false, stream: false, cliff: false },
 };
 
 let world = null;
@@ -47,10 +54,11 @@ function toast(text, cls = '') {
 function setAct(act) {
   $$('#act-track .act').forEach((e) => e.classList.toggle('is-on', e.dataset.act === act));
 }
-function showRoll({ title, values, used, mod = 0, ac = null, success = true, text = '', auto = false }) {
+function showRoll({ title, values, used, mod = 0, ac = null, success = true, text = '', auto = false, word = null, meaning = null, wordBonus = 0, wordCorrect = null }) {
   const el = $('#roll-banner');
   const dice = auto ? `<span class="die">${used}</span>` : values.map((v) => `<span class="die ${v === used ? 'is-used' : ''}">${v}</span>`).join('');
-  el.innerHTML = `<p class="roll-title">${esc(title)}</p><div class="roll-row">${dice}<span class="roll-math">${auto ? '' : `${sign(mod)}${ac !== null ? ` vs AC ${ac}` : ''}`}</span><span class="roll-total ${success ? 'is-good' : 'is-bad'}">${used}</span></div><p class="roll-text">${esc(text)}</p>`;
+  const wordLine = word ? `<p class="roll-word"><b>${esc(word)}</b> = ${esc(meaning || '')} <span class="${wordCorrect ? 'is-good' : 'is-bad'}">${wordCorrect ? '正确' : '错误'}</span> · 词义 ${sign(wordBonus)}</p>` : '';
+  el.innerHTML = `<p class="roll-title">${esc(title)}</p><div class="roll-row">${dice}<span class="roll-math">${auto ? '' : `${sign(mod)}${ac !== null ? ` vs AC ${ac}` : ''}`}</span><span class="roll-total ${success ? 'is-good' : 'is-bad'}">${used}</span></div><p class="roll-text">${esc(text)}</p>${wordLine}`;
   el.hidden = false;
   clearTimeout(bannerTimer);
   bannerTimer = setTimeout(() => { el.hidden = true; }, 2400);
@@ -105,8 +113,8 @@ function renderHand() {
   }
   if (!state.combat || state.combat.ended) {
     $('#hand-owner').textContent = '三猪小径';
-    $('#hand-hint').textContent = '观察树林，或直接前进';
-    hand.innerHTML = '<p class="hand-empty">战斗时这里会变成手牌。</p>';
+    $('#hand-hint').textContent = '打开探索地图，选下一个节点';
+    hand.innerHTML = '<p class="hand-empty">路线图决定下一个事件；战斗时这里会变成手牌。</p>';
     return;
   }
   const c = state.combat;
@@ -281,6 +289,21 @@ function buildParty() {
 function showHud() {
   $('#hud').hidden = false;
 }
+function setStory({ kicker, title, body, actions = [] }) {
+  $('#story-kicker').textContent = kicker;
+  $('#story-title').textContent = title;
+  $('#story-body').innerHTML = body;
+  const box = $('#story-actions');
+  box.innerHTML = '';
+  for (const a of actions) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = `choice ${a.primary ? 'primary' : ''}`;
+    b.innerHTML = `<span class="c-key">${a.key || '→'}</span><span class="c-main"><span class="c-title">${a.title}</span><span class="c-sub">${a.sub || ''}</span></span><span class="c-go">→</span>`;
+    b.addEventListener('click', a.onClick);
+    box.appendChild(b);
+  }
+}
 function startTrail() {
   if (state.selected.length !== 3) return;
   buildParty();
@@ -288,6 +311,7 @@ function startTrail() {
   setTimeout(() => { $('#select').hidden = true; }, 400);
   showHud();
   state.screen = 'trail';
+  state.route = { visited: ['trail'], current: 'trail' };
   world.setSelected(state.selected);
   world.setMode('trail');
   setAct('trail');
@@ -298,49 +322,179 @@ function startTrail() {
   world.setEnvironment('rain');
   updateEnvButton();
   log('三猪小径。雨把车辙泡成了泥。', 'log-roll');
+  openMap();
 }
 function renderStoryTrail() {
-  $('#story-kicker').textContent = STORY.trail.kicker;
-  $('#story-title').textContent = STORY.trail.title;
-  $('#story-body').innerHTML = `<p>${STORY.trail.body}</p><p class="quiet">四个哥布林藏在路两侧的蕨丛里。发现他们需要 <b>察觉 DC 12</b>；失败会被伏击，哥布林先手。</p>`;
-  const box = $('#story-actions');
-  box.innerHTML = '';
-  const acts = [
-    { key: '察', title: '观察树林', sub: '全队察觉检定 · DC 12', primary: true, onClick: observeTrail },
-    { key: '马', title: '检查马尸', sub: '看看鞍袋和箭羽', onClick: inspectHorses },
-    { key: '进', title: '直接前进', sub: '不检查，进入伏击', onClick: () => startCombat(true) },
-  ];
-  for (const a of acts) {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = `choice ${a.primary ? 'primary' : ''}`;
-    b.innerHTML = `<span class="c-key">${a.key}</span><span class="c-main"><span class="c-title">${a.title}</span><span class="c-sub">${a.sub}</span></span><span class="c-go">→</span>`;
-    b.addEventListener('click', a.onClick);
-    box.appendChild(b);
-  }
+  state.screen = 'trail';
+  setAct('trail');
+  setStory({
+    kicker: STORY.trail.kicker,
+    title: STORY.trail.title,
+    body: `<p>${STORY.trail.body}</p><p class="quiet">地图上有两条岔路：去两匹死马，或去路旁浅溪。走到哪里，就触发哪个事件；树影节点会进入哥布林伏击。</p>`,
+    actions: [
+      { key: '图', title: '打开探索地图', sub: '选择下一个节点', primary: true, onClick: openMap },
+      { key: '规', title: '查看规则书', sub: '检定、地图与战斗。', onClick: openRules },
+    ],
+  });
+  renderHand();
 }
-function inspectHorses() {
-  if (state.busy) return;
-  openModal({
-    kicker: '现场 · 两匹死马', title: '被翻过的鞍袋', sub: '黑羽短箭 · 泥地上的拖痕',
-    body: '<p>两匹马都中了三箭。其中一匹是西尔达·霍尔温特的灰马，鞍袋里有半张被雨泡皱的便条：</p><p class="quote">“……先回凡达林。若我们没到，找巴特恩。” </p><p>冈德伦的矮种马不在。泥地上有一道很宽的拖痕，向北通向树线。</p>',
-    actions: [{ label: '合上便条', ghost: true, onClick: closeModal }],
+
+/* ---------------- exploration map ---------------- */
+
+function nodeById(id) { return MAP_NODES.find((n) => n.id === id); }
+function neighborsOf(id) { return MAP_EDGES.filter((e) => e.includes(id)).map((e) => e[0] === id ? e[1] : e[0]); }
+function availableNodes() {
+  if (state.combat && !state.combat.ended) return [];
+  const cur = state.route.current;
+  return neighborsOf(cur).filter((id) => !state.route.visited.includes(id));
+}
+function openMap() {
+  if (state.combat && !state.combat.ended) { toast('战斗结束后再看地图。'); return; }
+  if (state.screen === 'cave') { toast('第一幕已经结束。'); return; }
+  renderMap();
+  $('#map').hidden = false;
+}
+function closeMap() { $('#map').hidden = true; }
+function renderMap() {
+  const nodes = $('#map-nodes');
+  const lines = $('#map-lines');
+  lines.innerHTML = '';
+  nodes.innerHTML = '';
+  const visited = state.route.visited;
+  const current = state.route.current;
+  const avail = availableNodes();
+  for (const [a, b] of MAP_EDGES) {
+    const A = nodeById(a), B = nodeById(b);
+    if (!A || !B) continue;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', A.x); line.setAttribute('y1', A.y);
+    line.setAttribute('x2', B.x); line.setAttribute('y2', B.y);
+    if (visited.includes(a) && visited.includes(b)) line.classList.add('is-open');
+    lines.appendChild(line);
+  }
+  for (const n of MAP_NODES) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `map-node is-${n.type}`;
+    btn.style.left = `${n.x}%`;
+    btn.style.top = `${n.y}%`;
+    btn.dataset.id = n.id;
+    const isVisited = visited.includes(n.id);
+    const isCurrent = current === n.id;
+    const isAvail = avail.includes(n.id);
+    btn.classList.toggle('is-visited', isVisited && !isCurrent);
+    btn.classList.toggle('is-current', isCurrent);
+    btn.classList.toggle('is-available', isAvail);
+    btn.classList.toggle('is-locked', !isVisited && !isCurrent && !isAvail);
+    btn.innerHTML = `<span class="mn-icon">${n.icon}</span><span class="mn-title">${n.label}</span><span class="mn-sub">${n.sub}</span>`;
+    btn.addEventListener('click', () => {
+      if (!isAvail) {
+        if (isCurrent) toast('你在这里。');
+        else if (isVisited) toast('这个节点已经探索过了。');
+        else toast('只能走到相邻且已解锁的节点。');
+        return;
+      }
+      travelTo(n.id);
+    });
+    nodes.appendChild(btn);
+  }
+  const cur = nodeById(current);
+  $('#map .map-head h2').textContent = cur && cur.id !== 'trail' ? `三猪小径 · ${cur.label}` : '三猪小径';
+}
+function travelTo(id) {
+  if (!availableNodes().includes(id)) return;
+  closeMap();
+  state.route.visited.push(id);
+  state.route.current = id;
+  state.screen = 'trail';
+  runNode(id);
+}
+function bestFor(ability) {
+  return state.selected.map((id) => state.party[id])
+    .filter((h) => h && !h.dead)
+    .sort((a, b) => (b.skills[ability] || 0) - (a.skills[ability] || 0))[0];
+}
+function rollNodeCheck({ label, ability, dc }) {
+  const best = bestFor(ability);
+  const mod = best?.skills[ability] || 0;
+  return roll20('normal', { label }).then((r) => {
+    const total = r.used + mod;
+    const ok = total >= dc;
+    showRoll({ title: `${best?.name || '队伍'} · ${label}`, values: r.values, used: r.wordMode ? r.card : r.used, mod: mod + (r.bonus || 0), ac: dc, success: ok, text: ok ? '成功' : '失败', word: r.word, meaning: r.meaning, wordBonus: r.bonus || 0, wordCorrect: r.correct });
+    log(`${best?.name || '队伍'} ${label}：${checkText(r)} + ${abilityName(ability)} ${sign(mod)} = ${total} vs DC ${dc}${ok ? ' · 成功' : ' · 失败'}`, ok ? 'log-good' : 'log-bad');
+    if (r.wordMode) log(`词义：${r.word} = ${r.meaning} · ${r.correct ? '正确' : '错误'}`, r.correct ? 'log-good' : 'log-bad');
+    return { r, total, ok, best, mod };
   });
 }
-async function observeTrail() {
-  if (state.busy) return;
+function abilityName(key) {
+  return { investigation: '调查', survival: '生存', athletics: '运动', perception: '察觉' }[key] || key;
+}
+function afterNode(kicker, title, body) {
+  state.screen = 'trail';
+  setAct('trail');
+  setStory({
+    kicker, title, body,
+    actions: [
+      { key: '图', title: '继续探索', sub: '回到分支地图，选下一个节点', primary: true, onClick: openMap },
+      { key: '规', title: '查看规则书', sub: '检定、优势与短休。', onClick: openRules },
+    ],
+  });
+  renderParty();
+  renderHand();
+}
+async function nodeHorses() {
   setBusy(true);
-  const best = state.selected.map((id) => state.party[id]).sort((a, b) => (b.skills.perception || 0) - (a.skills.perception || 0))[0];
-  const mod = best?.skills.perception || 0;
-  const r = await roll20('normal');
-  const total = r.used + mod;
-  const ok = total >= 12;
-  showRoll({ title: `${best?.name || '队伍'} · 察觉树林`, values: r.values, used: r.used, mod, ac: 12, success: ok, text: ok ? '发现伏兵' : '没有发现' });
-  log(`${best?.name || '队伍'} 观察树林：d20 ${sign(mod)} = ${total} vs DC 12${ok ? ' · 成功' : ' · 失败'}`, ok ? 'log-good' : 'log-bad');
+  const { ok } = await rollNodeCheck({ label: '调查马尸', ability: 'investigation', dc: 12 });
+  state.clues.horses = ok;
+  await wait(450);
+  setBusy(false);
+  afterNode('事件 · 两匹死马', ok ? '被翻过的鞍袋' : '雨里的鞍袋', `<p>${ok ? '两匹马都中了三箭。西尔达的灰马鞍袋里有一张被雨泡皱的便条：<b>“先回凡达林。若我们没到，找巴特恩。”</b> 冈德伦的矮种马不在，泥地上有一道很宽的拖痕。' : '泥水糊住了鞍袋，你只摸到一手冷铁和断箭。拖痕被雨冲得很淡，但树影的方向还有东西在动。'}</p><p class="quiet">分支：可以继续去树影，也可以绕去翻倒的补给车。</p>`);
+}
+async function nodeStream() {
+  setBusy(true);
+  const { ok } = await rollNodeCheck({ label: '生存 · 浅溪', ability: 'survival', dc: 12 });
+  state.clues.stream = ok;
+  await wait(450);
+  setBusy(false);
+  afterNode('事件 · 路旁浅溪', ok ? '被水冲淡的拖痕' : '什么也没找到', `<p>${ok ? '你在溪边的软泥里找到两道很深的拖痕，还有一小片铁甲上的红漆。有人被拖向树影，而且不止一个。' : '雨把泥地冲成一片糊。你只看见几根被踩断的蕨草，方向说不准。'}</p><p class="quiet">${ok ? '拖痕让队伍记住了伏击位置：战斗第 1 轮攻击有优势。' : '至少溪水可以补满水袋。'}</p>`);
+}
+function nodeWagon() {
+  state.items.potions += 1;
+  world.playSkill(state.selected[0], 'heal', state.selected[0]);
+  log('在翻倒的补给车里找到 1 瓶治疗药水。', 'log-good');
+  afterNode('事件 · 翻倒的补给车', '散落的补给', '<p>车辕断了，箱子摔在蕨丛里。你从湿透的麻布下摸出一瓶还完好的治疗药水，另外还有几枚被泥裹住的银币。</p><p class="quiet">补给 +1 治疗药水。拖痕往树影方向去了。</p>');
+}
+async function nodeCliff() {
+  setBusy(true);
+  const { ok, best } = await rollNodeCheck({ label: '运动 · 崖壁', ability: 'athletics', dc: 13 });
+  await wait(400);
+  if (!ok) {
+    const dmg = d(4);
+    if (best) { best.hp = Math.max(1, best.hp - dmg); world.floatAt(best.id, `-${dmg}`, 'dmg'); log(`${best.name} 从湿岩上滑下，受到 ${dmg} 点伤害。`, 'log-bad'); }
+  }
+  state.clues.cliff = ok;
+  setBusy(false);
+  renderParty();
+  afterNode('事件 · 崖壁捷径', ok ? '岩缝上的视野' : '湿滑的岩壁', `<p>${ok ? '你们从一条被树根遮住的岩缝爬上去，能从高处看见崖壁下的裂口：溪水、两只哥布林哨兵、还有洞口的火光。' : '岩壁比看上去滑。有人摔了下来，好在只是擦伤；你们退回溪边，仍能沿拖痕去树影。'}</p><p class="quiet">${ok ? '捷径已记住：之后到巢穴入口时不会迷路。' : '下次可以换条路。'}</p>`);
+}
+async function nodeShade() {
+  setBusy(true);
+  const { ok } = await rollNodeCheck({ label: '察觉 · 树影', ability: 'perception', dc: 12 });
   state.surprised = !ok;
-  await wait(650);
+  await wait(500);
   setBusy(false);
   await startCombat(state.surprised);
+}
+function nodeCave() {
+  shortRest();
+}
+function runNode(id) {
+  if (id === 'horses') return nodeHorses();
+  if (id === 'stream') return nodeStream();
+  if (id === 'wagon') return nodeWagon();
+  if (id === 'cliff') return nodeCliff();
+  if (id === 'shade') return nodeShade();
+  if (id === 'cave') return nodeCave();
 }
 
 /* ---------------- combat ---------------- */
@@ -356,7 +510,7 @@ function heroName(id) { return state.party[id]?.name || state.goblins[id]?.name 
 
 async function startCombat(surprised = false) {
   if (state.combat) return;
-  const c = { order: [], init: {}, turn: -1, round: 1, actionUsed: false, bonusUsed: false, ended: false, surprised: !!surprised };
+  const c = { order: [], init: {}, turn: -1, round: 1, actionUsed: false, bonusUsed: false, ended: false, surprised: !!surprised, tracksAdv: !!state.clues.stream };
   state.combat = c;
   state.surprised = !!surprised;
   state.targetId = orderedGoblins()[0]?.id || null;
@@ -501,7 +655,7 @@ async function goblinAttack(g, surprise = false) {
   const target = party[Math.floor(Math.random() * party.length)];
   let mode = 'normal';
   if (target.dodge) mode = 'dis';
-  const r = await roll20(mode);
+  const r = await roll20(mode, { dice: true });
   const total = r.used + g.atk;
   const crit = r.used === 20;
   const hit = r.used === 1 ? false : (crit || total >= target.ac);
@@ -541,7 +695,7 @@ function applyDamage(target, amount, source) {
   renderParty();
 }
 async function deathSave(h) {
-  const r = await roll20('normal');
+  const r = await roll20('normal', { dice: true });
   if (r.used === 20) { h.hp = 1; h.down = false; log(`${h.name} 自然 20！睁开了眼。`, 'log-good'); world.floatAt(h.id, '+1', 'heal'); }
   else {
     h.deathOk = (h.deathOk || 0) + (r.used >= 10 ? 1 : 0);
@@ -566,10 +720,10 @@ async function victory() {
   $('#turnbar').hidden = true;
   $('#story-kicker').textContent = STORY.victory.kicker;
   $('#story-title').textContent = STORY.victory.title;
-  $('#story-body').innerHTML = `<p>${STORY.victory.body}</p><p class="quiet">战斗结束。可以短休，再沿拖痕向北。</p>`;
+  $('#story-body').innerHTML = `<p>${STORY.victory.body}</p><p class="quiet">战斗结束。回到分支地图，可以继续去巢穴入口。</p>`;
   const box = $('#story-actions');
   box.innerHTML = '';
-  const a1 = { key: '休', title: '短休 · 追上去', sub: '恢复生命骰，然后进入克拉格巢穴', primary: true, onClick: shortRest };
+  const a1 = { key: '图', title: '继续探索', sub: '回到分支地图，选下一个节点', primary: true, onClick: openMap };
   const a2 = { key: '规', title: '查看规则书', sub: '短休与死亡豁免。', onClick: openRules };
   for (const a of [a1, a2]) {
     const b = document.createElement('button'); b.type = 'button'; b.className = `choice ${a.primary ? 'primary' : ''}`;
@@ -654,6 +808,7 @@ function markAction(h, card) {
 }
 function attackMode(h, target) {
   if (h.dodge) return 'dis';
+  if (state.combat?.tracksAdv && state.combat.round === 1) return 'adv';
   if (h.advNext || h.helpAdv) return 'adv';
   return 'normal';
 }
@@ -662,13 +817,15 @@ async function useAttack(h, card) {
   if (!target || target.dead) { toast('先选一个目标。'); return; }
   setBusy(true);
   const mode = attackMode(h, target);
-  const r = await roll20(mode);
+  const r = await roll20(mode, { label: card.name });
   const blessBonus = state.combat.bless > 0 ? d(4) : 0;
   const total = r.used + h.atk.mod + blessBonus;
-  const crit = r.used === 20;
-  const hit = r.used === 1 ? false : (crit || total >= target.ac);
-  showRoll({ title: `${h.name} · ${card.name}`, values: r.values, used: r.used, mod: h.atk.mod, ac: target.ac, success: hit, text: crit ? '暴击！' : hit ? '命中' : '未命中' });
-  log(`${h.name} 用${card.name}攻击${target.name}：d20 ${sign(h.atk.mod)}${blessBonus ? ` + 祝福 ${blessBonus}` : ''} = ${total} vs AC ${target.ac}${crit ? ' · 暴击' : ''}`, 'log-roll');
+  const natural = r.wordMode ? r.card : r.used;
+  const crit = natural === 20;
+  const hit = natural === 1 ? false : (crit || total >= target.ac);
+  showRoll({ title: `${h.name} · ${card.name}`, values: r.values, used: r.wordMode ? r.card : r.used, mod: h.atk.mod + (r.bonus || 0) + (typeof blessBonus !== 'undefined' ? blessBonus : 0), ac: target.ac, success: hit, text: crit ? '暴击！' : hit ? '命中' : '未命中', word: r.word, meaning: r.meaning, wordBonus: r.bonus || 0, wordCorrect: r.correct });
+  log(`${h.name} 用${card.name}攻击${target.name}：${checkText(r)}${blessBonus ? ` + 祝福 ${blessBonus}` : ''} + 攻击 ${sign(h.atk.mod)} = ${total} vs AC ${target.ac}${crit ? ' · 暴击' : ''}`, 'log-roll');
+  if (r.wordMode) log(`词义：${r.word} = ${r.meaning} · ${r.correct ? '正确' : '错误'}`, r.correct ? 'log-good' : 'log-bad');
   const kind = h.id === 'darvin' || h.id === 'bruenor' ? 'sword' : h.id === 'barvin' ? 'bow' : 'fire';
   world.playSkill(h.id, kind, target.id);
   h.advNext = false; h.helpAdv = false;
@@ -786,10 +943,96 @@ async function useItem(h, card) {
   renderParty(); renderHand();
 }
 
+
+/* ---------------- word check ---------------- */
+
+function buildWordDeck() {
+  const pool = shuffle(WORDS).slice(0, 20);
+  const values = shuffle([...Array(20).keys()].map((i) => i + 1));
+  wordDeck = shuffle(pool.map((w, i) => ({ ...w, value: values[i] })));
+}
+function drawWordCard() {
+  if (!wordDeck.length) buildWordDeck();
+  return wordDeck.pop();
+}
+function checkText(r) {
+  if (!r || !r.wordMode) return 'd20';
+  return `词卡 ${r.card} + 词义 ${sign(r.bonus)}`;
+}
+function wordCheck(mode = 'normal', label = '检定') {
+  if (wordActive) return Promise.resolve({ values: [10], used: 10, card: 10, bonus: 0, word: '—', meaning: '—', correct: false, wordMode: true });
+  const c1 = drawWordCard();
+  const c2 = mode === 'normal' ? null : drawWordCard();
+  const correctMeaning = c1.meaning;
+  const distractorPool = shuffle(WORDS.filter((w) => w.meaning !== correctMeaning).map((w) => w.meaning)).slice(0, 3);
+  const options = shuffle([correctMeaning, ...distractorPool]);
+  const modal = $('#word-modal');
+  $('#word-kicker').textContent = `单词检定 · ${label}`;
+  $('#word-word').textContent = c1.word;
+  const optBox = $('#word-options');
+  optBox.innerHTML = '';
+  const result = $('#word-result');
+  result.hidden = true;
+  result.innerHTML = '';
+  const bar = $('#word-timer-bar');
+  bar.style.transform = 'scaleX(1)';
+  modal.hidden = false;
+  wordActive = true;
+  const started = performance.now();
+  const limit = 8000;
+  return new Promise((resolve) => {
+    let done = false;
+    const finish = (picked) => {
+      if (done) return;
+      done = true;
+      wordActive = false;
+      cancelAnimationFrame(wordTimerRaf);
+      const elapsed = (performance.now() - started) / 1000;
+      const correct = picked === correctMeaning;
+      let bonus = correct ? (elapsed <= 4 ? 3 : 2) : -2;
+      if (picked === null) bonus = -3;
+      const base = mode === 'adv' ? Math.max(c1.value, c2.value) : mode === 'dis' ? Math.min(c1.value, c2.value) : c1.value;
+      const used = base + bonus;
+      [...optBox.children].forEach((b) => {
+        b.disabled = true;
+        if (b.textContent === correctMeaning) b.classList.add('is-correct');
+        if (picked !== null && b.textContent === picked && !correct) b.classList.add('is-wrong');
+      });
+      bar.style.transform = 'scaleX(0)';
+      result.innerHTML = `<p class="${correct ? 'is-good' : 'is-bad'}">${correct ? '正确' : '错误'} · <b>${c1.word}</b> = ${c1.meaning}</p><p>词卡 <b>${base}</b>${mode !== 'normal' ? `（${mode === 'adv' ? '优势取高' : '劣势取低'}）` : ''} + 词义 <b>${sign(bonus)}</b> = <b>${used}</b></p>`;
+      result.hidden = false;
+      setTimeout(() => {
+        modal.hidden = true;
+        resolve({ values: [base], used, card: base, bonus, word: c1.word, meaning: c1.meaning, correct, wordMode: true });
+      }, 1100);
+    };
+    for (const meaning of options) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'word-option';
+      b.textContent = meaning;
+      b.addEventListener('click', () => finish(meaning));
+      optBox.appendChild(b);
+    }
+    const tick = () => {
+      if (done) return;
+      const elapsed = performance.now() - started;
+      const remain = Math.max(0, 1 - elapsed / limit);
+      bar.style.transform = `scaleX(${remain})`;
+      if (remain <= 0) { finish(null); return; }
+      wordTimerRaf = requestAnimationFrame(tick);
+    };
+    wordTimerRaf = requestAnimationFrame(tick);
+  });
+}
+
 /* ---------------- dice ---------------- */
 
 const QA = new URLSearchParams(location.search).has('qa');
-async function roll20(mode = 'normal') {
+async function roll20(mode = 'normal', opts = {}) {
+  if (state.checkMode === 'word' && !opts.dice) {
+    return await wordCheck(mode, opts.label || '检定');
+  }
   const a = d(20), b = d(20);
   const values = mode === 'normal' ? [a] : [a, b];
   let used;
@@ -865,10 +1108,17 @@ function updateEnvButton() {
   b.textContent = ENV_LABELS[e.name] || e.label;
   b.title = `当前环境：${ENV_LABELS[e.name] || e.label} · 点击切换`;
 }
+function updateCheckMode() {
+  const b = $('#btn-check-mode');
+  if (!b) return;
+  b.textContent = state.checkMode === 'word' ? '检定 · 单词' : '检定 · d20';
+  $('#dice-status').textContent = state.checkMode === 'word' ? '词卡已洗好 · 20 张' : 'd20 已在桌上';
+}
 function renderRules() {
+  const allRules = [...RULES, RULES_WORD];
   const tabs = $('#rules-tabs');
   tabs.innerHTML = '';
-  RULES.forEach((r, i) => {
+  allRules.forEach((r, i) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = `rules-tab ${i === 0 ? 'is-on' : ''}`; b.textContent = r.label;
     b.addEventListener('click', () => {
@@ -877,7 +1127,7 @@ function renderRules() {
     });
     tabs.appendChild(b);
   });
-  $('#rules-body').innerHTML = RULES[0].body;
+  $('#rules-body').innerHTML = allRules[0].body;
 }
 function openRules() {
   renderRules();
@@ -891,6 +1141,13 @@ $('#btn-intro-next').addEventListener('click', nextIntro);
 $('#btn-intro-skip').addEventListener('click', openSelect);
 $('#btn-select-back').addEventListener('click', () => openIntro(INTRO.length - 1));
 $('#btn-start').addEventListener('click', startTrail);
+$('#btn-route').addEventListener('click', openMap);
+$('#btn-map-close').addEventListener('click', closeMap);
+$('#btn-check-mode').addEventListener('click', () => {
+  state.checkMode = state.checkMode === 'word' ? 'dice' : 'word';
+  updateCheckMode();
+  toast(state.checkMode === 'word' ? '检定：单词卡' : '检定：d20');
+});
 $('#btn-rules').addEventListener('click', openRules);
 $('#btn-rules-close').addEventListener('click', closeRules);
 $('#btn-reset').addEventListener('click', () => world.resetCamera());
@@ -918,6 +1175,7 @@ window.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal
 
 state.items = { potions: 2 };
 renderRules();
+updateCheckMode();
 openIntro(0);
 updateEnvButton();
 setTimeout(() => { if (document.getElementById('loader')?.classList.contains('is-done')) { /* noop */ } }, 600);
@@ -926,7 +1184,7 @@ setTimeout(() => { if (document.getElementById('loader')?.classList.contains('is
 window.__lmop = {
   state, world,
   get phase() { return state.screen; },
-  openIntro, openSelect, toggleHero, startTrail, observeTrail, startCombat,
+  openIntro, openSelect, toggleHero, startTrail, startCombat, openMap, closeMap, travelTo, nodeHorses, nodeStream, nodeWagon, nodeCliff, nodeShade, nodeCave,
   useCard, endTurn, freeRoll,
   selectAll: () => { state.selected = [...HERO_ORDER.slice(0, 3)]; world.setSelected(state.selected); updateSelect(); },
   win: () => { for (const g of Object.values(state.goblins)) { g.hp = 0; g.dead = true; } victory(); },

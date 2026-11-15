@@ -166,3 +166,70 @@ export const RULES = [
 ];
 
 export const ENV_LABELS = { mist: '晨雾', rain: '阴雨', dusk: '黄昏', night: '夜' };
+
+/* 单词检定 · 词库与词义
+   每次检定从词库随机抽词；词卡面值 1–20 随机分配，词义掌握只加修正，不保证成功。 */
+export const WORDS = [
+  { word: 'trail', meaning: '小径' },
+  { word: 'ambush', meaning: '伏击' },
+  { word: 'goblin', meaning: '哥布林' },
+  { word: 'wagon', meaning: '马车' },
+  { word: 'horse', meaning: '马' },
+  { word: 'cave', meaning: '洞穴' },
+  { word: 'forest', meaning: '森林' },
+  { word: 'rain', meaning: '雨' },
+  { word: 'torch', meaning: '火把' },
+  { word: 'sword', meaning: '剑' },
+  { word: 'shield', meaning: '盾' },
+  { word: 'heal', meaning: '治疗' },
+  { word: 'danger', meaning: '危险' },
+  { word: 'path', meaning: '道路' },
+  { word: 'river', meaning: '河流' },
+  { word: 'bridge', meaning: '桥' },
+  { word: 'trap', meaning: '陷阱' },
+  { word: 'scout', meaning: '侦察兵' },
+  { word: 'rescue', meaning: '营救' },
+  { word: 'escape', meaning: '逃脱' },
+  { word: 'attack', meaning: '攻击' },
+  { word: 'hide', meaning: '躲藏' },
+  { word: 'search', meaning: '搜索' },
+  { word: 'listen', meaning: '听' },
+  { word: 'alert', meaning: '警觉' },
+  { word: 'dark', meaning: '黑暗' },
+  { word: 'light', meaning: '光' },
+  { word: 'climb', meaning: '攀爬' },
+  { word: 'strong', meaning: '强壮' },
+  { word: 'weak', meaning: '虚弱' },
+];
+
+export const MAP_NODES = [
+  { id: 'trail', label: '三猪小径', sub: '雨里的车辙', type: 'start', icon: '◎', x: 12, y: 50 },
+  { id: 'horses', label: '两匹死马', sub: '鞍袋与黑羽箭', type: 'event', icon: '◇', x: 37, y: 24, check: '调查', ability: 'investigation', dc: 12, best: 'aramil' },
+  { id: 'stream', label: '路旁浅溪', sub: '被雨冲淡的痕迹', type: 'event', icon: '◇', x: 37, y: 76, check: '生存', ability: 'survival', dc: 12, best: 'barvin' },
+  { id: 'shade', label: '树影', sub: '蕨丛里的黄绿色眼睛', type: 'combat', icon: '⚔', x: 62, y: 22 },
+  { id: 'wagon', label: '翻倒的补给车', sub: '散落的补给', type: 'treasure', icon: '▣', x: 62, y: 50 },
+  { id: 'cliff', label: '崖壁捷径', sub: '湿滑的岩缝', type: 'event', icon: '◇', x: 62, y: 78, check: '运动', ability: 'athletics', dc: 13, best: 'darvin' },
+  { id: 'cave', label: '克拉格巢穴', sub: '岩壁下的裂口', type: 'end', icon: '⌂', x: 87, y: 50 },
+];
+export const MAP_EDGES = [
+  ['trail', 'horses'], ['trail', 'stream'],
+  ['horses', 'shade'], ['horses', 'wagon'],
+  ['stream', 'shade'], ['stream', 'cliff'],
+  ['shade', 'cave'], ['wagon', 'cave'], ['cliff', 'cave'],
+];
+
+
+export const RULES_WORD = {
+  id: 'word', label: '单词检定',
+  body: `<h3>为什么不是 d20</h3>
+    <p>单词检定把 d20 换成一张随机词卡：牌堆 20 张，词卡面值 1–20 随机分配；洗牌后抽一张，面值就是这次检定的“骰面”。</p>
+    <h3>词义修正</h3>
+    <ul><li>4 秒内选对：<b>+3</b></li><li>8 秒内选对：<b>+2</b></li><li>选错：<b>-2</b></li><li>超时：<b>-3</b></li></ul>
+    <p>结果 = 词卡面值 + 词义修正 + 属性调整值，对抗 DC / AC。</p>
+    <h3>随机性在哪</h3>
+    <p>词卡面值、抽到的单词、四个选项的顺序、干扰项都随机；牌堆用完重洗、面值重排。认识单词会提高结果，但抽到低面值仍可能失败，不认识也可能靠高面值成功。</p>
+    <h3>优势 / 劣势</h3>
+    <p>优势抽两张词卡取高面值，劣势取低面值；只问其中一张的单词，词义修正只算一次。</p>
+    <h3>模式</h3>
+    <p>手牌区「检定 · 单词 / d20」可切回原来的 d20；敌人攻击与死亡豁免默认用 d20，避免替 DM 答题。</p>`,
+};

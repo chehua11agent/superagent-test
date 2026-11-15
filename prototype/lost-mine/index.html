@@ -85,6 +85,7 @@
       <div class="story-head">
         <p class="story-kicker" id="story-kicker">第一幕 · 三猪小径</p>
         <h2 id="story-title">两匹死马</h2>
+        <button type="button" class="story-toggle story-route-btn" id="btn-route" aria-label="打开路线图">路线</button>
         <button type="button" class="story-toggle" id="story-toggle" aria-label="收起剧情">收起</button>
       </div>
       <div class="story-body" id="story-body"></div>
@@ -101,6 +102,7 @@
           <p class="hand-hint" id="hand-hint">先观察树林，再决定是否动手</p>
         </div>
         <div class="dice-box">
+          <button type="button" class="mode-btn" id="btn-check-mode" title="切换检定方式">检定 · 单词</button>
           <p class="dice-status" id="dice-status">d20 已在桌上</p>
           <button type="button" class="dice-btn" id="btn-roll"><span>d20</span> 自由掷骰</button>
         </div>
@@ -138,6 +140,46 @@
 
     <p class="table-hint" id="table-hint">拖拽旋转 · 滚轮缩放 · 点角色 / 哥布林 / 骰子</p>
   </div>
+
+  <!-- 单词检定 -->
+  <div class="word-modal" id="word-modal" hidden>
+    <div class="word-backdrop"></div>
+    <div class="word-card" role="dialog" aria-modal="true" aria-labelledby="word-word">
+      <p class="word-kicker" id="word-kicker">单词检定 · 察觉</p>
+      <p class="word-sub">选出正确的中文词义</p>
+      <h2 class="word-word" id="word-word">trail</h2>
+      <div class="word-timer"><i id="word-timer-bar"></i></div>
+      <div class="word-options" id="word-options"></div>
+      <div class="word-result" id="word-result" hidden></div>
+      <p class="word-tail">词卡面值 = 本次 d20 · 词义掌握只加修正，不保证成功</p>
+    </div>
+  </div>
+
+  <!-- 探索地图 -->
+  <section class="map-screen" id="map" aria-label="探索地图" hidden>
+    <header class="map-head">
+      <div>
+        <p class="drawer-kicker">EXPLORATION MAP · BRANCH</p>
+        <h2>三猪小径</h2>
+        <p class="map-sub">选一个相邻节点，走到哪里就触发哪个事件；战斗仍按 5e。手机可左右滑动地图。</p>
+      </div>
+      <button type="button" class="icon-btn" id="btn-map-close" aria-label="关闭地图">×</button>
+    </header>
+    <div class="map-wrap">
+      <div class="map-board" id="map-board">
+        <svg class="map-lines" id="map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="map-nodes" id="map-nodes"></div>
+      </div>
+    </div>
+    <footer class="map-foot">
+      <span class="map-legend"><i class="lg-start"></i>起点</span>
+      <span class="map-legend"><i class="lg-event"></i>事件</span>
+      <span class="map-legend"><i class="lg-combat"></i>战斗</span>
+      <span class="map-legend"><i class="lg-treasure"></i>补给</span>
+      <span class="map-legend"><i class="lg-end"></i>终点</span>
+      <p>分支树只决定探索事件与顺序；战斗、距离、掩体仍按 5e theater of mind，不引入棋盘格移动。</p>
+    </footer>
+  </section>
 
   <div class="loader" id="loader">
     <div class="loader-inner">
