@@ -29,6 +29,25 @@
     "source_policy": "只保留结构化字段与摘要，不收录原文段落；数值以本书第 16–33 页为准。",
     "scope_note": "第 3 章及后续章节的内容只作为任务指向记录，不在本文件展开。"
   },
+  "validation": {
+    "method": "python3 -m json.tool + 自定义交叉引用检查 + 关键页图像复核",
+    "checks": [
+      "JSON 可解析",
+      "章节/场景/NPC/怪物/检定/奖励之间的 ID 引用全部存在",
+      "所有页码落在书内第 16–33 页（PDF 第 17–34 页）范围内",
+      "XP、DC、金币/宝石数量与原文核对",
+      "未收录模组原文段落"
+    ],
+    "result": "passed",
+    "checked_date": "2026-11-15",
+    "known_gaps": [
+      "本文件只覆盖 PART 2（书内第 16–33 页 / PDF 第 17–34 页）；第 3 章及以后只保留任务指向。",
+      "怪物条目只记录原文明确给出的数量、XP 与特殊信息，不补写原文未出现的 AC/HP 数据。",
+      "中文译文存在译名不一致：水晶之杖/水水晶之杖、伊阿诺-阿布雷克/阿博瑞克、大眼怪/独眼怪、回浪洞穴/潮音洞穴、雷树镇/雷霆树废墟；本文件以正文常用译名为主，并在 aliases 中保留别名。",
+      "PDF 第 16 页为整页插图；书内第 16 页对应 PDF 第 17 页。",
+      "不含模组原文段落，只保留结构化摘要。"
+    ]
+  },
   "chapters": [
     {
       "id": "ch02-phandalin",
@@ -237,10 +256,10 @@
       ],
       "monster_ids": [],
       "check_ids": [
-        "chk-barthen-history"
+        "check-barthen-history"
       ],
       "reward_ids": [
-        "rw-barthen-delivery"
+        "reward-barthen-delivery"
       ],
       "quests": [
         {
@@ -270,7 +289,7 @@
       "monster_ids": [],
       "check_ids": [],
       "reward_ids": [
-        "rw-title-knight"
+        "reward-title-knight"
       ],
       "quests": [
         {
@@ -308,7 +327,7 @@
       "monster_ids": [],
       "check_ids": [],
       "reward_ids": [
-        "rw-linene-goods"
+        "reward-linene-goods"
       ],
       "quests": [
         {
@@ -338,11 +357,11 @@
       ],
       "monster_ids": [],
       "check_ids": [
-        "chk-halia-insight"
+        "check-halia-insight"
       ],
       "reward_ids": [
-        "rw-halia-quest",
-        "rw-title-fang"
+        "reward-halia-quest",
+        "reward-title-fang"
       ],
       "quests": [
         {
@@ -414,8 +433,8 @@
       "monster_ids": [],
       "check_ids": [],
       "reward_ids": [
-        "rw-garaele-potions",
-        "rw-title-watcher"
+        "reward-garaele-potions",
+        "reward-title-watcher"
       ],
       "quests": [
         {
@@ -447,11 +466,11 @@
       ],
       "npc_ids": [],
       "monster_ids": [
-        "mon-redbrand-ruffian"
+        "monster-redbrand-ruffian"
       ],
       "check_ids": [],
       "reward_ids": [
-        "rw-xp-redbrand-ruffians"
+        "reward-xp-redbrand-ruffians"
       ]
     },
     {
@@ -472,10 +491,10 @@
       "monster_ids": [],
       "check_ids": [],
       "reward_ids": [
-        "rw-harbin-orcs",
-        "rw-sildar-castle",
-        "rw-sildar-iarno",
-        "rw-title-cloak"
+        "reward-harbin-orcs",
+        "reward-sildar-castle",
+        "reward-sildar-iarno",
+        "reward-title-cloak"
       ],
       "quests": [
         {
@@ -547,11 +566,11 @@
         "npc-harbin-wester"
       ],
       "monster_ids": [
-        "mon-redbrand-ruffian"
+        "monster-redbrand-ruffian"
       ],
       "check_ids": [],
       "reward_ids": [
-        "rw-xp-redbrand-ruffians"
+        "reward-xp-redbrand-ruffians"
       ],
       "dm_guidance": [
         "遭遇后应让玩家觉得该去解决剩下的帮匪；若他们还不清楚，让一名已见过的镇上 NPC 指路去特雷山大庄园。",
@@ -606,19 +625,19 @@
         "npc-mirna-dendrar"
       ],
       "monster_ids": [
-        "mon-redbrand-ruffian",
-        "mon-skeleton",
-        "mon-nothic",
-        "mon-bugbear",
-        "mon-goblin-droop",
-        "mon-rat-familiar",
-        "mon-iarno-albrek"
+        "monster-redbrand-ruffian",
+        "monster-skeleton",
+        "monster-nothic",
+        "monster-bugbear",
+        "monster-goblin-droop",
+        "monster-rat-familiar",
+        "monster-iarno-albrek"
       ],
       "check_ids": [
-        "chk-secret-door-passive",
-        "chk-secret-door-search",
-        "chk-door-lock",
-        "chk-door-break"
+        "check-secret-door-passive",
+        "check-secret-door-search",
+        "check-door-lock",
+        "check-door-break"
       ],
       "reward_ids": [],
       "area_scene_ids": [
@@ -656,10 +675,10 @@
       "npc_ids": [],
       "monster_ids": [],
       "check_ids": [
-        "chk-cistern-rope"
+        "check-cistern-rope"
       ],
       "reward_ids": [
-        "rw-area1-pouch"
+        "reward-area1-pouch"
       ],
       "connections": [
         "scene-hideout-area-2",
@@ -683,12 +702,12 @@
       ],
       "npc_ids": [],
       "monster_ids": [
-        "mon-redbrand-ruffian"
+        "monster-redbrand-ruffian"
       ],
       "check_ids": [],
       "reward_ids": [
-        "rw-xp-area-2",
-        "rw-area2-treasure"
+        "reward-xp-area-2",
+        "reward-area2-treasure"
       ],
       "connections": [
         "scene-hideout-area-1"
@@ -711,12 +730,12 @@
       "npc_ids": [],
       "monster_ids": [],
       "check_ids": [
-        "chk-pit-find",
-        "chk-pit-edge",
-        "chk-pit-save"
+        "check-pit-find",
+        "check-pit-edge",
+        "check-pit-save"
       ],
       "reward_ids": [
-        "rw-xp-area-3"
+        "reward-xp-area-3"
       ],
       "connections": [
         "scene-hideout-area-2",
@@ -741,12 +760,12 @@
       ],
       "npc_ids": [],
       "monster_ids": [
-        "mon-skeleton"
+        "monster-skeleton"
       ],
       "check_ids": [],
       "reward_ids": [
-        "rw-xp-area-4",
-        "rw-area4-treasure"
+        "reward-xp-area-4",
+        "reward-area4-treasure"
       ],
       "connections": [
         "scene-hideout-area-3",
@@ -776,15 +795,15 @@
         "npc-nilsa"
       ],
       "monster_ids": [
-        "mon-redbrand-ruffian"
+        "monster-redbrand-ruffian"
       ],
       "check_ids": [
-        "chk-cell-gate-tools",
-        "chk-cell-gate-force"
+        "check-cell-gate-tools",
+        "check-cell-gate-force"
       ],
       "reward_ids": [
-        "rw-xp-area-5",
-        "rw-xp-area-5-family"
+        "reward-xp-area-5",
+        "reward-xp-area-5-family"
       ],
       "connections": [
         "scene-hideout-area-4",
@@ -818,10 +837,10 @@
       "npc_ids": [],
       "monster_ids": [],
       "check_ids": [
-        "chk-door-lock"
+        "check-door-lock"
       ],
       "reward_ids": [
-        "rw-area6-weapons"
+        "reward-area6-weapons"
       ],
       "connections": [
         "scene-hideout-area-4",
@@ -845,10 +864,10 @@
       "npc_ids": [],
       "monster_ids": [],
       "check_ids": [
-        "chk-secret-door-search"
+        "check-secret-door-search"
       ],
       "reward_ids": [
-        "rw-area7-pelts"
+        "reward-area7-pelts"
       ],
       "connections": [
         "scene-hideout-area-6",
@@ -878,15 +897,15 @@
         "npc-thel-dendrar"
       ],
       "monster_ids": [
-        "mon-nothic"
+        "monster-nothic"
       ],
       "check_ids": [
-        "chk-bridge-notice",
-        "chk-talon-history"
+        "check-bridge-notice",
+        "check-talon-history"
       ],
       "reward_ids": [
-        "rw-xp-area-8",
-        "rw-area8-treasure"
+        "reward-xp-area-8",
+        "reward-area8-treasure"
       ],
       "connections": [
         "scene-hideout-area-1",
@@ -917,17 +936,17 @@
         "npc-droop"
       ],
       "monster_ids": [
-        "mon-bugbear",
-        "mon-goblin-droop"
+        "monster-bugbear",
+        "monster-goblin-droop"
       ],
       "check_ids": [
-        "chk-bugbear-listen",
-        "chk-bugbear-intimidate",
-        "chk-bugbear-deceive"
+        "check-bugbear-listen",
+        "check-bugbear-intimidate",
+        "check-bugbear-deceive"
       ],
       "reward_ids": [
-        "rw-xp-area-9",
-        "rw-area9-treasure"
+        "reward-xp-area-9",
+        "reward-area9-treasure"
       ],
       "connections": [
         "scene-hideout-area-8",
@@ -951,15 +970,15 @@
       ],
       "npc_ids": [],
       "monster_ids": [
-        "mon-redbrand-ruffian"
+        "monster-redbrand-ruffian"
       ],
       "check_ids": [
-        "chk-commonroom-listen",
-        "chk-commonroom-deceive"
+        "check-commonroom-listen",
+        "check-commonroom-deceive"
       ],
       "reward_ids": [
-        "rw-xp-area-10",
-        "rw-area10-treasure"
+        "reward-xp-area-10",
+        "reward-area10-treasure"
       ],
       "connections": [
         "scene-hideout-area-9",
@@ -986,13 +1005,13 @@
         "npc-iarno-albrek"
       ],
       "monster_ids": [
-        "mon-rat-familiar"
+        "monster-rat-familiar"
       ],
       "check_ids": [
-        "chk-workshop-listen"
+        "check-workshop-listen"
       ],
       "reward_ids": [
-        "rw-area11-ingredients"
+        "reward-area11-ingredients"
       ],
       "connections": [
         "scene-hideout-area-10",
@@ -1023,14 +1042,14 @@
         "npc-black-spider"
       ],
       "monster_ids": [
-        "mon-iarno-albrek"
+        "monster-iarno-albrek"
       ],
       "check_ids": [
-        "chk-glasstaff-secretdoor"
+        "check-glasstaff-secretdoor"
       ],
       "reward_ids": [
-        "rw-xp-area-12",
-        "rw-area12-treasure"
+        "reward-xp-area-12",
+        "reward-area12-treasure"
       ],
       "connections": [
         "scene-hideout-area-11",
@@ -1424,7 +1443,7 @@
   ],
   "monsters": [
     {
-      "id": "mon-redbrand-ruffian",
+      "id": "monster-redbrand-ruffian",
       "name": "红烙印恶霸",
       "name_en": "Redbrand Ruffian",
       "type": "humanoid (human)",
@@ -1471,7 +1490,7 @@
       "intel": "被俘/受控后可供出：首领是水晶之杖（人类法师）；房间在区域 11-12；黑蜘蛛雇佣他们并派来熊地精；区域 8 有大眼怪；区域 4-5 有骷髅看守的俘虏。"
     },
     {
-      "id": "mon-skeleton",
+      "id": "monster-skeleton",
       "name": "骷髅",
       "name_en": "Skeleton",
       "type": "undead",
@@ -1490,7 +1509,7 @@
       "intel": null
     },
     {
-      "id": "mon-nothic",
+      "id": "monster-nothic",
       "name": "大眼怪",
       "aliases": [
         "独眼怪"
@@ -1524,7 +1543,7 @@
       "intel": "知道所有红烙印恶霸知道的事。"
     },
     {
-      "id": "mon-bugbear",
+      "id": "monster-bugbear",
       "name": "熊地精",
       "name_en": "Bugbear",
       "type": "humanoid (goblinoid)",
@@ -1552,7 +1571,7 @@
       "intel": "知道潮音洞穴与克拉格莫城堡的位置，但更怕黑蜘蛛；DC15 魅力（胁迫）可打探。"
     },
     {
-      "id": "mon-goblin-droop",
+      "id": "monster-goblin-droop",
       "name": "Droop",
       "name_en": "Droop",
       "type": "humanoid (goblinoid)",
@@ -1571,7 +1590,7 @@
       "intel": "知道藏身处布局、密门与陷阱；知道克拉格莫城堡在北方森林，但不记得路线。"
     },
     {
-      "id": "mon-rat-familiar",
+      "id": "monster-rat-familiar",
       "name": "老鼠魔宠",
       "name_en": "Rat Familiar",
       "type": "beast (familiar)",
@@ -1590,7 +1609,7 @@
       "intel": "会把入侵者消息传给伊阿诺，使其有时间准备或逃跑。"
     },
     {
-      "id": "mon-iarno-albrek",
+      "id": "monster-iarno-albrek",
       "name": "伊阿诺-阿布雷克（水晶之杖）",
       "name_en": "Iarno Albrek (Glasstaff)",
       "type": "humanoid (human, mage)",
@@ -1625,7 +1644,7 @@
   ],
   "checks": [
     {
-      "id": "chk-barthen-history",
+      "id": "check-barthen-history",
       "scene_id": "scene-barthens-provisions",
       "check": "智力（历史）",
       "dc": 15,
@@ -1633,7 +1652,7 @@
       "pages": "19"
     },
     {
-      "id": "chk-halia-insight",
+      "id": "check-halia-insight",
       "scene_id": "scene-miners-exchange",
       "check": "感知（洞察）",
       "dc": 15,
@@ -1641,7 +1660,7 @@
       "pages": "21"
     },
     {
-      "id": "chk-secret-door-passive",
+      "id": "check-secret-door-passive",
       "scene_id": "scene-redbrand-hideout",
       "check": "被动感知（侦察）",
       "dc": 15,
@@ -1649,7 +1668,7 @@
       "pages": "24"
     },
     {
-      "id": "chk-secret-door-search",
+      "id": "check-secret-door-search",
       "scene_id": "scene-redbrand-hideout",
       "check": "感知（侦察）",
       "dc": 10,
@@ -1657,7 +1676,7 @@
       "pages": "24"
     },
     {
-      "id": "chk-door-lock",
+      "id": "check-door-lock",
       "scene_id": "scene-redbrand-hideout",
       "check": "敏捷（盗贼工具）",
       "dc": 10,
@@ -1665,7 +1684,7 @@
       "pages": "24"
     },
     {
-      "id": "chk-door-break",
+      "id": "check-door-break",
       "scene_id": "scene-redbrand-hideout",
       "check": "力量",
       "dc": 20,
@@ -1673,7 +1692,7 @@
       "pages": "24"
     },
     {
-      "id": "chk-cistern-rope",
+      "id": "check-cistern-rope",
       "scene_id": "scene-hideout-area-1",
       "check": "感知（侦察）",
       "dc": 15,
@@ -1681,7 +1700,7 @@
       "pages": "25"
     },
     {
-      "id": "chk-pit-find",
+      "id": "check-pit-find",
       "scene_id": "scene-hideout-area-3",
       "check": "感知（侦察）",
       "dc": 15,
@@ -1689,7 +1708,7 @@
       "pages": "26"
     },
     {
-      "id": "chk-pit-edge",
+      "id": "check-pit-edge",
       "scene_id": "scene-hideout-area-3",
       "check": "敏捷（杂技）",
       "dc": 10,
@@ -1697,7 +1716,7 @@
       "pages": "26"
     },
     {
-      "id": "chk-pit-save",
+      "id": "check-pit-save",
       "scene_id": "scene-hideout-area-3",
       "check": "敏捷豁免",
       "dc": 15,
@@ -1705,7 +1724,7 @@
       "pages": "26"
     },
     {
-      "id": "chk-cell-gate-tools",
+      "id": "check-cell-gate-tools",
       "scene_id": "scene-hideout-area-5",
       "check": "敏捷（盗贼工具）",
       "dc": 10,
@@ -1713,7 +1732,7 @@
       "pages": "27"
     },
     {
-      "id": "chk-cell-gate-force",
+      "id": "check-cell-gate-force",
       "scene_id": "scene-hideout-area-5",
       "check": "力量",
       "dc": 22,
@@ -1721,7 +1740,7 @@
       "pages": "27"
     },
     {
-      "id": "chk-bridge-notice",
+      "id": "check-bridge-notice",
       "scene_id": "scene-hideout-area-8",
       "check": "智力（调查）",
       "dc": 15,
@@ -1729,7 +1748,7 @@
       "pages": "29"
     },
     {
-      "id": "chk-talon-history",
+      "id": "check-talon-history",
       "scene_id": "scene-hideout-area-8",
       "check": "智力（历史）",
       "dc": 15,
@@ -1737,7 +1756,7 @@
       "pages": "29"
     },
     {
-      "id": "chk-bugbear-listen",
+      "id": "check-bugbear-listen",
       "scene_id": "scene-hideout-area-9",
       "check": "感知（侦察）",
       "dc": 10,
@@ -1745,7 +1764,7 @@
       "pages": "29"
     },
     {
-      "id": "chk-bugbear-intimidate",
+      "id": "check-bugbear-intimidate",
       "scene_id": "scene-hideout-area-9",
       "check": "魅力（威吓）",
       "dc": 15,
@@ -1753,7 +1772,7 @@
       "pages": "30"
     },
     {
-      "id": "chk-bugbear-deceive",
+      "id": "check-bugbear-deceive",
       "scene_id": "scene-hideout-area-9",
       "check": "魅力（欺瞒）",
       "dc": 15,
@@ -1761,7 +1780,7 @@
       "pages": "30"
     },
     {
-      "id": "chk-commonroom-listen",
+      "id": "check-commonroom-listen",
       "scene_id": "scene-hideout-area-10",
       "check": "感知（侦察）",
       "dc": 10,
@@ -1769,7 +1788,7 @@
       "pages": "30"
     },
     {
-      "id": "chk-commonroom-deceive",
+      "id": "check-commonroom-deceive",
       "scene_id": "scene-hideout-area-10",
       "check": "魅力（欺瞒）",
       "dc": 10,
@@ -1777,7 +1796,7 @@
       "pages": "31"
     },
     {
-      "id": "chk-workshop-listen",
+      "id": "check-workshop-listen",
       "scene_id": "scene-hideout-area-11",
       "check": "感知（侦察）",
       "dc": 15,
@@ -1785,7 +1804,7 @@
       "pages": "31"
     },
     {
-      "id": "chk-glasstaff-secretdoor",
+      "id": "check-glasstaff-secretdoor",
       "scene_id": "scene-hideout-area-12",
       "check": "能力检定（寻找微开的密门）",
       "dc": null,
@@ -1795,7 +1814,7 @@
   ],
   "rewards": [
     {
-      "id": "rw-barthen-delivery",
+      "id": "reward-barthen-delivery",
       "type": "gold",
       "scene_id": "scene-barthens-provisions",
       "amount": "每人 10 gp",
@@ -1803,7 +1822,7 @@
       "pages": "19"
     },
     {
-      "id": "rw-linene-goods",
+      "id": "reward-linene-goods",
       "type": "gold",
       "scene_id": "scene-lionshield-coster",
       "amount": 50,
@@ -1812,7 +1831,7 @@
       "pages": "20"
     },
     {
-      "id": "rw-halia-quest",
+      "id": "reward-halia-quest",
       "type": "gold",
       "scene_id": "scene-miners-exchange",
       "amount": 100,
@@ -1821,7 +1840,7 @@
       "pages": "21"
     },
     {
-      "id": "rw-harbin-orcs",
+      "id": "reward-harbin-orcs",
       "type": "gold",
       "scene_id": "scene-townmasters-hall",
       "amount": 100,
@@ -1830,7 +1849,7 @@
       "pages": "22"
     },
     {
-      "id": "rw-sildar-castle",
+      "id": "reward-sildar-castle",
       "type": "gold",
       "scene_id": "scene-townmasters-hall",
       "amount": 500,
@@ -1839,7 +1858,7 @@
       "pages": "22"
     },
     {
-      "id": "rw-sildar-iarno",
+      "id": "reward-sildar-iarno",
       "type": "gold",
       "scene_id": "scene-townmasters-hall",
       "amount": 200,
@@ -1848,7 +1867,7 @@
       "pages": "22"
     },
     {
-      "id": "rw-garaele-potions",
+      "id": "reward-garaele-potions",
       "type": "item",
       "scene_id": "scene-shrine-of-luck",
       "items": [
@@ -1858,7 +1877,7 @@
       "pages": "21-22"
     },
     {
-      "id": "rw-title-knight",
+      "id": "reward-title-knight",
       "type": "title",
       "scene_id": "scene-edermath-orchard",
       "items": [
@@ -1868,7 +1887,7 @@
       "pages": "19"
     },
     {
-      "id": "rw-title-fang",
+      "id": "reward-title-fang",
       "type": "title",
       "scene_id": "scene-miners-exchange",
       "items": [
@@ -1878,7 +1897,7 @@
       "pages": "21"
     },
     {
-      "id": "rw-title-watcher",
+      "id": "reward-title-watcher",
       "type": "title",
       "scene_id": "scene-shrine-of-luck",
       "items": [
@@ -1888,7 +1907,7 @@
       "pages": "22"
     },
     {
-      "id": "rw-title-cloak",
+      "id": "reward-title-cloak",
       "type": "title",
       "scene_id": "scene-townmasters-hall",
       "items": [
@@ -1898,7 +1917,7 @@
       "pages": "22"
     },
     {
-      "id": "rw-xp-redbrand-ruffians",
+      "id": "reward-xp-redbrand-ruffians",
       "type": "xp",
       "scene_id": "scene-redbrand-ruffians",
       "amount": 400,
@@ -1907,7 +1926,7 @@
       "pages": "23"
     },
     {
-      "id": "rw-xp-area-2",
+      "id": "reward-xp-area-2",
       "type": "xp",
       "scene_id": "scene-hideout-area-2",
       "amount": 300,
@@ -1916,7 +1935,7 @@
       "pages": "25"
     },
     {
-      "id": "rw-xp-area-3",
+      "id": "reward-xp-area-3",
       "type": "xp",
       "scene_id": "scene-hideout-area-3",
       "amount": 100,
@@ -1925,7 +1944,7 @@
       "pages": "26"
     },
     {
-      "id": "rw-xp-area-4",
+      "id": "reward-xp-area-4",
       "type": "xp",
       "scene_id": "scene-hideout-area-4",
       "amount": 150,
@@ -1934,7 +1953,7 @@
       "pages": "27"
     },
     {
-      "id": "rw-xp-area-5",
+      "id": "reward-xp-area-5",
       "type": "xp",
       "scene_id": "scene-hideout-area-5",
       "amount": 200,
@@ -1943,7 +1962,7 @@
       "pages": "28"
     },
     {
-      "id": "rw-xp-area-5-family",
+      "id": "reward-xp-area-5-family",
       "type": "xp",
       "scene_id": "scene-hideout-area-5",
       "amount": 100,
@@ -1952,7 +1971,7 @@
       "pages": "28"
     },
     {
-      "id": "rw-xp-area-8",
+      "id": "reward-xp-area-8",
       "type": "xp",
       "scene_id": "scene-hideout-area-8",
       "amount": 450,
@@ -1961,7 +1980,7 @@
       "pages": "29"
     },
     {
-      "id": "rw-xp-area-9",
+      "id": "reward-xp-area-9",
       "type": "xp",
       "scene_id": "scene-hideout-area-9",
       "amount": 600,
@@ -1970,7 +1989,7 @@
       "pages": "30"
     },
     {
-      "id": "rw-xp-area-10",
+      "id": "reward-xp-area-10",
       "type": "xp",
       "scene_id": "scene-hideout-area-10",
       "amount": 400,
@@ -1979,7 +1998,7 @@
       "pages": "31"
     },
     {
-      "id": "rw-xp-area-12",
+      "id": "reward-xp-area-12",
       "type": "xp",
       "scene_id": "scene-hideout-area-12",
       "amount": 200,
@@ -1989,7 +2008,7 @@
       "pages": "33"
     },
     {
-      "id": "rw-area1-pouch",
+      "id": "reward-area1-pouch",
       "type": "treasure",
       "scene_id": "scene-hideout-area-1",
       "items": [
@@ -2002,7 +2021,7 @@
       "pages": "25"
     },
     {
-      "id": "rw-area2-treasure",
+      "id": "reward-area2-treasure",
       "type": "treasure",
       "scene_id": "scene-hideout-area-2",
       "items": [
@@ -2016,7 +2035,7 @@
       "pages": "25"
     },
     {
-      "id": "rw-area4-treasure",
+      "id": "reward-area4-treasure",
       "type": "treasure",
       "scene_id": "scene-hideout-area-4",
       "items": [
@@ -2026,7 +2045,7 @@
       "pages": "27"
     },
     {
-      "id": "rw-area6-weapons",
+      "id": "reward-area6-weapons",
       "type": "treasure",
       "scene_id": "scene-hideout-area-6",
       "items": [
@@ -2041,7 +2060,7 @@
       "pages": "28"
     },
     {
-      "id": "rw-area7-pelts",
+      "id": "reward-area7-pelts",
       "type": "treasure",
       "scene_id": "scene-hideout-area-7",
       "items": [
@@ -2051,7 +2070,7 @@
       "pages": "28"
     },
     {
-      "id": "rw-area8-treasure",
+      "id": "reward-area8-treasure",
       "type": "treasure",
       "scene_id": "scene-hideout-area-8",
       "items": [
@@ -2066,7 +2085,7 @@
       "pages": "29"
     },
     {
-      "id": "rw-area9-treasure",
+      "id": "reward-area9-treasure",
       "type": "treasure",
       "scene_id": "scene-hideout-area-9",
       "items": [
@@ -2078,7 +2097,7 @@
       "pages": "30"
     },
     {
-      "id": "rw-area10-treasure",
+      "id": "reward-area10-treasure",
       "type": "treasure",
       "scene_id": "scene-hideout-area-10",
       "items": [
@@ -2092,7 +2111,7 @@
       "pages": "30"
     },
     {
-      "id": "rw-area11-ingredients",
+      "id": "reward-area11-ingredients",
       "type": "treasure",
       "scene_id": "scene-hideout-area-11",
       "items": [
@@ -2104,7 +2123,7 @@
       "pages": "31"
     },
     {
-      "id": "rw-area12-treasure",
+      "id": "reward-area12-treasure",
       "type": "treasure",
       "scene_id": "scene-hideout-area-12",
       "items": [
