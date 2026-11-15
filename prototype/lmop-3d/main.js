@@ -17,6 +17,30 @@ const MAP_META = {
   'map-road-to-phandalin': { spawn: 0, target: 1, targetName: '哥布林伏击', objective: '检查小径两侧的灌木，找到哥布林伏击点。', done: '伏击点已找到。原型：完整战斗在下一版接入。' },
   'map-sword-coast-region': { region: true, objective: '拖动旋转剑湾桌面，滚轮缩放；点击地点查看地标、hex 与旅行距离。', done: '正在查看剑湾区域图。' },
 };
+const CAMPAIGN = [
+  { id: 'c1-ambush', chapter: '第一章 · 哥布林之矢', map: 'map-road-to-phandalin', target: 1, targetName: '伏击点',
+    objective: '检查小径两侧的灌木，找到哥布林伏击点。', done: '伏击点已找到，可以前往克拉格莫窝点。',
+    outro: '哥布林把俘虏和货物拖向北方。你们沿着小径追上拖痕，来到山腹中的克拉格莫窝点。' },
+  { id: 'c1-hideout', chapter: '第一章 · 克拉格莫窝点', map: 'map-cragmaw-hideout', target: 8, targetName: '克拉格',
+    objective: '沿暗溪深入，找到区域 8 的克拉格，救出西达尔。', done: '克拉格已找到，西达尔获救。',
+    outro: '克拉格倒下，西达尔·荷温特获救。他请你们护送他回凡度林，并指向红烙印的据点。' },
+  { id: 'c2-phandalin', chapter: '第二章 · 凡度林', map: 'map-phandalin', target: 9, targetName: '镇长',
+    objective: '到镇长大厅报到，接下处理红烙印的任务。', done: '已到镇长大厅，红烙印的线索指向特雷山大庄园。',
+    outro: '镇长与西达尔指向镇东山坡上的特雷山大庄园。红烙印把地窖改成了地下堡垒。' },
+  { id: 'c2-redbrand', chapter: '第二章 · 红烙印大本营', map: 'map-redbrand-hideout', target: 12, targetName: '水晶之杖',
+    objective: '穿过地窖与裂隙，找到区域 12 的水晶之杖。', done: '水晶之杖已找到，红烙印被击溃。',
+    outro: '红烙印被击溃，凡度林暂时安全。下一步是去雷霆树镇找德鲁伊莱多斯，问出克拉格莫城堡的位置。' },
+  { id: 'c3-thundertree', chapter: '第三章 · 雷霆树镇', map: 'map-thundertree', target: 4, targetName: '莱多斯',
+    objective: '找到区域 4 的德鲁伊莱多斯，问出克拉格莫城堡的位置。', done: '莱多斯已找到，城堡方向已确认。',
+    outro: '莱多斯指出克拉格莫城堡的方向：刚铎仍被囚禁在那里，潮音洞的地图也在他手上。' },
+  { id: 'c3-castle', chapter: '第三章 · 克拉格莫城堡', map: 'map-cragmaw-castle', target: 14, targetName: '刚铎',
+    objective: '找到区域 14 的刚铎，夺回潮音洞地图。', done: '刚铎获救，潮音洞地图已夺回。',
+    outro: '刚铎获救。潮音洞就在凡度林以东十五里的剑山山谷中，黑蜘蛛奈兹纳尔已经先一步进去了。' },
+  { id: 'c4-wave-echo', chapter: '第四章 · 潮音洞', map: 'map-wave-echo-cave', target: 19, targetName: '奈兹纳尔',
+    objective: '深入矿坑，找到区域 19 的奈兹纳尔，结束黑蜘蛛的阴谋。', done: '奈兹纳尔已找到，矿坑的阴谋终结。',
+    outro: '奈兹纳尔倒下，失落矿坑重见天日。凡度林与寻石者兄弟终于可以重新开采潮音洞。' },
+];
+
 const LIGHT_ZH = { daylight: '日光', bright: '明亮', dim: '微光', darkness: '黑暗', 'magical-darkness': '魔法黑暗' };
 const KIND_ZH = { region: '区域图', battlemap: '战斗地图', dungeon: '地下城', site: '野外地点', town: '城镇' };
 const MONSTER_NAMES = {
@@ -41,7 +65,8 @@ const state = {
   yaw: 0, pitch: 0.22, dist: 20,
   rYaw: 0.7, rPitch: 0.72, rDist: 500,
   keys: new Set(), touch: { x: 0, y: 0, active: false },
-  introT: 0, moving: false, walkPhase: 0, lastAreaAt: 0, encounterTimer: null,
+  introT: 0, moving: false, walkPhase: 0, lastAreaAt: 0, encounterTimer: null, chapterTimer: null,
+  campaign: { active: true, index: 0, completed: new Set() }, modalAction: null,
   regionSite: null,
 };
 
@@ -98,8 +123,14 @@ async function boot() {
   buildScenePicker();
   bindUI();
 
-  const initial = params.get('map') && mapsData.maps.some((m) => m.id === params.get('map')) ? params.get('map') : 'map-cragmaw-hideout';
-  loadMap(initial, { initial: true, quiet: true });
+  const initial = params.get('map') && mapsData.maps.some((m) => m.id === params.get('map')) ? params.get('map') : null;
+  if (initial) {
+    state.campaign.active = false;
+    loadMap(initial, { initial: true, quiet: true });
+  } else {
+    state.campaign.active = true;
+    loadCampaignStep(0, { initial: true, quiet: true });
+  }
   if (params.get('intro') === '0') start();
   $('#loading').classList.add('hidden');
   animate();
@@ -133,13 +164,15 @@ function setAtmosphere(kind) {
   }
 }
 
-function loadMap(mapId, { initial = false, quiet = false } = {}) {
+function loadMap(mapId, { initial = false, quiet = false, campaign = false } = {}) {
   const next = mapsData.maps.find((m) => m.id === mapId);
   if (!next) return;
   if (world) { disposeGroup(world.group); world = null; player = null; }
   if (region) { disposeGroup(region.group); region = null; }
   clearTimeout(state.encounterTimer);
+  state.modalAction = null;
   $('#modal').classList.add('hidden');
+  state.campaign.active = !!campaign;
   map = next;
   state.mapId = mapId;
   state.mode = map.kind === 'region' ? 'region' : 'map';
@@ -201,24 +234,34 @@ function updateIntro() {
   if (!map) return;
   const meta = MAP_META[map.id] || {};
   const h = document.querySelector('.intro h1'); const sub = document.querySelector('.subtitle');
-  if (h) h.textContent = map.title;
-  if (sub) sub.textContent = meta.region ? '由结构化地图数据生成的 3D 区域沙盘' : '由结构化地图数据生成的 3D 场景';
+  if (h) h.textContent = state.campaign.active ? '凡戴尔的失落矿坑' : map.title;
+  if (sub) sub.textContent = state.campaign.active ? '8 张地图 · 剧情模式' : meta.region ? '由结构化地图数据生成的 3D 区域沙盘' : '由结构化地图数据生成的 3D 场景';
   const stat = document.querySelector('.intro-card .stat b');
-  if (stat) stat.textContent = String((map.areas || []).length || (map.sites || []).length);
+  if (stat) stat.textContent = state.campaign.active ? '8' : String((map.areas || []).length || (map.sites || []).length);
+  const statLabel = document.querySelector('.intro-card .stat span');
+  if (statLabel) statLabel.textContent = state.campaign.active ? '地图' : '区域';
 }
 
 function updateBrand() {
   if (!map) return;
   $('#brand-title').textContent = map.title;
-  $('#brand-sub').textContent = `${KIND_ZH[map.kind] || map.kind} · ${map.title_en}`;
+  $('#brand-sub').textContent = state.campaign.active ? `${currentStep()?.chapter || '剧情'} · ${map.title_en}` : `${KIND_ZH[map.kind] || map.kind} · ${map.title_en}`;
   $('#btn-scenes').textContent = isTouchDevice ? '地图' : `地图 · ${map.title.length > 10 ? map.title.slice(0, 10) + '…' : map.title}`;
+  $('#btn-story').textContent = state.campaign.active ? `剧情 ${state.campaign.index + 1}/${CAMPAIGN.length}` : '剧情';
   const cap = document.querySelector('.minimap-caption');
   if (cap) cap.textContent = `${map.title} · ${map.scale?.feet_per_square ? map.scale.feet_per_square + ' ft / 格' : '比例尺'}`;
 }
 function updateObjective() {
   if (!map) return;
+  const step = state.campaign.active ? currentStep() : null;
   const meta = MAP_META[map.id] || {};
-  $('#objective-text').textContent = state.targetHit ? (meta.done || '已完成。') : (meta.objective || '探索场景。');
+  if (step) {
+    $('#objective-eyebrow').textContent = `剧情 ${state.campaign.index + 1} / ${CAMPAIGN.length}`;
+    $('#objective-text').textContent = state.targetHit ? (step.done || '目标已完成，前往下一章。') : step.objective;
+  } else {
+    $('#objective-eyebrow').textContent = '当前目标';
+    $('#objective-text').textContent = state.targetHit ? (meta.done || '已完成。') : (meta.objective || '探索场景。');
+  }
   if (state.mode === 'map') {
     const total = world?.areas.length || 0;
     $('#progress-fill').style.width = total ? `${(state.discovered.size / total) * 100}%` : '0%';
@@ -236,10 +279,16 @@ function showModeUi() {
   $('#btn-torch').classList.toggle('hidden', isRegion);
   $('#btn-map').classList.toggle('hidden', isRegion);
   $('#touch-ui').classList.toggle('hidden', isRegion || !isTouchDevice);
-  $('#btn-start').textContent = isRegion ? '进入区域图' : '进入场景';
+  $('#btn-start').textContent = state.campaign.active ? '开始剧情' : isRegion ? '进入区域图' : '进入场景';
   $('#progress-fill').parentElement.classList.toggle('hidden', isRegion);
   $('#progress-text').parentElement.classList.toggle('hidden', isRegion);
   if (isRegion && window.matchMedia('(pointer: coarse)').matches) $('#touch-ui').classList.add('hidden');
+  if (!state.started) {
+    $('#objective').classList.add('hidden');
+    $('#area-panel').classList.add('hidden');
+    $('#region-panel').classList.add('hidden');
+    $('#minimap-wrap').classList.add('hidden');
+  }
 }
 
 /* ---------------------------------------------------------------- UI */
@@ -256,7 +305,7 @@ function buildScenePicker() {
       <small>${KIND_ZH[m.kind] || m.kind} · 书内 p.${m.page} / PDF p.${m.pdf_page} · ${count} ${m.kind === 'region' ? '地点' : '区域'}</small>
       <p>${escapeHtml((m.layout || '').slice(0, 72))}${(m.layout || '').length > 72 ? '…' : ''}</p>
       <span class="badge">${m.kind === 'region' ? '3D 桌面' : '可走入'}</span>`;
-    el.addEventListener('click', () => { closePicker(); loadMap(m.id); });
+    el.addEventListener('click', () => { closePicker(); state.campaign.active = false; loadMap(m.id); if (!state.started) start(); else toastMsg('自由探索 · ' + m.title, 1800); });
     grid.append(el);
   }
 }
@@ -307,9 +356,20 @@ function bindUI() {
     $('#modal-close').textContent = '知道了';
     $('#modal').classList.remove('hidden');
   });
-  $('#modal-close').addEventListener('click', () => $('#modal').classList.add('hidden'));
+  $('#modal-close').addEventListener('click', () => {
+    $('#modal').classList.add('hidden');
+    const action = state.modalAction; state.modalAction = null;
+    if (action) action();
+  });
   $('#modal').addEventListener('click', (e) => { if (e.target === $('#modal')) $('#modal').classList.add('hidden'); });
-  $('#btn-start').addEventListener('click', start);
+  $('#btn-start').addEventListener('click', startCampaign);
+  $('#btn-free').addEventListener('click', () => {
+    state.campaign.active = false;
+    loadMap('map-cragmaw-hideout', { initial: true });
+    start();
+    toastMsg('自由探索模式', 1800);
+  });
+  $('#btn-story').addEventListener('click', resumeCampaign);
 
   let dragging = false, lastX = 0, lastY = 0;
   canvas.addEventListener('pointerdown', (e) => {
@@ -409,7 +469,82 @@ function start() {
   updateObjective();
   if (state.mode === 'map') { if (state.currentArea) updatePanel(state.currentArea); drawMinimap(); }
   setTimeout(() => toastMsg(state.mode === 'region' ? '拖动旋转 · 滚轮缩放 · 点击地点' : isTouchDevice ? '左侧摇杆移动 · 右侧拖动视角 · 左上“地图”切换场景' : 'WASD 移动 · 拖动视角 · 左上“地图”切换场景', 3400), 500);
+  if (state.campaign.active && state.mode === 'map') showChapterCard(currentStep());
   window.__LMOP3D_READY__ = true;
+}
+
+
+/* ---------------------------------------------------------------- campaign */
+function currentStep() { return CAMPAIGN[state.campaign.index] || null; }
+function loadCampaignStep(i, { initial = false, quiet = false } = {}) {
+  if (i < 0) i = 0;
+  if (i >= CAMPAIGN.length) { finishCampaign(); return; }
+  state.campaign.index = i;
+  state.campaign.active = true;
+  state.targetHit = false;
+  const step = CAMPAIGN[i];
+  loadMap(step.map, { initial, quiet: true, campaign: true });
+  updateObjective();
+  if (state.started) showChapterCard(step);
+}
+function startCampaign() {
+  state.campaign.completed.clear();
+  state.campaign.index = 0;
+  state.campaign.active = true;
+  loadCampaignStep(0, { initial: true, quiet: true });
+  start();
+  showChapterCard(CAMPAIGN[0]);
+}
+function resumeCampaign() {
+  if (state.campaign.active) {
+    showChapterCard(currentStep());
+    toastMsg(`当前剧情：${currentStep()?.chapter || ''}`, 1600);
+    return;
+  }
+  state.campaign.active = true;
+  loadCampaignStep(state.campaign.index, { initial: true });
+  if (!state.started) start();
+}
+function advanceCampaign() {
+  const next = state.campaign.index + 1;
+  state.campaign.completed.add(state.campaign.index);
+  if (next >= CAMPAIGN.length) { finishCampaign(); return; }
+  const fade = $('#fade');
+  fade.classList.add('show');
+  setTimeout(() => {
+    loadCampaignStep(next, { quiet: true });
+    fade.classList.remove('show');
+  }, 420);
+}
+function showChapterCard(step) {
+  if (!step) return;
+  clearTimeout(state.chapterTimer);
+  $('#chapter-eyebrow').textContent = `剧情 ${state.campaign.index + 1} / ${CAMPAIGN.length} · ${step.chapter}`;
+  $('#chapter-title').textContent = step.chapter;
+  $('#chapter-objective').textContent = step.objective;
+  const card = $('#chapter-card');
+  card.classList.remove('hidden');
+  state.chapterTimer = setTimeout(() => card.classList.add('hidden'), 3600);
+}
+function showChapterComplete(step) {
+  const last = state.campaign.index + 1 >= CAMPAIGN.length;
+  $('#modal-eyebrow').textContent = `剧情 ${state.campaign.index + 1} / ${CAMPAIGN.length} · 章节完成`;
+  $('#modal-title').textContent = step.chapter;
+  $('#modal-body').innerHTML = `<p>${escapeHtml(step.outro)}</p>
+    <p>${last ? '这是当前流程的最后一章。3D 切片到这里结束；完整战斗/存档/正式游戏接入仍在下一版。' : '点击前往下一章，地图、起点与探索进度会重置。'}</p>`;
+  $('#modal-close').textContent = last ? '完成剧情' : '前往下一章';
+  state.modalAction = last ? () => finishCampaign() : () => advanceCampaign();
+  $('#modal').classList.remove('hidden');
+}
+function finishCampaign() {
+  state.campaign.completed.add(state.campaign.index);
+  $('#modal-eyebrow').textContent = '剧情完成';
+  $('#modal-title').textContent = '失落矿坑重见天日';
+  $('#modal-body').innerHTML = `<p>七段主线的 3D 流程已经跑完：哥布林之矢 → 克拉格莫窝点 → 凡度林 → 红烙印大本营 → 雷霆树镇 → 克拉格莫城堡 → 潮音洞。</p>
+    <p>这是方向确认切片：完整战斗、检定、掉落、存档与正式游戏接入仍在下一版。</p>`;
+  $('#modal-close').textContent = '重新开始';
+  state.modalAction = () => { startCampaign(); };
+  $('#modal').classList.remove('hidden');
 }
 
 /* ---------------------------------------------------------------- map triggers */
@@ -422,12 +557,14 @@ function markArea(area, silent = false) {
   }
   updatePanel(area);
   updateObjective();
+  const step = state.campaign.active ? currentStep() : null;
   const meta = MAP_META[map.id] || {};
-  if (area.no === meta.target && !state.targetHit) {
+  const target = step ? step.target : meta.target;
+  if (area.no === target && !state.targetHit) {
     state.targetHit = true;
     updateObjective();
     clearTimeout(state.encounterTimer);
-    state.encounterTimer = setTimeout(() => showEncounter(area), 420);
+    state.encounterTimer = setTimeout(() => step ? showChapterComplete(step) : showEncounter(area), 420);
   }
   drawMinimap();
 }
@@ -459,6 +596,7 @@ function showEncounter(area) {
     <p>${monsters ? `场景数据记录：${escapeHtml(monsters)}。` : ''}</p>
     <p>这是 3D 场景切片：区域触发、光照、出口、规则与怪物数据已经接通；完整战斗/对话在下一版接入。</p>`;
   $('#modal-close').textContent = '继续探索';
+  state.modalAction = null;
   $('#modal').classList.remove('hidden');
 }
 

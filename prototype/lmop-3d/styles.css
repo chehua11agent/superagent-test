@@ -310,3 +310,23 @@ button { font: inherit; color: inherit; }
   .picker-card { padding: 14px; }
   .top-actions .chip#btn-scenes { max-width: 130px; overflow: hidden; text-overflow: ellipsis; }
 }
+
+/* ---------- campaign ---------- */
+.chapter-card {
+  position: absolute; z-index: 25; left: 50%; top: 22%; transform: translate(-50%, 0);
+  width: min(520px, calc(100vw - 32px)); padding: 20px 22px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: linear-gradient(180deg, rgba(28,22,16,.96), rgba(14,11,8,.92));
+  box-shadow: 0 30px 100px rgba(0,0,0,.55), 0 0 60px rgba(217,173,98,.08);
+  text-align: center; pointer-events: none;
+  animation: chapterIn .45s ease both;
+}
+.chapter-card h2 { margin: 2px 0 8px; font-family: var(--page); font-size: clamp(26px, 4vw, 38px); color: #f6e5c3; }
+.chapter-card p:last-child { margin: 0; color: #cbbc9f; font-size: 13px; line-height: 1.6; }
+.chapter-card.hidden { display: none; }
+@keyframes chapterIn { from { opacity: 0; transform: translate(-50%, -10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+.fade {
+  position: absolute; inset: 0; z-index: 34; background: #060504; opacity: 0;
+  pointer-events: none; transition: opacity .35s ease;
+}
+.fade.show { opacity: 1; pointer-events: auto; }

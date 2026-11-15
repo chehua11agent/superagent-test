@@ -48,7 +48,7 @@
 
 | 原型 | 内容 |
 | --- | --- |
-| [`../prototype/lmop-3d/`](../prototype/lmop-3d/) | 把 `data/lmop/maps.json` 的 8 张地图生成成可切换的 3D 场景集：克拉格莫窝点、红烙印、城堡、潮音洞、雷霆树镇、凡度林、突袭点与剑湾 3D 沙盘 |
+| [`../prototype/lmop-3d/`](../prototype/lmop-3d/) | 把 `data/lmop/maps.json` 的 8 张地图生成成 3D 场景集，并串成 7 章剧情流程：突袭 → 窝点 → 凡度林 → 红烙印 → 雷霆树镇 → 城堡 → 潮音洞；含剑湾 3D 沙盘 |
 
 ## 来源
 
