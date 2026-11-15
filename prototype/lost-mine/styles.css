@@ -1246,3 +1246,57 @@ body { background: #070b09; }
 .roll-word b { color: var(--gold); }
 .roll-word .is-good { color: var(--ok); }
 .roll-word .is-bad { color: var(--blood); }
+
+/* ---------------- glossary / term links ---------------- */
+.term {
+  display: inline;
+  border: 0; border-bottom: 1px dotted rgba(211, 164, 95, 0.6);
+  background: transparent; color: var(--gold);
+  padding: 0; margin: 0; font: inherit; cursor: pointer;
+  text-align: inherit; line-height: inherit;
+}
+.term:hover { color: #f0c987; border-bottom-color: var(--gold); }
+.term:focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
+.term-bar {
+  display: flex; gap: 6px; align-items: center;
+  margin: 6px 0 7px; padding: 6px 0 0;
+  border-top: 1px solid rgba(202, 190, 150, 0.1);
+  overflow-x: auto; white-space: nowrap;
+  scrollbar-width: none;
+}
+.term-bar::-webkit-scrollbar { display: none; }
+.term-bar .term-chip {
+  flex: 0 0 auto;
+  border: 1px solid rgba(211, 164, 95, 0.2); border-radius: 999px;
+  padding: 2px 7px; font-size: 8.5px; letter-spacing: 0.04em;
+  color: var(--muted); background: rgba(255, 255, 255, 0.02); cursor: pointer;
+}
+.term-bar .term-chip:hover { color: var(--gold); border-color: var(--line-strong); }
+.term-bar .term-label { flex: 0 0 auto; font-size: 8px; letter-spacing: 0.14em; color: var(--muted); margin-right: 2px; }
+.term-chips { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0 2px; }
+.term-chips .term {
+  border: 1px solid rgba(211, 164, 95, 0.24); border-radius: 999px;
+  padding: 2px 7px; font-size: 9px; text-decoration: none;
+}
+.glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.glossary-item {
+  border: 1px solid var(--line); border-radius: 8px;
+  background: rgba(255, 255, 255, 0.025); color: var(--snow);
+  padding: 8px 9px; text-align: left; cursor: pointer; font-family: var(--sans);
+}
+.glossary-item:hover { border-color: var(--line-strong); background: rgba(211, 164, 95, 0.07); }
+.glossary-item b { display: block; color: var(--gold); font-family: var(--serif); font-size: 12px; font-weight: 600; }
+.glossary-item span { display: block; margin-top: 2px; font-size: 8.5px; color: var(--muted); line-height: 1.4; }
+.ac-chip { display: inline-flex; align-items: center; gap: 2px; border-bottom: 1px dotted rgba(211, 164, 95, 0.55); cursor: pointer; color: var(--gold); }
+.ac-chip b { font-size: 8px; opacity: 0.7; }
+.ac-link { border: 0; border-bottom: 1px dotted rgba(211, 164, 95, 0.55); background: transparent; color: var(--gold); font: inherit; padding: 0; cursor: pointer; }
+@media (max-width: 680px) {
+  .term-bar { margin: 4px 0 5px; padding-top: 5px; }
+  .term-bar .term-chip { font-size: 8px; padding: 2px 6px; }
+  .glossary-grid { grid-template-columns: 1fr; }
+  .pc-tag { display: inline-flex !important; font-size: 7.5px; }
+  .pc-tag .ac-chip { font-size: 7.5px; }
+}
+.pc-right { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 2px; }
+.pc-right .pc-hp { line-height: 1; }
+.pc-right .pc-tag { margin-top: 1px; line-height: 1; }
