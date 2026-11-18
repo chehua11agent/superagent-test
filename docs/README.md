@@ -12,6 +12,7 @@
 | [`design/dual-check-design.md`](design/dual-check-design.md) | 「认识 vs 会拼」双鉴定设计提案：认义 / 拼写双轨、复习加试、BOSS 混检 |
 | [`design/story-card-combat-design.md`](design/story-card-combat-design.md) | 剧情 → 词卡战斗 → 复习的可组合故事单元设计 |
 | [`design/sample-closing-notice.md`](design/sample-closing-notice.md) | 10 词 / 3 幕 / 5 节点的内容位置样本《闭馆通知》：每个词都落在选项、判定或物品上 |
+| [`design/rules-engine-backend.md`](design/rules-engine-backend.md) | 5e 规则后端：捏人、种族/职业/背景、派生数值、状态与情境修正、d20 检定、单词加值钩子 |
 
 ## 调研
 
@@ -20,6 +21,7 @@
 | [`research/trpg-rules-survey.md`](research/trpg-rules-survey.md) | 跑团规则书与 GitHub 基建调研：Ironsworn / Fate / PbtA / Blades 的取舍、许可边界、技术组合 |
 | [`research/phb-story-dm-review.md`](research/phb-story-dm-review.md) | 5e《玩家手册》剧情设定、DM 指引与故事发展盘点 |
 | [`research/game-visual-solutions-survey.md`](research/game-visual-solutions-survey.md) | 游戏画面 / UI 现成方案与长线引擎调研：三条可视化路线、候选清单、许可证边界 |
+| [`research/5e-rules-engine-survey.md`](research/5e-rules-engine-survey.md) | 5e 规则引擎 / 角色创建现成方案调研：SRD API、Open5e、Foundry dnd5e 的适配性与许可，以及自研薄规则核的决策 |
 
 ## 内容与数据
 

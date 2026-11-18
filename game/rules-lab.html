@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>5e 规则实验台 · 拾词者</title>
+    <link rel="icon" href="./favicon.svg" />
+    <link rel="stylesheet" href="./rules-lab.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#builder-panel">跳到捏人面板</a>
+    <header class="lab-header">
+      <div class="lab-header__title">
+        <a class="lab-back" href="./">← 回到《拾词者》</a>
+        <h1>5e 规则实验台</h1>
+        <p>捏人 · 种族 · 技能与豁免 · 情境修正 · d20 检定</p>
+      </div>
+      <div class="lab-header__meta">
+        <span>SRD 5.1 数据</span>
+        <span>纯规则核</span>
+        <span>可导出 JSON</span>
+      </div>
+    </header>
+
+    <main class="lab-layout">
+      <section class="panel" id="builder-panel" aria-labelledby="builder-title">
+        <div class="panel__head">
+          <h2 id="builder-title"><span>1</span> 捏人</h2>
+          <button type="button" class="ghost-button" id="reset-button">重置</button>
+        </div>
+        <div id="preset-bar" class="preset-bar" aria-label="预设角色"></div>
+        <div id="builder-error" class="form-error" role="alert" hidden></div>
+        <div id="builder" class="builder"></div>
+      </section>
+
+      <section class="panel" id="sheet-panel" aria-labelledby="sheet-title">
+        <div class="panel__head">
+          <h2 id="sheet-title"><span>2</span> 角色卡</h2>
+          <span class="panel__hint">派生值实时重算</span>
+        </div>
+        <div id="sheet" class="sheet" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" id="checks-panel" aria-labelledby="checks-title">
+        <div class="panel__head">
+          <h2 id="checks-title"><span>3</span> 掷骰实验</h2>
+          <span class="panel__hint">单词只提高概率，不决定结果</span>
+        </div>
+        <div id="checks" class="checks"></div>
+      </section>
+    </main>
+
+    <footer class="lab-footer">
+      <p>
+        规则数据来自 <a href="https://www.dndbeyond.com/srd" rel="noreferrer">SRD 5.1</a>（CC-BY-4.0）；这是开发用实验台，不是正式游戏界面。
+        实现说明见 <code>docs/design/rules-engine-backend.md</code>。
+      </p>
+    </footer>
+
+    <script type="module" src="./src/rules-lab.js"></script>
+  </body>
+</html>
