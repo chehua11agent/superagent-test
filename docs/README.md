@@ -13,6 +13,7 @@
 | [`design/story-card-combat-design.md`](design/story-card-combat-design.md) | 剧情 → 词卡战斗 → 复习的可组合故事单元设计 |
 | [`design/sample-closing-notice.md`](design/sample-closing-notice.md) | 10 词 / 3 幕 / 5 节点的内容位置样本《闭馆通知》：每个词都落在选项、判定或物品上 |
 | [`design/rules-engine-backend.md`](design/rules-engine-backend.md) | 5e 规则后端：捏人、种族/职业/背景、派生数值、状态与情境修正、d20 检定、单词加值钩子 |
+| [`design/foundry-content-import.md`](design/foundry-content-import.md) | Foundry dnd5e SRD 内容导入：319 法术 / 885 物品 / 340 怪物、背包/武器/护甲/法术书、转换器与缺口 |
 
 ## 调研
 

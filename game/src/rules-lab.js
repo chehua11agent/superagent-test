@@ -9,9 +9,20 @@ import {
   SRD_CONDITIONS,
   buildRules,
   checkOdds,
+  contentStats,
   createCharacter,
+  getArmor,
+  getContentManifest,
+  getItem,
+  getMonster,
+  getSpell,
+  listItems,
+  listMonsters,
+  listSpells,
   resolveCheck,
+  resolveWeaponAttack,
   rollAbilityPool,
+  rollWeaponDamage,
   serializeCharacter,
   wordBonusLabel
 } from './rules/index.js';
@@ -146,6 +157,58 @@ const PRESETS = [
     }
   },
   {
+    id: 'foundry-fighter',
+    label: 'Foundry 装备战士',
+    spec: {
+      name: '长剑卫兵',
+      level: 1,
+      race: 'human',
+      subrace: null,
+      class: 'fighter',
+      background: 'soldier',
+      abilityMethod: 'standard-array',
+      baseAbilities: { str: 15, dex: 14, con: 13, int: 12, wis: 10, cha: 8 },
+      extraLanguages: ['矮人语'],
+      skillChoices: ['history', 'perception'],
+      expertiseChoices: [],
+      armor: 'none',
+      shield: false,
+      armorItem: 'chain-mail',
+      shieldItem: 'shield',
+      weapon: 'longsword',
+      inventory: ['longsword', 'chain-mail', 'shield', 'explorers-pack'],
+      spells: [],
+      conditions: [],
+      exhaustion: 0,
+      effects: []
+    }
+  },
+  {
+    id: 'foundry-wizard',
+    label: 'Foundry 法术书法师',
+    spec: {
+      name: '灰字学徒',
+      level: 1,
+      race: 'human',
+      subrace: null,
+      class: 'wizard',
+      background: 'sage',
+      abilityMethod: 'standard-array',
+      baseAbilities: { str: 8, dex: 14, con: 13, int: 15, wis: 12, cha: 10 },
+      extraLanguages: ['天界语', '龙语', '矮人语'],
+      skillChoices: ['insight', 'investigation'],
+      expertiseChoices: [],
+      armor: 'none',
+      shield: false,
+      inventory: ['spellbook', 'component-pouch', 'quarterstaff'],
+      weapon: 'quarterstaff',
+      spells: ['fire-bolt', 'magic-missile', 'shield'],
+      conditions: [],
+      exhaustion: 0,
+      effects: []
+    }
+  },
+  {
     id: 'moon-sorcerer',
     label: '月族术士（自定义）',
     spec: {
@@ -170,12 +233,13 @@ const PRESETS = [
 ];
 
 const state = {
-  spec: clone(PRESETS[0].spec),
+  spec: withContentDefaults(clone(PRESETS[0].spec)),
   character: null,
   lastValid: null,
   error: null,
   lastResult: null,
   history: [],
+  content: { tab: 'spells', query: '', selected: null },
   check: {
     kind: 'skill',
     target: 'perception',
@@ -189,7 +253,8 @@ const state = {
     disadvantage: false,
     bonus: 0,
     contexts: [],
-    requiresSight: false
+    requiresSight: false,
+    weaponId: null
   }
 };
 
@@ -198,6 +263,11 @@ const builderError = document.querySelector('#builder-error');
 const presetBar = document.querySelector('#preset-bar');
 const sheetEl = document.querySelector('#sheet');
 const checksEl = document.querySelector('#checks');
+const contentPanel = document.querySelector('#content-panel');
+const contentList = document.querySelector('#content-list');
+const contentDetail = document.querySelector('#content-detail');
+const contentSearch = document.querySelector('#content-search');
+const contentCount = document.querySelector('#content-count');
 const resetButton = document.querySelector('#reset-button');
 
 init();
@@ -205,14 +275,27 @@ init();
 function init() {
   renderPresets();
   resetButton.addEventListener('click', () => {
-    state.spec = clone(PRESETS[0].spec);
+    state.spec = withContentDefaults(clone(PRESETS[0].spec));
     commit();
   });
   builder.addEventListener('input', onBuilderInput);
   builder.addEventListener('change', onBuilderChange);
   checksEl.addEventListener('change', onCheckChange);
   checksEl.addEventListener('click', onCheckClick);
+  contentPanel.addEventListener('click', onContentClick);
+  contentSearch.addEventListener('input', onContentSearch);
   commit();
+}
+
+function withContentDefaults(spec) {
+  return {
+    inventory: [],
+    spells: [],
+    weapon: null,
+    armorItem: null,
+    shieldItem: null,
+    ...spec
+  };
 }
 
 function clone(value) {
@@ -299,6 +382,7 @@ function commit() {
   renderBuilder();
   renderSheet();
   renderChecks();
+  renderContent();
 }
 
 // ------------------------------- builder -------------------------------
@@ -312,9 +396,199 @@ function renderPresets() {
     if (!button) return;
     const preset = PRESETS.find((entry) => entry.id === button.dataset.preset);
     if (!preset) return;
-    state.spec = clone(preset.spec);
+    state.spec = withContentDefaults(clone(preset.spec));
     commit();
   });
+}
+
+function renderContent() {
+  if (!contentPanel) return;
+  const { tab, query } = state.content;
+  let entries;
+  if (tab === 'spells') entries = listSpells({ search: query }).sort((a, b) => a.level - b.level || a.name.localeCompare(b.name));
+  else if (tab === 'items') entries = listItems({ search: query }).sort((a, b) => a.name.localeCompare(b.name));
+  else entries = listMonsters({ search: query }).sort((a, b) => a.cr - b.cr || a.name.localeCompare(b.name));
+
+  const stats = contentStats();
+  const total = tab === 'spells' ? stats.spells : tab === 'items' ? stats.items : stats.monsters;
+  contentCount.textContent = `${entries.length} / ${total} 条 · Foundry dnd5e ${getContentManifest().version}`;
+  for (const button of contentPanel.querySelectorAll('[data-content-tab]')) {
+    button.setAttribute('aria-selected', String(button.dataset.contentTab === tab));
+  }
+  if (!entries.some((entry) => entry.id === state.content.selected)) {
+    state.content.selected = entries[0]?.id ?? null;
+  }
+  contentList.innerHTML = entries.length
+    ? entries.map((entry) => `<button type="button" data-content-id="${escapeHtml(entry.id)}" class="${entry.id === state.content.selected ? 'is-selected' : ''}"><span>${escapeHtml(entry.name)}</span><span>${escapeHtml(contentMeta(entry, tab))}</span></button>`).join('')
+    : '<p class="content-empty">没有匹配的内容。</p>';
+  const selected = entries.find((entry) => entry.id === state.content.selected);
+  contentDetail.innerHTML = selected ? renderContentDetail(selected, tab) : '<p class="content-empty">选择左侧条目查看详情。</p>';
+}
+
+function contentMeta(entry, tab) {
+  if (tab === 'spells') return `${entry.level === 0 ? '戏法' : `${entry.level} 环`} · ${entry.schoolName}`;
+  if (tab === 'items') {
+    if (entry.kind === 'weapon') return `${entry.weapon.category === 'martial' ? '军用' : '简易'}${entry.weapon.mode === 'ranged' ? '远程' : '近战'} · ${entry.weapon.damage.formula ?? '—'}`;
+    if (entry.kind === 'armor') return `${ARMOR_CATEGORY_NAMES[entry.armor.category] ?? entry.armor.category} · AC ${entry.armor.baseAc}`;
+    return entry.kind;
+  }
+  return `CR ${entry.crLabel} · ${entry.creatureType}`;
+}
+
+function renderContentDetail(entry, tab) {
+  if (tab === 'spells') return renderSpellDetail(entry);
+  if (tab === 'items') return renderItemDetail(entry);
+  return renderMonsterDetail(entry);
+}
+
+function sourceLine(entry) {
+  const source = entry.source ?? {};
+  return [source.book, source.page ? `p.${source.page}` : '', source.rules, source.license].filter(Boolean).join(' · ');
+}
+
+function renderSpellDetail(spell) {
+  const known = state.spec.spells.includes(spell.id);
+  const damage = (spell.damage ?? []).map((part) => `<span class="tag tag--teal">${escapeHtml(part.formula)} ${escapeHtml(part.type ?? '')}</span>`).join('');
+  return `
+    <h3>${escapeHtml(spell.name)}</h3>
+    <div class="content-detail__meta">
+      <span class="tag">${spell.level === 0 ? '戏法' : `${spell.level} 环`}</span>
+      <span class="tag">${escapeHtml(spell.schoolName)}</span>
+      ${spell.concentration ? '<span class="tag tag--danger">专注</span>' : ''}
+      ${spell.ritual ? '<span class="tag">仪式</span>' : ''}
+      <span class="tag">${escapeHtml(rangeText(spell.range))}</span>
+    </div>
+    <div class="content-detail__section">
+      <h4>效果</h4>
+      <p>${escapeHtml(spell.description || '（无描述）')}</p>
+    </div>
+    ${damage ? `<div class="content-detail__section"><h4>伤害</h4><div class="defense-row">${damage}</div></div>` : ''}
+    <div class="content-detail__section">
+      <h4>施法</h4>
+      <p>${escapeHtml(activationText(spell.activation))}；成分：${escapeHtml(componentText(spell.components))}${spell.components.materials ? `（${escapeHtml(spell.components.materials)}）` : ''}</p>
+    </div>
+    ${sourceLine(spell) ? `<div class="content-detail__section"><h4>来源</h4><p>${escapeHtml(sourceLine(spell))}</p></div>` : ''}
+    <div class="content-actions">
+      <button type="button" data-content-action="${known ? 'remove-spell' : 'add-spell'}" data-content-id="${escapeHtml(spell.id)}">${known ? '从法术书移除' : '加入法术书'}</button>
+    </div>
+  `;
+}
+
+function renderItemDetail(item) {
+  const inInventory = state.spec.inventory.includes(item.id);
+  const weapon = item.weapon;
+  const armor = item.armor;
+  const actionButtons = [];
+  actionButtons.push(`<button type="button" class="secondary" data-content-action="add-inventory" data-content-id="${escapeHtml(item.id)}">${inInventory ? '已在背包' : '加入背包'}</button>`);
+  if (weapon) {
+    const equipped = state.spec.weapon === item.id;
+    actionButtons.push(`<button type="button" data-content-action="equip-weapon" data-content-id="${escapeHtml(item.id)}">${equipped ? '卸下武器' : '装备为武器'}</button>`);
+  }
+  if (armor && armor.category !== 'shield') {
+    const equipped = state.spec.armorItem === item.id;
+    actionButtons.push(`<button type="button" data-content-action="equip-armor" data-content-id="${escapeHtml(item.id)}">${equipped ? '卸下护甲' : '装备为护甲'}</button>`);
+  }
+  if (armor && armor.category === 'shield') {
+    const equipped = state.spec.shieldItem === item.id;
+    actionButtons.push(`<button type="button" data-content-action="equip-shield" data-content-id="${escapeHtml(item.id)}">${equipped ? '卸下盾牌' : '装备为盾牌'}</button>`);
+  }
+  return `
+    <h3>${escapeHtml(item.name)}</h3>
+    <div class="content-detail__meta">
+      <span class="tag">${escapeHtml(item.kind)}</span>
+      ${item.rarity ? `<span class="tag tag--teal">${escapeHtml(item.rarity)}</span>` : ''}
+      <span class="tag">${item.weight} lb</span>
+      <span class="tag">${item.priceGp} gp</span>
+    </div>
+    ${weapon ? `<div class="content-detail__section"><h4>武器</h4><p>${weapon.category === 'martial' ? '军用' : '简易'}${weapon.mode === 'ranged' ? '远程' : '近战'}；伤害 ${escapeHtml(weapon.damage.formula ?? '—')} ${escapeHtml(weapon.damage.types.join('/'))}${weapon.versatile.formula ? `；双手 ${escapeHtml(weapon.versatile.formula)}` : ''}；属性 ${escapeHtml(weapon.propertyNames.join('、') || '无')}；攻击属性 ${escapeHtml(weapon.attackAbility)}</p></div>` : ''}
+    ${armor ? `<div class="content-detail__section"><h4>护甲</h4><p>${escapeHtml(ARMOR_CATEGORY_NAMES[armor.category] ?? armor.category)}；AC ${armor.baseAc}${armor.dexCap === null ? ' + 敏捷' : armor.dexCap === 0 ? '（不加深敏）' : ` + 敏捷（上限 ${armor.dexCap}）`}${armor.strength ? `；力量 ${armor.strength}` : ''}${armor.stealthDisadvantage ? '；隐匿劣势' : ''}</p></div>` : ''}
+    <div class="content-detail__section">
+      <h4>描述</h4>
+      <p>${escapeHtml(item.description || '（无描述）')}</p>
+    </div>
+    ${sourceLine(item) ? `<div class="content-detail__section"><h4>来源</h4><p>${escapeHtml(sourceLine(item))}</p></div>` : ''}
+    <div class="content-actions">${actionButtons.join('')}</div>
+  `;
+}
+
+function renderMonsterDetail(monster) {
+  const abilities = ABILITIES.map((ability) => `<span class="tag">${escapeHtml(ability.abbr)} ${monster.abilities[ability.id]?.score ?? '—'}（${money(monster.abilities[ability.id]?.mod ?? 0)}）</span>`).join('');
+  const actions = monster.actions.map((action) => `<p><strong>${escapeHtml(action.name)}</strong>：${escapeHtml(action.description || `${action.attack.toHit} to hit`)}</p>`).join('');
+  const traits = monster.traits.map((trait) => `<p><strong>${escapeHtml(trait.name)}</strong>：${escapeHtml(trait.description || '')}</p>`).join('');
+  return `
+    <h3>${escapeHtml(monster.name)}</h3>
+    <div class="content-detail__meta">
+      <span class="tag">CR ${monster.crLabel}</span>
+      <span class="tag">${escapeHtml(monster.size)} ${escapeHtml(monster.creatureType)}</span>
+      <span class="tag">AC ${monster.ac}</span>
+      <span class="tag">HP ${monster.hp.max}${monster.hp.formula ? `（${escapeHtml(monster.hp.formula)}）` : ''}</span>
+      <span class="tag">速度 ${monster.speed.walk} 尺</span>
+    </div>
+    <div class="content-detail__section"><h4>属性</h4><div class="defense-row">${abilities}</div></div>
+    ${actions ? `<div class="content-detail__section"><h4>动作</h4>${actions}</div>` : ''}
+    ${traits ? `<div class="content-detail__section"><h4>特性</h4>${traits}</div>` : ''}
+    ${sourceLine(monster) ? `<div class="content-detail__section"><h4>来源</h4><p>${escapeHtml(sourceLine(monster))}</p></div>` : ''}
+  `;
+}
+
+function rangeText(range = {}) {
+  if (!range.value && !range.units) return '距离 —';
+  return `距离 ${range.value ?? '—'} ${range.units ?? ''}`.trim();
+}
+
+function activationText(activation = {}) {
+  const type = { action: '动作', bonus: '附赠动作', reaction: '反应', minute: '分钟', hour: '小时', special: '特殊' }[activation.type] ?? activation.type ?? '—';
+  return activation.value ? `${activation.value} ${type}` : type;
+}
+
+function componentText(components = {}) {
+  return [components.vocal ? 'V' : '', components.somatic ? 'S' : '', components.material ? 'M' : ''].filter(Boolean).join('/') || '—';
+}
+
+function onContentSearch(event) {
+  state.content.query = event.target.value;
+  state.content.selected = null;
+  renderContent();
+}
+
+function onContentClick(event) {
+  const tabButton = event.target.closest('[data-content-tab]');
+  if (tabButton) {
+    state.content.tab = tabButton.dataset.contentTab;
+    state.content.selected = null;
+    renderContent();
+    return;
+  }
+  const itemButton = event.target.closest('[data-content-id]');
+  if (!itemButton) return;
+  const id = itemButton.dataset.contentId;
+  const action = itemButton.dataset.contentAction;
+  if (!action) {
+    state.content.selected = id;
+    renderContent();
+    return;
+  }
+  const { tab } = state.content;
+  const entry = tab === 'spells' ? getSpell(id) : tab === 'items' ? getItem(id) : getMonster(id);
+  if (!entry) return;
+  if (action === 'add-spell') state.spec.spells = [...new Set([...state.spec.spells, id])];
+  if (action === 'remove-spell') state.spec.spells = state.spec.spells.filter((spellId) => spellId !== id);
+  if (action === 'add-inventory' && !state.spec.inventory.includes(id)) state.spec.inventory = [...state.spec.inventory, id];
+  if (action === 'equip-weapon') {
+    state.spec.weapon = state.spec.weapon === id ? null : id;
+    if (!state.spec.inventory.includes(id)) state.spec.inventory = [...state.spec.inventory, id];
+  }
+  if (action === 'equip-armor') {
+    state.spec.armorItem = state.spec.armorItem === id ? null : id;
+    state.spec.armor = 'none';
+    if (!state.spec.inventory.includes(id)) state.spec.inventory = [...state.spec.inventory, id];
+  }
+  if (action === 'equip-shield') {
+    state.spec.shieldItem = state.spec.shieldItem === id ? null : id;
+    state.spec.shield = Boolean(state.spec.shieldItem);
+    if (!state.spec.inventory.includes(id)) state.spec.inventory = [...state.spec.inventory, id];
+  }
+  commit();
 }
 
 function renderBuilder() {
@@ -465,7 +739,7 @@ function renderBuilder() {
       <h3>装备 <small>AC 会实时重算</small></h3>
       <div class="field-grid">
         <div class="field field--wide">
-          <label for="field-armor">护甲</label>
+          <label for="field-armor">SRD 护甲（未使用 Foundry 护甲时生效）</label>
           <select id="field-armor" data-field="armor">
             ${SRD_ARMOR.map((entry) => `<option value="${entry.id}" ${entry.id === spec.armor ? 'selected' : ''}>${escapeHtml(entry.name)}${entry.baseAc ? `（AC ${entry.baseAc}${entry.dexCap === null ? ' + 敏捷' : entry.dexCap === 0 ? '' : ` + 敏捷（上限 ${entry.dexCap}）`}${entry.strengthReq ? `，力量 ${entry.strengthReq}` : ''}）` : ''}</option>`).join('')}
           </select>
@@ -473,6 +747,11 @@ function renderBuilder() {
         </div>
         <div class="field field--wide">
           <label class="chip" style="justify-self:start"><input type="checkbox" data-field="shield" ${spec.shield ? 'checked' : ''} />持盾（+2 AC）${shieldOk ? '' : ' · 未受训'}</label>
+        </div>
+        <div class="field field--wide">
+          <div class="field-help">Foundry 内容：武器 ${escapeHtml(spec.weapon ? getItem(spec.weapon)?.name ?? spec.weapon : '—')} · 护甲 ${escapeHtml(spec.armorItem ? getItem(spec.armorItem)?.name ?? spec.armorItem : '—')} · 盾牌 ${escapeHtml(spec.shieldItem ? getItem(spec.shieldItem)?.name ?? spec.shieldItem : '—')}。在下方「SRD 内容」里装备或加入背包。</div>
+          ${spec.armorItem || spec.shieldItem ? '<p class="check-hint">当前 AC 使用 Foundry 护甲/盾牌，上方 SRD 护甲下拉不参与计算。</p>' : ''}
+          ${spec.armorItem || spec.shieldItem || spec.weapon ? '<button type="button" class="tiny-button" data-action="clear-foundry-equipment" style="justify-self:start">清除 Foundry 装备</button>' : ''}
         </div>
       </div>
     </section>
@@ -681,6 +960,14 @@ builder.addEventListener('click', (event) => {
     state.spec.baseAbilities = { str: 15, dex: 14, con: 13, int: 12, wis: 10, cha: 8 };
     commit();
   }
+  if (button.dataset.action === 'clear-foundry-equipment') {
+    state.spec.weapon = null;
+    state.spec.armorItem = null;
+    state.spec.shieldItem = null;
+    state.spec.shield = false;
+    commit();
+    return;
+  }
   if (button.dataset.action === 'roll-abilities') {
     const groups = rollAbilityPool(Math.random);
     const values = groups.map((group) => group.total).sort((a, b) => b - a);
@@ -772,6 +1059,28 @@ function renderSheet() {
       </div>
     </div>
 
+    ${sheet.inventory.items.length ? `
+      <div class="subcard">
+        <div class="subcard__title">背包 <small>${sheet.inventory.totalWeight} lb · ${sheet.inventory.totalValueGp} gp</small></div>
+        <ul class="plain-list">
+          ${sheet.inventory.items.map((item) => `<li>${escapeHtml(item.name)}${item.kind === 'weapon' ? ` · ${escapeHtml(item.weapon.damage.formula ?? '')}` : item.kind === 'armor' ? ` · AC ${item.armor.baseAc}` : ''} <span style="color:var(--faint)">${item.weight} lb / ${item.priceGp} gp</span></li>`).join('')}
+        </ul>
+      </div>` : ''}
+
+    ${sheet.spells.length ? `
+      <div class="subcard">
+        <div class="subcard__title">法术书 <small>${sheet.spells.length} 个</small></div>
+        <ul class="plain-list">
+          ${sheet.spells.map((spell) => `<li>${spell.level === 0 ? '戏法' : `${spell.level} 环`} · ${escapeHtml(spell.name)} <span style="color:var(--faint)">${escapeHtml(spell.schoolName)}${spell.concentration ? ' · 专注' : ''}</span></li>`).join('')}
+        </ul>
+      </div>` : ''}
+
+    ${sheet.weapon ? `
+      <div class="subcard">
+        <div class="subcard__title">武器 <small>${escapeHtml(sheet.weapon.name)}</small></div>
+        <p class="check-hint">${escapeHtml(sheet.weapon.damage.formula ?? '—')} ${escapeHtml(sheet.weapon.damage.types.join('/'))} · ${escapeHtml(ABILITY_BY_ID[sheet.weapon.ability]?.name ?? sheet.weapon.ability)} · 攻击时可在下方选择“使用武器”结算伤害。</p>
+      </div>` : ''}
+
     <details class="export-box">
       <summary>特性（${sheet.traits.length}）</summary>
       <ul class="trait-list" style="margin-top:8px">
@@ -812,6 +1121,11 @@ function renderChecks() {
   if (!targetOptions.some((option) => option.value === check.target)) {
     check.target = targetOptions[0]?.value ?? 'perception';
   }
+  const weapons = [...new Set([
+    ...character.sheet.inventory.items.filter((item) => item.kind === 'weapon').map((item) => item.id),
+    ...(character.sheet.weapon ? [character.sheet.weapon.id] : [])
+  ])];
+  if (!weapons.includes(check.weaponId)) check.weaponId = character.sheet.weapon?.id ?? weapons[0] ?? '';
   checksEl.innerHTML = `
     <div class="check-form">
       <div class="field">
@@ -835,6 +1149,13 @@ function renderChecks() {
         <div class="field">
           <label for="check-ac">目标 AC</label>
           <input id="check-ac" data-check="ac" type="number" min="1" max="40" value="${check.ac}" />
+        </div>
+        <div class="field">
+          <label for="check-weapon">武器</label>
+          <select id="check-weapon" data-check="weaponId">
+            <option value="">仅命中（无伤害）</option>
+            ${weapons.map((id) => `<option value="${escapeHtml(id)}" ${id === check.weaponId ? 'selected' : ''}>${escapeHtml(character.sheet.inventory.items.find((item) => item.id === id)?.name ?? character.sheet.weapon?.name ?? id)}</option>`).join('')}
+          </select>
         </div>` : `
         <div class="field">
           <label for="check-dc">DC</label>
@@ -941,6 +1262,7 @@ function onCheckChange(event) {
       state.check.kind = target.value;
       state.check.target = optionsForKind(target.value)[0]?.value ?? 'perception';
       state.check.proficient = true;
+      state.check.weaponId = state.lastValid?.sheet.weapon?.id ?? '';
     } else if (target.type === 'checkbox') {
       state.check[key] = target.checked;
     } else if (target.type === 'number' || key === 'wordBonus') {
@@ -969,15 +1291,30 @@ function onCheckClick(event) {
   if (!button) return;
   if (button.dataset.checkAction !== 'roll') return;
   if (!state.lastValid) return;
-  const result = resolveCheck(state.lastValid, { ...checkOptions(), rng: Math.random });
-  state.lastResult = result;
+  let result;
+  if (state.check.kind === 'attack' && state.check.weaponId) {
+    const attack = resolveWeaponAttack(state.lastValid, {
+      weaponId: state.check.weaponId,
+      targetAc: Number(state.check.ac),
+      proficient: state.check.proficient,
+      wordBonus: Number(state.check.wordBonus),
+      situational: checkOptions().situational ?? [],
+      rng: Math.random
+    });
+    result = { ...attack.check, damage: attack.damage, weapon: attack.profile };
+    state.lastResult = { kind: 'weapon', check: result, damage: attack.damage };
+  } else {
+    result = resolveCheck(state.lastValid, { ...checkOptions(), rng: Math.random });
+    state.lastResult = result;
+  }
   state.history.unshift({
     at: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
     label: describeCheck(),
     total: result.total,
     target: result.kind === 'attack' ? result.targetAc : result.dc,
     success: result.success,
-    autoFail: result.autoFail
+    autoFail: result.autoFail,
+    damage: result.damage?.total ?? null
   });
   state.history = state.history.slice(0, 6);
   renderResult();
@@ -990,14 +1327,19 @@ function describeCheck() {
   if (check.kind === 'skill') return `${SKILL_BY_ID[check.target]?.name ?? check.target}检定`;
   if (check.kind === 'abilityCheck') return `${ABILITY_BY_ID[check.target]?.name ?? check.target}检定`;
   if (check.kind === 'save') return `${ABILITY_BY_ID[check.target]?.name ?? check.target}豁免`;
-  if (check.kind === 'attack') return `${ABILITY_BY_ID[check.target]?.name ?? check.target}攻击`;
+  if (check.kind === 'attack') {
+    const weapon = check.weaponId ? getItem(check.weaponId) : null;
+    return `${weapon?.name ?? ABILITY_BY_ID[check.target]?.name ?? check.target}攻击`;
+  }
   return '先攻';
 }
 
 function renderResult() {
   const container = document.querySelector('#check-result');
   if (!container) return;
-  const result = state.lastResult;
+  const wrapper = state.lastResult?.check ? state.lastResult : null;
+  const result = wrapper ? wrapper.check : state.lastResult;
+  const damage = wrapper?.damage ?? result?.damage ?? null;
   if (!result) {
     container.innerHTML = '<p class="check-hint">选择一项检定，掷一次 d20 查看完整加值拆解。</p>';
     return;
@@ -1034,6 +1376,7 @@ function renderResult() {
       </div>
       <div class="result__formula">${escapeHtml(result.formula)}</div>
       <div class="result__chips">${modifierChips}${modeChips}</div>
+      ${damage ? `<div class="content-detail__section"><h4>伤害</h4><p>${escapeHtml(damage.name)}：${escapeHtml(damage.formula)} = <strong>${damage.total}</strong> ${escapeHtml(damage.type ?? '')}${damage.critical ? '（暴击，伤害骰已翻倍）' : ''}</p></div>` : ''}
       ${notes.length ? `<ul class="result__notes">${notes.map((note) => `<li>${escapeHtml(note)}</li>`).join('')}</ul>` : ''}
     </div>
   `;
@@ -1072,7 +1415,7 @@ function renderHistory() {
   container.innerHTML = `
     <h3>最近掷骰</h3>
     <ol>
-      ${state.history.map((entry) => `<li><b>${escapeHtml(entry.label)}</b><span>${entry.autoFail ? '自动失败' : `${entry.total} vs ${entry.target}`}</span><span class="${entry.success ? 'ok' : 'bad'}">${entry.autoFail ? '自动失败' : entry.success ? '成功' : '失败'}</span><span>${escapeHtml(entry.at)}</span></li>`).join('')}
+      ${state.history.map((entry) => `<li><b>${escapeHtml(entry.label)}</b><span>${entry.autoFail ? '自动失败' : `${entry.total} vs ${entry.target}`}</span>${entry.damage != null ? `<span>伤害 ${entry.damage}</span>` : ''}<span class="${entry.success ? 'ok' : 'bad'}">${entry.autoFail ? '自动失败' : entry.success ? '成功' : '失败'}</span><span>${escapeHtml(entry.at)}</span></li>`).join('')}
     </ol>
   `;
 }

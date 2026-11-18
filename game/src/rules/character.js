@@ -18,6 +18,7 @@ import { normalizeModifier, resolveRollMode, sumFlat } from './modifiers.js';
 import { conditionFlags, conditionRollEffects, defenseProfile, exhaustionRollEffects, exhaustionState } from './conditions.js';
 import { resolveReference, SRD_RULES } from './rules.js';
 import { SKILL_BY_ID, SKILLS } from './skills.js';
+import { getArmor, getItem, getSpell, getWeapon } from './content.js';
 
 const ABILITY_CAP = 20;
 
@@ -85,10 +86,30 @@ export function createCharacter(spec = {}, rules = SRD_RULES, options = {}) {
     autoExtra: raceChoiceResult.languages
   });
 
+  // ---- Foundry 内容（物品/法术）----
+  const inventory = normalized.inventory.map((id) => requireContent(getItem(id), '物品', id));
+  const weapon = normalized.weapon
+    ? requireContent(getWeapon(normalized.weapon), '武器', normalized.weapon)
+    : null;
+  const armorContent = normalized.armorItem
+    ? requireContent(getArmor(normalized.armorItem), '护甲', normalized.armorItem)
+    : null;
+  if (armorContent && armorContent.armor.category === 'shield') {
+    fail('ARMOR_INVALID', `${armorContent.name} 是盾牌，请用 shieldItem`, { item: armorContent.id });
+  }
+  const shieldContent = normalized.shieldItem
+    ? requireContent(getArmor(normalized.shieldItem), '盾牌', normalized.shieldItem)
+    : null;
+  if (shieldContent && shieldContent.armor.category !== 'shield') {
+    fail('ARMOR_INVALID', `${shieldContent.name} 不是盾牌`, { item: shieldContent.id });
+  }
+  const knownSpells = normalized.spells.map((id) => requireContent(getSpell(id), '法术', id));
+
   // ---- 护甲与防御 ----
-  const armor = normalized.armor
+  const rulesArmor = normalized.armor
     ? resolveReference(rules.armor, normalized.armor, '护甲')
     : resolveReference(rules.armor, 'none', '护甲');
+  const armor = armorContent ? armorFromContent(armorContent) : rulesArmor;
   const armorProficiencies = unique([
     ...(klass.armorProficiencies ?? []),
     ...(race.armorProficiencies ?? []),
@@ -99,7 +120,7 @@ export function createCharacter(spec = {}, rules = SRD_RULES, options = {}) {
     armor.category === 'none' ||
     armor.category === 'shield' ||
     armorProficiencies.includes(armor.category);
-  const shieldEquipped = Boolean(normalized.shield);
+  const shieldEquipped = Boolean(normalized.shield || shieldContent);
   if (armor.category !== 'none' && armor.category !== 'shield' && !Number.isFinite(armor.baseAc)) {
     fail('ARMOR_INVALID', `护甲 ${armor.name} 缺少 baseAc`, { armor: armor.id });
   }
@@ -297,7 +318,9 @@ export function createCharacter(spec = {}, rules = SRD_RULES, options = {}) {
     savingThrows,
     armorClass,
     armorClassBase: armorClass - acBonus,
-    armor: armor.category === 'none' && shieldEquipped ? { id: 'shield', name: '盾牌', category: 'shield', baseAc: 0 } : armor,
+    armor: armor.category === 'none' && shieldContent ? armorFromContent(shieldContent) : armor,
+    armorItem: armorContent ? { id: armorContent.id, name: armorContent.name } : null,
+    shieldItem: shieldContent ? { id: shieldContent.id, name: shieldContent.name } : null,
     shield: shieldEquipped,
     armorProficient,
     shieldProficient,
@@ -319,6 +342,14 @@ export function createCharacter(spec = {}, rules = SRD_RULES, options = {}) {
     traits,
     spellcasting,
     spellcastingBlocked: armorUnproficient,
+    inventory: {
+      items: inventory.map(summarizeInventoryItem),
+      totalWeight: round(inventory.reduce((total, item) => total + (Number(item.weight) || 0), 0)),
+      totalValueGp: round(inventory.reduce((total, item) => total + (Number(item.priceGp) || 0), 0))
+    },
+    weapon: weapon ? summarizeWeapon(weapon) : null,
+    spells: knownSpells.map(summarizeSpell),
+    spellbook: buildSpellbook(knownSpells),
     resistances,
     saveAdvantages,
     conditions: conditionList,
@@ -372,6 +403,77 @@ export function deserializeCharacter(payload, rules = SRD_RULES, options = {}) {
 // 内部辅助
 // ---------------------------------------------------------------------------
 
+function requireContent(entry, label, id) {
+  if (!entry) fail('CONTENT_UNKNOWN', `找不到${label}：${id}`, { label, id });
+  return entry;
+}
+
+function armorFromContent(item) {
+  const armor = item.armor;
+  return {
+    id: item.id,
+    name: item.name,
+    category: armor.category,
+    baseAc: armor.baseAc,
+    dexCap: armor.dexCap,
+    strengthReq: armor.strength,
+    stealthDisadvantage: armor.stealthDisadvantage,
+    foundry: true
+  };
+}
+
+function summarizeInventoryItem(item) {
+  return {
+    id: item.id,
+    name: item.name,
+    kind: item.kind,
+    weight: item.weight,
+    priceGp: item.priceGp,
+    rarity: item.rarity,
+    weapon: item.weapon ?? null,
+    armor: item.armor ?? null
+  };
+}
+
+function summarizeWeapon(item) {
+  return {
+    id: item.id,
+    name: item.name,
+    damage: item.weapon.damage,
+    versatile: item.weapon.versatile,
+    properties: item.weapon.properties,
+    ability: item.weapon.attackAbility,
+    range: item.weapon.range
+  };
+}
+
+function summarizeSpell(spell) {
+  return {
+    id: spell.id,
+    name: spell.name,
+    level: spell.level,
+    school: spell.school,
+    schoolName: spell.schoolName,
+    concentration: spell.concentration,
+    ritual: spell.ritual,
+    range: spell.range,
+    damage: spell.damage
+  };
+}
+
+function buildSpellbook(spells) {
+  const byLevel = {};
+  for (const spell of spells) {
+    byLevel[spell.level] ??= [];
+    byLevel[spell.level].push(spell.id);
+  }
+  return { count: spells.length, byLevel };
+}
+
+function round(value) {
+  return Math.round(value * 100) / 100;
+}
+
 function normalizeSpec(spec) {
   return {
     name: spec.name ?? '无名冒险者',
@@ -390,6 +492,11 @@ function normalizeSpec(spec) {
     shield: Boolean(spec.shield),
     conditions: [...new Set(spec.conditions ?? [])],
     exhaustion: spec.exhaustion ?? 0,
+    inventory: [...new Set(spec.inventory ?? [])],
+    weapon: spec.weapon ?? null,
+    armorItem: spec.armorItem ?? null,
+    shieldItem: spec.shieldItem ?? null,
+    spells: [...new Set(spec.spells ?? [])],
     effects: Array.isArray(spec.effects) ? spec.effects : [],
     raceChoices: { ...(spec.raceChoices ?? {}) },
     hpRolls: [...(spec.hpRolls ?? [])],

@@ -48,11 +48,30 @@
         </div>
         <div id="checks" class="checks"></div>
       </section>
+
+      <section class="panel content-panel" id="content-panel" aria-labelledby="content-title">
+        <div class="panel__head">
+          <h2 id="content-title"><span>4</span> SRD 内容</h2>
+          <span class="panel__hint" id="content-count">来自 Foundry dnd5e 的 packs/_source</span>
+        </div>
+        <div class="content-toolbar">
+          <div class="content-tabs" role="tablist" aria-label="内容类型">
+            <button type="button" role="tab" data-content-tab="spells" aria-selected="true">法术</button>
+            <button type="button" role="tab" data-content-tab="items" aria-selected="false">物品</button>
+            <button type="button" role="tab" data-content-tab="monsters" aria-selected="false">怪物</button>
+          </div>
+          <input id="content-search" type="search" placeholder="搜索名称 / 描述…" aria-label="搜索 SRD 内容" />
+        </div>
+        <div class="content-layout">
+          <div id="content-list" class="content-list" aria-live="polite"></div>
+          <div id="content-detail" class="content-detail" aria-live="polite"></div>
+        </div>
+      </section>
     </main>
 
     <footer class="lab-footer">
       <p>
-        规则数据来自 <a href="https://www.dndbeyond.com/srd" rel="noreferrer">SRD 5.1</a>（CC-BY-4.0）；这是开发用实验台，不是正式游戏界面。
+        规则数据来自 <a href="https://www.dndbeyond.com/srd" rel="noreferrer">SRD 5.1</a>（CC-BY-4.0）；法术/物品/怪物内容来自 <a href="https://github.com/foundryvtt/dnd5e" rel="noreferrer">Foundry dnd5e</a>（MIT 代码 / CC-BY-4.0 内容，见 <code>game/src/rules/content/NOTICE.md</code>）。这是开发用实验台，不是正式游戏界面。
         实现说明见 <code>docs/design/rules-engine-backend.md</code>。
       </p>
     </footer>

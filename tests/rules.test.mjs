@@ -15,7 +15,19 @@ import {
   passiveScore,
   proficiencyBonus,
   resolveCheck,
+  resolveWeaponAttack,
+  rollWeaponDamage,
+  contentStats,
+  getArmor,
+  getItem,
+  getMonster,
+  getSpell,
+  listItems,
+  listMonsters,
+  listSpells,
+  searchContent,
   serializeCharacter,
+  sequenceRng,
   wordBonusFromMemory
 } from '../game/src/rules/index.js';
 
@@ -591,4 +603,143 @@ test('SRD 规则集包含 9 个种族、12 个职业、18 项技能、13 个状�
   assert.equal(SRD_RULES.skills.length, 18);
   assert.equal(SRD_RULES.conditions.length, 14);
   assert.equal(ABILITY_IDS.length, 6);
+});
+
+
+// ---------------------------------------------------------------------------
+// Foundry dnd5e SRD 内容导入
+// ---------------------------------------------------------------------------
+
+const CONTENT_FIGHTER_SPEC = {
+  ...FIGHTER_SPEC,
+  armor: 'none',
+  shield: false,
+  armorItem: 'chain-mail',
+  shieldItem: 'shield',
+  weapon: 'longsword',
+  inventory: ['longsword', 'chain-mail', 'shield'],
+  spells: ['bless']
+};
+
+test('Foundry 内容层：法术/物品/怪物数量与已知条目', () => {
+  const stats = contentStats();
+  assert.equal(stats.spells, 319);
+  assert.equal(stats.items, 885);
+  assert.equal(stats.monsters, 340);
+  assert.equal(stats.weapons, 277);
+  assert.equal(stats.armor, 92);
+
+  const bless = getSpell('bless');
+  assert.equal(bless.level, 1);
+  assert.equal(bless.school, 'enc');
+  assert.equal(bless.concentration, true);
+
+  const longsword = getItem('longsword');
+  assert.equal(longsword.kind, 'weapon');
+  assert.equal(longsword.weapon.damage.formula, '1d8');
+  assert.deepEqual(longsword.weapon.damage.types, ['slashing']);
+
+  const chain = getArmor('chain-mail');
+  assert.equal(chain.armor.baseAc, 16);
+  assert.equal(chain.armor.dexCap, 0);
+  assert.equal(chain.armor.strength, 13);
+  assert.equal(chain.armor.stealthDisadvantage, true);
+
+  const goblin = getMonster('goblin-warrior');
+  assert.equal(goblin.ac, 15);
+  assert.equal(goblin.hp.max, 7);
+  assert.equal(goblin.cr, 0.25);
+  assert.ok(goblin.actions.some((action) => action.name === 'Scimitar' && action.attack.toHit === 4));
+});
+
+test('内容筛选与搜索', () => {
+  const cantrips = listSpells({ level: 0 });
+  assert.ok(cantrips.length > 10);
+  assert.ok(cantrips.some((spell) => spell.id === 'fire-bolt'));
+
+  const heavyArmor = listItems({ kind: 'armor', category: 'heavy' });
+  assert.ok(heavyArmor.some((item) => item.id === 'chain-mail'));
+
+  const lowCr = listMonsters({ crMax: 0.5 });
+  assert.ok(lowCr.some((monster) => monster.id === 'goblin-warrior'));
+
+  const hits = searchContent('fire bolt');
+  assert.ok(hits.some((hit) => hit.type === 'spell' && hit.entry.id === 'fire-bolt'));
+});
+
+test('角色内容：背包、装备武器/护甲、法术书', () => {
+  const character = createCharacter(CONTENT_FIGHTER_SPEC);
+  const { sheet } = character;
+  assert.equal(sheet.armorClass, 18); // 链甲 16 + 盾 2，重甲不加深敏
+  assert.equal(sheet.armor.foundry, true);
+  assert.equal(sheet.weapon.id, 'longsword');
+  assert.equal(sheet.weapon.damage.formula, '1d8');
+  assert.equal(sheet.inventory.items.length, 3);
+  assert.equal(sheet.inventory.totalWeight, 64);
+  assert.equal(sheet.inventory.totalValueGp, 100);
+  assert.equal(sheet.spells.length, 1);
+  assert.equal(sheet.spells[0].id, 'bless');
+  assert.deepEqual(sheet.spellbook.byLevel, { 1: ['bless'] });
+});
+
+test('Foundry 护甲参与 AC：链甲 16、敏捷上限 0、盾牌 +2、未受训惩罚', () => {
+  const fighterChar = createCharacter(CONTENT_FIGHTER_SPEC);
+  assert.equal(fighterChar.sheet.armorClass, 18);
+
+  const wizardChar = createCharacter({
+    ...CONTENT_FIGHTER_SPEC,
+    class: 'wizard',
+    background: 'sage',
+    skillChoices: ['insight', 'investigation'],
+    spells: ['bless', 'fire-bolt']
+  });
+  assert.equal(wizardChar.sheet.armorProficient, false);
+  assert.ok(wizardChar.sheet.warnings.some((warning) => warning.includes('未受训')));
+});
+
+test('武器伤害：长剑 1d8+力量；暴击翻倍伤害骰', () => {
+  const character = createCharacter(CONTENT_FIGHTER_SPEC);
+  const normal = rollWeaponDamage(character, { rng: sequenceRng([0]) });
+  assert.equal(normal.formula, '1d8+3');
+  assert.equal(normal.total, 1 + 3);
+  assert.equal(normal.type, 'slashing');
+
+  const critical = rollWeaponDamage(character, { critical: true, rng: sequenceRng([0, 0.5]) });
+  assert.equal(critical.formula, '2d8+3');
+  assert.equal(critical.total, 1 + 5 + 3);
+  assert.equal(critical.critical, true);
+});
+
+test('武器攻击：命中后掷伤害，未命中时没有伤害', () => {
+  const character = createCharacter(CONTENT_FIGHTER_SPEC);
+  const hit = resolveWeaponAttack(character, { targetAc: 15, proficient: true, rng: d20Sequence([10]) });
+  assert.equal(hit.check.success, true);
+  assert.ok(hit.damage);
+  assert.equal(hit.damage.weaponId, 'longsword');
+
+  const miss = resolveWeaponAttack(character, { targetAc: 30, proficient: true, rng: d20Sequence([2]) });
+  assert.equal(miss.check.success, false);
+  assert.equal(miss.damage, null);
+});
+
+test('未知内容 id 抛出 CONTENT_UNKNOWN', () => {
+  expectCode(
+    () => createCharacter({ ...CONTENT_FIGHTER_SPEC, inventory: ['not-an-item'] }),
+    'CONTENT_UNKNOWN'
+  );
+  expectCode(
+    () => createCharacter({ ...CONTENT_FIGHTER_SPEC, spells: ['not-a-spell'] }),
+    'CONTENT_UNKNOWN'
+  );
+});
+
+test('内容 ID 随角色存档保存，反序列化后重新解析', () => {
+  const character = createCharacter(CONTENT_FIGHTER_SPEC);
+  const payload = serializeCharacter(character);
+  assert.equal(payload.spec.weapon, 'longsword');
+  assert.deepEqual(payload.spec.spells, ['bless']);
+  const restored = deserializeCharacter(payload);
+  assert.equal(restored.sheet.weapon.id, 'longsword');
+  assert.equal(restored.sheet.spells[0].id, 'bless');
+  assert.equal(restored.sheet.inventory.items.length, 3);
 });

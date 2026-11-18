@@ -65,3 +65,21 @@ export {
   passiveScore,
   resolveCheck
 } from './checks.js';
+
+export { resolveWeaponAttack, rollWeaponDamage, weaponProfile } from './combat.js';
+
+export {
+  CONTENT,
+  CONTENT_VERSION,
+  contentStats,
+  getArmor,
+  getContentManifest,
+  getItem,
+  getMonster,
+  getSpell,
+  getWeapon,
+  listItems,
+  listMonsters,
+  listSpells,
+  searchContent
+} from './content.js';
