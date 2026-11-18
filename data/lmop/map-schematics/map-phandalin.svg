@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -42 1040 906" width="1144" height="997" role="img" aria-labelledby="t d">
+  <title id="t">凡度林镇 — 示意重绘</title>
+  <desc id="d">《凡戴尔的失落矿坑》凡度林镇，按原图六边形网格重绘的结构化示意图，共 18 个区域。</desc>
+  <rect x="-20" y="-42" width="1040" height="906" fill="#efe7d2" stroke="#b9a888"/>
+  <text x="0" y="-22" font-size="15" font-weight="700" fill="#3d2f20" font-family="serif">凡度林镇</text>
+    <text x="0" y="-8" font-size="8.5" fill="#6b5a44" font-family="serif">Phandalin · 18 区域 · 按原图重绘</text>
+  <g class="connections"><line x1="260" y1="330" x2="400" y2="290" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="510" y2="350" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="340" y2="100" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="565" y2="105" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="660" y2="290" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="845" y2="235" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="225" y2="420" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="315" y2="630" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="640" y2="490" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="130" y2="245" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="190" y2="140" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="670" y2="130" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="120" y2="500" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="520" y2="520" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="470" y2="630" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="405" y2="490" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/><line x1="260" y1="330" x2="380" y2="200" stroke="#6b4f3a" stroke-width="1.4" opacity="0.7"/></g><g class="area" data-area="scene-stonehill-inn" data-no="1">
+      <polygon points="360,260 440,260 440,320 360,320" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="400" cy="283" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="400" y="285.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">1</text>
+    </g><g class="area" data-area="scene-barthens-provisions" data-no="2">
+      <polygon points="520,70 610,70 610,140 520,140" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="565" cy="98" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="565" y="100.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">2</text>
+    </g><g class="area" data-area="scene-edermath-orchard" data-no="3">
+      <polygon points="70,190 190,190 190,300 70,300" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="130" cy="238" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="130" y="240.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">3</text>
+    </g><g class="area" data-area="scene-lionshield-coster" data-no="4">
+      <polygon points="180,390 270,390 270,450 180,450" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="225" cy="413" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="225" y="415.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">4</text>
+    </g><g class="area" data-area="scene-miners-exchange" data-no="5">
+      <polygon points="270,600 360,600 360,660 270,660" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="315" cy="623" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="315" y="625.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">5</text>
+    </g><g class="area" data-area="scene-alderleaf-farm" data-no="6">
+      <polygon points="580,450 700,450 700,530 580,530" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="640" cy="483" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="640" y="485.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">6</text>
+    </g><g class="area" data-area="scene-shrine-of-luck" data-no="7">
+      <polygon points="310,80 370,80 370,120 310,120" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="340" cy="93" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="340" y="95.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">7</text>
+    </g><g class="area" data-area="scene-sleeping-giant" data-no="8">
+      <polygon points="620,260 700,260 700,320 620,320" fill="#d8c9ad" stroke="#5d4c37" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="660" cy="283" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="660" y="285.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">8</text>
+    </g><g class="area" data-area="scene-townmasters-hall" data-no="9">
+      <polygon points="470,320 550,320 550,380 470,380" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="510" cy="343" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="510" y="345.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">9</text>
+    </g><g class="area" data-area="scene-tresendar-manor" data-no="10">
+      <polygon points="790,190 900,190 900,280 790,280" fill="#d8c9ad" stroke="#5d4c37" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="845" cy="228" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="845" y="230.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">10</text>
+    </g><g class="area" data-area="external:phandalin:sister-garaele-home" data-no="11">
+      <polygon points="160,120 220,120 220,160 160,160" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="190" cy="133" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="190" y="135.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">11</text>
+    </g><g class="area" data-area="external:phandalin:barthen-home" data-no="12">
+      <polygon points="640,110 700,110 700,150 640,150" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="670" cy="123" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="670" y="125.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">12</text>
+    </g><g class="area" data-area="external:phandalin:linene-home" data-no="13">
+      <polygon points="90,480 150,480 150,520 90,520" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="120" cy="493" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="120" y="495.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">13</text>
+    </g><g class="area" data-area="external:phandalin:harbin-home" data-no="14">
+      <polygon points="490,500 550,500 550,540 490,540" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="520" cy="513" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="520" y="515.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">14</text>
+    </g><g class="area" data-area="external:phandalin:halia-home" data-no="15">
+      <polygon points="440,610 500,610 500,650 440,650" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="470" cy="623" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="470" y="625.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">15</text>
+    </g><g class="area" data-area="external:phandalin:woodworker" data-no="16">
+      <polygon points="380,470 430,470 430,510 380,510" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="405" cy="483" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="405" y="485.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">16</text>
+    </g><g class="area" data-area="external:phandalin:smithy" data-no="17">
+      <polygon points="350,180 410,180 410,220 350,220" fill="#d8c9ad" stroke="#5d4c37" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="380" cy="193" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="380" y="195.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">17</text>
+    </g><g class="area" data-area="external:phandalin:town-green" data-no="18">
+      <polygon points="210,290 310,290 310,370 210,370" fill="#dce8c8" stroke="#4c5a3a" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="260" cy="323" r="7" fill="#8c2f24" fill-opacity="0.9"/>
+      <text x="260" y="325.8" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">18</text>
+    </g><polyline points="300,640 300,500 320,380 330,260 360,160" fill="none" stroke="#b0895d" stroke-width="6" stroke-opacity="0.55" stroke-linecap="round"/><polyline points="330,330 450,330 560,300 660,290 780,240" fill="none" stroke="#b0895d" stroke-width="6" stroke-opacity="0.55" stroke-linecap="round"/><polyline points="100,650 200,640 300,620 360,620" fill="none" stroke="#b0895d" stroke-width="6" stroke-opacity="0.55" stroke-linecap="round"/><polyline points="0,40 200,50 400,60 600,55 800,40" fill="none" stroke="#b0895d" stroke-width="6" stroke-opacity="0.55" stroke-linecap="round"/><g class="area-legend"><text x="0" y="732" font-size="8" font-weight="700" fill="#4a3a27">区域</text><text x="0" y="742" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">1</tspan> 石丘旅舍</text><text x="250" y="742" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">2</tspan> 巴森小栈</text><text x="500" y="742" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">3</tspan> 埃德玛的果园</text><text x="750" y="742" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">4</tspan> 狮盾商会</text><text x="0" y="753" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">5</tspan> 凡度林淘金公会</text><text x="250" y="753" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">6</tspan> 阿黛尔利芙的农场</text><text x="500" y="753" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">7</tspan> 幸运神殿</text><text x="750" y="753" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">8</tspan> 沉睡巨人</text><text x="0" y="764" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">9</tspan> 镇长大厅</text><text x="250" y="764" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">10</tspan> 特雷山大庄园</text><text x="500" y="764" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">11</tspan> 加拉尔修女的家</text><text x="750" y="764" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">12</tspan> 巴森的家</text><text x="0" y="775" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">13</tspan> 莱纳的家</text><text x="250" y="775" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">14</tspan> 哈宾·威斯特的家</text><text x="500" y="775" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">15</tspan> 哈利娅的家</text><text x="750" y="775" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">16</tspan> 木匠铺</text><text x="0" y="786" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">17</tspan> 铁匠铺</text><text x="250" y="786" font-size="7.5" fill="#4a3a27"><tspan font-weight="700">18</tspan> 镇民绿地</text></g><g class="scale"><line x1="20" y1="716" x2="520" y2="716" stroke="#4a3a27" stroke-width="1.4"/>
+    <line x1="20" y1="713" x2="20" y2="719" stroke="#4a3a27"/>
+    <line x1="520" y1="713" x2="520" y2="719" stroke="#4a3a27"/>
+    <text x="20" y="727" font-size="8" fill="#4a3a27">0</text>
+    <text x="520" y="727" text-anchor="end" font-size="8" fill="#4a3a27">500 ft</text>
+  </g><g class="north" transform="translate(980,18)"><circle r="12" fill="none" stroke="#4a3a27" stroke-width="1"/><path d="M0,-10 L3,3 L0,0 L-3,3 Z" fill="#4a3a27"/><text y="-14" text-anchor="middle" font-size="8" fill="#4a3a27">N</text></g><g class="legend">
+    <text x="0" y="805" font-size="8" font-weight="700" fill="#4a3a27">图例</text>
+    <text x="0" y="815" font-size="7.5" fill="#4a3a27">· 旅舍</text><text x="250" y="815" font-size="7.5" fill="#4a3a27">· 商铺</text><text x="500" y="815" font-size="7.5" fill="#4a3a27">· 神殿</text><text x="750" y="815" font-size="7.5" fill="#4a3a27">· 公会</text><text x="0" y="826" font-size="7.5" fill="#4a3a27">· 农场</text><text x="250" y="826" font-size="7.5" fill="#4a3a27">· 庄园</text><text x="500" y="826" font-size="7.5" fill="#4a3a27">· 住宅</text><text x="750" y="826" font-size="7.5" fill="#4a3a27">· 道路</text><text x="0" y="837" font-size="7.5" fill="#4a3a27">· 小径</text>
+  </g>
+  <text x="0" y="858" font-size="7.5" fill="#7a674e">示意重绘，非原图扫描；尺寸按 原图比例尺。源：LMoP p.20 / PDF p.21。</text>
+</svg>

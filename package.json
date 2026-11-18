@@ -10,7 +10,11 @@
     "validate": "node scripts/validate.mjs",
     "validate:sample": "node scripts/validate-sample.mjs",
     "test:e2e": "playwright test",
-    "validate:lmop": "node scripts/lmop-validate.mjs"
+    "validate:lmop": "node scripts/lmop-validate.mjs",
+    "validate:lmop-atlas": "node scripts/lmop-atlas-validate.mjs",
+    "build:lmop-crossref": "node scripts/build-lmop-crossref.mjs",
+    "render:lmop-maps": "node scripts/render-lmop-maps.mjs",
+    "build:lmop-atlas-doc": "node scripts/build-lmop-atlas-doc.mjs"
   },
   "engines": {
     "node": ">=20"

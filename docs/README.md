@@ -29,6 +29,7 @@
 | [`content/cet4-syllabus-kb.md`](content/cet4-syllabus-kb.md) | 四级大纲知识库的 OCR 方法、覆盖与限制 |
 | [`content/cet4-materials-ingest.md`](content/cet4-materials-ingest.md) | 两本四级素材的页级录入完整性核对与出题素材用法 |
 | [`content/lmop-library.md`](content/lmop-library.md) | 《凡戴尔的失落矿坑》四段结构化数据集：覆盖范围、页码口径、跨分卷实体与校验方式 |
+| [`content/lmop-atlas.md`](content/lmop-atlas.md) | 《凡戴尔的失落矿坑》地图/场景图集与规则对照：8 张示意地图、89 个区域、49 条规则、XP 等级审计 |
 
 机器可读数据在 [`data/`](../data/)：
 
@@ -39,6 +40,15 @@
 | [`cet4-materials/manifest.json`](../data/cet4-materials/manifest.json) | 两本扫描书的页数、字符数与 SHA-256 清单；全文因版权不公开 |
 | [`lmop/manifest.json`](../data/lmop/manifest.json) | 《凡戴尔的失落矿坑》四段数据集索引：计数、页码口径、跨分卷实体与 SHA-256 |
 | [`lmop/p001-015.json`](../data/lmop/p001-015.json) 等四卷 | 模组前言/PART 1–4 与附录的结构化录入；不含译文正文 |
+| [`lmop/maps.json`](../data/lmop/maps.json) | 8 张地图的结构化几何：区域多边形、净高、光照、地形、物件、连接 |
+| [`lmop/rules.json`](../data/lmop/rules.json) | 模组用到的 5e 规则索引（属性检定/豁免/掩护/光照/XP 等） |
+| [`lmop/rules-crossref.json`](../data/lmop/rules-crossref.json) | 场景/区域 → 规则/检定/怪物/奖励的逐条对照与覆盖审计 |
+
+## 3D 场景切片
+
+| 原型 | 内容 |
+| --- | --- |
+| [`../prototype/lmop-3d/`](../prototype/lmop-3d/) | 第一章《哥布林之矢》3D 竖切片：三猪小径伏击 → 克拉格莫窝点 → 救西达尔；含战斗、章节完成与 8 张地图自由探索（剑湾区域图是 3D 沙盘） |
 
 ## 来源
 

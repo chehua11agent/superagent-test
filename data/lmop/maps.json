@@ -1,0 +1,5909 @@
+{
+ "schema_version": "lmop-maps-v1",
+ "generated_at": "2026-11-15",
+ "module": {
+  "title": "凡戴尔的失落矿坑",
+  "title_en": "Lost Mine of Phandelver",
+  "abbr": "LMoP",
+  "edition": "D&D 5e Starter Set (2014)",
+  "party": {
+   "size": "4–5 名 1 级 PC",
+   "start_level": 1,
+   "end_level": 5
+  }
+ },
+ "source": {
+  "type": "中文翻译版 PDF（80 页）",
+  "translators": [
+   "庞西瓦",
+   "琉璃",
+   "cherng9"
+  ],
+  "translation_source": "纯美苹果园",
+  "note": "地图几何按原图方格/比例尺重绘，不是原图扫描；原图版权归 Wizards of the Coast。"
+ },
+ "policy": {
+  "map_images": "不收录原图扫描；只提供按原图重绘的示意矢量图与结构化几何。",
+  "prose": "不收录模组译文正文；场景文字为生成式摘要。",
+  "accuracy": "示意几何，误差约 ±1 格（地下城 5 尺 / 室外 10 尺）；精确尺寸以原图方格计数为准。"
+ },
+ "coordinate_system": {
+  "unit": "feet（区域地图为 hex）",
+  "origin": "每张地图左上角；x 向东，y 向南",
+  "area_geometry": "polygon = [[x,y], …]，单位为英尺；room 内的 0,0 为地图左上角。",
+  "elevation": "elevation_ft 为相对该图主要地板的标高；未逐格建模。",
+  "ceiling": "ceiling_ft 为区域默认净高；局部（塔楼、裂谷、竖井）另注。"
+ },
+ "maps": [
+  {
+   "id": "map-sword-coast-region",
+   "title": "剑湾区域地图",
+   "title_en": "Sword Coast Region",
+   "scene_id": null,
+   "kind": "region",
+   "page": 3,
+   "pdf_page": 4,
+   "scale": {
+    "unit": "hex",
+    "miles_per_hex": 5
+   },
+   "canvas": {
+    "width": 24,
+    "height": 32,
+    "unit": "hex"
+   },
+   "environment": {
+    "terrain": "海岸、森林、丘陵、山地、沼泽",
+    "travel": "1 hex = 5 miles；队伍每日约 24 英里"
+   },
+   "layout": "北起无冬城与无冬森林，南至雷隆与亡者沼泽；大道沿海南北纵贯，三猪小径从大道向东穿过凡度林以北，通往康尼贝里与古枭井。",
+   "accuracy": "按原图 hex 网格重绘；未标注地点（克拉格莫城堡、潮音洞、飞龙崖）的 hex 为文字描述推算。",
+   "sites": [
+    {
+     "id": "site-neverwinter",
+     "name": "无冬城",
+     "name_en": "Neverwinter",
+     "type": "city",
+     "hex": [
+      6,
+      15
+     ],
+     "label": true
+    },
+    {
+     "id": "site-thundertree",
+     "name": "雷霆树镇",
+     "name_en": "Thundertree",
+     "type": "ruins",
+     "hex": [
+      12,
+      13
+     ],
+     "label": true,
+     "scene_id": "lmop:scene:thundertree"
+    },
+    {
+     "id": "site-conyberry",
+     "name": "康尼贝里",
+     "name_en": "Conyberry",
+     "type": "ruins",
+     "hex": [
+      21,
+      15
+     ],
+     "label": true,
+     "scene_id": "lmop:scene:conyberry-agatha"
+    },
+    {
+     "id": "site-old-owl-well",
+     "name": "古枭井",
+     "name_en": "Old Owl Well",
+     "type": "point_of_interest",
+     "hex": [
+      22,
+      18
+     ],
+     "label": true,
+     "scene_id": "lmop:scene:old-owl-well"
+    },
+    {
+     "id": "site-phandalin",
+     "name": "凡度林",
+     "name_en": "Phandalin",
+     "type": "town",
+     "hex": [
+      16,
+      22
+     ],
+     "label": true,
+     "scene_id": "scene-phandalin"
+    },
+    {
+     "id": "site-leilon",
+     "name": "雷隆",
+     "name_en": "Leilon",
+     "type": "town",
+     "hex": [
+      8,
+      27
+     ],
+     "label": true
+    },
+    {
+     "id": "site-cragmaw-hideout",
+     "name": "克拉格莫窝点（推算）",
+     "name_en": "Cragmaw Hideout (approx.)",
+     "type": "dungeon",
+     "hex": [
+      14,
+      18
+     ],
+     "label": false,
+     "scene_id": "scene-cragmaw-hideout",
+     "note": "原图未标注；据「小径向北 5 英里」推算。"
+    },
+    {
+     "id": "site-cragmaw-castle",
+     "name": "克拉格莫城堡（推算）",
+     "name_en": "Cragmaw Castle (approx.)",
+     "type": "dungeon",
+     "hex": [
+      18,
+      18
+     ],
+     "label": false,
+     "scene_id": "lmop:scene:cragmaw-castle",
+     "note": "原图未标注；据「窝点东北约 20 英里、无冬森林中」推算。"
+    },
+    {
+     "id": "site-wave-echo-cave",
+     "name": "潮音洞（推算）",
+     "name_en": "Wave Echo Cave (approx.)",
+     "type": "dungeon",
+     "hex": [
+      20,
+      22
+     ],
+     "label": false,
+     "scene_id": "lmop:scene:area-1",
+     "note": "原图未标注；据「凡度林以东 15 英里、剑山山谷」推算。"
+    },
+    {
+     "id": "site-wyvern-tor",
+     "name": "飞龙崖（推算）",
+     "name_en": "Wyvern Tor (approx.)",
+     "type": "point_of_interest",
+     "hex": [
+      24,
+      19
+     ],
+     "label": false,
+     "scene_id": "lmop:scene:wyvern-tor",
+     "note": "原图未标注；据任务描述与大地图方位推算。"
+    },
+    {
+     "id": "site-starmetal-hills",
+     "name": "星铁丘陵",
+     "name_en": "Starmetal Hills",
+     "type": "hills",
+     "hex": [
+      22,
+      12
+     ],
+     "label": true
+    },
+    {
+     "id": "site-mount-hotenow",
+     "name": "霍特诺山",
+     "name_en": "Mount Hotenow",
+     "type": "peak",
+     "hex": [
+      11,
+      8
+     ],
+     "label": true
+    },
+    {
+     "id": "site-ice-spire-peak",
+     "name": "冰塔峰",
+     "name_en": "Ice Spire Peak",
+     "type": "peak",
+     "hex": [
+      20,
+      20
+     ],
+     "label": true
+    },
+    {
+     "id": "site-sword-mountains",
+     "name": "剑山",
+     "name_en": "Sword Mountains",
+     "type": "mountains",
+     "hex": [
+      18,
+      25
+     ],
+     "label": true
+    },
+    {
+     "id": "site-kryptgarden-forest",
+     "name": "地穴花园森林",
+     "name_en": "Kryptgarden Forest",
+     "type": "forest",
+     "hex": [
+      22,
+      27
+     ],
+     "label": true
+    },
+    {
+     "id": "site-mere-of-dead-men",
+     "name": "亡者沼泽",
+     "name_en": "Mere of Dead Men",
+     "type": "marsh",
+     "hex": [
+      10,
+      31
+     ],
+     "label": true
+    },
+    {
+     "id": "site-neverwinter-wood",
+     "name": "无冬森林",
+     "name_en": "Neverwinter Wood",
+     "type": "forest",
+     "hex": [
+      16,
+      12
+     ],
+     "label": true
+    }
+   ],
+   "routes": [
+    {
+     "id": "route-high-road",
+     "name": "大道",
+     "name_en": "The High Road",
+     "type": "road",
+     "points": [
+      [
+       6,
+       5
+      ],
+      [
+       5,
+       12
+      ],
+      [
+       6,
+       18
+      ],
+      [
+       7,
+       24
+      ],
+      [
+       8,
+       29
+      ]
+     ],
+     "note": "沿海南北向。"
+    },
+    {
+     "id": "route-triboar-trail",
+     "name": "三猪小径",
+     "name_en": "Triboar Trail",
+     "type": "trail",
+     "points": [
+      [
+       8,
+       22
+      ],
+      [
+       12,
+       20
+      ],
+      [
+       16,
+       19
+      ],
+      [
+       20,
+       17
+      ],
+      [
+       23,
+       15
+      ]
+     ],
+     "note": "从大道向东穿过凡度林以北。"
+    }
+   ],
+   "travel": [
+    {
+     "from": "site-phandalin",
+     "to": "site-thundertree",
+     "miles": 30,
+     "source": "hex"
+    },
+    {
+     "from": "site-phandalin",
+     "to": "site-conyberry",
+     "miles": 35,
+     "source": "hex"
+    },
+    {
+     "from": "site-phandalin",
+     "to": "site-old-owl-well",
+     "miles": 40,
+     "source": "hex"
+    },
+    {
+     "from": "site-phandalin",
+     "to": "site-cragmaw-castle",
+     "miles": 25,
+     "source": "hex"
+    },
+    {
+     "from": "site-phandalin",
+     "to": "site-wave-echo-cave",
+     "miles": 15,
+     "source": "text"
+    },
+    {
+     "from": "site-phandalin",
+     "to": "site-cragmaw-hideout",
+     "miles": 20,
+     "source": "text+hex"
+    },
+    {
+     "from": "site-phandalin",
+     "to": "site-wyvern-tor",
+     "miles": 45,
+     "source": "hex"
+    },
+    {
+     "from": "site-phandalin",
+     "to": "site-leilon",
+     "miles": 40,
+     "source": "hex"
+    }
+   ],
+   "legend": [
+    "城市",
+    "城镇",
+    "废墟",
+    "兴趣点",
+    "山峰",
+    "道路",
+    "小径",
+    "河流",
+    "森林",
+    "沼泽",
+    "丘陵",
+    "山地"
+   ],
+   "notes": [
+    "hex 坐标以原图左上为原点，x 向东、y 向南。",
+    "未标注地点只作旅行参考，不作为精确位置；DM 可自行调整。"
+   ],
+   "chapter_id": "chapter-00-introduction",
+   "part": 0,
+   "area_count": 0
+  },
+  {
+   "id": "map-road-to-phandalin",
+   "title": "前往凡度林的道路（哥布林突袭）",
+   "title_en": "Road to Phandalin — Goblin Ambush",
+   "scene_id": "scene-goblin-ambush",
+   "kind": "battlemap",
+   "page": 6,
+   "pdf_page": 7,
+   "scale": {
+    "unit": "feet",
+    "feet_per_square": 10
+   },
+   "canvas": {
+    "width": 480,
+    "height": 300,
+    "unit": "feet"
+   },
+   "environment": {
+    "setting": "outdoor",
+    "weather": "白天，阴天或薄雾",
+    "terrain": "三猪小径、灌木、树线、北侧峭壁"
+   },
+   "layout": "东西向的小径穿过一片开阔地；北侧是草坡与树线，南侧是灌木。两匹死马倒在路中，鞍囊被洗劫；四个哥布林分藏在小径两侧的灌木里。",
+   "accuracy": "按原图 10 尺方格重绘；隐藏位置为示意。",
+   "areas": [
+    {
+     "area_id": "scene-goblin-ambush",
+     "no": 0,
+     "name": "小径伏击点",
+     "page": 6,
+     "pdf_page": 7,
+     "shape": "polygon",
+     "footprint": [
+      [
+       20,
+       110
+      ],
+      [
+       460,
+       105
+      ],
+      [
+       460,
+       185
+      ],
+      [
+       20,
+       190
+      ]
+     ],
+     "ceiling_ft": 0,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "小径",
+      "灌木（困难地形）",
+      "树线（掩护）"
+     ],
+     "props": [
+      "两匹死马（刚铎与西达尔的马）",
+      "空皮地图匣",
+      "被洗劫的鞍囊",
+      "小径两侧的灌木",
+      "北侧峭壁"
+     ],
+     "entrances": [],
+     "visual": "一条东西向的土路被树线夹住；两匹死马横在路中央，苍蝇成群；灌木后有人影晃动。",
+     "rules": [
+      "rule-surprise",
+      "rule-cover",
+      "rule-difficult-terrain",
+      "rule-ability-check",
+      "rule-stealth",
+      "rule-light"
+     ]
+    },
+    {
+     "area_id": "external:ambush:north-brush",
+     "no": 1,
+     "name": "北侧灌木（2 哥布林）",
+     "page": 6,
+     "pdf_page": 7,
+     "shape": "polygon",
+     "footprint": [
+      [
+       160,
+       75
+      ],
+      [
+       240,
+       75
+      ],
+      [
+       240,
+       110
+      ],
+      [
+       160,
+       110
+      ]
+     ],
+     "ceiling_ft": 0,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "灌木（困难地形，半掩蔽）"
+     ],
+     "props": [
+      "低矮灌木",
+      "可藏身的洼地"
+     ],
+     "entrances": [],
+     "visual": "北侧草坡上有一排及膝的灌木，视线被草叶切断。",
+     "rules": [
+      "rule-cover",
+      "rule-surprise",
+      "rule-stealth"
+     ]
+    },
+    {
+     "area_id": "external:ambush:south-brush",
+     "no": 2,
+     "name": "南侧灌木（2 哥布林）",
+     "page": 6,
+     "pdf_page": 7,
+     "shape": "polygon",
+     "footprint": [
+      [
+       160,
+       185
+      ],
+      [
+       240,
+       185
+      ],
+      [
+       240,
+       220
+      ],
+      [
+       160,
+       220
+      ]
+     ],
+     "ceiling_ft": 0,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "灌木（困难地形，半掩蔽）"
+     ],
+     "props": [
+      "低矮灌木",
+      "可藏身的洼地"
+     ],
+     "entrances": [],
+     "visual": "南侧灌木更密，枝条上挂着苍白的叶子，风一吹就发出沙沙声。",
+     "rules": [
+      "rule-cover",
+      "rule-surprise",
+      "rule-stealth"
+     ]
+    },
+    {
+     "area_id": "external:ambush:escarpment",
+     "no": 3,
+     "name": "北侧峭壁",
+     "page": 6,
+     "pdf_page": 7,
+     "shape": "polygon",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       480,
+       0
+      ],
+      [
+       480,
+       75
+      ],
+      [
+       0,
+       75
+      ]
+     ],
+     "ceiling_ft": 0,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "峭壁（不可攀爬，除非特别说明）"
+     ],
+     "props": [
+      "裸露岩壁",
+      "稀疏草皮"
+     ],
+     "entrances": [],
+     "visual": "小径北侧是一道低矮的岩壁，像一堵被雨水啃过的墙。",
+     "rules": [
+      "rule-falling",
+      "rule-difficult-terrain"
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "from": "external:ambush:north-brush",
+     "to": "scene-goblin-ambush",
+     "type": "open_ground",
+     "width_ft": 40,
+     "notes": "伏击后冲上小径。"
+    },
+    {
+     "from": "external:ambush:south-brush",
+     "to": "scene-goblin-ambush",
+     "type": "open_ground",
+     "width_ft": 40,
+     "notes": "伏击后冲上小径。"
+    },
+    {
+     "from": "external:ambush:escarpment",
+     "to": "scene-goblin-ambush",
+     "type": "drop",
+     "width_ft": 40,
+     "notes": "北侧峭壁俯瞰小径；不是通行路线，仅用于高度/掩蔽关系。"
+    }
+   ],
+   "legend": [
+    "小径",
+    "灌木",
+    "树",
+    "峭壁"
+   ],
+   "notes": [
+    "哥布林在灌木中获得半掩蔽；穿过灌木为困难地形。",
+    "两匹马属于刚铎与西达尔，已经死了约一天。"
+   ],
+   "chapter_id": "chapter-01-goblin-arrows",
+   "part": 1,
+   "area_count": 4
+  },
+  {
+   "id": "map-cragmaw-hideout",
+   "title": "克拉格莫窝点",
+   "title_en": "Cragmaw Hideout",
+   "scene_id": "scene-cragmaw-hideout",
+   "kind": "dungeon",
+   "page": 8,
+   "pdf_page": 9,
+   "scale": {
+    "unit": "feet",
+    "feet_per_square": 5
+   },
+   "canvas": {
+    "width": 240,
+    "height": 165,
+    "unit": "feet"
+   },
+   "environment": {
+    "setting": "underground cave",
+    "ceiling": "大部分洞穴 20–30 尺；通道 10–20 尺",
+    "water": "暗溪 2 尺深，冰冷缓慢",
+    "light": "区域 1–2 室外；其余除非特别说明为完全黑暗"
+   },
+   "layout": "溪流从东北的双子池（7）经天桥（5）下方的峡谷向南流出洞口（1）。西岸主通道陡峭向上（4），分出西支路通往哥布林生活间（6）；东岸石阶通往狼舍（3），狼舍东墙烟道向上 30 尺通克拉格洞窟（8）；天桥（5）连接东西两条隧道，东隧道通双子池（7）；双子池南侧宽石阶下到克拉格洞窟（8）。",
+   "accuracy": "按原图 5 尺方格重绘；洞穴边界为示意多边形，误差约 ±1 格（5 尺）。",
+   "areas": [
+    {
+     "area_id": "scene-area-1-entrance",
+     "no": 1,
+     "name": "洞口",
+     "page": 9,
+     "pdf_page": 10,
+     "shape": "polygon",
+     "footprint": [
+      [
+       45,
+       100
+      ],
+      [
+       105,
+       98
+      ],
+      [
+       112,
+       125
+      ],
+      [
+       100,
+       158
+      ],
+      [
+       55,
+       155
+      ],
+      [
+       42,
+       128
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "浅溪（2 尺深，可涉水）",
+      "碎石（困难地形）",
+      "荆棘（困难地形）"
+     ],
+     "props": [
+      "灌木遮掩的洞口",
+      "浅溪",
+      "溪右的干燥小道",
+      "区域 2 的荆棘丛（无法从溪西直接穿过）"
+     ],
+     "entrances": [],
+     "visual": "山腹裂开一个黑口，浅溪从洞里涌出，在阳光下泛白；右侧一条窄而干的小道贴着岩壁伸进去。",
+     "rules": [
+      "rule-light",
+      "rule-difficult-terrain",
+      "rule-water",
+      "rule-stealth"
+     ]
+    },
+    {
+     "area_id": "scene-area-2-guardpost",
+     "no": 2,
+     "name": "哥布林暗哨",
+     "page": 9,
+     "pdf_page": 10,
+     "shape": "polygon",
+     "footprint": [
+      [
+       115,
+       110
+      ],
+      [
+       148,
+       108
+      ],
+      [
+       150,
+       138
+      ],
+      [
+       118,
+       140
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "荆棘（困难地形，半掩蔽）"
+     ],
+     "props": [
+      "压在灌木上的木板",
+      "两处潜伏位",
+      "溪东岸的浅滩"
+     ],
+     "entrances": [],
+     "visual": "溪东岸的荆棘丛后压着几块木板，木板下是能蹲两个人的浅坑。",
+     "rules": [
+      "rule-cover",
+      "rule-surprise",
+      "rule-stealth",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "scene-area-3-wolf-den",
+     "no": 3,
+     "name": "狼舍",
+     "page": 9,
+     "pdf_page": 10,
+     "shape": "polygon",
+     "footprint": [
+      [
+       142,
+       78
+      ],
+      [
+       192,
+       80
+      ],
+      [
+       190,
+       112
+      ],
+      [
+       168,
+       116
+      ],
+      [
+       144,
+       108
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "石阶（高低不平）",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "入口石笋下的铁棍与锁链",
+      "三匹狼的兽窝",
+      "东墙狭缝（烟道口）",
+      "垃圾堆"
+     ],
+     "entrances": [],
+     "visual": "狭小潮湿的斗室，尽头收窄成一道仅容侧身通过的裂缝；空气里是牲畜的膻臭，锁链在石头上刮出细响。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-restrained",
+      "rule-animal-handling",
+      "rule-falling",
+      "rule-climb"
+     ]
+    },
+    {
+     "area_id": "scene-area-4-steep-passage",
+     "no": 4,
+     "name": "陡峭的通道",
+     "page": 10,
+     "pdf_page": 11,
+     "shape": "polygon",
+     "footprint": [
+      [
+       118,
+       40
+      ],
+      [
+       152,
+       42
+      ],
+      [
+       154,
+       80
+      ],
+      [
+       122,
+       82
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "陡坡（困难地形）",
+      "碎石（困难地形）",
+      "脆弱平台"
+     ],
+     "props": [
+      "西岸支路",
+      "两峭壁之间的脆弱平台",
+      "被水冲刷光滑的岩壁"
+     ],
+     "entrances": [],
+     "visual": "主通道在这里陡然向上，溪水在石缝里撞碎；西岸一条支路被碎石和峭壁夹住，脚下的平台像随时会滑走。",
+     "rules": [
+      "rule-light",
+      "rule-darkvision",
+      "rule-difficult-terrain",
+      "rule-falling",
+      "rule-prone",
+      "rule-saving-throw"
+     ]
+    },
+    {
+     "area_id": "scene-area-5-bridge",
+     "no": 5,
+     "name": "天桥",
+     "page": 10,
+     "pdf_page": 11,
+     "shape": "polygon",
+     "footprint": [
+      [
+       145,
+       28
+      ],
+      [
+       192,
+       28
+      ],
+      [
+       192,
+       58
+      ],
+      [
+       168,
+       62
+      ],
+      [
+       145,
+       58
+      ]
+     ],
+     "ceiling_ft": 25,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "木桥（可破坏）",
+      "湿滑岩壁"
+     ],
+     "props": [
+      "摇摇晃晃的木制扶桥（离溪 20 尺）",
+      "桥上的哥布林哨位",
+      "东西两条隧道口"
+     ],
+     "entrances": [],
+     "visual": "头顶的阴影里横着一座窄木桥，离溪面约二十尺；桥板被水汽泡得发黑，走上去会发出吱呀声。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-cover",
+      "rule-break-object",
+      "rule-falling",
+      "rule-prone",
+      "rule-flood",
+      "rule-saving-throw"
+     ]
+    },
+    {
+     "area_id": "scene-area-6-goblin-den",
+     "no": 6,
+     "name": "哥布林生活间",
+     "page": 11,
+     "pdf_page": 12,
+     "shape": "polygon",
+     "footprint": [
+      [
+       20,
+       20
+      ],
+      [
+       62,
+       16
+      ],
+      [
+       98,
+       24
+      ],
+      [
+       102,
+       58
+      ],
+      [
+       82,
+       80
+      ],
+      [
+       38,
+       80
+      ],
+      [
+       18,
+       60
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "10 尺高石壁（陡峭石梯）",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "低处的灶火",
+      "高处的小头目铺位",
+      "发臭的兽皮",
+      "西达尔的捆绑处"
+     ],
+     "entrances": [],
+     "visual": "巨大的洞穴被一道十尺高的石壁劈成上下两层，石梯陡得像梯子；下层灶火把烟熏在洞顶，上层阴影里堆着兽皮。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-difficult-terrain",
+      "rule-prone",
+      "rule-death",
+      "rule-npc-party"
+     ]
+    },
+    {
+     "area_id": "scene-area-7-twin-pools",
+     "no": 7,
+     "name": "双子池",
+     "page": 12,
+     "pdf_page": 13,
+     "shape": "polygon",
+     "footprint": [
+      [
+       188,
+       24
+      ],
+      [
+       235,
+       26
+      ],
+      [
+       236,
+       80
+      ],
+      [
+       216,
+       92
+      ],
+      [
+       190,
+       74
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "水池（深水）",
+      "湿滑石阶",
+      "瀑布噪音（听觉遮蔽）"
+     ],
+     "props": [
+      "两座大型蓄水池",
+      "低矮碎石墙堤坝",
+      "东壁瀑布",
+      "西侧出水口",
+      "南侧宽出入口"
+     ],
+     "entrances": [],
+     "visual": "半个洞穴被两片黑水占满，瀑布从东壁高处砸下来，水雾里什么都显得发白；石堤像一排歪牙围住水池。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-water",
+      "rule-flood",
+      "rule-cover",
+      "rule-stealth"
+     ]
+    },
+    {
+     "area_id": "scene-area-8-klargs-cave",
+     "no": 8,
+     "name": "克拉格的洞窟",
+     "page": 13,
+     "pdf_page": 14,
+     "shape": "polygon",
+     "footprint": [
+      [
+       190,
+       82
+      ],
+      [
+       235,
+       84
+      ],
+      [
+       235,
+       136
+      ],
+      [
+       212,
+       138
+      ],
+      [
+       190,
+       120
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "火坑（火焰伤害）",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "中央火坑",
+      "南角补给堆（狮盾商会徽记）",
+      "西侧斜向下的烟道口",
+      "北侧宽入口与天然石阶",
+      "克拉格的小金库"
+     ],
+     "entrances": [],
+     "visual": "洞窟中央的煤火把岩壁照得发红，南角堆着印有蓝狮徽记的麻袋和板条箱；西边地面斜着陷进一条黑缝。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-fire",
+      "rule-cover",
+      "rule-falling",
+      "rule-treasure",
+      "rule-monster-stat"
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "from": "external:hideout:path",
+     "to": "scene-area-1-entrance",
+     "type": "open_ground",
+     "width_ft": 10,
+     "notes": "哥布林小径尽头的洞口。"
+    },
+    {
+     "from": "scene-area-1-entrance",
+     "to": "scene-area-2-guardpost",
+     "type": "shallow_stream",
+     "width_ft": 20,
+     "notes": "涉过 2 尺深的浅溪；东岸即暗哨。"
+    },
+    {
+     "from": "scene-area-1-entrance",
+     "to": "scene-area-3-wolf-den",
+     "type": "stone_steps",
+     "width_ft": 5,
+     "notes": "洞口通道东侧的几级石阶。"
+    },
+    {
+     "from": "scene-area-1-entrance",
+     "to": "scene-area-4-steep-passage",
+     "type": "main_passage",
+     "width_ft": 10,
+     "notes": "沿溪主通道陡峭向上。"
+    },
+    {
+     "from": "scene-area-4-steep-passage",
+     "to": "scene-area-6-goblin-den",
+     "type": "side_branch",
+     "width_ft": 10,
+     "notes": "西岸支路，困难地形。"
+    },
+    {
+     "from": "scene-area-4-steep-passage",
+     "to": "scene-area-5-bridge",
+     "type": "main_passage",
+     "width_ft": 10,
+     "notes": "溪流通道继续向上，转向东。"
+    },
+    {
+     "from": "scene-area-5-bridge",
+     "to": "scene-area-6-goblin-den",
+     "type": "tunnel",
+     "width_ft": 10,
+     "notes": "桥西端隧道。"
+    },
+    {
+     "from": "scene-area-5-bridge",
+     "to": "scene-area-7-twin-pools",
+     "type": "bridge",
+     "width_ft": 5,
+     "notes": "木桥横跨溪流，连接东西隧道。"
+    },
+    {
+     "from": "scene-area-7-twin-pools",
+     "to": "scene-area-8-klargs-cave",
+     "type": "stone_steps",
+     "width_ft": 10,
+     "notes": "南侧宽出入口与天然石阶。"
+    },
+    {
+     "from": "scene-area-3-wolf-den",
+     "to": "scene-area-8-klargs-cave",
+     "type": "chimney",
+     "width_ft": 5,
+     "notes": "东墙狭缝烟道，垂直 30 尺；DC10 力量（运动）。"
+    }
+   ],
+   "legend": [
+    "荆棘",
+    "桥",
+    "峭壁",
+    "急流",
+    "碎石",
+    "石笋",
+    "石阶",
+    "石墙",
+    "补给"
+   ],
+   "notes": [
+    "区域 1–2 为室外，其余区域默认完全黑暗。",
+    "有碎石沙砾的区域为困难地形。",
+    "暗溪 2 尺深，可涉水；瀑布噪音使区域 7/8 相互听不到战斗。"
+   ],
+   "chapter_id": "chapter-01-goblin-arrows",
+   "part": 1,
+   "area_count": 8
+  },
+  {
+   "id": "map-redbrand-hideout",
+   "title": "红烙印大本营（特雷山大庄园地窖）",
+   "title_en": "Redbrand Hideout — Tresendar Manor Cellar",
+   "scene_id": "scene-redbrand-hideout",
+   "kind": "dungeon",
+   "page": 26,
+   "pdf_page": 27,
+   "scale": {
+    "unit": "feet",
+    "feet_per_square": 5
+   },
+   "canvas": {
+    "width": 300,
+    "height": 210,
+    "unit": "feet"
+   },
+   "environment": {
+    "setting": "underground stone cellar",
+    "ceiling": "通道与石室默认 10 尺；墓室/洞穴局部更高",
+    "light": "墙上油灯提供大部分区域的微光；裂隙区域寒冷黑暗",
+    "terrain": "平整石板地面；裂隙与碎石堆为困难地形"
+   },
+   "layout": "从庄园厨房石梯下到地窖（1）。地窖西侧水池占近半空间，西南密门通天然裂隙（8）。北侧营房（2）与陷阱走廊（3）相连；走廊尽头的双开大门通墓室（4）。墓室东门通奴隶圈栏（5），北门通武器库（6）；武器库正对锁门的墙上是通往储藏室（7）的密门。储藏室南边下到裂隙（8），两扇密门分别通武器库（6）与水晶之杖卧室（12）。裂隙东侧守卫营房（9）通一般房间（10），再通法师工作间（11）与卧室（12）。基地地势自东向西降低，沿途有台阶。",
+   "accuracy": "按原图 5 尺方格重绘；房间边界为示意多边形，误差约 ±1 格（5 尺）。",
+   "areas": [
+    {
+     "area_id": "scene-hideout-area-1",
+     "no": 1,
+     "name": "地窖",
+     "page": 24,
+     "pdf_page": 25,
+     "shape": "polygon",
+     "footprint": [
+      [
+       235,
+       95
+      ],
+      [
+       285,
+       95
+      ],
+      [
+       285,
+       195
+      ],
+      [
+       235,
+       195
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "平整石板",
+      "水池（10 尺深）"
+     ],
+     "props": [
+      "西墙大水池（池底在地面下 8 尺，围边高 2 尺）",
+      "沿墙两排木桶（腌肉、面粉、麦芽酒）",
+      "北侧楼梯下的门",
+      "西南角密门（通 8）",
+      "水下 2 尺的绳与防水小包"
+     ],
+     "entrances": [],
+     "visual": "推开木门，脚下是离地十五尺的平台，两侧 U 形石梯向下；西墙的黑水池几乎占去半个房间，桶墙在灯影里泛着油光。",
+     "rules": [
+      "rule-light",
+      "rule-secret-door",
+      "rule-water",
+      "rule-treasure",
+      "rule-stealth"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-2",
+     "no": 2,
+     "name": "营房",
+     "page": 25,
+     "pdf_page": 26,
+     "shape": "polygon",
+     "footprint": [
+      [
+       148,
+       98
+      ],
+      [
+       180,
+       98
+      ],
+      [
+       180,
+       120
+      ],
+      [
+       215,
+       120
+      ],
+      [
+       215,
+       128
+      ],
+      [
+       180,
+       128
+      ],
+      [
+       180,
+       125
+      ],
+      [
+       148,
+       125
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "平整石板"
+     ],
+     "props": [
+      "两张上下铺",
+      "木桶与板条箱",
+      "3 件猩红披风",
+      "3 个腰包"
+     ],
+     "entrances": [],
+     "visual": "门边北墙摆着两张上下铺，床对面堆着木桶和板条箱；墙上挂着三件脏兮兮的猩红披风。",
+     "rules": [
+      "rule-light",
+      "rule-surprise",
+      "rule-treasure",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-3",
+     "no": 3,
+     "name": "陷阱走廊",
+     "page": 25,
+     "pdf_page": 26,
+     "shape": "polygon",
+     "footprint": [
+      [
+       200,
+       75
+      ],
+      [
+       285,
+       75
+      ],
+      [
+       285,
+       95
+      ],
+      [
+       200,
+       95
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "青石地面（厚灰）",
+      "隐藏陷坑（20 尺深）"
+     ],
+     "props": [
+      "每隔 10 尺的装饰性人造圆柱",
+      "走廊中段假地板（承重 100 磅）",
+      "尽头的哀伤天使双开大门",
+      "陷坑南北两侧窄边"
+     ],
+     "entrances": [],
+     "visual": "走廊两侧每隔十尺立着一根人造圆柱，青石地面上积着厚灰；尽头的双开大门上，一个哀伤的天使浮雕被铜锈染绿。",
+     "rules": [
+      "rule-light",
+      "rule-trap",
+      "rule-falling",
+      "rule-prone",
+      "rule-saving-throw",
+      "rule-secret-door"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-4",
+     "no": 4,
+     "name": "特雷山大墓室",
+     "page": 26,
+     "pdf_page": 27,
+     "shape": "polygon",
+     "footprint": [
+      [
+       150,
+       75
+      ],
+      [
+       190,
+       75
+      ],
+      [
+       190,
+       123
+      ],
+      [
+       150,
+       123
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "平整石板",
+      "灰尘（潜行加成）"
+     ],
+     "props": [
+      "三具雕花石棺",
+      "三具穿锈甲的人类骷髅",
+      "墙上圆柱的橡树浮雕",
+      "东南角双开大门"
+     ],
+     "entrances": [],
+     "visual": "灰尘厚得能吞掉脚步；三具石棺并排，棺盖刻着两名男子与一名女子的面孔，每具棺旁都靠着一具穿锈甲的骷髅。",
+     "rules": [
+      "rule-light",
+      "rule-surprise",
+      "rule-monster-stat",
+      "rule-treasure",
+      "rule-condition"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-5",
+     "no": 5,
+     "name": "奴隶圈栏",
+     "page": 27,
+     "pdf_page": 28,
+     "shape": "polygon",
+     "footprint": [
+      [
+       200,
+       25
+      ],
+      [
+       242,
+       25
+      ],
+      [
+       242,
+       75
+      ],
+      [
+       200,
+       75
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "平整石板",
+      "脏乱稻草"
+     ],
+     "props": [
+      "两道铁栅栏墙（三个隔间）",
+      "上锁的小铁门",
+      "俘虏（米尔娜与两个孩子）",
+      "中间墙下的衣服堆"
+     ],
+     "entrances": [],
+     "visual": "长方形房间被两道铁栅栏从南到北切成三格，每格地上铺着脏稻草；铁链和锁头垂在栅栏门上，空气里有汗和霉味。",
+     "rules": [
+      "rule-light",
+      "rule-lock",
+      "rule-break-object",
+      "rule-monster-stat",
+      "rule-npc-party"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-6",
+     "no": 6,
+     "name": "武器库",
+     "page": 27,
+     "pdf_page": 28,
+     "shape": "polygon",
+     "footprint": [
+      [
+       148,
+       25
+      ],
+      [
+       180,
+       25
+      ],
+      [
+       180,
+       63
+      ],
+      [
+       148,
+       63
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "平整石板"
+     ],
+     "props": [
+      "沿墙武器架（12 矛、6 短剑、4 长剑、6 轻弩、8 筒弩矢）",
+      "门边钩子上的 12 件红披风",
+      "通往 7 的密门"
+     ],
+     "entrances": [],
+     "visual": "门从外面锁着；沿墙的武器架像一排铁牙齿，矛尖、剑刃和弩臂在油灯下反着冷光。",
+     "rules": [
+      "rule-light",
+      "rule-lock",
+      "rule-secret-door",
+      "rule-treasure",
+      "rule-weapon"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-7",
+     "no": 7,
+     "name": "储藏室与工作间",
+     "page": 28,
+     "pdf_page": 29,
+     "shape": "polygon",
+     "footprint": [
+      [
+       108,
+       25
+      ],
+      [
+       143,
+       25
+      ],
+      [
+       143,
+       68
+      ],
+      [
+       108,
+       68
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "青石板地面",
+      "石砖墙"
+     ],
+     "props": [
+      "靠墙的木桶、空板条箱、填充稻草",
+      "锤子、撬棍、钉子",
+      "30 张硝制海狸皮",
+      "两扇密门（通 6 与 12）"
+     ],
+     "entrances": [],
+     "visual": "这里曾是天然洞穴的最北端，如今铺了青石板、砌了石砖墙；木桶和板条箱沿墙堆到腰高，几扇密门与石墙混成一体。",
+     "rules": [
+      "rule-light",
+      "rule-secret-door",
+      "rule-treasure",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-8",
+     "no": 8,
+     "name": "裂缝",
+     "page": 28,
+     "pdf_page": 29,
+     "shape": "polygon",
+     "footprint": [
+      [
+       63,
+       73
+      ],
+      [
+       118,
+       73
+      ],
+      [
+       118,
+       190
+      ],
+      [
+       75,
+       190
+      ],
+      [
+       63,
+       160
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "裂隙（20 尺深，5–10 尺宽）",
+      "碎石堆（困难地形）",
+      "两座无护栏木桥"
+     ],
+     "props": [
+      "两根 20 尺高的粗糙石柱",
+      "两座木桥（南桥 50 磅即塌）",
+      "裂隙底部的白骨与半具尸体",
+      "独眼怪的破木箱"
+     ],
+     "entrances": [],
+     "visual": "冷风从裂隙里往上冒，带着腐肉味；两根粗石柱撑着洞顶，两座没有护栏的窄木桥横在黑缝上。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-falling",
+      "rule-prone",
+      "rule-break-object",
+      "rule-cover",
+      "rule-monster-stat",
+      "rule-treasure"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-9",
+     "no": 9,
+     "name": "守卫营房",
+     "page": 29,
+     "pdf_page": 30,
+     "shape": "polygon",
+     "footprint": [
+      [
+       15,
+       143
+      ],
+      [
+       63,
+       143
+      ],
+      [
+       63,
+       183
+      ],
+      [
+       15,
+       183
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "平整石板"
+     ],
+     "props": [
+      "四张粗木床",
+      "堆满的毯子",
+      "散乱的盘子",
+      "麦芽酒桶"
+     ],
+     "entrances": [],
+     "visual": "四张粗木床沿墙排开，毯子堆得像兽窝；空气里是强烈的尸臭和腐肉味，盘子上还留着干掉的残渣。",
+     "rules": [
+      "rule-light",
+      "rule-monster-stat",
+      "rule-treasure",
+      "rule-npc-party"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-10",
+     "no": 10,
+     "name": "一般房间",
+     "page": 30,
+     "pdf_page": 31,
+     "shape": "polygon",
+     "footprint": [
+      [
+       15,
+       95
+      ],
+      [
+       60,
+       95
+      ],
+      [
+       60,
+       143
+      ],
+      [
+       15,
+       143
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "平整石板"
+     ],
+     "props": [
+      "破损的桌椅",
+      "墙边棕色/红色布料",
+      "角落的麦芽酒桶",
+      "赌博桌与灌铅骰子"
+     ],
+     "entrances": [],
+     "visual": "破损的桌椅散在房间里，墙边挂着棕红两色布幔；角落的麦芽酒桶和桌上的骰子、硬币说明这里刚有人赌到兴头上。",
+     "rules": [
+      "rule-light",
+      "rule-surprise",
+      "rule-poisoned",
+      "rule-monster-stat",
+      "rule-treasure"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-11",
+     "no": 11,
+     "name": "法师的工作间",
+     "page": 31,
+     "pdf_page": 32,
+     "shape": "polygon",
+     "footprint": [
+      [
+       15,
+       25
+      ],
+      [
+       58,
+       25
+      ],
+      [
+       58,
+       70
+      ],
+      [
+       15,
+       70
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "平整石板",
+      "炼金设备（易碎）"
+     ],
+     "props": [
+      "大桌上的蒸馏器、曲颈瓶、环状蒸馏器",
+      "塞满羊皮纸卷的书架",
+      "老鼠魔宠",
+      "三瓶稀有材料（水银、龙胆汁、山葵粉）"
+     ],
+     "entrances": [],
+     "visual": "门缝里传出细微的冒泡声；大桌上摆满玻璃器皿，书架上的羊皮纸卷一直堆到天花板，一只老鼠从桌脚边窜过。",
+     "rules": [
+      "rule-light",
+      "rule-monster-stat",
+      "rule-treasure",
+      "rule-magic-item"
+     ]
+    },
+    {
+     "area_id": "scene-hideout-area-12",
+     "no": 12,
+     "name": "水晶之杖的居所",
+     "page": 31,
+     "pdf_page": 32,
+     "shape": "polygon",
+     "footprint": [
+      [
+       60,
+       25
+      ],
+      [
+       98,
+       25
+      ],
+      [
+       98,
+       63
+      ],
+      [
+       60,
+       63
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "平整石板",
+      "猩红布幔"
+     ],
+     "props": [
+      "小写字台与木椅",
+      "舒适的床",
+      "床脚木箱",
+      "水晶法杖",
+      "黑蜘蛛的信件",
+      "东北密门"
+     ],
+     "entrances": [],
+     "visual": "墙上挂满猩红布幔，把石室裹成一间帐篷；小写字台上摊着书册，床边一只木箱，水晶法杖靠在椅边。",
+     "rules": [
+      "rule-light",
+      "rule-secret-door",
+      "rule-monster-stat",
+      "rule-spellcasting",
+      "rule-treasure",
+      "rule-magic-item"
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "from": "external:redbrand:manor-stairs",
+     "to": "scene-hideout-area-1",
+     "type": "stairs",
+     "width_ft": 5,
+     "notes": "庄园厨房的石梯下到 15 尺平台。"
+    },
+    {
+     "from": "scene-hideout-area-1",
+     "to": "scene-hideout-area-2",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "北侧楼梯下的木门。"
+    },
+    {
+     "from": "scene-hideout-area-1",
+     "to": "scene-hideout-area-8",
+     "type": "secret_door",
+     "width_ft": 5,
+     "notes": "西南角密门，通天然裂隙。"
+    },
+    {
+     "from": "scene-hideout-area-2",
+     "to": "scene-hideout-area-3",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "营房东门。"
+    },
+    {
+     "from": "scene-hideout-area-3",
+     "to": "scene-hideout-area-4",
+     "type": "double_door",
+     "width_ft": 10,
+     "notes": "走廊尽头的哀伤天使双开大门。"
+    },
+    {
+     "from": "scene-hideout-area-4",
+     "to": "scene-hideout-area-5",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "墓室东门；靠近 10 尺触发骷髅。"
+    },
+    {
+     "from": "scene-hideout-area-4",
+     "to": "scene-hideout-area-6",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "墓室北门；靠近 10 尺触发骷髅。"
+    },
+    {
+     "from": "scene-hideout-area-5",
+     "to": "scene-hideout-area-6",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "奴隶圈栏与武器库之间的门。"
+    },
+    {
+     "from": "scene-hideout-area-6",
+     "to": "scene-hideout-area-7",
+     "type": "secret_door",
+     "width_ft": 5,
+     "notes": "正对锁门的墙后密门。"
+    },
+    {
+     "from": "scene-hideout-area-7",
+     "to": "scene-hideout-area-8",
+     "type": "passage",
+     "width_ft": 10,
+     "notes": "储藏室南边下到裂隙洞穴。"
+    },
+    {
+     "from": "scene-hideout-area-7",
+     "to": "scene-hideout-area-12",
+     "type": "secret_door",
+     "width_ft": 5,
+     "notes": "通往水晶之杖卧室的密门。"
+    },
+    {
+     "from": "scene-hideout-area-8",
+     "to": "scene-hideout-area-9",
+     "type": "stairs",
+     "width_ft": 5,
+     "notes": "裂隙东侧台阶上到守卫营房。"
+    },
+    {
+     "from": "scene-hideout-area-8",
+     "to": "scene-hideout-area-10",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "裂隙西侧的门通往一般房间。"
+    },
+    {
+     "from": "scene-hideout-area-8",
+     "to": "external:redbrand:south-tunnel",
+     "type": "tunnel",
+     "width_ft": 5,
+     "notes": "南边粗糙通道，从庄园南侧树林进入。"
+    },
+    {
+     "from": "scene-hideout-area-9",
+     "to": "scene-hideout-area-10",
+     "type": "stairs",
+     "width_ft": 5,
+     "notes": "守卫营房与一般房间之间的台阶。"
+    },
+    {
+     "from": "scene-hideout-area-10",
+     "to": "scene-hideout-area-11",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "一般房间通往法师工作间。"
+    },
+    {
+     "from": "scene-hideout-area-11",
+     "to": "scene-hideout-area-12",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "工作间通往卧室。"
+    }
+   ],
+   "legend": [
+    "木桶",
+    "桥",
+    "上下铺",
+    "锁门",
+    "补给",
+    "武器架",
+    "密门",
+    "石棺",
+    "桌子",
+    "水池"
+   ],
+   "notes": [
+    "所有门默认未锁；锁门可用 DC10 敏捷（盗贼工具）撬开，或 DC20 力量破坏。",
+    "密门：10 尺内被动察觉 15 发现，主动搜索 DC10；地图上标 S。",
+    "基地地势自东向西降低，部分连接为台阶。"
+   ],
+   "chapter_id": "ch02-phandalin",
+   "part": 2,
+   "area_count": 12
+  },
+  {
+   "id": "map-thundertree",
+   "title": "雷霆树镇废墟",
+   "title_en": "Ruins of Thundertree",
+   "scene_id": "lmop:scene:thundertree",
+   "kind": "site",
+   "page": 39,
+   "pdf_page": 40,
+   "scale": {
+    "unit": "feet",
+    "feet_per_square": 10
+   },
+   "canvas": {
+    "width": 520,
+    "height": 370,
+    "unit": "feet"
+   },
+   "environment": {
+    "setting": "outdoor ruins",
+    "weather": "阴天、潮湿，偶有细雨",
+    "terrain": "杂草、碎石、倒塌石墙、树丛",
+    "light": "白天自然光；塔楼/闭门小屋为微光或黑暗"
+   },
+   "layout": "小镇废墟沿一条东西向的旧路展开。西侧是两间塌顶小屋（1–2），北侧是棕马酒馆（3）与龙之塔（7），南侧是德鲁伊守望（4）、农舍（5）与杂货店（6）；东侧有药草店（9）、广场（10）、警备岗哨（11）、织布者小屋（12）与龙之信徒农舍（13）。巨蛛的网从杂货店延伸到北侧路边。",
+   "accuracy": "按原图 10 尺方格重绘；废墟边界为示意多边形，误差约 ±1 格（10 尺）。",
+   "areas": [
+    {
+     "area_id": "lmop:area:thundertree-1",
+     "no": 1,
+     "name": "最西边的小屋",
+     "page": 38,
+     "pdf_page": 39,
+     "shape": "polygon",
+     "footprint": [
+      [
+       70,
+       140
+      ],
+      [
+       120,
+       140
+      ],
+      [
+       120,
+       200
+      ],
+      [
+       70,
+       200
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "杂草（困难地形）",
+      "无顶石屋"
+     ],
+     "props": [
+      "无屋顶的石制小屋",
+      "两侧杂草中的枯枝怪"
+     ],
+     "entrances": [],
+     "visual": "石屋只剩齐腰的墙，屋顶早已不见；两侧杂草高过膝盖，风一吹就露出干枯的枝条。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-stealth",
+      "rule-surprise",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-2",
+     "no": 2,
+     "name": "荒废的小屋",
+     "page": 38,
+     "pdf_page": 39,
+     "shape": "polygon",
+     "footprint": [
+      [
+       150,
+       160
+      ],
+      [
+       260,
+       160
+      ],
+      [
+       260,
+       250
+      ],
+      [
+       150,
+       250
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "碎石（困难地形）",
+      "茂密植物（困难地形）"
+     ],
+     "props": [
+      "塌顶的木石结构",
+      "中央小树",
+      "六只枯枝怪潜伏的树叶"
+     ],
+     "entrances": [],
+     "visual": "这里曾是一户商户或富农的家，如今只剩半截烟囱和一圈墙根；一棵小树从屋子中央长出来，树冠密得看不见里面。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-stealth",
+      "rule-surprise",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-3",
+     "no": 3,
+     "name": "棕马马酒馆",
+     "page": 39,
+     "pdf_page": 40,
+     "shape": "polygon",
+     "footprint": [
+      [
+       200,
+       40
+      ],
+      [
+       300,
+       40
+      ],
+      [
+       300,
+       110
+      ],
+      [
+       200,
+       110
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "碎石（困难地形）",
+      "倒塌梁木"
+     ],
+     "props": [
+      "褪色的棕马招牌",
+      "倒塌的吧台",
+      "四只灰烬僵尸",
+      "地窖/后厨入口"
+     ],
+     "entrances": [],
+     "visual": "褪色的招牌上还能看出一个人举着麦酒；屋里桌椅翻倒，墙角有绿黑色的霉，空气里是烧焦的麦芽味。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-monster-stat",
+      "rule-fire",
+      "rule-cover"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-4",
+     "no": 4,
+     "name": "德鲁伊的守望",
+     "page": 40,
+     "pdf_page": 41,
+     "shape": "polygon",
+     "footprint": [
+      [
+       170,
+       280
+      ],
+      [
+       230,
+       280
+      ],
+      [
+       230,
+       330
+      ],
+      [
+       170,
+       330
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "加固木门",
+      "厚木板窗"
+     ],
+     "props": [
+      "铁条加固的门",
+      "木板封住的窗",
+      "莱多斯的营地",
+      "草药与兽骨"
+     ],
+     "entrances": [],
+     "visual": "小屋被铁条和厚木板封得严严实实，门缝里透出一点灯火和草药的苦味。",
+     "rules": [
+      "rule-rest",
+      "rule-npc-party",
+      "rule-ability-check",
+      "rule-treasure"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-5",
+     "no": 5,
+     "name": "荒废的农舍",
+     "page": 40,
+     "pdf_page": 41,
+     "shape": "polygon",
+     "footprint": [
+      [
+       300,
+       300
+      ],
+      [
+       360,
+       300
+      ],
+      [
+       360,
+       340
+      ],
+      [
+       300,
+       340
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "碎石（困难地形）",
+      "金雀花与荆棘（困难地形）"
+     ],
+     "props": [
+      "倒塌的农舍",
+      "东边树丛",
+      "南门/北门"
+     ],
+     "entrances": [],
+     "visual": "农舍的屋顶塌了一半，金雀花和荆棘从墙根爬上来；东边树丛里偶尔有枝条不自然地晃动。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-stealth",
+      "rule-surprise",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-6",
+     "no": 6,
+     "name": "荒废的杂货店",
+     "page": 41,
+     "pdf_page": 42,
+     "shape": "polygon",
+     "footprint": [
+      [
+       350,
+       250
+      ],
+      [
+       460,
+       250
+      ],
+      [
+       460,
+       320
+      ],
+      [
+       350,
+       320
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "蛛网（困难地形）",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "部分完好的屋顶",
+      "内墙中的巨蛛",
+      "延伸到北面路边的蛛网"
+     ],
+     "entrances": [],
+     "visual": "杂货店的屋顶还剩一半，门框上挂着厚厚的蛛网；网线一直拉到北边的树上，稍一碰就颤动。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-surprise",
+      "rule-monster-stat",
+      "rule-cover"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-7",
+     "no": 7,
+     "name": "龙之塔",
+     "page": 41,
+     "pdf_page": 42,
+     "shape": "polygon",
+     "footprint": [
+      [
+       370,
+       40
+      ],
+      [
+       450,
+       40
+      ],
+      [
+       450,
+       120
+      ],
+      [
+       370,
+       120
+      ]
+     ],
+     "ceiling_ft": 40,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "碎石（困难地形）",
+      "环形楼梯"
+     ],
+     "props": [
+      "圆形塔楼",
+      "5 尺宽环形楼梯",
+      "露天屋顶",
+      "两具巨蛛尸体",
+      "屋内缠网家具"
+     ],
+     "entrances": [],
+     "visual": "山丘顶上立着一座圆塔，塔顶已经露天；塔外两具巨蛛尸体被雨水泡得发胀，塔内传来低沉的回声。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-monster-stat",
+      "rule-flying",
+      "rule-frightened",
+      "rule-treasure"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-8",
+     "no": 8,
+     "name": "老旧的铁匠铺",
+     "page": 42,
+     "pdf_page": 43,
+     "shape": "polygon",
+     "footprint": [
+      [
+       400,
+       310
+      ],
+      [
+       480,
+       310
+      ],
+      [
+       480,
+       350
+      ],
+      [
+       400,
+       350
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "碎石（困难地形）",
+      "煤灰"
+     ],
+     "props": [
+      "宽烟囱残骸",
+      "腐朽柴堆",
+      "两具灰烬僵尸"
+     ],
+     "entrances": [],
+     "visual": "铁匠铺只剩一个塌了半边的宽烟囱，柴堆黑得像炭；墙角的灰烬里蜷着两具人形。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-monster-stat",
+      "rule-fire"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-9",
+     "no": 9,
+     "name": "药草店",
+     "page": 42,
+     "pdf_page": 43,
+     "shape": "polygon",
+     "footprint": [
+      [
+       410,
+       220
+      ],
+      [
+       470,
+       220
+      ],
+      [
+       470,
+       280
+      ],
+      [
+       410,
+       280
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "残破货架（困难地形）",
+      "腐烂书本"
+     ],
+     "props": [
+      "倒塌的货架",
+      "破碎的瓶罐",
+      "货架下的空当（米尔娜的传家宝）"
+     ],
+     "entrances": [],
+     "visual": "货架倒了一半，干枯的草药和碎玻璃铺了一地；空气里还残留着薄荷与硫磺混在一起的味道。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-ability-check",
+      "rule-treasure",
+      "rule-poisoned"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-10",
+     "no": 10,
+     "name": "城镇广场",
+     "page": 42,
+     "pdf_page": 43,
+     "shape": "polygon",
+     "footprint": [
+      [
+       370,
+       180
+      ],
+      [
+       410,
+       180
+      ],
+      [
+       410,
+       230
+      ],
+      [
+       370,
+       230
+      ]
+     ],
+     "ceiling_ft": 0,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "石铺地面",
+      "杂草（困难地形）"
+     ],
+     "props": [
+      "10 尺高的风化木雕像（Palien）",
+      "方形广场",
+      "通往各处的旧路"
+     ],
+     "entrances": [],
+     "visual": "广场中央立着一尊被雨泡白的木雕像，战士举着长矛和盾牌，基座上爬满青苔。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-ability-check"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-11",
+     "no": 11,
+     "name": "老旧的警卫岗哨",
+     "page": 43,
+     "pdf_page": 44,
+     "shape": "polygon",
+     "footprint": [
+      [
+       440,
+       60
+      ],
+      [
+       490,
+       60
+      ],
+      [
+       490,
+       120
+      ],
+      [
+       440,
+       120
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "碎石（困难地形）",
+      "城垛屋顶"
+     ],
+     "props": [
+      "简单城垛的屋顶",
+      "射箭孔窗",
+      "五只灰烬僵尸",
+      "梯子与活板门",
+      "十人床铺"
+     ],
+     "entrances": [],
+     "visual": "这是镇上少有的还立着的建筑，屋顶有简单城垛，窗洞窄得像箭孔；门里黑着，偶尔有铁片摩擦的声音。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-monster-stat",
+      "rule-cover",
+      "rule-rest"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-12",
+     "no": 12,
+     "name": "织布者小屋",
+     "page": 43,
+     "pdf_page": 44,
+     "shape": "polygon",
+     "footprint": [
+      [
+       450,
+       190
+      ],
+      [
+       500,
+       190
+      ],
+      [
+       500,
+       250
+      ],
+      [
+       450,
+       250
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "碎石（困难地形）",
+      "树丛（困难地形）"
+     ],
+     "props": [
+      "倒塌的小屋",
+      "破碎的织布机",
+      "南边树丛中的枯枝怪"
+     ],
+     "entrances": [],
+     "visual": "小屋整个塌了下来，织布机的木架从瓦砾里伸出来，像一副散了架的肋骨。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-stealth",
+      "rule-surprise",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "lmop:area:thundertree-13",
+     "no": 13,
+     "name": "龙之信徒",
+     "page": 43,
+     "pdf_page": 44,
+     "shape": "polygon",
+     "footprint": [
+      [
+       460,
+       310
+      ],
+      [
+       510,
+       310
+      ],
+      [
+       510,
+       360
+      ],
+      [
+       460,
+       360
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "加固门窗"
+     ],
+     "props": [
+      "从里面挡住的门",
+      "内部堵上的窗板",
+      "六个黑衣信徒",
+      "龙翼状斗篷与龙角面具"
+     ],
+     "entrances": [],
+     "visual": "农舍门窗紧闭，窗板从里面顶死；门缝里透出一点烛光，偶尔有压低的龙语。",
+     "rules": [
+      "rule-break-object",
+      "rule-monster-stat",
+      "rule-surprise",
+      "rule-npc-party"
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "from": "external:thundertree:road",
+     "to": "lmop:area:thundertree-2",
+     "type": "path",
+     "width_ft": 10,
+     "notes": "从南边旧路进入废墟。"
+    },
+    {
+     "from": "lmop:area:thundertree-1",
+     "to": "lmop:area:thundertree-2",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "西侧小屋间的旧径。"
+    },
+    {
+     "from": "lmop:area:thundertree-2",
+     "to": "lmop:area:thundertree-3",
+     "type": "path",
+     "width_ft": 10,
+     "notes": "向北的旧路。"
+    },
+    {
+     "from": "lmop:area:thundertree-2",
+     "to": "lmop:area:thundertree-4",
+     "type": "path",
+     "width_ft": 10,
+     "notes": "向南的旧路。"
+    },
+    {
+     "from": "lmop:area:thundertree-2",
+     "to": "lmop:area:thundertree-10",
+     "type": "path",
+     "width_ft": 10,
+     "notes": "向东的旧路。"
+    },
+    {
+     "from": "lmop:area:thundertree-3",
+     "to": "lmop:area:thundertree-7",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "酒馆东侧的碎石小径。"
+    },
+    {
+     "from": "lmop:area:thundertree-4",
+     "to": "lmop:area:thundertree-5",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "南侧小径。"
+    },
+    {
+     "from": "lmop:area:thundertree-4",
+     "to": "lmop:area:thundertree-6",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "向东穿过树丛。"
+    },
+    {
+     "from": "lmop:area:thundertree-5",
+     "to": "lmop:area:thundertree-6",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "农舍与杂货店之间。"
+    },
+    {
+     "from": "lmop:area:thundertree-5",
+     "to": "lmop:area:thundertree-8",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "向南到铁匠铺。"
+    },
+    {
+     "from": "lmop:area:thundertree-6",
+     "to": "lmop:area:thundertree-8",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "杂货店南侧。"
+    },
+    {
+     "from": "lmop:area:thundertree-6",
+     "to": "lmop:area:thundertree-9",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "向东到药草店。"
+    },
+    {
+     "from": "lmop:area:thundertree-7",
+     "to": "lmop:area:thundertree-10",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "塔楼南侧小径。"
+    },
+    {
+     "from": "lmop:area:thundertree-8",
+     "to": "lmop:area:thundertree-9",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "铁匠铺与药草店之间。"
+    },
+    {
+     "from": "lmop:area:thundertree-8",
+     "to": "lmop:area:thundertree-13",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "东南小径。"
+    },
+    {
+     "from": "lmop:area:thundertree-9",
+     "to": "lmop:area:thundertree-10",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "药草店西侧。"
+    },
+    {
+     "from": "lmop:area:thundertree-10",
+     "to": "lmop:area:thundertree-11",
+     "type": "path",
+     "width_ft": 10,
+     "notes": "向东北的旧路。"
+    },
+    {
+     "from": "lmop:area:thundertree-10",
+     "to": "lmop:area:thundertree-12",
+     "type": "path",
+     "width_ft": 10,
+     "notes": "向东的旧路。"
+    },
+    {
+     "from": "lmop:area:thundertree-11",
+     "to": "lmop:area:thundertree-12",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "北侧小径。"
+    },
+    {
+     "from": "lmop:area:thundertree-12",
+     "to": "lmop:area:thundertree-13",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "东南小径。"
+    }
+   ],
+   "legend": [
+    "灌木",
+    "门",
+    "完整墙体",
+    "小径",
+    "废墟墙体",
+    "雕像",
+    "树",
+    "窗"
+   ],
+   "notes": [
+    "户外区域白天有自然光；塔楼内部、紧闭小屋为微光或黑暗。",
+    "大部分废墟地面为困难地形；树丛可提供掩护。"
+   ],
+   "chapter_id": "lmop:chapter:part-3",
+   "part": 3,
+   "area_count": 13
+  },
+  {
+   "id": "map-cragmaw-castle",
+   "title": "克拉格莫城堡",
+   "title_en": "Cragmaw Castle",
+   "scene_id": "lmop:scene:cragmaw-castle",
+   "kind": "dungeon",
+   "page": 48,
+   "pdf_page": 49,
+   "scale": {
+    "unit": "feet",
+    "feet_per_square": 5
+   },
+   "canvas": {
+    "width": 240,
+    "height": 165,
+    "unit": "feet"
+   },
+   "environment": {
+    "setting": "ruined castle",
+    "ceiling": "默认 15 尺；宴会厅 25 尺；枭熊塔楼中空 30 尺",
+    "light": "白昼从射箭孔透入微弱光；夜晚全黑；区域 8/13 无外部光",
+    "terrain": "破裂石板铺在泥土上；瓦砾区为困难地形"
+   },
+   "layout": "城堡由七座交错重叠的破败塔楼构成，只有一楼仍可居住。前门（1）经倒塌的青铜木门进入陷阱大厅（2）；大厅北通大地精营房（6），西通弓箭手岗哨（3）与废弃营房（4），东通储藏室（5）与黑暗大厅（8），南接宴会厅（7）。黑暗大厅北接哥布林神殿（9），东接废弃塔楼（11）；塔楼南接守卫营房（12），营房北通王之居所（14）；后门（10）在城堡南面，枭熊塔楼（13）在东南。",
+   "accuracy": "按原图 5 尺方格重绘；塔楼圆弧与洞穴边界为示意多边形，误差约 ±1 格（5 尺）。",
+   "areas": [
+    {
+     "area_id": "lmop:area:cragmaw-1",
+     "no": 1,
+     "name": "城堡入口",
+     "page": 45,
+     "pdf_page": 46,
+     "shape": "polygon",
+     "footprint": [
+      [
+       20,
+       80
+      ],
+      [
+       85,
+       80
+      ],
+      [
+       85,
+       105
+      ],
+      [
+       50,
+       105
+      ],
+      [
+       50,
+       135
+      ],
+      [
+       20,
+       135
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "低矮石阶",
+      "倒塌的青铜木门",
+      "瓦砾（困难地形）"
+     ],
+     "props": [
+      "倒塌的青铜覆盖木门",
+      "入口平台",
+      "低矮阶梯",
+      "射箭孔（区域 3 的哥布林哨兵）"
+     ],
+     "entrances": [],
+     "visual": "七座高低不一的破塔从树线后探出来，像一排断牙；入口前几级低矮石阶通向平台，青铜包边的木门已经锈塌。",
+     "rules": [
+      "rule-light",
+      "rule-difficult-terrain",
+      "rule-cover",
+      "rule-stealth"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-2",
+     "no": 2,
+     "name": "陷阱大厅",
+     "page": 46,
+     "pdf_page": 47,
+     "shape": "polygon",
+     "footprint": [
+      [
+       85,
+       60
+      ],
+      [
+       100,
+       60
+      ],
+      [
+       100,
+       95
+      ],
+      [
+       85,
+       95
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "瓦砾（困难地形）",
+      "崩塌天花板（陷阱）"
+     ],
+     "props": [
+      "北/南/东多扇门",
+      "瓦砾堆",
+      "铜线连接的天花板机关",
+      "崩塌范围标记"
+     ],
+     "entrances": [],
+     "visual": "这里曾是门厅，如今瓦砾堆到膝盖；天花板的泥灰一块块往下掉，地上一道细铜线在尘土里几乎看不见。",
+     "rules": [
+      "rule-trap",
+      "rule-falling",
+      "rule-prone",
+      "rule-saving-throw",
+      "rule-difficult-terrain",
+      "rule-cover"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-3",
+     "no": 3,
+     "name": "弓箭手岗哨",
+     "page": 46,
+     "pdf_page": 47,
+     "shape": "polygon",
+     "footprint": [
+      [
+       40,
+       60
+      ],
+      [
+       75,
+       60
+      ],
+      [
+       75,
+       80
+      ],
+      [
+       40,
+       80
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "碎石（困难地形）",
+      "射箭孔（掩蔽）"
+     ],
+     "props": [
+      "正对门的射箭孔",
+      "散落的碎石",
+      "两只哥布林弓箭手"
+     ],
+     "entrances": [],
+     "visual": "小房间正对城堡大门的位置开着一个射箭孔，碎石铺了一地；墙角的短弓已经搭好箭。",
+     "rules": [
+      "rule-cover",
+      "rule-light",
+      "rule-monster-stat",
+      "rule-stealth"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-4",
+     "no": 4,
+     "name": "废弃营房",
+     "page": 46,
+     "pdf_page": 47,
+     "shape": "polygon",
+     "footprint": [
+      [
+       50,
+       105
+      ],
+      [
+       85,
+       105
+      ],
+      [
+       85,
+       135
+      ],
+      [
+       50,
+       135
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "瓦砾（困难地形）",
+      "碎石通道"
+     ],
+     "props": [
+      "残破铺盖",
+      "通往东方的窄通道",
+      "三只哥布林"
+     ],
+     "entrances": [],
+     "visual": "西南塔楼只比一堆瓦砾好一点，剩下的地板上摊着几个破铺盖；东边墙根有一道仅容一人过的窄缝。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-light",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-5",
+     "no": 5,
+     "name": "储藏室",
+     "page": 47,
+     "pdf_page": 48,
+     "shape": "polygon",
+     "footprint": [
+      [
+       105,
+       55
+      ],
+      [
+       120,
+       55
+      ],
+      [
+       120,
+       75
+      ],
+      [
+       105,
+       75
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "瓦砾（困难地形）"
+     ],
+     "props": [
+      "旧木桶（腌肉）",
+      "腐烂谷粒袋",
+      "染血锁子甲",
+      "大型十字弓",
+      "无鞘长剑（绝冬城徽记）",
+      "矮人白兰地小桶"
+     ],
+     "entrances": [],
+     "visual": "旧木桶沿墙堆着，袋里的谷粒已经发黑；一股腌肉、酸酒和霉味混在一起。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-treasure",
+      "rule-poisoned"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-6",
+     "no": 6,
+     "name": "大地精营房",
+     "page": 47,
+     "pdf_page": 48,
+     "shape": "polygon",
+     "footprint": [
+      [
+       55,
+       35
+      ],
+      [
+       95,
+       35
+      ],
+      [
+       95,
+       58
+      ],
+      [
+       55,
+       58
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "四张稻草床",
+      "墙上托架（矛、剑、流星锤、巨剑、长棍）",
+      "北墙的假瓦砾堆"
+     ],
+     "entrances": [],
+     "visual": "四张稻草床沿墙排开，墙上托架插满长矛、长剑与流星锤；北墙的瓦砾看起来塌了，地面却被扫得异常干净。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-light",
+      "rule-monster-stat",
+      "rule-treasure"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-7",
+     "no": 7,
+     "name": "宴会厅",
+     "page": 47,
+     "pdf_page": 48,
+     "shape": "polygon",
+     "footprint": [
+      [
+       105,
+       75
+      ],
+      [
+       145,
+       75
+      ],
+      [
+       145,
+       115
+      ],
+      [
+       105,
+       115
+      ]
+     ],
+     "ceiling_ft": 25,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "碎石（困难地形）",
+      "大木桌（掩蔽）"
+     ],
+     "props": [
+      "两张长木桌与长凳",
+      "铜火盆（炽热煤炭）",
+      "肮脏餐具与剩饭",
+      "七只哥布林与厨子 Yegg"
+     ],
+     "entrances": [],
+     "visual": "大厅西半只剩一堵碎石墙，东半还立着；两张长桌从厅中穿过，桌上的盘子、炖锅和骨头堆成小山。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-fire",
+      "rule-cover",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-8",
+     "no": 8,
+     "name": "黑暗大厅",
+     "page": 48,
+     "pdf_page": 49,
+     "shape": "polygon",
+     "footprint": [
+      [
+       120,
+       50
+      ],
+      [
+       145,
+       50
+      ],
+      [
+       145,
+       75
+      ],
+      [
+       120,
+       75
+      ]
+     ],
+     "ceiling_ft": 25,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "碎石（困难地形）",
+      "厚重帘幕（掩蔽）"
+     ],
+     "props": [
+      "上方天使雕刻",
+      "北侧厚帘幕与拱门",
+      "破损石制火盆（藏金雕像）",
+      "掘地兽藏身处"
+     ],
+     "entrances": [],
+     "visual": "高而窄的大厅里没有一丝外部光；上方雕刻的天使在黑暗里只剩轮廓，北侧厚帘幕垂到地面。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-surprise",
+      "rule-cover",
+      "rule-monster-stat",
+      "rule-treasure"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-9",
+     "no": 9,
+     "name": "哥布林神殿",
+     "page": 49,
+     "pdf_page": 50,
+     "shape": "polygon",
+     "footprint": [
+      [
+       140,
+       20
+      ],
+      [
+       180,
+       20
+      ],
+      [
+       180,
+       65
+      ],
+      [
+       140,
+       65
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "碎石（困难地形）",
+      "厚重帘幕（掩蔽）"
+     ],
+     "props": [
+      "石制祭坛（血布）",
+      "纯金仪式法器（酒杯、刀、香炉）",
+      "Lhupo 与两名侍僧",
+      "人类神祇浮雕"
+     ],
+     "entrances": [],
+     "visual": "祭坛立在房间中央，黑布上浸着血；三件纯金法器摆得整整齐齐，两侧拱门挂着厚帘。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-cover",
+      "rule-monster-stat",
+      "rule-treasure",
+      "rule-ability-check"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-10",
+     "no": 10,
+     "name": "后门",
+     "page": 50,
+     "pdf_page": 51,
+     "shape": "polygon",
+     "footprint": [
+      [
+       145,
+       125
+      ],
+      [
+       175,
+       125
+      ],
+      [
+       175,
+       145
+      ],
+      [
+       145,
+       145
+      ]
+     ],
+     "ceiling_ft": 0,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "杂草小径",
+      "可攀爬城墙"
+     ],
+     "props": [
+      "上锁铁门",
+      "射箭孔（离地 10 尺）",
+      "南面小路"
+     ],
+     "entrances": [],
+     "visual": "城堡南面的墙上嵌着一扇生锈铁门，门前杂草被踩出一条细路；射箭孔在十尺高处俯视着来路。",
+     "rules": [
+      "rule-lock",
+      "rule-break-object",
+      "rule-climb",
+      "rule-falling"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-11",
+     "no": 11,
+     "name": "废弃塔楼",
+     "page": 50,
+     "pdf_page": 51,
+     "shape": "polygon",
+     "footprint": [
+      [
+       170,
+       60
+      ],
+      [
+       200,
+       60
+      ],
+      [
+       200,
+       95
+      ],
+      [
+       170,
+       95
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "瓦砾（困难地形）",
+      "帆布掩蔽"
+     ],
+     "props": [
+      "几乎塌光的塔楼",
+      "腐烂箱子与旧木桶",
+      "北面帆布隐藏入口（地图 C）"
+     ],
+     "entrances": [],
+     "visual": "塔楼塌得只剩一圈墙根，地板还露出几块；一堆沾灰的帆布盖在北墙上，与碎石几乎混成一体。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-secret-door",
+      "rule-stealth"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-12",
+     "no": 12,
+     "name": "守卫营房",
+     "page": 50,
+     "pdf_page": 51,
+     "shape": "polygon",
+     "footprint": [
+      [
+       200,
+       80
+      ],
+      [
+       230,
+       80
+      ],
+      [
+       230,
+       120
+      ],
+      [
+       200,
+       120
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "碎石（困难地形）",
+      "帘幕（掩蔽）"
+     ],
+     "props": [
+      "四个稻草铺盖",
+      "燃烧的石制火盆",
+      "完好木门",
+      "两个大地精"
+     ],
+     "entrances": [],
+     "visual": "小营房里一只石火盆烧着煤，四个铺盖沿东墙排开；南墙塌了，但木门还立着。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-fire",
+      "rule-cover",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-13",
+     "no": 13,
+     "name": "枭熊塔楼",
+     "page": 50,
+     "pdf_page": 51,
+     "shape": "polygon",
+     "footprint": [
+      [
+       175,
+       120
+      ],
+      [
+       225,
+       120
+      ],
+      [
+       225,
+       150
+      ],
+      [
+       175,
+       150
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "碎石（困难地形）",
+      "中空塔楼"
+     ],
+     "props": [
+      "被木栓阻挡的门",
+      "封死的射箭孔",
+      "倒塌的上层（30 尺中空）",
+      "旧工作台与书架",
+      "枭熊"
+     ],
+     "entrances": [],
+     "visual": "门被一根沉重木栓从外面别住，门板上钉着警告标志；门后塔楼中空三十尺，尘土和碎玻璃铺了一地。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-break-object",
+      "rule-monster-stat",
+      "rule-treasure"
+     ]
+    },
+    {
+     "area_id": "lmop:area:cragmaw-14",
+     "no": 14,
+     "name": "王之居所",
+     "page": 51,
+     "pdf_page": 52,
+     "shape": "polygon",
+     "footprint": [
+      [
+       200,
+       30
+      ],
+      [
+       235,
+       30
+      ],
+      [
+       235,
+       75
+      ],
+      [
+       200,
+       75
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "厚毛皮地毯",
+      "石制火盆（明亮）"
+     ],
+     "props": [
+      "北边大床",
+      "墙上老旧奖章",
+      "南边圆桌与椅子",
+      "石火盆",
+      "被拷打的刚铎",
+      "葛罗尔王、狼与变形怪"
+     ],
+     "entrances": [],
+     "visual": "厚毛皮铺在地上当地毯，墙上挂着褪色奖章；北边大床旁的铁火盆烧得正亮，南边圆桌旁的地板上躺着一个失去意识的矮人。",
+     "rules": [
+      "rule-light",
+      "rule-fire",
+      "rule-cover",
+      "rule-monster-stat",
+      "rule-treasure",
+      "rule-npc-party",
+      "rule-death"
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "from": "external:castle:front",
+     "to": "lmop:area:cragmaw-1",
+     "type": "stairs",
+     "width_ft": 10,
+     "notes": "前门低矮石阶与倒塌大门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-1",
+     "to": "lmop:area:cragmaw-2",
+     "type": "gate",
+     "width_ft": 10,
+     "notes": "青铜包边木门（已倒塌）。"
+    },
+    {
+     "from": "lmop:area:cragmaw-1",
+     "to": "lmop:area:cragmaw-3",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "入口西侧的岗哨门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-2",
+     "to": "lmop:area:cragmaw-3",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "大厅西侧门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-2",
+     "to": "lmop:area:cragmaw-4",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "大厅南侧门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-2",
+     "to": "lmop:area:cragmaw-5",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "大厅东侧门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-2",
+     "to": "lmop:area:cragmaw-6",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "大厅北侧门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-2",
+     "to": "lmop:area:cragmaw-7",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "大厅南侧门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-2",
+     "to": "lmop:area:cragmaw-8",
+     "type": "corridor",
+     "width_ft": 5,
+     "notes": "大厅东侧走廊，两扇门分别通东与南。"
+    },
+    {
+     "from": "lmop:area:cragmaw-5",
+     "to": "lmop:area:cragmaw-8",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "储藏室与黑暗大厅之间。"
+    },
+    {
+     "from": "lmop:area:cragmaw-6",
+     "to": "lmop:area:cragmaw-7",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "大地精营房南门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-7",
+     "to": "lmop:area:cragmaw-8",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "宴会厅北门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-7",
+     "to": "lmop:area:cragmaw-10",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "南面后门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-8",
+     "to": "lmop:area:cragmaw-9",
+     "type": "curtain",
+     "width_ft": 10,
+     "notes": "北侧厚帘幕后的双拱门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-8",
+     "to": "lmop:area:cragmaw-11",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "黑暗大厅东侧门；区域 11 另有一个从外部帆布进入的隐藏入口。"
+    },
+    {
+     "from": "lmop:area:cragmaw-9",
+     "to": "lmop:area:cragmaw-14",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "神殿东北门。"
+    },
+    {
+     "from": "lmop:area:cragmaw-10",
+     "to": "lmop:area:cragmaw-13",
+     "type": "path",
+     "width_ft": 5,
+     "notes": "南面小路绕到东南塔楼。"
+    },
+    {
+     "from": "lmop:area:cragmaw-11",
+     "to": "lmop:area:cragmaw-12",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "废弃塔楼与守卫营房之间。"
+    },
+    {
+     "from": "lmop:area:cragmaw-12",
+     "to": "lmop:area:cragmaw-14",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "守卫营房北门。"
+    }
+   ],
+   "legend": [
+    "射箭孔",
+    "火盆",
+    "破门",
+    "密门（C）",
+    "帘幕",
+    "哥布林铺盖",
+    "补给",
+    "桌子",
+    "陷阱"
+   ],
+   "notes": [
+    "射箭孔对外 10 尺高、对内 4 尺高，8 英寸宽、4 尺长；一端对另一端攻击获得四分之三掩蔽。",
+    "内门为木头加铁条，未上锁、无钥匙孔；DC15 力量可破坏。",
+    "白天大部分区域微弱光，夜晚全黑。"
+   ],
+   "chapter_id": "lmop:chapter:part-3",
+   "part": 3,
+   "area_count": 14
+  },
+  {
+   "id": "map-wave-echo-cave",
+   "title": "潮音洞",
+   "title_en": "Wave Echo Cave",
+   "scene_id": null,
+   "kind": "dungeon",
+   "page": 54,
+   "pdf_page": 55,
+   "scale": {
+    "unit": "feet",
+    "feet_per_square": 10
+   },
+   "canvas": {
+    "width": 500,
+    "height": 640,
+    "unit": "feet"
+   },
+   "environment": {
+    "setting": "underground mine",
+    "ceiling": "矿道 10 尺；房间 20 尺；天然洞穴 30 尺",
+    "water": "黑水池 20 尺深；东北支流 3 尺深",
+    "light": "默认黑暗；区域 8 真菌绿光、区域 13 星空微光、区域 15 绿火微光"
+   },
+   "layout": "矿坑从西南入口（1）进入，中央是迷宫般的原始矿道（2）。南侧旧入口（3）下接旧守卫间（4）与试金者办公室（5），中部是南部营房（6）、废弃储藏间（7）与真菌洞窟（8）。中央大洞穴（9）连接黑水池（10）、北部营房（11）与冶炼洞窟（12）；冶炼洞窟东通明亮洞穴（13），再通法师居所（14）与法术工场（15）。东北是轰鸣声洞穴（16），北面是古老河床（17）与崩塌洞穴（18），西北是杜马松神殿（19）与祭司居所（20）。",
+   "accuracy": "按原图 10 尺方格重绘；天然洞穴边界为示意多边形，误差约 ±1 格（10 尺）。",
+   "areas": [
+    {
+     "area_id": "lmop:scene:area-1",
+     "no": 1,
+     "name": "洞窟入口",
+     "page": 56,
+     "pdf_page": 56,
+     "shape": "polygon",
+     "footprint": [
+      [
+       90,
+       480
+      ],
+      [
+       205,
+       480
+      ],
+      [
+       205,
+       585
+      ],
+      [
+       110,
+       592
+      ],
+      [
+       92,
+       545
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "天然石柱与石笋（掩蔽）",
+      "20 尺深坑",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "三张铺盖",
+      "补给（面粉、盐、腌肉、油灯、灯油、镐、铲）",
+      "塔登的尸体",
+      "东北深坑（10 尺宽、20 尺深）与麻绳",
+      "跑跳靴"
+     ],
+     "entrances": [],
+     "visual": "矿道尽头豁然开朗，三根石笋和一根天然石柱撑起黑黢黢的洞顶；西边石柱后有三张铺盖，一具矮人尸体倒在补给旁。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-falling",
+      "rule-climb",
+      "rule-cover",
+      "rule-treasure",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-2",
+     "no": 2,
+     "name": "矿道",
+     "page": 56,
+     "pdf_page": 56,
+     "shape": "polygon",
+     "footprint": [
+      [
+       205,
+       380
+      ],
+      [
+       270,
+       380
+      ],
+      [
+       270,
+       500
+      ],
+      [
+       205,
+       500
+      ],
+      [
+       180,
+       460
+      ]
+     ],
+     "ceiling_ft": 10,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "矿道（6 尺高）",
+      "死路",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "交叉矿道",
+      "多处死路",
+      "矿工凿痕",
+      "赭色果冻怪"
+     ],
+     "entrances": [],
+     "visual": "矿道像被随手扯开的线团，六尺高的顶压得很低；许多岔路走进去几步就断了，岩壁上留着镐痕。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-difficult-terrain",
+      "rule-monster-stat",
+      "rule-stealth"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-3",
+     "no": 3,
+     "name": "旧入口",
+     "page": 57,
+     "pdf_page": 57,
+     "shape": "polygon",
+     "footprint": [
+      [
+       240,
+       500
+      ],
+      [
+       325,
+       500
+      ],
+      [
+       325,
+       560
+      ],
+      [
+       240,
+       560
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "塌方堆积",
+      "骸骨（困难地形）"
+     ],
+     "props": [
+      "被崩塌埋葬的旧入口",
+      "矮人与兽人骸骨",
+      "墙上矮人/侏儒矿工图样",
+      "天花板蚊蝠"
+     ],
+     "entrances": [],
+     "visual": "天然洞穴的高顶下散着两打穿锈甲的骸骨，墙上有矮人和侏儒矿工刻的简单图样；旧入口被塌方堵死。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-difficult-terrain",
+      "rule-surprise",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-4",
+     "no": 4,
+     "name": "老旧的守卫间",
+     "page": 57,
+     "pdf_page": 57,
+     "shape": "polygon",
+     "footprint": [
+      [
+       170,
+       560
+      ],
+      [
+       240,
+       560
+      ],
+      [
+       240,
+       610
+      ],
+      [
+       170,
+       610
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "碎石（困难地形）",
+      "倒塌家具"
+     ],
+     "props": [
+      "碎裂石椅",
+      "倒塌武器架",
+      "矮人/兽人骸骨",
+      "九具会重组的骷髅"
+     ],
+     "entrances": [],
+     "visual": "守卫间被碎石塞满，石椅碎成几块，武器架倒在地上；骸骨堆里分不清哪些是矮人、哪些是兽人。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-difficult-terrain",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-5",
+     "no": 5,
+     "name": "试金者的办公室",
+     "page": 57,
+     "pdf_page": 57,
+     "shape": "polygon",
+     "footprint": [
+      [
+       320,
+       560
+      ],
+      [
+       370,
+       560
+      ],
+      [
+       370,
+       610
+      ],
+      [
+       320,
+       610
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "碎石（困难地形）",
+      "石制柜台（掩蔽）"
+     ],
+     "props": [
+      "大型石制柜台",
+      "三个沾灰铁秤",
+      "北侧小隔间与碎纸",
+      "侏儒/兽人尸体",
+      "上锁铁保险箱"
+     ],
+     "entrances": [],
+     "visual": "石制柜台把房间分成两半，三只铁秤还摆在上面；北边的小隔间里，碎纸一碰就化成灰。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-lock",
+      "rule-treasure",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-6",
+     "no": 6,
+     "name": "南部营房",
+     "page": 57,
+     "pdf_page": 57,
+     "shape": "polygon",
+     "footprint": [
+      [
+       270,
+       400
+      ],
+      [
+       335,
+       400
+      ],
+      [
+       335,
+       470
+      ],
+      [
+       270,
+       470
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "碎石（困难地形）",
+      "旧石床"
+     ],
+     "props": [
+      "沿墙石床",
+      "锈铁火盆（旧煤）",
+      "矮人/兽人骸骨",
+      "三只食尸鬼"
+     ],
+     "entrances": [],
+     "visual": "石床沿墙排成一线，房间中央的铁火盆里只剩冷煤；骸骨堆边有什么东西在咀嚼。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-monster-stat",
+      "rule-surprise",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-7",
+     "no": 7,
+     "name": "废弃的储藏间",
+     "page": 58,
+     "pdf_page": 58,
+     "shape": "polygon",
+     "footprint": [
+      [
+       340,
+       400
+      ],
+      [
+       390,
+       400
+      ],
+      [
+       390,
+       455
+      ],
+      [
+       340,
+       455
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "碎石（困难地形）",
+      "安全休息点"
+     ],
+     "props": [
+      "东墙崩塌的碎石",
+      "半开的北门",
+      "沿墙小桶（已蒸发）",
+      "可从内部挡住的门"
+     ],
+     "entrances": [],
+     "visual": "储藏间北半还完好，小桶沿墙排得整整齐齐；东墙塌成一堆碎石，门却还能从里面顶住。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-rest",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-8",
+     "no": 8,
+     "name": "真菌洞窟",
+     "page": 58,
+     "pdf_page": 58,
+     "shape": "polygon",
+     "footprint": [
+      [
+       390,
+       430
+      ],
+      [
+       470,
+       430
+      ],
+      [
+       470,
+       540
+      ],
+      [
+       410,
+       540
+      ],
+      [
+       390,
+       490
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "真菌毯（1 尺高，毒气）",
+      "石笋（5 尺高真菌）",
+      "微光环境"
+     ],
+     "props": [
+      "覆盖地面的发光真菌",
+      "石笋上的真菌",
+      "绿色磷光",
+      "毒气孢子"
+     ],
+     "entrances": [],
+     "visual": "地面铺着一层奇怪的绿光真菌，像湿地上的萤火；石笋上的菌伞长到五尺高，呼吸里有股甜腥的霉味。",
+     "rules": [
+      "rule-poisoned",
+      "rule-saving-throw",
+      "rule-light",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-9",
+     "no": 9,
+     "name": "大洞穴",
+     "page": 58,
+     "pdf_page": 58,
+     "shape": "polygon",
+     "footprint": [
+      [
+       280,
+       300
+      ],
+      [
+       400,
+       300
+      ],
+      [
+       400,
+       380
+      ],
+      [
+       280,
+       380
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "三级高地（悬崖 10 尺，DC12 运动）",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "中间低地两张旧大桌与一对火盆",
+      "东边高地小桌",
+      "西边高地阴影",
+      "七只食尸鬼"
+     ],
+     "entrances": [],
+     "visual": "洞穴被悬崖分成三层，两边高、中间低；低地上两张旧大桌并排，桌边散着几打骸骨。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-climb",
+      "rule-falling",
+      "rule-prone",
+      "rule-monster-stat",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-10",
+     "no": 10,
+     "name": "黑水池",
+     "page": 58,
+     "pdf_page": 58,
+     "shape": "polygon",
+     "footprint": [
+      [
+       120,
+       220
+      ],
+      [
+       200,
+       220
+      ],
+      [
+       200,
+       300
+      ],
+      [
+       120,
+       300
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "黑水池（20 尺深）",
+      "东北支流（3 尺深，低顶）",
+      "湿滑岸边"
+     ],
+     "props": [
+      "黑水池",
+      "岸边破损薄贝壳",
+      "池底巫师骸骨",
+      "两枚白金戒指与魔法飞弹魔杖"
+     ],
+     "entrances": [],
+     "visual": "池水黑得像一块墨，岸边散着碎贝壳，空气里有鱼腥味；水面偶尔鼓起一个泡，又无声地破掉。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-water",
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-11",
+     "no": 11,
+     "name": "北部营房",
+     "page": 59,
+     "pdf_page": 59,
+     "shape": "polygon",
+     "footprint": [
+      [
+       200,
+       320
+      ],
+      [
+       280,
+       320
+      ],
+      [
+       280,
+       380
+      ],
+      [
+       200,
+       380
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "碎石（困难地形）",
+      "路障（困难地形）"
+     ],
+     "props": [
+      "沿墙旧石床",
+      "中央铁火盆（照明取暖）",
+      "东门木桌路障",
+      "五只熊地精"
+     ],
+     "entrances": [],
+     "visual": "石床沿墙排成一线，中央铁火盆还亮着；东门被几张拆散的木桌堆成路障。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-break-object",
+      "rule-monster-stat",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-12",
+     "no": 12,
+     "name": "冶炼洞窟",
+     "page": 59,
+     "pdf_page": 59,
+     "shape": "polygon",
+     "footprint": [
+      [
+       400,
+       280
+      ],
+      [
+       455,
+       280
+      ],
+      [
+       455,
+       350
+      ],
+      [
+       400,
+       350
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "干涸渠道（5 尺深）",
+      "高炉与风箱",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "高炉（冰冷）",
+      "机械化风箱",
+      "水车（干涸渠道）",
+      "煤炭堆与未炼矿石车",
+      "八具僵尸与燃烧之颅"
+     ],
+     "entrances": [],
+     "visual": "高炉冷着，风箱像一只停下的肺；十尺宽的水车渠道横穿地板，渠底干得发白。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-fire",
+      "rule-monster-stat",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-13",
+     "no": 13,
+     "name": "明亮的洞穴",
+     "page": 59,
+     "pdf_page": 59,
+     "shape": "polygon",
+     "footprint": [
+      [
+       455,
+       300
+      ],
+      [
+       500,
+       300
+      ],
+      [
+       500,
+       370
+      ],
+      [
+       455,
+       370
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "小悬崖（阶梯）",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "天花板发光矿物（星空般）",
+      "两座人类比例石制建筑残骸",
+      "数十具被压垮的骷髅",
+      "通往 14/15 的破损门"
+     ],
+     "entrances": [],
+     "visual": "洞顶的矿物把光吸进去又吐出来，像一片倒悬的星空；两座人类比例的石屋在星光下只剩焦黑的墙。",
+     "rules": [
+      "rule-light",
+      "rule-difficult-terrain",
+      "rule-magic-item"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-14",
+     "no": 14,
+     "name": "法师的居所",
+     "page": 60,
+     "pdf_page": 60,
+     "shape": "polygon",
+     "footprint": [
+      [
+       455,
+       375
+      ],
+      [
+       500,
+       375
+      ],
+      [
+       500,
+       425
+      ],
+      [
+       455,
+       425
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "烧焦家具",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "破裂的门与融化的铁铰链",
+      "烧焦桌、椅、书柜、床",
+      "焦黑铁箱（1100cp/160sp/50ep/3 钻石/木管）",
+      "法术书与地图",
+      "缚灵莫尔梅斯克"
+     ],
+     "entrances": [],
+     "visual": "门板焦黑，铁铰链化成一坨；屋里到处是灰烬和烧裂的家具，只有床脚那只铁箱还完整。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-break-object",
+      "rule-monster-stat",
+      "rule-treasure",
+      "rule-magic-item",
+      "rule-spell-scroll"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-15",
+     "no": 15,
+     "name": "法术工场",
+     "page": 61,
+     "pdf_page": 61,
+     "shape": "polygon",
+     "footprint": [
+      [
+       455,
+       220
+      ],
+      [
+       500,
+       220
+      ],
+      [
+       500,
+       290
+      ],
+      [
+       455,
+       290
+      ]
+     ],
+     "ceiling_ft": 25,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "焦黑工作桌",
+      "碎石（困难地形）"
+     ],
+     "props": [
+      "石基座上的绿色火焰火盆",
+      "观察者眼魔",
+      "东南角工作桌（护光者、龙之守护）",
+      "北侧独立工作间"
+     ],
+     "entrances": [],
+     "visual": "工作间被古代法术战烧得只剩骨架，两只工作桌焦黑；房间中央的石基座上，一团绿火安静地跳着。",
+     "rules": [
+      "rule-light",
+      "rule-monster-stat",
+      "rule-magic-item",
+      "rule-treasure",
+      "rule-fire",
+      "rule-ability-check"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-16",
+     "no": 16,
+     "name": "轰鸣声的洞穴",
+     "page": 62,
+     "pdf_page": 62,
+     "shape": "polygon",
+     "footprint": [
+      [
+       400,
+       50
+      ],
+      [
+       500,
+       50
+      ],
+      [
+       500,
+       180
+      ],
+      [
+       400,
+       180
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "水浪（水位周期性上升 10 尺）",
+      "湿滑岩壁"
+     ],
+     "props": [
+      "南墙岩壁边（离水面 15 尺）",
+      "水道入口",
+      "周期性水浪与轰鸣声"
+     ],
+     "entrances": [],
+     "visual": "水声在这里最响，像有什么巨物在岩壁后呼吸；每隔两分钟，一股白浪从水道里涌进来，拍在湿滑的石壁上。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-water",
+      "rule-climb",
+      "rule-falling",
+      "rule-saving-throw"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-17",
+     "no": 17,
+     "name": "古老的河床",
+     "page": 62,
+     "pdf_page": 62,
+     "shape": "polygon",
+     "footprint": [
+      [
+       310,
+       50
+      ],
+      [
+       390,
+       50
+      ],
+      [
+       390,
+       130
+      ],
+      [
+       310,
+       130
+      ]
+     ],
+     "ceiling_ft": 4,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "4 尺高通道（狭窄）",
+      "圆石/鹅卵石（困难地形）",
+      "干涸河床"
+     ],
+     "props": [
+      "低矮通道",
+      "圆石与鹅卵石",
+      "干涸的水道",
+      "绕过区域 12 的密径"
+     ],
+     "entrances": [],
+     "visual": "通道只有四尺高，得弯着腰走；地上全是圆石和鹅卵石，像一条被抽干水的河。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-difficult-terrain",
+      "rule-stealth"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-18",
+     "no": 18,
+     "name": "崩塌的洞穴",
+     "page": 62,
+     "pdf_page": 62,
+     "shape": "polygon",
+     "footprint": [
+      [
+       230,
+       120
+      ],
+      [
+       310,
+       120
+      ],
+      [
+       310,
+       210
+      ],
+      [
+       230,
+       210
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "20 尺深裂谷（绳索/DC10 运动）",
+      "碎石（困难地形）",
+      "水流"
+     ],
+     "props": [
+      "东半部大裂谷",
+      "西墙流出的水",
+      "铁桩与绳索",
+      "三只熊地精与变形怪",
+      "裂谷底的食人魔力量手套"
+     ],
+     "entrances": [],
+     "visual": "洞穴东半被一条二十尺深的裂谷劈开，水从西墙流出来，跌进谷底再往北去；几条绳子拴在铁桩上垂下去。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-climb",
+      "rule-falling",
+      "rule-prone",
+      "rule-monster-stat",
+      "rule-treasure",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-19",
+     "no": 19,
+     "name": "杜马松神殿",
+     "page": 63,
+     "pdf_page": 63,
+     "shape": "polygon",
+     "footprint": [
+      [
+       80,
+       50
+      ],
+      [
+       180,
+       50
+      ],
+      [
+       180,
+       150
+      ],
+      [
+       80,
+       150
+      ]
+     ],
+     "ceiling_ft": 30,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "碎石（困难地形）",
+      "石柱（掩蔽）"
+     ],
+     "props": [
+      "六根破损大理石柱",
+      "九尺高矮人神像（祖母绿眼睛）",
+      "营地（铺盖、包裹、火坑）",
+      "奈兹纳尔、四只巨蛛、两只熊地精",
+      "雕像眼陷阱"
+     ],
+     "entrances": [],
+     "visual": "六根断柱沿墙立着，尽头一尊九尺高的矮人神像坐在宝座上，膝上横着石锤；神像的眼睛是两颗祖母绿，在火坑的光里发绿。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-trap",
+      "rule-monster-stat",
+      "rule-treasure",
+      "rule-cover",
+      "rule-difficult-terrain"
+     ]
+    },
+    {
+     "area_id": "lmop:scene:area-20",
+     "no": 20,
+     "name": "祭司的居所",
+     "page": 64,
+     "pdf_page": 64,
+     "shape": "polygon",
+     "footprint": [
+      [
+       180,
+       50
+      ],
+      [
+       230,
+       50
+      ],
+      [
+       230,
+       100
+      ],
+      [
+       180,
+       100
+      ]
+     ],
+     "ceiling_ft": 20,
+     "elevation_ft": 0,
+     "light": "darkness",
+     "terrain": [
+      "石地",
+      "帘幕（掩蔽）"
+     ],
+     "props": [
+      "上锁的门",
+      "布满尘土的帘幕",
+      "床与火盆",
+      "被绑的南镀"
+     ],
+     "entrances": [],
+     "visual": "门上着锁，门缝里没有光；屋里一张床、一只火盆，帘幕上积着厚灰，南镀被绑在石地上不省人事。",
+     "rules": [
+      "rule-darkvision",
+      "rule-light",
+      "rule-lock",
+      "rule-rest",
+      "rule-npc-party",
+      "rule-death"
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "from": "external:wec:entrance",
+     "to": "lmop:scene:area-1",
+     "type": "mine_tunnel",
+     "width_ft": 10,
+     "notes": "剑山山麓的天然矿道入口。"
+    },
+    {
+     "from": "lmop:scene:area-1",
+     "to": "lmop:scene:area-2",
+     "type": "mine_tunnel",
+     "width_ft": 10,
+     "notes": "矿道向北分岔。"
+    },
+    {
+     "from": "lmop:scene:area-1",
+     "to": "lmop:scene:area-3",
+     "type": "mine_tunnel",
+     "width_ft": 10,
+     "notes": "东侧矿道。"
+    },
+    {
+     "from": "lmop:scene:area-2",
+     "to": "lmop:scene:area-3",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "迷宫矿道南出口。"
+    },
+    {
+     "from": "lmop:scene:area-2",
+     "to": "lmop:scene:area-4",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "通旧守卫间。"
+    },
+    {
+     "from": "lmop:scene:area-2",
+     "to": "lmop:scene:area-5",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "通试金者办公室。"
+    },
+    {
+     "from": "lmop:scene:area-2",
+     "to": "lmop:scene:area-6",
+     "type": "mine_tunnel",
+     "width_ft": 10,
+     "notes": "通南部营房。"
+    },
+    {
+     "from": "lmop:scene:area-2",
+     "to": "lmop:scene:area-9",
+     "type": "mine_tunnel",
+     "width_ft": 10,
+     "notes": "迷宫北端开进大洞穴。"
+    },
+    {
+     "from": "lmop:scene:area-3",
+     "to": "lmop:scene:area-4",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "旧入口下到守卫间。"
+    },
+    {
+     "from": "lmop:scene:area-3",
+     "to": "lmop:scene:area-5",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "旧入口东侧通道。"
+    },
+    {
+     "from": "lmop:scene:area-6",
+     "to": "lmop:scene:area-7",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "南部营房与储藏间之间。"
+    },
+    {
+     "from": "lmop:scene:area-6",
+     "to": "lmop:scene:area-9",
+     "type": "mine_tunnel",
+     "width_ft": 10,
+     "notes": "营房北出口。"
+    },
+    {
+     "from": "lmop:scene:area-7",
+     "to": "lmop:scene:area-8",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "储藏间东侧通真菌洞窟。"
+    },
+    {
+     "from": "lmop:scene:area-8",
+     "to": "lmop:scene:area-12",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "真菌洞窟北侧窄道。"
+    },
+    {
+     "from": "lmop:scene:area-9",
+     "to": "lmop:scene:area-10",
+     "type": "mine_tunnel",
+     "width_ft": 10,
+     "notes": "大洞穴西侧通道。"
+    },
+    {
+     "from": "lmop:scene:area-9",
+     "to": "lmop:scene:area-11",
+     "type": "stairs",
+     "width_ft": 5,
+     "notes": "大洞穴西北石阶。"
+    },
+    {
+     "from": "lmop:scene:area-9",
+     "to": "lmop:scene:area-12",
+     "type": "mine_tunnel",
+     "width_ft": 10,
+     "notes": "大洞穴东北通道。"
+    },
+    {
+     "from": "lmop:scene:area-10",
+     "to": "lmop:scene:area-17",
+     "type": "water_passage",
+     "width_ft": 5,
+     "notes": "东北支流，3 尺深，低顶。"
+    },
+    {
+     "from": "lmop:scene:area-10",
+     "to": "lmop:scene:area-18",
+     "type": "water_passage",
+     "width_ft": 5,
+     "notes": "支流继续通往崩塌洞穴。"
+    },
+    {
+     "from": "lmop:scene:area-11",
+     "to": "lmop:scene:area-12",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "营房东门（木桌路障）。"
+    },
+    {
+     "from": "lmop:scene:area-12",
+     "to": "lmop:scene:area-13",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "干涸渠道穿过房间地板。"
+    },
+    {
+     "from": "lmop:scene:area-13",
+     "to": "lmop:scene:area-14",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "破损的法师居所门。"
+    },
+    {
+     "from": "lmop:scene:area-13",
+     "to": "lmop:scene:area-15",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "法术工场门。"
+    },
+    {
+     "from": "lmop:scene:area-14",
+     "to": "lmop:scene:area-15",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "法师居所与法术工场之间。"
+    },
+    {
+     "from": "lmop:scene:area-15",
+     "to": "lmop:scene:area-16",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "北侧通道通轰鸣声洞穴。"
+    },
+    {
+     "from": "lmop:scene:area-15",
+     "to": "lmop:scene:area-17",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "北侧通道通古老河床。"
+    },
+    {
+     "from": "lmop:scene:area-16",
+     "to": "lmop:scene:area-17",
+     "type": "dry_channel",
+     "width_ft": 5,
+     "notes": "旧水道相连。"
+    },
+    {
+     "from": "lmop:scene:area-17",
+     "to": "lmop:scene:area-18",
+     "type": "dry_channel",
+     "width_ft": 5,
+     "notes": "旧河床通往崩塌洞穴。"
+    },
+    {
+     "from": "lmop:scene:area-18",
+     "to": "lmop:scene:area-19",
+     "type": "mine_tunnel",
+     "width_ft": 5,
+     "notes": "崩塌洞穴西北通道。"
+    },
+    {
+     "from": "lmop:scene:area-19",
+     "to": "lmop:scene:area-20",
+     "type": "door",
+     "width_ft": 5,
+     "notes": "神殿北侧上锁的门（DC15 盗贼工具/奈兹纳尔铁钥匙）。"
+    }
+   ],
+   "legend": [
+    "木桶",
+    "火盆",
+    "铺盖",
+    "悬崖",
+    "真菌",
+    "石柱",
+    "石笋",
+    "桌子",
+    "水车"
+   ],
+   "notes": [
+    "矿道 10 尺高、房间 20 尺高、天然洞穴 30 尺高。",
+    "门默认 6 尺高、4 尺宽、6 英寸厚石板；大多低矮适合矮人。",
+    "区域 1–16 有微风；区域 8/13/15 有特殊光。"
+   ],
+   "page_basis": "areas use PDF pages; map sheet is printed p.54 / PDF p.55",
+   "chapter_id": "lmop:chapter:part-4-wave-echo-cave",
+   "part": 4,
+   "area_count": 20
+  },
+  {
+   "id": "map-phandalin",
+   "title": "凡度林镇",
+   "title_en": "Phandalin",
+   "scene_id": "scene-phandalin",
+   "kind": "town",
+   "page": 20,
+   "pdf_page": 21,
+   "scale": {
+    "unit": "feet",
+    "feet_per_square": 0,
+    "scale_bar_ft": 500
+   },
+   "canvas": {
+    "width": 1000,
+    "height": 700,
+    "unit": "feet"
+   },
+   "environment": {
+    "setting": "rural town",
+    "terrain": "草坡、土路、果园、林缘",
+    "light": "白天自然光"
+   },
+   "layout": "小镇沿一条南北向主街展开。北面是三猪小径与石丘旅舍、幸运神殿、巴森小栈；中部是镇公所、沉睡巨人、狮盾商会与镇民住宅；南面是淘金公会、阿黛尔利芙农场与矿工小径；东面山坡上是特雷山大庄园。",
+   "accuracy": "按原图比例尺重绘；建筑为示意方块，位置误差约 ±50 尺。",
+   "areas": [
+    {
+     "area_id": "scene-stonehill-inn",
+     "no": 1,
+     "name": "石丘旅舍",
+     "page": 18,
+     "pdf_page": 19,
+     "shape": "polygon",
+     "footprint": [
+      [
+       360,
+       260
+      ],
+      [
+       440,
+       260
+      ],
+      [
+       440,
+       320
+      ],
+      [
+       360,
+       320
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "两层石木旅舍",
+      "马厩",
+      "旅舍大厅",
+      "客房"
+     ],
+     "entrances": [],
+     "visual": "镇中心最像样的建筑，石墙木梁，门口挂着褪色的石丘招牌。",
+     "rules": [
+      "rule-rest",
+      "rule-npc-party",
+      "rule-ability-check"
+     ]
+    },
+    {
+     "area_id": "scene-barthens-provisions",
+     "no": 2,
+     "name": "巴森小栈",
+     "page": 19,
+     "pdf_page": 20,
+     "shape": "polygon",
+     "footprint": [
+      [
+       520,
+       70
+      ],
+      [
+       610,
+       70
+      ],
+      [
+       610,
+       140
+      ],
+      [
+       520,
+       140
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "杂货铺面",
+      "仓库",
+      "货车"
+     ],
+     "entrances": [],
+     "visual": "一间长条形的木石铺面，门口堆着麻袋和板条箱，招牌上画着一只靴子。",
+     "rules": [
+      "rule-treasure",
+      "rule-quest"
+     ]
+    },
+    {
+     "area_id": "scene-edermath-orchard",
+     "no": 3,
+     "name": "埃德玛的果园",
+     "page": 19,
+     "pdf_page": 20,
+     "shape": "polygon",
+     "footprint": [
+      [
+       70,
+       190
+      ],
+      [
+       190,
+       190
+      ],
+      [
+       190,
+       300
+      ],
+      [
+       70,
+       300
+      ]
+     ],
+     "ceiling_ft": 0,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "果园（困难地形）"
+     ],
+     "props": [
+      "成排苹果树",
+      "果树间的蜂箱",
+      "果园小屋"
+     ],
+     "entrances": [],
+     "visual": "缓坡上一排排苹果树，树冠修剪得很整齐，空气里有发酵果子的甜味。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-quest"
+     ]
+    },
+    {
+     "area_id": "scene-lionshield-coster",
+     "no": 4,
+     "name": "狮盾商会",
+     "page": 20,
+     "pdf_page": 21,
+     "shape": "polygon",
+     "footprint": [
+      [
+       180,
+       390
+      ],
+      [
+       270,
+       390
+      ],
+      [
+       270,
+       450
+      ],
+      [
+       180,
+       450
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "商行柜台",
+      "武器/护甲架",
+      "账本",
+      "货车"
+     ],
+     "entrances": [],
+     "visual": "门口挂着蓝狮盾徽，屋里是铁器、皮革和木箱的味道。",
+     "rules": [
+      "rule-treasure",
+      "rule-quest"
+     ]
+    },
+    {
+     "area_id": "scene-miners-exchange",
+     "no": 5,
+     "name": "凡度林淘金公会",
+     "page": 20,
+     "pdf_page": 21,
+     "shape": "polygon",
+     "footprint": [
+      [
+       270,
+       600
+      ],
+      [
+       360,
+       600
+      ],
+      [
+       360,
+       660
+      ],
+      [
+       270,
+       660
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "兑换柜台",
+      "矿石样本",
+      "账房",
+      "守卫"
+     ],
+     "entrances": [],
+     "visual": "一间石头砌的交易所，窗子很小，柜台后摆着天平与矿石样本。",
+     "rules": [
+      "rule-treasure",
+      "rule-quest",
+      "rule-ability-check"
+     ]
+    },
+    {
+     "area_id": "scene-alderleaf-farm",
+     "no": 6,
+     "name": "阿黛尔利芙的农场",
+     "page": 21,
+     "pdf_page": 22,
+     "shape": "polygon",
+     "footprint": [
+      [
+       580,
+       450
+      ],
+      [
+       700,
+       450
+      ],
+      [
+       700,
+       530
+      ],
+      [
+       580,
+       530
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "农田（困难地形）"
+     ],
+     "props": [
+      "农舍",
+      "鸡舍",
+      "草垛",
+      "农田"
+     ],
+     "entrances": [],
+     "visual": "镇东南的农场，农舍前有一棵大树，鸡在土里刨食。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-rest",
+      "rule-quest"
+     ]
+    },
+    {
+     "area_id": "scene-shrine-of-luck",
+     "no": 7,
+     "name": "幸运神殿",
+     "page": 21,
+     "pdf_page": 22,
+     "shape": "polygon",
+     "footprint": [
+      [
+       310,
+       80
+      ],
+      [
+       370,
+       80
+      ],
+      [
+       370,
+       120
+      ],
+      [
+       310,
+       120
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "石铺小院"
+     ],
+     "props": [
+      "幸运女神神龛",
+      "供品",
+      "石凳"
+     ],
+     "entrances": [],
+     "visual": "一座小神龛，屋顶上立着幸运女神的徽记，台阶上放着几束野花。",
+     "rules": [
+      "rule-rest",
+      "rule-ability-check",
+      "rule-quest"
+     ]
+    },
+    {
+     "area_id": "scene-sleeping-giant",
+     "no": 8,
+     "name": "沉睡巨人",
+     "page": 22,
+     "pdf_page": 23,
+     "shape": "polygon",
+     "footprint": [
+      [
+       620,
+       260
+      ],
+      [
+       700,
+       260
+      ],
+      [
+       700,
+       320
+      ],
+      [
+       620,
+       320
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "泥地"
+     ],
+     "props": [
+      "酒馆大厅",
+      "吧台",
+      "酒桶",
+      "赌桌"
+     ],
+     "entrances": [],
+     "visual": "一栋歪斜的木楼，招牌上画着一个打鼾的巨人；窗缝里透出浑黄的灯光和酒气。",
+     "rules": [
+      "rule-social",
+      "rule-rest",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "scene-townmasters-hall",
+     "no": 9,
+     "name": "镇长大厅",
+     "page": 22,
+     "pdf_page": 23,
+     "shape": "polygon",
+     "footprint": [
+      [
+       470,
+       320
+      ],
+      [
+       550,
+       320
+      ],
+      [
+       550,
+       380
+      ],
+      [
+       470,
+       380
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "镇民告示板",
+      "镇长办公桌",
+      "赏金公告"
+     ],
+     "entrances": [],
+     "visual": "一栋方方正正的石木建筑，门口钉着告示板，上面贴着悬赏和地契。",
+     "rules": [
+      "rule-quest",
+      "rule-ability-check"
+     ]
+    },
+    {
+     "area_id": "scene-tresendar-manor",
+     "no": 10,
+     "name": "特雷山大庄园",
+     "page": 23,
+     "pdf_page": 24,
+     "shape": "polygon",
+     "footprint": [
+      [
+       790,
+       190
+      ],
+      [
+       900,
+       190
+      ],
+      [
+       900,
+       280
+      ],
+      [
+       790,
+       280
+      ]
+     ],
+     "ceiling_ft": 15,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "山坡（困难地形）",
+      "荆棘（困难地形）"
+     ],
+     "props": [
+      "废弃庄园主楼",
+      "坍塌屋顶",
+      "荆棘丛",
+      "地窖入口（厨房石梯）"
+     ],
+     "entrances": [],
+     "visual": "山坡上被林木和荆棘包围的废弃庄园，石墙还立着，窗洞全黑。",
+     "rules": [
+      "rule-difficult-terrain",
+      "rule-secret-door",
+      "rule-monster-stat"
+     ]
+    },
+    {
+     "area_id": "external:phandalin:sister-garaele-home",
+     "no": 11,
+     "name": "加拉尔修女的家",
+     "page": 21,
+     "pdf_page": 22,
+     "shape": "polygon",
+     "footprint": [
+      [
+       160,
+       120
+      ],
+      [
+       220,
+       120
+      ],
+      [
+       220,
+       160
+      ],
+      [
+       160,
+       160
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "小神屋",
+      "草药园",
+      " prayer 角"
+     ],
+     "entrances": [],
+     "visual": "一栋安静的小屋，窗台上摆着草药和蜡烛。",
+     "rules": [
+      "rule-rest",
+      "rule-quest"
+     ]
+    },
+    {
+     "area_id": "external:phandalin:barthen-home",
+     "no": 12,
+     "name": "巴森的家",
+     "page": 19,
+     "pdf_page": 20,
+     "shape": "polygon",
+     "footprint": [
+      [
+       640,
+       110
+      ],
+      [
+       700,
+       110
+      ],
+      [
+       700,
+       150
+      ],
+      [
+       640,
+       150
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "住宅",
+      "货车棚"
+     ],
+     "entrances": [],
+     "visual": "小栈后面的住宅，门口停着一辆卸了货的板车。",
+     "rules": [
+      "rule-rest"
+     ]
+    },
+    {
+     "area_id": "external:phandalin:linene-home",
+     "no": 13,
+     "name": "莱纳的家",
+     "page": 20,
+     "pdf_page": 21,
+     "shape": "polygon",
+     "footprint": [
+      [
+       90,
+       480
+      ],
+      [
+       150,
+       480
+      ],
+      [
+       150,
+       520
+      ],
+      [
+       90,
+       520
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "住宅",
+      "小院"
+     ],
+     "entrances": [],
+     "visual": "狮盾商会后面的小院住宅，晾着皮围裙。",
+     "rules": [
+      "rule-rest"
+     ]
+    },
+    {
+     "area_id": "external:phandalin:harbin-home",
+     "no": 14,
+     "name": "哈宾·威斯特的家",
+     "page": 22,
+     "pdf_page": 23,
+     "shape": "polygon",
+     "footprint": [
+      [
+       490,
+       500
+      ],
+      [
+       550,
+       500
+      ],
+      [
+       550,
+       540
+      ],
+      [
+       490,
+       540
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "住宅",
+      "门廊"
+     ],
+     "entrances": [],
+     "visual": "镇长大厅南边的一栋体面住宅，门前有两级石阶。",
+     "rules": [
+      "rule-rest"
+     ]
+    },
+    {
+     "area_id": "external:phandalin:halia-home",
+     "no": 15,
+     "name": "哈利娅的家",
+     "page": 21,
+     "pdf_page": 22,
+     "shape": "polygon",
+     "footprint": [
+      [
+       440,
+       610
+      ],
+      [
+       500,
+       610
+      ],
+      [
+       500,
+       650
+      ],
+      [
+       440,
+       650
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "住宅",
+      "账房"
+     ],
+     "entrances": [],
+     "visual": "淘金公会附近的小楼，窗子朝着交易所。",
+     "rules": [
+      "rule-rest"
+     ]
+    },
+    {
+     "area_id": "external:phandalin:woodworker",
+     "no": 16,
+     "name": "木匠铺",
+     "page": 22,
+     "pdf_page": 23,
+     "shape": "polygon",
+     "footprint": [
+      [
+       380,
+       470
+      ],
+      [
+       430,
+       470
+      ],
+      [
+       430,
+       510
+      ],
+      [
+       380,
+       510
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "工作棚",
+      "木料堆"
+     ],
+     "entrances": [],
+     "visual": "露天工作棚下堆着木料，刨花铺了一地。",
+     "rules": [
+      "rule-treasure"
+     ]
+    },
+    {
+     "area_id": "external:phandalin:smithy",
+     "no": 17,
+     "name": "铁匠铺",
+     "page": 19,
+     "pdf_page": 20,
+     "shape": "polygon",
+     "footprint": [
+      [
+       350,
+       180
+      ],
+      [
+       410,
+       180
+      ],
+      [
+       410,
+       220
+      ],
+      [
+       350,
+       220
+      ]
+     ],
+     "ceiling_ft": 12,
+     "elevation_ft": 0,
+     "light": "dim",
+     "terrain": [
+      "土路"
+     ],
+     "props": [
+      "锻炉",
+      "铁砧",
+      "水槽"
+     ],
+     "entrances": [],
+     "visual": "铁匠铺里炉火发红，锤声从半开的门里传出来。",
+     "rules": [
+      "rule-fire",
+      "rule-treasure"
+     ]
+    },
+    {
+     "area_id": "external:phandalin:town-green",
+     "no": 18,
+     "name": "镇民绿地",
+     "page": 19,
+     "pdf_page": 20,
+     "shape": "polygon",
+     "footprint": [
+      [
+       210,
+       290
+      ],
+      [
+       310,
+       290
+      ],
+      [
+       310,
+       370
+      ],
+      [
+       210,
+       370
+      ]
+     ],
+     "ceiling_ft": 0,
+     "elevation_ft": 0,
+     "light": "daylight",
+     "terrain": [
+      "草地"
+     ],
+     "props": [
+      "水井",
+      "长凳",
+      "告示柱"
+     ],
+     "entrances": [],
+     "visual": "镇中心的一片草地，中间一口石井，井栏被绳子磨得发亮。",
+     "rules": [
+      "rule-social"
+     ]
+    }
+   ],
+   "connections": [
+    {
+     "from": "external:phandalin:triboar-trail",
+     "to": "external:phandalin:town-green",
+     "type": "road",
+     "width_ft": 20,
+     "notes": "三猪小径进镇。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "scene-stonehill-inn",
+     "type": "street",
+     "width_ft": 20,
+     "notes": "主街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "scene-townmasters-hall",
+     "type": "street",
+     "width_ft": 20,
+     "notes": "主街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "scene-shrine-of-luck",
+     "type": "street",
+     "width_ft": 10,
+     "notes": "北向小巷。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "scene-barthens-provisions",
+     "type": "street",
+     "width_ft": 15,
+     "notes": "北向主街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "scene-sleeping-giant",
+     "type": "street",
+     "width_ft": 15,
+     "notes": "东向街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "scene-tresendar-manor",
+     "type": "path",
+     "width_ft": 10,
+     "notes": "东面山坡小径。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "scene-lionshield-coster",
+     "type": "street",
+     "width_ft": 15,
+     "notes": "西南街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "scene-miners-exchange",
+     "type": "street",
+     "width_ft": 15,
+     "notes": "南向主街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "scene-alderleaf-farm",
+     "type": "path",
+     "width_ft": 10,
+     "notes": "东南田路。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "scene-edermath-orchard",
+     "type": "path",
+     "width_ft": 10,
+     "notes": "西侧果园小径。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "external:phandalin:sister-garaele-home",
+     "type": "street",
+     "width_ft": 10,
+     "notes": "北面小巷。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "external:phandalin:barthen-home",
+     "type": "street",
+     "width_ft": 10,
+     "notes": "东北街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "external:phandalin:linene-home",
+     "type": "street",
+     "width_ft": 10,
+     "notes": "西南街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "external:phandalin:harbin-home",
+     "type": "street",
+     "width_ft": 10,
+     "notes": "南面街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "external:phandalin:halia-home",
+     "type": "street",
+     "width_ft": 10,
+     "notes": "南面街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "external:phandalin:woodworker",
+     "type": "street",
+     "width_ft": 10,
+     "notes": "南面街。"
+    },
+    {
+     "from": "external:phandalin:town-green",
+     "to": "external:phandalin:smithy",
+     "type": "street",
+     "width_ft": 10,
+     "notes": "北面街。"
+    }
+   ],
+   "routes": [
+    {
+     "id": "route-phandalin-main",
+     "name": "主街",
+     "type": "street",
+     "points": [
+      [
+       300,
+       640
+      ],
+      [
+       300,
+       500
+      ],
+      [
+       320,
+       380
+      ],
+      [
+       330,
+       260
+      ],
+      [
+       360,
+       160
+      ]
+     ],
+     "note": "南北向。"
+    },
+    {
+     "id": "route-phandalin-east",
+     "name": "东街",
+     "type": "street",
+     "points": [
+      [
+       330,
+       330
+      ],
+      [
+       450,
+       330
+      ],
+      [
+       560,
+       300
+      ],
+      [
+       660,
+       290
+      ],
+      [
+       780,
+       240
+      ]
+     ],
+     "note": "通往庄园。"
+    },
+    {
+     "id": "route-phandalin-miners",
+     "name": "矿工小径",
+     "type": "trail",
+     "points": [
+      [
+       100,
+       650
+      ],
+      [
+       200,
+       640
+      ],
+      [
+       300,
+       620
+      ],
+      [
+       360,
+       620
+      ]
+     ],
+     "note": "西南向。"
+    },
+    {
+     "id": "route-phandalin-triboar",
+     "name": "三猪小径",
+     "type": "trail",
+     "points": [
+      [
+       0,
+       40
+      ],
+      [
+       200,
+       50
+      ],
+      [
+       400,
+       60
+      ],
+      [
+       600,
+       55
+      ],
+      [
+       800,
+       40
+      ]
+     ],
+     "note": "镇北。"
+    }
+   ],
+   "legend": [
+    "旅舍",
+    "商铺",
+    "神殿",
+    "公会",
+    "农场",
+    "庄园",
+    "住宅",
+    "道路",
+    "小径"
+   ],
+   "notes": [
+    "原图只有比例尺（0–500 尺），没有方格；本图为按比例尺重绘的示意平面。",
+    "建筑尺寸为示意，不是测绘数据。"
+   ],
+   "chapter_id": "ch02-phandalin",
+   "part": 2,
+   "area_count": 18
+  }
+ ],
+ "counts": {
+  "maps": 8,
+  "areas": 89,
+  "region_sites": 17,
+  "connections": 117
+ }
+}
