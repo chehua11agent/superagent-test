@@ -25,8 +25,18 @@ const CAMPAIGN = [
     objective: '穿过暗哨、狼舍与天桥，找到区域 8 的克拉格，救出西达尔。', done: '克拉格已击败，西达尔获救。',
     outro: '克拉格倒下，西达尔·荷温特获救。他告诉你：刚铎被带去了克拉格莫城堡。' },
 ];
-const PLAYER_BASE = { level: 1, hp: 60, maxHp: 60, ac: 18, atk: 7, dmg: [2, 6, 4], potions: 4, xp: 0 };
-const PLAYER_LEVEL2 = { level: 2, hp: 80, maxHp: 80, ac: 19, atk: 8, dmg: [2, 8, 4], potions: 5, xp: 200 };
+const PLAYER_BASE = {
+  level: 1, hp: 60, maxHp: 60, ac: 18, atk: 7, dmg: [2, 6, 4], potions: 4, xp: 0, speed: 30, prof: 2,
+  abilities: { str: 16, dex: 14, con: 14, int: 10, wis: 12, cha: 10 },
+  saves: { str: 5, dex: 2, con: 2, int: 0, wis: 1, cha: 0 },
+  skills: { athletics: 5, acrobatics: 4, sleight: 2, stealth: 4, investigation: 0, perception: 3, survival: 3, persuasion: 2, deception: 2, intimidation: 2, insight: 3, medicine: 1, nature: 1, religion: 0, history: 0, arcana: 0, animal: 3, performance: 2 },
+};
+const PLAYER_LEVEL2 = {
+  level: 2, hp: 80, maxHp: 80, ac: 19, atk: 8, dmg: [2, 8, 4], potions: 5, xp: 200, speed: 30, prof: 3,
+  abilities: { str: 18, dex: 16, con: 16, int: 10, wis: 12, cha: 10 },
+  saves: { str: 6, dex: 3, con: 3, int: 0, wis: 1, cha: 0 },
+  skills: { athletics: 7, acrobatics: 5, sleight: 3, stealth: 5, investigation: 0, perception: 4, survival: 4, persuasion: 3, deception: 3, intimidation: 3, insight: 4, medicine: 1, nature: 1, religion: 0, history: 0, arcana: 0, animal: 3, performance: 2 },
+};
 const MONSTER_STATS = {
   goblin: { ac: 15, hp: 7, atk: 4, dmg: [1, 6, 2], xp: 50 },
   'goblin-boss': { ac: 15, hp: 10, atk: 4, dmg: [1, 6, 2], xp: 100 },
@@ -38,6 +48,17 @@ const MONSTER_STATS = {
   spider: { ac: 14, hp: 26, atk: 5, dmg: [1, 8, 3], xp: 200 },
   twig: { ac: 13, hp: 4, atk: 3, dmg: [1, 4, 1], xp: 25 },
 };
+const ABILITY_ZH = { str: '力量', dex: '敏捷', con: '体质', int: '智力', wis: '感知', cha: '魅力' };
+const SKILLS = [
+  ['athletics', '运动', 'str'], ['acrobatics', '体操', 'dex'], ['stealth', '隐匿', 'dex'], ['perception', '察觉', 'wis'],
+  ['investigation', '调查', 'int'], ['survival', '生存', 'wis'], ['persuasion', '游说', 'cha'], ['deception', '欺瞒', 'cha'],
+  ['intimidation', '威吓', 'cha'], ['insight', '洞悉', 'wis'], ['medicine', '医药', 'wis'], ['nature', '自然', 'int'],
+  ['religion', '宗教', 'int'], ['history', '历史', 'int'], ['arcana', '奥秘', 'int'], ['animal', '驯兽', 'wis'],
+  ['sleight', '巧手', 'dex'], ['performance', '表演', 'cha'],
+];
+function mod(score) { return Math.floor((score - 10) / 2); }
+function signed(n) { return n >= 0 ? `+${n}` : `${n}`; }
+function damageText(p = playerStats) { return `${p.dmg[0]}d${p.dmg[1]}${p.dmg[2] ? '+' + p.dmg[2] : ''}`; }
 function playerStatsReset() { Object.assign(playerStats, PLAYER_BASE); }
 function playerStatsLevel2() { Object.assign(playerStats, PLAYER_LEVEL2); }
 const playerStats = { ...PLAYER_BASE };
@@ -189,6 +210,7 @@ function loadMap(mapId, { initial = false, quiet = false, campaign = false } = {
   if (world) { disposeGroup(world.group); world = null; player = null; }
   if (region) { disposeGroup(region.group); region = null; }
   clearTimeout(state.encounterTimer);
+  closeSheet();
   combat = null;
   $('#combat').classList.add('hidden');
   $('#area-encounter').classList.add('hidden');
@@ -242,6 +264,7 @@ function loadMap(mapId, { initial = false, quiet = false, campaign = false } = {
   updateBrand();
   updateObjective();
   updateIntro();
+  updatePlayerHud();
   drawMinimap();
   if (!initial && !quiet) toastMsg(`已切换到 ${map.title}`, 1800);
 }
@@ -262,6 +285,8 @@ function updateIntro() {
   if (stat) stat.textContent = state.campaign.active ? '2' : String((map.areas || []).length || (map.sites || []).length);
   const statLabel = document.querySelector('.intro-card .stat span');
   if (statLabel) statLabel.textContent = state.campaign.active ? '场景' : '区域';
+  const line = $('#intro-sheet-line');
+  if (line) line.textContent = `Lv.${playerStats.level} · HP ${playerStats.hp} · AC ${playerStats.ac} · 攻击 ${signed(playerStats.atk)} · 伤害 ${damageText()} · 药水 ${playerStats.potions}`;
 }
 
 function updateBrand() {
@@ -310,6 +335,7 @@ function showModeUi() {
     $('#area-panel').classList.add('hidden');
     $('#region-panel').classList.add('hidden');
     $('#minimap-wrap').classList.add('hidden');
+    $('#btn-sheet').classList.add('hidden');
   }
 }
 
@@ -393,6 +419,8 @@ function bindUI() {
     toastMsg('自由探索模式', 1800);
   });
   $('#btn-story').addEventListener('click', resumeCampaign);
+  $('#btn-sheet').addEventListener('click', toggleSheet);
+  $('#sheet-close').addEventListener('click', closeSheet);
   $('#area-encounter').addEventListener('click', () => { if (state.pendingEncounter && !combat) startCombat(state.pendingEncounter); });
   $('#combat-attack').addEventListener('click', playerAttack);
   $('#combat-potion').addEventListener('click', usePotion);
@@ -432,9 +460,10 @@ function bindUI() {
     if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ShiftLeft', 'ShiftRight'].includes(e.code)) {
       state.keys.add(e.code); if (e.code.startsWith('Arrow')) e.preventDefault();
     }
+    if (e.code === 'KeyC') toggleSheet();
     if (e.code === 'KeyF') toggleTorch();
     if (e.code === 'KeyR') resetPlayer();
-    if (e.code === 'Escape') closePicker();
+    if (e.code === 'Escape') { closePicker(); closeSheet(); }
   });
   window.addEventListener('keyup', (e) => state.keys.delete(e.code));
   window.addEventListener('blur', () => state.keys.clear());
@@ -492,7 +521,9 @@ function start() {
   $('#intro').classList.add('hidden');
   $('#loading').classList.add('hidden');
   $('#topbar').classList.remove('hidden');
+  $('#btn-sheet').classList.remove('hidden');
   showModeUi();
+  updatePlayerHud();
   updateObjective();
   if (state.mode === 'map') { if (state.currentArea) updatePanel(state.currentArea); drawMinimap(); }
   setTimeout(() => toastMsg(state.mode === 'region' ? '拖动旋转 · 滚轮缩放 · 点击地点' : isTouchDevice ? '左侧摇杆移动 · 右侧拖动视角 · 左上“地图”切换场景' : 'WASD 移动 · 拖动视角 · 左上“地图”切换场景', 3400), 500);
@@ -501,6 +532,36 @@ function start() {
 }
 
 
+
+
+/* ---------------------------------------------------------------- character sheet */
+function updatePlayerHud() {
+  const b = $('#btn-sheet');
+  if (!b) return;
+  $('#ph-level').textContent = `Lv.${playerStats.level}`;
+  $('#ph-main').textContent = `HP ${Math.max(0, playerStats.hp)}/${playerStats.maxHp} · AC ${playerStats.ac}`;
+  $('#ph-sub').textContent = `攻击 ${signed(playerStats.atk)} · ${damageText()}`;
+  b.title = `角色数值（C）· Lv.${playerStats.level}`;
+}
+function renderSheet() {
+  if ($('#sheet').classList.contains('hidden')) return;
+  const p = playerStats;
+  $('#sheet-name').textContent = '冒险者';
+  $('#sheet-sub').textContent = `Lv.${p.level} · 竖切片角色 · ${p.level >= 2 ? '第一章后半' : '第一章开场'}`;
+  $('#sheet-hp-fill').style.width = `${Math.max(0, p.hp / p.maxHp * 100)}%`;
+  $('#sheet-hp-text').textContent = `HP ${Math.max(0, p.hp)} / ${p.maxHp}`;
+  const vitals = [
+    ['AC', p.ac], ['攻击', signed(p.atk)], ['伤害', damageText(p)], ['先攻', signed(mod(p.abilities.dex))],
+    ['速度', `${p.speed} ft`], ['熟练', signed(p.prof)], ['被动察觉', 10 + (p.skills.perception ?? mod(p.abilities.wis))], ['药水', p.potions], ['XP', p.xp],
+  ];
+  $('#sheet-vitals').innerHTML = vitals.map(([k, v]) => `<div><span>${k}</span><b>${v}</b></div>`).join('');
+  $('#sheet-abilities').innerHTML = Object.entries(p.abilities).map(([k, v]) => `<div><span>${ABILITY_ZH[k]}</span><b>${v}</b><i>${signed(mod(v))}</i></div>`).join('');
+  $('#sheet-saves').innerHTML = Object.entries(p.saves).map(([k, v]) => `<div><span>${ABILITY_ZH[k]}</span><b>${signed(v)}</b><i>豁免</i></div>`).join('');
+  $('#sheet-skills').innerHTML = SKILLS.map(([k, label, ab]) => `<div><span>${label} <em>${ABILITY_ZH[ab]}</em></span><b>${signed(p.skills[k] ?? mod(p.abilities[ab]))}</b></div>`).join('');
+}
+function openSheet() { if (!state.started) return; $('#sheet').classList.remove('hidden'); renderSheet(); updatePlayerHud(); }
+function closeSheet() { $('#sheet').classList.add('hidden'); }
+function toggleSheet() { if ($('#sheet').classList.contains('hidden')) openSheet(); else closeSheet(); }
 
 /* ---------------------------------------------------------------- combat */
 function combatLog(html) {
@@ -543,11 +604,14 @@ function renderCombat() {
   for (const [i, e] of combat.enemies.entries()) {
     const card = document.createElement('div');
     card.className = `combat-enemy${e.alive ? '' : ' dead'}${i === selectedEnemy && e.alive ? ' selected' : ''}`;
-    card.innerHTML = `<b>${escapeHtml(e.name)}</b><small>AC ${e.ac} · HP ${e.hp}/${e.maxHp}</small><div class="hp-track"><i style="width:${Math.max(0, e.hp / e.maxHp * 100)}%"></i></div>`;
+    card.innerHTML = `<b>${escapeHtml(e.name)}</b><small>AC ${e.ac} · 攻 ${signed(e.atk)} · ${e.dmg[0]}d${e.dmg[1]}+${e.dmg[2]}</small><small>HP ${e.hp}/${e.maxHp}</small><div class="hp-track"><i style="width:${Math.max(0, e.hp / e.maxHp * 100)}%"></i></div>`;
     if (e.alive) card.addEventListener('click', () => { selectedEnemy = i; renderCombat(); });
     box.append(card);
   }
-  $('#combat-player').textContent = `Lv.${playerStats.level} · HP ${Math.max(0, playerStats.hp)} / ${playerStats.maxHp} · AC ${playerStats.ac} · 药水 ${playerStats.potions}`;
+  $('#combat-player').innerHTML = `Lv.${playerStats.level} · HP ${Math.max(0, playerStats.hp)} / ${playerStats.maxHp} · AC ${playerStats.ac}<small>攻击 ${signed(playerStats.atk)} · 伤害 ${damageText()} · 药水 ${playerStats.potions}</small>`;
+  $('#combat-attack').textContent = `攻击 ${signed(playerStats.atk)} · ${damageText()}`;
+  updatePlayerHud();
+  renderSheet();
   const disabled = combat.turn !== 'player';
   $('#combat-attack').disabled = disabled;
   $('#combat-potion').disabled = disabled || playerStats.potions <= 0;
@@ -614,6 +678,7 @@ function usePotion() {
   const heal = rollDice(2, 4, 2);
   playerStats.potions--;
   playerStats.hp = Math.min(playerStats.maxHp, playerStats.hp + heal);
+  updatePlayerHud(); renderSheet();
   combatLog(`<b>你</b> 喝下药水，恢复 ${heal} 点生命。`);
   combat.turn = 'enemy'; renderCombat();
   setTimeout(enemyTurn, 620);
@@ -630,6 +695,8 @@ function endCombat(result) {
   $('#combat').classList.add('hidden');
   $('#area-panel').classList.remove('hidden');
   showModeUi();
+  updatePlayerHud();
+  renderSheet();
   if (result === true) {
     area.cleared = true;
     for (const e of c.enemies) { e.alive = false; e.obj.visible = false; }
