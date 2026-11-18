@@ -100,7 +100,7 @@ D&D Beyond 的角色生成器是商业闭源产品；Aurora Character Builder �
 | --- | --- |
 | 数据 | 按 SRD 5.1 转录子集：9 种族 + 子种族、12 职业、13 背景、18 技能、14 状态、12 种护甲 |
 | 规则 | 自研纯函数规则核：`createCharacter` → `sheet`，`resolveCheck` → 结果 |
-| 许可 | 只使用 SRD 5.1（CC-BY-4.0），保留署名；不复制 Foundry/Open5e/5etools 代码或非 SRD 文本 |
+| 许可 | 只使用 SRD 5.1（CC-BY-4.0），保留署名；本项目对 SRD 做了中文化、子集裁剪与结构化改写。不复制 Foundry/Open5e/5etools 代码或非 SRD 文本 |
 | 运行 | 零依赖 ES 模块，浏览器/Node 共用；未来可被 Node 服务端 import |
 | 扩展 | `buildRules()` 注入自定义种族/职业/背景/状态/护甲；同一套校验 |
 
