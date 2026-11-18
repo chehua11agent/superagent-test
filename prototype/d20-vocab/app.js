@@ -102,6 +102,8 @@
     timerId: null,
     timerStart: 0,
     ended: false,
+    runId: 0,
+    diceId: null,
   };
 
   // ---------------------------------------------------------------- 词池
@@ -379,10 +381,12 @@
     renderSide();
     showToast(retireMsg || (ok ? '词力 +' + bonus + ' · ' + tag : '词义没对上 · 词力 +0'));
 
-    setTimeout(() => beginRoll(), 620);
+    const runId = S.runId;
+    setTimeout(() => { if (S.runId === runId) beginRoll(); }, 620);
   }
 
   function beginRoll() {
+    const runId = S.runId;
     const sc = SCENES[S.ei];
     const c = S.current;
     $('wordPanel').hidden = true;
@@ -396,11 +400,13 @@
     const num = $('d20Num');
     dice.classList.add('rolling');
     let ticks = 0;
-    const iv = setInterval(() => {
+    if (S.diceId) clearInterval(S.diceId);
+    S.diceId = setInterval(() => {
       num.textContent = 1 + Math.floor(Math.random() * 20);
       if (++ticks > 8) {
-        clearInterval(iv);
-        settleRoll(bonus, c);
+        clearInterval(S.diceId);
+        S.diceId = null;
+        if (S.runId === runId) settleRoll(bonus, c);
       }
     }, 60);
   }
@@ -659,6 +665,7 @@
   }
 
   function beginRollControl() {
+    const runId = S.runId;
     const sc = SCENES[S.ei];
     const need = needFor(sc, 0);
     renderMath(need, 0, { word: { en: '—' }, bonus: 0, ok: null });
@@ -666,11 +673,13 @@
     dice.classList.remove('crit', 'fumble');
     dice.classList.add('rolling');
     let ticks = 0;
-    const iv = setInterval(() => {
+    if (S.diceId) clearInterval(S.diceId);
+    S.diceId = setInterval(() => {
       $('d20Num').textContent = 1 + Math.floor(Math.random() * 20);
       if (++ticks > 8) {
-        clearInterval(iv);
-        settleRollControl(need);
+        clearInterval(S.diceId);
+        S.diceId = null;
+        if (S.runId === runId) settleRollControl(need);
       }
     }, 60);
   }
@@ -707,7 +716,6 @@
       const p = list.reduce((s, w) => s + (0.25 + 0.75 * sigmoid(1.7 * (S.theta - w.b))), 0) / list.length;
       return { band, p };
     });
-    const vocab = vocabEstimate(S.theta);
     const vocabLo = vocabEstimate(S.theta - 0.3);
     const vocabHi = vocabEstimate(S.theta + 0.3);
 
@@ -765,7 +773,7 @@
         : '<div class="vocab"><h2>对照模式</h2><p class="caveat">对照模式不测词汇量。打开右上角的「词力加成」，同一条雾港会变成单词检定。</p>' +
           '<div class="summary-actions"><button class="ghost-btn" id="againBtn" type="button">再走一遍</button></div></div>') +
 
-      '<div class="summary-actions" id="summaryActions"></div>';
+'';
 
     const copy = $('copyProfile');
     if (copy) {
@@ -811,6 +819,9 @@
   }
 
   function startRun() {
+    S.runId += 1;
+    stopTimer();
+    if (S.diceId) { clearInterval(S.diceId); S.diceId = null; }
     S.ei = 0;
     S.hp = HP_MAX;
     S.clues = 0;
