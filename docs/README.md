@@ -22,6 +22,7 @@
 | [`research/phb-story-dm-review.md`](research/phb-story-dm-review.md) | 5e《玩家手册》剧情设定、DM 指引与故事发展盘点 |
 | [`research/game-visual-solutions-survey.md`](research/game-visual-solutions-survey.md) | 游戏画面 / UI 现成方案与长线引擎调研：三条可视化路线、候选清单、许可证边界 |
 | [`research/5e-rules-engine-survey.md`](research/5e-rules-engine-survey.md) | 5e 规则引擎 / 角色创建现成方案调研：SRD API、Open5e、Foundry dnd5e 的适配性与许可，以及自研薄规则核的决策 |
+| [`research/foundry-dnd5e-assessment.md`](research/foundry-dnd5e-assessment.md) | Foundry VTT dnd5e 深读：它确实是完整 5e 系统，但需要 Foundry 14.x 运行时；代码证据、可复用内容包，以及 Foundry 原生 vs 独立网页两条路线 |
 
 ## 内容与数据
 

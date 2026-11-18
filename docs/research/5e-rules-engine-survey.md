@@ -2,7 +2,7 @@
 
 > 调研日期：2026-11-18
 > 问题：有没有现成的系统，能直接提供「5e 捏人 + 种族数值 + 情境修正 + d20 检定」，并且能嵌进这个零依赖、离线优先的网页原型？
-> 一句话结论：**数据有现成的，规则引擎没有可直接嵌入的**。最接近的是 Foundry VTT 的 dnd5e 系统（MIT），但它以 Foundry 运行时为前提；本仓库应该复用 SRD 数据、自己保留一层薄规则核。
+> 一句话结论：**最完整的现成 5e 系统是 Foundry VTT 的 dnd5e 系统（MIT）**，但它要求 Foundry VTT 14.x 运行时，不是可 `import` 的独立规则库；如果接受 Foundry，它就是首选底座；如果不接受，只能复用它的 SRD 内容包与设计，在本仓库保留一层薄规则核。两条路线的取舍见 [`foundry-dnd5e-assessment.md`](foundry-dnd5e-assessment.md)。
 
 ## 0. 结论先行
 
@@ -10,7 +10,7 @@
 | --- | --- | --- | --- |
 | D&D 5e SRD API（5e-bits） | SRD 5.1 结构化数据：种族、职业、法术、怪物、装备、状态 | 角色创建流程、修正叠加、检定结算 | **数据可参考/转录；API 需联网，不适合离线** |
 | Open5e | SRD + 多本第三方内容的 API 与站点 | 同样只是数据；不同文档许可不同 | **数据可参考；需逐文档核对许可** |
-| Foundry VTT dnd5e | 完整的角色数据模型、状态、掷骰、角色卡自动化 | 独立可嵌入的规则库；没有 Foundry 运行时就不成立 | **只能当参考实现，不能直接搬** |
+| Foundry VTT dnd5e | 完整 5e 系统：角色/物品/法术/怪物/效果/升级/战斗 + SRD 内容包 | 必须运行在 Foundry VTT 14.x；没有独立 npm/headless API | **接受 Foundry：首选底座；否则只能复用内容包与设计** |
 | 5etools | 聚合数据与网页 UI | 开源规则库、明确的再分发许可 | **不采用** |
 | 自研规则核（本仓库） | 捏人、种族/职业/背景、修正层、检定、单词加值 | 法术/专长/完整战斗（后续补） | **已落地** |
 
@@ -75,7 +75,7 @@
   - 运行前提是 Foundry VTT（商业软件）的 `Actor`/`Item`/`ActiveEffect`/`Document` 生命周期；
   - 大量逻辑与 UI、模组加载、设置系统耦合；
   - 没有面向普通网页的“import 一个函数就能创建角色/掷骰”的 API。
-- 结论：**读它的数据形状与规则处理可以，但不能把它的代码当作本项目依赖**。
+- 结论：**如果走 Foundry 原生路线，它是首选底座（规则/内容/角色卡/战斗全现成）；如果走独立网页路线，它的代码不能直接依赖，只能复用 `packs/_source` 内容包和设计。** 详见 [`foundry-dnd5e-assessment.md`](foundry-dnd5e-assessment.md)。
 
 ### 3.2 通用骰子库
 
@@ -92,7 +92,11 @@
 
 D&D Beyond 的角色生成器是商业闭源产品；Aurora Character Builder 是桌面应用 + 内容包生态，不是可嵌入网页的 JS 规则库。它们都无法满足“零依赖、离线、可改造种族/单词加值”的要求，因此只作为交互参考。
 
-## 4. 决策：自研薄规则核 + SRD 数据子集
+## 4. 决策：先选部署架构，再选自研/复用
+
+> 2026-11-18 补充：如果产品接受 Foundry VTT 运行时（需要许可/服务器），**应直接采用 Foundry dnd5e，而不是重写**；本仓库现有的自研规则核只适用于“独立网页、离线、GitHub Pages 可部署”这条路。两条路的详细对比见 [`foundry-dnd5e-assessment.md`](foundry-dnd5e-assessment.md)。
+
+在“独立网页、零依赖、离线优先”这个约束下，决策如下：
 
 ### 4.1 选择
 
@@ -170,4 +174,5 @@ wordBonusFromMemory({ stage: 3, spelling: { stage: 2 } }) // +3
 - 5e-database（已归档）：<https://github.com/5e-bits/5e-database>
 - Open5e API 与许可：<https://github.com/open5e/open5e-api>、<https://open5e.com/>
 - Foundry VTT dnd5e（MIT）：<https://github.com/foundryvtt/dnd5e>
+- Foundry dnd5e 深读与两条路线评估：[`foundry-dnd5e-assessment.md`](foundry-dnd5e-assessment.md)
 - 5etools（仅作参考，不采用数据）：<https://5e.tools/>
