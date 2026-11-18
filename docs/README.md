@@ -11,6 +11,7 @@
 | [`design/cet4-vocab-rpg.md`](design/cet4-vocab-rpg.md) | 《四级单词跑团》总体设计文档：6 章 × 48 词、每日复习 + 剧情循环、SRS、单词即行动、技术方案与验收标准 |
 | [`design/dual-check-design.md`](design/dual-check-design.md) | 「认识 vs 会拼」双鉴定设计提案：认义 / 拼写双轨、复习加试、BOSS 混检 |
 | [`design/story-card-combat-design.md`](design/story-card-combat-design.md) | 剧情 → 词卡战斗 → 复习的可组合故事单元设计 |
+| [`design/d20-vocab-check.md`](design/d20-vocab-check.md) | 单词识别作为 d20 成功率因子：多邻国开源调研、有界词力、阶段词带、掌握撤出与回访 |
 | [`design/sample-closing-notice.md`](design/sample-closing-notice.md) | 10 词 / 3 幕 / 5 节点的内容位置样本《闭馆通知》：每个词都落在选项、判定或物品上 |
 
 ## 调研
