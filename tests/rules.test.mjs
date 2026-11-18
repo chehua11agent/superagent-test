@@ -263,6 +263,17 @@ test('AC：无甲、轻甲、重甲、盾牌与力量需求', () => {
   });
   assert.equal(weak.sheet.speed, 20); // 30 - 10
   assert.ok(weak.sheet.warnings.some((warning) => warning.includes('力量 13')));
+
+  const dwarf = createCharacter({
+    ...FIGHTER_SPEC,
+    race: 'dwarf',
+    subrace: 'hill-dwarf',
+    baseAbilities: { str: 8, dex: 14, con: 13, int: 12, wis: 10, cha: 15 },
+    armor: 'chain-mail',
+    shield: false,
+    extraLanguages: []
+  });
+  assert.equal(dwarf.sheet.speed, 25); // 矮人穿重甲不减速
 });
 
 test('未受训护甲：力量/敏捷检定、豁免与攻击劣势，并阻止施法', () => {

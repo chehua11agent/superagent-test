@@ -158,7 +158,8 @@ export function createCharacter(spec = {}, rules = SRD_RULES, options = {}) {
   const speedBase =
     (subrace?.speed ?? race.speed ?? 30) +
     sumFlat(effectResolution.modifiers.filter((modifier) => modifier.target === 'speed' && modifier.type === 'flat'));
-  const strengthPenalty = armor.strengthReq && abilityScores.str < armor.strengthReq ? 10 : 0;
+  const strengthPenalty =
+    armor.strengthReq && abilityScores.str < armor.strengthReq && !race.ignoreHeavyArmorSpeedPenalty ? 10 : 0;
   let speed = speedBase - strengthPenalty;
   if (exhaustion.speedMultiplier !== 1) speed = Math.floor(speed * exhaustion.speedMultiplier);
   if (exhaustion.speedZero || flags.speedZero) speed = 0;

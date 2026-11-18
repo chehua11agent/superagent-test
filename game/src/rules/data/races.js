@@ -25,6 +25,7 @@ export const SRD_RACES = [
     speed: 25,
     darkvision: 60,
     abilityBonuses: { fixed: { con: 2 } },
+    ignoreHeavyArmorSpeedPenalty: true,
     languages: ['通用语', '矮人语'],
     resistances: ['poison'],
     saveAdvantages: [{ abilities: 'all', against: ['poison'], label: '矮人韧性' }],
