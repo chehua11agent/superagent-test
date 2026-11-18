@@ -586,6 +586,7 @@ function startCombat(area) {
   combat = { area, enemies, turn: 'player', log: [] };
   selectedEnemy = 0;
   clearTimeout(state.encounterTimer);
+  closeSheet();
   $('#area-panel').classList.add('hidden');
   $('#chapter-card').classList.add('hidden');
   $('#touch-ui').classList.add('hidden');
