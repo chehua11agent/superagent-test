@@ -28,9 +28,9 @@
         <div class="stat"><b>117</b><span>全图连接</span></div>
       </div>
       <ul class="intro-points">
-        <li><span>01</span>从三猪小径的哥布林伏击开始，按 7 章主线推进。</li>
+        <li><span>01</span>从三猪小径的哥布林伏击开始，跑完第一章两个场景与两场战斗。</li>
         <li><span>02</span>WASD 移动 · 拖动鼠标看 · 滚轮远近 · F 火把。</li>
-        <li><span>03</span>走进区域读取摘要/光照/出口/规则；到达目标推进章节。</li>
+        <li><span>03</span>走进区域读取摘要/光照/出口/规则；清完敌人达成章节目标。</li>
       </ul>
       <div class="intro-actions">
         <button id="btn-start" class="btn primary">开始剧情</button>
@@ -71,6 +71,7 @@
     <h2 id="area-name">洞口</h2>
     <p id="area-summary" class="summary"></p>
     <div id="area-rules" class="tags"></div>
+    <button id="area-encounter" class="btn combat-btn hidden">进入战斗</button>
     <div class="area-meta">
       <div><span>出口</span><b id="area-exits">—</b></div>
       <div><span>敌人</span><b id="area-monsters">—</b></div>
@@ -122,6 +123,23 @@
     <p id="chapter-objective"></p>
   </div>
   <div id="fade" class="fade"></div>
+
+  <section id="combat" class="combat hidden" aria-live="polite">
+    <div class="combat-head">
+      <div>
+        <p class="eyebrow">遭遇</p>
+        <h2 id="combat-title">战斗</h2>
+      </div>
+      <div id="combat-player" class="combat-player">HP 28 / 28</div>
+    </div>
+    <div id="combat-enemies" class="combat-enemies"></div>
+    <div id="combat-log" class="combat-log"></div>
+    <div class="combat-actions">
+      <button id="combat-attack" class="btn primary">攻击</button>
+      <button id="combat-potion" class="btn ghost">药水 ×2</button>
+      <button id="combat-flee" class="btn ghost">撤退</button>
+    </div>
+  </section>
 
   <div id="scene-picker" class="scene-picker hidden" role="dialog" aria-modal="true">
     <div class="picker-card">

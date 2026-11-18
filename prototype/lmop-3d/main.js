@@ -14,32 +14,51 @@ const MAP_META = {
   'map-wave-echo-cave': { spawn: 1, target: 19, targetName: '奈兹纳尔', objective: '深入潮音洞，找到区域 19 的奈兹纳尔。', done: '已找到奈兹纳尔。原型：完整战斗在下一版接入。' },
   'map-thundertree': { spawn: 2, target: 4, targetName: '莱多斯', objective: '穿过雷霆树镇废墟，找到区域 4 的莱多斯。', done: '已找到德鲁伊莱多斯。原型：完整战斗在下一版接入。' },
   'map-phandalin': { spawn: 18, target: 9, targetName: '镇长', objective: '在凡度林镇上找到镇长大厅。', done: '已找到镇长大厅。原型：完整对话在下一版接入。' },
-  'map-road-to-phandalin': { spawn: 0, target: 1, targetName: '哥布林伏击', objective: '检查小径两侧的灌木，找到哥布林伏击点。', done: '伏击点已找到。原型：完整战斗在下一版接入。' },
+  'map-road-to-phandalin': { spawn: 0, target: 0, targetName: '哥布林伏击', objective: '击退三猪小径上的哥布林伏击，检查马尸与货物。', done: '伏击已清理，追向克拉格莫窝点。' },
   'map-sword-coast-region': { region: true, objective: '拖动旋转剑湾桌面，滚轮缩放；点击地点查看地标、hex 与旅行距离。', done: '正在查看剑湾区域图。' },
 };
 const CAMPAIGN = [
-  { id: 'c1-ambush', chapter: '第一章 · 哥布林之矢', map: 'map-road-to-phandalin', target: 1, targetName: '伏击点',
-    objective: '检查小径两侧的灌木，找到哥布林伏击点。', done: '伏击点已找到，可以前往克拉格莫窝点。',
+  { id: 'c1-ambush', chapter: '第一章 · 哥布林之矢', scene: '场景 1 · 三猪小径', map: 'map-road-to-phandalin', target: 0, targetName: '哥布林伏击',
+    objective: '击退三猪小径上的哥布林伏击，检查马尸与货物。', done: '伏击已清理，追向克拉格莫窝点。',
     outro: '哥布林把俘虏和货物拖向北方。你们沿着小径追上拖痕，来到山腹中的克拉格莫窝点。' },
-  { id: 'c1-hideout', chapter: '第一章 · 克拉格莫窝点', map: 'map-cragmaw-hideout', target: 8, targetName: '克拉格',
-    objective: '沿暗溪深入，找到区域 8 的克拉格，救出西达尔。', done: '克拉格已找到，西达尔获救。',
-    outro: '克拉格倒下，西达尔·荷温特获救。他请你们护送他回凡度林，并指向红烙印的据点。' },
-  { id: 'c2-phandalin', chapter: '第二章 · 凡度林', map: 'map-phandalin', target: 9, targetName: '镇长',
-    objective: '到镇长大厅报到，接下处理红烙印的任务。', done: '已到镇长大厅，红烙印的线索指向特雷山大庄园。',
-    outro: '镇长与西达尔指向镇东山坡上的特雷山大庄园。红烙印把地窖改成了地下堡垒。' },
-  { id: 'c2-redbrand', chapter: '第二章 · 红烙印大本营', map: 'map-redbrand-hideout', target: 12, targetName: '水晶之杖',
-    objective: '穿过地窖与裂隙，找到区域 12 的水晶之杖。', done: '水晶之杖已找到，红烙印被击溃。',
-    outro: '红烙印被击溃，凡度林暂时安全。下一步是去雷霆树镇找德鲁伊莱多斯，问出克拉格莫城堡的位置。' },
-  { id: 'c3-thundertree', chapter: '第三章 · 雷霆树镇', map: 'map-thundertree', target: 4, targetName: '莱多斯',
-    objective: '找到区域 4 的德鲁伊莱多斯，问出克拉格莫城堡的位置。', done: '莱多斯已找到，城堡方向已确认。',
-    outro: '莱多斯指出克拉格莫城堡的方向：刚铎仍被囚禁在那里，潮音洞的地图也在他手上。' },
-  { id: 'c3-castle', chapter: '第三章 · 克拉格莫城堡', map: 'map-cragmaw-castle', target: 14, targetName: '刚铎',
-    objective: '找到区域 14 的刚铎，夺回潮音洞地图。', done: '刚铎获救，潮音洞地图已夺回。',
-    outro: '刚铎获救。潮音洞就在凡度林以东十五里的剑山山谷中，黑蜘蛛奈兹纳尔已经先一步进去了。' },
-  { id: 'c4-wave-echo', chapter: '第四章 · 潮音洞', map: 'map-wave-echo-cave', target: 19, targetName: '奈兹纳尔',
-    objective: '深入矿坑，找到区域 19 的奈兹纳尔，结束黑蜘蛛的阴谋。', done: '奈兹纳尔已找到，矿坑的阴谋终结。',
-    outro: '奈兹纳尔倒下，失落矿坑重见天日。凡度林与寻石者兄弟终于可以重新开采潮音洞。' },
+  { id: 'c1-hideout', chapter: '第一章 · 哥布林之矢', scene: '场景 2 · 克拉格莫窝点', map: 'map-cragmaw-hideout', target: 8, targetName: '克拉格',
+    objective: '穿过暗哨、狼舍与天桥，找到区域 8 的克拉格，救出西达尔。', done: '克拉格已击败，西达尔获救。',
+    outro: '克拉格倒下，西达尔·荷温特获救。他告诉你：刚铎被带去了克拉格莫城堡。' },
 ];
+const PLAYER_BASE = { level: 1, hp: 60, maxHp: 60, ac: 18, atk: 7, dmg: [2, 6, 4], potions: 4, xp: 0 };
+const PLAYER_LEVEL2 = { level: 2, hp: 80, maxHp: 80, ac: 19, atk: 8, dmg: [2, 8, 4], potions: 5, xp: 200 };
+const MONSTER_STATS = {
+  goblin: { ac: 15, hp: 7, atk: 4, dmg: [1, 6, 2], xp: 50 },
+  'goblin-boss': { ac: 15, hp: 10, atk: 4, dmg: [1, 6, 2], xp: 100 },
+  wolf: { ac: 13, hp: 11, atk: 4, dmg: [2, 4, 2], xp: 50 },
+  'wolf-ripper': { ac: 14, hp: 18, atk: 5, dmg: [2, 6, 3], xp: 100 },
+  bugbear: { ac: 16, hp: 27, atk: 4, dmg: [2, 8, 2], xp: 200 },
+  skeleton: { ac: 13, hp: 13, atk: 4, dmg: [1, 6, 2], xp: 50 },
+  zombie: { ac: 8, hp: 22, atk: 3, dmg: [1, 6, 1], xp: 50 },
+  spider: { ac: 14, hp: 26, atk: 5, dmg: [1, 8, 3], xp: 200 },
+  twig: { ac: 13, hp: 4, atk: 3, dmg: [1, 4, 1], xp: 25 },
+};
+function playerStatsReset() { Object.assign(playerStats, PLAYER_BASE); }
+function playerStatsLevel2() { Object.assign(playerStats, PLAYER_LEVEL2); }
+const playerStats = { ...PLAYER_BASE };
+let combat = null;
+let selectedEnemy = 0;
+function d20() { return 1 + Math.floor(Math.random() * 20); }
+function rollDice(n, sides, bonus) { let t = 0; for (let i = 0; i < n; i++) t += 1 + Math.floor(Math.random() * sides); return t + bonus; }
+function monsterKey(id) {
+  const k = String(id).replace(/^lmop:monster:/, '').replace(/^monster-/, '');
+  if (k.includes('bugbear')) return 'bugbear';
+  if (k.includes('wolf-ripper')) return 'wolf-ripper';
+  if (k.includes('wolf')) return 'wolf';
+  if (k.includes('goblin-boss')) return 'goblin-boss';
+  if (k.includes('goblin')) return 'goblin';
+  if (k.includes('skeleton')) return 'skeleton';
+  if (k.includes('zombie')) return 'zombie';
+  if (k.includes('spider')) return 'spider';
+  if (k.includes('twig')) return 'twig';
+  return 'goblin';
+}
+function monsterStats(id) { return MONSTER_STATS[monsterKey(id)] || MONSTER_STATS.goblin; }
 
 const LIGHT_ZH = { daylight: '日光', bright: '明亮', dim: '微光', darkness: '黑暗', 'magical-darkness': '魔法黑暗' };
 const KIND_ZH = { region: '区域图', battlemap: '战斗地图', dungeon: '地下城', site: '野外地点', town: '城镇' };
@@ -66,7 +85,7 @@ const state = {
   rYaw: 0.7, rPitch: 0.72, rDist: 500,
   keys: new Set(), touch: { x: 0, y: 0, active: false },
   introT: 0, moving: false, walkPhase: 0, lastAreaAt: 0, encounterTimer: null, chapterTimer: null,
-  campaign: { active: true, index: 0, completed: new Set() }, modalAction: null,
+  campaign: { active: true, index: 0, completed: new Set() }, modalAction: null, pendingEncounter: null,
   regionSite: null,
 };
 
@@ -170,6 +189,9 @@ function loadMap(mapId, { initial = false, quiet = false, campaign = false } = {
   if (world) { disposeGroup(world.group); world = null; player = null; }
   if (region) { disposeGroup(region.group); region = null; }
   clearTimeout(state.encounterTimer);
+  combat = null;
+  $('#combat').classList.add('hidden');
+  $('#area-encounter').classList.add('hidden');
   state.modalAction = null;
   $('#modal').classList.add('hidden');
   state.campaign.active = !!campaign;
@@ -234,20 +256,20 @@ function updateIntro() {
   if (!map) return;
   const meta = MAP_META[map.id] || {};
   const h = document.querySelector('.intro h1'); const sub = document.querySelector('.subtitle');
-  if (h) h.textContent = state.campaign.active ? '凡戴尔的失落矿坑' : map.title;
-  if (sub) sub.textContent = state.campaign.active ? '8 张地图 · 剧情模式' : meta.region ? '由结构化地图数据生成的 3D 区域沙盘' : '由结构化地图数据生成的 3D 场景';
+  if (h) h.textContent = state.campaign.active ? '第一章 · 哥布林之矢' : map.title;
+  if (sub) sub.textContent = state.campaign.active ? '失落矿坑 · 章节竖切片 · 三猪小径 + 克拉格莫窝点' : meta.region ? '由结构化地图数据生成的 3D 区域沙盘' : '由结构化地图数据生成的 3D 场景';
   const stat = document.querySelector('.intro-card .stat b');
-  if (stat) stat.textContent = state.campaign.active ? '8' : String((map.areas || []).length || (map.sites || []).length);
+  if (stat) stat.textContent = state.campaign.active ? '2' : String((map.areas || []).length || (map.sites || []).length);
   const statLabel = document.querySelector('.intro-card .stat span');
-  if (statLabel) statLabel.textContent = state.campaign.active ? '地图' : '区域';
+  if (statLabel) statLabel.textContent = state.campaign.active ? '场景' : '区域';
 }
 
 function updateBrand() {
   if (!map) return;
   $('#brand-title').textContent = map.title;
-  $('#brand-sub').textContent = state.campaign.active ? `${currentStep()?.chapter || '剧情'} · ${map.title_en}` : `${KIND_ZH[map.kind] || map.kind} · ${map.title_en}`;
+  $('#brand-sub').textContent = state.campaign.active ? `${currentStep()?.chapter || '剧情'} · ${currentStep()?.scene || map.title_en}` : `${KIND_ZH[map.kind] || map.kind} · ${map.title_en}`;
   $('#btn-scenes').textContent = isTouchDevice ? '地图' : `地图 · ${map.title.length > 10 ? map.title.slice(0, 10) + '…' : map.title}`;
-  $('#btn-story').textContent = state.campaign.active ? `剧情 ${state.campaign.index + 1}/${CAMPAIGN.length}` : '剧情';
+  $('#btn-story').textContent = state.campaign.active ? `第一章 ${state.campaign.index + 1}/${CAMPAIGN.length}` : '第一章';
   const cap = document.querySelector('.minimap-caption');
   if (cap) cap.textContent = `${map.title} · ${map.scale?.feet_per_square ? map.scale.feet_per_square + ' ft / 格' : '比例尺'}`;
 }
@@ -256,7 +278,7 @@ function updateObjective() {
   const step = state.campaign.active ? currentStep() : null;
   const meta = MAP_META[map.id] || {};
   if (step) {
-    $('#objective-eyebrow').textContent = `剧情 ${state.campaign.index + 1} / ${CAMPAIGN.length}`;
+    $('#objective-eyebrow').textContent = `第一章 · 场景 ${state.campaign.index + 1} / ${CAMPAIGN.length}`;
     $('#objective-text').textContent = state.targetHit ? (step.done || '目标已完成，前往下一章。') : step.objective;
   } else {
     $('#objective-eyebrow').textContent = '当前目标';
@@ -279,7 +301,7 @@ function showModeUi() {
   $('#btn-torch').classList.toggle('hidden', isRegion);
   $('#btn-map').classList.toggle('hidden', isRegion);
   $('#touch-ui').classList.toggle('hidden', isRegion || !isTouchDevice);
-  $('#btn-start').textContent = state.campaign.active ? '开始剧情' : isRegion ? '进入区域图' : '进入场景';
+  $('#btn-start').textContent = state.campaign.active ? '开始第一章' : isRegion ? '进入区域图' : '进入场景';
   $('#progress-fill').parentElement.classList.toggle('hidden', isRegion);
   $('#progress-text').parentElement.classList.toggle('hidden', isRegion);
   if (isRegion && window.matchMedia('(pointer: coarse)').matches) $('#touch-ui').classList.add('hidden');
@@ -328,7 +350,7 @@ function toggleView() {
   toastMsg(state.firstPerson ? '第一人称视角' : '第三人称视角', 1200);
 }
 function resetPlayer() {
-  if (!world) return;
+  if (!world || combat) return;
   const meta = MAP_META[map.id] || {};
   const a = world.areas.find((x) => x.no === meta.spawn) || world.areas[0];
   if (!a) return;
@@ -365,11 +387,16 @@ function bindUI() {
   $('#btn-start').addEventListener('click', startCampaign);
   $('#btn-free').addEventListener('click', () => {
     state.campaign.active = false;
+    playerStatsReset();
     loadMap('map-cragmaw-hideout', { initial: true });
     start();
     toastMsg('自由探索模式', 1800);
   });
   $('#btn-story').addEventListener('click', resumeCampaign);
+  $('#area-encounter').addEventListener('click', () => { if (state.pendingEncounter && !combat) startCombat(state.pendingEncounter); });
+  $('#combat-attack').addEventListener('click', playerAttack);
+  $('#combat-potion').addEventListener('click', usePotion);
+  $('#combat-flee').addEventListener('click', combatFlee);
 
   let dragging = false, lastX = 0, lastY = 0;
   canvas.addEventListener('pointerdown', (e) => {
@@ -474,6 +501,170 @@ function start() {
 }
 
 
+
+/* ---------------------------------------------------------------- combat */
+function combatLog(html) {
+  const log = $('#combat-log');
+  if (!log) return;
+  const p = document.createElement('p');
+  p.innerHTML = html;
+  log.append(p);
+  log.scrollTop = log.scrollHeight;
+}
+function livingEnemies() { return combat ? combat.enemies.filter((e) => e.alive) : []; }
+function startCombat(area) {
+  if (combat || !area || state.mode !== 'map' || !state.started) return;
+  const objects = (world?.monsters || []).filter((m) => m.userData.area === area.no && m.visible && (m.userData.hp ?? 1) > 0);
+  if (!objects.length) { area.cleared = true; completeTarget(area); return; }
+  const enemies = objects.map((obj, i) => {
+    const st = monsterStats(obj.userData.name);
+    obj.userData.hp = st.hp;
+    obj.userData.maxHp = st.hp;
+    return { obj, name: monsterName(obj.userData.name), hp: st.hp, maxHp: st.hp, ac: st.ac, atk: st.atk, dmg: st.dmg, xp: st.xp, alive: true, idx: i };
+  });
+  combat = { area, enemies, turn: 'player', log: [] };
+  selectedEnemy = 0;
+  clearTimeout(state.encounterTimer);
+  $('#area-panel').classList.add('hidden');
+  $('#chapter-card').classList.add('hidden');
+  $('#touch-ui').classList.add('hidden');
+  $('#controls').classList.add('hidden');
+  $('#combat').classList.remove('hidden');
+  $('#combat-title').textContent = `遭遇 · ${area.name}`;
+  $('#combat-log').innerHTML = '';
+  combatLog(`<b>遭遇：</b>${enemies.map((e) => e.name).join('、')}。`);
+  combatLog('你的回合：选择目标后点击「攻击」。');
+  renderCombat();
+}
+function renderCombat() {
+  if (!combat) return;
+  const box = $('#combat-enemies');
+  box.innerHTML = '';
+  for (const [i, e] of combat.enemies.entries()) {
+    const card = document.createElement('div');
+    card.className = `combat-enemy${e.alive ? '' : ' dead'}${i === selectedEnemy && e.alive ? ' selected' : ''}`;
+    card.innerHTML = `<b>${escapeHtml(e.name)}</b><small>AC ${e.ac} · HP ${e.hp}/${e.maxHp}</small><div class="hp-track"><i style="width:${Math.max(0, e.hp / e.maxHp * 100)}%"></i></div>`;
+    if (e.alive) card.addEventListener('click', () => { selectedEnemy = i; renderCombat(); });
+    box.append(card);
+  }
+  $('#combat-player').textContent = `Lv.${playerStats.level} · HP ${Math.max(0, playerStats.hp)} / ${playerStats.maxHp} · AC ${playerStats.ac} · 药水 ${playerStats.potions}`;
+  const disabled = combat.turn !== 'player';
+  $('#combat-attack').disabled = disabled;
+  $('#combat-potion').disabled = disabled || playerStats.potions <= 0;
+  $('#combat-flee').disabled = disabled;
+  $('#combat-potion').textContent = `药水 ×${playerStats.potions}`;
+}
+function playerAttack() {
+  if (!combat || combat.turn !== 'player') return;
+  const alive = livingEnemies();
+  if (!alive.length) return;
+  let target = alive.find((e) => e.idx === selectedEnemy) || alive[0];
+  selectedEnemy = target.idx;
+  const r = d20();
+  const crit = r === 20;
+  const hit = crit || (r !== 1 && r + playerStats.atk >= target.ac);
+  if (!hit) {
+    combatLog(`<b>你</b> 攻击 ${target.name}：d20 ${r} + ${playerStats.atk} = ${r + playerStats.atk}，未命中（AC ${target.ac}）。`);
+  } else {
+    let dmg = rollDice(playerStats.dmg[0], playerStats.dmg[1], playerStats.dmg[2]);
+    if (crit) dmg += rollDice(playerStats.dmg[0], playerStats.dmg[1], 0);
+    target.hp = Math.max(0, target.hp - dmg);
+    target.obj.userData.hp = target.hp;
+    combatLog(`<b>你</b> 攻击 ${target.name}：d20 ${r}${crit ? '（暴击）' : ''} 命中，造成 ${dmg} 点伤害。`);
+    if (target.hp <= 0) {
+      target.alive = false; target.obj.visible = false;
+      combatLog(`${target.name} 倒下了。`);
+    }
+  }
+  if (!livingEnemies().length) {
+    combat.turn = 'done'; renderCombat();
+    combatLog('<b>遭遇结束：</b>敌人全部倒下。');
+    setTimeout(() => endCombat(true), 620);
+    return;
+  }
+  combat.turn = 'enemy'; renderCombat();
+  setTimeout(enemyTurn, 720);
+}
+function enemyTurn() {
+  if (!combat || combat.turn !== 'enemy') return;
+  for (const e of livingEnemies()) {
+    const r = d20();
+    const hit = r === 20 || (r !== 1 && r + e.atk >= playerStats.ac);
+    if (!hit) {
+      combatLog(`${e.name} 攻击你：d20 ${r} + ${e.atk} = ${r + e.atk}，未命中（AC ${playerStats.ac}）。`);
+    } else {
+      const dmg = rollDice(e.dmg[0], e.dmg[1], e.dmg[2]) + (r === 20 ? rollDice(1, e.dmg[1], 0) : 0);
+      playerStats.hp = Math.max(0, playerStats.hp - dmg);
+      combatLog(`${e.name} 攻击你：d20 ${r}${r === 20 ? '（暴击）' : ''} 命中，造成 ${dmg} 点伤害。`);
+    }
+    if (playerStats.hp <= 0) break;
+  }
+  if (playerStats.hp <= 0) {
+    combatLog('<b>你倒下了。</b>');
+    renderCombat();
+    setTimeout(() => endCombat(false), 700);
+    return;
+  }
+  combat.turn = 'player';
+  renderCombat();
+  combatLog('你的回合。');
+}
+function usePotion() {
+  if (!combat || combat.turn !== 'player' || playerStats.potions <= 0) return;
+  const heal = rollDice(2, 4, 2);
+  playerStats.potions--;
+  playerStats.hp = Math.min(playerStats.maxHp, playerStats.hp + heal);
+  combatLog(`<b>你</b> 喝下药水，恢复 ${heal} 点生命。`);
+  combat.turn = 'enemy'; renderCombat();
+  setTimeout(enemyTurn, 620);
+}
+function combatFlee() {
+  if (!combat || combat.turn !== 'player') return;
+  endCombat('flee');
+}
+function endCombat(result) {
+  if (!combat) return;
+  const c = combat;
+  const area = c.area;
+  combat = null;
+  $('#combat').classList.add('hidden');
+  $('#area-panel').classList.remove('hidden');
+  showModeUi();
+  if (result === true) {
+    area.cleared = true;
+    for (const e of c.enemies) { e.alive = false; e.obj.visible = false; }
+    const xp = c.enemies.reduce((s, e) => s + e.xp, 0);
+    playerStats.xp += xp;
+    playerStats.hp = playerStats.maxHp;
+    playerStats.potions = Math.min(playerStats.level >= 2 ? PLAYER_LEVEL2.potions : PLAYER_BASE.potions, playerStats.potions + 1);
+    const target = (state.campaign.active ? currentStep()?.target : MAP_META[map.id]?.target);
+    showCombatReward(area, xp, area.no === target);
+  } else if (result === 'flee') {
+    toastMsg('你脱离了战斗；敌人仍在原地。', 2200);
+    updatePanel(area);
+  } else {
+    playerStats.hp = playerStats.maxHp;
+    playerStats.potions = playerStats.level >= 2 ? PLAYER_LEVEL2.potions : PLAYER_BASE.potions;
+    $('#modal-eyebrow').textContent = '战斗失败';
+    $('#modal-title').textContent = '你倒下了';
+    $('#modal-body').innerHTML = '<p>你被击倒，但故事没有结束。回到章节起点，恢复生命与药水后再试。</p>';
+    $('#modal-close').textContent = '回到起点';
+    state.modalAction = () => { resetPlayer(); };
+    $('#modal').classList.remove('hidden');
+  }
+}
+function showCombatReward(area, xp, isTarget) {
+  $('#modal-eyebrow').textContent = '战斗胜利';
+  $('#modal-title').textContent = area.name;
+  $('#modal-body').innerHTML = `<p>${escapeHtml(area.record?.summary || area.visual || '遭遇结束。')}</p>
+    <p><b>+${xp} XP</b>${area.no === 8 ? ' · 克拉格的火坑旁找到了被绑的西达尔' : ' · 战场上有几枚银币和一把弯刀'}。短暂休息后生命与药水恢复。</p>
+    ${isTarget ? '<p>本章目标已达成。</p>' : '<p>继续探索，或前往下一个区域。</p>'}`;
+  $('#modal-close').textContent = '继续';
+  state.modalAction = null;
+  if (isTarget) state.modalAction = () => { completeTarget(area); };
+  $('#modal').classList.remove('hidden');
+}
+
 /* ---------------------------------------------------------------- campaign */
 function currentStep() { return CAMPAIGN[state.campaign.index] || null; }
 function loadCampaignStep(i, { initial = false, quiet = false } = {}) {
@@ -483,6 +674,8 @@ function loadCampaignStep(i, { initial = false, quiet = false } = {}) {
   state.campaign.active = true;
   state.targetHit = false;
   const step = CAMPAIGN[i];
+  playerStatsReset();
+  if (i >= 1) playerStatsLevel2();
   loadMap(step.map, { initial, quiet: true, campaign: true });
   updateObjective();
   if (state.started) showChapterCard(step);
@@ -491,6 +684,7 @@ function startCampaign() {
   state.campaign.completed.clear();
   state.campaign.index = 0;
   state.campaign.active = true;
+  playerStatsReset();
   loadCampaignStep(0, { initial: true, quiet: true });
   start();
   showChapterCard(CAMPAIGN[0]);
@@ -519,7 +713,7 @@ function advanceCampaign() {
 function showChapterCard(step) {
   if (!step) return;
   clearTimeout(state.chapterTimer);
-  $('#chapter-eyebrow').textContent = `剧情 ${state.campaign.index + 1} / ${CAMPAIGN.length} · ${step.chapter}`;
+  $('#chapter-eyebrow').textContent = `第一章 · 场景 ${state.campaign.index + 1} / ${CAMPAIGN.length} · ${step.scene || step.chapter}`;
   $('#chapter-title').textContent = step.chapter;
   $('#chapter-objective').textContent = step.objective;
   const card = $('#chapter-card');
@@ -528,21 +722,21 @@ function showChapterCard(step) {
 }
 function showChapterComplete(step) {
   const last = state.campaign.index + 1 >= CAMPAIGN.length;
-  $('#modal-eyebrow').textContent = `剧情 ${state.campaign.index + 1} / ${CAMPAIGN.length} · 章节完成`;
+  $('#modal-eyebrow').textContent = `第一章 · 场景 ${state.campaign.index + 1} / ${CAMPAIGN.length} · 场景完成`;
   $('#modal-title').textContent = step.chapter;
   $('#modal-body').innerHTML = `<p>${escapeHtml(step.outro)}</p>
-    <p>${last ? '这是当前流程的最后一章。3D 切片到这里结束；完整战斗/存档/正式游戏接入仍在下一版。' : '点击前往下一章，地图、起点与探索进度会重置。'}</p>`;
-  $('#modal-close').textContent = last ? '完成剧情' : '前往下一章';
+    <p>${last ? '第一章到此结束；第二章（凡度林 / 红烙印）待制作。完整存档与正式游戏接入仍在下一版。' : '点击前往下一段，地图、起点与探索进度会重置。'}</p>`;
+  $('#modal-close').textContent = last ? '完成第一章' : '前往下一段';
   state.modalAction = last ? () => finishCampaign() : () => advanceCampaign();
   $('#modal').classList.remove('hidden');
 }
 function finishCampaign() {
   state.campaign.completed.add(state.campaign.index);
   $('#modal-eyebrow').textContent = '剧情完成';
-  $('#modal-title').textContent = '失落矿坑重见天日';
-  $('#modal-body').innerHTML = `<p>七段主线的 3D 流程已经跑完：哥布林之矢 → 克拉格莫窝点 → 凡度林 → 红烙印大本营 → 雷霆树镇 → 克拉格莫城堡 → 潮音洞。</p>
-    <p>这是方向确认切片：完整战斗、检定、掉落、存档与正式游戏接入仍在下一版。</p>`;
-  $('#modal-close').textContent = '重新开始';
+  $('#modal-title').textContent = '第一章 · 哥布林之矢 完成';
+  $('#modal-body').innerHTML = `<p>三猪小径的伏击已清理，克拉格莫窝点的克拉格已被击败，西达尔获救。他告诉你：刚铎被带去了克拉格莫城堡。</p>
+    <p>第一章竖切片到此结束；第二章（凡度林 / 红烙印）待制作。现在可以重玩第一章，或自由探索其余地图。</p>`;
+  $('#modal-close').textContent = '重玩第一章';
   state.modalAction = () => { startCampaign(); };
   $('#modal').classList.remove('hidden');
 }
@@ -557,16 +751,36 @@ function markArea(area, silent = false) {
   }
   updatePanel(area);
   updateObjective();
+  const living = (world?.monsters || []).filter((m) => m.userData.area === area.no && m.visible && (m.userData.hp ?? 1) > 0);
+  const hasEncounter = !area.cleared && living.length > 0;
+  const btn = $('#area-encounter');
+  if (btn) {
+    btn.classList.toggle('hidden', !hasEncounter);
+    btn.textContent = hasEncounter ? `进入战斗 · ${living.length} 名敌人` : '进入战斗';
+  }
+  state.pendingEncounter = hasEncounter ? area : null;
   const step = state.campaign.active ? currentStep() : null;
   const meta = MAP_META[map.id] || {};
   const target = step ? step.target : meta.target;
-  if (area.no === target && !state.targetHit) {
-    state.targetHit = true;
-    updateObjective();
+  if (!hasEncounter && area.no === target && !state.targetHit) completeTarget(area);
+  if (hasEncounter && !silent && area.no !== meta.spawn) {
     clearTimeout(state.encounterTimer);
-    state.encounterTimer = setTimeout(() => step ? showChapterComplete(step) : showEncounter(area), 420);
+    state.encounterTimer = setTimeout(() => {
+      if (!combat && state.currentArea === area && !area.cleared) startCombat(area);
+    }, 750);
   }
   drawMinimap();
+}
+function completeTarget(area) {
+  if (!area || state.targetHit) return;
+  const step = state.campaign.active ? currentStep() : null;
+  const meta = MAP_META[map.id] || {};
+  const target = step ? step.target : meta.target;
+  if (area.no !== target) return;
+  state.targetHit = true;
+  updateObjective();
+  clearTimeout(state.encounterTimer);
+  state.encounterTimer = setTimeout(() => step ? showChapterComplete(step) : showEncounter(area), 420);
 }
 function updatePanel(area) {
   if (!state.started || state.mode !== 'map') return;
@@ -586,6 +800,9 @@ function updatePanel(area) {
   $('#area-exits').textContent = exits.length ? [...new Set(exits)].join(' · ') : '—';
   const monsters = area.record?.monsters || [];
   $('#area-monsters').textContent = monsters.length ? monsters.map((m) => `${monsterName(m.monster_id)}${Number(m.count) > 1 ? ' ×' + m.count : ''}`).join(' · ') : '—';
+  const living = (world?.monsters || []).filter((m) => m.userData.area === area.no && m.visible && (m.userData.hp ?? 1) > 0);
+  $('#area-encounter').classList.toggle('hidden', !living.length || !!area.cleared);
+  $('#area-encounter').textContent = living.length ? `进入战斗 · ${living.length} 名敌人` : '进入战斗';
 }
 function showEncounter(area) {
   const meta = MAP_META[map.id] || {};
@@ -602,7 +819,7 @@ function showEncounter(area) {
 
 /* ---------------------------------------------------------------- movement / draw */
 function updateMovement(dt) {
-  if (!state.started || state.mode !== 'map' || !player) return;
+  if (!state.started || state.mode !== 'map' || !player || combat) return;
   let ix = 0, iz = 0;
   if (state.keys.has('KeyW') || state.keys.has('ArrowUp')) iz += 1;
   if (state.keys.has('KeyS') || state.keys.has('ArrowDown')) iz -= 1;
@@ -776,6 +993,9 @@ window.__LMOP3D__ = {
   get map() { return map; },
   get region() { return region; },
   get player() { return player; },
+  get combat() { return combat; },
+  get playerStats() { return playerStats; },
+  winCombat: () => endCombat(true),
   maps: () => mapsData.maps,
   loadMap, goTo, discoverAll, start,
   selectSite: (id) => { const s = map?.sites?.find((x) => x.id === id); if (s) updateRegionPanel(s); },
