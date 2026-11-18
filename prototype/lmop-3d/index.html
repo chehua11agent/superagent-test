@@ -27,6 +27,7 @@
         <div class="stat"><b>5 ft</b><span>原图方格</span></div>
         <div class="stat"><b>117</b><span>全图连接</span></div>
       </div>
+      <p class="intro-sheet-line" id="intro-sheet-line">Lv.1 · HP 60 · AC 18 · 攻击 +7 · 伤害 2d6+4 · 药水 4</p>
       <ul class="intro-points">
         <li><span>01</span>从三猪小径的哥布林伏击开始，跑完第一章两个场景与两场战斗。</li>
         <li><span>02</span>WASD 移动 · 拖动鼠标看 · 滚轮远近 · F 火把。</li>
@@ -65,6 +66,12 @@
     <div class="progress"><span id="progress-fill"></span></div>
     <small><span id="progress-text">0 / 8</span> 区域已探索</small>
   </aside>
+
+  <button id="btn-sheet" class="player-hud hidden" title="角色数值（C）">
+    <span class="ph-level" id="ph-level">Lv.1</span>
+    <span class="ph-main" id="ph-main">HP 60/60 · AC 18</span>
+    <span class="ph-sub" id="ph-sub">攻击 +7 · 2d6+4</span>
+  </button>
 
   <aside id="area-panel" class="area-panel hidden" aria-live="polite">
     <p class="eyebrow"><span id="area-light">黑暗</span> · 区域 <span id="area-no">1</span></p>
@@ -123,6 +130,26 @@
     <p id="chapter-objective"></p>
   </div>
   <div id="fade" class="fade"></div>
+
+  <aside id="sheet" class="sheet hidden" role="dialog" aria-modal="false">
+    <header class="sheet-head">
+      <div>
+        <p class="eyebrow">角色</p>
+        <h2 id="sheet-name">冒险者</h2>
+        <p id="sheet-sub">Lv.1 · 竖切片角色</p>
+      </div>
+      <button id="sheet-close" class="chip">关闭</button>
+    </header>
+    <div class="sheet-hp"><div class="hp-track"><i id="sheet-hp-fill"></i></div><span id="sheet-hp-text">HP 60 / 60</span></div>
+    <div id="sheet-vitals" class="sheet-vitals"></div>
+    <h3>属性</h3>
+    <div id="sheet-abilities" class="sheet-abilities"></div>
+    <h3>豁免</h3>
+    <div id="sheet-saves" class="sheet-abilities"></div>
+    <h3>技能</h3>
+    <div id="sheet-skills" class="sheet-skills"></div>
+    <p class="sheet-note">战斗选择主要看 HP、AC、攻击/伤害与药水；探索/对话选择看对应技能调整值。</p>
+  </aside>
 
   <section id="combat" class="combat hidden" aria-live="polite">
     <div class="combat-head">
