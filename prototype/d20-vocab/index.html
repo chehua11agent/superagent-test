@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>词咒 · 雾港检定 — 单词识别作为 d20 因子</title>
+<meta name="description" content="可玩原型：单词识别只提升 d20 成功率、不决定结果；词库随游戏阶段轮换，掌握后撤出，回访答错再回池。">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='25' font-size='26'%3E%E1%9A%8C%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="fog" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">ᚌ</span>
+    <span class="brand-name">词咒 · 雾港检定</span>
+    <span class="tag">可玩原型</span>
+  </div>
+  <div class="top-actions">
+    <label class="switch" title="对照模式：关闭后回到纯 d20，不含任何单词因子">
+      <input type="checkbox" id="modeToggle" checked>
+      <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+      <span class="switch-label">词力加成</span>
+    </label>
+    <button class="ghost-btn" id="howBtn" type="button">玩法</button>
+    <button class="ghost-btn" id="restartBtn" type="button">重开</button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="stage" id="stage" aria-live="polite">
+    <div class="act-strip">
+      <ol class="acts" id="acts" aria-label="六幕进度"></ol>
+      <div class="act-meta">
+        <div class="act-label" id="actLabel">前期 · 第 1 幕</div>
+        <div class="band-hint" id="bandHint">词带 1 · 生疏偏好 低（偏好熟词）</div>
+        <div class="mode-chip" id="modeChip" hidden>对照 · 纯 d20</div>
+      </div>
+    </div>
+
+    <div class="scene" id="scene">
+      <div class="scene-kicker" id="sceneKicker">序章 · 抵达</div>
+      <h1 id="sceneTitle">雾港</h1>
+      <p class="narration" id="narration"></p>
+
+      <div class="check-row" id="checkRow">
+        <div class="check-stat"><span>检定</span><b id="checkName">感知</b></div>
+        <div class="check-stat"><span>难度</span><b id="checkDc">DC 10</b></div>
+        <div class="check-stat"><span>基础成功率</span><b id="baseProb">50%</b></div>
+        <div class="check-stat dim"><span>词力上限后</span><b id="maxProb">65%</b></div>
+      </div>
+    </div>
+
+    <div class="word-panel" id="wordPanel" hidden>
+      <div class="sigil-card" id="sigilCard">
+        <div class="sigil-head">
+          <span class="band-chip" id="bandChip">高频词带</span>
+          <span class="timer-text" id="timerText">12.0s</span>
+        </div>
+        <div class="word-line">
+          <span class="word-en" id="wordEn">harbor</span>
+          <span class="word-ipa" id="wordIpa">/ˈhɑːbə/</span>
+        </div>
+        <p class="word-prompt">雾里浮出一个词灵。它的中文意思是——</p>
+        <div class="options" id="options" role="group" aria-label="选择词义"></div>
+        <div class="timer-track" aria-hidden="true"><i id="timerBar"></i></div>
+        <p class="word-hint">5 秒内 <b>+3</b> · 9 秒内 <b>+2</b> · 超时前 <b>+1</b> · 答错 <b>+0</b></p>
+      </div>
+    </div>
+
+    <div class="roll-panel" id="rollPanel" hidden>
+      <div class="roll-top">
+        <div class="d20" id="d20" aria-label="d20 骰子">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <polygon class="d20-face" points="50,4 91,27 91,73 50,96 9,73 9,27"/>
+            <polygon class="d20-inner" points="50,18 79,34 79,66 50,82 21,66 21,34"/>
+          </svg>
+          <span class="d20-num" id="d20Num">20</span>
+        </div>
+        <div class="roll-math" id="rollMath"></div>
+      </div>
+      <div class="verdict" id="verdict"></div>
+      <p class="outcome" id="outcome"></p>
+      <p class="word-check-note" id="wordCheckNote" hidden></p>
+      <button class="primary-btn" id="nextBtn" type="button">继续</button>
+    </div>
+
+    <div class="summary" id="summary" hidden></div>
+  </section>
+
+  <aside class="side" aria-label="词灵状态">
+    <section class="panel">
+      <header class="panel-head">
+        <h2>词灵池</h2>
+        <span class="count" id="poolCount">0</span>
+      </header>
+      <p class="panel-hint">答对 3 次即「记忆撤出」，不再被抽到；回访答错会立刻回池。</p>
+      <ul class="word-list" id="poolList"></ul>
+    </section>
+
+    <section class="panel">
+      <header class="panel-head">
+        <h2>已撤出</h2>
+        <span class="count" id="retiredCount">0</span>
+      </header>
+      <p class="panel-hint">撤出不是删除：每隔几次检定会回访一次。</p>
+      <ul class="word-list retired-list" id="retiredList"></ul>
+    </section>
+
+    <section class="panel log-panel">
+      <header class="panel-head"><h2>掷骰记录</h2></header>
+      <ol class="roll-log" id="rollLog"></ol>
+    </section>
+  </aside>
+</main>
+
+<dialog class="how-dialog" id="howDialog">
+  <div class="how-head">
+    <h2>怎么玩</h2>
+    <button class="ghost-btn" id="howClose" type="button">关闭</button>
+  </div>
+  <ol class="how-list">
+    <li><b>先读词灵。</b>雾里浮出一个英文词，从四个中文义项里选出正确的一个。答得越快，词力越高：5 秒内 +3，9 秒内 +2，12 秒内 +1，答错或超时 +0。</li>
+    <li><b>再掷 d20。</b>结果 = d20 + 属性 + 词力，对抗 DC。天然 1 必败、天然 20 必成；词力最高 +3，所以单词只能把成功率往上推，不能替你掷骰。</li>
+    <li><b>记忆会撤出。</b>同一个词答对 3 次就「封存」，不再被抽到；过几幕它会回访一次，回访答错就立刻回到词灵池。</li>
+    <li><b>词库随阶段变。</b>前期抽高频词、偏好熟词；后期抽低频词、偏好生疏词。题目的 DC 和干扰项也会一起变难。</li>
+    <li><b>对比模式。</b>右上角关掉「词力加成」就是纯 d20 对照组；同一场景、同一 DC，可以自己感受单词到底值多少。</li>
+  </ol>
+  <p class="how-note">一局 6 幕，约 2–3 分钟。结算会给出本局的词汇画像和下一局建议词带。</p>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<footer class="foot">
+  <span>原型数据：第一章 48 个 CET-4 核心词（freq_rank 1–48）</span>
+  <span>d20 保留最终判定：天然 1 必败、天然 20 必成；词力 +0–3，封顶。</span>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
