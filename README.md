@@ -28,3 +28,5 @@ npm run test:e2e # Playwright 端到端测试
 ```
 
 详细说明、操作方式、已知边界与文件结构见 [`game/README.md`](game/README.md)。
+
+另有一个独立的 5e 规则核与开发实验台：`npm run serve` 后打开 [`game/rules-lab.html`](game/rules-lab.html)（<http://127.0.0.1:4173/rules-lab.html>），可捏人、查看种族/职业/背景派生数值、切换状态与情境修正、掷 d20 并量化单词加值对成功率的影响；已导入 Foundry dnd5e 的 319 法术 / 885 物品 / 340 怪物，可浏览、装备武器/护甲、加入法术书并结算武器伤害。设计见 [`docs/design/rules-engine-backend.md`](docs/design/rules-engine-backend.md) 与 [`docs/design/foundry-content-import.md`](docs/design/foundry-content-import.md)。

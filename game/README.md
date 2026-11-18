@@ -51,6 +51,11 @@ game/
     srs.js              纯函数 SRS、每日计划、选项生成
     store.js            localStorage 存档、跨天、演示存档
     ui.js               图标、进度环、格式化
+    rules/              5e 规则核：捏人、种族/职业/背景、修正层、d20 检定
+    rules/content/      Foundry dnd5e SRD 内容：法术/物品/怪物
+    rules-lab.js        规则实验台交互（开发用）
+  rules-lab.html        5e 捏人 / 修正 / 掷骰 / SRD 内容实验台
+  rules-lab.css         实验台样式
   content/
     words.json          第一章 48 个词（占位词频排序）
     chapter-1.json      12 幕 + 23 个词行动 + BOSS
@@ -72,7 +77,7 @@ playwright.config.mjs   自动启动本地服务器与浏览器项目
 ## 验证
 
 ```bash
-npm test                # 25 个单元 / 内容 / 集成测试
+npm test                # 61 个单元 / 内容 / 集成测试
 npm run validate        # 48 词 / 12 幕 / 行动与长度校验
 npm run validate:sample # 10 词 / 3 幕 / 5 节点：每个词的功能位置审计
 npm run test:e2e        # 10 个 Playwright 端到端用例（首次需 npx playwright install chromium）
@@ -121,6 +126,21 @@ npm run test:e2e        # 10 个 Playwright 端到端用例（首次需 npx play
 ## 剧情 → 词卡战斗 → 复习
 
 第 4 幕「旧灯塔」已接入一场 3 回合词卡战斗：剧情里契约过的 guide / signal / warn / reflect 变成手牌；每回合选一张卡，用认出（4 选 1）或拼出（输入）打出；成功结算卡牌效果，失败扣 HP/线索；战斗结果回到剧情，词进入 SRS。设计笔记见 [`docs/story-card-combat-design.md`](../docs/design/story-card-combat-design.md)。
+
+## 5e 规则核与实验台
+
+`game/src/rules/` 是独立于现有剧情的纯规则核：支持 9 个 SRD 种族（含子种族）、12 个职业、13 个背景、购点/标准数组/4d6/自由属性、18 项技能、14 种状态、力竭、护甲与情境修正，以及 d20 检定与单词加值（0–3）。
+
+规则核同时导入了 Foundry dnd5e 的 SRD 内容包：319 个法术、885 个物品（277 武器、92 护甲/盾牌）、340 个怪物；角色可以带背包、装备武器/护甲/盾牌、加入法术书，武器攻击会结算 d20 命中与伤害。
+
+```bash
+npm run serve
+# 打开 http://127.0.0.1:4173/rules-lab.html
+```
+
+实验台可以捏人、切换状态/装备/临时效果、查看派生角色卡、掷骰并查看加值拆解，浏览/搜索 SRD 法术、物品与怪物，装备武器/护甲、加入法术书，以及量化“单词 +0/+1/+2/+3”对成功率的影响。设计说明见 [`docs/design/rules-engine-backend.md`](../docs/design/rules-engine-backend.md) 与 [`docs/design/foundry-content-import.md`](../docs/design/foundry-content-import.md)，现成引擎调研见 [`docs/research/5e-rules-engine-survey.md`](../docs/research/5e-rules-engine-survey.md) 与 [`docs/research/foundry-dnd5e-assessment.md`](../docs/research/foundry-dnd5e-assessment.md)。
+
+规则核目前**没有接入**现有复习/剧情/战斗流程；它不包含法术位/施法效果、专长、完整战斗/休息流程。Foundry 内容导入的缺口与下一步见 `docs/design/foundry-content-import.md`；产品问题见设计文档第 7–9 节。
 
 ## 原型边界（诚实说明）
 
